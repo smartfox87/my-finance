@@ -1,0 +1,48 @@
+export const INITIAL_CONTACT_FIELDS = [
+  {
+    id: "full_name",
+    label_translation: "contact.full_name",
+    value: "",
+    type: "text",
+    focus: true,
+  },
+  {
+    id: "email",
+    label_translation: "contact.email",
+    value: "",
+    type: "email",
+    required: true,
+  },
+  {
+    id: "subject",
+    label_translation: "contact.subject.label",
+    value: "",
+    type: "select",
+    required: true,
+    options: [
+      { label_translation: "contact.subject.options.feedback", value: "feedback" },
+      { label_translation: "contact.subject.options.bug", value: "bug" },
+      { label_translation: "contact.subject.options.support", value: "support" },
+      { label_translation: "contact.subject.options.suggestion", value: "suggestion" },
+      { label_translation: "contact.subject.options.collaboration", value: "collaboration" },
+      { label_translation: "contact.subject.options.other", value: "other" },
+    ],
+  },
+  {
+    id: "message",
+    label_translation: "contact.message",
+    value: "",
+    type: "textarea",
+    required: true,
+  },
+  {
+    id: "files",
+    label_translation: "contact.attachments",
+    value: [],
+    type: "file",
+    maxCount: 3,
+    multiple: true,
+    accept: "image/*,video/*",
+    maxSize: 5 * 1024 * 1024,
+  },
+];

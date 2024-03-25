@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*:root {*/
+/*  --foreground-rgb: 0, 0, 0;*/
+/*  --background-start-rgb: 214, 219, 220;*/
+/*  --background-end-rgb: 255, 255, 255;*/
+/*}*/
+
+/*@media (prefers-color-scheme: dark) {*/
+/*  :root {*/
+/*    --foreground-rgb: 255, 255, 255;*/
+/*    --background-start-rgb: 0, 0, 0;*/
+/*    --background-end-rgb: 0, 0, 0;*/
+/*  }*/
+/*}*/
+
+/*body {*/
+/*  color: rgb(var(--foreground-rgb));*/
+/*  background: linear-gradient(*/
+/*      to bottom,*/
+/*      transparent,*/
+/*      rgb(var(--background-end-rgb))*/
+/*    )*/
+/*    rgb(var(--background-start-rgb));*/
+/*}*/
+
+/*@layer utilities {*/
+/*  .text-balance {*/
+/*    text-wrap: balance;*/
+/*  }*/
+/*}*/
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  padding: 0;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+  max-width: 1400px;
+  width: 100%;
+}
+
+.container-edge {
+  margin-left: -16px;
+  margin-right: -16px;
+  width: auto;
+}
+
+.ant-notification-notice-message.ant-notification-notice-message.ant-notification-notice-message {
+  margin-right: 35px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.ant-notification-notice-description.ant-notification-notice-description.ant-notification-notice-description:empty {
+  margin-top: -8px;
+}
+
+.ant-picker-time-panel.ant-picker-time-panel {
+  display: none !important;
+}
+
+.ant-radio-group.ant-radio-group.ant-radio-group {
+  display: flex;
+}
+
+.ant-radio-button-wrapper {
+  flex-grow: 1;
+  text-align: center;
+}
+
+button:focus-visible,
+a:focus-visible,
+.focus-appearance:focus-visible {
+  outline: rgba(22, 104, 220, 0.5) solid 4px !important;
+  outline-offset: 1px !important;
+}
+
+g:focus {
+  outline: none;
+}
+
+.grecaptcha-badge {
+  visibility: hidden;
+}
+
+@media (max-width: 385px) {
+  .ant-drawer-header.ant-drawer-header.ant-drawer-header,
+  .ant-drawer-body.ant-drawer-body.ant-drawer-body {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+@media (max-width: 430px) {
+  .ant-radio-button-wrapper.ant-radio-button-wrapper.ant-radio-button-wrapper {
+    font-size: 14px;
+    padding-inline: 5px;
+  }
+}

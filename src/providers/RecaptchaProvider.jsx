@@ -1,8 +1,7 @@
-import { createContext, createRef, lazy, Suspense, useState } from "react";
+import { createContext, createRef, lazy, Suspense, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-const siteKey = import.meta.env.VITE_GOOGLE_RECAPTCHA_SITE_KEY;
-window.recaptchaOptions = { enterprise: true };
+const siteKey = process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY;
 
 export const RecaptchaContext = createContext();
 
@@ -34,6 +33,10 @@ export const RecaptchaProvider = ({ children }) => {
       }
     }
   };
+
+  useEffect(() => {
+    window.recaptchaOptions = { enterprise: true };
+  }, []);
 
   return (
     <RecaptchaContext.Provider value={{ initCAPTCHA, isLoaded, getScore }}>

@@ -3,10 +3,11 @@ import { setLanguage } from "@/store/commonSlice.js";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import { store } from "@/store/index.js";
+import i18nConfig from "../../i18nConfig";
 
-export const languages = { en: null, ru: null };
+export const languages = i18nConfig.locales.reduce((acc, lang) => ({ ...acc, [lang]: null }), {});
 const getLocale = async (lang) => (languages[lang] ? languages[lang] : (languages[lang] = await import(`@/initial-data/antd-locales`).then((module) => module[lang])));
-export const LocaleContext = createContext({});
+export const LocaleContext = createContext({ locale: null, changeLocale: () => {} });
 
 export const LocaleProvider = ({ children }) => {
   const {
@@ -17,7 +18,7 @@ export const LocaleProvider = ({ children }) => {
   const [locale, setLocale] = useState(getLocale(language));
   const changeLocale = useCallback(
     async (lang) => {
-      if (!language.includes(lang)) changeLanguage(lang);
+      if (!language.includes(lang)) await changeLanguage(lang);
       dispatch(setLanguage(lang));
       const antdLocale = await getLocale(lang);
       setLocale(antdLocale);
