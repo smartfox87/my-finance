@@ -5,6 +5,7 @@ import { dir } from "i18next";
 import Providers from "./providers";
 import { ReactNodeLike } from "prop-types";
 import initTranslations from "@/i18n";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin", "cyrillic"], style: ["normal"], weight: ["400", "700", "900"] });
 const i18nNamespaces = ["default"];
@@ -20,7 +21,7 @@ export default async function RootLayout({ children, params: { locale } }: { chi
     <html lang={locale} dir={dir(locale)}>
       <body className={inter.className + " fixed left-0 top-0 flex h-full w-full flex-col overflow-auto dark:bg-dark"}>
         <Providers locale={locale} resources={resources} i18nNamespaces={i18nNamespaces}>
-          {children}
+          <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
         </Providers>
       </body>
     </html>
