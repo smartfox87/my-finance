@@ -18,7 +18,7 @@ export default async function RootLayout({ children, params: { locale } }: { chi
 
   return (
     <html lang={locale} dir={dir(locale)}>
-      <body className={inter.className + " dark:bg-dark fixed left-0 top-0 flex h-full w-full flex-col overflow-auto"}>
+      <body className={inter.className + " fixed left-0 top-0 flex h-full w-full flex-col overflow-auto dark:bg-dark"}>
         <Providers locale={locale} resources={resources} i18nNamespaces={i18nNamespaces}>
           {children}
         </Providers>

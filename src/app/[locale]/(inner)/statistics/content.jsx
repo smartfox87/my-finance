@@ -29,6 +29,7 @@ import { StatisticsFilter } from "@/components/Statistics/Filter/StatisticsFilte
 import { ActiveStatisticsFilters } from "@/components/Statistics/Filter/ActiveStatisticsFilters";
 import { InnerLayout } from "@/components/Layout/InnerLayout";
 import { Preloader } from "@/components/Layout/Preloader";
+import { FoundNothing } from "@/components/Common/FoundNothing";
 
 export default function StatisticsContent() {
   const { t } = useTranslation();
