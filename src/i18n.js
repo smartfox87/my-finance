@@ -25,11 +25,17 @@ export default async function initTranslations(locale, namespaces, i18nInstance,
     preload: resources ? [] : i18nConfig.locales,
   });
 
-  i18n = {
+  if (!i18n) {
+    i18n = {
+      i18n: i18nInstance,
+      resources: i18nInstance.services.resourceStore.data,
+      t: i18nInstance.t,
+    };
+  }
+
+  return {
     i18n: i18nInstance,
     resources: i18nInstance.services.resourceStore.data,
     t: i18nInstance.t,
   };
-
-  return i18n;
 }

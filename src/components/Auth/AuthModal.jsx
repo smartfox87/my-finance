@@ -3,7 +3,7 @@ import { DemoUserAuth } from "@/components/Auth/DemoUserAuth.jsx";
 import { SideModal } from "@/components/Modals/SideModal.jsx";
 import { DefaultForm } from "@/components/Form/DefaultForm.jsx";
 import { useEffect } from "react";
-import { useInjectReducer } from "@/hooks/injectReducer.js";
+import { useInjectReducer } from "@/hooks/injectReducer";
 
 export const AuthModal = ({ title, isOpen, onToggleVisibility, onSaveForm, fields }) => {
   const { injectReducer } = useInjectReducer();

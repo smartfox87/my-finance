@@ -6,7 +6,7 @@ import { useViewport } from "@/hooks/viewport.js";
 import { useRecaptcha } from "@/hooks/recaptcha.js";
 import SvgSignIn from "@/assets/sprite/sign-in.svg";
 import { SimpleButton } from "@/components/Form/SimpleButton.jsx";
-import { useInjectReducer } from "@/hooks/injectReducer.js";
+import { useInjectReducer } from "@/hooks/injectReducer";
 import { useAntd } from "@/hooks/antd.js";
 
 let isOpenRef = false;

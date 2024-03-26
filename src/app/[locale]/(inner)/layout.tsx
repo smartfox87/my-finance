@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Preloader } from "@/components/Layout/Preloader.jsx";
 import { selectUser } from "@/store/selectors/auth.js";
 import { useTranslation } from "react-i18next";
-import { useInjectReducer } from "@/hooks/injectReducer.js";
+import { useInjectReducer } from "@/hooks/injectReducer";
 import { getUserId } from "@/helpers/localStorage.js";
 import { MobileNav } from "@/components/Layout/MobileNav.jsx";
 import { usePage } from "@/hooks/page.js";
