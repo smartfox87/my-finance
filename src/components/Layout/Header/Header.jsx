@@ -13,7 +13,7 @@ export const Header = memo(function Header() {
   const user = useSelector(selectUser);
 
   return (
-    <header className="dark:bg-dark sticky top-0 z-50 border-b border-b-gray-300 bg-white py-4">
+    <header className="sticky top-0 z-50 border-b border-b-gray-300 bg-white py-4 dark:bg-dark">
       <div className="container flex items-center justify-between">
         <Logo />
         {["sm", "xs", "xxs"].includes(viewport) ? (
