@@ -9,7 +9,6 @@ import { showNotification } from "@/helpers/modals.js";
 import { SideModal } from "@/components/Modals/SideModal.jsx";
 import { useNavigate, useParams } from "react-router-dom";
 import { useLoading } from "@/hooks/loading.js";
-import PropTypes from "prop-types";
 import SvgDelete from "@/assets/sprite/delete.svg";
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
 import { Button } from "antd";
@@ -82,7 +81,3 @@ export const IncomeDetail = memo(function IncomeDetail({ onSave }) {
     </SideModal>
   );
 });
-
-IncomeDetail.propTypes = {
-  onSave: PropTypes.func,
-};

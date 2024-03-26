@@ -1,6 +1,5 @@
 import { createContext, useCallback } from "react";
 import { rootReducer } from "@/store/index.js";
-import PropTypes from "prop-types";
 
 export const InjectReducerContext = createContext({ injectReducer: () => {} });
 const thunks = {};
@@ -16,8 +15,4 @@ export const InjectReducerProvider = ({ children }) => {
   }, []);
 
   return <InjectReducerContext.Provider value={{ thunks, injectReducer }}>{children}</InjectReducerContext.Provider>;
-};
-
-InjectReducerProvider.propTypes = {
-  children: PropTypes.node,
 };

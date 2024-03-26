@@ -1,5 +1,4 @@
 import SvgLoadingBtn from "@/assets/sprite/loading-btn.svg";
-import PropTypes from "prop-types";
 
 export const SimpleButton = ({ size, type, loading, children, ...props }) => {
   let className = `rounded-md border`;
@@ -17,11 +16,4 @@ export const SimpleButton = ({ size, type, loading, children, ...props }) => {
       {children}
     </button>
   );
-};
-
-SimpleButton.propTypes = {
-  size: PropTypes.string,
-  type: PropTypes.string,
-  loading: PropTypes.bool,
-  children: PropTypes.node,
 };

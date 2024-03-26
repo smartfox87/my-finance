@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
 import { selectCostCategories } from "@/store/selectors/references.js";
-import PropTypes from "prop-types";
 import { useViewport } from "@/hooks/viewport.js";
 import { Button } from "antd";
 
@@ -22,9 +21,4 @@ export const CostCategories = ({ activeCategory, onChangeCategory }) => {
       </ul>
     </>
   );
-};
-
-CostCategories.propTypes = {
-  activeCategory: PropTypes.number,
-  onChangeCategory: PropTypes.func,
 };

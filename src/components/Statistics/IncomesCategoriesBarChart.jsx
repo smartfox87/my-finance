@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import formatPrice from "@/helpers/formatPrice.js";
 import { useSelector } from "react-redux";
@@ -32,12 +31,6 @@ const CustomTooltip = ({ active, payload }) => {
   return null;
 };
 
-CustomTooltip.propTypes = {
-  payload: PropTypes.array,
-  active: PropTypes.bool,
-  label: PropTypes.string,
-};
-
 export const IncomesCategoriesBarChart = ({ items }) => {
   const { viewport } = useViewport();
   const isMobile = ["xs", "xxs"].includes(viewport);
@@ -56,8 +49,4 @@ export const IncomesCategoriesBarChart = ({ items }) => {
       </ResponsiveContainer>
     </div>
   );
-};
-
-IncomesCategoriesBarChart.propTypes = {
-  items: PropTypes.array,
 };

@@ -1,3 +1,4 @@
+"use client";
 import dayjs from "dayjs";
 import { getLanguage } from "@/helpers/localStorage.js";
 import "dayjs/locale/ru.js";
@@ -8,7 +9,10 @@ export const periods = ["day", "week", "month", "quarter", "year"];
 
 export const periodOptions = periods.map((period) => ({ label: `filter.period.options.${period}`, value: period }));
 
-export const getPeriod = () => localStorage.getItem("period") || "month";
+export const getPeriod = () => {
+  if (typeof window !== "undefined") return localStorage.getItem("period");
+  else return "year";
+};
 
 export const getCurrentDate = () => new Date().toISOString();
 

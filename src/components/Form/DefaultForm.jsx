@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { forwardRef, useCallback, useEffect, useImperativeHandle, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Form, Input, Select, DatePicker, InputNumber, Radio, Upload, message } from "antd";
@@ -232,11 +231,3 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
     </Form>
   );
 });
-
-DefaultForm.propTypes = {
-  fields: PropTypes.array,
-  isResetAfterSave: PropTypes.bool,
-  isVisible: PropTypes.bool,
-  onSaveForm: PropTypes.func,
-  onResetForm: PropTypes.func,
-};

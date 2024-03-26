@@ -3,7 +3,6 @@ import { selectUser } from "@/store/selectors/auth.js";
 import { useTranslation } from "react-i18next";
 import { DemoUserAuth } from "@/components/Auth/DemoUserAuth.jsx";
 import { useMemo } from "react";
-import PropTypes from "prop-types";
 
 export const AuthGuard = ({ children }) => {
   const user = useSelector(selectUser);
@@ -20,8 +19,4 @@ export const AuthGuard = ({ children }) => {
   );
 
   return <>{user ? children : authRequirement}</>;
-};
-
-AuthGuard.propTypes = {
-  children: PropTypes.node,
 };

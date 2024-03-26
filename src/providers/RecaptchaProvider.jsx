@@ -1,5 +1,4 @@
 import { createContext, createRef, lazy, Suspense, useEffect, useState } from "react";
-import PropTypes from "prop-types";
 
 const siteKey = process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY;
 
@@ -46,8 +45,4 @@ export const RecaptchaProvider = ({ children }) => {
       </Suspense>
     </RecaptchaContext.Provider>
   );
-};
-
-RecaptchaProvider.propTypes = {
-  children: PropTypes.node,
 };

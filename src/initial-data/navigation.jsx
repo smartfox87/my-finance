@@ -12,7 +12,7 @@ export const INIT_NAV_LIST = [
   {
     icon: <SvgHome className="h-5 w-5 lg:h-7 lg:w-7" />,
     full_name: "navigation.home",
-    url: "",
+    url: "/",
   },
   {
     icon: <SvgAccounts className="h-5 w-5 lg:h-7 lg:w-7" />,

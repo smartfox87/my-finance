@@ -2,8 +2,8 @@ import { createSelector } from "@reduxjs/toolkit";
 import { INITIAL_BUDGETS_FILTER_FIELDS, INITIAL_BUDGET_FIELDS } from "@/initial-data/budgets.js";
 import { selectCostCategories } from "@/store/selectors/references.js";
 import { selectCurrency } from "@/store/selectors/profile.jsx";
-import i18n from "@/i18n.js";
 import { selectAccountsList } from "@/store/selectors/accounts.js";
+import { i18n } from "@/i18n";
 
 export const selectBudgetsList = ({ budgets }) => budgets?.budgetsList || null;
 

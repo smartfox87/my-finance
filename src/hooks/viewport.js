@@ -20,6 +20,7 @@ export const useViewport = () => {
 
   useEffect(() => {
     const mediaQueryLists = viewports.map(({ query }) => matchMedia(query));
+    setViewport(getViewportByIndex(getTrueValueIndex(mediaQueryLists)));
 
     setIsTouchDevice("ontouchstart" in document.documentElement);
 

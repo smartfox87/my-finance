@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { useEffect, useRef } from "react";
 import { useViewport } from "@/hooks/viewport.js";
 
@@ -21,10 +20,4 @@ export const CalculatorResult = ({ value, onKeyDown, onChange }) => {
       />
     </div>
   );
-};
-
-CalculatorResult.propTypes = {
-  value: PropTypes.string,
-  onKeyDown: PropTypes.func,
-  onChange: PropTypes.func,
 };

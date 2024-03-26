@@ -1,7 +1,6 @@
 import { createContext, useCallback, useEffect, useState } from "react";
 import { setLanguage } from "@/store/commonSlice.js";
 import { useTranslation } from "react-i18next";
-import PropTypes from "prop-types";
 import { store } from "@/store/index.js";
 import i18nConfig from "../../i18nConfig";
 
@@ -31,8 +30,4 @@ export const LocaleProvider = ({ children }) => {
   }, []);
 
   return <LocaleContext.Provider value={{ locale, changeLocale }}>{children}</LocaleContext.Provider>;
-};
-
-LocaleProvider.propTypes = {
-  children: PropTypes.node,
 };

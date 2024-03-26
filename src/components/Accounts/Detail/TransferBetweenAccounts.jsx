@@ -6,7 +6,6 @@ import { transferAccountsBalanceThunk } from "@/store/accountsSlice.js";
 import { showNotification } from "@/helpers/modals.js";
 import { SideModal } from "@/components/Modals/SideModal.jsx";
 import { useLoading } from "@/hooks/loading.js";
-import PropTypes from "prop-types";
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
 import { handleFilterSelectOptions } from "@/helpers/fields.js";
 import { Button, Form, InputNumber, Select } from "antd";
@@ -127,7 +126,3 @@ export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ o
     </>
   );
 });
-
-TransferBetweenAccounts.propTypes = {
-  onSave: PropTypes.func,
-};

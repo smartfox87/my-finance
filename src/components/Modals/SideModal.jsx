@@ -1,5 +1,4 @@
 import { useViewport } from "@/hooks/viewport.js";
-import PropTypes from "prop-types";
 import { Preloader } from "@/components/Layout/Preloader.jsx";
 import { lazy, useEffect, useState } from "react";
 
@@ -35,14 +34,4 @@ export const SideModal = ({ title, isOpen, isLoading = false, children, footer, 
       )}
     </>
   );
-};
-
-SideModal.propTypes = {
-  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  isOpen: PropTypes.bool,
-  isLoading: PropTypes.bool,
-  onClose: PropTypes.func,
-  children: PropTypes.node,
-  footer: PropTypes.node,
-  onInit: PropTypes.func,
 };

@@ -7,7 +7,6 @@ import { createBudgetItemThunk } from "@/store/budgetsSlice.js";
 import { useTranslation } from "react-i18next";
 import { showNotification } from "@/helpers/modals.js";
 import { memo, useRef, useState } from "react";
-import PropTypes from "prop-types";
 import SvgNewBudget from "@/assets/sprite/new-budget.svg";
 
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
@@ -51,8 +50,3 @@ export const AddNewBudget = memo(function AddNewBudget({ isAdaptive, onSave }) {
     </>
   );
 });
-
-AddNewBudget.propTypes = {
-  isAdaptive: PropTypes.bool,
-  onSave: PropTypes.func,
-};

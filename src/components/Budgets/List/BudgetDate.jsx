@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { getFullDate } from "@/helpers/date.js";
 
 export const BudgetDate = ({ startDate, endDate }) => {
@@ -14,9 +13,4 @@ export const BudgetDate = ({ startDate, endDate }) => {
       )}
     </div>
   );
-};
-
-BudgetDate.propTypes = {
-  startDate: PropTypes.string,
-  endDate: PropTypes.string,
 };

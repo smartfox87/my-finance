@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { getFullDate } from "@/helpers/date.js";
 
 export const CommonDate = ({ date }) => (
@@ -6,7 +5,3 @@ export const CommonDate = ({ date }) => (
     {getFullDate(date, "DD MMMM YYYY")}
   </time>
 );
-
-CommonDate.propTypes = {
-  date: PropTypes.string,
-};

@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import SvgArrowSelect from "@/assets/sprite/arrow-select.svg";
 
@@ -37,18 +36,18 @@ export const SimpleSelect = ({ value, options, onChange }) => {
     <div className="simple-select relative text-sm dark:text-white/85" onKeyDown={handleKeyDown}>
       <button
         type="button"
-        className={`flex h-8 items-center gap-1.5 rounded-md border px-3 duration-300 ${isOpen ? "border-primary-blue text-primary-gray" : "dark:border-dark-gray border-black/15"}`}
+        className={`flex h-8 items-center gap-1.5 rounded-md border px-3 duration-300 ${isOpen ? "border-primary-blue text-primary-gray" : "border-black/15 dark:border-dark-gray"}`}
         onClick={handleToggleVisibility}
       >
         {value}
-        <SvgArrowSelect className="text-primary-gray dark:text-dark-gray h-3 w-3" />
+        <SvgArrowSelect className="h-3 w-3 text-primary-gray dark:text-dark-gray" />
       </button>
-      <ul className={`dark:bg-darkest-gray absolute top-full mt-0.5 min-w-full rounded-md bg-white p-1 shadow-lg duration-300 ${!isOpen && "pointer-events-none opacity-0"}`}>
+      <ul className={`absolute top-full mt-0.5 min-w-full rounded-md bg-white p-1 shadow-lg duration-300 dark:bg-darkest-gray ${!isOpen && "pointer-events-none opacity-0"}`}>
         {options.map((option) => (
           <li key={option.value}>
             <button
               className={`focus-appearance flex h-8 w-full rounded px-3 py-1 duration-300 ${
-                value === option.value ? "dark:bg-darkest-blue bg-blue-100" : "cursor-pointer hover:bg-black/5 dark:hover:bg-white/10"
+                value === option.value ? "bg-blue-100 dark:bg-darkest-blue" : "cursor-pointer hover:bg-black/5 dark:hover:bg-white/10"
               }`}
               type="button"
               onClick={() => handleChange(option.value)}
@@ -60,10 +59,4 @@ export const SimpleSelect = ({ value, options, onChange }) => {
       </ul>
     </div>
   );
-};
-
-SimpleSelect.propTypes = {
-  value: PropTypes.string,
-  options: PropTypes.array,
-  onChange: PropTypes.func,
 };

@@ -7,18 +7,17 @@ import { DefaultForm } from "@/components/Form/DefaultForm.jsx";
 import { getOnlyValuesFromData } from "@/helpers/processData.js";
 import { showNotification } from "@/helpers/modals.js";
 import { SideModal } from "@/components/Modals/SideModal.jsx";
-import { useNavigate, useParams } from "react-router-dom";
 import { useLoading } from "@/hooks/loading.js";
-import PropTypes from "prop-types";
 import SvgDelete from "@/assets/sprite/delete.svg";
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
 import { Button } from "antd";
+import { useParams, useRouter } from "next/navigation";
 
 export const CostDetail = memo(function CostDetail({ onSave }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { costId } = useParams();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const [isLoading, setIsLoading] = useLoading(false);
   const [isBtnLoading, setIsBtnLoading] = useLoading(false);
@@ -26,7 +25,7 @@ export const CostDetail = memo(function CostDetail({ onSave }) {
 
   const handleCloseModal = () => {
     setIsOpen(false);
-    navigate("/expenses");
+    router.push("/expenses");
     dispatch(setCostItem(null));
   };
 
@@ -82,7 +81,3 @@ export const CostDetail = memo(function CostDetail({ onSave }) {
     </SideModal>
   );
 });
-
-CostDetail.propTypes = {
-  onSave: PropTypes.func,
-};

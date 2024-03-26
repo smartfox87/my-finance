@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { usePage } from "@/hooks/page.js";
 import { AuthGuard } from "@/components/Auth/AuthGuard.jsx";
@@ -24,12 +23,4 @@ export const InnerLayout = ({ title, description, children, headerActions, isAut
       {isAuth ? <AuthGuard>{children}</AuthGuard> : children}
     </section>
   );
-};
-
-InnerLayout.propTypes = {
-  title: PropTypes.string,
-  description: PropTypes.string,
-  headerActions: PropTypes.node,
-  children: PropTypes.node,
-  isAuth: PropTypes.bool,
 };

@@ -1,5 +1,3 @@
-import PropTypes from "prop-types";
-
 export const PropValueList = ({ items = [], className }) => {
   return (
     <ul className={className}>
@@ -11,9 +9,4 @@ export const PropValueList = ({ items = [], className }) => {
       ))}
     </ul>
   );
-};
-
-PropValueList.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.shape({ prop: PropTypes.string, value: PropTypes.any })),
-  className: PropTypes.string,
 };

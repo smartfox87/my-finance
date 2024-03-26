@@ -1,5 +1,4 @@
 import { forwardRef, useImperativeHandle, useState } from "react";
-import PropTypes from "prop-types";
 import { CalculatorResult } from "@/components/Calculator/CalculatorResult.jsx";
 import { CalculatorKeyPad } from "@/components/Calculator/CalculatorKeyPad.jsx";
 
@@ -47,7 +46,3 @@ export const Calculator = forwardRef(function Calculator({ onCalculate }, ref) {
     </section>
   );
 });
-
-Calculator.propTypes = {
-  onCalculate: PropTypes.func,
-};

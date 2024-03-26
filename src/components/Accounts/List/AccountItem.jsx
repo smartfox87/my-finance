@@ -1,5 +1,3 @@
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "antd";
 import formatPrice from "@/helpers/formatPrice.js";
@@ -11,6 +9,7 @@ import { isTextClamped } from "@/helpers/isTextClamped.js";
 import { useViewport } from "@/hooks/viewport.js";
 import { getFullDate } from "@/helpers/date.js";
 import { getLocalizeUrl } from "@/helpers/url.js";
+import Link from "next/link";
 
 export const AccountItem = ({ id, name, balance, updated_at }) => {
   const { t } = useTranslation();
@@ -27,7 +26,7 @@ export const AccountItem = ({ id, name, balance, updated_at }) => {
 
   return (
     <Link
-      to={getLocalizeUrl(`/accounts/${id}`)}
+      href={getLocalizeUrl(`/accounts/${id}`)}
       className="flex flex-wrap justify-between gap-2 rounded-xl border border-gray-300 p-4 shadow-[0_3px_7px_0_#ddd] duration-300 hover:-translate-y-1 hover:shadow-[0_7px_7px_0_#ddd]"
     >
       <div ref={nameRef} className="line-clamp-2 w-full  md:line-clamp-3">
@@ -52,11 +51,4 @@ export const AccountItem = ({ id, name, balance, updated_at }) => {
       </div>
     </Link>
   );
-};
-
-AccountItem.propTypes = {
-  id: PropTypes.number,
-  name: PropTypes.string,
-  balance: PropTypes.number,
-  updated_at: PropTypes.string,
 };

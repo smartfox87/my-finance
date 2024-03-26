@@ -1,5 +1,4 @@
 import { Watch } from "react-loader-spinner";
-import PropTypes from "prop-types";
 
 export const Preloader = ({ isLoading = false, children, className = "" }) => {
   return (
@@ -17,10 +16,4 @@ export const Preloader = ({ isLoading = false, children, className = "" }) => {
       {children}
     </>
   );
-};
-
-Preloader.propTypes = {
-  isLoading: PropTypes.bool,
-  children: PropTypes.node,
-  className: PropTypes.string,
 };

@@ -7,7 +7,6 @@ import { createCostItemThunk } from "@/store/costsSlice.js";
 import { useTranslation } from "react-i18next";
 import { showNotification } from "@/helpers/modals.js";
 import { memo, useRef, useState } from "react";
-import PropTypes from "prop-types";
 import SvgNewExpense from "@/assets/sprite/new-expense.svg";
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
 import { useViewport } from "@/hooks/viewport.js";
@@ -50,8 +49,3 @@ export const AddNewCost = memo(function AddNewCost({ isAdaptive, onSave }) {
     </>
   );
 });
-
-AddNewCost.propTypes = {
-  isAdaptive: PropTypes.bool,
-  onSave: PropTypes.func,
-};

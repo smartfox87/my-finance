@@ -2,7 +2,7 @@ import { createSelector } from "@reduxjs/toolkit";
 import { INITIAL_COSTS_FILTER_FIELDS, INITIAL_COST_FIELDS } from "@/initial-data/costs.js";
 import { selectCostCategories } from "@/store/selectors/references.js";
 import { selectCurrency } from "@/store/selectors/profile.jsx";
-import i18n from "@/i18n.js";
+import { i18n } from "@/i18n";
 import { selectAccountsList } from "@/store/selectors/accounts.js";
 
 export const selectCostsList = ({ costs }) => costs?.costsList || null;

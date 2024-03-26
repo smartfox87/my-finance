@@ -11,7 +11,6 @@ import { useViewport } from "@/hooks/viewport.js";
 import { PeriodField } from "@/components/Form/PeriodField.jsx";
 import { setFilterValue } from "@/helpers/filters.js";
 import { useFilterFocus } from "@/hooks/filterFocus.js";
-import PropTypes from "prop-types";
 
 export const IncomesFilter = memo(function IncomesFilter({ onSave }) {
   const { t } = useTranslation();
@@ -79,7 +78,3 @@ export const IncomesFilter = memo(function IncomesFilter({ onSave }) {
     </>
   );
 });
-
-IncomesFilter.propTypes = {
-  onSave: PropTypes.func,
-};

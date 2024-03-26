@@ -1,6 +1,4 @@
 import { BudgetDate } from "./BudgetDate.jsx";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "antd";
 import formatPrice from "@/helpers/formatPrice.js";
@@ -13,6 +11,7 @@ import { isTextClamped } from "@/helpers/isTextClamped.js";
 import { useViewport } from "@/hooks/viewport.js";
 import { selectAccountsObject } from "@/store/selectors/accounts.js";
 import { getLocalizeUrl } from "@/helpers/url.js";
+import Link from "next/link";
 
 export const BudgetItem = ({ id, name, amount, accounts, categories, period: [start_date, end_date] }) => {
   const { t } = useTranslation();
@@ -33,7 +32,7 @@ export const BudgetItem = ({ id, name, amount, accounts, categories, period: [st
 
   return (
     <Link
-      to={getLocalizeUrl(`/budgets/${id}`)}
+      href={getLocalizeUrl(`/budgets/${id}`)}
       className="flex w-full flex-col gap-3 rounded-xl border border-gray-300 p-4 shadow-[0_3px_7px_0_#ddd] duration-300 hover:-translate-y-1 hover:shadow-[0_7px_7px_0_#ddd]"
     >
       <BudgetDate startDate={start_date} endDate={end_date} />
@@ -64,13 +63,4 @@ export const BudgetItem = ({ id, name, amount, accounts, categories, period: [st
       </ul>
     </Link>
   );
-};
-
-BudgetItem.propTypes = {
-  id: PropTypes.number,
-  name: PropTypes.string,
-  amount: PropTypes.number,
-  accounts: PropTypes.array,
-  categories: PropTypes.array,
-  period: PropTypes.any,
 };

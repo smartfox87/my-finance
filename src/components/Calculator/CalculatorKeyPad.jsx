@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { CalculatorButton } from "@/components/Calculator/CalculatorButton.jsx";
 import SvgDelete from "@/assets/sprite/delete.svg";
 import SvgBackspace from "@/assets/sprite/backspace.svg";
@@ -38,8 +37,4 @@ export const CalculatorKeyPad = ({ onClick }) => {
       <CalculatorButton name="/" onClick={onClick} />
     </div>
   );
-};
-
-CalculatorKeyPad.propTypes = {
-  onClick: PropTypes.func,
 };

@@ -7,7 +7,6 @@ import { createAccountItemThunk } from "@/store/accountsSlice.js";
 import { useTranslation } from "react-i18next";
 import { showNotification } from "@/helpers/modals.js";
 import { memo, useRef, useState } from "react";
-import PropTypes from "prop-types";
 import SvgNewAccount from "@/assets/sprite/new-account.svg";
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
 import { useViewport } from "@/hooks/viewport.js";
@@ -50,8 +49,3 @@ export const AddNewAccount = memo(function AddNewAccount({ onSave }) {
     </>
   );
 });
-
-AddNewAccount.propTypes = {
-  isAdaptive: PropTypes.bool,
-  onSave: PropTypes.func,
-};

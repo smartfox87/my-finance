@@ -7,7 +7,6 @@ import { createIncomeItemThunk } from "@/store/incomesSlice.js";
 import { useTranslation } from "react-i18next";
 import { showNotification } from "@/helpers/modals.js";
 import { memo, useRef, useState } from "react";
-import PropTypes from "prop-types";
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
 import { useViewport } from "@/hooks/viewport.js";
 import SvgNewIncome from "@/assets/sprite/new-income.svg";
@@ -50,8 +49,3 @@ export const AddNewIncome = memo(function AddNewIncome({ isAdaptive, onSave }) {
     </>
   );
 });
-
-AddNewIncome.propTypes = {
-  isAdaptive: PropTypes.bool,
-  onSave: PropTypes.func,
-};

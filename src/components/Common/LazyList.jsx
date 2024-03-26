@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 import { Preloader } from "@/components/Layout/Preloader.jsx";
 import { useViewport } from "@/hooks/viewport.js";
@@ -54,9 +53,4 @@ export const LazyList = ({ items = [], Item }) => {
     );
 
   return <></>;
-};
-
-LazyList.propTypes = {
-  items: PropTypes.array,
-  Item: PropTypes.elementType,
 };

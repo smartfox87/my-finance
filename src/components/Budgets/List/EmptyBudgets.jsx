@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-import PropTypes from "prop-types";
 
 export const EmptyBudgets = ({ addNew }) => {
   const { t } = useTranslation();
@@ -10,8 +9,4 @@ export const EmptyBudgets = ({ addNew }) => {
       {addNew}
     </div>
   );
-};
-
-EmptyBudgets.propTypes = {
-  addNew: PropTypes.node,
 };

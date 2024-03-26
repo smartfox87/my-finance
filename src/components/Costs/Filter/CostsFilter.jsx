@@ -11,7 +11,6 @@ import { useViewport } from "@/hooks/viewport.js";
 import { PeriodField } from "@/components/Form/PeriodField.jsx";
 import { useFilterFocus } from "@/hooks/filterFocus.js";
 import { setFilterValue } from "@/helpers/filters.js";
-import PropTypes from "prop-types";
 
 export const CostsFilter = memo(function CostsFilter({ onSave }) {
   const { t } = useTranslation();
@@ -79,7 +78,3 @@ export const CostsFilter = memo(function CostsFilter({ onSave }) {
     </>
   );
 });
-
-CostsFilter.propTypes = {
-  onSave: PropTypes.func,
-};

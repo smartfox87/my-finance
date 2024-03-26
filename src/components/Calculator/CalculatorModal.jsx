@@ -3,7 +3,6 @@ import { Button } from "antd";
 import { SideModal } from "@/components/Modals/SideModal.jsx";
 import { Calculator } from "@/components/Calculator/Calculator.jsx";
 import SvgCalculator from "@/assets/sprite/calculator.svg";
-import PropTypes from "prop-types";
 import SvgPassPrice from "@/assets/sprite/pass-price.svg";
 
 export const CalculatorModal = ({ title, buttonOpen, buttonSave, onSave }) => {
@@ -36,11 +35,4 @@ export const CalculatorModal = ({ title, buttonOpen, buttonSave, onSave }) => {
       </SideModal>
     </>
   );
-};
-
-CalculatorModal.propTypes = {
-  title: PropTypes.string,
-  buttonOpen: PropTypes.string,
-  buttonSave: PropTypes.string,
-  onSave: PropTypes.func,
 };

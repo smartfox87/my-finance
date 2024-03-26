@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-import PropTypes from "prop-types";
 
 export const FoundNothing = ({ clearFilter }) => {
   const { t } = useTranslation();
@@ -10,8 +9,4 @@ export const FoundNothing = ({ clearFilter }) => {
       {clearFilter}
     </div>
   );
-};
-
-FoundNothing.propTypes = {
-  clearFilter: PropTypes.node,
 };

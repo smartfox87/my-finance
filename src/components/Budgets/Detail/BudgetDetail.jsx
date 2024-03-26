@@ -7,19 +7,18 @@ import { DefaultForm } from "@/components/Form/DefaultForm.jsx";
 import { getOnlyValuesFromData } from "@/helpers/processData.js";
 import { showNotification } from "@/helpers/modals.js";
 import { SideModal } from "@/components/Modals/SideModal.jsx";
-import { useNavigate, useParams } from "react-router-dom";
 import { useLoading } from "@/hooks/loading.js";
-import PropTypes from "prop-types";
 import { checkIsNumber } from "@/helpers/numbers.js";
 import SvgDelete from "@/assets/sprite/delete.svg";
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
 import { Button } from "antd";
+import { useParams, useRouter } from "next/navigation";
 
 export const BudgetDetail = memo(function BudgetDetail({ onSave }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { budgetId } = useParams();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const [isLoading, setIsLoading] = useLoading(false);
   const [isBtnLoading, setIsBtnLoading] = useLoading(false);
@@ -27,7 +26,7 @@ export const BudgetDetail = memo(function BudgetDetail({ onSave }) {
 
   const handleCloseModal = () => {
     setIsOpen(false);
-    navigate("/budgets");
+    router.push("/budgets");
     dispatch(setBudgetItem(null));
   };
 
@@ -86,7 +85,3 @@ export const BudgetDetail = memo(function BudgetDetail({ onSave }) {
     </SideModal>
   );
 });
-
-BudgetDetail.propTypes = {
-  onSave: PropTypes.func,
-};

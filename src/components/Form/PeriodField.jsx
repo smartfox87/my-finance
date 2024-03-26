@@ -1,7 +1,6 @@
 import dayjs from "dayjs";
 import { Button, DatePicker, Radio } from "antd";
 import { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { findMatchingPeriod, getDatesPeriod, periodOptions } from "@/helpers/date.js";
 const { RangePicker } = DatePicker;
@@ -62,9 +61,4 @@ export const PeriodField = ({ value = [], onChange }) => {
       </div>
     </div>
   );
-};
-
-PeriodField.propTypes = {
-  value: PropTypes.array,
-  onChange: PropTypes.func,
 };

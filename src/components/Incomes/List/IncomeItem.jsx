@@ -1,5 +1,4 @@
 import { CommonDate } from "../../Common/CommonDate.jsx";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "antd";
@@ -64,13 +63,4 @@ export const IncomeItem = ({ id, name, amount, date, category, account }) => {
       </ul>
     </Link>
   );
-};
-
-IncomeItem.propTypes = {
-  id: PropTypes.number,
-  name: PropTypes.string,
-  amount: PropTypes.number,
-  date: PropTypes.string,
-  category: PropTypes.number,
-  account: PropTypes.number,
 };
