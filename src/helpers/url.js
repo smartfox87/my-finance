@@ -1,4 +1,4 @@
-// import i18n from "@/i18n.js";
+// import i18n from "@/i18n";
 
 export const addHttpsToUrl = (url) => (url.includes("http") ? url : "https://" + url);
 

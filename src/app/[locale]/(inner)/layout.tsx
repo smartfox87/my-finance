@@ -25,7 +25,7 @@ export default function MainLayout({ children }: { children: ReactNodeLike }) {
 
   const user = useSelector(selectUser);
   const { injectReducer } = useInjectReducer();
-  const [isLoadingReferences, setIsLoadingReferences] = useState(false);
+  const [isLoadingReferences, setIsLoadingReferences] = useState(true);
 
   const initProfile = async () => {
     if (getUserId() && !user) {

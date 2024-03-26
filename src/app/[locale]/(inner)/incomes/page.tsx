@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
 import initTranslations from "@/i18n";
-import CostsContent from "@/app/[locale]/(inner)/expenses/content";
+import IncomesContent from "@/app/[locale]/(inner)/incomes/content";
 
 const i18nNamespaces = ["default"];
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
   const { t } = await initTranslations(locale, i18nNamespaces);
   return {
-    title: t(`pages.expenses.title`),
-    description: t(`pages.expenses.description`),
-    keywords: t(`pages.expenses.keywords`),
+    title: t(`pages.incomes.title`),
+    description: t(`pages.incomes.description`),
+    keywords: t(`pages.incomes.keywords`),
   };
 }
 
-export default function Costs() {
-  return <CostsContent />;
+export default function Incomes() {
+  return <IncomesContent />;
 }

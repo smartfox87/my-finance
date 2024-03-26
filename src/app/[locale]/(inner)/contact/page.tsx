@@ -13,6 +13,6 @@ export async function generateMetadata({ params: { locale } }: { params: { local
   };
 }
 
-export default function Accounts() {
+export default function Contact() {
   return <ContactContent />;
 }

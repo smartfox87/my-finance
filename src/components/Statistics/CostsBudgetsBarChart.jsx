@@ -2,7 +2,6 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } fro
 import formatPrice from "@/helpers/formatPrice.js";
 import { useSelector } from "react-redux";
 import { selectCurrency } from "@/store/selectors/profile.jsx";
-import { useWindowSize } from "@uidotdev/usehooks";
 import { useViewport } from "@/hooks/viewport.js";
 import { useTranslation } from "react-i18next";
 import { uppercaseFirstLetter } from "@/helpers/strings.js";
@@ -46,13 +45,12 @@ const CustomTooltip = ({ active, payload }) => {
 };
 
 export const CostsBudgetsBarChart = ({ items }) => {
-  const { height: windowHeight } = useWindowSize();
   const { viewport } = useViewport();
   const isMobile = ["xs", "xxs"].includes(viewport);
   const coords = ["xxs"].includes(viewport) ? { x: 0 } : undefined;
 
   return (
-    <div style={{ width: "100%", height: isMobile ? 480 : Math.max(400, windowHeight / 3) }}>
+    <div className={`w-full ${isMobile ? "h-[480px]" : "h-[max(400px,calc(100vh_/_3))]"}`}>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={items} layout={isMobile ? "vertical" : "horizontal"}>
           {isMobile ? (

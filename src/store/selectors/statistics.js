@@ -1,6 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { selectCostCategories } from "@/store/selectors/references.js";
-import i18n from "@/i18n.js";
+import { i18n } from "@/i18n";
 import { selectAccountsList } from "@/store/selectors/accounts.js";
 import { INITIAL_STATISTICS_FILTER_FIELDS } from "@/initial-data/statistics.js";
 

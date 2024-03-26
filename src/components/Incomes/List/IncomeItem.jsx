@@ -1,5 +1,4 @@
 import { CommonDate } from "../../Common/CommonDate.jsx";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "antd";
 import formatPrice from "@/helpers/formatPrice.js";
@@ -12,6 +11,7 @@ import { isTextClamped } from "@/helpers/isTextClamped.js";
 import { useViewport } from "@/hooks/viewport.js";
 import { selectAccountsObject } from "@/store/selectors/accounts.js";
 import { getLocalizeUrl } from "@/helpers/url.js";
+import Link from "next/link";
 
 export const IncomeItem = ({ id, name, amount, date, category, account }) => {
   const { t } = useTranslation();
@@ -30,7 +30,7 @@ export const IncomeItem = ({ id, name, amount, date, category, account }) => {
 
   return (
     <Link
-      to={getLocalizeUrl(`/incomes/${id}`)}
+      href={getLocalizeUrl(`/incomes/${id}`)}
       className="focus-appearance flex w-full flex-col gap-3 rounded-xl border border-gray-300 p-4 shadow-[0_3px_7px_0_#ddd] duration-300 hover:-translate-y-1 hover:shadow-[0_7px_7px_0_#ddd]"
     >
       <CommonDate date={date} />

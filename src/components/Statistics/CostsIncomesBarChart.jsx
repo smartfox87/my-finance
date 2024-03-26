@@ -2,18 +2,16 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } fro
 import formatPrice from "@/helpers/formatPrice.js";
 import { useSelector } from "react-redux";
 import { selectCurrency } from "@/store/selectors/profile.jsx";
-import { useWindowSize } from "@uidotdev/usehooks";
 import { useViewport } from "@/hooks/viewport.js";
 import { useTranslation } from "react-i18next";
 
 const CustomTooltip = ({ active, payload }) => {
-  const { width: windowWidth } = useWindowSize();
   const currency = useSelector(selectCurrency);
   const { t } = useTranslation();
 
   if (active && payload && payload.length) {
     return (
-      <ul className="flex flex-col gap-2 border border-gray-300 bg-white p-3 dark:bg-dark" style={{ maxWidth: windowWidth - 40 }}>
+      <ul className="flex max-w-[calc(100vw_-_30px)] flex-col gap-2 border border-gray-300 bg-white p-3 dark:bg-dark">
         {payload.map(({ value, name, payload }) => (
           <li className="flex flex-col" key={name}>
             <p className="font-bold">
@@ -41,12 +39,11 @@ const CustomTooltip = ({ active, payload }) => {
 };
 
 export const CostsIncomesBarChart = ({ items }) => {
-  const { height: windowHeight } = useWindowSize();
   const { viewport } = useViewport();
   const isMobile = ["xs", "xxs"].includes(viewport);
 
   return (
-    <div style={{ width: "100%", height: isMobile ? 480 : Math.max(400, windowHeight / 3) }}>
+    <div className={`w-full ${isMobile ? "h-[480px]" : "h-[max(400px,calc(100vh_/_3))]"}`}>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={items} layout={isMobile ? "vertical" : "horizontal"}>
           {isMobile ? (
