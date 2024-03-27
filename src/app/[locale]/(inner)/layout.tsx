@@ -32,7 +32,7 @@ export default function MainLayout({ children }: { children: ReactNodeLike }) {
       const { getUserSessionThunk } = await injectReducer("auth");
       await dispatch(getUserSessionThunk());
     }
-    if (!user) return;
+    if (!user) return setIsLoadingReferences(false);
     setIsLoadingReferences(true);
     const [{ getCurrenciesThunk }, { getProfileThunk }, { getAccountsListThunk }] = await Promise.all([injectReducer("references"), injectReducer("profile"), injectReducer("accounts")]);
     Promise.all([dispatch(getCurrenciesThunk()), dispatch(getProfileThunk()), dispatch(getAccountsListThunk())]).finally(() => setIsLoadingReferences(false));
