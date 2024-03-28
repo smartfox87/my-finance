@@ -1,4 +1,5 @@
 "use client";
+
 import { selectProfile } from "@/store/selectors/profile";
 import { useSelector } from "react-redux";
 import { DemoUserAuth } from "@/components/Auth/DemoUserAuth";
@@ -9,7 +10,7 @@ export default function HomeContent() {
   const profile = useSelector(selectProfile);
 
   return (
-    <main className="flex grow flex-col items-center justify-center gap-4 text-center">
+    <div className="flex grow flex-col items-center justify-center gap-4 text-center">
       <h1 className="text-3xl font-black">{t("pages.home.title")}</h1>
       <p className="text-xl xl:px-20">{t("pages.home.description")}</p>
       {!profile && (
@@ -17,6 +18,6 @@ export default function HomeContent() {
           <DemoUserAuth />
         </div>
       )}
-    </main>
+    </div>
   );
 }

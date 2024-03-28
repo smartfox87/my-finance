@@ -1,10 +1,10 @@
 "use client";
+
 import { selectCurrency } from "@/store/selectors/profile";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { useLoading } from "@/hooks/loading";
 import { useCallback, useEffect } from "react";
-import { InnerLayout } from "@/components/Layout/InnerLayout";
 import { Preloader } from "@/components/Layout/Preloader";
 import formatPrice from "@/helpers/formatPrice";
 import { useInjectReducer } from "@/hooks/injectReducer";
@@ -21,6 +21,7 @@ import { BudgetItem } from "@/components/Budgets/List/BudgetItem";
 import { BudgetDetail } from "@/components/Budgets/Detail/BudgetDetail";
 import { EmptyBudgets } from "@/components/Budgets/List/EmptyBudgets";
 import { FoundNothing } from "@/components/Common/FoundNothing";
+import { createPortal } from "react-dom";
 
 export default function BudgetsContent() {
   const { t } = useTranslation();
@@ -98,8 +99,9 @@ export default function BudgetsContent() {
   );
 
   return (
-    <InnerLayout headerActions={headerActions}>
-      <Preloader isLoading={isLoading}>{content && <div className="flex flex-col gap-4 lg:gap-8">{content}</div>}</Preloader>
-    </InnerLayout>
+    <Preloader isLoading={isLoading}>
+      {createPortal(headerActions, document.getElementById("layout-header"))}
+      {content && <div className="flex flex-col gap-4 lg:gap-8">{content}</div>}
+    </Preloader>
   );
 }

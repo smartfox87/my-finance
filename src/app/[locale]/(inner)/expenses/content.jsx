@@ -10,7 +10,6 @@ import { LazyList } from "@/components/Common/LazyList";
 import { CostDetail } from "@/components/Costs/Detail/CostDetail";
 import { EmptyCosts } from "@/components/Costs/List/EmptyCosts";
 import { FoundNothing } from "@/components/Common/FoundNothing";
-import { InnerLayout } from "@/components/Layout/InnerLayout";
 import { Preloader } from "@/components/Layout/Preloader";
 import { selectCostsByFilter, selectCostsFilterValues, selectCostsList } from "@/store/selectors/costs";
 import { useFilterSearchParams } from "@/hooks/filterSearchParams";
@@ -22,6 +21,7 @@ import { getUserId } from "@/helpers/localStorage";
 import { selectCurrency } from "@/store/selectors/profile";
 import { CostItem } from "@/components/Costs/List/CostItem";
 import formatPrice from "@/helpers/formatPrice";
+import { createPortal } from "react-dom";
 
 export default function CostsContent() {
   const { t } = useTranslation();
@@ -99,8 +99,9 @@ export default function CostsContent() {
     );
 
   return (
-    <InnerLayout headerActions={headerActions}>
-      <Preloader isLoading={isLoading}>{content && <div className="flex flex-col gap-4 lg:gap-8">{content}</div>}</Preloader>
-    </InnerLayout>
+    <Preloader isLoading={isLoading}>
+      {createPortal(headerActions, document.getElementById("layout-header"))}
+      {content && <div className="flex flex-col gap-4 lg:gap-8">{content}</div>}
+    </Preloader>
   );
 }

@@ -1,9 +1,11 @@
+"use client";
+
 import { Auth } from "../../Auth/Auth.jsx";
 import { useSelector } from "react-redux";
 import { ProfileMenu } from "@/components/Profile/ProfileMenu.jsx";
 import { LanguageToggle } from "@/components/Layout/Header/LanguageToggle.jsx";
 import { Logo } from "@/components/Layout/Header/Logo.jsx";
-import { memo } from "react";
+import { memo, Suspense } from "react";
 import { selectUser } from "@/store/selectors/auth.js";
 import { MobileMenu } from "@/components/Layout/Header/MobileMenu.jsx";
 import { useViewport } from "@/hooks/viewport.js";
@@ -17,7 +19,9 @@ export const Header = memo(function Header() {
       <div className="container flex items-center justify-between">
         <Logo />
         {["sm", "xs", "xxs"].includes(viewport) ? (
-          <MobileMenu />
+          <Suspense fallback={<div>Loading...</div>}>
+            <MobileMenu />
+          </Suspense>
         ) : (
           <div className="flex items-center gap-2 md:gap-4">
             {user ? <ProfileMenu /> : <Auth />}

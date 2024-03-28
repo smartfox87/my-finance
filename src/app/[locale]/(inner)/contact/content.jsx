@@ -1,6 +1,5 @@
 "use client";
 import { useTranslation } from "react-i18next";
-import { InnerLayout } from "@/components/Layout/InnerLayout";
 import { Preloader } from "@/components/Layout/Preloader";
 import { DefaultForm } from "@/components/Form/DefaultForm";
 import { showNotification } from "@/helpers/modals";
@@ -36,10 +35,8 @@ export const ContactContent = () => {
   };
 
   return (
-    <InnerLayout isAuth={false}>
-      <Preloader isLoading={!isLoaded}>
-        <DefaultForm fields={contactFields} isResetAfterSave onSaveForm={handleSendMessage} />
-      </Preloader>
-    </InnerLayout>
+    <Preloader isLoading={!isLoaded}>
+      <DefaultForm fields={contactFields} isResetAfterSave onSaveForm={handleSendMessage} />
+    </Preloader>
   );
 };

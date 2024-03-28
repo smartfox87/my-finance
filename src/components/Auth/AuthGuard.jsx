@@ -1,3 +1,5 @@
+"use client";
+
 import { useSelector } from "react-redux";
 import { selectUser } from "@/store/selectors/auth.js";
 import { useTranslation } from "react-i18next";
@@ -15,7 +17,7 @@ export const AuthGuard = ({ children }) => {
         <DemoUserAuth />
       </div>
     ),
-    [t],
+    [],
   );
 
   return <>{user ? children : authRequirement}</>;

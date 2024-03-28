@@ -20,8 +20,8 @@ import { IncomeItem } from "@/components/Incomes/List/IncomeItem";
 import { IncomeDetail } from "@/components/Incomes/Detail/IncomeDetail";
 import { EmptyIncomes } from "@/components/Incomes/List/EmptyIncomes";
 import { FoundNothing } from "@/components/Common/FoundNothing";
-import { InnerLayout } from "@/components/Layout/InnerLayout";
 import { Preloader } from "@/components/Layout/Preloader";
+import { createPortal } from "react-dom";
 
 export default function IncomesContent() {
   const { t } = useTranslation();
@@ -99,8 +99,9 @@ export default function IncomesContent() {
     );
 
   return (
-    <InnerLayout headerActions={headerActions}>
-      <Preloader isLoading={isLoading}>{content && <div className="flex flex-col gap-4 lg:gap-8">{content}</div>}</Preloader>
-    </InnerLayout>
+    <Preloader isLoading={isLoading}>
+      {createPortal(headerActions, document.getElementById("layout-header"))}
+      {content && <div className="flex flex-col gap-4 lg:gap-8">{content}</div>}
+    </Preloader>
   );
 }

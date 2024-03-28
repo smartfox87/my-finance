@@ -27,7 +27,6 @@ import { CostsCategoriesBarChart } from "@/components/Statistics/CostsCategories
 import { EmptyCosts } from "@/components/Costs/List/EmptyCosts";
 import { StatisticsFilter } from "@/components/Statistics/Filter/StatisticsFilter";
 import { ActiveStatisticsFilters } from "@/components/Statistics/Filter/ActiveStatisticsFilters";
-import { InnerLayout } from "@/components/Layout/InnerLayout";
 import { Preloader } from "@/components/Layout/Preloader";
 import { FoundNothing } from "@/components/Common/FoundNothing";
 
@@ -228,9 +227,5 @@ export default function StatisticsContent() {
     );
   }
 
-  return (
-    <InnerLayout>
-      <Preloader isLoading={isLoading}>{content}</Preloader>
-    </InnerLayout>
-  );
+  return <Preloader isLoading={isLoading}>{content}</Preloader>;
 }

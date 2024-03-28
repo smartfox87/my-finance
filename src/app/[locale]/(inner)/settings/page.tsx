@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import initTranslations from "@/i18n";
 import SettingsContent from "@/app/[locale]/(inner)/settings/content";
+import { InnerLayout } from "@/components/Layout/InnerLayout";
 
 const i18nNamespaces = ["default"];
 
@@ -13,6 +14,10 @@ export async function generateMetadata({ params: { locale } }: { params: { local
   };
 }
 
-export default function Settings() {
-  return <SettingsContent />;
+export default function Settings({ params: { locale } }: { params: { locale: string } }) {
+  return (
+    <InnerLayout locale={locale} page="settings">
+      <SettingsContent />;
+    </InnerLayout>
+  );
 }

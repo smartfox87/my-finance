@@ -13,6 +13,6 @@ export async function generateMetadata({ params: { locale } }: { params: { local
   };
 }
 
-export default async function Home() {
+export default function Home() {
   return <HomeContent />;
 }

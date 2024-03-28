@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import initTranslations from "@/i18n";
-import StatisticsContent from "@/app/[locale]/(inner)/statistics/content";
+import StatisticsModule from "@/app/[locale]/(inner)/statistics/content-module";
+import { InnerLayout } from "@/components/Layout/InnerLayout";
 
 const i18nNamespaces = ["default"];
 
@@ -13,6 +14,10 @@ export async function generateMetadata({ params: { locale } }: { params: { local
   };
 }
 
-export default function Statistics() {
-  return <StatisticsContent />;
+export default function Statistics({ params: { locale } }: { params: { locale: string } }) {
+  return (
+    <InnerLayout locale={locale} page="statistics">
+      <StatisticsModule />;
+    </InnerLayout>
+  );
 }

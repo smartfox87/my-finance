@@ -5,12 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useInjectReducer } from "@/hooks/injectReducer";
 import { selectProfile, selectProfileFields } from "@/store/selectors/profile";
 import { getFullDate } from "@/helpers/date";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "antd";
-import { InnerLayout } from "@/components/Layout/InnerLayout";
 import { PropValueList } from "@/components/Common/PropValueList";
 import { DefaultForm } from "@/components/Form/DefaultForm";
 import SvgLogout from "@/assets/sprite/logout.svg";
+import { createPortal } from "react-dom";
 
 export default function ProfileContent() {
   const { t } = useTranslation();
@@ -33,7 +33,7 @@ export default function ProfileContent() {
     setIsLogoutLoading(false);
   };
 
-  const logoutButton = (
+  const headerActions = (
     <Button type="primary" danger loading={isLogoutLoading} className="!flex items-center gap-2" onClick={handleLogout}>
       <SvgLogout className="h-4 w-4" />
       {t("buttons.logout")}
@@ -41,9 +41,10 @@ export default function ProfileContent() {
   );
 
   return (
-    <InnerLayout headerActions={logoutButton}>
+    <>
+      {createPortal(headerActions, document.getElementById("layout-header"))}
       <PropValueList items={datesList} className="flex flex-wrap justify-between gap-x-6 gap-y-1" />
       <DefaultForm fields={profileFields} onSaveForm={handleSaveProfile} />
-    </InnerLayout>
+    </>
   );
 }
