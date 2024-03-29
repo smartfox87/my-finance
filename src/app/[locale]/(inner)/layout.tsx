@@ -21,7 +21,6 @@ export default function MainLayout({ children }: { children: ReactNodeLike }) {
 
   const user = useSelector(selectUser);
   const { injectReducer } = useInjectReducer();
-  // const [isLoadingReferences, setIsLoadingReferences] = useState(false);
 
   const initProfile = async () => {
     if (getUserId() && !user) {
@@ -29,11 +28,8 @@ export default function MainLayout({ children }: { children: ReactNodeLike }) {
       await dispatch(getUserSessionThunk());
     }
     if (!user) return;
-    // setIsLoadingReferences(false);
-    // setIsLoadingReferences(true);
     const [{ getCurrenciesThunk }, { getProfileThunk }, { getAccountsListThunk }] = await Promise.all([injectReducer("references"), injectReducer("profile"), injectReducer("accounts")]);
     await Promise.all([dispatch(getCurrenciesThunk()), dispatch(getProfileThunk()), dispatch(getAccountsListThunk())]);
-    // .finally(() => setIsLoadingReferences(false));
   };
   useEffect(() => {
     initProfile();
@@ -52,11 +48,8 @@ export default function MainLayout({ children }: { children: ReactNodeLike }) {
     <>
       <Header />
       <main className="container flex grow">
-        {["xl", "lg", "md"].includes(viewport) && <MainNav />}
-        <div className="relative flex min-w-0 grow flex-col py-4 md:py-6 lg:ml-6">
-          {/*<Preloader isLoading={isLoadingReferences}>{children}</Preloader>*/}
-          {children}
-        </div>
+        <MainNav className="hidden lg:block" />
+        <div className="relative flex min-w-0 grow flex-col py-4 md:py-6 lg:ml-6">{children}</div>
       </main>
       <div className="sticky bottom-0 z-30 bg-white dark:bg-dark">{["sm", "xs", "xxs"].includes(viewport) && <MobileNav />}</div>
     </>
