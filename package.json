@@ -1,10 +1,12 @@
 {
   "name": "my-finance",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "type": "module",
   "private": true,
   "scripts": {
+    "css": "node ./scripts/inlineCss.js",
     "dev": "i18nexus pull -k 5NhqAr7x8teREHdaBwnjIA && next dev -p 3020",
-    "build": "i18nexus pull -k 5NhqAr7x8teREHdaBwnjIA && next build",
+    "build": "i18nexus pull -k 5NhqAr7x8teREHdaBwnjIA && next build && npm run css",
     "start": "i18nexus pull -k 5NhqAr7x8teREHdaBwnjIA && next start -p 3020",
     "size": "npx cross-env ANALYZE=true npm run build",
     "lint": "next lint"
@@ -35,6 +37,7 @@
     "@types/react": "^18.2.67",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
+    "critters": "^0.0.22",
     "eslint": "^8",
     "eslint-config-next": "14.1.4",
     "eslint-config-prettier": "^9.1.0",

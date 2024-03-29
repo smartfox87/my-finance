@@ -1,6 +1,8 @@
-const i18nConfig = {
-  locales: ["en", "ru"],
+export const locales = ["en", "ru"];
+
+export const pages = ["", "accounts", "budgets", "contact", "expenses", "incomes", "profile", "settings", "statistics"];
+
+export const i18nConfig = {
+  locales,
   defaultLocale: "en",
 };
-
-module.exports = i18nConfig;
