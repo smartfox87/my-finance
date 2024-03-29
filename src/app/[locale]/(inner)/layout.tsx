@@ -1,7 +1,7 @@
 "use client";
 
 import { Header } from "@/components/Layout/Header/Header.jsx";
-import { MainNav } from "@/components/Layout/MainNav.jsx";
+import { MainNav } from "@/components/Layout/MainNav";
 import { useViewport } from "@/hooks/viewport.js";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,7 +9,7 @@ import { selectUser } from "@/store/selectors/auth.js";
 import { useTranslation } from "react-i18next";
 import { useInjectReducer } from "@/hooks/injectReducer";
 import { getUserId } from "@/helpers/localStorage.js";
-import { MobileNav } from "@/components/Layout/MobileNav.jsx";
+import { MobileNav } from "@/components/Layout/MobileNav";
 import { ReactNodeLike } from "prop-types";
 
 export default function MainLayout({ children }: { children: ReactNodeLike }) {

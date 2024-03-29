@@ -7,7 +7,7 @@ import { Auth } from "@/components/Auth/Auth.jsx";
 import { LanguageToggle } from "@/components/Layout/Header/LanguageToggle.jsx";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/store/selectors/auth.js";
-import { MainNav } from "@/components/Layout/MainNav.jsx";
+import { MainNav } from "@/components/Layout/MainNav";
 import { usePathname, useSearchParams } from "next/navigation";
 
 export const MobileMenu = memo(function MobileMenu() {
