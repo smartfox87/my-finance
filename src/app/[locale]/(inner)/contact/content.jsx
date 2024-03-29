@@ -8,7 +8,7 @@ import { useRecaptcha } from "@/hooks/recaptcha";
 import { selectContactFields } from "@/store/selectors/contact";
 import { useSelector } from "react-redux";
 
-export const ContactContent = () => {
+export default function ContactContent() {
   const { t } = useTranslation();
   const contactFields = useSelector(selectContactFields);
   const { initCAPTCHA, isLoaded, getScore } = useRecaptcha();
@@ -39,4 +39,4 @@ export const ContactContent = () => {
       <DefaultForm fields={contactFields} isResetAfterSave onSaveForm={handleSendMessage} />
     </Preloader>
   );
-};
+}

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import initTranslations from "@/i18n";
-import BudgetsContent from "@/app/[locale]/(inner)/budgets/content";
 import { InnerLayout } from "@/components/Layout/InnerLayout";
+import BudgetsModule from "@/app/[locale]/(inner)/budgets/content-module";
 
 const i18nNamespaces = ["default"];
 
@@ -17,7 +17,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 export default function Budgets({ params: { locale } }: { params: { locale: string } }) {
   return (
     <InnerLayout locale={locale} page="budgets">
-      <BudgetsContent />
+      <BudgetsModule />
     </InnerLayout>
   );
 }

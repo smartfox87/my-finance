@@ -23,7 +23,7 @@ import { CostItem } from "@/components/Costs/List/CostItem";
 import formatPrice from "@/helpers/formatPrice";
 import { createPortal } from "react-dom";
 
-export default function CostsContent() {
+export default function ExpensesContent() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { injectReducer, thunks } = useInjectReducer();
