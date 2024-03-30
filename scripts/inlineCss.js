@@ -1,5 +1,6 @@
 import Critters from "critters";
 import fs from "fs";
+import * as cheerio from "cheerio";
 import { locales, pages } from "../i18nConfig.js";
 
 const critters = new Critters({
@@ -14,6 +15,13 @@ const routes = pages.reduce((acc, page) => {
   return acc.concat(langPages);
 }, []);
 
-const routesProcess = routes.map((route) => critters.process(fs.readFileSync(`.next/server/app/${route}`, "utf8")).then((inlined) => fs.writeFileSync(`.next/server/app/${route}`, inlined)));
+const routesProcess = routes.map(async (route) => {
+  const html = await fs.readFileSync(`.next/server/app/${route}`, "utf8");
+  const updatedHtml = await critters.process(html);
+
+  const $ = cheerio.load(updatedHtml);
+  $('link[href$=".css"]').remove();
+  fs.writeFileSync(`.next/server/app/${route}`, $.html());
+});
 
 Promise.all(routesProcess);
