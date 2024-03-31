@@ -1,4 +1,22 @@
 import withBundleAnalyzer from '@next/bundle-analyzer';
+import withPWAInit from "@ducanh2912/next-pwa";
+
+const withPWA = withPWAInit({
+  dest: "public",
+  extendDefaultRuntimeCaching: true,
+  workboxOptions: {
+    runtimeCaching: [
+      {
+        urlPattern: /\.html$/,
+        handler: 'NetworkFirst',
+        options: {
+          networkTimeoutSeconds: 2,
+          cacheName: 'html-cache',
+        },
+      },
+    ],
+  }
+});
 
 const bundleAnalyzerConfig = {
   enabled: process.env.ANALYZE === 'true',
@@ -56,4 +74,4 @@ const nextConfig = {
   },
 };
 
-export default withBundleAnalyzer(bundleAnalyzerConfig)(nextConfig);
+export default withBundleAnalyzer(bundleAnalyzerConfig)(withPWA(nextConfig));

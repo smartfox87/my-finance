@@ -255,5 +255,8 @@
       "description": "Send us a message. We will be happy to help you.",
       "keywords": "contact, message, support, feedback"
     }
+  },
+  "seo": {
+    "app_name": "My Finance"
   }
 }
