@@ -1,6 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { selectCostCategories } from "@/store/selectors/references.js";
-import { i18nInstance } from "@/i18n";
+import { i18nRef } from "@/i18n";
 import { selectAccountsList } from "@/store/selectors/accounts.js";
 import { INITIAL_STATISTICS_FILTER_FIELDS } from "@/initial-data/statistics.js";
 
@@ -60,11 +60,11 @@ export const selectStatisticsFilterFields = createSelector([selectCostCategories
   INITIAL_STATISTICS_FILTER_FIELDS.map((field) => {
     if (field.id === "category" && costCategories?.length) {
       const options = field.options.concat(costCategories?.map(({ id, name }) => ({ value: id, label: name })));
-      const optionsObject = options.reduce((acc, { value, label, label_translation }) => ({ ...acc, [value]: label_translation ? i18nInstance.i18n.t(`fields.${label_translation}`) : label }), {});
+      const optionsObject = options.reduce((acc, { value, label, label_translation }) => ({ ...acc, [value]: label_translation ? i18nRef.i18n.t(`fields.${label_translation}`) : label }), {});
       return { ...field, optionsObject, options };
     } else if (field.id === "account" && accountsList?.length) {
       const options = field.options.concat(accountsList?.map(({ id, name }) => ({ value: id, label: name })));
-      const optionsObject = options.reduce((acc, { value, label, label_translation }) => ({ ...acc, [value]: label_translation ? i18nInstance.i18n.t(`fields.${label_translation}`) : label }), {});
+      const optionsObject = options.reduce((acc, { value, label, label_translation }) => ({ ...acc, [value]: label_translation ? i18nRef.i18n.t(`fields.${label_translation}`) : label }), {});
       return { ...field, optionsObject, options };
     } else {
       return field;

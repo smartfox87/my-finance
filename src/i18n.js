@@ -3,7 +3,7 @@ import { initReactI18next } from "react-i18next/initReactI18next";
 import resourcesToBackend from "i18next-resources-to-backend";
 import { i18nConfig } from "../i18nConfig.js";
 
-export const i18nInstance = { i18n: null };
+export const i18nRef = { i18n: null };
 
 export default async function initTranslations(locale, namespaces, i18nInstance, resources) {
   i18nInstance = i18nInstance || createInstance();
@@ -25,8 +25,8 @@ export default async function initTranslations(locale, namespaces, i18nInstance,
     preload: resources ? [] : i18nConfig.locales,
   });
 
-  if (!i18nInstance.i18n) {
-    i18nInstance.i18n = {
+  if (!i18nRef.i18n) {
+    i18nRef.i18n = {
       i18n: i18nInstance,
       resources: i18nInstance.services.resourceStore.data,
       t: i18nInstance.t,
