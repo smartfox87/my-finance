@@ -79,7 +79,7 @@ export default function BudgetsContent() {
           </div>
         </div>
         <ActiveBudgetsFilters />
-        <FoundNothing />;
+        <FoundNothing />
       </>
     );
 

@@ -17,7 +17,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 export default function Settings({ params: { locale } }: { params: { locale: string } }) {
   return (
     <InnerLayout locale={locale} page="settings">
-      <SettingsModule />;
+      <SettingsModule />
     </InnerLayout>
   );
 }

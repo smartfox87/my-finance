@@ -17,7 +17,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 export default async function Expenses({ params: { locale } }: { params: { locale: string } }) {
   return (
     <InnerLayout locale={locale} page="expenses">
-      <ExpensesModule />;
+      <ExpensesModule />
     </InnerLayout>
   );
 }
