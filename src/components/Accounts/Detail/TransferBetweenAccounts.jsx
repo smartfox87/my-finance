@@ -76,7 +76,7 @@ export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ o
       >
         <div className="flex flex-col gap-4">
           <Form layout="vertical" form={form} fields={formFieldsValues} className="flex w-full flex-col" onSubmit={handleSubmitForm}>
-            <Form.Item label={t(`fields.account.from`)} name="from" rules={[{ required: true, message: t("fields.errors.required") }]}>
+            <Form.Item label={t(`fields.simple.from`)} name="from" rules={[{ required: true, message: t("fields.errors.required") }]}>
               <Select
                 ref={focusInputRef}
                 size="large"
@@ -86,7 +86,7 @@ export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ o
                 onChange={(value) => handleChangeFieldValue({ id: "from", value })}
               />
             </Form.Item>
-            <Form.Item label={t(`fields.account.to`)} name="to" rules={[{ required: true, message: t("fields.errors.required") }]}>
+            <Form.Item label={t(`fields.simple.to`)} name="to" rules={[{ required: true, message: t("fields.errors.required") }]}>
               <Select
                 size="large"
                 options={accountsList?.filter(({ id }) => id !== fieldsValues.from).map(({ id, name }) => ({ label: name, value: id }))}
@@ -96,7 +96,7 @@ export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ o
               />
             </Form.Item>
             <Form.Item
-              label={t(`fields.account.amount`)}
+              label={t(`fields.simple.amount`)}
               name="amount"
               rules={[
                 { validator: (_, value) => (value > maxAmount ? Promise.reject(new Error(t("fields.errors.balance_exceeded"))) : Promise.resolve()) },

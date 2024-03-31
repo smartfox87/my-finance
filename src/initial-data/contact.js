@@ -1,21 +1,21 @@
 export const INITIAL_CONTACT_FIELDS = [
   {
     id: "full_name",
-    label_translation: "contact.full_name",
+    label_translation: "simple.full_name",
     value: "",
     type: "text",
     focus: true,
   },
   {
     id: "email",
-    label_translation: "contact.email",
+    label_translation: "simple.email",
     value: "",
     type: "email",
     required: true,
   },
   {
     id: "subject",
-    label_translation: "contact.subject.label",
+    label_translation: "complex.subject.label",
     value: "",
     type: "select",
     required: true,
@@ -30,14 +30,14 @@ export const INITIAL_CONTACT_FIELDS = [
   },
   {
     id: "message",
-    label_translation: "contact.message",
+    label_translation: "simple.message",
     value: "",
     type: "textarea",
     required: true,
   },
   {
     id: "files",
-    label_translation: "contact.attachments",
+    label_translation: "simple.attachments",
     value: [],
     type: "file",
     maxCount: 3,

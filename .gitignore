@@ -17,6 +17,7 @@
 # production
 /build
 /public/locales
+/locales
 
 # misc
 .DS_Store

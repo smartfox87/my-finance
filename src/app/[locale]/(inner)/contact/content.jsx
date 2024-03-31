@@ -7,14 +7,17 @@ import { useEffect } from "react";
 import { useRecaptcha } from "@/hooks/recaptcha";
 import { selectContactFields } from "@/store/selectors/contact";
 import { useSelector } from "react-redux";
+import { useAntd } from "@/hooks/antd.js";
 
 export default function ContactContent() {
   const { t } = useTranslation();
   const contactFields = useSelector(selectContactFields);
   const { initCAPTCHA, isLoaded, getScore } = useRecaptcha();
+  const { initAntd, isLoadedAntd } = useAntd();
 
   useEffect(() => {
     if (!isLoaded) initCAPTCHA();
+    if (!isLoadedAntd) initAntd();
   }, [initCAPTCHA, isLoaded]);
 
   const handleSendMessage = async (contactData) => {
@@ -35,7 +38,7 @@ export default function ContactContent() {
   };
 
   return (
-    <Preloader isLoading={!isLoaded}>
+    <Preloader isLoading={!isLoaded || !isLoadedAntd}>
       <DefaultForm fields={contactFields} isResetAfterSave onSaveForm={handleSendMessage} />
     </Preloader>
   );

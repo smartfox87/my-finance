@@ -2,7 +2,7 @@ import { createSelector } from "@reduxjs/toolkit";
 import { INITIAL_INCOMES_FILTER_FIELDS, INITIAL_INCOME_FIELDS } from "@/initial-data/incomes.js";
 import { selectIncomeCategories } from "@/store/selectors/references.js";
 import { selectCurrency } from "@/store/selectors/profile.jsx";
-import { i18n } from "@/i18n";
+import { i18nInstance } from "@/i18n";
 import { selectAccountsList } from "@/store/selectors/accounts.js";
 
 export const selectIncomesList = ({ incomes }) => incomes?.incomesList || null;
@@ -38,14 +38,17 @@ export const selectIncomesFilterFields = createSelector([selectIncomeCategories,
   INITIAL_INCOMES_FILTER_FIELDS.map((field) => {
     if (field.id === "category" && incomeCategories?.length) {
       const options = field.options.concat(incomeCategories?.map(({ id, name }) => ({ value: id, label: name })));
-      const optionsObject = options.reduce((acc, { value, label, label_translation }) => ({ ...acc, [value]: label_translation ? i18n.t(`fields.${label_translation}`) : label }), {});
+      const optionsObject = options.reduce((acc, { value, label, label_translation }) => ({ ...acc, [value]: label_translation ? i18nInstance.i18n.t(`fields.${label_translation}`) : label }), {});
       return { ...field, optionsObject, options };
     } else if (field.id === "account" && accountsList?.length) {
       const options = field.options.concat(accountsList?.map(({ id, name }) => ({ value: id, label: name })));
-      const optionsObject = options.reduce((acc, { value, label, label_translation }) => ({ ...acc, [value]: label_translation ? i18n.t(`fields.${label_translation}`) : label }), {});
+      const optionsObject = options.reduce((acc, { value, label, label_translation }) => ({ ...acc, [value]: label_translation ? i18nInstance.i18n.t(`fields.${label_translation}`) : label }), {});
       return { ...field, optionsObject, options };
     } else if (field.type === "select") {
-      const optionsObject = field.options.reduce((acc, { value, label, label_translation }) => ({ ...acc, [value]: label_translation ? i18n.t(`fields.${label_translation}`) : label }), {});
+      const optionsObject = field.options.reduce(
+        (acc, { value, label, label_translation }) => ({ ...acc, [value]: label_translation ? i18nInstance.i18n.t(`fields.${label_translation}`) : label }),
+        {},
+      );
       return { ...field, optionsObject };
     } else {
       return field;

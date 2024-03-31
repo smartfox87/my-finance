@@ -3,7 +3,7 @@ import { periodOptions } from "@/helpers/date.js";
 export const INITIAL_SETTINGS_FIELDS = [
   {
     id: "currency",
-    label_translation: "profile.currency",
+    label_translation: "simple.currency",
     value: "",
     type: "select",
     required: true,
@@ -13,7 +13,7 @@ export const INITIAL_SETTINGS_FIELDS = [
   },
   {
     id: "period",
-    label_translation: "profile.period",
+    label_translation: "simple.period",
     value: "",
     type: "radio-buttons",
     required: true,
@@ -24,7 +24,7 @@ export const INITIAL_SETTINGS_FIELDS = [
 export const INITIAL_PROFILE_FIELDS = [
   {
     id: "full_name",
-    label_translation: "profile.full_name",
+    label_translation: "simple.full_name",
     value: "",
     type: "text",
     required: true,
@@ -32,7 +32,7 @@ export const INITIAL_PROFILE_FIELDS = [
   },
   {
     id: "email",
-    label_translation: "profile.email",
+    label_translation: "simple.email",
     value: "",
     type: "email",
     required: true,
@@ -40,18 +40,18 @@ export const INITIAL_PROFILE_FIELDS = [
   },
   {
     id: "birthdate",
-    label_translation: "profile.birthdate",
+    label_translation: "simple.birthdate",
     value: "",
     type: "date",
   },
   {
     id: "gender",
-    label_translation: "profile.gender.label",
+    label_translation: "complex.gender.label",
     value: "",
     type: "select",
     options: [
-      { label_translation: "profile.gender.options.female", value: "female" },
-      { label_translation: "profile.gender.options.male", value: "male" },
+      { label_translation: "complex.gender.options.female", value: "female" },
+      { label_translation: "complex.gender.options.male", value: "male" },
     ],
   },
 ];
