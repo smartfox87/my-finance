@@ -30,7 +30,7 @@ export default function AccountsContent() {
   const totalBalance = accountsList?.reduce((acc, { balance }) => acc + balance, 0);
   const currency = useSelector(selectCurrency);
   const headerActions = (
-    <div className="font-black lg:text-lg">
+    <div className="ml-auto font-black lg:text-lg">
       <span className="mr-1">{t("common.total")}: </span>
       {formatPrice(totalBalance)}
       {currency}
