@@ -11,10 +11,8 @@ export default function HomeContent() {
 
   return (
     <div className="flex grow flex-col items-center justify-center gap-4 text-center">
-      <h1 className="text-3xl font-black">
-        {t("seo.app_name")} <br /> {t("pages.home.title")}
-      </h1>
-      <p className="text-xl xl:px-20">{t("pages.home.description")}</p>
+      <h1 className="text-xl font-black lg:text-3xl">{t("pages.home.title")}</h1>
+      <p className="lg:text-xl xl:px-20">{t("pages.home.description")}</p>
       {!profile && (
         <div className="mt-4">
           <DemoUserAuth />
