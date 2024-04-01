@@ -19,7 +19,7 @@ export const InnerLayout = async ({ locale, page, isAuth = true, children }: { l
         </div>
         {description && <p className="lg:text-lg">{description}</p>}
       </div>
-      <Suspense fallback={<div>Loading...</div>}>{isAuth ? <AuthGuard>{children}</AuthGuard> : children}</Suspense>
+      <Suspense fallback={<div />}>{isAuth ? <AuthGuard>{children}</AuthGuard> : children}</Suspense>
     </section>
   );
 };

@@ -11,13 +11,14 @@ import { useLoading } from "@/hooks/loading.js";
 import SvgDelete from "@/assets/sprite/delete.svg";
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
 import { Button } from "antd";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export const AccountDetail = memo(function AccountDetail({ onSave }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { accountId } = useParams();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const accountId = searchParams.get("accountId");
 
   const [isLoading, setIsLoading] = useLoading(false);
   const [isBtnLoading, setIsBtnLoading] = useLoading(false);

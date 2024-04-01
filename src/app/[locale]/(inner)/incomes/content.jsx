@@ -7,7 +7,7 @@ import { selectIncomesByFilter, selectIncomesFilterValues, selectIncomesList } f
 import { useFilterSearchParams } from "@/hooks/filterSearchParams";
 import { getIncomesListThunk, setIncomesFilterValues } from "@/store/incomesSlice";
 import { useLoading } from "@/hooks/loading";
-import { useCallback, useEffect } from "react";
+import { Suspense, useCallback, useEffect } from "react";
 import { INITIAL_INCOMES_FILTER_FIELDS } from "@/initial-data/incomes";
 import { getUserId } from "@/helpers/localStorage";
 import { selectCurrency } from "@/store/selectors/profile";
@@ -80,7 +80,9 @@ export default function IncomesContent() {
           <ActiveIncomesFilters />
         </div>
         <LazyList items={filteredSortedIncomes} Item={IncomeItem} />
-        <IncomeDetail onSave={handleGetData} />
+        <Suspense fallback={<div />}>
+          <IncomeDetail onSave={handleGetData} />
+        </Suspense>
       </>
     );
   else if (!incomesList?.length) content = <EmptyIncomes addNew={<AddNewIncome onSave={handleGetData} />} />;

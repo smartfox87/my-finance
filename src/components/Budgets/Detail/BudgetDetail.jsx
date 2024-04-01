@@ -12,13 +12,14 @@ import { checkIsNumber } from "@/helpers/numbers.js";
 import SvgDelete from "@/assets/sprite/delete.svg";
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
 import { Button } from "antd";
-import { useParams, useRouter } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
 export const BudgetDetail = memo(function BudgetDetail({ onSave }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { budgetId } = useParams();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const budgetId = searchParams.get("budgetId");
 
   const [isLoading, setIsLoading] = useLoading(false);
   const [isBtnLoading, setIsBtnLoading] = useLoading(false);

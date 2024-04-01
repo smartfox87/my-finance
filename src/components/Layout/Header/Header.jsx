@@ -19,7 +19,7 @@ export const Header = memo(function Header() {
       <div className="container flex items-center justify-between">
         <Logo />
         {["sm", "xs", "xxs"].includes(viewport) ? (
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<div />}>
             <MobileMenu />
           </Suspense>
         ) : (

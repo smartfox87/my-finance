@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { useLoading } from "@/hooks/loading";
 import { selectAccountsList } from "@/store/selectors/accounts";
-import { useCallback, useEffect } from "react";
+import { Suspense, useCallback, useEffect } from "react";
 import { getAccountTypesThunk } from "@/store/referencesSlice";
 import { getAccountsListThunk } from "@/store/accountsSlice";
 import { Preloader } from "@/components/Layout/Preloader";
@@ -54,7 +54,9 @@ export default function AccountsContent() {
             </li>
           ))}
         </ul>
-        <AccountDetail onSave={handleGetData} />
+        <Suspense fallback={<div />}>
+          <AccountDetail onSave={handleGetData} />
+        </Suspense>
       </div>
     </Preloader>
   );

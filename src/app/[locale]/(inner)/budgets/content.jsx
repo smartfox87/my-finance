@@ -4,7 +4,7 @@ import { selectCurrency } from "@/store/selectors/profile";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { useLoading } from "@/hooks/loading";
-import { useCallback, useEffect } from "react";
+import { Suspense, useCallback, useEffect } from "react";
 import { Preloader } from "@/components/Layout/Preloader";
 import formatPrice from "@/helpers/formatPrice";
 import { useInjectReducer } from "@/hooks/injectReducer";
@@ -65,7 +65,9 @@ export default function BudgetsContent() {
           <ActiveBudgetsFilters />
         </div>
         <LazyList items={filteredSortedBudgets} Item={BudgetItem} />
-        <BudgetDetail onSave={handleGetData} />
+        <Suspense fallback={<div />}>
+          <BudgetDetail onSave={handleGetData} />
+        </Suspense>
       </>
     );
   else if (!budgetsList?.length) content = <EmptyBudgets addNew={<AddNewBudget onSave={handleGetData} />} />;

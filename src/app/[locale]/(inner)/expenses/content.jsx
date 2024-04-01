@@ -14,7 +14,7 @@ import { Preloader } from "@/components/Layout/Preloader";
 import { selectCostsByFilter, selectCostsFilterValues, selectCostsList } from "@/store/selectors/costs";
 import { useFilterSearchParams } from "@/hooks/filterSearchParams";
 import { useLoading } from "@/hooks/loading";
-import { useCallback, useEffect } from "react";
+import { Suspense, useCallback, useEffect } from "react";
 import { getCostsListThunk, setCostsFilterValues } from "@/store/costsSlice";
 import { INITIAL_COSTS_FILTER_FIELDS } from "@/initial-data/costs";
 import { getUserId } from "@/helpers/localStorage";
@@ -80,7 +80,9 @@ export default function ExpensesContent() {
           <ActiveCostsFilters />
         </div>
         <LazyList items={filteredSortedCosts} Item={CostItem} />
-        <CostDetail onSave={handleGetData} />
+        <Suspense fallback={<div />}>
+          <CostDetail onSave={handleGetData} />
+        </Suspense>
       </>
     );
   else if (!costsList?.length) content = <EmptyCosts addNew={<AddNewCost onSave={handleGetData} />} />;
