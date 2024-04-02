@@ -11,7 +11,7 @@ export const MainNav = memo(function MainNav({ className = "" }: { className?: s
     t,
     i18n: { language },
   } = useTranslation();
-  const pathname = usePathname().replace(`/${language}`, "");
+  const pathname = usePathname().replace(`/${language}`, "") || "/";
   const { viewport } = useViewport();
 
   const getNavLinkClassName = (url: string) => (url === pathname ? "!text-blue-600 dark:!text-blue-400" : "!text-black dark:!text-white");
