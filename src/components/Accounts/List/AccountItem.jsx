@@ -8,7 +8,6 @@ import { useEffect, useRef, useState } from "react";
 import { isTextClamped } from "@/helpers/isTextClamped.js";
 import { useViewport } from "@/hooks/viewport.js";
 import { getFullDate } from "@/helpers/date";
-import { getLocalizeUrl } from "@/helpers/url.js";
 import Link from "next/link";
 
 export const AccountItem = ({ id, name, balance, updated_at }) => {
@@ -26,7 +25,7 @@ export const AccountItem = ({ id, name, balance, updated_at }) => {
 
   return (
     <Link
-      href={getLocalizeUrl(`/accounts?accountId=${id}`)}
+      href={`/accounts?accountId=${id}`}
       className="flex flex-wrap justify-between gap-2 rounded-xl border border-gray-300 p-4 shadow-[0_3px_7px_0_#ddd] duration-300 hover:-translate-y-1 hover:shadow-[0_7px_7px_0_#ddd]"
     >
       <div ref={nameRef} className="line-clamp-2 w-full  md:line-clamp-3">

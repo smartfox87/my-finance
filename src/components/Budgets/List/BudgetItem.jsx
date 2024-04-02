@@ -10,7 +10,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { isTextClamped } from "@/helpers/isTextClamped.js";
 import { useViewport } from "@/hooks/viewport.js";
 import { selectAccountsObject } from "@/store/selectors/accounts.js";
-import { getLocalizeUrl } from "@/helpers/url.js";
 import Link from "next/link";
 
 export const BudgetItem = ({ id, name, amount, accounts, categories, period: [start_date, end_date] }) => {
@@ -32,7 +31,7 @@ export const BudgetItem = ({ id, name, amount, accounts, categories, period: [st
 
   return (
     <Link
-      href={getLocalizeUrl(`/budgets?budgetId=${id}`)}
+      href={`/budgets?budgetId=${id}`}
       className="flex w-full flex-col gap-3 rounded-xl border border-gray-300 p-4 shadow-[0_3px_7px_0_#ddd] duration-300 hover:-translate-y-1 hover:shadow-[0_7px_7px_0_#ddd]"
     >
       <BudgetDate startDate={start_date} endDate={end_date} />
