@@ -16,7 +16,7 @@ export const toggleDayjsLocale = async (locale: Locale) => {
 export const periods = ["day", "week", "month", "quarter", "year"] as const;
 export type Period = (typeof periods)[number];
 
-export const periodOptions = periods.map((period) => ({ label: `filter.period.options.${period}`, value: period }));
+export const periodOptions = periods.map((period) => ({ label: `complex.period.options.${period}`, value: period }));
 
 export const getPeriod = () => {
   if (typeof window !== "undefined") return localStorage.getItem("period");
