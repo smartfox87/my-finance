@@ -1,0 +1,258 @@
+{
+  "navigation": {
+    "home": "首页",
+    "expenses": {
+      "full": "费用列表",
+      "short": "费用"
+    },
+    "budgets": {
+      "full": "预算列表",
+      "short": "预算"
+    },
+    "accounts": {
+      "full": "账户列表",
+      "short": "账户"
+    },
+    "incomes": {
+      "full": "收入列表",
+      "short": "收入"
+    },
+    "statistics": {
+      "full": "总统计",
+      "short": "统计"
+    },
+    "profile": "用户资料",
+    "settings": "设置",
+    "contact_us": "联系我们"
+  },
+  "buttons": {
+    "sign_up": "注册",
+    "sign_in": "登录",
+    "sign_in_google": "谷歌授权",
+    "sign_in_demo_user": "演示用户授权",
+    "logout": "登出",
+    "add_expense": "添加新费用",
+    "add_budget": "添加新预算",
+    "delete_expense": "删除费用",
+    "delete_budget": "删除预算",
+    "delete_income": "删除收入",
+    "delete_account": "删除账户",
+    "submit": "提交",
+    "cancel": "取消",
+    "set_filters": "设置过滤器",
+    "backspace": "退格",
+    "clear": "清除",
+    "save_amount": "保存计算的金额",
+    "save_balance": "保存计算的余额",
+    "show_menu": "显示菜单",
+    "upload": "上传",
+    "apply": "应用",
+    "go_home": "回到首页"
+  },
+  "fields": {
+    "simple": {
+      "email": "电子邮件",
+      "password": "密码",
+      "full_name": "全名",
+      "name": "名称",
+      "amount": "金额",
+      "date": "日期",
+      "account": "账户",
+      "category": "类别",
+      "to": "到账户",
+      "from": "从账户",
+      "balance": "余额",
+      "message": "消息",
+      "attachments": "附件",
+      "period": "默认期间",
+      "currency": "货币",
+      "birthdate": "出生日期"
+    },
+    "complex": {
+      "sort": {
+        "label": "排序",
+        "options": {
+          "prefix": "按照排序",
+          "date_asc": "日期（升序）",
+          "name_asc": "名称（升序）",
+          "date_desc": "日期（降序）",
+          "name_desc": "名称（降序）",
+          "amount_asc": "金额（升序）",
+          "amount_desc": "金额（降序）"
+        }
+      },
+      "period": {
+        "label": "期间",
+        "options": {
+          "day": "日",
+          "week": "周",
+          "year": "年",
+          "month": "月",
+          "quarter": "季度"
+        }
+      },
+      "account": {
+        "label": "账户",
+        "options": {
+          "all": "所有账户"
+        }
+      },
+      "category": {
+        "label": "类别",
+        "options": {
+          "all": "所有类别"
+        }
+      },
+      "gender": {
+        "label": "性别",
+        "options": {
+          "male": "男",
+          "female": "女"
+        }
+      },
+      "subject": {
+        "label": "主题",
+        "options": {
+          "bug": "错误",
+          "other": "其他",
+          "support": "支持",
+          "feedback": "反馈",
+          "suggestion": "建议",
+          "collaboration": "合作"
+        }
+      }
+    },
+    "errors": {
+      "email": "无效的电子邮件",
+      "number": "无效的数字",
+      "required": "此字段是必需的",
+      "file_size": "文件大小必须小于",
+      "balance_exceeded": "超过账户余额限制"
+    }
+  },
+  "common": {
+    "updated_at": "更新于",
+    "created_at": "创建于",
+    "empty_expenses": "在开始时添加费用",
+    "empty_budgets": "在开始时添加预算",
+    "empty_incomes": "在开始时添加收入",
+    "found_nothing": "未找到任何内容",
+    "items": "项目",
+    "balance_calculator": "余额计算器",
+    "add_account": "添加新账户",
+    "add_income": "添加新收入",
+    "transfer_money": "账户间转账",
+    "amount_calculator": "金额计算器",
+    "total": "总计"
+  },
+  "titles": {
+    "authorisation": "授权",
+    "registration": "注册",
+    "add_expense": "添加新费用",
+    "add_budget": "添加新预算",
+    "detail_expense": "费用卡",
+    "detail_budget": "预算卡",
+    "detail_account": "账户卡",
+    "detail_income": "收入卡",
+    "set_filters": "设置过滤器",
+    "not_found": "未找到页面"
+  },
+  "notifications": {
+    "auth_requirement": "请登录以访问此页面。",
+    "recaptcha_invalid": "您未通过reCAPTCHA验证。请重试。",
+    "expense": {
+      "create": "费用已成功创建。",
+      "update": "费用已成功更新。",
+      "delete": "费用已成功删除。"
+    },
+    "budget": {
+      "create": "预算已成功创建。",
+      "update": "预算已成功更新。",
+      "delete": "预算已成功删除。"
+    },
+    "account": {
+      "create": "账户已成功创建。",
+      "update": "账户已成功更新。",
+      "delete": "账户已成功删除。",
+      "money_transferred": "资金已成功转账。"
+    },
+    "income": {
+      "create": "收入已成功创建。",
+      "update": "收入已成功更新。",
+      "delete": "收入已成功删除。"
+    },
+    "contact": {
+      "success": "消息已成功发送。",
+      "error": "发送消息时发生错误。"
+    }
+  },
+  "detail": {
+    "name": "名称",
+    "account": "账户",
+    "category": "类别",
+    "all_accounts": "所有账户",
+    "all_categories": "所有类别",
+    "amount": "金额",
+    "balance": "余额",
+    "updated_at": "更新于"
+  },
+  "statistics": {
+    "incomes_by_categories": "按类别划分的收入",
+    "expenses_by_categories": "按类别划分的支出",
+    "costs": "支出",
+    "budgets": "预算",
+    "budget": "预算",
+    "incomes": "收入",
+    "accounts": "账户"
+  },
+  "pages": {
+    "home": {
+      "title": "预算管理和收入、账户、支出跟踪和统计",
+      "description": "这是一个方便的个人财务管理工具，设计用来帮助您跟踪收入和支出，管理账户，并按类别、账户和时间段设置预算。通过详细的统计和分析，优化您的财务并实现您的财务目标。",
+      "keywords": "财务，管理，工具，收入，支出，账户，预算，统计，分析"
+    },
+    "statistics": {
+      "title": "总统计",
+      "description": "按类别、账户和时间段跟踪收入、支出和预算。通过详细的统计和分析，优化您的财务并实现您的财务目标。",
+      "keywords": "统计，分析，类别，账户，收入，预算，期间"
+    },
+    "accounts": {
+      "title": "账户列表",
+      "description": "添加、编辑和删除账户。在账户之间转账。",
+      "keywords": "账户，金钱，转账，余额"
+    },
+    "budgets": {
+      "title": "预算列表",
+      "description": "添加、编辑和删除预算。按类别、账户和时间段设置预算。",
+      "keywords": "预算，类别，账户，期间"
+    },
+    "expenses": {
+      "title": "支出列表",
+      "description": "添加、编辑和删除支出。跟踪收入和支出。",
+      "keywords": "支出，类别，账户，期间"
+    },
+    "incomes": {
+      "title": "收入列表",
+      "description": "添加、编辑和删除收入。跟踪收入和支出。",
+      "keywords": "收入，类别，账户，期间"
+    },
+    "profile": {
+      "title": "用户资料",
+      "description": "编辑用户资料。更改全名、电子邮件、出生日期、性别",
+      "keywords": "资料，用户，全名，电子邮件，出生日期，性别"
+    },
+    "settings": {
+      "title": "设置",
+      "description": "更改设置。更改货币，默认期间",
+      "keywords": "设置，货币，期间"
+    },
+    "contact": {
+      "title": "联系我们",
+      "description": "给我们发送消息。我们很乐意帮助您。",
+      "keywords": "联系，消息，支持，反馈"
+    }
+  },
+  "seo": {
+    "app_name": "我的财务"
+  }
+}

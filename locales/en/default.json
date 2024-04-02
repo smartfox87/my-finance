@@ -205,10 +205,6 @@
     "incomes": "Incomes",
     "accounts": "Accounts"
   },
-  "closed_site": {
-    "title": "We apologize.",
-    "text": "The site is undergoing technical work. Come back later."
-  },
   "pages": {
     "home": {
       "title": "Budget Management and Incomes, Accounts, Expenses Tracking & Statistics",
