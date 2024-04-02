@@ -47,7 +47,8 @@
     "show_menu": "Mostrar menú",
     "upload": "Subir",
     "apply": "Aplicar",
-    "go_home": "Ir a la página de inicio"
+    "go_home": "Ir a la página de inicio",
+    "try_again": "Intentar de nuevo"
   },
   "fields": {
     "simple": {
@@ -143,7 +144,8 @@
     "add_income": "Añadir nuevo ingreso",
     "transfer_money": "Transferir entre cuentas",
     "amount_calculator": "Calculadora de cantidad",
-    "total": "Total"
+    "total": "Total",
+    "error": "¡Algo salió mal!"
   },
   "titles": {
     "authorisation": "Autorización",

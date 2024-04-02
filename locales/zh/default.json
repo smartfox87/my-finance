@@ -47,7 +47,8 @@
     "show_menu": "显示菜单",
     "upload": "上传",
     "apply": "应用",
-    "go_home": "回到首页"
+    "go_home": "回到首页",
+    "try_again": "重试"
   },
   "fields": {
     "simple": {
@@ -143,7 +144,8 @@
     "add_income": "添加新收入",
     "transfer_money": "账户间转账",
     "amount_calculator": "金额计算器",
-    "total": "总计"
+    "total": "总计",
+    "error": "出了些问题！"
   },
   "titles": {
     "authorisation": "授权",

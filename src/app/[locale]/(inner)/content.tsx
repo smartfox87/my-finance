@@ -10,7 +10,7 @@ export default function HomeContent() {
   const profile = useSelector(selectProfile);
 
   return (
-    <div className="flex grow flex-col items-center justify-center gap-4 text-center">
+    <section className="flex grow flex-col items-center justify-center gap-4 text-center">
       <h1 className="text-xl font-black lg:text-3xl">{t("pages.home.title")}</h1>
       <p className="lg:text-xl xl:px-20">{t("pages.home.description")}</p>
       {!profile && (
@@ -18,6 +18,6 @@ export default function HomeContent() {
           <DemoUserAuth />
         </div>
       )}
-    </div>
+    </section>
   );
 }

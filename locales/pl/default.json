@@ -47,7 +47,8 @@
     "show_menu": "Pokaż menu",
     "upload": "Prześlij",
     "apply": "Zastosuj",
-    "go_home": "Przejdź do strony głównej"
+    "go_home": "Przejdź do strony głównej",
+    "try_again": "Spróbuj ponownie"
   },
   "fields": {
     "simple": {
@@ -143,7 +144,8 @@
     "add_income": "Dodaj nowy dochód",
     "transfer_money": "Przelew między kontami",
     "amount_calculator": "Kalkulator kwoty",
-    "total": "Razem"
+    "total": "Razem",
+    "error": "Coś poszło nie tak!"
   },
   "titles": {
     "authorisation": "Autoryzacja",

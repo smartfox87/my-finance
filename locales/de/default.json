@@ -47,7 +47,8 @@
     "show_menu": "Menü anzeigen",
     "upload": "Hochladen",
     "apply": "Anwenden",
-    "go_home": "Zur Startseite gehen"
+    "go_home": "Zur Startseite gehen",
+    "try_again": "Versuchen Sie es erneut"
   },
   "fields": {
     "simple": {
@@ -143,7 +144,8 @@
     "add_income": "Neues Einkommen hinzufügen",
     "transfer_money": "Geld zwischen Konten überweisen",
     "amount_calculator": "Betrag-Rechner",
-    "total": "Gesamt"
+    "total": "Gesamt",
+    "error": "Etwas ist schief gelaufen!"
   },
   "titles": {
     "authorisation": "Autorisierung",

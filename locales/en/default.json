@@ -47,7 +47,8 @@
     "show_menu": "Show menu",
     "upload": "Upload",
     "apply": "Apply",
-    "go_home": "Go home page"
+    "go_home": "Go home page",
+    "try_again": "Try again"
   },
   "fields": {
     "simple": {
@@ -143,7 +144,8 @@
     "add_income": "Add new income",
     "transfer_money": "Transfer between accounts",
     "amount_calculator": "Amount calculator",
-    "total": "Total"
+    "total": "Total",
+    "error": "Something went wrong!"
   },
   "titles": {
     "authorisation": "Authorisation",
