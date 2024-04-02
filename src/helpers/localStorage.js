@@ -1,3 +1,7 @@
 export const getUserId = () => localStorage.getItem("user_id");
 
-export const getLanguage = () => localStorage.getItem("i18nextLng")?.substring(0, 2) || "en";
+export const getLanguage = () =>
+  document.cookie
+    .split(";")
+    .find((cookie) => cookie.includes("NEXT_LOCALE"))
+    ?.split("=")[1];

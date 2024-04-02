@@ -2,9 +2,10 @@ import { createContext, useCallback, useEffect, useState } from "react";
 import { setLanguage } from "@/store/commonSlice.js";
 import { useTranslation } from "react-i18next";
 import { store } from "@/store/index.js";
-import { i18nConfig } from "../../i18nConfig";
+import { locales } from "../../i18nConfig";
+import { toggleDayjsLocale } from "@/helpers/date.js";
 
-export const languages = i18nConfig.locales.reduce((acc, lang) => ({ ...acc, [lang]: null }), {});
+export const languages = locales.reduce((acc, lang) => ({ ...acc, [lang]: null }), {});
 const getLocale = async (lang) => (languages[lang] ? languages[lang] : (languages[lang] = await import(`@/initial-data/antd-locales`).then((module) => module[lang])));
 export const LocaleContext = createContext({ locale: null, changeLocale: () => {} });
 
@@ -17,10 +18,12 @@ export const LocaleProvider = ({ children }) => {
   const [locale, setLocale] = useState(getLocale(language));
   const changeLocale = useCallback(
     async (lang) => {
+      console.log("2222222222222222222222222", lang);
       if (!language.includes(lang)) await changeLanguage(lang);
       dispatch(setLanguage(lang));
       const antdLocale = await getLocale(lang);
       setLocale(antdLocale);
+      await toggleDayjsLocale(lang);
     },
     [language],
   );

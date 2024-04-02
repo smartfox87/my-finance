@@ -4,7 +4,7 @@ import { SimpleSelect } from "@/components/Form/SimpleSelect.jsx";
 import { languages } from "@/providers/LocaleProvider.jsx";
 import { useLocale } from "@/hooks/locale";
 import { useParams, usePathname, useRouter } from "next/navigation";
-import { i18nConfig } from "../../../../i18nConfig.js";
+import { i18nConfig } from "../../../../i18nConfig.ts";
 
 export const LanguageToggle = () => {
   const {

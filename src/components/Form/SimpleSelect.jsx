@@ -50,6 +50,7 @@ export const SimpleSelect = ({ value, options, onChange }) => {
                 value === option.value ? "bg-blue-100 dark:bg-darkest-blue" : "cursor-pointer hover:bg-black/5 dark:hover:bg-white/10"
               }`}
               type="button"
+              tabIndex={isOpen ? 0 : -1}
               onClick={() => handleChange(option.value)}
             >
               {option.label}
