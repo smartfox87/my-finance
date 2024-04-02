@@ -3,7 +3,7 @@ import { setLanguage } from "@/store/commonSlice.js";
 import { useTranslation } from "react-i18next";
 import { store } from "@/store/index.js";
 import { locales } from "../../i18nConfig";
-import { toggleDayjsLocale } from "@/helpers/date.js";
+import { toggleDayjsLocale } from "@/helpers/date";
 
 export const languages = locales.reduce((acc, lang) => ({ ...acc, [lang]: null }), {});
 const getLocale = async (lang) => (languages[lang] ? languages[lang] : (languages[lang] = await import(`@/initial-data/antd-locales`).then((module) => module[lang])));

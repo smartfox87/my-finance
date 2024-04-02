@@ -1,7 +1,7 @@
 import { supabase } from "@/api/supabase.js";
 import { getUserId } from "@/helpers/localStorage.js";
 import { deleteIncomeCategoryApi } from "@/api/references.js";
-import { getCurrentDate } from "@/helpers/date.js";
+import { getCurrentDate } from "@/helpers/date";
 
 export const getIncomesListApi = ({ period: [from, to] }) =>
   supabase.from("incomes").select("created_at, id, name, category, date, amount, account").or(`user_id.eq.${getUserId()}`).order("id").gte("date", from).lte("date", to);

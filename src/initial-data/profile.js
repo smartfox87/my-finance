@@ -1,4 +1,4 @@
-import { periodOptions } from "@/helpers/date.js";
+import { periodOptions } from "@/helpers/date";
 
 export const INITIAL_SETTINGS_FIELDS = [
   {

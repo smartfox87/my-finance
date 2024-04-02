@@ -1,6 +1,6 @@
 import { supabase } from "@/api/supabase.js";
 import { getUserId } from "@/helpers/localStorage.js";
-import { getFromPeriodDatesForApi, getToPeriodDatesForApi } from "@/helpers/date.js";
+import { getFromPeriodDatesForApi, getToPeriodDatesForApi } from "@/helpers/date";
 
 export const getCostsListForChartsApi = ({ period: [from, to] }) => supabase.from("costs").select("amount, date, category, account").match({ user_id: getUserId() }).gte("date", from).lte("date", to);
 

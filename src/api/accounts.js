@@ -1,7 +1,7 @@
 import { supabase } from "@/api/supabase.js";
 import { getUserId } from "@/helpers/localStorage.js";
 import { deleteAccountTypeApi } from "@/api/references.js";
-import { getCurrentDate } from "@/helpers/date.js";
+import { getCurrentDate } from "@/helpers/date";
 
 export const createInitialAccountsApi = () =>
   supabase

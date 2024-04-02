@@ -7,7 +7,7 @@ import { uppercaseFirstLetter } from "@/helpers/strings.js";
 import { useEffect, useRef, useState } from "react";
 import { isTextClamped } from "@/helpers/isTextClamped.js";
 import { useViewport } from "@/hooks/viewport.js";
-import { getFullDate } from "@/helpers/date.js";
+import { getFullDate } from "@/helpers/date";
 import { getLocalizeUrl } from "@/helpers/url.js";
 import Link from "next/link";
 

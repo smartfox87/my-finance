@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from "react";
 import { getIntegerIfPossible } from "@/helpers/numbers.js";
 import { useDispatch } from "react-redux";
-import { isStringADate } from "@/helpers/date.js";
+import { isStringADate } from "@/helpers/date";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import queryString from "query-string";
 

@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import { Button, DatePicker, Radio } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { findMatchingPeriod, getDatesPeriod, periodOptions } from "@/helpers/date.js";
+import { findMatchingPeriod, getDatesPeriod, periodOptions } from "@/helpers/date";
 const { RangePicker } = DatePicker;
 
 const processDates = (dates) => dates.map((date) => dayjs(date));

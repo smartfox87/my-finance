@@ -1,4 +1,4 @@
-import { getFullDate } from "@/helpers/date.js";
+import { getFullDate } from "@/helpers/date";
 
 export const BudgetDate = ({ startDate, endDate }) => {
   const isDifferentMonths = startDate !== endDate;

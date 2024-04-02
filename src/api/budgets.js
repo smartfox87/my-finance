@@ -1,6 +1,6 @@
 import { supabase } from "@/api/supabase.js";
 import { getUserId } from "@/helpers/localStorage.js";
-import { getCurrentDate, getFromPeriodDatesForApi, getToPeriodDatesForApi } from "@/helpers/date.js";
+import { getCurrentDate, getFromPeriodDatesForApi, getToPeriodDatesForApi } from "@/helpers/date";
 
 export const getBudgetsListApi = ({ period }) =>
   supabase

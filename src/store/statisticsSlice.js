@@ -2,7 +2,7 @@ import { asyncThunkCreator, buildCreateSlice } from "@reduxjs/toolkit";
 import { handleRejected } from "@/helpers/processExtraReducersCases.js";
 import { getBudgetsListForChartsApi, getCostsListForChartsApi, getIncomesListForChartsApi } from "@/api/statistics.js";
 import { setFilterValue } from "@/helpers/filters.js";
-import { getPeriodDates } from "@/helpers/date.js";
+import { getPeriodDates } from "@/helpers/date";
 
 const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },

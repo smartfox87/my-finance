@@ -1,4 +1,4 @@
-import { getDatesPeriod, getPeriod } from "@/helpers/date.js";
+import { getDatesPeriod, getPeriod } from "@/helpers/date";
 
 export const INITIAL_BUDGETS_FILTER_FIELDS = [
   {
