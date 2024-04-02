@@ -1,6 +1,6 @@
 import Critters from "critters";
 import fs from "fs";
-import { locales, pages } from "../i18nConfig.ts";
+import { locales, pages } from "../src/initial-data/router.js";
 
 const critters = new Critters({
   path: ".next/static/css",
