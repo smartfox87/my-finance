@@ -1,6 +1,7 @@
 import { locales, pages } from "../src/initial-data/router.js";
 import fs from "fs";
 import path from "path";
+import * as cheerio from "cheerio";
 
 function getCssPaths(dir) {
   const files = fs.readdirSync(dir);
@@ -17,9 +18,11 @@ const htmlPaths = pages.reduce((acc, page) => {
 async function insertCssIntoHtml(cssFileName, htmlFileName) {
   const cssContent = fs.readFileSync(cssFileName, "utf8");
   const styleContent = `<style>${cssContent}</style>`;
-  let htmlContent = fs.readFileSync(htmlFileName, "utf8");
-  htmlContent = htmlContent.replace("</head>", `${styleContent}</head>`);
-  fs.writeFileSync(htmlFileName, htmlContent);
+  const htmlContent = fs.readFileSync(htmlFileName, "utf8");
+  const $ = cheerio.load(htmlContent);
+  $('link[href$=".css"]').remove();
+  $("head").append(styleContent);
+  fs.writeFileSync(htmlFileName, $.html());
 }
 
 Promise.all(htmlPaths.map(async (htmlPath) => cssPaths.map(async (cssPath) => insertCssIntoHtml(cssPath, htmlPath))).flat()).finally(() => console.log("Inline Styles Done"));
