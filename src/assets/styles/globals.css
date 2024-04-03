@@ -2,15 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-	html {
-		font-family: Arial, system-ui, sans-serif;
-		line-height: 1.5;
-		font-weight: 400;
-	}
-}
-
 :root {
+	font-family: Arial, system-ui, sans-serif;
+	line-height: 1.5;
+	font-weight: 400;
 	color-scheme: light dark;
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
