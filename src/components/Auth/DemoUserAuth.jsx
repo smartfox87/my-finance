@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
-import { SimpleButton } from "@/components/Form/SimpleButton.jsx";
+import { SimpleButton } from "@/components/Form/SimpleButton";
 import { useInjectReducer } from "@/hooks/injectReducer";
 
 export const DemoUserAuth = () => {

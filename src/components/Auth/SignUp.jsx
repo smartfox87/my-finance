@@ -5,7 +5,7 @@ import { lazy, Suspense, useState } from "react";
 import { useViewport } from "@/hooks/viewport.js";
 import { useRecaptcha } from "@/hooks/recaptcha.js";
 import SvgSignUp from "@/assets/sprite/sign-up.svg";
-import { SimpleButton } from "@/components/Form/SimpleButton.jsx";
+import { SimpleButton } from "@/components/Form/SimpleButton";
 import { useInjectReducer } from "@/hooks/injectReducer";
 import { useAntd } from "@/hooks/antd.js";
 
