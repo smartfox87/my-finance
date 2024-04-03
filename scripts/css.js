@@ -1,24 +1,25 @@
-import Critters from "critters";
-import fs from "fs";
 import { locales, pages } from "../src/initial-data/router.js";
+import fs from "fs";
+import path from "path";
 
-const critters = new Critters({
-  path: ".next/static/css",
-  publicPath: "/_next/static/css/",
-  inlineFonts: true,
-  pruneSource: true,
-  preloadFonts: false, // next is already preloading them
-});
+function getCssPaths(dir) {
+  const files = fs.readdirSync(dir);
+  return files.filter((file) => path.extname(file) === ".css").map((file) => path.join(dir, file));
+}
 
-const routes = pages.reduce((acc, page) => {
-  const langPages = locales.map((locale) => (page.length ? `${locale}/${page}.html` : `${locale}.html`));
+const cssPaths = getCssPaths(".next/static/css");
+
+const htmlPaths = pages.reduce((acc, page) => {
+  const langPages = locales.map((locale) => ".next/server/app/" + (page.length ? `${locale}/${page}.html` : `${locale}.html`));
   return acc.concat(langPages);
 }, []);
 
-const routesProcess = routes.map(async (route) => {
-  const html = await fs.readFileSync(`.next/server/app/${route}`, "utf8");
-  const updatedHtml = await critters.process(html);
-  fs.writeFileSync(`.next/server/app/${route}`, updatedHtml);
-});
+async function insertCssIntoHtml(cssFileName, htmlFileName) {
+  const cssContent = fs.readFileSync(cssFileName, "utf8");
+  const styleContent = `<style>${cssContent}</style>`;
+  let htmlContent = fs.readFileSync(htmlFileName, "utf8");
+  htmlContent = htmlContent.replace("</head>", `${styleContent}</head>`);
+  fs.writeFileSync(htmlFileName, htmlContent);
+}
 
-Promise.all(routesProcess);
+Promise.all(htmlPaths.map(async (htmlPath) => cssPaths.map(async (cssPath) => insertCssIntoHtml(cssPath, htmlPath))).flat()).finally(() => console.log("Inline Styles Done"));
