@@ -9,6 +9,8 @@ function getCssPaths(dir) {
 
 const cssPaths = getCssPaths(".next/static/css");
 
+const clearCssFiles = () => cssPaths.forEach((cssPath) => fs.writeFileSync(cssPath, ""));
+
 const htmlPaths = pages.reduce((acc, page) => {
   const langPages = locales.map((locale) => ".next/server/app/" + (page.length ? `${locale}/${page}.html` : `${locale}.html`));
   return acc.concat(langPages);
@@ -22,4 +24,7 @@ async function insertCssIntoHtml(cssFileName, htmlFileName) {
   fs.writeFileSync(htmlFileName, htmlContent);
 }
 
-Promise.all(htmlPaths.map(async (htmlPath) => cssPaths.map(async (cssPath) => insertCssIntoHtml(cssPath, htmlPath))).flat()).finally(() => console.log("Inline Styles Done"));
+Promise.all(htmlPaths.map(async (htmlPath) => cssPaths.map(async (cssPath) => insertCssIntoHtml(cssPath, htmlPath))).flat()).finally(() => {
+  clearCssFiles();
+  console.log("Inline Styles Done");
+});
