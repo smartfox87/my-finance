@@ -2,85 +2,88 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+	html {
+		font-family: Arial, system-ui, sans-serif;
+		line-height: 1.5;
+		font-weight: 400;
+	}
+}
+
 :root {
-  font-family: Arial, system-ui, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-  padding: 0;
+	color-scheme: light dark;
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-text-size-adjust: 100%;
+	padding: 0;
 }
 
 .container {
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 16px;
-  padding-right: 16px;
-  max-width: 1400px;
-  width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 16px;
+	padding-right: 16px;
+	max-width: 1400px;
+	width: 100%;
 }
 
 .container-edge {
-  margin-left: -16px;
-  margin-right: -16px;
-  width: auto;
+	margin-left: -16px;
+	margin-right: -16px;
+	width: auto;
 }
 
 .ant-notification-notice-message.ant-notification-notice-message.ant-notification-notice-message {
-  margin-right: 35px;
-  font-weight: 700;
-  line-height: 1.2;
+	margin-right: 35px;
+	font-weight: 700;
+	line-height: 1.2;
 }
 
 .ant-notification-notice-description.ant-notification-notice-description.ant-notification-notice-description:empty {
-  margin-top: -8px;
+	margin-top: -8px;
 }
 
 .ant-picker-time-panel.ant-picker-time-panel {
-  display: none !important;
+	display: none !important;
 }
 
 .ant-radio-group.ant-radio-group.ant-radio-group {
-  display: flex;
+	display: flex;
 }
 
 .ant-radio-button-wrapper {
-  flex-grow: 1;
-  text-align: center;
+	flex-grow: 1;
+	text-align: center;
 }
 
 button:focus-visible,
 a:focus-visible,
 .focus-appearance:focus-visible {
-  outline: rgba(22, 104, 220, 0.5) solid 4px !important;
-  outline-offset: 1px !important;
+	outline: rgba(22, 104, 220, 0.5) solid 4px !important;
+	outline-offset: 1px !important;
 }
 
 g:focus {
-  outline: none;
+	outline: none;
 }
 
 .grecaptcha-badge {
-  visibility: hidden;
+	visibility: hidden;
 }
 
 @media (max-width: 385px) {
-  .ant-drawer-header.ant-drawer-header.ant-drawer-header,
-  .ant-drawer-body.ant-drawer-body.ant-drawer-body {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
+	.ant-drawer-header.ant-drawer-header.ant-drawer-header,
+	.ant-drawer-body.ant-drawer-body.ant-drawer-body {
+		padding-left: 15px;
+		padding-right: 15px;
+	}
 }
 
 @media (max-width: 430px) {
-  .ant-radio-button-wrapper.ant-radio-button-wrapper.ant-radio-button-wrapper {
-    font-size: 14px;
-    padding-inline: 5px;
-  }
+	.ant-radio-button-wrapper.ant-radio-button-wrapper.ant-radio-button-wrapper {
+		font-size: 14px;
+		padding-inline: 5px;
+	}
 }
