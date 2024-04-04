@@ -25,6 +25,6 @@ async function insertCssIntoHtml(cssFileName, htmlFileName) {
 }
 
 Promise.all(htmlPaths.map(async (htmlPath) => cssPaths.map(async (cssPath) => insertCssIntoHtml(cssPath, htmlPath))).flat()).finally(() => {
-  clearCssFiles();
+  // clearCssFiles();
   console.log("Inline Styles Done");
 });
