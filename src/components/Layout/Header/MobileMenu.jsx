@@ -32,7 +32,7 @@ export const MobileMenu = memo(function MobileMenu() {
       <SideModal isOpen={isOpen} onClose={handleToggleVisibility}>
         <div className="flex items-center justify-between gap-3">
           {user ? <ProfileMenu /> : <Auth />}
-          <div className="ml-auto">
+          <div className="relative z-20 ml-auto">
             <LanguageToggle />
           </div>
         </div>
