@@ -9,7 +9,7 @@ const links = pages.map((url) => ({
   url: `${hostname}/${url}`,
   changefreq: "daily",
   priority: 0.8,
-  links: locales.map((lang) => ({ lang, url: `${hostname}/${lang}/${url}` })),
+  links: locales.filter((lang) => lang !== "en").map((lang) => ({ lang, url: `${hostname}/${lang}/${url}` })),
 }));
 
 const stream = new SitemapStream({
