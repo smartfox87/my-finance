@@ -2,10 +2,9 @@ import "dotenv/config";
 import { writeFileSync } from "fs";
 import { SitemapStream, streamToPromise } from "sitemap";
 import { Readable } from "stream";
-import { locales, pages } from "../i18nConfig";
+import { locales, pages } from "../src/initial-data/router.js";
 
 const hostname = process.env.PRODUCTION_URL;
-console.log(hostname);
 const links = pages.map((url) => ({
   url: `${hostname}/${url}`,
   changefreq: "daily",
