@@ -11,11 +11,14 @@ export const SimpleSelect = ({ value, options, onChange }) => {
 
   const [focusedOptionIndex, setFocusedOptionIndex] = useState(0);
   const handleKeyDown = (e) => {
-    e.preventDefault();
     if (["ArrowDown"].includes(e.key)) {
+      e.preventDefault();
       handleToggleVisibility(true);
       if (isOpen) setFocusedOptionIndex(focusedOptionIndex < options.length - 1 ? focusedOptionIndex + 1 : 0);
-    } else if (["ArrowUp"].includes(e.key) && isOpen) setFocusedOptionIndex(focusedOptionIndex > 0 ? focusedOptionIndex - 1 : options.length - 1);
+    } else if (["ArrowUp"].includes(e.key) && isOpen) {
+      e.preventDefault();
+      setFocusedOptionIndex(focusedOptionIndex > 0 ? focusedOptionIndex - 1 : options.length - 1);
+    }
   };
   useEffect(() => {
     if (!isOpen) return;
