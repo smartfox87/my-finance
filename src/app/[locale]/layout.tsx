@@ -47,6 +47,10 @@ export async function generateMetadata({ params: { locale } }: { params: { local
       },
       description: APP_DESCRIPTION,
     },
+    icons: {
+      icon: "/assets/favicon/favicon.ico",
+      apple: "/assets/favicon/apple-touch-icon-180x180.png",
+    },
   };
 }
 
