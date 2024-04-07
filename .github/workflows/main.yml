@@ -2,7 +2,7 @@ name: linting, testing
 run-name: linting, testing
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  pipeline:
     runs-on: ubuntu-latest
     strategy:
         matrix:
