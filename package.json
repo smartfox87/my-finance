@@ -11,7 +11,8 @@
 		"build": "next build && npm run css",
 		"start": "next start -p 3020",
 		"size": "npx cross-env ANALYZE=true npm run build",
-		"lint": "next lint"
+		"lint": "eslint \"**/*.{js,jsx,ts,tsx}\"",
+		"lint:fix": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix"
 	},
 	"dependencies": {
 		"@ant-design/nextjs-registry": "^1.0.0",
