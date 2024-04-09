@@ -1,3 +1,3 @@
 export const locales = ["en", "de", "it", "es", "fr", "pl", "zh", "hi", "ru"].sort((a, b) => a.localeCompare(b));
 
-export const pages = ["", "accounts", "budgets", "contact", "expenses", "incomes", "statistics"];
+export const pages = ["", "accounts", "budgets", "expenses", "incomes", "statistics"];

@@ -211,47 +211,44 @@
     "home": {
       "title": "Zarządzanie budżetem i śledzenie dochodów, kont, wydatków i statystyk",
       "description": "To wygodne narzędzie do zarządzania finansami osobistymi, zaprojektowane, aby pomóc Ci śledzić dochody i wydatki, zarządzać kontami i ustalać budżet według kategorii, konta i okresu czasu. Optymalizuj swoje finanse i osiągnij swoje cele finansowe dzięki szczegółowym statystykom i analizom.",
-      "keywords": "finanse, zarządzanie, narzędzie, dochody, wydatki, konta, budżet, statystyki, analizy"
+      "keywords": "finanse, zarządzanie, narzędzie, dochody, wydatki, konta, budżet, statystyki, analizy, pieniądze"
     },
     "statistics": {
       "title": "Całkowite statystyki",
       "description": "Śledź dochody, wydatki i budżety według kategorii, konta i okresu czasu. Optymalizuj swoje finanse i osiągnij swoje cele finansowe dzięki szczegółowym statystykom i analizom.",
-      "keywords": "statystyki, analizy, kategorie, konta, dochody, budżety, okres"
+      "keywords": "statystyki, analizy, kategorie, konta, dochody, budżety, okres, pieniądze, finanse"
     },
     "accounts": {
       "title": "Lista kont",
       "description": "Dodaj, edytuj i usuń konta. Przelej pieniądze między kontami.",
-      "keywords": "konta, pieniądze, transfer, saldo"
+      "keywords": "konta, pieniądze, transfer, saldo, pieniądze, finanse"
     },
     "budgets": {
       "title": "Lista budżetów",
       "description": "Dodaj, edytuj i usuń budżety. Ustal budżet według kategorii, konta i okresu czasu.",
-      "keywords": "budżety, kategorie, konta, okres"
+      "keywords": "budżety, kategorie, konta, okres, pieniądze, finanse"
     },
     "expenses": {
       "title": "Lista wydatków",
       "description": "Dodaj, edytuj i usuń wydatki. Śledź dochody i wydatki.",
-      "keywords": "wydatki, kategorie, konta, okres"
+      "keywords": "wydatki, kategorie, konta, okres, pieniądze, finanse"
     },
     "incomes": {
       "title": "Lista dochodów",
       "description": "Dodaj, edytuj i usuń dochody. Śledź dochody i wydatki.",
-      "keywords": "dochody, kategorie, konta, okres"
+      "keywords": "dochody, kategorie, konta, okres, pieniądze, finanse"
     },
     "profile": {
       "title": "Profil użytkownika",
-      "description": "Edytuj profil użytkownika. Zmień pełne imię, email, datę urodzenia, płeć",
-      "keywords": "profil, użytkownik, pełne imię, email, data urodzenia, płeć"
+      "description": "Edytuj profil użytkownika. Zmień pełne imię, email, datę urodzenia, płeć"
     },
     "settings": {
       "title": "Ustawienia",
-      "description": "Zmień ustawienia. Zmień walutę, domyślny okres",
-      "keywords": "ustawienia, waluta, okres"
+      "description": "Zmień ustawienia. Zmień walutę, domyślny okres"
     },
     "contact": {
       "title": "Skontaktuj się z nami",
-      "description": "Wyślij nam wiadomość. Chętnie Ci pomożemy.",
-      "keywords": "kontakt, wiadomość, wsparcie, opinia"
+      "description": "Wyślij nam wiadomość. Chętnie Ci pomożemy."
     }
   },
   "seo": {

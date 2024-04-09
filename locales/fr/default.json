@@ -211,47 +211,44 @@
     "home": {
       "title": "Gestion de budget et suivi des revenus, comptes, dépenses et statistiques",
       "description": "C'est un outil pratique de gestion des finances personnelles conçu pour vous aider à suivre les revenus et les dépenses, gérer les comptes et définir un budget par catégorie, compte et période. Optimisez vos finances et atteignez vos objectifs financiers avec des statistiques et des analyses détaillées.",
-      "keywords": "finance, gestion, outil, revenus, dépenses, comptes, budget, statistiques, analyses"
+      "keywords": "finance, gestion, outil, revenus, dépenses, comptes, budget, statistiques, analyses, argent"
     },
     "statistics": {
       "title": "Statistiques totales",
       "description": "Suivez les revenus, les dépenses et les budgets par catégorie, compte et période. Optimisez vos finances et atteignez vos objectifs financiers avec des statistiques et des analyses détaillées.",
-      "keywords": "statistiques, analyses, catégories, comptes, revenus, budgets, période"
+      "keywords": "statistiques, analyses, catégories, comptes, revenus, budgets, période, argent, finance"
     },
     "accounts": {
       "title": "Liste des comptes",
       "description": "Ajoutez, modifiez et supprimez des comptes. Transférez de l'argent entre les comptes.",
-      "keywords": "comptes, argent, transfert, solde"
+      "keywords": "comptes, argent, transfert, solde, argent, finance"
     },
     "budgets": {
       "title": "Liste des budgets",
       "description": "Ajoutez, modifiez et supprimez des budgets. Définissez un budget par catégorie, compte et période.",
-      "keywords": "budgets, catégories, comptes, période"
+      "keywords": "budgets, catégories, comptes, période, argent, finance"
     },
     "expenses": {
       "title": "Liste des dépenses",
       "description": "Ajoutez, modifiez et supprimez des dépenses. Suivez les revenus et les dépenses.",
-      "keywords": "dépenses, catégories, comptes, période"
+      "keywords": "dépenses, catégories, comptes, période, argent, finance"
     },
     "incomes": {
       "title": "Liste des revenus",
       "description": "Ajoutez, modifiez et supprimez des revenus. Suivez les revenus et les dépenses.",
-      "keywords": "revenus, catégories, comptes, période"
+      "keywords": "revenus, catégories, comptes, période, argent, finance"
     },
     "profile": {
       "title": "Profil de l'utilisateur",
-      "description": "Modifiez le profil de l'utilisateur. Changez le nom complet, l'email, la date de naissance, le sexe",
-      "keywords": "profil, utilisateur, nom complet, email, date de naissance, sexe"
+      "description": "Modifiez le profil de l'utilisateur. Changez le nom complet, l'email, la date de naissance, le sexe"
     },
     "settings": {
       "title": "Paramètres",
-      "description": "Changez les paramètres. Changez la devise, la période par défaut",
-      "keywords": "paramètres, devise, période"
+      "description": "Changez les paramètres. Changez la devise, la période par défaut"
     },
     "contact": {
       "title": "Contactez-nous",
-      "description": "Envoyez-nous un message. Nous serons heureux de vous aider.",
-      "keywords": "contact, message, support, feedback"
+      "description": "Envoyez-nous un message. Nous serons heureux de vous aider."
     }
   },
   "seo": {

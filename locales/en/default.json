@@ -211,47 +211,44 @@
     "home": {
       "title": "Budget Management and Incomes, Accounts, Expenses Tracking & Statistics",
       "description": "This is a convenient personal finance management tool designed to help you track income and expenses, manage accounts, and set budget by category, account, and time period. Optimize your finances and achieve your financial goals with detailed statistics and analytics.",
-      "keywords": "finance, management, tool, income, expenses, accounts, budget, statistics, analytics"
+      "keywords": "finance, management, tool, income, expenses, accounts, budget, statistics, analytics, money"
     },
     "statistics": {
       "title": "Total statistics",
       "description": "Track incomes, expenses and budgets by category, account, and time period. Optimize your finances and achieve your financial goals with detailed statistics and analytics.",
-      "keywords": "statistics, analytics, categories, accounts, incomes, budgets, period"
+      "keywords": "statistics, analytics, categories, accounts, incomes, budgets, period, money, finance"
     },
     "accounts": {
       "title": "Accounts list",
       "description": "Add, edit, and delete accounts. Transfer money between accounts.",
-      "keywords": "accounts, money, transfer, balance"
+      "keywords": "accounts, money, transfer, balance, money, finance"
     },
     "budgets": {
       "title": "Budgets list",
       "description": "Add, edit, and delete budgets. Set budget by category, account, and time period.",
-      "keywords": "budgets, categories, accounts, period"
+      "keywords": "budgets, categories, accounts, period, money, finance"
     },
     "expenses": {
       "title": "Expenses list",
       "description": "Add, edit, and delete expenses. Track income and expenses.",
-      "keywords": "expenses, categories, accounts, period"
+      "keywords": "expenses, categories, accounts, period, money, finance"
     },
     "incomes": {
       "title": "Incomes list",
       "description": "Add, edit, and delete incomes. Track income and expenses.",
-      "keywords": "incomes, categories, accounts, period"
+      "keywords": "incomes, categories, accounts, period, money, finance"
     },
     "profile": {
       "title": "User profile",
-      "description": "Edit user profile. Change full name, email, birthdate, gender",
-      "keywords": "profile, user, full name, email, birthdate, gender"
+      "description": "Edit user profile. Change full name, email, birthdate, gender"
     },
     "settings": {
       "title": "Settings",
-      "description": "Change settings. Change currency, default period",
-      "keywords": "settings, currency, period"
+      "description": "Change settings. Change currency, default period"
     },
     "contact": {
       "title": "Contact us",
-      "description": "Send us a message. We will be happy to help you.",
-      "keywords": "contact, message, support, feedback"
+      "description": "Send us a message. We will be happy to help you."
     }
   },
   "seo": {

@@ -211,47 +211,44 @@
     "home": {
       "title": "Gestione del budget e monitoraggio di entrate, conti e spese",
       "description": "Questo è uno strumento conveniente per la gestione delle finanze personali progettato per aiutarti a monitorare le entrate e le spese, gestire i conti e impostare il budget per categoria, conto e periodo di tempo. Ottimizza le tue finanze e raggiungi i tuoi obiettivi finanziari con statistiche e analisi dettagliate.",
-      "keywords": "finanza, gestione, strumento, entrate, spese, conti, budget, statistiche, analisi"
+      "keywords": "finanza, gestione, strumento, entrate, spese, conti, budget, statistiche, analisi, denaro"
     },
     "statistics": {
       "title": "Statistiche totali",
       "description": "Monitora entrate, spese e budget per categoria, conto e periodo di tempo. Ottimizza le tue finanze e raggiungi i tuoi obiettivi finanziari con statistiche e analisi dettagliate.",
-      "keywords": "statistiche, analisi, categorie, conti, entrate, budget, periodo"
+      "keywords": "statistiche, analisi, categorie, conti, entrate, budget, periodo, denaro, finanza"
     },
     "accounts": {
       "title": "Lista dei conti",
       "description": "Aggiungi, modifica e cancella conti. Trasferisci denaro tra conti.",
-      "keywords": "conti, denaro, trasferimento, saldo"
+      "keywords": "conti, denaro, trasferimento, saldo, denaro, finanza"
     },
     "budgets": {
       "title": "Lista dei budget",
       "description": "Aggiungi, modifica e cancella budget. Imposta il budget per categoria, conto e periodo di tempo.",
-      "keywords": "budget, categorie, conti, periodo"
+      "keywords": "budget, categorie, conti, periodo, denaro, finanza"
     },
     "expenses": {
       "title": "Lista delle spese",
       "description": "Aggiungi, modifica e cancella spese. Monitora entrate e spese.",
-      "keywords": "spese, categorie, conti, periodo"
+      "keywords": "spese, categorie, conti, periodo, denaro, finanza"
     },
     "incomes": {
       "title": "Lista dei redditi",
       "description": "Aggiungi, modifica e cancella redditi. Monitora entrate e spese.",
-      "keywords": "redditi, categorie, conti, periodo"
+      "keywords": "redditi, categorie, conti, periodo, denaro, finanza"
     },
     "profile": {
       "title": "Profilo utente",
-      "description": "Modifica il profilo utente. Cambia nome completo, email, data di nascita, genere",
-      "keywords": "profilo, utente, nome completo, email, data di nascita, genere"
+      "description": "Modifica il profilo utente. Cambia nome completo, email, data di nascita, genere"
     },
     "settings": {
       "title": "Impostazioni",
-      "description": "Cambia le impostazioni. Cambia valuta, periodo predefinito",
-      "keywords": "impostazioni, valuta, periodo"
+      "description": "Cambia le impostazioni. Cambia valuta, periodo predefinito"
     },
     "contact": {
       "title": "Contattaci",
-      "description": "Invia un messaggio. Saremo felici di aiutarti.",
-      "keywords": "contatto, messaggio, supporto, feedback"
+      "description": "Invia un messaggio. Saremo felici di aiutarti."
     }
   },
   "seo": {

@@ -211,47 +211,44 @@
     "home": {
       "title": "Budgetverwaltung und Einkommens, Konten, Ausgabenverfolgung & Statistiken",
       "description": "Dies ist ein praktisches Tool zur Verwaltung Ihrer persönlichen Finanzen, das Ihnen hilft, Einnahmen und Ausgaben zu verfolgen, Konten zu verwalten und Budgets nach Kategorie, Konto und Zeitraum festzulegen. Optimieren Sie Ihre Finanzen und erreichen Sie Ihre finanziellen Ziele mit detaillierten Statistiken und Analysen.",
-      "keywords": "Finanzen, Verwaltung, Tool, Einkommen, Ausgaben, Konten, Budget, Statistiken, Analysen"
+      "keywords": "Finanzen, Verwaltung, Tool, Einkommen, Ausgaben, Konten, Budget, Statistiken, Analysen, Geld"
     },
     "statistics": {
       "title": "Gesamtstatistiken",
       "description": "Verfolgen Sie Einnahmen, Ausgaben und Budgets nach Kategorie, Konto und Zeitraum. Optimieren Sie Ihre Finanzen und erreichen Sie Ihre finanziellen Ziele mit detaillierten Statistiken und Analysen.",
-      "keywords": "Statistiken, Analysen, Kategorien, Konten, Einnahmen, Budgets, Zeitraum"
+      "keywords": "Statistiken, Analysen, Kategorien, Konten, Einnahmen, Budgets, Zeitraum, Geld, Finanzen"
     },
     "accounts": {
       "title": "Kontenliste",
       "description": "Fügen Sie Konten hinzu, bearbeiten und löschen Sie sie. Überweisen Sie Geld zwischen Konten.",
-      "keywords": "Konten, Geld, Überweisung, Saldo"
+      "keywords": "Konten, Geld, Überweisung, Saldo, Geld, Finanzen"
     },
     "budgets": {
       "title": "Budgetliste",
       "description": "Fügen Sie Budgets hinzu, bearbeiten und löschen Sie sie. Legen Sie das Budget nach Kategorie, Konto und Zeitraum fest.",
-      "keywords": "Budgets, Kategorien, Konten, Zeitraum"
+      "keywords": "Budgets, Kategorien, Konten, Zeitraum, Geld, Finanzen"
     },
     "expenses": {
       "title": "Ausgabenliste",
       "description": "Fügen Sie Ausgaben hinzu, bearbeiten und löschen Sie sie. Verfolgen Sie Einnahmen und Ausgaben.",
-      "keywords": "Ausgaben, Kategorien, Konten, Zeitraum"
+      "keywords": "Ausgaben, Kategorien, Konten, Zeitraum, Geld, Finanzen"
     },
     "incomes": {
       "title": "Einkommensliste",
       "description": "Fügen Sie Einkommen hinzu, bearbeiten und löschen Sie sie. Verfolgen Sie Einnahmen und Ausgaben.",
-      "keywords": "Einkommen, Kategorien, Konten, Zeitraum"
+      "keywords": "Einkommen, Kategorien, Konten, Zeitraum, Geld, Finanzen"
     },
     "profile": {
       "title": "Benutzerprofil",
-      "description": "Bearbeiten Sie das Benutzerprofil. Ändern Sie vollständigen Namen, E-Mail, Geburtsdatum, Geschlecht",
-      "keywords": "Profil, Benutzer, vollständiger Name, E-Mail, Geburtsdatum, Geschlecht"
+      "description": "Bearbeiten Sie das Benutzerprofil. Ändern Sie vollständigen Namen, E-Mail, Geburtsdatum, Geschlecht"
     },
     "settings": {
       "title": "Einstellungen",
-      "description": "Ändern Sie die Einstellungen. Ändern Sie Währung, Standardzeitraum",
-      "keywords": "Einstellungen, Währung, Zeitraum"
+      "description": "Ändern Sie die Einstellungen. Ändern Sie Währung, Standardzeitraum"
     },
     "contact": {
       "title": "Kontaktiere uns",
-      "description": "Senden Sie uns eine Nachricht. Wir helfen Ihnen gerne weiter.",
-      "keywords": "Kontakt, Nachricht, Unterstützung, Feedback"
+      "description": "Senden Sie uns eine Nachricht. Wir helfen Ihnen gerne weiter."
     }
   },
   "seo": {

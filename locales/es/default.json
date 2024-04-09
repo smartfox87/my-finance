@@ -211,47 +211,44 @@
     "home": {
       "title": "Gestión de presupuesto y seguimiento de ingresos, cuentas y gastos",
       "description": "Esta es una herramienta conveniente para la gestión de finanzas personales diseñada para ayudarte a seguir los ingresos y gastos, administrar cuentas y establecer un presupuesto por categoría, cuenta y período de tiempo. Optimiza tus finanzas y alcanza tus metas financieras con estadísticas y análisis detallados.",
-      "keywords": "finanzas, gestión, herramienta, ingresos, gastos, cuentas, presupuesto, estadísticas, análisis"
+      "keywords": "finanzas, gestión, herramienta, ingresos, gastos, cuentas, presupuesto, estadísticas, análisis, dinero"
     },
     "statistics": {
       "title": "Estadísticas totales",
       "description": "Sigue los ingresos, gastos y presupuestos por categoría, cuenta y período de tiempo. Optimiza tus finanzas y alcanza tus metas financieras con estadísticas y análisis detallados.",
-      "keywords": "estadísticas, análisis, categorías, cuentas, ingresos, presupuestos, período"
+      "keywords": "estadísticas, análisis, categorías, cuentas, ingresos, presupuestos, período, dinero, finanzas"
     },
     "accounts": {
       "title": "Lista de cuentas",
       "description": "Añade, edita y elimina cuentas. Transfiere dinero entre cuentas.",
-      "keywords": "cuentas, dinero, transferencia, saldo"
+      "keywords": "cuentas, dinero, transferencia, saldo, dinero, finanzas"
     },
     "budgets": {
       "title": "Lista de presupuestos",
       "description": "Añade, edita y elimina presupuestos. Establece un presupuesto por categoría, cuenta y período de tiempo.",
-      "keywords": "presupuestos, categorías, cuentas, período"
+      "keywords": "presupuestos, categorías, cuentas, período, dinero, finanzas"
     },
     "expenses": {
       "title": "Lista de gastos",
       "description": "Añade, edita y elimina gastos. Sigue los ingresos y gastos.",
-      "keywords": "gastos, categorías, cuentas, período"
+      "keywords": "gastos, categorías, cuentas, período, dinero, finanzas"
     },
     "incomes": {
       "title": "Lista de ingresos",
       "description": "Añade, edita y elimina ingresos. Sigue los ingresos y gastos.",
-      "keywords": "ingresos, categorías, cuentas, período"
+      "keywords": "ingresos, categorías, cuentas, período, dinero, finanzas"
     },
     "profile": {
       "title": "Perfil de usuario",
-      "description": "Edita el perfil de usuario. Cambia el nombre completo, correo electrónico, fecha de nacimiento, género",
-      "keywords": "perfil, usuario, nombre completo, correo electrónico, fecha de nacimiento, género"
+      "description": "Edita el perfil de usuario. Cambia el nombre completo, correo electrónico, fecha de nacimiento, género"
     },
     "settings": {
       "title": "Configuraciones",
-      "description": "Cambia las configuraciones. Cambia la moneda, período predeterminado",
-      "keywords": "configuraciones, moneda, período"
+      "description": "Cambia las configuraciones. Cambia la moneda, período predeterminado"
     },
     "contact": {
       "title": "Contáctanos",
-      "description": "Envíanos un mensaje. Estaremos encantados de ayudarte.",
-      "keywords": "contacto, mensaje, soporte, retroalimentación"
+      "description": "Envíanos un mensaje. Estaremos encantados de ayudarte."
     }
   },
   "seo": {
