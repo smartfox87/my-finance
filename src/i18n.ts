@@ -5,7 +5,7 @@ import { i18nConfig, Locale } from "../i18nConfig";
 
 export const i18nRef: { i18n?: i18n; resources?: Resource; t?: i18n["t"]; locale?: Locale } = {};
 
-export default async function initTranslations(locale: Locale, namespaces: string, i18nInstance?: i18n, resources?: Resource) {
+export default async function initTranslations(locale: Locale, namespaces: string[], i18nInstance?: i18n, resources?: Resource) {
   i18nInstance = i18nInstance || createInstance();
 
   i18nInstance.use(initReactI18next);
