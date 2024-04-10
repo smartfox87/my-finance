@@ -43,14 +43,14 @@ export const selectBudgetsFilterFields = createSelector([selectCostCategories, s
   INITIAL_BUDGETS_FILTER_FIELDS.map((field) => {
     if (field.id === "categories" && budgetCategories?.length) {
       const options = field.options.concat(budgetCategories?.map(({ id, name }) => ({ value: id, label: name })));
-      const optionsObject = options.reduce((acc, { value, label, label_translation }) => ({ ...acc, [value]: label_translation ? i18nRef.i18n.t(`fields.${label_translation}`) : label }), {});
+      const optionsObject = options.reduce((acc, { value, label, label_translation }) => ({ ...acc, [value]: label_translation ? i18nRef.t(`fields.${label_translation}`) : label }), {});
       return { ...field, optionsObject, options };
     } else if (field.id === "accounts" && accountsList?.length) {
       const options = field.options.concat(accountsList?.map(({ id, name }) => ({ value: id, label: name })));
-      const optionsObject = options.reduce((acc, { value, label, label_translation }) => ({ ...acc, [value]: label_translation ? i18nRef.i18n.t(`fields.${label_translation}`) : label }), {});
+      const optionsObject = options.reduce((acc, { value, label, label_translation }) => ({ ...acc, [value]: label_translation ? i18nRef.t(`fields.${label_translation}`) : label }), {});
       return { ...field, optionsObject, options };
     } else if (field.type === "select") {
-      const optionsObject = field.options.reduce((acc, { value, label, label_translation }) => ({ ...acc, [value]: label_translation ? i18nRef.i18n.t(`fields.${label_translation}`) : label }), {});
+      const optionsObject = field.options.reduce((acc, { value, label, label_translation }) => ({ ...acc, [value]: label_translation ? i18nRef.t(`fields.${label_translation}`) : label }), {});
       return { ...field, optionsObject };
     } else {
       return field;
