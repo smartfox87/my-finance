@@ -176,7 +176,7 @@ export default function StatisticsContent() {
         <li>
           {t("statistics.budgets")}: {formatPrice(budgetsTotalAmount)} {currency}
         </li>
-        <li className="font-black">
+        <li className="font-bold">
           {t("common.total")}: {formatPrice(incomesTotalAmount - costsTotalAmount)} {currency}
         </li>
       </ul>
