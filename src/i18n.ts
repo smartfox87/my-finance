@@ -23,12 +23,10 @@ export default async function initTranslations(locale: Locale, namespaces: strin
     preload: resources ? [] : [locale],
   });
 
-  if (!i18nRef.i18n) {
-    i18nRef.i18n = i18nInstance;
-    i18nRef.resources = i18nInstance.services.resourceStore.data;
-    i18nRef.t = i18nInstance.t;
-    i18nRef.locale = locale;
-  }
+  i18nRef.i18n = i18nInstance;
+  i18nRef.resources = i18nInstance.services.resourceStore.data;
+  i18nRef.t = i18nInstance.t;
+  i18nRef.locale = locale;
 
   return {
     i18n: i18nInstance,
