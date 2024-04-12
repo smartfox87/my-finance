@@ -18,6 +18,7 @@
 		"@ant-design/nextjs-registry": "^1.0.0",
 		"@ducanh2912/next-pwa": "^10.2.5",
 		"@reduxjs/toolkit": "^2.2.2",
+		"@sentry/nextjs": "^7.105.0",
 		"@supabase/supabase-js": "^2.39.8",
 		"antd": "^5.15.3",
 		"i18next": "^23.10.1",

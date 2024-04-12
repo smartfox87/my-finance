@@ -1,15 +1,11 @@
 "use client";
 
-import { useEffect } from "react";
-import { useTranslation } from "react-i18next";
-import { SimpleButton } from "@/components/Form/SimpleButton";
 import * as Sentry from "@sentry/nextjs";
+import { useEffect } from "react";
+import { SimpleButton } from "../../components/Form/SimpleButton.tsx";
 
-export default function Error({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
-  const { t } = useTranslation();
-
+export default function GlobalError({ error }) {
   useEffect(() => {
-    console.error(error);
     Sentry.captureException(error);
   }, [error]);
 
