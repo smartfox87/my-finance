@@ -4,12 +4,12 @@ import { SitemapStream, streamToPromise } from "sitemap";
 import { Readable } from "stream";
 import { locales, pages } from "../src/initial-data/router.js";
 
-const hostname = process.env.PRODUCTION_URL;
+const hostname = process.env.NEXT_PRODUCTION_URL;
 const links = pages.map((url) => ({
   url: `${hostname}/${url}`,
   changefreq: "daily",
   priority: 0.8,
-  links: locales.filter((lang) => lang !== "en").map((lang) => ({ lang, url: `${hostname}/${lang}/${url}` })),
+  links: locales.map((lang) => ({ lang, url: `${hostname}${lang === "en" ? "" : `/${lang}`}/${url}` })),
 }));
 
 const stream = new SitemapStream({

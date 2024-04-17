@@ -21,8 +21,8 @@ const jsonLd = {
   "@type": "Organization",
   name: "My Finance & A.D.",
   legalName: "Andrei Dyminski",
-  url: process.env.PRODUCTION_URL,
-  logo: `${process.env.PRODUCTION_URL}/assets/favicon/maskable-icon-512x512.png`,
+  url: process.env.NEXT_PRODUCTION_URL,
+  logo: `${process.env.NEXT_PRODUCTION_URL}/assets/favicon/maskable-icon-512x512.png`,
   foundingDate: "2023",
   founders: [
     {
