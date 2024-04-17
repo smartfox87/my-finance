@@ -253,5 +253,13 @@
   },
   "seo": {
     "app_name": "Moje Finanse"
+  },
+  "info": {
+    "phone": "Telefon",
+    "email": "Email",
+    "address": "Adres",
+    "country": "Kraj",
+    "working_hours": "Godziny pracy",
+    "every_day": "Codziennie"
   }
 }

@@ -40,7 +40,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
       description: APP_DESCRIPTION,
       images: [
         {
-          url: "/assets/images/open-graph.webp",
+          url: `${process.env.PRODUCTION_URL}/assets/images/open-graph.webp`,
           width: 1200,
           height: 630,
           alt: APP_DEFAULT_TITLE,

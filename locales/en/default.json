@@ -253,5 +253,13 @@
   },
   "seo": {
     "app_name": "My Finance"
+  },
+  "info": {
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address",
+    "country": "Country",
+    "working_hours": "Working hours",
+    "every_day": "Every day"
   }
 }

@@ -253,5 +253,13 @@
   },
   "seo": {
     "app_name": "Ma Finance"
+  },
+  "info": {
+    "phone": "Téléphone",
+    "email": "Email",
+    "address": "Adresse",
+    "country": "Pays",
+    "working_hours": "Heures de travail",
+    "every_day": "Tous les jours"
   }
 }

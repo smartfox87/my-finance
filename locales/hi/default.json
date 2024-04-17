@@ -253,5 +253,13 @@
   },
   "seo": {
     "app_name": "मेरा वित्त"
+  },
+  "info": {
+    "phone": "फ़ोन",
+    "email": "ईमेल",
+    "address": "पता",
+    "country": "देश",
+    "working_hours": "कार्य समय",
+    "every_day": "हर दिन"
   }
 }

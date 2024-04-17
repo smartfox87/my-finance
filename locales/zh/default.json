@@ -253,5 +253,13 @@
   },
   "seo": {
     "app_name": "我的财务"
+  },
+  "info": {
+    "phone": "电话",
+    "email": "电子邮件",
+    "address": "地址",
+    "country": "国家",
+    "working_hours": "工作时间",
+    "every_day": "每天"
   }
 }
