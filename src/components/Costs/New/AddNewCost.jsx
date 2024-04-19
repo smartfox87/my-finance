@@ -1,6 +1,6 @@
 import { Button } from "antd";
 import { SideModal } from "@/components/Modals/SideModal.jsx";
-import { DefaultForm } from "@/components/Form/DefaultForm.jsx";
+import { DefaultForm } from "@/components/Form/DefaultForm.tsx";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCostFields } from "@/store/selectors/costs.js";
 import { createCostItemThunk } from "@/store/costsSlice.js";

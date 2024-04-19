@@ -1,4 +1,6 @@
-export const INITIAL_CONTACT_FIELDS = [
+import { PropField } from "@/types/Form";
+
+export const INITIAL_CONTACT_FIELDS: PropField[] = [
   {
     id: "full_name",
     label_translation: "simple.full_name",
@@ -20,12 +22,12 @@ export const INITIAL_CONTACT_FIELDS = [
     type: "select",
     required: true,
     options: [
-      { label_translation: "contact.subject.options.feedback", value: "feedback" },
-      { label_translation: "contact.subject.options.bug", value: "bug" },
-      { label_translation: "contact.subject.options.support", value: "support" },
-      { label_translation: "contact.subject.options.suggestion", value: "suggestion" },
-      { label_translation: "contact.subject.options.collaboration", value: "collaboration" },
-      { label_translation: "contact.subject.options.other", value: "other" },
+      { label_translation: "complex.subject.options.feedback", value: "feedback" },
+      { label_translation: "complex.subject.options.bug", value: "bug" },
+      { label_translation: "complex.subject.options.support", value: "support" },
+      { label_translation: "complex.subject.options.suggestion", value: "suggestion" },
+      { label_translation: "complex.subject.options.collaboration", value: "collaboration" },
+      { label_translation: "complex.subject.options.other", value: "other" },
     ],
   },
   {

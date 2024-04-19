@@ -7,7 +7,7 @@ import { showNotification } from "@/helpers/modals.js";
 import { SideModal } from "@/components/Modals/SideModal.jsx";
 import { useLoading } from "@/hooks/loading.js";
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
-import { handleFilterSelectOptions } from "@/helpers/fields.js";
+import { handleFilterSelectOptions } from "@/helpers/fields.ts";
 import { Button, Form, InputNumber, Select } from "antd";
 import { useViewport } from "@/hooks/viewport.js";
 import SvgTransfer from "@/assets/sprite/transfer.svg";

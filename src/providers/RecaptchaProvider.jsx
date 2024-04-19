@@ -1,3 +1,5 @@
+"use client";
+
 import { createContext, createRef, lazy, Suspense, useEffect, useState } from "react";
 
 const siteKey = process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY;

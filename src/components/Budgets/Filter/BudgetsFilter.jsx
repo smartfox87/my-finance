@@ -3,7 +3,7 @@ import { setBudgetsFilterValues } from "@/store/budgetsSlice.js";
 import { selectBudgetsFilterFields, selectBudgetsFilterValues } from "@/store/selectors/budgets.js";
 import { useTranslation } from "react-i18next";
 import { Select, Button } from "antd";
-import { handleFilterSelectOptions } from "@/helpers/fields.js";
+import { handleFilterSelectOptions } from "@/helpers/fields.ts";
 import { SideModal } from "@/components/Modals/SideModal.jsx";
 import { memo, useEffect, useState } from "react";
 import SvgFilter from "@/assets/sprite/filter.svg";

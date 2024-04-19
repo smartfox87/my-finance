@@ -3,7 +3,7 @@ import { setStatisticsFilterValues } from "@/store/statisticsSlice.js";
 import { selectStatisticsFilterFields, selectStatisticsFilterValues } from "@/store/selectors/statistics.js";
 import { useTranslation } from "react-i18next";
 import { Select, Button } from "antd";
-import { handleFilterSelectOptions } from "@/helpers/fields.js";
+import { handleFilterSelectOptions } from "@/helpers/fields.ts";
 import { SideModal } from "@/components/Modals/SideModal.jsx";
 import { memo, useEffect, useState } from "react";
 import SvgFilter from "@/assets/sprite/filter.svg";
