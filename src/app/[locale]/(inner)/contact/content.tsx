@@ -71,7 +71,7 @@ export default function ContactContent() {
         "@type": "ListItem",
         position: 2,
         "@id": `${process.env.NEXT_PRODUCTION_URL}/contact`,
-        name: t("navigation.contact"),
+        name: t("navigation.contact_us"),
       },
     ],
   };
@@ -79,7 +79,7 @@ export default function ContactContent() {
   const jsonLdOrganization: WithContext<Organization> = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "My Finance & A.D.",
+    name: `${t("seo.app_name")} & A.D.`,
     legalName: "Andrei Dyminski",
     url: process.env.NEXT_PRODUCTION_URL,
     logo: `${process.env.NEXT_PRODUCTION_URL}/assets/favicon/maskable-icon-512x512.png`,
@@ -117,8 +117,8 @@ export default function ContactContent() {
 
   return (
     <>
-      <Script id="schema-breadcrumbs" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumbs) }} />
-      <Script id="schema-contact" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrganization) }} />
+      <Script strategy="beforeInteractive" id="schema-breadcrumbs" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumbs) }} />
+      <Script strategy="beforeInteractive" id="schema-contact" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrganization) }} />
       <Preloader isLoading={!isLoaded || !isLoadedAntd}>
         <DefaultForm fields={contactFields} isResetAfterSave onSaveForm={handleSendMessage} />
         <section className="flex shrink-0 flex-col gap-4 ">
