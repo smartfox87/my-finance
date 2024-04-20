@@ -10,7 +10,7 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
 
   useEffect(() => {
     console.error(error);
-    Sentry.captureException(error);
+    if (process.env.NODE_ENV === "production") Sentry.captureException(error);
   }, [error]);
 
   return (

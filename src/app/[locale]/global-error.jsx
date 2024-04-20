@@ -3,10 +3,13 @@
 import * as Sentry from "@sentry/nextjs";
 import { useEffect } from "react";
 import { SimpleButton } from "../../components/Form/SimpleButton.tsx";
+import { useTranslation } from "react-i18next";
 
 export default function GlobalError({ error }) {
+  const { t } = useTranslation();
+
   useEffect(() => {
-    Sentry.captureException(error);
+    if (process.env.NODE_ENV === "production") Sentry.captureException(error);
   }, [error]);
 
   return (
