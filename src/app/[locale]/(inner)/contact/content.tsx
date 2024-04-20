@@ -10,7 +10,6 @@ import { useSelector } from "react-redux";
 import { useAntd } from "@/hooks/antd.js";
 import { BreadcrumbList, Organization, WithContext } from "schema-dts";
 import { languages } from "@/initial-data/router.js";
-import Script from "next/script";
 
 type ContactData = {
   full_name: string;
@@ -117,8 +116,8 @@ export default function ContactContent() {
 
   return (
     <>
-      <Script strategy="beforeInteractive" id="schema-breadcrumbs" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumbs) }} />
-      <Script strategy="beforeInteractive" id="schema-contact" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrganization) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumbs) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrganization) }} />
       <Preloader isLoading={!isLoaded || !isLoadedAntd}>
         <DefaultForm fields={contactFields} isResetAfterSave onSaveForm={handleSendMessage} />
         <section className="flex shrink-0 flex-col gap-4 ">
