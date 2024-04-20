@@ -6,7 +6,7 @@ import { SimpleButton } from "@/components/Form/SimpleButton";
 import * as Sentry from "@sentry/nextjs";
 import { useRouter } from "next/navigation";
 
-export default function Error({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
+export default function GlobalError({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
   const { t } = useTranslation();
   const router = useRouter();
 

@@ -4,7 +4,7 @@ import { SitemapStream, streamToPromise } from "sitemap";
 import { Readable } from "stream";
 import { locales, pages } from "../src/initial-data/router.js";
 
-const hostname = process.env.NEXT_PRODUCTION_URL;
+const hostname = process.env.NEXT_PUBLIC_PRODUCTION_URL;
 const links = pages.map((url) => ({
   url: `${hostname}/${url}`,
   changefreq: "daily",

@@ -40,7 +40,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
       description: APP_DESCRIPTION,
       images: [
         {
-          url: `${process.env.NEXT_PRODUCTION_URL}/assets/images/open-graph.jpg`,
+          url: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/assets/images/open-graph.jpg`,
           width: 1200,
           height: 630,
           alt: APP_DEFAULT_TITLE,

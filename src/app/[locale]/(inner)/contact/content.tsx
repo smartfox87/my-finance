@@ -63,7 +63,7 @@ export default function ContactContent() {
         "@type": "ListItem",
         position: 1,
         item: {
-          "@id": `${process.env.NEXT_PRODUCTION_URL}/`,
+          "@id": `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/`,
           name: t("navigation.home"),
         },
       },
@@ -71,7 +71,7 @@ export default function ContactContent() {
         "@type": "ListItem",
         position: 2,
         item: {
-          "@id": `${process.env.NEXT_PRODUCTION_URL}/contact`,
+          "@id": `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/contact`,
           name: t("navigation.contact_us"),
         },
       },
@@ -83,8 +83,8 @@ export default function ContactContent() {
     "@type": "Organization",
     name: `${t("seo.app_name")} & A.D.`,
     legalName: "Andrei Dyminski",
-    url: process.env.NEXT_PRODUCTION_URL,
-    logo: `${process.env.NEXT_PRODUCTION_URL}/assets/favicon/maskable-icon-512x512.png`,
+    url: process.env.NEXT_PUBLIC_PRODUCTION_URL,
+    logo: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/assets/favicon/maskable-icon-512x512.png`,
     foundingDate: "2023",
     founder: [
       {
