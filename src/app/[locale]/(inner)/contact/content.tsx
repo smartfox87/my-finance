@@ -62,14 +62,18 @@ export default function ContactContent() {
       {
         "@type": "ListItem",
         position: 1,
-        "@id": `${process.env.NEXT_PRODUCTION_URL}/`,
-        name: t("navigation.home"),
+        item: {
+          "@id": `${process.env.NEXT_PRODUCTION_URL}/`,
+          name: t("navigation.home"),
+        },
       },
       {
         "@type": "ListItem",
         position: 2,
-        "@id": `${process.env.NEXT_PRODUCTION_URL}/contact`,
-        name: t("navigation.contact_us"),
+        item: {
+          "@id": `${process.env.NEXT_PRODUCTION_URL}/contact`,
+          name: t("navigation.contact_us"),
+        },
       },
     ],
   };
