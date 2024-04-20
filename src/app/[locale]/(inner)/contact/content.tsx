@@ -11,13 +11,10 @@ import { useAntd } from "@/hooks/antd.js";
 import { BreadcrumbList, Organization, WithContext } from "schema-dts";
 import { languages } from "@/initial-data/router.js";
 
+type KeyType = "full_name" | "email" | "subject" | "message" | "files";
+
 type ContactData = {
-  full_name: string;
-  email: string;
-  subject: string;
-  message: string;
-  files: File[];
-  [key: string]: string | File[];
+  [key in KeyType]: string | File[];
 };
 
 export default function ContactContent() {
@@ -37,10 +34,12 @@ export default function ContactContent() {
       if (score < 0.5) return showNotification({ title: t("notifications.recaptcha_invalid") });
       const formData = new FormData();
       Object.keys(contactData)
-        .filter((key) => contactData[key])
-        .forEach((key) =>
-          key === "files" && Array.isArray(contactData[key]) ? contactData[key].forEach((value: File) => formData.append(key, value)) : formData.append(key, contactData[key] as string),
-        );
+        .filter((key: string): boolean => !!contactData[key as KeyType]?.length)
+        .forEach((key: string) => {
+          Array.isArray(contactData[key as KeyType])
+            ? (contactData[key as KeyType] as File[]).forEach((value: File) => formData.append(key, value))
+            : formData.append(key, contactData[key as KeyType] as string);
+        });
       const { success, error } = await fetch("/api/contact", { method: "POST", body: formData }).then((res) => res.json());
       if (success) {
         showNotification({ title: t("notifications.contact.success") });
