@@ -14,10 +14,38 @@ export async function generateMetadata({ params: { locale } }: { params: { local
   };
 }
 
-export default function Accounts({ params: { locale } }: { params: { locale: string } }) {
+export default async function Accounts({ params: { locale } }: { params: { locale: string } }) {
+  const { t } = await initTranslations(locale, i18nNamespaces);
+
+  const jsonLdBreadcrumbs = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        item: {
+          "@id": `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/`,
+          name: t("navigation.home"),
+        },
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        item: {
+          "@id": `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/accounts`,
+          name: t("navigation.accounts.full"),
+        },
+      },
+    ],
+  };
+
   return (
-    <InnerLayout locale={locale} page="accounts">
-      <AccountsModule />
-    </InnerLayout>
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumbs) }} />
+      <InnerLayout locale={locale} page="accounts">
+        <AccountsModule />
+      </InnerLayout>
+    </>
   );
 }
