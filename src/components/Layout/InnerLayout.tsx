@@ -2,10 +2,20 @@ import { AuthGuard } from "@/components/Auth/AuthGuard.jsx";
 import { ReactNodeLike } from "prop-types";
 import initTranslations from "@/i18n";
 import { Suspense } from "react";
+import { Breadcrumbs } from "@/components/Common/Breadcrumbs";
+import { LinkType } from "@/helpers/jsonLd";
 
 const i18nNamespaces = ["default"];
 
-export const InnerLayout = async ({ locale, page, isAuth = true, children }: { locale: string; page: string; isAuth?: Boolean; children: ReactNodeLike }) => {
+type LayoutPropsType = {
+  locale: string;
+  page: string;
+  isAuth?: Boolean;
+  breadcrumbs: LinkType[];
+  children: ReactNodeLike;
+};
+
+export const InnerLayout = async ({ locale, page, isAuth = true, breadcrumbs, children }: LayoutPropsType) => {
   const { t } = await initTranslations(locale, i18nNamespaces);
   const title = t(`pages.${page}.title`);
   const description = t(`pages.${page}.description`);
@@ -19,6 +29,7 @@ export const InnerLayout = async ({ locale, page, isAuth = true, children }: { l
         </div>
         {description && <p className="lg:text-lg">{description}</p>}
       </div>
+      <Breadcrumbs list={breadcrumbs} />
       <Suspense fallback={<div />}>{isAuth ? <AuthGuard>{children}</AuthGuard> : children}</Suspense>
     </section>
   );

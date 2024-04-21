@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import initTranslations from "@/i18n";
 import { InnerLayout } from "@/components/Layout/InnerLayout";
 import ContactModule from "@/app/[locale]/(inner)/contact/content-module";
-import Script from "next/script";
+import { getJsonLdBreadcrumbs, LinkType } from "@/helpers/jsonLd";
 
 const i18nNamespaces = ["default"];
 
@@ -15,10 +15,20 @@ export async function generateMetadata({ params: { locale } }: { params: { local
   };
 }
 
-export default function Contact({ params: { locale } }: { params: { locale: string } }) {
+export default async function Contact({ params: { locale } }: { params: { locale: string } }) {
+  const { t } = await initTranslations(locale, i18nNamespaces);
+
+  const breadcrumbList: LinkType[] = [
+    { path: "", name: t("navigation.home") },
+    { path: "contact", name: t("navigation.contact_us") },
+  ];
+
   return (
-    <InnerLayout locale={locale} page="contact" isAuth={false}>
-      <ContactModule />
-    </InnerLayout>
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(getJsonLdBreadcrumbs(breadcrumbList)) }} />
+      <InnerLayout locale={locale} page="contact" isAuth={false} breadcrumbs={breadcrumbList}>
+        <ContactModule />
+      </InnerLayout>
+    </>
   );
 }

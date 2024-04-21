@@ -26,7 +26,7 @@ export default async function Statistics({ params: { locale } }: { params: { loc
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(getJsonLdBreadcrumbs(breadcrumbList)) }} />
-      <InnerLayout locale={locale} page="statistics">
+      <InnerLayout locale={locale} page="statistics" breadcrumbs={breadcrumbList}>
         <StatisticsModule />
       </InnerLayout>
     </>

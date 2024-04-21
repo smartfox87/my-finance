@@ -26,7 +26,7 @@ export default async function Budgets({ params: { locale } }: { params: { locale
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(getJsonLdBreadcrumbs(breadcrumbList)) }} />
-      <InnerLayout locale={locale} page="budgets">
+      <InnerLayout locale={locale} page="budgets" breadcrumbs={breadcrumbList}>
         <BudgetsModule />
       </InnerLayout>
     </>

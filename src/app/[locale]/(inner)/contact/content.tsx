@@ -10,7 +10,6 @@ import { useSelector } from "react-redux";
 import { useAntd } from "@/hooks/antd.js";
 import { Organization, WithContext } from "schema-dts";
 import { languages } from "@/initial-data/router.js";
-import { getJsonLdBreadcrumbs, LinkType } from "@/helpers/jsonLd";
 
 type KeyType = "full_name" | "email" | "subject" | "message" | "files";
 
@@ -56,11 +55,6 @@ export default function ContactContent() {
     }
   };
 
-  const breadcrumbList: LinkType[] = [
-    { path: "", name: t("navigation.home") },
-    { path: "contact", name: t("navigation.contact_us") },
-  ];
-
   const jsonLdOrganization: WithContext<Organization> = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -102,7 +96,6 @@ export default function ContactContent() {
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(getJsonLdBreadcrumbs(breadcrumbList)) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrganization) }} />
       <Preloader isLoading={!isLoaded || !isLoadedAntd}>
         <DefaultForm fields={contactFields} isResetAfterSave onSaveForm={handleSendMessage} />

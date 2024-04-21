@@ -68,6 +68,16 @@ g:focus {
 	visibility: hidden;
 }
 
+.hidden-but-indexable {
+	position: absolute !important;
+	clip: rect(1px, 1px, 1px, 1px);
+	padding: 0 !important;
+	border: 0 !important;
+	height: 1px !important;
+	width: 1px !important;
+	overflow: hidden;
+}
+
 @media (max-width: 385px) {
 	.ant-drawer-header.ant-drawer-header.ant-drawer-header,
 	.ant-drawer-body.ant-drawer-body.ant-drawer-body {
