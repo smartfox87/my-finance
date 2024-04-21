@@ -11,7 +11,7 @@ type LayoutPropsType = {
   locale: string;
   page: string;
   isAuth?: Boolean;
-  breadcrumbs: LinkType[];
+  breadcrumbs?: LinkType[];
   children: ReactNodeLike;
 };
 
@@ -29,7 +29,7 @@ export const InnerLayout = async ({ locale, page, isAuth = true, breadcrumbs, ch
         </div>
         {description && <p className="lg:text-lg">{description}</p>}
       </div>
-      <Breadcrumbs list={breadcrumbs} />
+      {breadcrumbs?.length && <Breadcrumbs list={breadcrumbs} />}
       <Suspense fallback={<div />}>{isAuth ? <AuthGuard>{children}</AuthGuard> : children}</Suspense>
     </section>
   );
