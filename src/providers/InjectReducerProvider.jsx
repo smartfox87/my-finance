@@ -1,5 +1,5 @@
 import { createContext, useCallback } from "react";
-import { rootReducer } from "@/store/index.js";
+import { rootReducer } from "@/store/index.ts";
 
 export const InjectReducerContext = createContext({ injectReducer: () => {} });
 const thunks = {};

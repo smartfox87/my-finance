@@ -1,6 +1,6 @@
-import { LinkType } from "@/helpers/jsonLd";
+import { LinkItem } from "@/types/Breadcrumbs";
 
-export const Breadcrumbs = ({ list = [] }: { list: LinkType[] }) => {
+export const Breadcrumbs = ({ list = [] }: { list: LinkItem[] }) => {
   return (
     <ol className="hidden-but-indexable" itemScope itemType="https://schema.org/BreadcrumbList">
       {list.map(({ path, name }, index) => (

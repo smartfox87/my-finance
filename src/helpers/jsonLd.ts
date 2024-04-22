@@ -1,11 +1,7 @@
 import { BreadcrumbList, WithContext } from "schema-dts";
+import { LinkItem } from "@/types/Breadcrumbs";
 
-export type LinkType = {
-  path: string;
-  name: string;
-};
-
-export const getJsonLdBreadcrumbs = (linksList: LinkType[]): WithContext<BreadcrumbList> => ({
+export const getJsonLdBreadcrumbs = (linksList: LinkItem[]): WithContext<BreadcrumbList> => ({
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: linksList.map(({ path, name }, index) => ({

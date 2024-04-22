@@ -1,14 +1,14 @@
 import { Dayjs } from "dayjs";
 
-export type RuleType = "number" | "email";
+export type FormItemRule = "number" | "email";
 
-export type ExtendedRuleType = RuleType | "password" | "textarea" | "select" | "period" | "radio-buttons" | "file" | "text" | "date";
+export type ExtendedFormItemRule = FormItemRule | "password" | "textarea" | "select" | "period" | "radio-buttons" | "file" | "text" | "date";
 
-export type PropField = {
+export interface PropField {
   value: any;
   id: string;
   label_translation: string;
-  type: ExtendedRuleType;
+  type: ExtendedFormItemRule;
   label?: string;
   label_suffix?: string;
   focus?: boolean;
@@ -25,4 +25,4 @@ export type PropField = {
   maxLength?: number;
   picker?: "date" | "week" | "month" | "quarter" | "year";
   placeholder?: string;
-};
+}

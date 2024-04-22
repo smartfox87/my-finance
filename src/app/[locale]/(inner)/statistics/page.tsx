@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import initTranslations from "@/i18n";
 import StatisticsModule from "@/app/[locale]/(inner)/statistics/content-module";
 import { InnerLayout } from "@/components/Layout/InnerLayout";
-import { getJsonLdBreadcrumbs, LinkType } from "@/helpers/jsonLd";
+import { getJsonLdBreadcrumbs } from "@/helpers/jsonLd";
+import { LinkItem } from "@/types/Breadcrumbs";
 
 const i18nNamespaces = ["default"];
 
@@ -18,7 +19,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 export default async function Statistics({ params: { locale } }: { params: { locale: string } }) {
   const { t } = await initTranslations(locale, i18nNamespaces);
 
-  const breadcrumbList: LinkType[] = [
+  const breadcrumbList: LinkItem[] = [
     { path: "", name: t("navigation.home") },
     { path: "statistics", name: t("navigation.statistics.full") },
   ];

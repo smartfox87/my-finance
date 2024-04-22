@@ -1,7 +1,7 @@
 import { createContext, useCallback, useEffect, useState } from "react";
 import { setLanguage } from "@/store/commonSlice.js";
 import { useTranslation } from "react-i18next";
-import { store } from "@/store/index.js";
+import { store } from "@/store/index.ts";
 import { toggleDayjsLocale } from "@/helpers/date";
 import { locales } from "@/initial-data/router.js";
 

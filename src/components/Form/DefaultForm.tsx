@@ -7,39 +7,39 @@ import { PeriodField } from "@/components/Form/PeriodField.jsx";
 import SvgUpload from "@/assets/sprite/upload.svg";
 import { getFileSizeWithUnit } from "@/helpers/file.js";
 import { handleFilterSelectOptions } from "@/helpers/fields";
-import { ExtendedRuleType, PropField, RuleType } from "@/types/Form";
+import { ExtendedFormItemRule, PropField, FormItemRule } from "@/types/Form";
 
-type DefaultFormProps = {
+interface DefaultFormProps {
   fields: PropField[];
   isResetAfterSave?: boolean;
   isVisible?: boolean;
   onSaveForm: (formValues: any) => Promise<void>;
   onResetForm?: () => void;
-};
+}
 
 type FormValue = string | string[] | UploadFile[] | Dayjs;
 
-type FormValues = {
+interface FormValues {
   [key: string]: FormValue;
-};
+}
 
-type ProcessedValues = {
+interface ProcessedValues {
   [key: string]: File[] | FormValue;
-};
+}
 
-type ChangedField = {
+interface ChangedField {
   id: string;
   value: FormValue;
   multiple?: boolean;
   type?: string;
-};
+}
 
-type PropFieldValue = {
+interface PropFieldValue {
   name: string;
   type: string;
   value?: FormValue;
   fileList?: UploadFile[];
-};
+}
 
 export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfterSave, isVisible = true, onSaveForm, onResetForm }: DefaultFormProps, ref) {
   const { t } = useTranslation();
@@ -127,9 +127,9 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
     message.error(`${t("fields.errors.file_size")} ${getFileSizeWithUnit(maxSize)}`);
     return Upload.LIST_IGNORE;
   };
-  const getFieldRules = ({ required, type }: { required?: boolean; type: ExtendedRuleType }) => {
+  const getFieldRules = ({ required, type }: { required?: boolean; type: ExtendedFormItemRule }) => {
     const rules = [];
-    if (["email", "number"].includes(type)) rules.push({ type: type as RuleType, message: t(`fields.errors.${type}`) });
+    if (["email", "number"].includes(type)) rules.push({ type: type as FormItemRule, message: t(`fields.errors.${type}`) });
     if (required) rules.push({ required: true, message: t("fields.errors.required") });
     return rules;
   };

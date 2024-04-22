@@ -3,7 +3,7 @@ import { ReactNodeLike } from "prop-types";
 import initTranslations from "@/i18n";
 import { Suspense } from "react";
 import { Breadcrumbs } from "@/components/Common/Breadcrumbs";
-import { LinkType } from "@/helpers/jsonLd";
+import { LinkItem } from "@/types/Breadcrumbs";
 
 const i18nNamespaces = ["default"];
 
@@ -11,7 +11,7 @@ type LayoutPropsType = {
   locale: string;
   page: string;
   isAuth?: Boolean;
-  breadcrumbs?: LinkType[];
+  breadcrumbs?: LinkItem[];
   children: ReactNodeLike;
 };
 
