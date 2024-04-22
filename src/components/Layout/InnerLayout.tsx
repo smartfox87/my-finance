@@ -7,15 +7,15 @@ import { LinkItem } from "@/types/Breadcrumbs";
 
 const i18nNamespaces = ["default"];
 
-type LayoutPropsType = {
+interface Props {
   locale: string;
   page: string;
   isAuth?: Boolean;
   breadcrumbs?: LinkItem[];
   children: ReactNodeLike;
-};
+}
 
-export const InnerLayout = async ({ locale, page, isAuth = true, breadcrumbs, children }: LayoutPropsType) => {
+export const InnerLayout = async ({ locale, page, isAuth = true, breadcrumbs, children }: Props) => {
   const { t } = await initTranslations(locale, i18nNamespaces);
   const title = t(`pages.${page}.title`);
   const description = t(`pages.${page}.description`);

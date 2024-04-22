@@ -1,7 +1,13 @@
 import SvgLoadingBtn from "@/assets/sprite/loading-btn.svg";
 import { ReactNodeLike } from "prop-types";
 
-type Props = { size?: "large"; type?: "primary"; loading?: boolean; children: ReactNodeLike; onClick: () => void };
+interface Props {
+  size?: "large";
+  type?: "primary";
+  loading?: boolean;
+  children: ReactNodeLike;
+  onClick: () => void;
+}
 
 export const SimpleButton = ({ size, type, loading, children, onClick }: Props) => {
   let className = `rounded-md border`;
