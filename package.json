@@ -20,7 +20,7 @@
 		"@reduxjs/toolkit": "^2.2.3",
 		"@sentry/nextjs": "^7.111.0",
 		"@supabase/supabase-js": "^2.42.5",
-		"antd": "^5.16.2",
+		"antd": "^5.16.4",
 		"i18next": "^23.11.2",
 		"i18next-resources-to-backend": "^1.2.1",
 		"next": "^14.2.2",
