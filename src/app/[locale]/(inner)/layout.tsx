@@ -11,9 +11,12 @@ import { useInjectReducer } from "@/hooks/injectReducer";
 import { getUserId } from "@/helpers/localStorage.js";
 import { MobileNav } from "@/components/Layout/MobileNav";
 import { ReactNodeLike } from "prop-types";
+import { getAccountsListThunk } from "@/store/accountsSlice";
+import { useAppDispatch } from "@/hooks/redux";
 
 export default function MainLayout({ children }: { children: ReactNodeLike }) {
   const dispatch = useDispatch();
+  const appDispatch = useAppDispatch();
   const { viewport } = useViewport();
   const {
     i18n: { language },
@@ -28,8 +31,9 @@ export default function MainLayout({ children }: { children: ReactNodeLike }) {
       await dispatch(getUserSessionThunk());
     }
     if (!user) return;
-    const [{ getCurrenciesThunk }, { getProfileThunk }, { getAccountsListThunk }] = await Promise.all([injectReducer("references"), injectReducer("profile"), injectReducer("accounts")]);
-    await Promise.all([dispatch(getCurrenciesThunk()), dispatch(getProfileThunk()), dispatch(getAccountsListThunk())]);
+    await import("@/store/accountsSlice");
+    const [{ getCurrenciesThunk }, { getProfileThunk }] = await Promise.all([injectReducer("references"), injectReducer("profile")]);
+    await Promise.all([dispatch(getCurrenciesThunk()), dispatch(getProfileThunk()), appDispatch(getAccountsListThunk())]);
   };
   useEffect(() => {
     initProfile();

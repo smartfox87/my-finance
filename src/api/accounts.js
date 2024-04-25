@@ -21,7 +21,7 @@ export const createAccountItemApi = (accountData) =>
     .single();
 
 export const deleteAccountItemApi = async (accountId) => {
-  const { data, error } = await supabase.from("accounts").delete().match({ user_id: getUserId(), id: accountId }).select("account_type_id").single();
+  const { data, error } = await supabase.from("accounts").delete().match({ user_id: getUserId(), id: accountId }).select("id, account_type_id, balance, updated_at").single();
   await deleteAccountTypeApi(data.account_type_id);
   return { data, error };
 };

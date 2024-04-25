@@ -1,19 +1,20 @@
 import { Button } from "antd";
 import { SideModal } from "@/components/Modals/SideModal.jsx";
 import { DefaultForm } from "@/components/Form/DefaultForm.tsx";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectAccountFields } from "@/store/selectors/accounts.js";
-import { createAccountItemThunk } from "@/store/accountsSlice.js";
+import { createAccountItemThunk } from "@/store/accountsSlice";
 import { useTranslation } from "react-i18next";
 import { showNotification } from "@/helpers/modals.js";
 import { memo, useRef, useState } from "react";
 import SvgNewAccount from "@/assets/sprite/new-account.svg";
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
 import { useViewport } from "@/hooks/viewport.js";
+import { useAppDispatch } from "@/hooks/redux";
 
 export const AddNewAccount = memo(function AddNewAccount({ onSave }) {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { viewport } = useViewport();
 
   const [isOpen, setIsOpen] = useState(false);

@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { memo, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { selectAccountsList } from "@/store/selectors/accounts.js";
-import { transferAccountsBalanceThunk } from "@/store/accountsSlice.js";
+import { transferAccountsBalanceThunk } from "@/store/accountsSlice";
 import { showNotification } from "@/helpers/modals.js";
 import { SideModal } from "@/components/Modals/SideModal.jsx";
 import { useLoading } from "@/hooks/loading.js";
@@ -11,10 +11,11 @@ import { handleFilterSelectOptions } from "@/helpers/fields.ts";
 import { Button, Form, InputNumber, Select } from "antd";
 import { useViewport } from "@/hooks/viewport.js";
 import SvgTransfer from "@/assets/sprite/transfer.svg";
+import { useAppDispatch } from "@/hooks/redux";
 
 export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ onSave }) {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { viewport } = useViewport();
 
   const [isLoading, setIsLoading] = useLoading(false);

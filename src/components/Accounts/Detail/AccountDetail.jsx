@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { memo, useEffect, useRef, useState } from "react";
 import { selectAccountFields, selectAccountItem } from "@/store/selectors/accounts.js";
-import { deleteAccountItemThunk, getAccountItemThunk, setAccountItem, updateAccountItemThunk } from "@/store/accountsSlice.js";
+import { deleteAccountItemThunk, getAccountItemThunk, setAccountItem, updateAccountItemThunk } from "@/store/accountsSlice";
 import { DefaultForm } from "@/components/Form/DefaultForm.tsx";
 import { getOnlyValuesFromData } from "@/helpers/processData.js";
 import { showNotification } from "@/helpers/modals.js";
@@ -12,10 +12,11 @@ import SvgDelete from "@/assets/sprite/delete.svg";
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
 import { Button } from "antd";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useAppDispatch } from "@/hooks/redux";
 
 export const AccountDetail = memo(function AccountDetail({ onSave }) {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const searchParams = useSearchParams();
   const accountId = searchParams.get("accountId");
