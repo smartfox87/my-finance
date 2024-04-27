@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import initTranslations from "@/i18n";
 import { InnerLayout } from "@/components/Layout/InnerLayout";
 import IncomesModule from "@/app/[locale]/(inner)/incomes/content-module";
-import { getJsonLdBreadcrumbs } from "@/helpers/jsonLd";
+import { getJsonLdBreadcrumbs, getJsonLdWebsite } from "@/helpers/jsonLd";
 import { LinkItem } from "@/types/Breadcrumbs";
 
 const i18nNamespaces = ["default"];
@@ -27,6 +27,7 @@ export default async function Incomes({ params: { locale } }: { params: { locale
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(getJsonLdBreadcrumbs(breadcrumbList)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(getJsonLdWebsite(t("seo.app_name"))) }} />
       <InnerLayout locale={locale} page="incomes" breadcrumbs={breadcrumbList}>
         <IncomesModule />
       </InnerLayout>
