@@ -1,9 +1,11 @@
-export interface NewAccountItem {
-  name: string;
+export interface AccountItemBalance {
   balance: number;
 }
 
-export interface UpdatedAccountItem extends NewAccountItem {}
+export interface AccountItemData extends AccountItemBalance {
+  account_type_id?: number;
+  name?: string;
+}
 
 export interface AccountItem {
   id: number;
@@ -14,8 +16,3 @@ export interface AccountItem {
 }
 
 export type AccountsList = AccountItem[];
-
-export interface AccountType {
-  id: number;
-  name: string;
-}
