@@ -1,4 +1,4 @@
-import { BreadcrumbList, WithContext } from "schema-dts";
+import { BreadcrumbList, WebSite, WithContext } from "schema-dts";
 import { LinkItem } from "@/types/Breadcrumbs";
 
 export const getJsonLdBreadcrumbs = (linksList: LinkItem[]): WithContext<BreadcrumbList> => ({
@@ -12,4 +12,11 @@ export const getJsonLdBreadcrumbs = (linksList: LinkItem[]): WithContext<Breadcr
       name,
     },
   })),
+});
+
+export const getJsonLdWebsite = (name: string): WithContext<WebSite> => ({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name,
+  url: process.env.NEXT_PUBLIC_PRODUCTION_URL,
 });
