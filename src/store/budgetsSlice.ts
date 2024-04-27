@@ -1,25 +1,37 @@
 import { asyncThunkCreator, buildCreateSlice } from "@reduxjs/toolkit";
+import type { WithSlice } from "@reduxjs/toolkit";
 import { createBudgetItemApi, getBudgetsListApi, updateBudgetItemApi, deleteBudgetItemApi, getBudgetItemApi } from "@/api/budgets.js";
 import { handleRejected } from "@/helpers/processExtraReducersCases.js";
 import { setFilterValue } from "@/helpers/filters.js";
 import { getPeriodDates } from "@/helpers/date";
+import { rootReducer } from "@/store/index";
+import { BudgetItem, BudgetItemData, BudgetsFilterValues, BudgetsList } from "@/types/budgets";
+import { FilterValues } from "@/types/filter";
 
 const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
 });
 
+interface State {
+  budgetsFilterValues: BudgetsFilterValues | {};
+  budgetsList: BudgetsList | [];
+  budgetItem: BudgetItem | null;
+}
+
+const initialState: State = {
+  budgetsFilterValues: {},
+  budgetsList: [],
+  budgetItem: null,
+};
+
 export const budgetsSlice = createAppSlice({
   name: "budgets",
-  initialState: {
-    budgetsFilterValues: {},
-    budgetsList: null,
-    budgetItem: null,
-  },
+  initialState,
   reducers: (create) => ({
-    getBudgetsListThunk: create.asyncThunk(
+    getBudgetsListThunk: create.asyncThunk<BudgetsList, BudgetsFilterValues, { rejectValue: string }>(
       async (params, { rejectWithValue }) => {
         const { data, error } = await getBudgetsListApi(params);
-        if (error) return rejectWithValue(error.message);
+        if (error) throw rejectWithValue(error.message);
         return data;
       },
       {
@@ -29,20 +41,20 @@ export const budgetsSlice = createAppSlice({
         },
       },
     ),
-    createBudgetItemThunk: create.asyncThunk(
+    createBudgetItemThunk: create.asyncThunk<BudgetItem, BudgetItemData, { rejectValue: string }>(
       async (budgetData, { rejectWithValue }) => {
         const { data, error } = await createBudgetItemApi(budgetData);
-        if (error) return rejectWithValue(error.message);
+        if (error) throw rejectWithValue(error.message);
         return data;
       },
       {
         rejected: handleRejected,
       },
     ),
-    getBudgetItemThunk: create.asyncThunk(
+    getBudgetItemThunk: create.asyncThunk<BudgetItem, string, { rejectValue: string }>(
       async (budgetId, { rejectWithValue }) => {
         const { data, error } = await getBudgetItemApi(budgetId);
-        if (error) return rejectWithValue(error.message);
+        if (error) throw rejectWithValue(error.message);
         return data;
       },
       {
@@ -52,33 +64,39 @@ export const budgetsSlice = createAppSlice({
         },
       },
     ),
-    updateBudgetItemThunk: create.asyncThunk(
+    updateBudgetItemThunk: create.asyncThunk<BudgetItem, { budgetId: number; budgetData: BudgetItemData }, { rejectValue: string }>(
       async ({ budgetId, budgetData }, { rejectWithValue }) => {
         const { data, error } = await updateBudgetItemApi({ budgetId, budgetData });
-        if (error) return rejectWithValue(error.message);
+        if (error) throw rejectWithValue(error.message);
         return data;
       },
       {
         rejected: handleRejected,
       },
     ),
-    deleteBudgetItemThunk: create.asyncThunk(
+    deleteBudgetItemThunk: create.asyncThunk<BudgetItem, number, { rejectValue: string }>(
       async (budgetId, { rejectWithValue }) => {
         const { data, error } = await deleteBudgetItemApi(budgetId);
-        if (error) return rejectWithValue(error.message);
+        if (error) throw rejectWithValue(error.message);
         return data;
       },
       {
         rejected: handleRejected,
       },
     ),
-    setBudgetsFilterValues(state, { payload }) {
+    setBudgetsFilterValues: create.reducer<FilterValues>((state, { payload }) => {
       state.budgetsFilterValues = payload.reduce((acc, field) => setFilterValue(acc, field), state.budgetsFilterValues);
-    },
-    setBudgetItem(state, { payload }) {
+    }),
+    setBudgetItem: create.reducer<BudgetItem>((state, { payload }) => {
       state.budgetItem = payload;
-    },
+    }),
   }),
 });
+
+declare module "@/store/index" {
+  export interface LazyLoadedSlices extends WithSlice<typeof budgetsSlice> {}
+}
+
+const injectedReducers = rootReducer.inject(budgetsSlice);
 
 export const { setBudgetsFilterValues, setBudgetItem, getBudgetsListThunk, createBudgetItemThunk, getBudgetItemThunk, updateBudgetItemThunk, deleteBudgetItemThunk } = budgetsSlice.actions;

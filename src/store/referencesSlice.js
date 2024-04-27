@@ -2,7 +2,7 @@ import { asyncThunkCreator, buildCreateSlice } from "@reduxjs/toolkit";
 import { handleRejected } from "@/helpers/processExtraReducersCases.js";
 import { getAccountTypesApi, getBudgetYearsApi, getCostCategoriesApi, getCostYearsApi, getCurrenciesApi, getIncomeCategoriesApi } from "@/api/references.js";
 import { setCostsFilterValues } from "@/store/costsSlice.js";
-import { setBudgetsFilterValues } from "@/store/budgetsSlice.js";
+import { setBudgetsFilterValues } from "@/store/budgetsSlice";
 import { findYearInResponseData } from "@/helpers/processData.js";
 
 const createAppSlice = buildCreateSlice({

@@ -52,6 +52,8 @@ export const findMatchingPeriod = (datesArray: string[]) => {
   return null;
 };
 
+export type DatesPeriod = [string, string];
+
 export const getPeriodDates = (dates: string) => JSON.parse(dates).map((date: string) => date.substring(0, 10));
 
 export const getFromPeriodDatesForApi = ([from, to]: string[]) => `[${from + " 00:00:00"},${to + " 00:00:00"})`;
