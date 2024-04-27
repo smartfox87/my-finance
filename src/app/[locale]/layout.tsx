@@ -72,7 +72,7 @@ export function generateStaticParams() {
   return i18nConfig.locales.map((locale) => ({ locale }));
 }
 
-export default async function RootLayout({ children, params: { locale } }: { children: ReactNodeLike; params: { locale: string } }) {
+export default async function LocaleLayout({ children, params: { locale } }: { children: ReactNodeLike; params: { locale: string } }) {
   const { resources } = await initTranslations(locale, i18nNamespaces);
 
   return (

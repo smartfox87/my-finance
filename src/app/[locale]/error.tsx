@@ -11,7 +11,7 @@ export default function Error({ error }: { error: Error & { digest?: string } })
   const router = useRouter();
 
   useEffect(() => {
-    console.error(error);
+    console.error("inner error:", error);
     if (process.env.NODE_ENV === "production") Sentry.captureException(error);
   }, [error]);
 
