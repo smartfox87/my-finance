@@ -1,5 +1,4 @@
-import { asyncThunkCreator, buildCreateSlice } from "@reduxjs/toolkit";
-import type { WithSlice } from "@reduxjs/toolkit";
+import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import { createAccountItemApi, getAccountsListApi, updateAccountItemApi, deleteAccountItemApi, getAccountItemApi, createInitialAccountsApi } from "@/api/accounts";
 import { handleRejected } from "@/helpers/processExtraReducersCases.js";
 import { createAccountTypeApi, updateAccountTypeApi } from "@/api/references.js";

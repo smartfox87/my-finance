@@ -1,6 +1,5 @@
-import { asyncThunkCreator, buildCreateSlice } from "@reduxjs/toolkit";
-import type { WithSlice } from "@reduxjs/toolkit";
-import { createBudgetItemApi, getBudgetsListApi, updateBudgetItemApi, deleteBudgetItemApi, getBudgetItemApi } from "@/api/budgets.js";
+import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
+import { createBudgetItemApi, getBudgetsListApi, updateBudgetItemApi, deleteBudgetItemApi, getBudgetItemApi } from "@/api/budgets";
 import { handleRejected } from "@/helpers/processExtraReducersCases.js";
 import { setFilterValue } from "@/helpers/filters.js";
 import { getPeriodDates } from "@/helpers/date";

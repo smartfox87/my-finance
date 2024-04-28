@@ -32,6 +32,7 @@ export const getFullDate = (date: string, format = "YYYY MMMM DD") => {
 
 export const getDatesPeriod = (initialDate: string, period: Period = "month") => {
   const date = dayjs(initialDate);
+  console.log("11111111111111111111111111111", period, period === "year", date.startOf("year").format("YYYY-MM-DD"), date.startOf(period).format("YYYY-MM-DD"));
   return [date.startOf(period).format("YYYY-MM-DD"), date.endOf(period).format("YYYY-MM-DD")];
 };
 

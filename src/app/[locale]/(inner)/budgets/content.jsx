@@ -1,13 +1,12 @@
 "use client";
 
 import { selectCurrency } from "@/store/selectors/profile";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { useLoading } from "@/hooks/loading";
 import { Suspense, useCallback, useEffect } from "react";
 import { Preloader } from "@/components/Layout/Preloader";
 import formatPrice from "@/helpers/formatPrice";
-import { useInjectReducer } from "@/hooks/injectReducer";
 import { selectBudgetsByFilter, selectBudgetsFilterValues, selectBudgetsList } from "@/store/selectors/budgets";
 import { useFilterSearchParams } from "@/hooks/filterSearchParams";
 import { getBudgetsListThunk, setBudgetsFilterValues } from "@/store/budgetsSlice";
@@ -22,11 +21,11 @@ import { BudgetDetail } from "@/components/Budgets/Detail/BudgetDetail";
 import { EmptyBudgets } from "@/components/Budgets/List/EmptyBudgets";
 import { FoundNothing } from "@/components/Common/FoundNothing";
 import { createPortal } from "react-dom";
+import { useAppDispatch } from "@/hooks/redux";
 
 export default function BudgetsContent() {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
-  const { injectReducer, thunks } = useInjectReducer();
+  const dispatch = useAppDispatch();
 
   const budgetsFilterValues = useSelector(selectBudgetsFilterValues);
   const [isNotEqualParamsToFilters] = useFilterSearchParams(budgetsFilterValues, setBudgetsFilterValues);
@@ -35,20 +34,20 @@ export default function BudgetsContent() {
   const budgetsList = useSelector(selectBudgetsList);
   const filteredSortedBudgets = useSelector(selectBudgetsByFilter);
   const handleGetData = useCallback(async () => {
-    console.log("handleGetData", budgetsFilterValues?.period, isNotEqualParamsToFilters);
-    if (!budgetsFilterValues?.period || isNotEqualParamsToFilters) return;
+    console.log("handleGetData", budgetsFilterValues.period, isNotEqualParamsToFilters);
+    if (!budgetsFilterValues.period || isNotEqualParamsToFilters) return;
     setIsLoading(true);
     await dispatch(getBudgetsListThunk(budgetsFilterValues));
     setIsLoading(false);
-  }, [budgetsFilterValues?.period, isNotEqualParamsToFilters]);
+  }, [budgetsFilterValues.period, isNotEqualParamsToFilters]);
 
   useEffect(() => {
     const injectAndLoadData = async () => {
-      if (!thunks.budgets) {
-        await injectReducer("budgets");
+      if (!Object.keys(budgetsFilterValues).length) {
+        await import("@/store/budgetsSlice");
         await dispatch(setBudgetsFilterValues(INITIAL_BUDGETS_FILTER_FIELDS.map(({ id, value }) => ({ id, value }))));
       }
-      if (!budgetsList) await handleGetData();
+      if (!budgetsList.length) await handleGetData();
     };
     if (getUserId()) injectAndLoadData();
   }, [handleGetData]);
@@ -70,8 +69,8 @@ export default function BudgetsContent() {
         </Suspense>
       </>
     );
-  else if (!budgetsList?.length) content = <EmptyBudgets addNew={<AddNewBudget onSave={handleGetData} />} />;
-  else if (budgetsList?.length && !filteredSortedBudgets?.length)
+  else if (!budgetsList.length) content = <EmptyBudgets addNew={<AddNewBudget onSave={handleGetData} />} />;
+  else if (budgetsList.length && !filteredSortedBudgets?.length)
     content = (
       <>
         <div className="container-edge container sticky top-16 z-20 -my-4 flex flex-col gap-4 bg-white py-4 dark:bg-dark">

@@ -13,6 +13,7 @@ import { MobileNav } from "@/components/Layout/MobileNav";
 import { ReactNodeLike } from "prop-types";
 import { getAccountsListThunk } from "@/store/accountsSlice";
 import { useAppDispatch } from "@/hooks/redux";
+import { getProfileThunk } from "@/store/profileSlice";
 
 export default function MainLayout({ children }: { children: ReactNodeLike }) {
   const dispatch = useDispatch();
@@ -32,8 +33,9 @@ export default function MainLayout({ children }: { children: ReactNodeLike }) {
     }
     if (!user) return;
     await import("@/store/accountsSlice");
-    const [{ getCurrenciesThunk }, { getProfileThunk }] = await Promise.all([injectReducer("references"), injectReducer("profile")]);
-    await Promise.all([dispatch(getCurrenciesThunk()), dispatch(getProfileThunk()), appDispatch(getAccountsListThunk())]);
+    await import("@/store/profileSlice");
+    const [{ getCurrenciesThunk }] = await Promise.all([injectReducer("references")]);
+    await Promise.all([dispatch(getCurrenciesThunk()), appDispatch(getProfileThunk()), appDispatch(getAccountsListThunk())]);
   };
   useEffect(() => {
     initProfile();
