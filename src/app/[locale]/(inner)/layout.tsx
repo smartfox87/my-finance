@@ -14,6 +14,7 @@ import { ReactNodeLike } from "prop-types";
 import { getAccountsListThunk } from "@/store/accountsSlice";
 import { useAppDispatch } from "@/hooks/redux";
 import { getProfileThunk } from "@/store/profileSlice";
+import { getAccountTypesThunk, getCostCategoriesThunk, getCurrenciesThunk, getIncomeCategoriesThunk } from "@/store/referencesSlice";
 
 export default function MainLayout({ children }: { children: ReactNodeLike }) {
   const dispatch = useDispatch();
@@ -34,8 +35,8 @@ export default function MainLayout({ children }: { children: ReactNodeLike }) {
     if (!user) return;
     await import("@/store/accountsSlice");
     await import("@/store/profileSlice");
-    const [{ getCurrenciesThunk }] = await Promise.all([injectReducer("references")]);
-    await Promise.all([dispatch(getCurrenciesThunk()), appDispatch(getProfileThunk()), appDispatch(getAccountsListThunk())]);
+    await import("@/store/referencesSlice");
+    await Promise.all([appDispatch(getCurrenciesThunk()), appDispatch(getProfileThunk()), appDispatch(getAccountsListThunk())]);
   };
   useEffect(() => {
     initProfile();
@@ -43,8 +44,7 @@ export default function MainLayout({ children }: { children: ReactNodeLike }) {
 
   const initReferences = async () => {
     if (!user) return;
-    const { getCostCategoriesThunk, getAccountTypesThunk, getIncomeCategoriesThunk } = await injectReducer("references");
-    await Promise.all([dispatch(getAccountTypesThunk()), dispatch(getCostCategoriesThunk()), dispatch(getIncomeCategoriesThunk())]);
+    await Promise.all([appDispatch(getAccountTypesThunk()), appDispatch(getCostCategoriesThunk()), appDispatch(getIncomeCategoriesThunk())]);
   };
   useEffect(() => {
     initReferences();

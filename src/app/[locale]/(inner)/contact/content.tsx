@@ -118,8 +118,10 @@ export default function ContactContent() {
             </li>
             <li className="flex gap-2" itemProp="address" itemScope itemType="https://schema.org/PostalAddress">
               <b className="font-bold">{t("info.address")}:</b>
-              <span itemProp="streetAddress">Waska 15</span>, <span itemProp="postalCode">15-481</span>
-              <span itemProp="addressLocality">Bialystok, Poland</span>
+              <p>
+                <span itemProp="streetAddress">Waska 15</span>, <span itemProp="postalCode">15-481 </span>
+                <span itemProp="addressLocality">Bialystok, Poland</span>
+              </p>
             </li>
             <li className="flex gap-2">
               <b className="font-bold">{t("info.working_hours")}:</b> {t("info.every_day")} | 9:00 - 21:00

@@ -34,20 +34,20 @@ export default function BudgetsContent() {
   const budgetsList = useSelector(selectBudgetsList);
   const filteredSortedBudgets = useSelector(selectBudgetsByFilter);
   const handleGetData = useCallback(async () => {
-    console.log("handleGetData", budgetsFilterValues.period, isNotEqualParamsToFilters);
-    if (!budgetsFilterValues.period || isNotEqualParamsToFilters) return;
+    console.log("handleGetData", budgetsFilterValues?.period, isNotEqualParamsToFilters);
+    if (!budgetsFilterValues?.period || isNotEqualParamsToFilters) return;
     setIsLoading(true);
     await dispatch(getBudgetsListThunk(budgetsFilterValues));
     setIsLoading(false);
-  }, [budgetsFilterValues.period, isNotEqualParamsToFilters]);
+  }, [budgetsFilterValues?.period, isNotEqualParamsToFilters]);
 
   useEffect(() => {
     const injectAndLoadData = async () => {
-      if (!Object.keys(budgetsFilterValues).length) {
+      if (!budgetsFilterValues) {
         await import("@/store/budgetsSlice");
         await dispatch(setBudgetsFilterValues(INITIAL_BUDGETS_FILTER_FIELDS.map(({ id, value }) => ({ id, value }))));
       }
-      if (!budgetsList.length) await handleGetData();
+      if (!budgetsList?.length) await handleGetData();
     };
     if (getUserId()) injectAndLoadData();
   }, [handleGetData]);
@@ -69,8 +69,8 @@ export default function BudgetsContent() {
         </Suspense>
       </>
     );
-  else if (!budgetsList.length) content = <EmptyBudgets addNew={<AddNewBudget onSave={handleGetData} />} />;
-  else if (budgetsList.length && !filteredSortedBudgets?.length)
+  else if (!budgetsList?.length) content = <EmptyBudgets addNew={<AddNewBudget onSave={handleGetData} />} />;
+  else if (budgetsList?.length && !filteredSortedBudgets?.length)
     content = (
       <>
         <div className="container-edge container sticky top-16 z-20 -my-4 flex flex-col gap-4 bg-white py-4 dark:bg-dark">

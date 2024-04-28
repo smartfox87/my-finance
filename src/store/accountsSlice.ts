@@ -1,10 +1,11 @@
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import { createAccountItemApi, getAccountsListApi, updateAccountItemApi, deleteAccountItemApi, getAccountItemApi, createInitialAccountsApi } from "@/api/accounts";
 import { handleRejected } from "@/helpers/processExtraReducersCases.js";
-import { createAccountTypeApi, updateAccountTypeApi } from "@/api/references.js";
+import { createAccountTypeApi, updateAccountTypeApi } from "@/api/references";
 import { AccountItem, AccountsList, AccountItemData } from "@/types/accounts";
 import { rootReducer } from "@/store/index";
 import { RootState } from "@/types/redux";
+import { AccountTypeData } from "@/types/references";
 
 const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
@@ -44,7 +45,7 @@ export const accountsSlice = createAppSlice({
     ),
     createAccountItemThunk: create.asyncThunk<AccountItem, AccountItemData, { rejectValue: string }>(
       async (accountData, { rejectWithValue }): Promise<AccountItem> => {
-        const typeData = { general_name: accountData.name };
+        const typeData: AccountTypeData = { general_name: accountData.name };
         const { data: newTypeData, error: newTypeError } = await createAccountTypeApi(typeData);
         if (newTypeError) throw rejectWithValue(newTypeError.message);
         const newAccountData = { account_type_id: newTypeData.id, balance: accountData.balance };

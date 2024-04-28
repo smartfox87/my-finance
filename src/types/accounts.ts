@@ -4,7 +4,7 @@ export interface AccountItemBalance {
 
 export interface AccountItemData extends AccountItemBalance {
   account_type_id?: number;
-  name?: string;
+  name: string;
 }
 
 export interface AccountItem {

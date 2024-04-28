@@ -1,6 +1,6 @@
 import { supabase } from "@/api/supabase.js";
 import { getUserId } from "@/helpers/localStorage.js";
-import { deleteIncomeCategoryApi } from "@/api/references.js";
+import { deleteIncomeCategoryApi } from "@/api/references";
 import { getCurrentDate } from "@/helpers/date";
 
 export const getIncomesListApi = ({ period: [from, to] }) =>
