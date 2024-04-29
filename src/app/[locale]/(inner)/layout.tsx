@@ -14,7 +14,7 @@ import { ReactNodeLike } from "prop-types";
 import { useAppDispatch } from "@/hooks/redux";
 // import { getProfileThunk } from "@/store/profileSlice";
 // import { getAccountTypesThunk, getCostCategoriesThunk, getCurrenciesThunk, getIncomeCategoriesThunk } from "@/store/referencesSlice";
-import { getUserSessionThunk } from "@/store/authSlice";
+// import { getUserSessionThunk } from "@/store/authSlice";
 
 export default function MainLayout({ children }: { children: ReactNodeLike }) {
   const dispatch = useAppDispatch();
@@ -28,7 +28,7 @@ export default function MainLayout({ children }: { children: ReactNodeLike }) {
   const initProfile = async () => {
     if (getUserId() && !user) {
       await import("@/store/authSlice");
-      await dispatch(getUserSessionThunk());
+      // await dispatch(getUserSessionThunk());
     }
     if (!user) return;
     await Promise.all([import("@/store/accountsSlice"), import("@/store/profileSlice"), import("@/store/referencesSlice")]);
