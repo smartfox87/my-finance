@@ -2,17 +2,17 @@ import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { SimpleButton } from "@/components/Form/SimpleButton";
-import { useInjectReducer } from "@/hooks/injectReducer";
+import { loginByProviderUserThunk } from "@/store/authSlice";
 
 export const GoogleAuth = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const { thunks } = useInjectReducer();
 
   const [isLoading, setIsLoading] = useState(false);
-  const handleAuthorize = () => {
+  const handleAuthorize = async () => {
     setIsLoading(true);
-    dispatch(thunks.auth.loginByProviderUserThunk("google"));
+    await import("@/store/authSlice");
+    dispatch(loginByProviderUserThunk("google"));
   };
 
   return (

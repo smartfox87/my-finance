@@ -2,24 +2,24 @@
 
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { useInjectReducer } from "@/hooks/injectReducer";
 import { selectProfile, selectProfileFields } from "@/store/selectors/profile";
 import { getFullDate } from "@/helpers/date";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "antd";
 import { PropValueList } from "@/components/Common/PropValueList";
 import { DefaultForm } from "@/components/Form/DefaultForm";
 import SvgLogout from "@/assets/sprite/logout.svg";
 import { createPortal } from "react-dom";
+import { clearProfile, updateProfileThunk } from "@/store/profileSlice";
+import { logoutUserThunk } from "@/store/authSlice";
 
 export default function ProfileContent() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { thunks } = useInjectReducer();
   const profile = useSelector(selectProfile);
   const profileFields = useSelector(selectProfileFields);
 
-  const handleSaveProfile = (profileData) => dispatch(thunks.profile.updateProfileThunk(profileData));
+  const handleSaveProfile = (profileData) => dispatch(updateProfileThunk(profileData));
 
   const datesList = [
     { prop: t("common.created_at"), value: getFullDate(profile?.created_at, "YYYY MMMM DD, HH:MM") },
@@ -29,7 +29,7 @@ export default function ProfileContent() {
   const [isLogoutLoading, setIsLogoutLoading] = useState();
   const handleLogout = async () => {
     setIsLogoutLoading(true);
-    await Promise.all([dispatch(thunks.auth.logoutUserThunk()), dispatch(thunks.profile.clearProfile())]);
+    await Promise.all([dispatch(logoutUserThunk()), dispatch(clearProfile())]);
     setIsLogoutLoading(false);
   };
 

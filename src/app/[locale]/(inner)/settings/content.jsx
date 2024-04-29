@@ -1,16 +1,15 @@
 "use client";
 
 import { useDispatch, useSelector } from "react-redux";
-import { useInjectReducer } from "@/hooks/injectReducer";
 import { selectSettingsFields } from "@/store/selectors/profile";
 import { DefaultForm } from "@/components/Form/DefaultForm";
+import { updateProfileThunk } from "@/store/profileSlice";
 
 export default function SettingsContent() {
   const dispatch = useDispatch();
-  const { thunks } = useInjectReducer();
   const profileFields = useSelector(selectSettingsFields);
 
-  const handleSaveProfile = (profileData) => dispatch(thunks.profile.updateProfileThunk(profileData));
+  const handleSaveProfile = (profileData) => dispatch(updateProfileThunk(profileData));
 
   return <DefaultForm fields={profileFields} onSaveForm={handleSaveProfile} />;
 }

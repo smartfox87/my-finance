@@ -2,7 +2,6 @@
 
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { useInjectReducer } from "@/hooks/injectReducer";
 import { AddNewCost } from "@/components/Costs/New/AddNewCost";
 import { CostsFilter } from "@/components/Costs/Filter/CostsFilter";
 import { ActiveCostsFilters } from "@/components/Costs/Filter/ActiveCostsFilters";
@@ -26,7 +25,6 @@ import { createPortal } from "react-dom";
 export default function ExpensesContent() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { injectReducer, thunks } = useInjectReducer();
 
   const costsFilterValues = useSelector(selectCostsFilterValues);
   const [isNotEqualParamsToFilters] = useFilterSearchParams(costsFilterValues, setCostsFilterValues);
@@ -43,8 +41,8 @@ export default function ExpensesContent() {
 
   useEffect(() => {
     const injectAndLoadData = async () => {
-      if (!thunks.costs) {
-        await injectReducer("costs");
+      if (!costsFilterValues) {
+        await import("@/store/costsSlice");
         await dispatch(setCostsFilterValues(INITIAL_COSTS_FILTER_FIELDS.map(({ id, value }) => ({ id, value }))));
       }
       if (!costsList) await handleGetData();

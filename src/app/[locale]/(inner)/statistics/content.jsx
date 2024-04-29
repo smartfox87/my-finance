@@ -2,7 +2,6 @@
 
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { useInjectReducer } from "@/hooks/injectReducer";
 import {
   selectBudgetsListForChartsByFilter,
   selectCostsListForCharts,
@@ -33,7 +32,6 @@ import { FoundNothing } from "@/components/Common/FoundNothing";
 export default function StatisticsContent() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { injectReducer, thunks } = useInjectReducer();
 
   const statisticsFilterValues = useSelector(selectStatisticsFilterValues);
   const [isNotEqualParamsToFilters, isFilterValuesFilled] = useFilterSearchParams(statisticsFilterValues, setStatisticsFilterValues);
@@ -67,8 +65,8 @@ export default function StatisticsContent() {
 
   useEffect(() => {
     const injectAndLoadData = async () => {
-      if (!thunks.statistics) {
-        await injectReducer("statistics");
+      if (!statisticsFilterValues) {
+        await import("@/store/statisticsSlice");
         dispatch(setStatisticsFilterValues(INITIAL_STATISTICS_FILTER_FIELDS.map(({ id, value }) => ({ id, value }))));
       }
       if (!costsList) await handleGetData();

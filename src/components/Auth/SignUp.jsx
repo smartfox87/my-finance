@@ -6,8 +6,8 @@ import { useViewport } from "@/hooks/viewport.js";
 import { useRecaptcha } from "@/hooks/recaptcha.js";
 import SvgSignUp from "@/assets/sprite/sign-up.svg";
 import { SimpleButton } from "@/components/Form/SimpleButton";
-import { useInjectReducer } from "@/hooks/injectReducer";
 import { useAntd } from "@/hooks/antd.js";
+import { registerUserThunk } from "@/store/authSlice";
 
 let isOpenRef = false;
 let AuthModalRef = false;
@@ -16,7 +16,6 @@ export const SignUp = () => {
   const { viewport } = useViewport();
   const { t } = useTranslation();
   const { initCAPTCHA, isLoaded, getScore } = useRecaptcha();
-  const { thunks } = useInjectReducer();
 
   const [isOpen, setIsOpen] = useState(isOpenRef);
   const [AuthModal, setAuthModal] = useState(AuthModalRef);
@@ -31,8 +30,9 @@ export const SignUp = () => {
 
   const handleSubmitForm = async (fieldsValues) => {
     const score = await getScore();
+    await import("@/store/authSlice");
     if (score < 0.5) return import("@/helpers/modals.js").then(({ showNotification }) => showNotification({ title: t("notifications.recaptcha_invalid") }));
-    await dispatch(thunks.auth.registerUserThunk({ ...fieldsValues, score }));
+    await dispatch(registerUserThunk({ ...fieldsValues, score }));
     handleToggleVisibility();
   };
 

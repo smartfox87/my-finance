@@ -6,8 +6,8 @@ import { useViewport } from "@/hooks/viewport.js";
 import { useRecaptcha } from "@/hooks/recaptcha.js";
 import SvgSignIn from "@/assets/sprite/sign-in.svg";
 import { SimpleButton } from "@/components/Form/SimpleButton";
-import { useInjectReducer } from "@/hooks/injectReducer";
 import { useAntd } from "@/hooks/antd.js";
+import { loginUserThunk } from "@/store/authSlice";
 
 let isOpenRef = false;
 let AuthModalRef = false;
@@ -16,7 +16,6 @@ export const SignIn = () => {
   const dispatch = useDispatch();
   const { viewport } = useViewport();
   const { initCAPTCHA, isLoaded, getScore } = useRecaptcha();
-  const { thunks } = useInjectReducer();
 
   const [isOpen, setIsOpen] = useState(isOpenRef);
   const [AuthModal, setAuthModal] = useState(AuthModalRef);
@@ -31,7 +30,8 @@ export const SignIn = () => {
 
   const handleSubmitForm = async (fieldsValues) => {
     const score = await getScore("login");
-    await dispatch(thunks.auth.loginUserThunk({ ...fieldsValues, score }));
+    await import("@/store/authSlice");
+    await dispatch(loginUserThunk({ ...fieldsValues, score }));
     handleToggleVisibility();
   };
 

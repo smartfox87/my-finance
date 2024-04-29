@@ -2,7 +2,6 @@
 
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { useInjectReducer } from "@/hooks/injectReducer";
 import { selectIncomesByFilter, selectIncomesFilterValues, selectIncomesList } from "@/store/selectors/incomes";
 import { useFilterSearchParams } from "@/hooks/filterSearchParams";
 import { getIncomesListThunk, setIncomesFilterValues } from "@/store/incomesSlice";
@@ -26,7 +25,6 @@ import { createPortal } from "react-dom";
 export default function IncomesContent() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { injectReducer, thunks } = useInjectReducer();
 
   const incomesFilterValues = useSelector(selectIncomesFilterValues);
   const [isNotEqualParamsToFilters] = useFilterSearchParams(incomesFilterValues, setIncomesFilterValues);
@@ -43,8 +41,8 @@ export default function IncomesContent() {
 
   useEffect(() => {
     const injectAndLoadData = async () => {
-      if (!thunks.incomes) {
-        await injectReducer("incomes");
+      if (!incomesFilterValues) {
+        await import("@/store/incomesSlice");
         await dispatch(setIncomesFilterValues(INITIAL_INCOMES_FILTER_FIELDS.map(({ id, value }) => ({ id, value }))));
       }
       if (!incomesList) await handleGetData();

@@ -2,17 +2,16 @@ import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { SimpleButton } from "@/components/Form/SimpleButton";
-import { useInjectReducer } from "@/hooks/injectReducer";
+import { loginDemoUserThunk } from "@/store/authSlice";
 
 export const DemoUserAuth = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const { injectReducer } = useInjectReducer();
 
   const [isLoading, setIsLoading] = useState(false);
   const handleAuthorize = async () => {
     setIsLoading(true);
-    const { loginDemoUserThunk } = await injectReducer("auth");
+    await import("@/store/authSlice");
     dispatch(loginDemoUserThunk());
   };
 
