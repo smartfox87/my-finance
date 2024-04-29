@@ -10,10 +10,10 @@ import { useTranslation } from "react-i18next";
 import { getUserId } from "@/helpers/localStorage.js";
 import { MobileNav } from "@/components/Layout/MobileNav";
 import { ReactNodeLike } from "prop-types";
-import { getAccountsListThunk } from "@/store/accountsSlice";
+// import { getAccountsListThunk } from "@/store/accountsSlice";
 import { useAppDispatch } from "@/hooks/redux";
-import { getProfileThunk } from "@/store/profileSlice";
-import { getAccountTypesThunk, getCostCategoriesThunk, getCurrenciesThunk, getIncomeCategoriesThunk } from "@/store/referencesSlice";
+// import { getProfileThunk } from "@/store/profileSlice";
+// import { getAccountTypesThunk, getCostCategoriesThunk, getCurrenciesThunk, getIncomeCategoriesThunk } from "@/store/referencesSlice";
 import { getUserSessionThunk } from "@/store/authSlice";
 
 export default function MainLayout({ children }: { children: ReactNodeLike }) {
@@ -32,7 +32,7 @@ export default function MainLayout({ children }: { children: ReactNodeLike }) {
     }
     if (!user) return;
     await Promise.all([import("@/store/accountsSlice"), import("@/store/profileSlice"), import("@/store/referencesSlice")]);
-    await Promise.all([dispatch(getCurrenciesThunk()), dispatch(getProfileThunk()), dispatch(getAccountsListThunk())]);
+    // await Promise.all([dispatch(getCurrenciesThunk()), dispatch(getProfileThunk()), dispatch(getAccountsListThunk())]);
   };
   useEffect(() => {
     initProfile();
@@ -40,7 +40,7 @@ export default function MainLayout({ children }: { children: ReactNodeLike }) {
 
   const initReferences = async () => {
     if (!user) return;
-    await Promise.all([dispatch(getAccountTypesThunk()), dispatch(getCostCategoriesThunk()), dispatch(getIncomeCategoriesThunk())]);
+    // await Promise.all([dispatch(getAccountTypesThunk()), dispatch(getCostCategoriesThunk()), dispatch(getIncomeCategoriesThunk())]);
   };
   useEffect(() => {
     initReferences();
