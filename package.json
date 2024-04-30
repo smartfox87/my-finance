@@ -8,7 +8,7 @@
 		"sitemap": "node ./scripts/sitemap.js",
 		"locales": "node ./scripts/locales.js",
 		"dev": "next dev -p 3020",
-		"build": "next build",
+		"build": "next build && npm run css",
 		"start": "next start -p 3020",
 		"size": "npx cross-env ANALYZE=true npm run build",
 		"lint": "eslint \"**/*.{js,jsx,ts,tsx}\"",
