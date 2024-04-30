@@ -40,8 +40,8 @@ export default function MainLayout({ children }: { children: ReactNodeLike }) {
 
   const initReferences = async () => {
     if (!user) return;
-    const { getAccountTypesThunk, getCostCategoriesThunk, getIncomeCategoriesThunk } = await import("@/store/referencesSlice");
-    await Promise.all([dispatch(getAccountTypesThunk()), dispatch(getCostCategoriesThunk()), dispatch(getIncomeCategoriesThunk())]);
+    // const { getAccountTypesThunk, getCostCategoriesThunk, getIncomeCategoriesThunk } = await import("@/store/referencesSlice");
+    // await Promise.all([dispatch(getAccountTypesThunk()), dispatch(getCostCategoriesThunk()), dispatch(getIncomeCategoriesThunk())]);
   };
   useEffect(() => {
     initReferences();
