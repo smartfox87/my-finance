@@ -4,8 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { useLoading } from "@/hooks/loading";
 import { selectAccountsList } from "@/store/selectors/accounts";
-import { Suspense, useCallback, useEffect } from "react";
-import { getAccountTypesThunk } from "@/store/referencesSlice";
+import { Suspense, useCallback } from "react";
 import { getAccountsListThunk } from "@/store/accountsSlice";
 import { Preloader } from "@/components/Layout/Preloader";
 import { AddNewAccount } from "@/components/Accounts/New/AddNewAccount";
@@ -23,7 +22,7 @@ export default function AccountsContent() {
   const accountsList = useSelector(selectAccountsList);
   const handleGetData = useCallback(async () => {
     setIsLoading(true);
-    await Promise.all([dispatch(getAccountTypesThunk()), dispatch(getAccountsListThunk())]);
+    await dispatch(getAccountsListThunk());
     setIsLoading(false);
   }, []);
 
