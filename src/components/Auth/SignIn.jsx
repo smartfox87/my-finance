@@ -7,7 +7,7 @@ import { useRecaptcha } from "@/hooks/recaptcha.js";
 import SvgSignIn from "@/assets/sprite/sign-in.svg";
 import { SimpleButton } from "@/components/Form/SimpleButton";
 import { useAntd } from "@/hooks/antd.js";
-import { loginUserThunk } from "@/store/authSlice";
+import { loginUserThunk } from "@/store/authSlice.js";
 
 let isOpenRef = false;
 let AuthModalRef = false;
@@ -30,7 +30,7 @@ export const SignIn = () => {
 
   const handleSubmitForm = async (fieldsValues) => {
     const score = await getScore("login");
-    await import("@/store/authSlice");
+    const { loginUserThunk } = await import("@/store/authSlice");
     await dispatch(loginUserThunk({ ...fieldsValues, score }));
     handleToggleVisibility();
   };

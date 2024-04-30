@@ -2,7 +2,6 @@ import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { SimpleButton } from "@/components/Form/SimpleButton";
-import { loginDemoUserThunk } from "@/store/authSlice";
 
 export const DemoUserAuth = () => {
   const dispatch = useDispatch();
@@ -11,7 +10,7 @@ export const DemoUserAuth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const handleAuthorize = async () => {
     setIsLoading(true);
-    await import("@/store/authSlice");
+    const { loginDemoUserThunk } = await import("@/store/authSlice");
     dispatch(loginDemoUserThunk());
   };
 

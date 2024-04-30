@@ -7,7 +7,6 @@ import { useRecaptcha } from "@/hooks/recaptcha.js";
 import SvgSignUp from "@/assets/sprite/sign-up.svg";
 import { SimpleButton } from "@/components/Form/SimpleButton";
 import { useAntd } from "@/hooks/antd.js";
-import { registerUserThunk } from "@/store/authSlice";
 
 let isOpenRef = false;
 let AuthModalRef = false;
@@ -32,6 +31,7 @@ export const SignUp = () => {
     const score = await getScore();
     await import("@/store/authSlice");
     if (score < 0.5) return import("@/helpers/modals.js").then(({ showNotification }) => showNotification({ title: t("notifications.recaptcha_invalid") }));
+    const { registerUserThunk } = await import("@/store/authSlice");
     await dispatch(registerUserThunk({ ...fieldsValues, score }));
     handleToggleVisibility();
   };
