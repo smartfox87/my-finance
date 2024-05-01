@@ -19,7 +19,7 @@
 		"@ducanh2912/next-pwa": "^10.2.6",
 		"@reduxjs/toolkit": "^2.2.3",
 		"@sentry/nextjs": "^7.112.2",
-		"@supabase/supabase-js": "^2.42.7",
+		"@supabase/supabase-js": "^2.43.0",
 		"antd": "^5.16.5",
 		"i18next": "^23.11.3",
 		"i18next-resources-to-backend": "^1.2.1",
