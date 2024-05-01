@@ -17,7 +17,7 @@ interface DefaultFormProps {
   onResetForm?: () => void;
 }
 
-type FormValue = string | string[] | UploadFile[] | Dayjs;
+type FormValue = null | number | string | string[] | UploadFile[] | Dayjs;
 
 interface FormValues {
   [key: string]: FormValue;
@@ -128,8 +128,8 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
     return Upload.LIST_IGNORE;
   };
   const getFieldRules = ({ required, type }: { required?: boolean; type: ExtendedFormItemRule }) => {
-    const rules = [];
-    if (["email", "number"].includes(type)) rules.push({ type: type as FormItemRule, message: t(`fields.errors.${type}`) });
+    const rules: { required?: boolean; type?: FormItemRule; message: string }[] = [];
+    if ("number" === type || "email" === type) rules.push({ type, message: t(`fields.errors.${type}`) });
     if (required) rules.push({ required: true, message: t("fields.errors.required") });
     return rules;
   };
@@ -192,15 +192,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 />
               )}
               {type === "number" && (
-                <InputNumber
-                  size="large"
-                  autoFocus={!!focus}
-                  disabled={disabled}
-                  min={0}
-                  max={100000000000000}
-                  style={{ width: "100%" }}
-                  onChange={(value) => handleChangeFieldValue({ id, value: (value || "").toString() })}
-                />
+                <InputNumber size="large" autoFocus={!!focus} disabled={disabled} min={0} max={100000000000000} style={{ width: "100%" }} onChange={(value) => handleChangeFieldValue({ id, value })} />
               )}
               {type === "textarea" && (
                 <TextArea
