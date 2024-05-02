@@ -1,7 +1,7 @@
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import { getProfileApi, updateProfileApi } from "@/api/profile";
-import { handleRejected } from "@/helpers/processExtraReducersCases.js";
-import { rootReducer } from "@/store/index";
+import { handleRejected } from "@/helpers/processExtraReducersCases";
+import { rootReducer } from "@/store";
 import { Profile, ProfileData } from "@/types/profile";
 
 const createAppSlice = buildCreateSlice({
@@ -56,7 +56,7 @@ export const profileSlice = createAppSlice({
   }),
 });
 
-declare module "@/store/index" {
+declare module "@/store" {
   export interface LazyLoadedSlices extends WithSlice<typeof profileSlice> {}
 }
 

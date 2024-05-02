@@ -1,7 +1,7 @@
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
-import { handleRejected } from "@/helpers/processExtraReducersCases.js";
+import { handleRejected } from "@/helpers/processExtraReducersCases";
 import { getAccountTypesApi, getCostCategoriesApi, getCurrenciesApi, getIncomeCategoriesApi } from "@/api/references";
-import { rootReducer } from "@/store/index";
+import { rootReducer } from "@/store";
 import { AccountTypes, CostCategories, Currencies, IncomeCategories } from "@/types/references";
 
 const createAppSlice = buildCreateSlice({
@@ -9,17 +9,17 @@ const createAppSlice = buildCreateSlice({
 });
 
 interface State {
-  costCategories: CostCategories;
-  accountTypes: AccountTypes;
-  incomeCategories: IncomeCategories;
-  currencies: Currencies;
+  costCategories: CostCategories | null;
+  accountTypes: AccountTypes | null;
+  incomeCategories: IncomeCategories | null;
+  currencies: Currencies | null;
 }
 
 const initialState: State = {
-  costCategories: [],
-  accountTypes: [],
-  incomeCategories: [],
-  currencies: [],
+  costCategories: null,
+  accountTypes: null,
+  incomeCategories: null,
+  currencies: null,
 };
 
 export const referencesSlice = createAppSlice({
@@ -81,7 +81,7 @@ export const referencesSlice = createAppSlice({
   }),
 });
 
-declare module "@/store/index" {
+declare module "@/store" {
   export interface LazyLoadedSlices extends WithSlice<typeof referencesSlice> {}
 }
 

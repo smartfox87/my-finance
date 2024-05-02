@@ -1,5 +1,5 @@
 import { asyncThunkCreator, buildCreateSlice } from "@reduxjs/toolkit";
-import { handleRejected } from "@/helpers/processExtraReducersCases.js";
+import { handleRejected } from "@/helpers/processExtraReducersCases";
 import { getBudgetsListForChartsApi, getCostsListForChartsApi, getIncomesListForChartsApi } from "@/api/statistics.js";
 import { setFilterValue } from "@/helpers/filters.js";
 import { getPeriodDates } from "@/helpers/date";

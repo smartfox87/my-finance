@@ -1,3 +1,9 @@
+export interface AccountItemBalanceData {
+  accountId: number;
+  increase?: number;
+  decrease?: number;
+}
+
 export interface AccountItemBalance {
   balance: number;
 }

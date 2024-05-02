@@ -1,8 +1,8 @@
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import { getUserSession, loginDemoUserApi, loginUserApi, loginUserByProviderApi, logoutUserApi, registerUserApi } from "../api/auth";
-import { handleRejected } from "@/helpers/processExtraReducersCases.js";
+import { handleRejected } from "@/helpers/processExtraReducersCases";
 import { RegisterData, UserPayload, LoginData, SessionPayload } from "@/types/auth";
-import { rootReducer } from "@/store/index";
+import { rootReducer } from "@/store";
 import { Provider, User } from "@supabase/auth-js";
 
 interface State {
@@ -101,7 +101,7 @@ export const authSlice = createAppSlice({
   }),
 });
 
-declare module "@/store/index" {
+declare module "@/store" {
   export interface LazyLoadedSlices extends WithSlice<typeof authSlice> {}
 }
 

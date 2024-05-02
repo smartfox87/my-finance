@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setIncomesFilterValues } from "@/store/incomesSlice.js";
+import { setIncomesFilterValues } from "@/store/incomesSlice";
 import { selectIncomesFilterFields, selectIncomesFilterValues } from "@/store/selectors/incomes.js";
 import { useTranslation } from "react-i18next";
 import { Select, Button } from "antd";

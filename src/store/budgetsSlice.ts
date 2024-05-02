@@ -1,9 +1,9 @@
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import { createBudgetItemApi, getBudgetsListApi, updateBudgetItemApi, deleteBudgetItemApi, getBudgetItemApi } from "@/api/budgets";
-import { handleRejected } from "@/helpers/processExtraReducersCases.js";
+import { handleRejected } from "@/helpers/processExtraReducersCases";
 import { setFilterValue } from "@/helpers/filters.js";
 import { getPeriodDates } from "@/helpers/date";
-import { rootReducer } from "@/store/index";
+import { rootReducer } from "@/store";
 import { BudgetItem, BudgetItemData, BudgetsFilterValues, BudgetsList } from "@/types/budgets";
 import { FilterValues } from "@/types/filter";
 
@@ -11,15 +11,15 @@ const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
 });
 
-interface State {
+export interface BudgetsSliceState {
   budgetsFilterValues: BudgetsFilterValues | {};
-  budgetsList: BudgetsList | [];
+  budgetsList: BudgetsList | null;
   budgetItem: BudgetItem | null;
 }
 
-const initialState: State = {
+const initialState: BudgetsSliceState = {
   budgetsFilterValues: {},
-  budgetsList: [],
+  budgetsList: null,
   budgetItem: null,
 };
 
@@ -92,7 +92,7 @@ export const budgetsSlice = createAppSlice({
   }),
 });
 
-declare module "@/store/index" {
+declare module "@/store" {
   export interface LazyLoadedSlices extends WithSlice<typeof budgetsSlice> {}
 }
 

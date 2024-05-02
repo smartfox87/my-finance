@@ -1,23 +1,23 @@
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import { createAccountItemApi, getAccountsListApi, updateAccountItemApi, deleteAccountItemApi, getAccountItemApi, createInitialAccountsApi } from "@/api/accounts";
-import { handleRejected } from "@/helpers/processExtraReducersCases.js";
+import { handleRejected } from "@/helpers/processExtraReducersCases";
 import { createAccountTypeApi, updateAccountTypeApi } from "@/api/references";
-import { AccountItem, AccountsList, AccountItemData } from "@/types/accounts";
-import { rootReducer } from "@/store/index";
-import { RootState } from "@/types/redux";
+import { AccountItem, AccountsList, AccountItemData, AccountItemBalanceData } from "@/types/accounts";
+import { rootReducer } from "@/store";
+import { RootState } from "@/store";
 import { AccountTypeData } from "@/types/references";
 
 const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
 });
 
-interface State {
-  accountsList: AccountsList | [];
+export interface AccountsSliceState {
+  accountsList: AccountsList | null;
   accountItem: AccountItem | null;
 }
 
-const initialState: State = {
-  accountsList: [],
+const initialState: AccountsSliceState = {
+  accountsList: null,
   accountItem: null,
 };
 
@@ -72,7 +72,7 @@ export const accountsSlice = createAppSlice({
     ),
     updateAccountItemThunk: create.asyncThunk<AccountItem, { accountId: number; accountData: AccountItemData }>(
       async ({ accountId, accountData: { name, balance } }, thunkApi) => {
-        const { accountItem } = (thunkApi.getState() as RootState).accounts as State;
+        const { accountItem } = (thunkApi.getState() as RootState).accounts as AccountsSliceState;
         if (accountItem && accountItem.name !== name) {
           const { error } = await updateAccountTypeApi({ accountTypeId: accountItem.account_type_id, accountTypeData: { general_name: name } });
           if (error) throw thunkApi.rejectWithValue(error.message);
@@ -84,13 +84,14 @@ export const accountsSlice = createAppSlice({
       {
         rejected: handleRejected,
         fulfilled: (state, { payload }) => {
-          state.accountsList = state.accountsList.map((account) => (account.id === payload.id ? payload : account));
+          if (Array.isArray(state.accountsList)) state.accountsList = state.accountsList.map((account) => (account.id === payload.id ? payload : account));
         },
       },
     ),
-    updateAccountBalanceThunk: create.asyncThunk<AccountItem, { accountId: number; increase: number; decrease: number }>(
+    updateAccountBalanceThunk: create.asyncThunk<AccountItem, AccountItemBalanceData>(
       async ({ accountId, increase = 0, decrease = 0 }, thunkApi) => {
-        const accountItem = ((thunkApi.getState() as RootState).accounts as State).accountsList.find(({ id }) => id === accountId);
+        throw thunkApi.rejectWithValue("test");
+        const accountItem = ((thunkApi.getState() as RootState).accounts as AccountsSliceState).accountsList?.find(({ id }) => id === accountId);
         if (!accountItem) throw thunkApi.rejectWithValue("Account not found");
         const { data, error } = await updateAccountItemApi({ accountId, accountData: { balance: accountItem.balance + increase - decrease } });
         if (error) throw thunkApi.rejectWithValue(error.message);
@@ -99,15 +100,15 @@ export const accountsSlice = createAppSlice({
       {
         rejected: handleRejected,
         fulfilled: (state, { payload }) => {
-          state.accountsList = state.accountsList.map((account) => (account.id === payload.id ? payload : account));
+          if (Array.isArray(state.accountsList)) state.accountsList = state.accountsList.map((account) => (account.id === payload.id ? payload : account));
         },
       },
     ),
     transferAccountsBalanceThunk: create.asyncThunk<void, { from: number; to: number; amount: number }>(
       async ({ from, to, amount }, thunkApi) => {
-        const { accountsList } = (thunkApi.getState() as RootState).accounts as State;
-        const fromAccount = accountsList.find(({ id }) => id === from) as AccountItem;
-        const toAccount = accountsList.find(({ id }) => id === to) as AccountItem;
+        const { accountsList } = (thunkApi.getState() as RootState).accounts as AccountsSliceState;
+        const fromAccount = accountsList?.find(({ id }) => id === from) as AccountItem;
+        const toAccount = accountsList?.find(({ id }) => id === to) as AccountItem;
         const { error: fromError } = await updateAccountItemApi({ accountId: from, accountData: { balance: fromAccount.balance - amount } });
         if (fromError) throw thunkApi.rejectWithValue(fromError.message);
         const { error: toError } = await updateAccountItemApi({ accountId: to, accountData: { balance: toAccount.balance + amount } });
@@ -134,7 +135,7 @@ export const accountsSlice = createAppSlice({
   }),
 });
 
-declare module "@/store/index" {
+declare module "@/store" {
   export interface LazyLoadedSlices extends WithSlice<typeof accountsSlice> {}
 }
 
