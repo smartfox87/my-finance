@@ -70,7 +70,7 @@ export const accountsSlice = createAppSlice({
         },
       },
     ),
-    updateAccountItemThunk: create.asyncThunk<AccountItem, { accountId: number; accountData: AccountItemData }>(
+    updateAccountItemThunk: create.asyncThunk<AccountItem, { accountId: number; accountData: AccountItemData }, { rejectValue: string }>(
       async ({ accountId, accountData: { name, balance } }, thunkApi) => {
         const { accountItem } = (thunkApi.getState() as RootState).accounts as AccountsSliceState;
         if (accountItem && accountItem.name !== name) {
@@ -88,7 +88,7 @@ export const accountsSlice = createAppSlice({
         },
       },
     ),
-    updateAccountBalanceThunk: create.asyncThunk<AccountItem, AccountItemBalanceData>(
+    updateAccountBalanceThunk: create.asyncThunk<AccountItem, AccountItemBalanceData, { rejectValue: string }>(
       async ({ accountId, increase = 0, decrease = 0 }, thunkApi) => {
         const accountItem = ((thunkApi.getState() as RootState).accounts as AccountsSliceState).accountsList?.find(({ id }) => id === accountId);
         if (!accountItem) throw thunkApi.rejectWithValue("Account not found");
@@ -103,7 +103,7 @@ export const accountsSlice = createAppSlice({
         },
       },
     ),
-    transferAccountsBalanceThunk: create.asyncThunk<void, { from: number; to: number; amount: number }>(
+    transferAccountsBalanceThunk: create.asyncThunk<void, { from: number; to: number; amount: number }, { rejectValue: string }>(
       async ({ from, to, amount }, thunkApi) => {
         const { accountsList } = (thunkApi.getState() as RootState).accounts as AccountsSliceState;
         const fromAccount = accountsList?.find(({ id }) => id === from) as AccountItem;
@@ -117,11 +117,10 @@ export const accountsSlice = createAppSlice({
         rejected: handleRejected,
       },
     ),
-    deleteAccountItemThunk: create.asyncThunk<AccountItem, number>(
+    deleteAccountItemThunk: create.asyncThunk<AccountItem | null, number, { rejectValue: string }>(
       async (accountId = 0, thunkApi) => {
         const { data, error } = await deleteAccountItemApi(accountId);
         if (error) throw thunkApi.rejectWithValue(error.message);
-        if (!data) throw thunkApi.rejectWithValue("No data returned from API");
         return data;
       },
       {
