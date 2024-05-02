@@ -90,7 +90,6 @@ export const accountsSlice = createAppSlice({
     ),
     updateAccountBalanceThunk: create.asyncThunk<AccountItem, AccountItemBalanceData>(
       async ({ accountId, increase = 0, decrease = 0 }, thunkApi) => {
-        throw thunkApi.rejectWithValue("test");
         const accountItem = ((thunkApi.getState() as RootState).accounts as AccountsSliceState).accountsList?.find(({ id }) => id === accountId);
         if (!accountItem) throw thunkApi.rejectWithValue("Account not found");
         const { data, error } = await updateAccountItemApi({ accountId, accountData: { balance: accountItem.balance + increase - decrease } });

@@ -6,7 +6,7 @@ import { BudgetsSliceState } from "@/store/budgetsSlice";
 
 type State = IncomesSliceState | AccountsSliceState | BudgetsSliceState;
 
-export const handleRejected = (state: State, { type, payload, error }: { type: string; payload?: string | unknown; error: SerializedError }) => {
-  console.error(type, payload || error);
-  message.error(payload || error.message, 8);
+export const handleRejected = (state: State, { payload, error }: { payload?: string; error: SerializedError }) => {
+  const errorMessage = typeof payload === "string" ? payload : error.message;
+  message.error(errorMessage, 8);
 };
