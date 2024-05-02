@@ -10,11 +10,11 @@ const createAppSlice = buildCreateSlice({
 
 const setPeriod = ({ period }: Profile) => localStorage.setItem("period", period || "year");
 
-interface State {
+export interface ProfileSliceState {
   profile: Profile | null;
 }
 
-const initialState: State = {
+const initialState: ProfileSliceState = {
   profile: null,
 };
 

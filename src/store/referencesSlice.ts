@@ -8,14 +8,14 @@ const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
 });
 
-interface State {
+export interface ReferencesSliceState {
   costCategories: CostCategories | null;
   accountTypes: AccountTypes | null;
   incomeCategories: IncomeCategories | null;
   currencies: Currencies | null;
 }
 
-const initialState: State = {
+const initialState: ReferencesSliceState = {
   costCategories: null,
   accountTypes: null,
   incomeCategories: null,
