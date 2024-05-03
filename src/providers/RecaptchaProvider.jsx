@@ -10,7 +10,10 @@ export const RecaptchaProvider = ({ children }) => {
   const recaptchaRef = createRef();
 
   const [DynamicReCAPTCHA, setDynamicReCAPTCHA] = useState();
-  const initCAPTCHA = async () => !DynamicReCAPTCHA && setDynamicReCAPTCHA(lazy(() => import("react-google-recaptcha")));
+  const initCAPTCHA = async () => {
+    console.log("initCAPTCHA");
+    !DynamicReCAPTCHA && setDynamicReCAPTCHA(lazy(() => import("react-google-recaptcha")));
+  };
 
   const [isLoaded, setIsLoaded] = useState(false);
   const handleAsyncScriptLoad = () => setIsLoaded(true);
