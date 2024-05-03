@@ -1,35 +1,36 @@
-import withBundleAnalyzer from '@next/bundle-analyzer';
+import withBundleAnalyzer from "@next/bundle-analyzer";
 import withPWAInit from "@ducanh2912/next-pwa";
 import { withSentryConfig } from "@sentry/nextjs";
 
 const withPWA = withPWAInit({
   dest: "public",
   extendDefaultRuntimeCaching: true,
-  disable: process.env.NODE_ENV === 'development',
+  disable: process.env.NODE_ENV === "development",
   workboxOptions: {
     runtimeCaching: [
       {
         urlPattern: /\.html$/,
-        handler: 'NetworkFirst',
+        handler: "NetworkFirst",
         options: {
           networkTimeoutSeconds: 2,
-          cacheName: 'html-cache',
+          cacheName: "html-cache",
         },
       },
     ],
-  }
+  },
 });
 
 const bundleAnalyzerConfig = {
-  enabled: process.env.ANALYZE === 'true',
+  enabled: process.env.ANALYZE === "true",
 };
 
 const nextConfig = {
-  webpack(config, {webpack}) {
+  experimental: {
+    optimizePackageImports: ["antd", "@ant-design/nextjs-registry"],
+  },
+  webpack(config, { webpack }) {
     // Grab the existing rule that handles SVG imports
-    const fileLoaderRule = config.module.rules.find((rule) =>
-      rule.test?.test?.('.svg'),
-    )
+    const fileLoaderRule = config.module.rules.find((rule) => rule.test?.test?.(".svg"));
 
     config.module.rules.push(
       // Reapply the existing rule, but only for svg imports ending in ?url
@@ -45,13 +46,13 @@ const nextConfig = {
         resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] }, // exclude if *.svg?url
         use: [
           {
-            loader: '@svgr/webpack',
+            loader: "@svgr/webpack",
             options: {
               dimensions: false,
               svgoConfig: {
                 plugins: [
                   {
-                    name: 'preset-default',
+                    name: "preset-default",
                     params: {
                       overrides: {
                         removeViewBox: false,
@@ -67,10 +68,10 @@ const nextConfig = {
           },
         ],
       },
-    )
+    );
 
     // Modify the file loader rule to ignore *.svg, since we have it handled now.
-    fileLoaderRule.exclude = /\.svg$/i
+    fileLoaderRule.exclude = /\.svg$/i;
 
     config.plugins.push(
       new webpack.DefinePlugin({
@@ -79,14 +80,14 @@ const nextConfig = {
         __RRWEB_EXCLUDE_IFRAME__: true,
         __RRWEB_EXCLUDE_SHADOW_DOM__: true,
         __SENTRY_EXCLUDE_REPLAY_WORKER__: true,
-      })
+      }),
     );
 
-    return config
+    return config;
   },
 };
 
-const sentryConfig= withSentryConfig(
+const sentryConfig = withSentryConfig(
   nextConfig,
   {
     // For all available options, see:
@@ -124,7 +125,7 @@ const sentryConfig= withSentryConfig(
     // https://docs.sentry.io/product/crons/
     // https://vercel.com/docs/cron-jobs
     automaticVercelMonitors: true,
-  }
+  },
 );
 
 export default withBundleAnalyzer(bundleAnalyzerConfig)(withPWA(sentryConfig));
