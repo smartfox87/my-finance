@@ -15,6 +15,7 @@ interface DefaultFormProps {
   isVisible?: boolean;
   onSaveForm: (formValues: any) => Promise<void>;
   onResetForm?: () => void;
+  onChange?: () => void;
 }
 
 type FormValue = null | number | string | string[] | UploadFile[] | Dayjs;
@@ -41,7 +42,7 @@ interface PropFieldValue {
   fileList?: UploadFile[];
 }
 
-export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfterSave, isVisible = true, onSaveForm, onResetForm }: DefaultFormProps, ref) {
+export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfterSave, isVisible = true, onSaveForm, onResetForm, onChange }: DefaultFormProps, ref) {
   const { t } = useTranslation();
   const { TextArea } = Input;
 
@@ -82,6 +83,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
         }
       }),
     );
+    if (typeof onChange === "function") onChange();
   }, []);
 
   const isChangedFieldsData = JSON.stringify(propsFieldsValues) !== JSON.stringify(fieldsValues);

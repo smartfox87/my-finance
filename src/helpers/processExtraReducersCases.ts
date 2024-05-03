@@ -6,8 +6,9 @@ import { BudgetsSliceState } from "@/store/budgetsSlice";
 import { AuthSliceState } from "@/store/authSlice";
 import { ProfileSliceState } from "@/store/profileSlice";
 import { ReferencesSliceState } from "@/store/referencesSlice";
+import { CostsSliceState } from "@/store/costsSlice";
 
-type State = IncomesSliceState | AccountsSliceState | BudgetsSliceState | AuthSliceState | ProfileSliceState | ReferencesSliceState;
+type State = IncomesSliceState | AccountsSliceState | BudgetsSliceState | AuthSliceState | ProfileSliceState | ReferencesSliceState | CostsSliceState;
 
 export const handleRejected = (state: State, { payload, error }: { payload?: string; error: SerializedError }) => {
   message.error(typeof payload === "string" ? payload : error.message, 8);

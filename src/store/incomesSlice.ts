@@ -48,8 +48,7 @@ export const incomesSlice = createAppSlice({
         if (error) throw thunkApi.rejectWithValue(error.message);
         if (data) {
           const dispatch = thunkApi.dispatch as AppDispatch;
-          const updateAccountBalanceResult = await dispatch(updateAccountBalanceThunk({ accountId: incomeData.account, increase: incomeData.amount }));
-          if ("error" in updateAccountBalanceResult && updateAccountBalanceResult.error?.message) throw thunkApi.rejectWithValue(updateAccountBalanceResult.error.message);
+          await dispatch(updateAccountBalanceThunk({ accountId: incomeData.account, increase: incomeData.amount }));
         }
         return data;
       },
@@ -82,8 +81,7 @@ export const incomesSlice = createAppSlice({
           else if (amountDifference < 0) newAccountData.decrease = -amountDifference;
           else return data;
           const dispatch = thunkApi.dispatch as AppDispatch;
-          const updateAccountBalanceResult = await dispatch(updateAccountBalanceThunk(newAccountData));
-          if ("error" in updateAccountBalanceResult && updateAccountBalanceResult.error?.message) throw thunkApi.rejectWithValue(updateAccountBalanceResult.error.message);
+          await dispatch(updateAccountBalanceThunk(newAccountData));
         }
         return data;
       },
@@ -102,10 +100,7 @@ export const incomesSlice = createAppSlice({
           const state = thunkApi.getState() as RootState;
           const dispatch = thunkApi.dispatch as AppDispatch;
           const incomeData = state.incomes?.incomesList?.find(({ id }) => id === incomeId);
-          if (incomeData) {
-            const updateAccountBalanceResult = await dispatch(updateAccountBalanceThunk({ accountId: incomeData.account, decrease: incomeData.amount }));
-            if ("error" in updateAccountBalanceResult && updateAccountBalanceResult.error?.message) throw thunkApi.rejectWithValue(updateAccountBalanceResult.error.message);
-          }
+          if (incomeData) await dispatch(updateAccountBalanceThunk({ accountId: incomeData.account, decrease: incomeData.amount }));
         }
         return data;
       },
