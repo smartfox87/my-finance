@@ -77,7 +77,7 @@ export default async function LocaleLayout({ children, params: { locale } }: { c
 
   return (
     <html lang={locale} dir={dir(locale)}>
-      <body className="fixed left-0 top-0 flex h-full w-full flex-col overflow-auto dark:bg-dark">
+      <body className="absolute left-0 top-0 flex h-full w-full flex-col overflow-auto dark:bg-dark">
         <Providers locale={locale} resources={resources} i18nNamespaces={i18nNamespaces}>
           {children}
         </Providers>

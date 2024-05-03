@@ -34,7 +34,6 @@ export default function BudgetsContent() {
   const budgetsList = useSelector(selectBudgetsList);
   const filteredSortedBudgets = useSelector(selectBudgetsByFilter);
   const handleGetData = useCallback(async () => {
-    console.log("handleGetData", budgetsFilterValues?.period, isNotEqualParamsToFilters);
     if (!budgetsFilterValues?.period || isNotEqualParamsToFilters) return;
     setIsLoading(true);
     await dispatch(getBudgetsListThunk(budgetsFilterValues));
