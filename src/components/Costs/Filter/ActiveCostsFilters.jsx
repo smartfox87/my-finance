@@ -2,7 +2,7 @@ import { Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCostsFilterFields, selectCostsFilterValues } from "@/store/selectors/costs.js";
 import { useTranslation } from "react-i18next";
-import { setCostsFilterValues } from "@/store/costsSlice.ts";
+import { setCostsFilterValues } from "@/store/costsSlice";
 import { memo } from "react";
 import { checkIsClearableFilter } from "@/helpers/filters.js";
 import SvgCrossBold from "@/assets/sprite/cross-bold.svg";
