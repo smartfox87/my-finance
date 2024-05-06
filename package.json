@@ -16,7 +16,7 @@
 	},
 	"dependencies": {
 		"@ant-design/nextjs-registry": "^1.0.0",
-		"@ducanh2912/next-pwa": "^10.2.6",
+		"@ducanh2912/next-pwa": "^10.2.7",
 		"@reduxjs/toolkit": "^2.2.3",
 		"@sentry/nextjs": "^7.112.2",
 		"@supabase/supabase-js": "^2.42.7",
