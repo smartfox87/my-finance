@@ -34,7 +34,10 @@ export const useFilterSearchParams = (filterValues, setFilterValues) => {
       }, {});
   }, [searchParamsArray, filterValues]);
 
-  const isNotEqualParamsToFilters = useMemo(() => JSON.stringify(paramsObject) !== JSON.stringify(sortedFilterValues), [paramsObject, sortedFilterValues]);
+  const isNotEqualParamsToFilters = useMemo(
+    () => (!searchParamsArray.length && !filterValues) || JSON.stringify(paramsObject) !== JSON.stringify(sortedFilterValues),
+    [paramsObject, sortedFilterValues],
+  );
 
   useEffect(() => {
     if (isFilterValuesFilled) {
