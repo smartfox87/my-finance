@@ -1,13 +1,13 @@
 import { forwardRef, LegacyRef, useCallback, useEffect, useImperativeHandle, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Form, Input, Select, DatePicker, InputNumber, Radio, Upload, message, UploadFile, InputRef, FormProps } from "antd";
+import { Button, Form, Input, message, UploadFile, InputRef, FormProps } from "antd";
 import dayjs, { Dayjs } from "dayjs";
 import { useLoading } from "@/hooks/loading.js";
-import { PeriodField } from "@/components/Form/PeriodField.jsx";
 import SvgUpload from "@/assets/sprite/upload.svg";
 import { getFileSizeWithUnit } from "@/helpers/file.js";
 import { handleFilterSelectOptions } from "@/helpers/fields";
 import { ExtendedFormItemRule, PropField, FormItemRule } from "@/types/Form";
+import dynamic from "next/dynamic";
 
 interface DefaultFormProps {
   fields: PropField[];
@@ -44,7 +44,6 @@ interface PropFieldValue {
 
 export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfterSave, isVisible = true, onSaveForm, onResetForm, onChange }: DefaultFormProps, ref) {
   const { t } = useTranslation();
-  const { TextArea } = Input;
 
   const propsFieldsValues = useMemo(
     () =>
@@ -116,6 +115,13 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
 
   useImperativeHandle(ref, () => ({ handleChangeFieldValue }));
 
+  const PeriodField = useMemo(() => fields.find(({ type }) => type === "period") && dynamic(() => import("@/components/Form/PeriodField").then((mod) => mod.PeriodField)), []);
+  const DatePicker = useMemo(() => fields.find(({ type }) => type === "date") && dynamic(() => import("antd").then((mod) => mod.DatePicker)), []);
+  const Select = useMemo(() => fields.find(({ type }) => type === "select") && dynamic(() => import("antd").then((mod) => mod.Select)), []);
+  const InputNumber = useMemo(() => fields.find(({ type }) => type === "number") && dynamic(() => import("antd").then((mod) => mod.InputNumber)), []);
+  const RadioGroup = useMemo(() => fields.find(({ type }) => type === "radio-buttons") && dynamic(() => import("antd").then((mod) => mod.Radio.Group)), []);
+
+  const Upload = fields.find(({ type }) => type === "file") && dynamic(() => import("antd").then((mod) => mod.Upload));
   const normFile = (e: { fileList: UploadFile[] }) => (Array.isArray(e) ? e : e?.fileList);
   const handleRemoveFile = (file: UploadFile) =>
     setFieldsValues((oldFieldsValues) =>
@@ -127,7 +133,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
       return true;
     }
     message.error(`${t("fields.errors.file_size")} ${getFileSizeWithUnit(maxSize)}`);
-    return Upload.LIST_IGNORE;
+    return Upload && "LIST_IGNORE" in Upload && typeof Upload.LIST_IGNORE === "string" ? Upload.LIST_IGNORE : false;
   };
   const getFieldRules = ({ required, type }: { required?: boolean; type: ExtendedFormItemRule }) => {
     const rules: { required?: boolean; type?: FormItemRule; message: string }[] = [];
@@ -177,7 +183,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                   onChange={(event) => handleChangeFieldValue({ id, value: event.target.value })}
                 />
               )}
-              {type === "date" && (
+              {type === "date" && DatePicker && (
                 <DatePicker
                   size="large"
                   autoFocus={!!focus}
@@ -190,14 +196,14 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                     type: "mask",
                   }}
                   style={{ width: "100%" }}
-                  onChange={(value) => handleChangeFieldValue({ id, value })}
+                  onChange={(value) => handleChangeFieldValue({ id, value: value as Dayjs })}
                 />
               )}
-              {type === "number" && (
+              {type === "number" && InputNumber && (
                 <InputNumber size="large" autoFocus={!!focus} disabled={disabled} min={0} max={100000000000000} style={{ width: "100%" }} onChange={(value) => handleChangeFieldValue({ id, value })} />
               )}
               {type === "textarea" && (
-                <TextArea
+                <Input.TextArea
                   ref={focus ? focusInputRef : undefined}
                   rows={5}
                   maxLength={maxLength}
@@ -206,7 +212,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                   onChange={(event) => handleChangeFieldValue({ id, value: event.target.value })}
                 />
               )}
-              {type === "select" && (
+              {type === "select" && Select && (
                 <Select
                   size="large"
                   autoFocus={!!focus}
@@ -218,12 +224,12 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                   }))}
                   showSearch={showSearch}
                   filterOption={showSearch ? handleFilterSelectOptions : undefined}
-                  onChange={(value) => handleChangeFieldValue({ id, value, multiple, type: "select" })}
+                  onChange={(value) => handleChangeFieldValue({ id, value: value as string | string[], multiple, type: "select" })}
                 />
               )}
-              {type === "period" && <PeriodField onChange={(value: Dayjs) => handleChangeFieldValue({ id, value })} />}
-              {type === "radio-buttons" && (
-                <Radio.Group
+              {type === "period" && PeriodField && <PeriodField onChange={(value: Dayjs) => handleChangeFieldValue({ id, value })} />}
+              {type === "radio-buttons" && RadioGroup && (
+                <RadioGroup
                   className="w-full"
                   size="large"
                   optionType="button"
@@ -232,7 +238,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                   onChange={(event) => handleChangeFieldValue({ id, value: event.target.value })}
                 />
               )}
-              {type === "file" && (
+              {type === "file" && Upload && (
                 <Upload listType="picture" multiple={!!multiple} maxCount={maxCount} accept={accept} beforeUpload={(file) => handleAddFile(file, { maxSize })} onRemove={handleRemoveFile}>
                   <Button icon={<SvgUpload className="h-4 w-4" />} size="large">
                     {t("buttons.upload")}
