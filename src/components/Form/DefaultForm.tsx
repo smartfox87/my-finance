@@ -1,6 +1,6 @@
 import { forwardRef, LegacyRef, useCallback, useEffect, useImperativeHandle, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Form, Input, message, UploadFile, InputRef, FormProps } from "antd";
+import { Button, Form, Input, UploadFile, InputRef, FormProps } from "antd";
 import dayjs, { Dayjs } from "dayjs";
 import { useLoading } from "@/hooks/loading.js";
 import SvgUpload from "@/assets/sprite/upload.svg";
@@ -8,6 +8,7 @@ import { getFileSizeWithUnit } from "@/helpers/file.js";
 import { handleFilterSelectOptions } from "@/helpers/fields";
 import { ExtendedFormItemRule, PropField, FormItemRule } from "@/types/Form";
 import dynamic from "next/dynamic";
+import { showErrorMessage } from "@/helpers/message";
 
 interface DefaultFormProps {
   fields: PropField[];
@@ -132,7 +133,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
       setFieldsValues((oldFieldsValues) => oldFieldsValues.map((field) => (field.type === "file" ? { ...field, fileList: field.fileList?.concat([file]) } : field)));
       return true;
     }
-    message.error(`${t("fields.errors.file_size")} ${getFileSizeWithUnit(maxSize)}`);
+    showErrorMessage(`${t("fields.errors.file_size")} ${getFileSizeWithUnit(maxSize)}`);
     return Upload && "LIST_IGNORE" in Upload && typeof Upload.LIST_IGNORE === "string" ? Upload.LIST_IGNORE : false;
   };
   const getFieldRules = ({ required, type }: { required?: boolean; type: ExtendedFormItemRule }) => {
