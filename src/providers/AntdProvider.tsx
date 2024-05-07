@@ -23,12 +23,14 @@ export const AntdProvider = ({ children }: { children: ReactNode }) => {
   const [isMounted, setIsMounted] = useState(false);
 
   const initAntd = () =>
-    Promise.all([lazy(() => import("@ant-design/cssinjs").then(({ StyleProvider }) => ({ default: StyleProvider }))), lazy(() => import("antd/es/config-provider")), import("antd/es/theme")]).then(
-      ([StyleProvider, ConfigProvider, theme]) => {
-        setDynamicAntd({ StyleProvider, ConfigProvider, theme: theme.default });
-        setIsLoadedAntd(true);
-      },
-    );
+    Promise.all([
+      lazy(() => import("@ant-design/cssinjs/es/StyleContext").then(({ StyleProvider }) => ({ default: StyleProvider }))),
+      lazy(() => import("antd/es/config-provider")),
+      import("antd/es/theme"),
+    ]).then(([StyleProvider, ConfigProvider, theme]) => {
+      setDynamicAntd({ StyleProvider, ConfigProvider, theme: theme.default });
+      setIsLoadedAntd(true);
+    });
 
   useEffect(() => {
     setIsMounted(true);
