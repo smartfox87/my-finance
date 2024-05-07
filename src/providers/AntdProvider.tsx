@@ -4,6 +4,7 @@ import { selectUser } from "@/store/selectors/auth.js";
 import { createContext, lazy, ReactNode, useEffect, useState } from "react";
 import { useLocale } from "@/hooks/locale";
 import { getUserId } from "@/helpers/localStorage.js";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
 
 interface DynamicAntdType {
   StyleProvider?: any;
@@ -22,10 +23,12 @@ export const AntdProvider = ({ children }: { children: ReactNode }) => {
   const [isMounted, setIsMounted] = useState(false);
 
   const initAntd = () =>
-    Promise.all([lazy(() => import("@ant-design/cssinjs").then(({ StyleProvider }) => ({ default: StyleProvider }))), import("antd")]).then(([StyleProvider, { ConfigProvider, theme }]) => {
-      setDynamicAntd({ StyleProvider, ConfigProvider, theme });
-      setIsLoadedAntd(true);
-    });
+    Promise.all([lazy(() => import("@ant-design/cssinjs").then(({ StyleProvider }) => ({ default: StyleProvider }))), lazy(() => import("antd/es/config-provider")), import("antd/es/theme")]).then(
+      ([StyleProvider, ConfigProvider, theme]) => {
+        setDynamicAntd({ StyleProvider, ConfigProvider, theme: theme.default });
+        setIsLoadedAntd(true);
+      },
+    );
 
   useEffect(() => {
     setIsMounted(true);
@@ -35,11 +38,13 @@ export const AntdProvider = ({ children }: { children: ReactNode }) => {
   if (isMounted && DynamicAntd)
     return (
       <AntdContext.Provider value={{ initAntd, isLoadedAntd }}>
-        <DynamicAntd.StyleProvider hashPriority="high">
-          <DynamicAntd.ConfigProvider locale={locale} theme={{ algorithm: darkTheme ? DynamicAntd.theme.darkAlgorithm : DynamicAntd.theme.defaultAlgorithm }}>
-            {children}
-          </DynamicAntd.ConfigProvider>
-        </DynamicAntd.StyleProvider>
+        <AntdRegistry>
+          <DynamicAntd.StyleProvider hashPriority="high">
+            <DynamicAntd.ConfigProvider locale={locale} theme={{ algorithm: darkTheme ? DynamicAntd.theme.darkAlgorithm : DynamicAntd.theme.defaultAlgorithm }}>
+              {children}
+            </DynamicAntd.ConfigProvider>
+          </DynamicAntd.StyleProvider>
+        </AntdRegistry>
       </AntdContext.Provider>
     );
   return <AntdContext.Provider value={{ initAntd, isLoadedAntd }}>{children}</AntdContext.Provider>;

@@ -10,15 +10,10 @@ export const SideModal = ({ title, isOpen, isLoading = false, children, footer, 
   useEffect(() => {
     if (isOpen) {
       if (Modal) onInit(true);
-      else
-        setModal(
-          lazy(() =>
-            import("antd").then(({ Drawer }) => {
-              onInit(true);
-              return { default: Drawer };
-            }),
-          ),
-        );
+      else {
+        setModal(lazy(() => import("antd/es/drawer")));
+        onInit(true);
+      }
     }
   }, [isOpen, Modal]);
 

@@ -116,12 +116,12 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
   useImperativeHandle(ref, () => ({ handleChangeFieldValue }));
 
   const PeriodField = useMemo(() => fields.find(({ type }) => type === "period") && dynamic(() => import("@/components/Form/PeriodField").then((mod) => mod.PeriodField)), []);
-  const DatePicker = useMemo(() => fields.find(({ type }) => type === "date") && dynamic(() => import("antd").then((mod) => mod.DatePicker)), []);
-  const Select = useMemo(() => fields.find(({ type }) => type === "select") && dynamic(() => import("antd").then((mod) => mod.Select)), []);
-  const InputNumber = useMemo(() => fields.find(({ type }) => type === "number") && dynamic(() => import("antd").then((mod) => mod.InputNumber)), []);
-  const RadioGroup = useMemo(() => fields.find(({ type }) => type === "radio-buttons") && dynamic(() => import("antd").then((mod) => mod.Radio.Group)), []);
+  const DatePicker = useMemo(() => fields.find(({ type }) => type === "date") && dynamic(() => import("antd/es/date-picker")), []);
+  const Select = useMemo(() => fields.find(({ type }) => type === "select") && dynamic(() => import("antd/es/select")), []);
+  const InputNumber = useMemo(() => fields.find(({ type }) => type === "number") && dynamic(() => import("antd/es/input-number")), []);
+  const RadioGroup = useMemo(() => fields.find(({ type }) => type === "radio-buttons") && dynamic(() => import("antd/es/radio").then((mod) => mod.Group)), []);
+  const Upload = useMemo(() => fields.find(({ type }) => type === "file") && dynamic(() => import("antd/es/upload")), []);
 
-  const Upload = fields.find(({ type }) => type === "file") && dynamic(() => import("antd").then((mod) => mod.Upload));
   const normFile = (e: { fileList: UploadFile[] }) => (Array.isArray(e) ? e : e?.fileList);
   const handleRemoveFile = (file: UploadFile) =>
     setFieldsValues((oldFieldsValues) =>
