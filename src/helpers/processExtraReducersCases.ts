@@ -1,4 +1,3 @@
-import { message } from "antd";
 import { SerializedError } from "@reduxjs/toolkit";
 import { IncomesSliceState } from "@/store/incomesSlice";
 import { AccountsSliceState } from "@/store/accountsSlice";
@@ -8,9 +7,11 @@ import { ProfileSliceState } from "@/store/profileSlice";
 import { ReferencesSliceState } from "@/store/referencesSlice";
 import { CostsSliceState } from "@/store/costsSlice";
 import { StatisticsSliceState } from "@/store/statisticsSlice";
+import { showErrorMessage } from "@/helpers/message";
 
 type State = IncomesSliceState | AccountsSliceState | BudgetsSliceState | AuthSliceState | ProfileSliceState | ReferencesSliceState | CostsSliceState | StatisticsSliceState;
 
 export const handleRejected = (state: State, { payload, error }: { payload?: string; error: SerializedError }) => {
-  message.error(typeof payload === "string" ? payload : error.message, 8);
+  const errorText = payload || error.message;
+  if (errorText) showErrorMessage(errorText, 8);
 };
