@@ -1,6 +1,7 @@
 import { DictionaryResponse } from "../support/commands";
 
-const pages = ["accounts", "incomes", "expenses", "budgets", "statistics", "profile", "settings"];
+type Page = "accounts" | "incomes" | "expenses" | "budgets" | "statistics" | "profile" | "settings";
+const pages: Page[] = ["accounts", "incomes", "expenses", "budgets", "statistics", "profile", "settings"];
 
 describe("Navigation", () => {
   it("should navigate to the home page", () => {
@@ -14,7 +15,7 @@ describe("Navigation", () => {
 
   pages.forEach((page) => {
     it(`should navigate to the ${page} page`, () => {
-      cy.getDictionary().then(({ dictionary, lang }: DictionaryResponse) => {
+      cy.getDictionary().then(({ dictionary }: DictionaryResponse) => {
         cy.viewport(1920, 1080);
         cy.visit("/"); // Заходим на главную страницу для перехода по ссылке
         cy.get(`a[href*="/${page}"]`).first().click();
