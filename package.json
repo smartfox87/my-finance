@@ -7,12 +7,17 @@
 		"css": "node ./scripts/css.js",
 		"sitemap": "node ./scripts/sitemap.js",
 		"locales": "node ./scripts/locales.js",
-		"dev": "next dev -p 3020",
-		"build": "next build && npm run css",
+		"dev": "npm run locales && next dev -p 3020",
+		"build": "npm run locales && next build && npm run css",
 		"start": "next start -p 3020",
 		"size": "npx cross-env ANALYZE=true npm run build",
 		"lint": "eslint \"**/*.{js,jsx,ts,tsx}\"",
-		"lint:fix": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix"
+		"lint:fix": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix",
+		"cypress:open": "cypress open",
+		"e2e": "cypress open --e2e",
+		"e2e:headless": "cypress run --e2e",
+		"component": "cypress open --component",
+		"component:headless": "cypress run --component"
 	},
 	"dependencies": {
 		"@ant-design/nextjs-registry": "^1.0.0",
@@ -37,12 +42,14 @@
 		"redux": "^5.0.1"
 	},
 	"devDependencies": {
+		"@cypress/webpack-preprocessor": "^6.0.1",
 		"@next/bundle-analyzer": "^14.2.3",
 		"@svgr/webpack": "^8.1.0",
 		"@types/node": "^20",
 		"@types/react": "^18.3.1",
 		"@types/react-dom": "^18",
 		"autoprefixer": "^10.4.19",
+		"cypress": "^13.9.0",
 		"dotenv": "^16.4.5",
 		"eslint": "^8",
 		"eslint-config-next": "14.2.3",
@@ -55,6 +62,7 @@
 		"schema-dts": "^1.1.2",
 		"sitemap": "^7.1.1",
 		"tailwindcss": "^3.4.3",
+		"ts-loader": "^9.5.1",
 		"typescript": "^5",
 		"webpack": "^5.91.0"
 	}
