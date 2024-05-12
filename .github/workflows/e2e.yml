@@ -22,7 +22,6 @@ jobs:
         with:
           project: ./
           browser: chrome
-          command: npm run locales
           build: npm run build
           start: npm run start
           wait-on: ${{ secrets.NEXT_PUBLIC_PUBLIC_URL }}

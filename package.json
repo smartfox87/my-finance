@@ -8,7 +8,7 @@
 		"sitemap": "node ./scripts/sitemap.js",
 		"locales": "node ./scripts/locales.js",
 		"dev": "npm run locales && next dev -p 3020",
-		"build": "next build && npm run css",
+		"build": "npm run locales && next build && npm run css",
 		"start": "next start -p 3020",
 		"size": "npx cross-env ANALYZE=true npm run build",
 		"ts-validity": "tsc --noEmit",
