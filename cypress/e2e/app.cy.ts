@@ -1,4 +1,4 @@
-import { DictionaryResponse } from "../support/commands";
+import { DictionaryResponse } from "../support/types";
 
 type Page = "accounts" | "incomes" | "expenses" | "budgets" | "statistics" | "profile" | "settings";
 const pages: Page[] = ["accounts", "incomes", "expenses", "budgets", "statistics", "profile", "settings"];
