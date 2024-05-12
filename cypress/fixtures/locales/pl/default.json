@@ -1,0 +1,264 @@
+{
+  "navigation": {
+    "home": "Strona główna",
+    "expenses": {
+      "full": "Lista wydatków",
+      "short": "Wydatki"
+    },
+    "budgets": {
+      "full": "Lista budżetów",
+      "short": "Budżety"
+    },
+    "accounts": {
+      "full": "Lista kont",
+      "short": "Konta"
+    },
+    "incomes": {
+      "full": "Lista dochodów",
+      "short": "Dochody"
+    },
+    "statistics": {
+      "full": "Całkowite statystyki",
+      "short": "Statystyki"
+    },
+    "profile": "Profil użytkownika",
+    "settings": "Ustawienia",
+    "contact_us": "Skontaktuj się z nami"
+  },
+  "buttons": {
+    "sign_up": "Zarejestruj się",
+    "sign_in": "Zaloguj się",
+    "sign_in_google": "Autoryzacja Google",
+    "sign_in_demo_user": "Autoryzacja użytkownika demo",
+    "logout": "Wyloguj się",
+    "add_expense": "Dodaj nowy wydatek",
+    "add_budget": "Dodaj nowy budżet",
+    "delete_expense": "Usuń wydatek",
+    "delete_budget": "Usuń budżet",
+    "delete_income": "Usuń dochód",
+    "delete_account": "Usuń konto",
+    "submit": "Zatwierdź",
+    "cancel": "Anuluj",
+    "set_filters": "Ustaw filtry",
+    "backspace": "Cofnij",
+    "clear": "Wyczyść",
+    "save_amount": "Zapisz obliczoną kwotę",
+    "save_balance": "Zapisz obliczone saldo",
+    "show_menu": "Pokaż menu",
+    "upload": "Prześlij",
+    "apply": "Zastosuj",
+    "go_home": "Przejdź do strony głównej",
+    "try_again": "Spróbuj ponownie"
+  },
+  "fields": {
+    "simple": {
+      "email": "Email",
+      "password": "Hasło",
+      "full_name": "Pełne imię",
+      "name": "Nazwa",
+      "amount": "Kwota",
+      "date": "Data",
+      "account": "Konto",
+      "category": "Kategoria",
+      "to": "Do konta",
+      "from": "Z konta",
+      "balance": "Saldo",
+      "message": "Wiadomość",
+      "attachments": "Załączniki",
+      "period": "Domyślny okres",
+      "currency": "Waluta",
+      "birthdate": "Data urodzenia"
+    },
+    "complex": {
+      "sort": {
+        "label": "Sortuj",
+        "options": {
+          "prefix": "Sortuj według",
+          "date_asc": "Data (rosnąco)",
+          "name_asc": "Nazwa (rosnąco)",
+          "date_desc": "Data (malejąco)",
+          "name_desc": "Nazwa (malejąco)",
+          "amount_asc": "Kwota (rosnąco)",
+          "amount_desc": "Kwota (malejąco)"
+        }
+      },
+      "period": {
+        "label": "Okres",
+        "options": {
+          "day": "Dzień",
+          "week": "Tydzień",
+          "year": "Rok",
+          "month": "Miesiąc",
+          "quarter": "Kwartał"
+        }
+      },
+      "account": {
+        "label": "Konto",
+        "options": {
+          "all": "Wszystkie konta"
+        }
+      },
+      "category": {
+        "label": "Kategoria",
+        "options": {
+          "all": "Wszystkie kategorie"
+        }
+      },
+      "gender": {
+        "label": "Płeć",
+        "options": {
+          "male": "Mężczyzna",
+          "female": "Kobieta"
+        }
+      },
+      "subject": {
+        "label": "Temat",
+        "options": {
+          "bug": "Błąd",
+          "other": "Inne",
+          "support": "Wsparcie",
+          "feedback": "Opinia",
+          "suggestion": "Sugestia",
+          "collaboration": "Współpraca"
+        }
+      }
+    },
+    "errors": {
+      "email": "Nieprawidłowy email",
+      "number": "Nieprawidłowy numer",
+      "required": "To pole jest wymagane",
+      "file_size": "Rozmiar pliku musi być mniejszy niż",
+      "balance_exceeded": "Przekroczono limit salda konta"
+    }
+  },
+  "common": {
+    "updated_at": "Zaktualizowano o",
+    "created_at": "Utworzono o",
+    "empty_expenses": "Dodaj wydatki na początku",
+    "empty_budgets": "Dodaj budżety na początku",
+    "empty_incomes": "Dodaj dochody na początku",
+    "found_nothing": "Nic nie znaleziono",
+    "items": "przedmioty",
+    "balance_calculator": "Kalkulator salda",
+    "add_account": "Dodaj nowe konto",
+    "add_income": "Dodaj nowy dochód",
+    "transfer_money": "Przelew między kontami",
+    "amount_calculator": "Kalkulator kwoty",
+    "total": "Razem",
+    "error": "Coś poszło nie tak!"
+  },
+  "titles": {
+    "authorisation": "Autoryzacja",
+    "registration": "Rejestracja",
+    "add_expense": "Dodaj nowy wydatek",
+    "add_budget": "Dodaj nowy budżet",
+    "detail_expense": "Karta wydatków",
+    "detail_budget": "Karta budżetu",
+    "detail_account": "Karta konta",
+    "detail_income": "Karta dochodów",
+    "set_filters": "Ustaw filtry",
+    "not_found": "Strona nie została znaleziona"
+  },
+  "notifications": {
+    "auth_requirement": "Zaloguj się, aby uzyskać dostęp do tej strony.",
+    "recaptcha_invalid": "Nie przeszłeś walidacji reCAPTCHA. Spróbuj ponownie.",
+    "expense": {
+      "create": "Wydatek został pomyślnie utworzony.",
+      "update": "Wydatek został pomyślnie zaktualizowany.",
+      "delete": "Wydatek został pomyślnie usunięty."
+    },
+    "budget": {
+      "create": "Budżet został pomyślnie utworzony.",
+      "update": "Budżet został pomyślnie zaktualizowany.",
+      "delete": "Budżet został pomyślnie usunięty."
+    },
+    "account": {
+      "create": "Konto zostało pomyślnie utworzone.",
+      "update": "Konto zostało pomyślnie zaktualizowane.",
+      "delete": "Konto zostało pomyślnie usunięte.",
+      "money_transferred": "Pieniądze zostały pomyślnie przelane."
+    },
+    "income": {
+      "create": "Dochód został pomyślnie utworzony.",
+      "update": "Dochód został pomyślnie zaktualizowany.",
+      "delete": "Dochód został pomyślnie usunięty."
+    },
+    "contact": {
+      "success": "Wiadomość została pomyślnie wysłana.",
+      "error": "Wystąpił błąd podczas wysyłania wiadomości."
+    }
+  },
+  "detail": {
+    "name": "Nazwa",
+    "account": "Konto",
+    "category": "Kategoria",
+    "all_accounts": "Wszystkie konta",
+    "all_categories": "Wszystkie kategorie",
+    "amount": "Kwota",
+    "balance": "Saldo",
+    "updated_at": "Zaktualizowano o"
+  },
+  "statistics": {
+    "incomes_by_categories": "Dochody według kategorii",
+    "expenses_by_categories": "Wydatki według kategorii",
+    "costs": "Wydatki",
+    "budgets": "Budżety",
+    "budget": "Budżet",
+    "incomes": "Dochody",
+    "accounts": "Konta"
+  },
+  "pages": {
+    "home": {
+      "title": "Zarządzanie budżetem i śledzenie dochodów, kont, wydatków i statystyk",
+      "description": "To wygodne narzędzie do zarządzania finansami osobistymi, zaprojektowane, aby pomóc Ci śledzić dochody i wydatki, zarządzać kontami i ustalać budżet według kategorii, konta i okresu czasu. Optymalizuj swoje finanse i osiągnij swoje cele finansowe dzięki szczegółowym statystykom i analizom.",
+      "keywords": "finanse, zarządzanie, narzędzie, dochody, wydatki, konta, budżet, statystyki, analizy, pieniądze"
+    },
+    "statistics": {
+      "title": "Całkowite statystyki",
+      "description": "Śledź dochody, wydatki i budżety według kategorii, konta i okresu czasu. Optymalizuj swoje finanse i osiągnij swoje cele finansowe dzięki szczegółowym statystykom i analizom.",
+      "keywords": "statystyki, analizy, kategorie, konta, dochody, budżety, okres, pieniądze, finanse"
+    },
+    "accounts": {
+      "title": "Lista kont",
+      "description": "Dodaj, edytuj i usuń konta. Przelej pieniądze między kontami.",
+      "keywords": "konta, pieniądze, transfer, saldo, pieniądze, finanse"
+    },
+    "budgets": {
+      "title": "Lista budżetów",
+      "description": "Dodaj, edytuj i usuń budżety. Ustal budżet według kategorii, konta i okresu czasu.",
+      "keywords": "budżety, kategorie, konta, okres, pieniądze, finanse"
+    },
+    "expenses": {
+      "title": "Lista wydatków",
+      "description": "Dodaj, edytuj i usuń wydatki. Śledź dochody i wydatki.",
+      "keywords": "wydatki, kategorie, konta, okres, pieniądze, finanse"
+    },
+    "incomes": {
+      "title": "Lista dochodów",
+      "description": "Dodaj, edytuj i usuń dochody. Śledź dochody i wydatki.",
+      "keywords": "dochody, kategorie, konta, okres, pieniądze, finanse"
+    },
+    "profile": {
+      "title": "Profil użytkownika",
+      "description": "Edytuj profil użytkownika. Zmień pełne imię, email, datę urodzenia, płeć"
+    },
+    "settings": {
+      "title": "Ustawienia",
+      "description": "Zmień ustawienia. Zmień walutę, domyślny okres"
+    },
+    "contact": {
+      "title": "Skontaktuj się z nami",
+      "description": "Wyślij nam wiadomość. Chętnie Ci pomożemy."
+    }
+  },
+  "seo": {
+    "app_name": "Moje Finanse"
+  },
+  "info": {
+    "phone": "Telefon",
+    "email": "Email",
+    "address": "Adres",
+    "working_hours": "Godziny pracy",
+    "every_day": "Codziennie"
+  }
+}

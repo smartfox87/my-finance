@@ -1,0 +1,264 @@
+{
+  "navigation": {
+    "home": "Zuhause",
+    "expenses": {
+      "full": "Ausgabenliste",
+      "short": "Ausgaben"
+    },
+    "budgets": {
+      "full": "Budgetliste",
+      "short": "Budgets"
+    },
+    "accounts": {
+      "full": "Kontenliste",
+      "short": "Konten"
+    },
+    "incomes": {
+      "full": "Einkommensliste",
+      "short": "Einkommen"
+    },
+    "statistics": {
+      "full": "Gesamtstatistiken",
+      "short": "Statistiken"
+    },
+    "profile": "Benutzerprofil",
+    "settings": "Einstellungen",
+    "contact_us": "Kontaktiere uns"
+  },
+  "buttons": {
+    "sign_up": "Anmelden",
+    "sign_in": "Einloggen",
+    "sign_in_google": "Google-Autorisierung",
+    "sign_in_demo_user": "Demo-Benutzer-Autorisierung",
+    "logout": "Ausloggen",
+    "add_expense": "Neue Ausgabe hinzufügen",
+    "add_budget": "Neues Budget hinzufügen",
+    "delete_expense": "Ausgabe löschen",
+    "delete_budget": "Budget löschen",
+    "delete_income": "Einkommen löschen",
+    "delete_account": "Konto löschen",
+    "submit": "Einreichen",
+    "cancel": "Abbrechen",
+    "set_filters": "Filter setzen",
+    "backspace": "Rücktaste",
+    "clear": "Löschen",
+    "save_amount": "Berechneten Betrag speichern",
+    "save_balance": "Berechneten Saldo speichern",
+    "show_menu": "Menü anzeigen",
+    "upload": "Hochladen",
+    "apply": "Anwenden",
+    "go_home": "Zur Startseite gehen",
+    "try_again": "Versuchen Sie es erneut"
+  },
+  "fields": {
+    "simple": {
+      "email": "Email",
+      "password": "Passwort",
+      "full_name": "Vollständiger Name",
+      "name": "Name",
+      "amount": "Betrag",
+      "date": "Datum",
+      "account": "Konto",
+      "category": "Kategorie",
+      "to": "Zum Konto",
+      "from": "Vom Konto",
+      "balance": "Saldo",
+      "message": "Nachricht",
+      "attachments": "Anhänge",
+      "period": "Standardperiode",
+      "currency": "Währung",
+      "birthdate": "Geburtsdatum"
+    },
+    "complex": {
+      "sort": {
+        "label": "Sortieren",
+        "options": {
+          "prefix": "Sortieren nach",
+          "date_asc": "Datum (aufsteigend)",
+          "name_asc": "Name (aufsteigend)",
+          "date_desc": "Datum (absteigend)",
+          "name_desc": "Name (absteigend)",
+          "amount_asc": "Betrag (aufsteigend)",
+          "amount_desc": "Betrag (absteigend)"
+        }
+      },
+      "period": {
+        "label": "Zeitraum",
+        "options": {
+          "day": "Tag",
+          "week": "Woche",
+          "year": "Jahr",
+          "month": "Monat",
+          "quarter": "Quartal"
+        }
+      },
+      "account": {
+        "label": "Konto",
+        "options": {
+          "all": "Alle Konten"
+        }
+      },
+      "category": {
+        "label": "Kategorie",
+        "options": {
+          "all": "Alle Kategorien"
+        }
+      },
+      "gender": {
+        "label": "Geschlecht",
+        "options": {
+          "male": "Männlich",
+          "female": "Weiblich"
+        }
+      },
+      "subject": {
+        "label": "Betreff",
+        "options": {
+          "bug": "Fehler",
+          "other": "Andere",
+          "support": "Unterstützung",
+          "feedback": "Rückmeldung",
+          "suggestion": "Vorschlag",
+          "collaboration": "Zusammenarbeit"
+        }
+      }
+    },
+    "errors": {
+      "email": "Ungültige E-Mail",
+      "number": "Ungültige Nummer",
+      "required": "Dieses Feld ist erforderlich",
+      "file_size": "Die Dateigröße muss kleiner sein als",
+      "balance_exceeded": "Kontoguthabenlimit überschritten"
+    }
+  },
+  "common": {
+    "updated_at": "Aktualisiert am",
+    "created_at": "Erstellt am",
+    "empty_expenses": "Fügen Sie zu Beginn Ausgaben hinzu",
+    "empty_budgets": "Fügen Sie zu Beginn Budgets hinzu",
+    "empty_incomes": "Fügen Sie zu Beginn Einkommen hinzu",
+    "found_nothing": "Nichts gefunden",
+    "items": "Artikel",
+    "balance_calculator": "Saldo-Rechner",
+    "add_account": "Neues Konto hinzufügen",
+    "add_income": "Neues Einkommen hinzufügen",
+    "transfer_money": "Geld zwischen Konten überweisen",
+    "amount_calculator": "Betrag-Rechner",
+    "total": "Gesamt",
+    "error": "Etwas ist schief gelaufen!"
+  },
+  "titles": {
+    "authorisation": "Autorisierung",
+    "registration": "Registrierung",
+    "add_expense": "Neue Ausgabe hinzufügen",
+    "add_budget": "Neues Budget hinzufügen",
+    "detail_expense": "Ausgabenkarte",
+    "detail_budget": "Budgetkarte",
+    "detail_account": "Kontokarte",
+    "detail_income": "Einkommenskarte",
+    "set_filters": "Filter setzen",
+    "not_found": "Seite nicht gefunden"
+  },
+  "notifications": {
+    "auth_requirement": "Bitte melden Sie sich an, um auf diese Seite zuzugreifen.",
+    "recaptcha_invalid": "Sie haben die reCAPTCHA-Validierung nicht bestanden. Versuchen Sie es erneut.",
+    "expense": {
+      "create": "Die Ausgabe wurde erfolgreich erstellt.",
+      "update": "Die Ausgabe wurde erfolgreich aktualisiert.",
+      "delete": "Die Ausgabe wurde erfolgreich gelöscht."
+    },
+    "budget": {
+      "create": "Das Budget wurde erfolgreich erstellt.",
+      "update": "Das Budget wurde erfolgreich aktualisiert.",
+      "delete": "Das Budget wurde erfolgreich gelöscht."
+    },
+    "account": {
+      "create": "Das Konto wurde erfolgreich erstellt.",
+      "update": "Das Konto wurde erfolgreich aktualisiert.",
+      "delete": "Das Konto wurde erfolgreich gelöscht.",
+      "money_transferred": "Das Geld wurde erfolgreich überwiesen."
+    },
+    "income": {
+      "create": "Das Einkommen wurde erfolgreich erstellt.",
+      "update": "Das Einkommen wurde erfolgreich aktualisiert.",
+      "delete": "Das Einkommen wurde erfolgreich gelöscht."
+    },
+    "contact": {
+      "success": "Die Nachricht wurde erfolgreich gesendet.",
+      "error": "Beim Senden der Nachricht ist ein Fehler aufgetreten."
+    }
+  },
+  "detail": {
+    "name": "Name",
+    "account": "Konto",
+    "category": "Kategorie",
+    "all_accounts": "Alle Konten",
+    "all_categories": "Alle Kategorien",
+    "amount": "Betrag",
+    "balance": "Saldo",
+    "updated_at": "Aktualisiert am"
+  },
+  "statistics": {
+    "incomes_by_categories": "Einkommen nach Kategorien",
+    "expenses_by_categories": "Ausgaben nach Kategorien",
+    "costs": "Ausgaben",
+    "budgets": "Budgets",
+    "budget": "Budget",
+    "incomes": "Einkommen",
+    "accounts": "Konten"
+  },
+  "pages": {
+    "home": {
+      "title": "Budgetverwaltung und Einkommens, Konten, Ausgabenverfolgung & Statistiken",
+      "description": "Dies ist ein praktisches Tool zur Verwaltung Ihrer persönlichen Finanzen, das Ihnen hilft, Einnahmen und Ausgaben zu verfolgen, Konten zu verwalten und Budgets nach Kategorie, Konto und Zeitraum festzulegen. Optimieren Sie Ihre Finanzen und erreichen Sie Ihre finanziellen Ziele mit detaillierten Statistiken und Analysen.",
+      "keywords": "Finanzen, Verwaltung, Tool, Einkommen, Ausgaben, Konten, Budget, Statistiken, Analysen, Geld"
+    },
+    "statistics": {
+      "title": "Gesamtstatistiken",
+      "description": "Verfolgen Sie Einnahmen, Ausgaben und Budgets nach Kategorie, Konto und Zeitraum. Optimieren Sie Ihre Finanzen und erreichen Sie Ihre finanziellen Ziele mit detaillierten Statistiken und Analysen.",
+      "keywords": "Statistiken, Analysen, Kategorien, Konten, Einnahmen, Budgets, Zeitraum, Geld, Finanzen"
+    },
+    "accounts": {
+      "title": "Kontenliste",
+      "description": "Fügen Sie Konten hinzu, bearbeiten und löschen Sie sie. Überweisen Sie Geld zwischen Konten.",
+      "keywords": "Konten, Geld, Überweisung, Saldo, Geld, Finanzen"
+    },
+    "budgets": {
+      "title": "Budgetliste",
+      "description": "Fügen Sie Budgets hinzu, bearbeiten und löschen Sie sie. Legen Sie das Budget nach Kategorie, Konto und Zeitraum fest.",
+      "keywords": "Budgets, Kategorien, Konten, Zeitraum, Geld, Finanzen"
+    },
+    "expenses": {
+      "title": "Ausgabenliste",
+      "description": "Fügen Sie Ausgaben hinzu, bearbeiten und löschen Sie sie. Verfolgen Sie Einnahmen und Ausgaben.",
+      "keywords": "Ausgaben, Kategorien, Konten, Zeitraum, Geld, Finanzen"
+    },
+    "incomes": {
+      "title": "Einkommensliste",
+      "description": "Fügen Sie Einkommen hinzu, bearbeiten und löschen Sie sie. Verfolgen Sie Einnahmen und Ausgaben.",
+      "keywords": "Einkommen, Kategorien, Konten, Zeitraum, Geld, Finanzen"
+    },
+    "profile": {
+      "title": "Benutzerprofil",
+      "description": "Bearbeiten Sie das Benutzerprofil. Ändern Sie vollständigen Namen, E-Mail, Geburtsdatum, Geschlecht"
+    },
+    "settings": {
+      "title": "Einstellungen",
+      "description": "Ändern Sie die Einstellungen. Ändern Sie Währung, Standardzeitraum"
+    },
+    "contact": {
+      "title": "Kontaktiere uns",
+      "description": "Senden Sie uns eine Nachricht. Wir helfen Ihnen gerne weiter."
+    }
+  },
+  "seo": {
+    "app_name": "Meine Finanzen"
+  },
+  "info": {
+    "phone": "Telefon",
+    "email": "Email",
+    "address": "Adresse",
+    "working_hours": "Arbeitszeiten",
+    "every_day": "Jeden Tag"
+  }
+}

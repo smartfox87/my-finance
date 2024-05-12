@@ -1,0 +1,264 @@
+{
+  "navigation": {
+    "home": "Home",
+    "expenses": {
+      "full": "Lista delle spese",
+      "short": "Spese"
+    },
+    "budgets": {
+      "full": "Lista dei budget",
+      "short": "Budget"
+    },
+    "accounts": {
+      "full": "Lista dei conti",
+      "short": "Conti"
+    },
+    "incomes": {
+      "full": "Lista dei redditi",
+      "short": "Redditi"
+    },
+    "statistics": {
+      "full": "Statistiche totali",
+      "short": "Statistiche"
+    },
+    "profile": "Profilo utente",
+    "settings": "Impostazioni",
+    "contact_us": "Contattaci"
+  },
+  "buttons": {
+    "sign_up": "Iscriviti",
+    "sign_in": "Accedi",
+    "sign_in_google": "Autorizzazione Google",
+    "sign_in_demo_user": "Autorizzazione utente demo",
+    "logout": "Esci",
+    "add_expense": "Aggiungi nuova spesa",
+    "add_budget": "Aggiungi nuovo budget",
+    "delete_expense": "Elimina spesa",
+    "delete_budget": "Elimina budget",
+    "delete_income": "Elimina reddito",
+    "delete_account": "Elimina conto",
+    "submit": "Invia",
+    "cancel": "Annulla",
+    "set_filters": "Imposta filtri",
+    "backspace": "Backspace",
+    "clear": "Cancella",
+    "save_amount": "Salva importo calcolato",
+    "save_balance": "Salva saldo calcolato",
+    "show_menu": "Mostra menu",
+    "upload": "Carica",
+    "apply": "Applica",
+    "go_home": "Vai alla pagina principale",
+    "try_again": "Riprova"
+  },
+  "fields": {
+    "simple": {
+      "email": "Email",
+      "password": "Password",
+      "full_name": "Nome completo",
+      "name": "Nome",
+      "amount": "Importo",
+      "date": "Data",
+      "account": "Conto",
+      "category": "Categoria",
+      "to": "Al conto",
+      "from": "Dal conto",
+      "balance": "Saldo",
+      "message": "Messaggio",
+      "attachments": "Allegati",
+      "period": "Periodo predefinito",
+      "currency": "Valuta",
+      "birthdate": "Data di nascita"
+    },
+    "complex": {
+      "sort": {
+        "label": "Ordina",
+        "options": {
+          "prefix": "Ordina per",
+          "date_asc": "Data (crescente)",
+          "name_asc": "Nome (crescente)",
+          "date_desc": "Data (decrescente)",
+          "name_desc": "Nome (decrescente)",
+          "amount_asc": "Importo (crescente)",
+          "amount_desc": "Importo (decrescente)"
+        }
+      },
+      "period": {
+        "label": "Periodo",
+        "options": {
+          "day": "Giorno",
+          "week": "Settimana",
+          "year": "Anno",
+          "month": "Mese",
+          "quarter": "Trimestre"
+        }
+      },
+      "account": {
+        "label": "Conto",
+        "options": {
+          "all": "Tutti i conti"
+        }
+      },
+      "category": {
+        "label": "Categoria",
+        "options": {
+          "all": "Tutte le categorie"
+        }
+      },
+      "gender": {
+        "label": "Genere",
+        "options": {
+          "male": "Maschio",
+          "female": "Femmina"
+        }
+      },
+      "subject": {
+        "label": "Oggetto",
+        "options": {
+          "bug": "Bug",
+          "other": "Altro",
+          "support": "Supporto",
+          "feedback": "Feedback",
+          "suggestion": "Suggerimento",
+          "collaboration": "Collaborazione"
+        }
+      }
+    },
+    "errors": {
+      "email": "Email non valida",
+      "number": "Numero non valido",
+      "required": "Questo campo è obbligatorio",
+      "file_size": "La dimensione del file deve essere inferiore a",
+      "balance_exceeded": "Limite del saldo del conto superato"
+    }
+  },
+  "common": {
+    "updated_at": "Aggiornato il",
+    "created_at": "Creato il",
+    "empty_expenses": "Aggiungi spese all'inizio",
+    "empty_budgets": "Aggiungi budget all'inizio",
+    "empty_incomes": "Aggiungi redditi all'inizio",
+    "found_nothing": "Non ho trovato nulla",
+    "items": "articoli",
+    "balance_calculator": "Calcolatore di saldo",
+    "add_account": "Aggiungi nuovo conto",
+    "add_income": "Aggiungi nuovo reddito",
+    "transfer_money": "Trasferisci tra conti",
+    "amount_calculator": "Calcolatore di importo",
+    "total": "Totale",
+    "error": "Si è verificato un errore!"
+  },
+  "titles": {
+    "authorisation": "Autorizzazione",
+    "registration": "Registrazione",
+    "add_expense": "Aggiungi nuova spesa",
+    "add_budget": "Aggiungi nuovo budget",
+    "detail_expense": "Carta di spesa",
+    "detail_budget": "Carta di budget",
+    "detail_account": "Carta di conto",
+    "detail_income": "Carta di reddito",
+    "set_filters": "Imposta filtri",
+    "not_found": "Pagina non trovata"
+  },
+  "notifications": {
+    "auth_requirement": "Per favore, accedi per accedere a questa pagina.",
+    "recaptcha_invalid": "Non hai superato la validazione reCAPTCHA. Riprova.",
+    "expense": {
+      "create": "La spesa è stata creata con successo.",
+      "update": "La spesa è stata aggiornata con successo.",
+      "delete": "La spesa è stata cancellata con successo."
+    },
+    "budget": {
+      "create": "Il budget è stato creato con successo.",
+      "update": "Il budget è stato aggiornato con successo.",
+      "delete": "Il budget è stato cancellato con successo."
+    },
+    "account": {
+      "create": "Il conto è stato creato con successo.",
+      "update": "Il conto è stato aggiornato con successo.",
+      "delete": "Il conto è stato cancellato con successo.",
+      "money_transferred": "Il denaro è stato trasferito con successo."
+    },
+    "income": {
+      "create": "Il reddito è stato creato con successo.",
+      "update": "Il reddito è stato aggiornato con successo.",
+      "delete": "Il reddito è stato cancellato con successo."
+    },
+    "contact": {
+      "success": "Il messaggio è stato inviato con successo.",
+      "error": "Si è verificato un errore durante l'invio del messaggio."
+    }
+  },
+  "detail": {
+    "name": "Nome",
+    "account": "Conto",
+    "category": "Categoria",
+    "all_accounts": "Tutti i conti",
+    "all_categories": "Tutte le categorie",
+    "amount": "Importo",
+    "balance": "Saldo",
+    "updated_at": "Aggiornato il"
+  },
+  "statistics": {
+    "incomes_by_categories": "Redditi per categorie",
+    "expenses_by_categories": "Spese per categorie",
+    "costs": "Spese",
+    "budgets": "Budget",
+    "budget": "Budget",
+    "incomes": "Redditi",
+    "accounts": "Conti"
+  },
+  "pages": {
+    "home": {
+      "title": "Gestione del budget e monitoraggio di entrate, conti e spese",
+      "description": "Questo è uno strumento conveniente per la gestione delle finanze personali progettato per aiutarti a monitorare le entrate e le spese, gestire i conti e impostare il budget per categoria, conto e periodo di tempo. Ottimizza le tue finanze e raggiungi i tuoi obiettivi finanziari con statistiche e analisi dettagliate.",
+      "keywords": "finanza, gestione, strumento, entrate, spese, conti, budget, statistiche, analisi, denaro"
+    },
+    "statistics": {
+      "title": "Statistiche totali",
+      "description": "Monitora entrate, spese e budget per categoria, conto e periodo di tempo. Ottimizza le tue finanze e raggiungi i tuoi obiettivi finanziari con statistiche e analisi dettagliate.",
+      "keywords": "statistiche, analisi, categorie, conti, entrate, budget, periodo, denaro, finanza"
+    },
+    "accounts": {
+      "title": "Lista dei conti",
+      "description": "Aggiungi, modifica e cancella conti. Trasferisci denaro tra conti.",
+      "keywords": "conti, denaro, trasferimento, saldo, denaro, finanza"
+    },
+    "budgets": {
+      "title": "Lista dei budget",
+      "description": "Aggiungi, modifica e cancella budget. Imposta il budget per categoria, conto e periodo di tempo.",
+      "keywords": "budget, categorie, conti, periodo, denaro, finanza"
+    },
+    "expenses": {
+      "title": "Lista delle spese",
+      "description": "Aggiungi, modifica e cancella spese. Monitora entrate e spese.",
+      "keywords": "spese, categorie, conti, periodo, denaro, finanza"
+    },
+    "incomes": {
+      "title": "Lista dei redditi",
+      "description": "Aggiungi, modifica e cancella redditi. Monitora entrate e spese.",
+      "keywords": "redditi, categorie, conti, periodo, denaro, finanza"
+    },
+    "profile": {
+      "title": "Profilo utente",
+      "description": "Modifica il profilo utente. Cambia nome completo, email, data di nascita, genere"
+    },
+    "settings": {
+      "title": "Impostazioni",
+      "description": "Cambia le impostazioni. Cambia valuta, periodo predefinito"
+    },
+    "contact": {
+      "title": "Contattaci",
+      "description": "Invia un messaggio. Saremo felici di aiutarti."
+    }
+  },
+  "seo": {
+    "app_name": "Le Mie Finanze"
+  },
+  "info": {
+    "phone": "Telefono",
+    "email": "Email",
+    "address": "Indirizzo",
+    "working_hours": "Orario di lavoro",
+    "every_day": "Ogni giorno"
+  }
+}
