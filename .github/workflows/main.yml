@@ -22,7 +22,3 @@ jobs:
         run: npm install
       - name: Run linting
         run: npm run lint
-      - name: Run build
-        run: npm run build
-      - name: Run e2e tests
-        run: npm run e2e:headless

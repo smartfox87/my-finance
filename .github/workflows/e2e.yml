@@ -1,0 +1,43 @@
+name: E2E on Chrome
+on:
+    push:
+        branches: [master]
+    pull_request:
+        branches: [master]
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    strategy:
+        matrix:
+            node-version: [21.x]
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: npm install
+      - name: Cypress run
+        uses: cypress-io/github-action@v3
+        with:
+          project: ./
+          browser: chrome
+          build: npm run build
+          start: npm run start
+          locales: npm run locales
+          wait-on: "http://localhost:3000"
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_KEY }}
+          NEXT_PUBLIC_SUPABASE_KEY_SERVICE: ${{ secrets.NEXT_PUBLIC_SUPABASE_KEY_SERVICE }}
+          NEXT_PUBLIC_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_PUBLIC_URL }}
+          NEXT_PUBLIC_DEMO_USER_EMAIL: ${{ secrets.NEXT_PUBLIC_DEMO_USER_EMAIL }}
+          NEXT_PUBLIC_DEMO_USER_PASSWORD: ${{ secrets.NEXT_PUBLIC_DEMO_USER_PASSWORD }}
+          NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY: ${{ secrets.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY }}
+          NEXT_PUBLIC_PRODUCTION_URL: ${{ secrets.NEXT_PUBLIC_PRODUCTION_URL }}
+          GOOGLE_RECAPTCHA_API_KEY: ${{ secrets.GOOGLE_RECAPTCHA_API_KEY }}
+          GMAIL_LOGIN: ${{ secrets.GMAIL_LOGIN }}
+          GMAIL_PASSWORD: ${{ secrets.GMAIL_PASSWORD }}
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
