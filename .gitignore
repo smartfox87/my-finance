@@ -18,6 +18,7 @@
 /build
 /public/sw.*
 /public/workbox-*.*
+/cypress/fixtures/locales
 
 # misc
 .DS_Store

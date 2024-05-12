@@ -15,7 +15,7 @@ export const DemoUserAuth = () => {
   };
 
   return (
-    <SimpleButton size="large" type="primary" loading={isLoading} onClick={handleAuthorize}>
+    <SimpleButton size="large" type="primary" loading={isLoading} data-cy="demo-auth" onClick={handleAuthorize}>
       {t("buttons.sign_in_demo_user")}
     </SimpleButton>
   );

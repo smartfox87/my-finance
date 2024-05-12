@@ -1,13 +1,5 @@
-import "dotenv/config";
-import { exec } from "child_process";
+import fs from "fs-extra";
 
-const key = process.env.I18NEXUS_KEY;
-
-exec(`i18nexus pull -k ${key}`, (error, stdout, stderr) => {
-  if (error) {
-    console.error(`i18nexus exec error: ${error}`);
-    return;
-  }
-  console.log(`i18nexus stdout: ${stdout}`);
-  console.error(`i18nexus stderr: ${stderr}`);
-});
+fs.copy("./locales", "./cypress/fixtures/locales")
+  .then(() => console.log("Localization files have been copied successfully!"))
+  .catch((err) => console.error("Error copying localization files:", err));
