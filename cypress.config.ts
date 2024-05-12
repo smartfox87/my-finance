@@ -32,18 +32,6 @@ export default defineConfig({
           watchOptions: {},
         }),
       );
-
-      on("before:browser:launch", (browser, launchOptions) => {
-        if (browser.family === "chromium" && browser.name !== "electron") {
-          launchOptions.args.push("--lang=en-US");
-        } else if (browser.family === "firefox") {
-          launchOptions.args.push("--intl.accept_languages=en-US");
-        } else if (browser.name === "electron") {
-          launchOptions.preferences.default["intl"] = { accept_languages: ["en-US"] };
-        }
-
-        return launchOptions;
-      });
     },
     baseUrl: process.env.NEXT_PUBLIC_PUBLIC_URL,
   },
