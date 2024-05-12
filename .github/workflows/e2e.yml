@@ -17,17 +17,15 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Install dependencies
-        run: npm install
       - name: Cypress run
-        uses: cypress-io/github-action@v3
+        uses: cypress-io/github-action@v6
         with:
           project: ./
           browser: chrome
+          command: npm run locales
           build: npm run build
           start: npm run start
-          locales: npm run locales
-          wait-on: "http://localhost:3000"
+          wait-on: ${{ secrets.NEXT_PUBLIC_PUBLIC_URL }}
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_KEY }}
