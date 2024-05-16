@@ -25,13 +25,29 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-Cypress.Commands.add("getDictionary", () => {
+Cypress.Commands.add("getLang", () => {
   cy.window().then((win) => {
     const lang = (win.navigator.language || win.navigator.languages[0]).substring(0, 2);
-    cy.fixture(`locales/${lang}/default.json`).then((json) => {
-      if (!json) throw new Error(`Could not load dictionary for language: ${lang}`);
-      return cy.wrap({ dictionary: json, lang });
+    return cy.wrap(lang);
+  });
+});
+
+Cypress.Commands.add("getDictionary", () => {
+  cy.window().then((win) => {
+    cy.getLang().then((lang) => {
+      cy.fixture(`locales/${lang}/default.json`).then((json) => {
+        if (!json) throw new Error(`Could not load dictionary for language: ${lang}`);
+        return cy.wrap(json);
+      });
     });
+  });
+});
+
+Cypress.Commands.add("pickSelect", (id) => {
+  cy.get(`#${id}`).closest(".ant-select").click();
+  cy.get(".ant-select-dropdown:not(.ant-select-dropdown-hidden) .ant-select-item").then((options) => {
+    const index = Math.floor(Math.random() * options.length);
+    cy.wrap(options).eq(index).click();
   });
 });
 
@@ -42,5 +58,7 @@ declare namespace Cypress {
     // dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
     // visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
     getDictionary(): Chainable;
+    getLang(): Chainable;
+    pickSelect(id: string): Chainable;
   }
 }

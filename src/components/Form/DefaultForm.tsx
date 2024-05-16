@@ -225,6 +225,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                   }))}
                   showSearch={showSearch}
                   filterOption={showSearch ? handleFilterSelectOptions : undefined}
+                  getPopupContainer={(triggerNode) => triggerNode.parentElement}
                   onChange={(value) => handleChangeFieldValue({ id, value: value as string | string[], multiple, type: "select" })}
                 />
               )}
