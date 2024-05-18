@@ -14,6 +14,7 @@ describe("Contact form", () => {
         cy.get('input[id="email"]').type("test@gmail.com");
         cy.pickSelect("subject");
         cy.get('textarea[id="message"]').type("test message");
+        cy.get("#files").get("#files").selectFile("cypress/fixtures/images/jpg.jpg", { force: true, action: "select" });
         cy.get('button[type="submit"]').click();
       });
       cy.wait("@sendMessage").then((interception) => {
