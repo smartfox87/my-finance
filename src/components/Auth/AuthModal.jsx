@@ -16,7 +16,7 @@ export const AuthModal = ({ title, isOpen, onToggleVisibility, onSaveForm, field
       }
       onClose={onToggleVisibility}
     >
-      <DefaultForm fields={fields} onSaveForm={onSaveForm} onResetForm={onToggleVisibility} />
+      <DefaultForm fields={fields} data-cy="register-form" onSaveForm={onSaveForm} onResetForm={onToggleVisibility} />
     </SideModal>
   );
 };

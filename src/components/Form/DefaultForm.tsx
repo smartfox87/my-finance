@@ -10,7 +10,7 @@ import { ExtendedFormItemRule, PropField, FormItemRule, DefaultFormProps, PropFi
 import dynamic from "next/dynamic";
 import { showErrorMessage } from "@/helpers/message";
 
-export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfterSave, isVisible = true, onSaveForm, onResetForm, onChange }: DefaultFormProps, ref) {
+export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfterSave, isVisible = true, onSaveForm, onResetForm, onChange, ...props }: DefaultFormProps, ref) {
   const { t } = useTranslation();
   const [form] = Form.useForm();
 
@@ -120,7 +120,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
   };
 
   return (
-    <Form layout="vertical" form={form} className="flex w-full flex-col" onFinish={handleSubmitForm}>
+    <Form layout="vertical" form={form} className="flex w-full flex-col" {...props} onFinish={handleSubmitForm}>
       {fields.map(
         ({
           id,

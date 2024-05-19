@@ -1,20 +1,19 @@
-import { Dictionary } from "../support/types";
+import { Dictionary } from "../../support/types";
 
-describe("Contact form", () => {
+describe("Register form", () => {
   context("1920x1080 resolution", () => {
     beforeEach(() => {
       cy.viewport(1920, 1080);
-      cy.getLang().then((lang) => cy.visit(`/${lang}/contact`));
+      cy.getLang().then((lang) => cy.visit(`/${lang}`));
       cy.intercept("POST", "/api/contact").as("sendMessage");
     });
 
-    it("should send contact message", () => {
-      cy.get("form").within(() => {
+    it("should register", () => {
+      cy.get('[data-cy="register-btn"]').click();
+      cy.get('[data-cy="register-form"]').within(() => {
         cy.get("#full_name").type("Full name");
         cy.get("#email").type("test@gmail.com");
-        cy.pickSelect("#subject");
-        cy.get("#message").type("test message");
-        cy.pickFile("#files");
+        cy.get("#password").type("Pp25946123=");
         cy.get('button[type="submit"]').click();
       });
       cy.wait("@sendMessage").then((interception) => {
