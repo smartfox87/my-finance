@@ -102,7 +102,7 @@ export default function ContactContent() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrganization) }} />
       <Preloader isLoading={!isLoadedAntd}>
         <DefaultForm fields={contactFields} isResetAfterSave onSaveForm={handleSendMessage} onChange={handleFieldChange} />
-        <section className="flex shrink-0 flex-col gap-4" itemScope itemType="https://schema.org/Organization">
+        <section className="flex shrink-0 flex-col gap-4" itemScope itemType="https://schema.org/Organization" data-cy="contact-info">
           <h2 className="text-2xl font-bold" itemProp="name">
             {t("seo.app_name")} & A.D.
           </h2>
