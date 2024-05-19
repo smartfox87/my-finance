@@ -1,4 +1,38 @@
 import { Dayjs } from "dayjs";
+import { UploadFile } from "antd";
+
+export interface DefaultFormProps {
+  fields: PropField[];
+  isResetAfterSave?: boolean;
+  isVisible?: boolean;
+  onSaveForm: (formValues: any) => Promise<void>;
+  onResetForm?: () => void;
+  onChange?: () => void;
+}
+
+export type FormValue = null | number | string | string[] | UploadFile[] | Dayjs;
+
+export interface FormValues {
+  [key: string]: FormValue;
+}
+
+export interface ProcessedValues {
+  [key: string]: File[] | FormValue;
+}
+
+export interface ChangedField {
+  id: string;
+  value: FormValue;
+  multiple?: boolean;
+  type?: string;
+}
+
+export interface PropFieldValue {
+  name: string;
+  type: string;
+  value?: FormValue;
+  fileList?: UploadFile[];
+}
 
 export type FormItemRule = "number" | "email";
 

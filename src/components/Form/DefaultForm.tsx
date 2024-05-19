@@ -1,4 +1,4 @@
-import { forwardRef, LegacyRef, useCallback, useEffect, useImperativeHandle, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { forwardRef, LegacyRef, useCallback, useEffect, useImperativeHandle, useLayoutEffect, useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Form, Input, UploadFile, InputRef, FormProps } from "antd";
 import dayjs, { Dayjs } from "dayjs";
@@ -6,45 +6,13 @@ import { useLoading } from "@/hooks/loading.js";
 import SvgUpload from "@/assets/sprite/upload.svg";
 import { getFileSizeWithUnit } from "@/helpers/file.js";
 import { handleFilterSelectOptions } from "@/helpers/fields";
-import { ExtendedFormItemRule, PropField, FormItemRule } from "@/types/Form";
+import { ExtendedFormItemRule, PropField, FormItemRule, DefaultFormProps, PropFieldValue, FormValue, ChangedField, FormValues, ProcessedValues } from "@/types/Form";
 import dynamic from "next/dynamic";
 import { showErrorMessage } from "@/helpers/message";
 
-interface DefaultFormProps {
-  fields: PropField[];
-  isResetAfterSave?: boolean;
-  isVisible?: boolean;
-  onSaveForm: (formValues: any) => Promise<void>;
-  onResetForm?: () => void;
-  onChange?: () => void;
-}
-
-type FormValue = null | number | string | string[] | UploadFile[] | Dayjs;
-
-interface FormValues {
-  [key: string]: FormValue;
-}
-
-interface ProcessedValues {
-  [key: string]: File[] | FormValue;
-}
-
-interface ChangedField {
-  id: string;
-  value: FormValue;
-  multiple?: boolean;
-  type?: string;
-}
-
-interface PropFieldValue {
-  name: string;
-  type: string;
-  value?: FormValue;
-  fileList?: UploadFile[];
-}
-
 export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfterSave, isVisible = true, onSaveForm, onResetForm, onChange }: DefaultFormProps, ref) {
   const { t } = useTranslation();
+  const [form] = Form.useForm();
 
   const propsFieldsValues = useMemo(
     () =>
@@ -57,6 +25,22 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
     [fields],
   );
   const propsFieldsIds = useMemo(() => fields.map(({ id }) => id), [fields]);
+  const prevFieldsValuesRef = useRef<{ [key: string]: FormValue }>({});
+  const setPropsFormValues = () =>
+    form.setFieldsValue(
+      propsFieldsValues.reduce(
+        (acc, { name, value, fileList }) => ({
+          ...acc,
+          [name]: fileList || value,
+        }),
+        {},
+      ),
+    );
+
+  useEffect(() => {
+    setPropsFormValues();
+    prevFieldsValuesRef.current = form.getFieldsValue(propsFieldsIds);
+  }, [propsFieldsValues]);
 
   const [isLoading, setIsLoading] = useLoading(false);
 
@@ -65,30 +49,20 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
     if (isVisible) setTimeout(() => focusInputRef.current?.focus());
   }, [isVisible]);
 
-  const [fieldsValues, setFieldsValues] = useState<PropFieldValue[]>(propsFieldsValues);
+  const handleChangeFieldValue = useCallback(
+    ({ id, value: newValue, multiple, type }: ChangedField) => {
+      if (multiple && type === "select" && Array.isArray(newValue)) {
+        if (!newValue?.length || (!(prevFieldsValuesRef.current[id] as string[]).includes("all") && (newValue as string[]).includes("all"))) form.setFieldsValue({ [id]: ["all"] });
+        else form.setFieldsValue({ [id]: (newValue as string[]).filter((val: string) => val !== "all") });
+      } else form.setFieldsValue({ [id]: newValue });
+      prevFieldsValuesRef.current = form.getFieldsValue(propsFieldsIds);
+      if (typeof onChange === "function") onChange();
+    },
+    [onChange],
+  );
 
-  useEffect(() => {
-    setFieldsValues(propsFieldsValues);
-  }, [propsFieldsValues]);
+  const isChangedFieldsData = JSON.stringify(propsFieldsValues) !== JSON.stringify(form.getFieldsValue(propsFieldsIds));
 
-  const handleChangeFieldValue = useCallback(({ id, value: newValue, multiple, type }: ChangedField) => {
-    setFieldsValues((oldFieldsValues) =>
-      oldFieldsValues.map((oldField) => {
-        if (oldField.name !== id) return oldField;
-        if (multiple && type === "select" && Array.isArray(oldField.value) && Array.isArray(newValue)) {
-          if (!newValue?.length || (!(oldField.value as string[]).includes("all") && (newValue as string[]).includes("all"))) return { ...oldField, value: ["all"] };
-          else return { ...oldField, value: (newValue as string[]).filter((val: string) => val !== "all") };
-        } else {
-          return { ...oldField, value: newValue };
-        }
-      }),
-    );
-    if (typeof onChange === "function") onChange();
-  }, []);
-
-  const isChangedFieldsData = JSON.stringify(propsFieldsValues) !== JSON.stringify(fieldsValues);
-
-  const [form] = Form.useForm();
   const handleSubmitForm: FormProps<FormValues>["onFinish"] = async () => {
     try {
       const values = await form.validateFields(propsFieldsIds);
@@ -100,18 +74,18 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
         else acc[key] = values[key];
         return acc;
       }, {});
-      onSaveForm(processedValues).finally(() => {
-        setIsLoading(false);
-        if (isResetAfterSave) setFieldsValues(propsFieldsValues);
-      });
+      await onSaveForm(processedValues);
+      if (isResetAfterSave) form.resetFields();
     } catch (errorInfo) {
       console.warn("Failed:", errorInfo);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleCancelForm = () => {
     if (onResetForm) onResetForm();
-    setFieldsValues(propsFieldsValues);
+    setPropsFormValues();
   };
 
   useImperativeHandle(ref, () => ({ handleChangeFieldValue }));
@@ -125,12 +99,14 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
 
   const normFile = (e: { fileList: UploadFile[] }) => (Array.isArray(e) ? e : e?.fileList);
   const handleRemoveFile = (file: UploadFile) =>
-    setFieldsValues((oldFieldsValues) =>
-      oldFieldsValues.map((field) => (field.type === "file" ? { ...field, fileList: field.fileList?.filter(({ uid }: { uid: string }) => uid !== file.uid) } : field)),
-    );
+    form.setFieldsValue({
+      [file.uid]: form.getFieldValue(file.uid).filter(({ uid }: { uid: string }) => uid !== file.uid),
+    });
   const handleAddFile = async (file: UploadFile, { maxSize }: { maxSize: number }) => {
     if (file.size && file.size <= maxSize) {
-      setFieldsValues((oldFieldsValues) => oldFieldsValues.map((field) => (field.type === "file" ? { ...field, fileList: field.fileList?.concat([file]) } : field)));
+      form.setFieldsValue({
+        [file.uid]: form.getFieldValue(file.uid).concat([file]),
+      });
       return true;
     }
     showErrorMessage(`${t("fields.errors.file_size")} ${getFileSizeWithUnit(maxSize)}`);
@@ -144,7 +120,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
   };
 
   return (
-    <Form layout="vertical" form={form} fields={fieldsValues} className="flex w-full flex-col" onFinish={handleSubmitForm}>
+    <Form layout="vertical" form={form} className="flex w-full flex-col" onFinish={handleSubmitForm}>
       {fields.map(
         ({
           id,
