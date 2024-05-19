@@ -10,11 +10,11 @@ describe("Contact form", () => {
 
     it("should send contact message", () => {
       cy.get("form").within(() => {
-        cy.get('input[id="full_name"]').type("Full name");
-        cy.get('input[id="email"]').type("test@gmail.com");
-        cy.pickSelect("subject");
+        cy.get("#full_name").type("Full name");
+        cy.get("#email").type("test@gmail.com");
+        cy.pickSelect("#subject");
         cy.get('textarea[id="message"]').type("test message");
-        cy.get("#files").get("#files").selectFile("cypress/fixtures/images/jpg.jpg", { force: true, action: "select" });
+        cy.pickFile("#files");
         cy.get('button[type="submit"]').click();
       });
       cy.wait("@sendMessage").then((interception) => {

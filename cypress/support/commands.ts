@@ -43,12 +43,16 @@ Cypress.Commands.add("getDictionary", () => {
   });
 });
 
-Cypress.Commands.add("pickSelect", (id) => {
-  cy.get(`#${id}`).closest(".ant-select").click();
+Cypress.Commands.add("pickSelect", (selector) => {
+  cy.get(selector).closest(".ant-select").click();
   cy.get(".ant-select-dropdown:not(.ant-select-dropdown-hidden) .ant-select-item").then((options) => {
     const index = Math.floor(Math.random() * options.length);
     cy.wrap(options).eq(index).click();
   });
+});
+
+Cypress.Commands.add("pickFile", (selector) => {
+  cy.get(selector).selectFile("cypress/fixtures/images/jpg.jpg", { force: true, action: "select" });
 });
 
 declare namespace Cypress {
@@ -59,6 +63,7 @@ declare namespace Cypress {
     // visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
     getDictionary(): Chainable;
     getLang(): Chainable;
-    pickSelect(id: string): Chainable;
+    pickSelect(selector: string): Chainable;
+    pickFile(selector: string): Chainable;
   }
 }
