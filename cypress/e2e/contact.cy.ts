@@ -9,7 +9,7 @@ describe("Contact form", () => {
     });
 
     it("should send contact message", () => {
-      cy.get("form").within(($form) => {
+      cy.get("form").within(() => {
         cy.get('input[id="full_name"]').type("Full name");
         cy.get('input[id="email"]').type("test@gmail.com");
         cy.pickSelect("subject");
@@ -18,8 +18,8 @@ describe("Contact form", () => {
         cy.get('button[type="submit"]').click();
       });
       cy.wait("@sendMessage").then((interception) => {
-        expect(interception.response.statusCode).to.eq(200);
-        expect(interception.response.body.success).to.be.true;
+        expect(interception.response?.statusCode).to.eq(200);
+        expect(interception.response?.body.success).to.be.true;
         cy.getDictionary().then((dictionary: Dictionary) => {
           cy.get(".ant-notification-notice-message").contains(dictionary.notifications.contact.success);
         });
