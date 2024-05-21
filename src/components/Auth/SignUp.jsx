@@ -43,7 +43,9 @@ export const SignUp = () => {
         {!["xs", "xxs"].includes(viewport) ? t("buttons.sign_up") : null}
       </SimpleButton>
       <Suspense fallback={<div className="hidden" />}>
-        {AuthModal && <AuthModal title={t("titles.registration")} fields={INITIAL_SIGN_UP_FIELDS} isOpen={isOpen} onSaveForm={handleSubmitForm} onToggleVisibility={handleToggleVisibility} />}
+        {AuthModal && (
+          <AuthModal type="register" title={t("titles.registration")} fields={INITIAL_SIGN_UP_FIELDS} isOpen={isOpen} onSaveForm={handleSubmitForm} onToggleVisibility={handleToggleVisibility} />
+        )}
       </Suspense>
     </>
   );
