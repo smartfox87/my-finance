@@ -32,6 +32,12 @@ export default defineConfig({
           watchOptions: {},
         }),
       );
+      config.env.NEXT_PUBLIC_PUBLIC_URL = process.env.NEXT_PUBLIC_PUBLIC_URL;
+      config.env.E2E_LOGIN = process.env.E2E_LOGIN;
+      config.env.E2E_PASSWORD = process.env.E2E_PASSWORD;
+      config.env.NEXT_PUBLIC_SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
+      config.env.SUPABASE_KEY_SERVICE = process.env.SUPABASE_KEY_SERVICE;
+      return config;
     },
     baseUrl: process.env.NEXT_PUBLIC_PUBLIC_URL,
   },

@@ -5,23 +5,22 @@ describe("Register form", () => {
     beforeEach(() => {
       cy.viewport(1920, 1080);
       cy.getLang().then((lang) => cy.visit(`/${lang}`));
-      cy.intercept("POST", "/api/contact").as("sendMessage");
+      cy.intercept("POST", `${Cypress.env("NEXT_PUBLIC_SUPABASE_URL")}/auth/v1/signup*`).as("register");
     });
 
     it("should register", () => {
+      cy.deleteE2EUser();
       cy.get('[data-cy="register-btn"]').click();
       cy.get('[data-cy="register-form"]').within(() => {
         cy.get("#full_name").type("Full name");
-        cy.get("#email").type("test@gmail.com");
-        cy.get("#password").type("Pp25946123=");
+        cy.get("#email").type(Cypress.env("E2E_LOGIN"));
+        cy.get("#password").type(Cypress.env("E2E_PASSWORD"));
         cy.get('button[type="submit"]').click();
       });
-      cy.wait("@sendMessage").then((interception) => {
+      cy.wait("@register").then((interception) => {
         expect(interception.response?.statusCode).to.eq(200);
-        expect(interception.response?.body.success).to.be.true;
-        cy.getDictionary().then((dictionary: Dictionary) => {
-          cy.get(".ant-notification-notice-message").contains(dictionary.notifications.contact.success);
-        });
+        expect(interception.response?.body.access_token).to.be.a("string");
+        expect(interception.response?.body.user).to.be.an("object");
       });
     });
   });

@@ -25,20 +25,40 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
+import { supabaseClient } from "./supabase";
+
+Cypress.Commands.add("supabaseClient", () => cy.wrap(supabaseClient));
+
+Cypress.Commands.add("deleteE2EUser", () => {
+  cy.supabaseClient().then((supabase) => {
+    supabase
+      .from("profiles")
+      .select("id")
+      .eq("email", Cypress.env("E2E_LOGIN"))
+      .maybeSingle()
+      .then(({ data: user, error }) => {
+        if (error) throw new Error(error.message);
+        if (user) {
+          return supabase.auth.admin.deleteUser(user.id).then(({ error }) => {
+            if (error) throw new Error(error.message);
+          });
+        }
+      });
+  });
+});
+
 Cypress.Commands.add("getLang", () => {
   cy.window().then((win) => {
     const lang = (win.navigator.language || win.navigator.languages[0]).substring(0, 2);
-    return cy.wrap(lang);
+    cy.wrap(lang);
   });
 });
 
 Cypress.Commands.add("getDictionary", () => {
-  cy.window().then((win) => {
-    cy.getLang().then((lang) => {
-      cy.fixture(`locales/${lang}/default.json`).then((json) => {
-        if (!json) throw new Error(`Could not load dictionary for language: ${lang}`);
-        return cy.wrap(json);
-      });
+  cy.getLang().then((lang) => {
+    cy.fixture(`locales/${lang}/default.json`).then((json) => {
+      if (!json) throw new Error(`Could not load dictionary for language: ${lang}`);
+      cy.wrap(json);
     });
   });
 });
@@ -55,15 +75,16 @@ Cypress.Commands.add("pickFile", (selector) => {
   cy.get(selector).selectFile("cypress/fixtures/images/jpg.jpg", { force: true, action: "select" });
 });
 
-declare namespace Cypress {
-  interface Chainable {
-    // login(email: string, password: string): Chainable<void>
-    // drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-    // dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-    // visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
-    getDictionary(): Chainable;
-    getLang(): Chainable;
-    pickSelect(selector: string): Chainable;
-    pickFile(selector: string): Chainable;
+// Declare namespace for custom Cypress commands
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      supabaseClient(): Chainable<typeof supabaseClient>;
+      deleteE2EUser(): Chainable<void>;
+      getLang(): Chainable<string>;
+      getDictionary(): Chainable<any>;
+      pickSelect(selector: string): Chainable<void>;
+      pickFile(selector: string): Chainable<void>;
+    }
   }
 }
