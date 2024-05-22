@@ -37,3 +37,5 @@ jobs:
           GMAIL_LOGIN: ${{ secrets.GMAIL_LOGIN }}
           GMAIL_PASSWORD: ${{ secrets.GMAIL_PASSWORD }}
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          E2E_LOGIN: ${{ secrets.E2E_LOGIN }}
+          E2E_PASSWORD: ${{ secrets.E2E_PASSWORD }}
