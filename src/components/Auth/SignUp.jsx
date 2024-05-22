@@ -38,12 +38,14 @@ export const SignUp = () => {
 
   return (
     <>
-      <SimpleButton type="primary" loading={isLoading} onClick={handleToggleVisibility}>
+      <SimpleButton type="primary" loading={isLoading} data-cy="register-btn" onClick={handleToggleVisibility}>
         <SvgSignUp className="h-4 w-4" />
         {!["xs", "xxs"].includes(viewport) ? t("buttons.sign_up") : null}
       </SimpleButton>
       <Suspense fallback={<div className="hidden" />}>
-        {AuthModal && <AuthModal title={t("titles.registration")} fields={INITIAL_SIGN_UP_FIELDS} isOpen={isOpen} onSaveForm={handleSubmitForm} onToggleVisibility={handleToggleVisibility} />}
+        {AuthModal && (
+          <AuthModal type="register" title={t("titles.registration")} fields={INITIAL_SIGN_UP_FIELDS} isOpen={isOpen} onSaveForm={handleSubmitForm} onToggleVisibility={handleToggleVisibility} />
+        )}
       </Suspense>
     </>
   );

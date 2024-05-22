@@ -3,7 +3,7 @@ import { DemoUserAuth } from "@/components/Auth/DemoUserAuth.jsx";
 import { SideModal } from "@/components/Modals/SideModal.jsx";
 import { DefaultForm } from "@/components/Form/DefaultForm.tsx";
 
-export const AuthModal = ({ title, isOpen, onToggleVisibility, onSaveForm, fields }) => {
+export const AuthModal = ({ type, title, isOpen, onToggleVisibility, onSaveForm, fields }) => {
   return (
     <SideModal
       title={title}
@@ -16,7 +16,7 @@ export const AuthModal = ({ title, isOpen, onToggleVisibility, onSaveForm, field
       }
       onClose={onToggleVisibility}
     >
-      <DefaultForm fields={fields} onSaveForm={onSaveForm} onResetForm={onToggleVisibility} />
+      <DefaultForm fields={fields} data-cy={`${type}-form`} onSaveForm={onSaveForm} onResetForm={onToggleVisibility} />
     </SideModal>
   );
 };

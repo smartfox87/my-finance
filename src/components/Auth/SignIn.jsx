@@ -36,12 +36,14 @@ export const SignIn = () => {
 
   return (
     <>
-      <SimpleButton type="primary" loading={isLoading} onClick={handleToggleVisibility}>
+      <SimpleButton type="primary" loading={isLoading} data-cy="login-btn" onClick={handleToggleVisibility}>
         <SvgSignIn className="h-4 w-4" />
         {!["xs", "xxs"].includes(viewport) ? t("buttons.sign_in") : null}
       </SimpleButton>
       <Suspense fallback={<div className="hidden" />}>
-        {AuthModal && <AuthModal title={t("titles.authorisation")} fields={INITIAL_SIGN_IN_FIELDS} isOpen={isOpen} onSaveForm={handleSubmitForm} onToggleVisibility={handleToggleVisibility} />}
+        {AuthModal && (
+          <AuthModal type="login" title={t("titles.authorisation")} fields={INITIAL_SIGN_IN_FIELDS} isOpen={isOpen} onSaveForm={handleSubmitForm} onToggleVisibility={handleToggleVisibility} />
+        )}
       </Suspense>
     </>
   );
