@@ -14,7 +14,7 @@ describe("Unauthorized pages", () => {
         cy.getLang().then((lang) => cy.visit(`/${lang}/`));
         cy.get('[data-cy="title"]').contains(dictionary.pages.home.title);
         cy.get('[data-cy="description"]').contains(dictionary.pages.home.description);
-        cy.get('[data-cy="demo-auth"]').contains(dictionary.buttons.sign_in_demo_user);
+        cy.get('[data-cy="demo-login-btn"]').contains(dictionary.buttons.sign_in_demo_user);
       });
     });
 
@@ -26,7 +26,7 @@ describe("Unauthorized pages", () => {
           cy.url().should("include", `/${page}`); // Проверяем, что URL содержит /{page}
           cy.get('[data-cy="title"]').contains(dictionary.pages[page].title);
           cy.get('[data-cy="description"]').contains(dictionary.pages[page].description);
-          cy.get('[data-cy="demo-auth"]').contains(dictionary.buttons.sign_in_demo_user);
+          cy.get('[data-cy="demo-login-btn"]').contains(dictionary.buttons.sign_in_demo_user);
         });
       });
     });

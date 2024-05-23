@@ -36,7 +36,7 @@ export const SignIn = () => {
 
   return (
     <>
-      <SimpleButton type="primary" loading={isLoading} data-cy="login-btn" onClick={handleToggleVisibility}>
+      <SimpleButton type="primary" loading={isLoading} data-cy="modal-login-btn" onClick={handleToggleVisibility}>
         <SvgSignIn className="h-4 w-4" />
         {!["xs", "xxs"].includes(viewport) ? t("buttons.sign_in") : null}
       </SimpleButton>

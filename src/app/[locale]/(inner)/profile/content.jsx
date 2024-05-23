@@ -34,7 +34,7 @@ export default function ProfileContent() {
   };
 
   const headerActions = (
-    <Button type="primary" danger loading={isLogoutLoading} className="ml-auto !flex items-center gap-2" onClick={handleLogout}>
+    <Button type="primary" danger loading={isLogoutLoading} data-cy="logout-btn" className="ml-auto !flex items-center gap-2" onClick={handleLogout}>
       <SvgLogout className="h-4 w-4" />
       {t("buttons.logout")}
     </Button>
