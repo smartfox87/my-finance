@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from "react";
+import { memo, Suspense, useCallback, useEffect, useRef, useState } from "react";
 import SvgMenu from "@/assets/sprite/menu.svg";
 import { useTranslation } from "react-i18next";
 import { SideModal } from "@/components/Modals/SideModal.jsx";
@@ -8,36 +8,36 @@ import { LanguageToggle } from "@/components/Layout/Header/LanguageToggle.jsx";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/store/selectors/auth.js";
 import { MainNav } from "@/components/Layout/MainNav";
-import { usePathname, useSearchParams } from "next/navigation";
+import { useAntd } from "@/hooks/antd.js";
+import { useModalState } from "@/hooks/providers/modalState.js";
 
 export const MobileMenu = memo(function MobileMenu() {
   const { t } = useTranslation();
-
+  const { initAntd, isLoadedAntd } = useAntd();
+  const { isOpenMenuModal, setIsOpenMenuModal } = useModalState();
   const user = useSelector(selectUser);
 
-  const [isOpen, setIsOpen] = useState(false);
-  const handleToggleVisibility = () => setIsOpen((prevState) => !prevState);
-
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  useEffect(() => {
-    setIsOpen(false);
-  }, [pathname, searchParams]);
+  const handleToggleVisibility = async () => {
+    if (!isLoadedAntd) await initAntd();
+    setIsOpenMenuModal((prevState) => !prevState);
+  };
 
   return (
     <>
-      <button type="button" className="focus-appearance -m-2 p-2" title={t("show_menu")} onClick={handleToggleVisibility}>
+      <button type="button" data-cy="mobile-menu-btn" className="focus-appearance -m-2 p-2" title={t("show_menu")} onClick={handleToggleVisibility}>
         <SvgMenu className="h-6 w-6" />
       </button>
-      <SideModal isOpen={isOpen} onClose={handleToggleVisibility}>
-        <div className="flex items-center justify-between gap-3">
-          {user ? <ProfileMenu /> : <Auth />}
-          <div className="relative z-20 ml-auto">
-            <LanguageToggle />
+      <Suspense fallback={<div className="hidden" />}>
+        <SideModal isOpen={isOpenMenuModal} onClose={handleToggleVisibility}>
+          <div className="flex items-center justify-between gap-3">
+            {user ? <ProfileMenu /> : <Auth />}
+            <div className="relative z-20 ml-auto">
+              <LanguageToggle />
+            </div>
           </div>
-        </div>
-        <MainNav />
-      </SideModal>
+          <MainNav />
+        </SideModal>
+      </Suspense>
     </>
   );
 });

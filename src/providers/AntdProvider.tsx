@@ -1,10 +1,12 @@
 import { useDarkTheme } from "@/hooks/theme.js";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/store/selectors/auth.js";
-import { createContext, lazy, ReactNode, useEffect, useState } from "react";
+import { createContext, lazy, ReactNode, Suspense, useEffect, useMemo, useState } from "react";
 import { useLocale } from "@/hooks/locale";
 import { getUserId } from "@/helpers/localStorage.js";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
+import { Preloader } from "@/components/Layout/Preloader";
+import { Spinner } from "@/components/Layout/Spinner";
 
 interface DynamicAntdType {
   StyleProvider?: any;
@@ -20,7 +22,6 @@ export const AntdProvider = ({ children }: { children: ReactNode }) => {
   const user = useSelector(selectUser);
   const [DynamicAntd, setDynamicAntd] = useState<DynamicAntdType>();
   const [isLoadedAntd, setIsLoadedAntd] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
 
   const initAntd = () =>
     Promise.all([
@@ -33,21 +34,26 @@ export const AntdProvider = ({ children }: { children: ReactNode }) => {
     });
 
   useEffect(() => {
-    setIsMounted(true);
     if (getUserId() || user) initAntd();
   }, [user]);
 
-  if (isMounted && DynamicAntd)
-    return (
-      <AntdContext.Provider value={{ initAntd, isLoadedAntd }}>
-        <AntdRegistry>
-          <DynamicAntd.StyleProvider hashPriority="high">
-            <DynamicAntd.ConfigProvider locale={locale} theme={{ algorithm: darkTheme ? DynamicAntd.theme.darkAlgorithm : DynamicAntd.theme.defaultAlgorithm }}>
-              {children}
-            </DynamicAntd.ConfigProvider>
-          </DynamicAntd.StyleProvider>
-        </AntdRegistry>
-      </AntdContext.Provider>
-    );
-  return <AntdContext.Provider value={{ initAntd, isLoadedAntd }}>{children}</AntdContext.Provider>;
+  const contextValue = useMemo(() => ({ initAntd, isLoadedAntd }), [initAntd, isLoadedAntd]);
+
+  return (
+    <Suspense fallback={<Spinner isVisible />}>
+      {isLoadedAntd && DynamicAntd ? (
+        <AntdContext.Provider value={contextValue}>
+          <AntdRegistry>
+            <DynamicAntd.StyleProvider hashPriority="high">
+              <DynamicAntd.ConfigProvider locale={locale} theme={{ algorithm: darkTheme ? DynamicAntd.theme.darkAlgorithm : DynamicAntd.theme.defaultAlgorithm }}>
+                {children}
+              </DynamicAntd.ConfigProvider>
+            </DynamicAntd.StyleProvider>
+          </AntdRegistry>
+        </AntdContext.Provider>
+      ) : (
+        <AntdContext.Provider value={contextValue}>{children}</AntdContext.Provider>
+      )}
+    </Suspense>
+  );
 };

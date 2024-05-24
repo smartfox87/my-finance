@@ -7,24 +7,23 @@ import { useRecaptcha } from "@/hooks/recaptcha.js";
 import SvgSignIn from "@/assets/sprite/sign-in.svg";
 import { SimpleButton } from "@/components/Form/SimpleButton";
 import { useAntd } from "@/hooks/antd.js";
+import { useModalState } from "@/hooks/providers/modalState.js";
 
-let isOpenRef = false;
-let AuthModalRef = false;
 export const SignIn = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { viewport } = useViewport();
-  const { initCAPTCHA, isLoaded, getScore } = useRecaptcha();
+  const { initCAPTCHA, isLoadedCaptcha, getScore } = useRecaptcha();
 
-  const [isOpen, setIsOpen] = useState(isOpenRef);
-  const [AuthModal, setAuthModal] = useState(AuthModalRef);
+  const { isOpenSignInModal, setIsOpenSignInModal } = useModalState();
+  const { AuthModal, setAuthModal } = useModalState();
   const { initAntd, isLoadedAntd } = useAntd();
-  const isLoading = isOpen && (!isLoaded || !AuthModal);
+  const isLoading = isOpenSignInModal && (!isLoadedCaptcha || !AuthModal);
 
-  const loadAuthModal = async () => !isOpen && !AuthModal && setAuthModal((AuthModalRef = lazy(() => import("@/components/Auth/AuthModal.jsx").then(({ AuthModal }) => ({ default: AuthModal })))));
+  const loadAuthModal = async () => !AuthModal && setAuthModal(lazy(() => import("@/components/Auth/AuthModal.jsx").then(({ AuthModal }) => ({ default: AuthModal }))));
   const handleToggleVisibility = () => {
-    setIsOpen((prevState) => (isOpenRef = !prevState));
-    Promise.all([!isLoadedAntd && initAntd(), !isLoaded && initCAPTCHA(), loadAuthModal()]);
+    setIsOpenSignInModal((prevState) => !prevState);
+    Promise.all([!isLoadedAntd && initAntd(), !isLoadedCaptcha && initCAPTCHA(), !AuthModal && loadAuthModal()]);
   };
 
   const handleSubmitForm = async (fieldsValues) => {
@@ -42,7 +41,14 @@ export const SignIn = () => {
       </SimpleButton>
       <Suspense fallback={<div className="hidden" />}>
         {AuthModal && (
-          <AuthModal type="login" title={t("titles.authorisation")} fields={INITIAL_SIGN_IN_FIELDS} isOpen={isOpen} onSaveForm={handleSubmitForm} onToggleVisibility={handleToggleVisibility} />
+          <AuthModal
+            type="login"
+            title={t("titles.authorisation")}
+            fields={INITIAL_SIGN_IN_FIELDS}
+            isOpen={isOpenSignInModal}
+            onSaveForm={handleSubmitForm}
+            onToggleVisibility={handleToggleVisibility}
+          />
         )}
       </Suspense>
     </>
