@@ -4,7 +4,7 @@ import { createContext, createRef, lazy, Suspense, useEffect, useMemo, useState 
 
 const siteKey = process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY;
 
-export const RecaptchaContext = createContext({ initCAPTCHA: () => Promise.resolve(), isLoaded: false, getScore: () => Promise.resolve() });
+export const RecaptchaContext = createContext({ initCAPTCHA: async () => undefined, isLoadedCaptcha: false, getScore: async () => 0 });
 
 export const RecaptchaProvider = ({ children }) => {
   const recaptchaRef = createRef();
@@ -14,8 +14,8 @@ export const RecaptchaProvider = ({ children }) => {
     !DynamicReCAPTCHA && setDynamicReCAPTCHA(lazy(() => import("react-google-recaptcha")));
   };
 
-  const [isLoaded, setIsLoaded] = useState(false);
-  const handleAsyncScriptLoad = () => setIsLoaded(true);
+  const [isLoadedCaptcha, setIsLoadedCaptcha] = useState(false);
+  const handleAsyncScriptLoad = () => setIsLoadedCaptcha(true);
 
   const getScore = async ({ action = "signup" } = {}) => {
     if (recaptchaRef.current) {
@@ -41,7 +41,7 @@ export const RecaptchaProvider = ({ children }) => {
     window.recaptchaOptions = { enterprise: true };
   }, []);
 
-  const contextValue = useMemo(() => ({ initCAPTCHA, isLoaded, getScore }), [initCAPTCHA, isLoaded, getScore]);
+  const contextValue = useMemo(() => ({ initCAPTCHA, isLoadedCaptcha, getScore }), [initCAPTCHA, isLoadedCaptcha, getScore]);
 
   return (
     <RecaptchaContext.Provider value={contextValue}>

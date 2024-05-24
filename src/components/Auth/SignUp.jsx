@@ -7,24 +7,23 @@ import { useRecaptcha } from "@/hooks/recaptcha.js";
 import SvgSignUp from "@/assets/sprite/sign-up.svg";
 import { SimpleButton } from "@/components/Form/SimpleButton";
 import { useAntd } from "@/hooks/antd.js";
+import { useModalState } from "@/hooks/providers/modalState.js";
 
-let isOpenRef = false;
-let AuthModalRef = false;
 export const SignUp = () => {
   const dispatch = useDispatch();
   const { viewport } = useViewport();
   const { t } = useTranslation();
-  const { initCAPTCHA, isLoaded, getScore } = useRecaptcha();
+  const { initCAPTCHA, isLoadedCaptcha, getScore } = useRecaptcha();
 
-  const [isOpen, setIsOpen] = useState(isOpenRef);
-  const [AuthModal, setAuthModal] = useState(AuthModalRef);
+  const { isOpenSignUpModal, setIsOpenSignUpModal } = useModalState();
+  const { AuthModal, setAuthModal } = useModalState();
   const { initAntd, isLoadedAntd } = useAntd();
-  const isLoading = isOpen && (!isLoaded || !AuthModal);
+  const isLoading = isOpenSignUpModal && (!isLoadedCaptcha || !AuthModal);
 
-  const loadAuthModal = async () => !isOpen && !AuthModal && setAuthModal((AuthModalRef = lazy(() => import("@/components/Auth/AuthModal.jsx").then(({ AuthModal }) => ({ default: AuthModal })))));
+  const loadAuthModal = async () => !AuthModal && setAuthModal(lazy(() => import("@/components/Auth/AuthModal.jsx").then(({ AuthModal }) => ({ default: AuthModal }))));
   const handleToggleVisibility = () => {
-    setIsOpen((prevState) => (isOpenRef = !prevState));
-    Promise.all([!isLoadedAntd && initAntd(), !isLoaded && initCAPTCHA(), loadAuthModal()]);
+    setIsOpenSignUpModal((prevState) => !prevState);
+    Promise.all([!isLoadedAntd && initAntd(), !isLoadedCaptcha && initCAPTCHA(), loadAuthModal()]);
   };
 
   const handleSubmitForm = async (fieldsValues) => {
@@ -44,7 +43,14 @@ export const SignUp = () => {
       </SimpleButton>
       <Suspense fallback={<div className="hidden" />}>
         {AuthModal && (
-          <AuthModal type="register" title={t("titles.registration")} fields={INITIAL_SIGN_UP_FIELDS} isOpen={isOpen} onSaveForm={handleSubmitForm} onToggleVisibility={handleToggleVisibility} />
+          <AuthModal
+            type="register"
+            title={t("titles.registration")}
+            fields={INITIAL_SIGN_UP_FIELDS}
+            isOpen={isOpenSignUpModal}
+            onSaveForm={handleSubmitForm}
+            onToggleVisibility={handleToggleVisibility}
+          />
         )}
       </Suspense>
     </>

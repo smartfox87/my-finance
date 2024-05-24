@@ -1,10 +1,12 @@
 import { useDarkTheme } from "@/hooks/theme.js";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/store/selectors/auth.js";
-import { createContext, lazy, ReactNode, useEffect, useMemo, useState } from "react";
+import { createContext, lazy, ReactNode, Suspense, useEffect, useMemo, useState } from "react";
 import { useLocale } from "@/hooks/locale";
 import { getUserId } from "@/helpers/localStorage.js";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
+import { Preloader } from "@/components/Layout/Preloader";
+import { Spinner } from "@/components/Layout/Spinner";
 
 interface DynamicAntdType {
   StyleProvider?: any;
@@ -37,17 +39,21 @@ export const AntdProvider = ({ children }: { children: ReactNode }) => {
 
   const contextValue = useMemo(() => ({ initAntd, isLoadedAntd }), [initAntd, isLoadedAntd]);
 
-  if (isLoadedAntd && DynamicAntd)
-    return (
-      <AntdContext.Provider value={contextValue}>
-        <AntdRegistry>
-          <DynamicAntd.StyleProvider hashPriority="high">
-            <DynamicAntd.ConfigProvider locale={locale} theme={{ algorithm: darkTheme ? DynamicAntd.theme.darkAlgorithm : DynamicAntd.theme.defaultAlgorithm }}>
-              {children}
-            </DynamicAntd.ConfigProvider>
-          </DynamicAntd.StyleProvider>
-        </AntdRegistry>
-      </AntdContext.Provider>
-    );
-  return <AntdContext.Provider value={contextValue}>{children}</AntdContext.Provider>;
+  return (
+    <Suspense fallback={<Spinner isVisible />}>
+      {isLoadedAntd && DynamicAntd ? (
+        <AntdContext.Provider value={contextValue}>
+          <AntdRegistry>
+            <DynamicAntd.StyleProvider hashPriority="high">
+              <DynamicAntd.ConfigProvider locale={locale} theme={{ algorithm: darkTheme ? DynamicAntd.theme.darkAlgorithm : DynamicAntd.theme.defaultAlgorithm }}>
+                {children}
+              </DynamicAntd.ConfigProvider>
+            </DynamicAntd.StyleProvider>
+          </AntdRegistry>
+        </AntdContext.Provider>
+      ) : (
+        <AntdContext.Provider value={contextValue}>{children}</AntdContext.Provider>
+      )}
+    </Suspense>
+  );
 };
