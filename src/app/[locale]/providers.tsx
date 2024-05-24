@@ -7,6 +7,8 @@ import { AntdProvider } from "@/providers/AntdProvider";
 import TranslationsProvider from "@/providers/TranslationsProvider";
 import { ReactNodeLike } from "prop-types";
 import { ModalStateProvider } from "@/providers/ModalStateProvider";
+import { Suspense } from "react";
+import { Spinner } from "@/components/Layout/Spinner";
 
 export default function Providers({ children, locale, resources, i18nNamespaces }: { children: ReactNodeLike; locale: string; resources: any; i18nNamespaces: string[] }) {
   return (
@@ -14,9 +16,11 @@ export default function Providers({ children, locale, resources, i18nNamespaces 
       <RecaptchaProvider>
         <TranslationsProvider namespaces={i18nNamespaces} locale={locale} resources={resources}>
           <LocaleProvider>
-            <ModalStateProvider>
-              <AntdProvider>{children}</AntdProvider>
-            </ModalStateProvider>
+            <Suspense fallback={<Spinner isVisible />}>
+              <ModalStateProvider>
+                <AntdProvider>{children}</AntdProvider>
+              </ModalStateProvider>
+            </Suspense>
           </LocaleProvider>
         </TranslationsProvider>
       </RecaptchaProvider>
