@@ -1,17 +1,16 @@
 "use client";
 
-import { createContext, createRef, lazy, Suspense, useEffect, useState } from "react";
+import { createContext, createRef, lazy, Suspense, useEffect, useMemo, useState } from "react";
 
 const siteKey = process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY;
 
-export const RecaptchaContext = createContext();
+export const RecaptchaContext = createContext({ initCAPTCHA: () => Promise.resolve(), isLoaded: false, getScore: () => Promise.resolve() });
 
 export const RecaptchaProvider = ({ children }) => {
   const recaptchaRef = createRef();
 
   const [DynamicReCAPTCHA, setDynamicReCAPTCHA] = useState();
   const initCAPTCHA = async () => {
-    console.log("initCAPTCHA");
     !DynamicReCAPTCHA && setDynamicReCAPTCHA(lazy(() => import("react-google-recaptcha")));
   };
 
@@ -42,8 +41,10 @@ export const RecaptchaProvider = ({ children }) => {
     window.recaptchaOptions = { enterprise: true };
   }, []);
 
+  const contextValue = useMemo(() => ({ initCAPTCHA, isLoaded, getScore }), [initCAPTCHA, isLoaded, getScore]);
+
   return (
-    <RecaptchaContext.Provider value={{ initCAPTCHA, isLoaded, getScore }}>
+    <RecaptchaContext.Provider value={contextValue}>
       {children}
       <Suspense fallback={<div className="hidden" />}>
         {DynamicReCAPTCHA && <DynamicReCAPTCHA ref={recaptchaRef} size="invisible" sitekey={siteKey} className="hidden" asyncScriptOnLoad={handleAsyncScriptLoad} />}

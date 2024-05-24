@@ -1,4 +1,4 @@
-import { createContext, useCallback, useEffect, useState } from "react";
+import { createContext, useCallback, useEffect, useMemo, useState } from "react";
 import { setLanguage } from "@/store/commonSlice.js";
 import { useTranslation } from "react-i18next";
 import { store } from "@/store/index.ts";
@@ -7,7 +7,7 @@ import { locales } from "@/initial-data/router.js";
 
 export const languages = locales.reduce((acc, lang) => ({ ...acc, [lang]: null }), {});
 const getLocale = async (lang) => (languages[lang] ? languages[lang] : (languages[lang] = await import(`@/initial-data/antd-locales`).then((module) => module[lang]?.default)));
-export const LocaleContext = createContext({ locale: null, changeLocale: () => {} });
+export const LocaleContext = createContext({ locale: Promise.resolve(), changeLocale: () => Promise.resolve() });
 
 export const LocaleProvider = ({ children }) => {
   const {
@@ -31,5 +31,7 @@ export const LocaleProvider = ({ children }) => {
     changeLocale(language);
   }, []);
 
-  return <LocaleContext.Provider value={{ locale, changeLocale }}>{children}</LocaleContext.Provider>;
+  const contextValue = useMemo(() => ({ locale, changeLocale }), [locale, changeLocale]);
+
+  return <LocaleContext.Provider value={contextValue}>{children}</LocaleContext.Provider>;
 };

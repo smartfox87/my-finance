@@ -1,7 +1,7 @@
 import { useDarkTheme } from "@/hooks/theme.js";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/store/selectors/auth.js";
-import { createContext, lazy, ReactNode, useEffect, useState } from "react";
+import { createContext, lazy, ReactNode, useEffect, useMemo, useState } from "react";
 import { useLocale } from "@/hooks/locale";
 import { getUserId } from "@/helpers/localStorage.js";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
@@ -20,7 +20,6 @@ export const AntdProvider = ({ children }: { children: ReactNode }) => {
   const user = useSelector(selectUser);
   const [DynamicAntd, setDynamicAntd] = useState<DynamicAntdType>();
   const [isLoadedAntd, setIsLoadedAntd] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
 
   const initAntd = () =>
     Promise.all([
@@ -33,13 +32,14 @@ export const AntdProvider = ({ children }: { children: ReactNode }) => {
     });
 
   useEffect(() => {
-    setIsMounted(true);
     if (getUserId() || user) initAntd();
   }, [user]);
 
-  if (isMounted && DynamicAntd)
+  const contextValue = useMemo(() => ({ initAntd, isLoadedAntd }), [initAntd, isLoadedAntd]);
+
+  if (isLoadedAntd && DynamicAntd)
     return (
-      <AntdContext.Provider value={{ initAntd, isLoadedAntd }}>
+      <AntdContext.Provider value={contextValue}>
         <AntdRegistry>
           <DynamicAntd.StyleProvider hashPriority="high">
             <DynamicAntd.ConfigProvider locale={locale} theme={{ algorithm: darkTheme ? DynamicAntd.theme.darkAlgorithm : DynamicAntd.theme.defaultAlgorithm }}>
@@ -49,5 +49,5 @@ export const AntdProvider = ({ children }: { children: ReactNode }) => {
         </AntdRegistry>
       </AntdContext.Provider>
     );
-  return <AntdContext.Provider value={{ initAntd, isLoadedAntd }}>{children}</AntdContext.Provider>;
+  return <AntdContext.Provider value={contextValue}>{children}</AntdContext.Provider>;
 };
