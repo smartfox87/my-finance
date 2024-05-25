@@ -10,14 +10,12 @@ export interface AuthSliceState {
 }
 
 const setUserData = (state: AuthSliceState, user: User | null) => {
-  if (!user) return;
+  if (!user || state.user) return;
   state.user = user;
-  localStorage.setItem("user_id", user.id);
 };
 
 const clearUserData = (state: AuthSliceState) => {
   state.user = null;
-  localStorage.removeItem("user_id");
 };
 
 const createAppSlice = buildCreateSlice({

@@ -1,30 +1,3 @@
-/// <reference types="cypress" />
-// ***********************************************
-// This example commands.ts shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-
 import { supabaseClient } from "./supabase";
 
 Cypress.Commands.add("supabaseClient", () => cy.wrap(supabaseClient));
@@ -54,6 +27,27 @@ Cypress.Commands.add("getLang", () => {
   });
 });
 
+Cypress.Commands.add("login", () => {
+  cy.session(
+    "login",
+    () => {
+      cy.viewport(1920, 1080);
+      cy.visit("/");
+      cy.intercept("POST", `${Cypress.env("NEXT_PUBLIC_SUPABASE_URL")}/auth/v1/token?grant_type=password`).as("login");
+      cy.get('[data-cy="modal-login-btn"]').click();
+      cy.get('[data-cy="login-form"]').within(() => {
+        cy.get("#email").type(Cypress.env("E2E_LOGIN"));
+        cy.get("#password").type(Cypress.env("E2E_PASSWORD"));
+        cy.get('button[type="submit"]').click();
+      });
+      cy.wait("@login").then((interception) => {
+        expect(interception.response?.statusCode).to.eq(200);
+      });
+    },
+    { cacheAcrossSpecs: true },
+  );
+});
+
 Cypress.Commands.add("getDictionary", () => {
   cy.getLang().then((lang) => {
     cy.fixture(`locales/${lang}/default.json`).then((json) => {
@@ -81,6 +75,7 @@ declare global {
     interface Chainable {
       supabaseClient(): Chainable<typeof supabaseClient>;
       deleteE2EUser(): Chainable<void>;
+      login(): Chainable<void>;
       getLang(): Chainable<string>;
       getDictionary(): Chainable<any>;
       pickSelect(selector: string): Chainable<void>;
