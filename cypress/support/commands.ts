@@ -1,23 +1,19 @@
 import { supabaseClient } from "./supabase";
 
-Cypress.Commands.add("supabaseClient", () => cy.wrap(supabaseClient));
-
 Cypress.Commands.add("deleteE2EUser", () => {
-  cy.supabaseClient().then((supabase) => {
-    supabase
-      .from("profiles")
-      .select("id")
-      .eq("email", Cypress.env("E2E_LOGIN"))
-      .maybeSingle()
-      .then(({ data: user, error }) => {
-        if (error) throw new Error(error.message);
-        if (user) {
-          return supabase.auth.admin.deleteUser(user.id).then(({ error }) => {
-            if (error) throw new Error(error.message);
-          });
-        }
-      });
-  });
+  supabaseClient
+    .from("profiles")
+    .select("id")
+    .eq("email", Cypress.env("E2E_LOGIN"))
+    .maybeSingle()
+    .then(({ data: user, error }) => {
+      if (error) throw new Error(error.message);
+      if (user) {
+        return supabaseClient.auth.admin.deleteUser(user.id).then(({ error }) => {
+          if (error) throw new Error(error.message);
+        });
+      }
+    });
 });
 
 Cypress.Commands.add("getLang", () => {
@@ -86,7 +82,6 @@ Cypress.Commands.add("pickFile", (selector) => {
 declare global {
   namespace Cypress {
     interface Chainable {
-      supabaseClient(): Chainable<typeof supabaseClient>;
       deleteE2EUser(): Chainable<void>;
       login(): Chainable<void>;
       getLang(): Chainable<string>;
