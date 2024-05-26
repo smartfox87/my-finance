@@ -54,24 +54,26 @@ Cypress.Commands.add("getDictionary", () => {
 });
 
 Cypress.Commands.add("pickSelect", (selector, index) => {
-  cy.get(selector).closest(".ant-select").click();
-  cy.get(".ant-select-dropdown:not(.ant-select-dropdown-hidden) .ant-select-item").then((options) => {
-    const optionsLength = options.length;
-    if (!optionsLength) throw new Error("No selectable options found.");
+  cy.get(selector).closest(".ant-select").as("select").click();
+  cy.get("@select")
+    .get(".ant-select-item")
+    .then((options) => {
+      const optionsLength = options.length;
+      if (!optionsLength) throw new Error("No selectable options found.");
 
-    if (typeof index === "number") {
-      if (index >= 0)
+      if (typeof index === "number") {
+        if (index >= 0)
+          cy.wrap(options)
+            .eq(Math.min(index, optionsLength - 1))
+            .scrollIntoView()
+            .click();
+        else cy.wrap(options).eq(Math.max(index, -optionsLength)).scrollIntoView().click();
+      } else
         cy.wrap(options)
-          .eq(Math.min(index, optionsLength - 1))
+          .eq(Math.floor(Math.random() * optionsLength))
           .scrollIntoView()
           .click();
-      else cy.wrap(options).eq(Math.max(index, -optionsLength)).scrollIntoView().click();
-    } else
-      cy.wrap(options)
-        .eq(Math.floor(Math.random() * optionsLength))
-        .scrollIntoView()
-        .click();
-  });
+    });
 });
 
 Cypress.Commands.add("pickFile", (selector) => {
