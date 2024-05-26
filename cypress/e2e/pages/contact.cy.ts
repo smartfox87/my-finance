@@ -1,11 +1,11 @@
-import { Dictionary } from "../support/types";
+import { Dictionary } from "../../support/types";
 
 describe("Contact form", () => {
   context("1920x1080 resolution", () => {
     beforeEach(() => {
       cy.viewport(1920, 1080);
       cy.getLang().then((lang) => cy.visit(`/${lang}/contact`));
-      cy.intercept("POST", "/api/contact").as("sendMessage");
+      cy.intercept("POST", "/api/contact").as("contact");
     });
 
     it("should send contact message", () => {
@@ -17,7 +17,7 @@ describe("Contact form", () => {
         cy.pickFile("#files");
         cy.get('button[type="submit"]').click();
       });
-      cy.wait("@sendMessage").then((interception) => {
+      cy.wait("@contact").then((interception) => {
         expect(interception.response?.statusCode).to.eq(200);
         expect(interception.response?.body.success).to.be.true;
         cy.getDictionary().then((dictionary: Dictionary) => {

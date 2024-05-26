@@ -176,7 +176,7 @@
       "create": "Konto zostało pomyślnie utworzone.",
       "update": "Konto zostało pomyślnie zaktualizowane.",
       "delete": "Konto zostało pomyślnie usunięte.",
-      "money_transferred": "Pieniądze zostały pomyślnie przelane."
+      "money_transfer": "Pieniądze zostały pomyślnie przelane."
     },
     "income": {
       "create": "Dochód został pomyślnie utworzony.",

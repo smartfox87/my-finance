@@ -2,6 +2,24 @@ import { supabase } from "@/api/supabase";
 import { getPublicUrl } from "@/helpers/url";
 import { LoginData, RegisterData } from "@/types/auth";
 import { Provider } from "@supabase/auth-js";
+import { store } from "@/store";
+import { clearUserReducer, setUserReducer } from "@/store/authSlice";
+
+let isAuthStateChangeHandlerSet = false;
+export const handleAuthStateChange = () => {
+  if (isAuthStateChangeHandlerSet) return;
+  isAuthStateChangeHandlerSet = true;
+  supabase.auth.onAuthStateChange((event, session) => {
+    console.log("event", event);
+    if (event === "SIGNED_IN") {
+      if (session) store.dispatch(setUserReducer(session.user));
+    } else if (event === "SIGNED_OUT") {
+      store.dispatch(clearUserReducer());
+    } else if (event === "TOKEN_REFRESHED") {
+      if (session) store.dispatch(setUserReducer(session.user));
+    }
+  });
+};
 
 export const loginUserApi = ({ email, password }: LoginData) => supabase.auth.signInWithPassword({ email, password });
 

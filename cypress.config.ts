@@ -36,6 +36,7 @@ export default defineConfig({
       config.env.E2E_LOGIN = process.env.E2E_LOGIN;
       config.env.E2E_PASSWORD = process.env.E2E_PASSWORD;
       config.env.NEXT_PUBLIC_SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
+      config.env.NEXT_PUBLIC_SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_KEY;
       config.env.SUPABASE_KEY_SERVICE = process.env.SUPABASE_KEY_SERVICE;
       return config;
     },

@@ -176,7 +176,7 @@
       "create": "The account has been successfully created.",
       "update": "The account has been successfully updated.",
       "delete": "The account has been successfully deleted.",
-      "money_transferred": "The money has been successfully transferred."
+      "money_transfer": "The money has been successfully transferred."
     },
     "income": {
       "create": "The income has been successfully created.",

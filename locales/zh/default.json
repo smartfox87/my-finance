@@ -176,7 +176,7 @@
       "create": "账户已成功创建。",
       "update": "账户已成功更新。",
       "delete": "账户已成功删除。",
-      "money_transferred": "资金已成功转账。"
+      "money_transfer": "资金已成功转账。"
     },
     "income": {
       "create": "收入已成功创建。",

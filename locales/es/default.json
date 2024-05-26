@@ -176,7 +176,7 @@
       "create": "La cuenta ha sido creada con éxito.",
       "update": "La cuenta ha sido actualizada con éxito.",
       "delete": "La cuenta ha sido eliminada con éxito.",
-      "money_transferred": "El dinero ha sido transferido con éxito."
+      "money_transfer": "El dinero ha sido transferido con éxito."
     },
     "income": {
       "create": "El ingreso ha sido creado con éxito.",

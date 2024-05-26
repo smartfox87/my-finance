@@ -1,5 +1,5 @@
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
-import { getUserSession, loginDemoUserApi, loginUserApi, loginUserByProviderApi, logoutUserApi, registerUserApi } from "@/api/auth";
+import { getUserSession, handleAuthStateChange, loginDemoUserApi, loginUserApi, loginUserByProviderApi, logoutUserApi, registerUserApi } from "@/api/auth";
 import { handleRejected } from "@/helpers/processExtraReducersCases";
 import { RegisterData, UserPayload, LoginData, SessionPayload } from "@/types/auth";
 import { rootReducer } from "@/store";
@@ -10,14 +10,12 @@ export interface AuthSliceState {
 }
 
 const setUserData = (state: AuthSliceState, user: User | null) => {
-  if (!user) return;
+  if (!user || state.user) return;
   state.user = user;
-  localStorage.setItem("user_id", user.id);
 };
 
 const clearUserData = (state: AuthSliceState) => {
   state.user = null;
-  localStorage.removeItem("user_id");
 };
 
 const createAppSlice = buildCreateSlice({
@@ -34,6 +32,7 @@ export const authSlice = createAppSlice({
   reducers: (create) => ({
     registerUserThunk: create.asyncThunk<UserPayload, RegisterData, { rejectValue: string }>(
       async (userData, { rejectWithValue }) => {
+        handleAuthStateChange();
         const { data, error } = await registerUserApi(userData);
         if (error) throw rejectWithValue(error.message);
         return data;
@@ -45,6 +44,7 @@ export const authSlice = createAppSlice({
     ),
     loginUserThunk: create.asyncThunk<UserPayload, LoginData, { rejectValue: string }>(
       async (userData, { rejectWithValue }) => {
+        handleAuthStateChange();
         const { data, error } = await loginUserApi(userData);
         if (error) throw rejectWithValue(error.message);
         return data;
@@ -56,6 +56,7 @@ export const authSlice = createAppSlice({
     ),
     loginDemoUserThunk: create.asyncThunk<UserPayload, void, { rejectValue: string }>(
       async (_, { rejectWithValue }) => {
+        handleAuthStateChange();
         const { data, error } = await loginDemoUserApi();
         if (error) throw rejectWithValue(error.message);
         return data;
@@ -98,6 +99,8 @@ export const authSlice = createAppSlice({
         },
       },
     ),
+    setUserReducer: create.reducer<User>((state, { payload }) => setUserData(state, payload)),
+    clearUserReducer: create.reducer((state) => clearUserData(state)),
   }),
 });
 
@@ -107,4 +110,4 @@ declare module "@/store" {
 
 const injectedReducers = rootReducer.inject(authSlice);
 
-export const { registerUserThunk, loginUserThunk, loginDemoUserThunk, logoutUserThunk, loginByProviderUserThunk, getUserSessionThunk } = authSlice.actions;
+export const { registerUserThunk, loginUserThunk, loginDemoUserThunk, logoutUserThunk, loginByProviderUserThunk, getUserSessionThunk, setUserReducer, clearUserReducer } = authSlice.actions;

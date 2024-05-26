@@ -177,7 +177,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 />
               )}
               {type === "number" && InputNumber && (
-                <InputNumber size="large" autoFocus={!!focus} disabled={disabled} min={0} max={100000000000000} style={{ width: "100%" }} onChange={(value) => handleChangeFieldValue({ id, value })} />
+                <InputNumber size="large" autoFocus={!!focus} disabled={disabled} min={0} max={999999999999999} style={{ width: "100%" }} onChange={(value) => handleChangeFieldValue({ id, value })} />
               )}
               {type === "textarea" && (
                 <Input.TextArea

@@ -22,6 +22,7 @@ export default function MainLayout({ children }: { children: ReactNodeLike }) {
   const user = useSelector(selectUser);
 
   const initProfile = async () => {
+    if (getUserId()) import("@/api/auth").then(({ handleAuthStateChange }) => handleAuthStateChange());
     if (getUserId() && !user) {
       const { getUserSessionThunk } = await import("@/store/authSlice");
       await dispatch(getUserSessionThunk());
