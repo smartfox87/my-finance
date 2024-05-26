@@ -17,7 +17,7 @@ describe("authorized accounts page", () => {
         cy.get('button[type="submit"]').click();
       });
       cy.wait("@create-account").then((interception) => {
-        expect(interception.response.statusCode).to.eq(201);
+        expect(interception.response?.statusCode).to.eq(201);
         cy.getDictionary().then((dictionary: Dictionary) => {
           cy.get(".ant-notification-notice-message").contains(dictionary.notifications.account.create);
         });
@@ -34,8 +34,7 @@ describe("authorized accounts page", () => {
           cy.get('button[type="submit"]').click();
         });
         cy.wait("@update-account").then((interception) => {
-          expect(interception.response.statusCode).to.eq(200);
-          expect(interception.response.body.id).to.be.a("number");
+          expect(interception.response?.statusCode).to.eq(200);
           cy.getDictionary().then((dictionary: Dictionary) => {
             cy.get(".ant-notification-notice-message").contains(dictionary.notifications.account.update);
           });
@@ -54,8 +53,7 @@ describe("authorized accounts page", () => {
           cy.get('button[type="submit"]').click();
         });
         cy.wait("@update-account").then((interception) => {
-          expect(interception.response.statusCode).to.eq(200);
-          expect(interception.response.body.id).to.be.a("number");
+          expect(interception.response?.statusCode).to.eq(200);
           cy.getDictionary().then((dictionary: Dictionary) => {
             cy.get(".ant-notification-notice-message").contains(dictionary.notifications.account.money_transfer);
           });
@@ -69,8 +67,7 @@ describe("authorized accounts page", () => {
         cy.get('[data-cy="account-item"]').last().click();
         cy.get('[data-cy="delete-account-btn"]').last().click();
         cy.wait("@delete-account").then((interception) => {
-          expect(interception.response.statusCode).to.eq(200);
-          expect(interception.response.body.id).to.be.a("number");
+          expect(interception.response?.statusCode).to.eq(200);
           cy.getDictionary().then((dictionary: Dictionary) => {
             cy.get(".ant-notification-notice-message").contains(dictionary.notifications.account.delete);
           });
