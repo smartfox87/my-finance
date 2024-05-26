@@ -48,7 +48,7 @@ export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ o
     if (!error) {
       onSave();
       handleToggleVisibility();
-      showNotification({ title: t("notifications.account.money_transferred") });
+      showNotification({ title: t("notifications.account.money_transfer") });
       setFieldsValues({ ...initialFieldsValues });
     }
     setIsLoading(false);
@@ -63,7 +63,7 @@ export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ o
 
   return (
     <>
-      <Button size="large" className="!flex items-center justify-center gap-2" onClick={handleToggleVisibility}>
+      <Button size="large" gata-cy="transfer-between-accounts-btn" className="!flex items-center justify-center gap-2" onClick={handleToggleVisibility}>
         <SvgTransfer className="h-7 w-7 shrink-0" />
         {!["xs", "xxs"].includes(viewport) && t("common.transfer_money")}
       </Button>
@@ -76,11 +76,12 @@ export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ o
         onInit={setIsInitialized}
       >
         <div className="flex flex-col gap-4">
-          <Form layout="vertical" form={form} fields={formFieldsValues} className="flex w-full flex-col" onSubmit={handleSubmitForm}>
+          <Form layout="vertical" form={form} fields={formFieldsValues} gata-cy="transfer-between-accounts-form" className="flex w-full flex-col" onFinish={handleSubmitForm}>
             <Form.Item label={t(`fields.simple.from`)} name="from" rules={[{ required: true, message: t("fields.errors.required") }]}>
               <Select
                 ref={focusInputRef}
                 size="large"
+                getPopupContainer={(triggerNode) => triggerNode.parentElement}
                 options={accountsList?.filter(({ id }) => id !== fieldsValues.to).map(({ id, name }) => ({ label: name, value: id }))}
                 showSearch
                 filterOption={handleFilterSelectOptions}
@@ -90,6 +91,7 @@ export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ o
             <Form.Item label={t(`fields.simple.to`)} name="to" rules={[{ required: true, message: t("fields.errors.required") }]}>
               <Select
                 size="large"
+                getPopupContainer={(triggerNode) => triggerNode.parentElement}
                 options={accountsList?.filter(({ id }) => id !== fieldsValues.from).map(({ id, name }) => ({ label: name, value: id }))}
                 showSearch
                 filterOption={handleFilterSelectOptions}
@@ -104,24 +106,17 @@ export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ o
                 { required: true, message: t("fields.errors.required") },
               ]}
             >
-              <InputNumber
-                size="large"
-                disabled={!fieldsValues.from}
-                min={1}
-                max={999999999999999999999999}
-                style={{ width: "100%" }}
-                onChange={(value) => handleChangeFieldValue({ id: "amount", value })}
-              />
+              <InputNumber size="large" disabled={!fieldsValues.from} min={1} max={999999999999999} style={{ width: "100%" }} onChange={(value) => handleChangeFieldValue({ id: "amount", value })} />
             </Form.Item>
+            <div className="mt-2 flex gap-4">
+              <Button size="large" type="primary" htmlType="submit" loading={isLoading} className="w-1/3 grow" disabled={!isChangedFieldsData}>
+                {t("buttons.submit")}
+              </Button>
+              <Button size="large" variant="bordered" className="w-1/3 grow" disabled={!isChangedFieldsData} onClick={handleCancelForm}>
+                {t("buttons.cancel")}
+              </Button>
+            </div>
           </Form>
-          <div className="mt-2 flex gap-4">
-            <Button size="large" type="primary" loading={isLoading} className="w-1/3 grow" disabled={!isChangedFieldsData} onClick={handleSubmitForm}>
-              {t("buttons.submit")}
-            </Button>
-            <Button size="large" variant="bordered" className="w-1/3 grow" disabled={!isChangedFieldsData} onClick={handleCancelForm}>
-              {t("buttons.cancel")}
-            </Button>
-          </div>
         </div>
       </SideModal>
     </>

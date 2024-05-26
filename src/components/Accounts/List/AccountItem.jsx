@@ -26,6 +26,7 @@ export const AccountItem = ({ id, name, balance, updated_at }) => {
   return (
     <Link
       href={`/accounts?accountId=${id}`}
+      data-cy="account-item"
       className="flex flex-wrap justify-between gap-2 rounded-xl border border-gray-300 p-4 shadow-[0_3px_7px_0_#ddd] duration-300 hover:-translate-y-1 hover:shadow-[0_7px_7px_0_#ddd]"
     >
       <div ref={nameRef} className="line-clamp-2 w-full  md:line-clamp-3">

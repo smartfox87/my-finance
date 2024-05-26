@@ -57,11 +57,24 @@ Cypress.Commands.add("getDictionary", () => {
   });
 });
 
-Cypress.Commands.add("pickSelect", (selector) => {
+Cypress.Commands.add("pickSelect", (selector, index) => {
   cy.get(selector).closest(".ant-select").click();
   cy.get(".ant-select-dropdown:not(.ant-select-dropdown-hidden) .ant-select-item").then((options) => {
-    const index = Math.floor(Math.random() * options.length);
-    cy.wrap(options).eq(index).click();
+    const optionsLength = options.length;
+    if (!optionsLength) throw new Error("No selectable options found.");
+
+    if (typeof index === "number") {
+      if (index >= 0)
+        cy.wrap(options)
+          .eq(Math.min(index, optionsLength - 1))
+          .scrollIntoView()
+          .click();
+      else cy.wrap(options).eq(Math.max(index, -optionsLength)).scrollIntoView().click();
+    } else
+      cy.wrap(options)
+        .eq(Math.floor(Math.random() * optionsLength))
+        .scrollIntoView()
+        .click();
   });
 });
 
@@ -78,7 +91,7 @@ declare global {
       login(): Chainable<void>;
       getLang(): Chainable<string>;
       getDictionary(): Chainable<any>;
-      pickSelect(selector: string): Chainable<void>;
+      pickSelect(selector: string, index?: number): Chainable<void>;
       pickFile(selector: string): Chainable<void>;
     }
   }

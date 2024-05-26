@@ -73,7 +73,7 @@ export const AccountDetail = memo(function AccountDetail({ onSave }) {
   const footer = (
     <div className="flex flex-col gap-4">
       <CalculatorModal title={t("common.balance_calculator")} buttonOpen={t("common.balance_calculator")} buttonSave={t("buttons.save_amount")} onSave={handleSetCalculatedBalance} />
-      <Button size="large" className="!flex w-full items-center justify-center gap-3" loading={isBtnLoading} onClick={handleDeleteAccount}>
+      <Button size="large" className="!flex w-full items-center justify-center gap-3" loading={isBtnLoading} data-cy="delete-account-btn" onClick={handleDeleteAccount}>
         <SvgDelete className="h-5 w-5 cursor-pointer duration-300 hover:text-blue-600" />
         {t("buttons.delete_account")}
       </Button>
@@ -82,7 +82,7 @@ export const AccountDetail = memo(function AccountDetail({ onSave }) {
 
   return (
     <SideModal title={t("titles.detail_account")} isOpen={isOpen} isLoading={isLoading} footer={footer} onClose={handleCloseModal}>
-      <DefaultForm ref={formRef} fields={accountFields} isVisible={isOpen} onSaveForm={handleUpdateAccount} />
+      <DefaultForm ref={formRef} fields={accountFields} isVisible={isOpen} gata-cy="edit-account-form" onSaveForm={handleUpdateAccount} />
     </SideModal>
   );
 });
