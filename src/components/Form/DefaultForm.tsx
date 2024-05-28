@@ -168,6 +168,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                   disabledDate={disabledDate}
                   disabled={disabled}
                   placeholder={placeholder}
+                  getPopupContainer={(triggerNode) => triggerNode}
                   format={{
                     format: "YYYY-MM-DD",
                     type: "mask",
