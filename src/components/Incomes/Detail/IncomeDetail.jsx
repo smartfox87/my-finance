@@ -46,7 +46,7 @@ export const IncomeDetail = memo(function IncomeDetail({ onSave }) {
     const { error } = await dispatch(updateIncomeItemThunk({ incomeId: incomeItem.id, incomeData: fieldsValues }));
     setIsLoading(false);
     if (!error) {
-      onSave();
+      await onSave();
       handleCloseModal();
       showNotification({ title: t("notifications.income.update") });
     }
@@ -57,7 +57,7 @@ export const IncomeDetail = memo(function IncomeDetail({ onSave }) {
     const { error } = await dispatch(deleteIncomeItemThunk(incomeItem.id));
     setIsBtnLoading(false);
     if (!error) {
-      onSave();
+      await onSave();
       handleCloseModal();
       showNotification({ title: t("notifications.income.delete") });
     }
@@ -69,7 +69,7 @@ export const IncomeDetail = memo(function IncomeDetail({ onSave }) {
   const footer = (
     <div className="flex flex-col gap-4">
       <CalculatorModal title={t("common.amount_calculator")} buttonOpen={t("common.amount_calculator")} buttonSave={t("buttons.save_amount")} onSave={handleSetCalculatedAmount} />
-      <Button size="large" className="!flex w-full items-center justify-center gap-3" loading={isBtnLoading} onClick={handleDeleteIncome}>
+      <Button size="large" data-cy="delete-income-btn" className="!flex w-full items-center justify-center gap-3" loading={isBtnLoading} onClick={handleDeleteIncome}>
         <SvgDelete className="h-5 w-5 cursor-pointer duration-300 hover:text-blue-600" />
         {t("buttons.delete_income")}
       </Button>
@@ -78,7 +78,7 @@ export const IncomeDetail = memo(function IncomeDetail({ onSave }) {
 
   return (
     <SideModal title={t("titles.detail_income")} isOpen={isOpen} isLoading={isLoading} footer={footer} onClose={handleCloseModal}>
-      <DefaultForm ref={formRef} fields={incomeFields} isVisible={isOpen} onSaveForm={handleUpdateIncome} />
+      <DefaultForm ref={formRef} fields={incomeFields} isVisible={isOpen} gata-cy="edit-income-form" onSaveForm={handleUpdateIncome} />
     </SideModal>
   );
 });

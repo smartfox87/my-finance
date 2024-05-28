@@ -18,10 +18,7 @@ export type Period = (typeof periods)[number];
 
 export const periodOptions = periods.map((period) => ({ label: `complex.period.options.${period}`, value: period }));
 
-export const getPeriod = () => {
-  if (typeof window !== "undefined") return localStorage.getItem("period");
-  else return "year";
-};
+export const getPeriod = () => (typeof window !== "undefined" && localStorage.getItem("period") ? localStorage.getItem("period") : "year");
 
 export const getCurrentDate = () => new Date().toISOString();
 

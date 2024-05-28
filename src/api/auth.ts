@@ -10,7 +10,6 @@ export const handleAuthStateChange = () => {
   if (isAuthStateChangeHandlerSet) return;
   isAuthStateChangeHandlerSet = true;
   supabase.auth.onAuthStateChange((event, session) => {
-    console.log("event", event);
     if (event === "SIGNED_IN") {
       if (session) store.dispatch(setUserReducer(session.user));
     } else if (event === "SIGNED_OUT") {

@@ -14,13 +14,13 @@ const createAppSlice = buildCreateSlice({
 });
 
 export interface IncomesSliceState {
-  incomesFilterValues: IncomesFilterValues | {};
+  incomesFilterValues: IncomesFilterValues | null;
   incomesList: IncomesList | null;
   incomeItem: IncomeItem | null;
 }
 
 const initialState: IncomesSliceState = {
-  incomesFilterValues: {},
+  incomesFilterValues: null,
   incomesList: null,
   incomeItem: null,
 };
