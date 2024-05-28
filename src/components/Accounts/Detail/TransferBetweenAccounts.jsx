@@ -46,7 +46,7 @@ export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ o
     setIsLoading(true);
     const { error } = await dispatch(transferAccountsBalanceThunk(values));
     if (!error) {
-      onSave();
+      await onSave();
       handleToggleVisibility();
       showNotification({ title: t("notifications.account.money_transfer") });
       setFieldsValues({ ...initialFieldsValues });

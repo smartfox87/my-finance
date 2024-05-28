@@ -50,7 +50,7 @@ export const AccountDetail = memo(function AccountDetail({ onSave }) {
     const { error } = await dispatch(updateAccountItemThunk({ accountId: accountItem.id, accountData }));
     setIsLoading(false);
     if (!error) {
-      onSave();
+      await onSave();
       handleCloseModal();
       showNotification({ title: t("notifications.account.update") });
     }
@@ -61,7 +61,7 @@ export const AccountDetail = memo(function AccountDetail({ onSave }) {
     const { error } = await dispatch(deleteAccountItemThunk(accountItem.id));
     setIsBtnLoading(false);
     if (!error) {
-      onSave();
+      await onSave();
       handleCloseModal();
       showNotification({ title: t("notifications.account.delete") });
     }

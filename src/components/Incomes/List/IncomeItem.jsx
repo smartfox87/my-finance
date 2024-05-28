@@ -30,6 +30,7 @@ export const IncomeItem = ({ id, name, amount, date, category, account }) => {
   return (
     <Link
       href={`/incomes?incomeId=${id}`}
+      data-cy="income-item"
       className="focus-appearance flex w-full flex-col gap-3 rounded-xl border border-gray-300 p-4 shadow-[0_3px_7px_0_#ddd] duration-300 hover:-translate-y-1 hover:shadow-[0_7px_7px_0_#ddd]"
     >
       <CommonDate date={date} />
