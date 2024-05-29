@@ -24,7 +24,7 @@ export const AddNewCost = memo(function AddNewCost({ isAdaptive, onSave }) {
   const handleSaveNewCost = async (fieldsValues) => {
     const { error } = await dispatch(createCostItemThunk(fieldsValues));
     if (error) return;
-    onSave();
+    await onSave();
     setIsOpen(false);
     showNotification({ title: t("notifications.expense.create") });
   };
@@ -34,7 +34,7 @@ export const AddNewCost = memo(function AddNewCost({ isAdaptive, onSave }) {
 
   return (
     <>
-      <Button size="large" className="!flex items-center justify-center gap-2" onClick={handleToggleVisibility}>
+      <Button size="large" gata-cy="add-expense-modal-btm" className="!flex items-center justify-center gap-2" onClick={handleToggleVisibility}>
         <SvgNewExpense className="h-7 w-7" />
         {(!isAdaptive || !["xs", "xxs"].includes(viewport)) && t("buttons.add_expense")}
       </Button>
@@ -44,7 +44,7 @@ export const AddNewCost = memo(function AddNewCost({ isAdaptive, onSave }) {
         footer={<CalculatorModal title={t("common.amount_calculator")} buttonOpen={t("common.amount_calculator")} buttonSave={t("buttons.save_amount")} onSave={handleSetCalculatedAmount} />}
         onClose={handleToggleVisibility}
       >
-        <DefaultForm ref={formRef} fields={newCostFields} isResetAfterSave onSaveForm={handleSaveNewCost} />
+        <DefaultForm ref={formRef} fields={newCostFields} isResetAfterSave gata-cy="add-expense-form" onSaveForm={handleSaveNewCost} />
       </SideModal>
     </>
   );

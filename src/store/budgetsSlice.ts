@@ -12,13 +12,13 @@ const createAppSlice = buildCreateSlice({
 });
 
 export interface BudgetsSliceState {
-  budgetsFilterValues: BudgetsFilterValues | {};
+  budgetsFilterValues: BudgetsFilterValues | null;
   budgetsList: BudgetsList | null;
   budgetItem: BudgetItem | null;
 }
 
 const initialState: BudgetsSliceState = {
-  budgetsFilterValues: {},
+  budgetsFilterValues: null,
   budgetsList: null,
   budgetItem: null,
 };

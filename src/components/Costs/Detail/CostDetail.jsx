@@ -46,7 +46,7 @@ export const CostDetail = memo(function CostDetail({ onSave }) {
     const { error } = await dispatch(updateCostItemThunk({ costId: costItem.id, costData: fieldsValues }));
     setIsLoading(false);
     if (!error) {
-      onSave();
+      await onSave();
       handleCloseModal();
       showNotification({ title: t("notifications.expense.update") });
     }
@@ -57,7 +57,7 @@ export const CostDetail = memo(function CostDetail({ onSave }) {
     const { error } = await dispatch(deleteCostItemThunk(costItem.id));
     setIsBtnLoading(false);
     if (!error) {
-      onSave();
+      await onSave();
       handleCloseModal();
       showNotification({ title: t("notifications.expense.delete") });
     }
@@ -69,7 +69,7 @@ export const CostDetail = memo(function CostDetail({ onSave }) {
   const footer = (
     <div className="flex flex-col gap-4">
       <CalculatorModal title={t("common.amount_calculator")} buttonOpen={t("common.amount_calculator")} buttonSave={t("buttons.save_amount")} onSave={handleSetCalculatedAmount} />
-      <Button size="large" className="!flex w-full items-center justify-center gap-3" loading={isBtnLoading} onClick={handleDeleteCost}>
+      <Button size="large" data-cy="delete-expense-btn" className="!flex w-full items-center justify-center gap-3" loading={isBtnLoading} onClick={handleDeleteCost}>
         <SvgDelete className="h-5 w-5 cursor-pointer duration-300 hover:text-blue-600" />
         {t("buttons.delete_expense")}
       </Button>
@@ -78,7 +78,7 @@ export const CostDetail = memo(function CostDetail({ onSave }) {
 
   return (
     <SideModal title={t("titles.detail_expense")} isOpen={isOpen} isLoading={isLoading} footer={footer} onClose={handleCloseModal}>
-      <DefaultForm ref={formRef} fields={costFields} onSaveForm={handleUpdateCost} />
+      <DefaultForm ref={formRef} fields={costFields} gata-cy="edit-expense-form" onSaveForm={handleUpdateCost} />
     </SideModal>
   );
 });
