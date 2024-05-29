@@ -60,8 +60,8 @@ export const selectBudgetsFilterFields = createSelector([selectCostCategories, s
 
 export const selectBudgetFields = createSelector([selectAccountsList, selectCostCategories, selectCurrency], (accounts, costCategories, currency) =>
   INITIAL_BUDGET_FIELDS.map((field) => {
-    if (field.id === "categories") return { ...field, options: field.options.concat(costCategories?.map(({ id, name }) => ({ value: id, label: name }))) };
-    else if (field.id === "accounts") return { ...field, options: field.options.concat(accounts?.map(({ id, name }) => ({ value: id, label: name }))) };
+    if (field.id === "categories") return { ...field, options: field.options.concat(costCategories?.map(({ id, name }) => ({ value: id, label: name })) || []) };
+    else if (field.id === "accounts") return { ...field, options: field.options.concat(accounts?.map(({ id, name }) => ({ value: id, label: name })) || []) };
     else if (field.id === "amount") return { ...field, label_suffix: currency };
     else return field;
   }),

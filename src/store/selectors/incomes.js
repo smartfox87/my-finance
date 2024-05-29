@@ -55,8 +55,8 @@ export const selectIncomesFilterFields = createSelector([selectIncomeCategories,
 
 export const selectIncomeFields = createSelector([selectIncomeCategories, selectAccountsList, selectCurrency], (incomeCategories, accountsList, currency) =>
   INITIAL_INCOME_FIELDS.map((field) => {
-    if (field.id === "category") return { ...field, options: field.options.concat(incomeCategories?.map(({ id, name }) => ({ value: id, label: name }))) };
-    else if (field.id === "account") return { ...field, options: field.options.concat(accountsList?.map(({ id, name }) => ({ value: id, label: name }))) };
+    if (field.id === "category") return { ...field, options: field.options.concat(incomeCategories?.map(({ id, name }) => ({ value: id, label: name })) || []) };
+    else if (field.id === "account") return { ...field, options: field.options.concat(accountsList?.map(({ id, name }) => ({ value: id, label: name })) || []) };
     else if (field.id === "amount") return { ...field, label_suffix: currency };
     else return field;
   }),

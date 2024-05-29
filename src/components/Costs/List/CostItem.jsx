@@ -30,6 +30,7 @@ export const CostItem = ({ id, name, amount, date, category, account }) => {
   return (
     <Link
       href={`/expenses?costId=${id}`}
+      data-cy="expense-item"
       className="flex w-full flex-col gap-3 rounded-xl border border-gray-300 p-4 shadow-[0_3px_7px_0_#ddd] duration-300 hover:-translate-y-1 hover:shadow-[0_7px_7px_0_#ddd]"
     >
       <CommonDate date={date} />

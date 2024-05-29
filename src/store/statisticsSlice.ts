@@ -12,14 +12,14 @@ const createAppSlice = buildCreateSlice({
 });
 
 export interface StatisticsSliceState {
-  statisticsFilterValues: StatisticsFilterValues | {};
+  statisticsFilterValues: StatisticsFilterValues | null;
   costsListForCharts: StatisticsCostsList | null;
   incomesListForCharts: StatisticsIncomesList | null;
   budgetsListForCharts: StatisticsBudgetsList | null;
 }
 
 const initialState: StatisticsSliceState = {
-  statisticsFilterValues: {},
+  statisticsFilterValues: null,
   costsListForCharts: null,
   incomesListForCharts: null,
   budgetsListForCharts: null,
