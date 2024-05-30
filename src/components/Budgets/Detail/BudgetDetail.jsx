@@ -73,7 +73,7 @@ export const BudgetDetail = memo(function BudgetDetail({ onSave }) {
   const footer = (
     <div className="flex flex-col gap-4">
       <CalculatorModal title={t("common.amount_calculator")} buttonOpen={t("common.amount_calculator")} buttonSave={t("buttons.save_amount")} onSave={handleSetCalculatedAmount} />
-      <Button size="large" className="!flex w-full items-center justify-center gap-3" loading={isBtnLoading} onClick={handleDeleteBudget}>
+      <Button size="large" data-cy="delete-budget-btn" className="!flex w-full items-center justify-center gap-3" loading={isBtnLoading} onClick={handleDeleteBudget}>
         <SvgDelete className="h-5 w-5 cursor-pointer duration-300 hover:text-blue-600" />
         {t("buttons.delete_budget")}
       </Button>
@@ -82,7 +82,7 @@ export const BudgetDetail = memo(function BudgetDetail({ onSave }) {
 
   return (
     <SideModal title={t("titles.detail_budget")} isOpen={isOpen} isLoading={isLoading} footer={footer} onClose={handleCloseModal}>
-      <DefaultForm ref={formRef} fields={budgetFields} onSaveForm={handleUpdateBudget} />
+      <DefaultForm ref={formRef} fields={budgetFields} gata-cy="edit-budget-form" onSaveForm={handleUpdateBudget} />
     </SideModal>
   );
 });

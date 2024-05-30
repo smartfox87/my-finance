@@ -70,7 +70,7 @@ export const StatisticsFilter = memo(function StatisticsFilter({ onSave }) {
                   onChange={(value) => handleChangeFieldValue({ id, value })}
                 />
               )}
-              {type === "period" && <PeriodField value={filterValues[id]} onChange={(value) => handleChangeFieldValue({ id, value })} />}
+              {type === "period" && <PeriodField id={id} value={filterValues[id]} onChange={(value) => handleChangeFieldValue({ id, value })} />}
             </li>
           ))}
         </ul>
