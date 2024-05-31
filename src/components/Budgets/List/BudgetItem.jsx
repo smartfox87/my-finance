@@ -32,6 +32,7 @@ export const BudgetItem = ({ id, name, amount, accounts, categories, period: [st
   return (
     <Link
       href={`/budgets?budgetId=${id}`}
+      data-cy="budget-item"
       className="flex w-full flex-col gap-3 rounded-xl border border-gray-300 p-4 shadow-[0_3px_7px_0_#ddd] duration-300 hover:-translate-y-1 hover:shadow-[0_7px_7px_0_#ddd]"
     >
       <BudgetDate startDate={start_date} endDate={end_date} />

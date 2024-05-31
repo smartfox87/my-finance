@@ -206,7 +206,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                   onChange={(value) => handleChangeFieldValue({ id, value: value as string | string[], multiple, type: "select" })}
                 />
               )}
-              {type === "period" && PeriodField && <PeriodField onChange={(value: Dayjs) => handleChangeFieldValue({ id, value })} />}
+              {type === "period" && PeriodField && <PeriodField id={id} onChange={(value: Dayjs) => handleChangeFieldValue({ id, value })} />}
               {type === "radio-buttons" && RadioGroup && (
                 <RadioGroup
                   className="w-full"

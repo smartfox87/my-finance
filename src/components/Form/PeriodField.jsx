@@ -7,7 +7,7 @@ const { RangePicker } = DatePicker;
 
 const processDates = (dates) => dates.map((date) => dayjs(date));
 
-export const PeriodField = ({ value = [], onChange }) => {
+export const PeriodField = ({ id = "", value = [], onChange }) => {
   const { t } = useTranslation();
   const [datesValue, setDatesValue] = useState(processDates(value));
   const [periodValue, setPeriodValue] = useState(findMatchingPeriod(value));
@@ -40,7 +40,7 @@ export const PeriodField = ({ value = [], onChange }) => {
   };
 
   return (
-    <div className="flex flex-col gap-4">
+    <div id={id} className="flex flex-col gap-4">
       <Radio.Group
         className="w-full"
         size="large"
