@@ -12,9 +12,10 @@ describe("authorized accounts page", () => {
       cy.intercept("POST", `${Cypress.env("NEXT_PUBLIC_SUPABASE_URL")}/rest/v1/accounts*`).as("create-account");
       cy.get('[gata-cy="add-account-modal-btm"]').click();
       cy.get('[gata-cy="add-account-form"]').within(() => {
+        cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
         cy.get("#name").type("test account");
         cy.get("#balance").type("1000");
-        cy.get('button[type="submit"]').click();
+        cy.get("@submit-btn").click();
       });
       cy.wait("@create-account").then((interception) => {
         expect(interception.response?.statusCode).to.eq(201);
@@ -29,9 +30,10 @@ describe("authorized accounts page", () => {
       cy.wait("@get-accounts").then((interception) => {
         cy.get('[data-cy="account-item"]').last().click();
         cy.get('[gata-cy="edit-account-form"]').within(() => {
+          cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
           cy.get("#name").clear().type("test account 2");
           cy.get("#balance").clear().type("2000");
-          cy.get('button[type="submit"]').click();
+          cy.get("@submit-btn").click();
         });
         cy.wait("@update-account").then((interception) => {
           expect(interception.response?.statusCode).to.eq(200);
@@ -47,10 +49,11 @@ describe("authorized accounts page", () => {
       cy.wait("@get-accounts").then((interception) => {
         cy.get('[gata-cy="transfer-between-accounts-btn"]').click();
         cy.get('[gata-cy="transfer-between-accounts-form"]').within(() => {
+          cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
           cy.pickSelect("#from", -1);
           cy.pickSelect("#to", -2);
           cy.get("#amount").type("100");
-          cy.get('button[type="submit"]').click();
+          cy.get("@submit-btn").click();
         });
         cy.wait("@update-account").then((interception) => {
           expect(interception.response?.statusCode).to.eq(200);

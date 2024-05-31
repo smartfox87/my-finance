@@ -1,3 +1,5 @@
+import { faker } from "@faker-js/faker";
+
 describe("Register form", () => {
   context("1920x1080 resolution", () => {
     beforeEach(() => {
@@ -10,10 +12,11 @@ describe("Register form", () => {
       cy.deleteE2EUser();
       cy.get('[data-cy="register-btn"]').click();
       cy.get('[data-cy="register-form"]').within(() => {
-        cy.get("#full_name").type("Full name");
+        cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
+        cy.get("#full_name").type(faker.person.fullName());
         cy.get("#email").type(Cypress.env("E2E_LOGIN"));
         cy.get("#password").type(Cypress.env("E2E_PASSWORD"));
-        cy.get('button[type="submit"]').click();
+        cy.get("@submit-btn").click();
       });
       cy.wait("@register").then((interception) => {
         expect(interception.response?.statusCode).to.eq(200);
@@ -23,7 +26,7 @@ describe("Register form", () => {
     });
   });
 
-  context("smartphone resolution", () => {
+  context("mobile resolution", () => {
     beforeEach(() => {
       cy.viewport("iphone-6");
       cy.visit(`/`);
@@ -35,10 +38,11 @@ describe("Register form", () => {
       cy.get('[data-cy="mobile-menu-btn"]').click();
       cy.get('[data-cy="register-btn"]').click();
       cy.get('[data-cy="register-form"]').within(() => {
-        cy.get("#full_name").type("Full name");
+        cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
+        cy.get("#full_name").type(faker.person.fullName());
         cy.get("#email").type(Cypress.env("E2E_LOGIN"));
         cy.get("#password").type(Cypress.env("E2E_PASSWORD"));
-        cy.get('button[type="submit"]').click();
+        cy.get("@submit-btn").click();
       });
       cy.wait("@register").then((interception) => {
         expect(interception.response?.statusCode).to.eq(200);
