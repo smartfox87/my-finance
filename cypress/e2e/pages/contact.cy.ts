@@ -1,4 +1,5 @@
 import { Dictionary } from "../../support/types";
+import { faker } from "@faker-js/faker";
 
 describe("Contact form", () => {
   context("1920x1080 resolution", () => {
@@ -10,7 +11,7 @@ describe("Contact form", () => {
 
     it("should send contact message", () => {
       cy.get("form").within(() => {
-        cy.get("#full_name").type("Full name");
+        cy.get("#full_name").type(faker.person.fullName());
         cy.get("#email").type("test@gmail.com");
         cy.pickSelect("#subject");
         cy.get("#message").type("test message");

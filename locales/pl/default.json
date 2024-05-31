@@ -186,6 +186,9 @@
     "contact": {
       "success": "Wiadomość została pomyślnie wysłana.",
       "error": "Wystąpił błąd podczas wysyłania wiadomości."
+    },
+    "profile": {
+      "update": "Profil użytkownika został pomyślnie zaktualizowany."
     }
   },
   "detail": {
