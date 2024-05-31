@@ -5,7 +5,7 @@ export const EmptyCosts = ({ addNew }) => {
 
   return (
     <div data-cy="empty-expenses" className="my-20 flex flex-col items-center gap-6">
-      <h2 className=" text-center text-xl font-bold">{t("common.empty_expenses")}</h2>
+      <h2 className="text-center text-xl font-bold">{t("common.empty_expenses")}</h2>
       {addNew}
     </div>
   );

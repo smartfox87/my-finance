@@ -29,7 +29,7 @@ export const AccountItem = ({ id, name, balance, updated_at }) => {
       data-cy="account-item"
       className="flex flex-wrap justify-between gap-2 rounded-xl border border-gray-300 p-4 shadow-[0_3px_7px_0_#ddd] duration-300 hover:-translate-y-1 hover:shadow-[0_7px_7px_0_#ddd]"
     >
-      <div ref={nameRef} className="line-clamp-2 w-full  md:line-clamp-3">
+      <div ref={nameRef} className="line-clamp-2 w-full md:line-clamp-3">
         {isTooltipName ? (
           <Tooltip title={capitalizedName}>
             {t("detail.name")}:&nbsp; <span className="font-bold">{capitalizedName}</span>
@@ -40,13 +40,13 @@ export const AccountItem = ({ id, name, balance, updated_at }) => {
           </>
         )}
       </div>
-      <div className=" w-full  md:w-auto">
+      <div className="w-full md:w-auto">
         {t("detail.balance")}:&nbsp;&nbsp;
         <span className="font-bold">
           {formatPrice(balance)} {currency}
         </span>
       </div>
-      <div className=" w-full  md:w-auto">
+      <div className="w-full md:w-auto">
         {t("detail.updated_at")}:&nbsp; <span className="font-bold">{getFullDate(updated_at)}</span>
       </div>
     </Link>
