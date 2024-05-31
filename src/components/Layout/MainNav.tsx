@@ -21,7 +21,7 @@ export const MainNav = memo(function MainNav({ className = "" }: { className?: s
       <ul className={`sticky top-16 flex grow flex-col py-4 ${isMobile ? "pl-1" : "container !pl-0"}`}>
         {INIT_NAV_LIST.map(({ icon, full_name, url }) => (
           <li key={full_name} className="w-full">
-            <Link href={url} className={`${getNavLinkClassName(url)} -ml-3 mr-3 flex items-center gap-4 py-3 pl-3 pr-3 text-lg duration-300 hover:!text-blue-600 dark:hover:!text-blue-400 `}>
+            <Link href={url} className={`${getNavLinkClassName(url)} -ml-3 mr-3 flex items-center gap-4 py-3 pl-3 pr-3 text-lg duration-300 hover:!text-blue-600 dark:hover:!text-blue-400`}>
               <div className="scale-125">{icon}</div>
               <div className="mt-0.5">{t(full_name)}</div>
             </Link>
