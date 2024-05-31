@@ -15,7 +15,7 @@ describe("authorized profile page", () => {
         expect(interception.response?.statusCode).to.eq(200);
         cy.get('[gata-cy="edit-profile-form"]').within(() => {
           cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
-          cy.get("#full_name").should("have.value", interception.response.body.full_name);
+          cy.get("#full_name").should("have.value", interception.response?.body.full_name);
           cy.get("#full_name").clear({ force: true }).type(faker.person.fullName());
           cy.pickDate("#birthdate");
           cy.pickSelect("#gender");
