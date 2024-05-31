@@ -10,8 +10,9 @@ import { PropValueList } from "@/components/Common/PropValueList";
 import { DefaultForm } from "@/components/Form/DefaultForm";
 import SvgLogout from "@/assets/sprite/logout.svg";
 import { createPortal } from "react-dom";
-import { clearProfile, updateProfileThunk } from "@/store/profileSlice";
+import { clearProfile, getProfileThunk, updateProfileThunk } from "@/store/profileSlice";
 import { logoutUserThunk } from "@/store/authSlice";
+import { showNotification } from "@/helpers/modals.js";
 
 export default function ProfileContent() {
   const { t } = useTranslation();
@@ -19,7 +20,13 @@ export default function ProfileContent() {
   const profile = useSelector(selectProfile);
   const profileFields = useSelector(selectProfileFields);
 
-  const handleSaveProfile = (profileData) => dispatch(updateProfileThunk(profileData));
+  const handleSaveProfile = async (profileData) => {
+    const { error } = await dispatch(updateProfileThunk(profileData));
+    if (!error) {
+      await dispatch(getProfileThunk());
+      showNotification({ title: t("notifications.profile.update") });
+    }
+  };
 
   const datesList = [
     { prop: t("common.created_at"), value: getFullDate(profile?.created_at, "YYYY MMMM DD, HH:MM") },
@@ -44,7 +51,7 @@ export default function ProfileContent() {
     <>
       {createPortal(headerActions, document.getElementById("layout-header"))}
       <PropValueList items={datesList} className="flex flex-wrap justify-between gap-x-6 gap-y-1" />
-      <DefaultForm fields={profileFields} onSaveForm={handleSaveProfile} />
+      <DefaultForm fields={profileFields} gata-cy="edit-profile-form" onSaveForm={handleSaveProfile} />
     </>
   );
 }
