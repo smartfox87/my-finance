@@ -10,25 +10,25 @@ function getCssPaths(dir) {
 
 const cssPaths = getCssPaths(".next/static/css");
 
-const clearCssFiles = () => cssPaths.forEach((cssPath) => fs.writeFileSync(cssPath, ""));
+// const clearCssFiles = () => cssPaths.forEach((cssPath) => fs.writeFileSync(cssPath, ""));
 
 const htmlPaths = pages.reduce((acc, page) => {
   const langPages = locales.map((locale) => ".next/server/app/" + (page.length ? `${locale}/${page}.html` : `${locale}.html`));
   return acc.concat(langPages);
 }, []);
 
-async function insertCssIntoHtml(cssFileName, htmlFileName) {
-  const cssContent = fs.readFileSync(cssFileName, "utf8");
+async function insertCssIntoHtml(cssFilePath, htmlFileName) {
+  const cssContent = fs.readFileSync(cssFilePath, "utf8");
   const styleContent = `<style>${cssContent}</style>`;
+  const cssFileName = path.basename(cssFilePath);
   let htmlContent = fs.readFileSync(htmlFileName, "utf8");
   htmlContent = htmlContent.replace("</head>", `${styleContent}</head>`);
   const $ = cheerio.load(htmlContent);
-  const styleLinkTag = $('link[rel="stylesheet"]');
-  const stylePath = styleLinkTag.attr("href");
-  styleLinkTag.remove();
-  $("script")
-    .filter((i, el) => $(el).text().includes(stylePath))
-    .remove();
+  $(`link[href="${cssFileName}"]`).remove();
+  // $("script")
+  //   .filter((i, el) => $(el).text().includes(cssFileName))
+  //   .map((i, el) => console.log("111111111111111111111111111111111111", htmlFileName, $(el).text()));
+  // .remove();
   fs.writeFileSync(htmlFileName, $.html());
 }
 
