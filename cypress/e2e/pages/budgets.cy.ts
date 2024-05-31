@@ -16,12 +16,13 @@ describe("authorized budgets page", () => {
       cy.intercept("POST", `${Cypress.env("NEXT_PUBLIC_SUPABASE_URL")}/rest/v1/budgets*`).as("create-budget");
       cy.get('[gata-cy="add-budget-modal-btm"]').click();
       cy.get('[gata-cy="add-budget-form"]').within(() => {
+        cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
         cy.get("#name").type("test budget");
         cy.get("#amount").type("1000");
         cy.pickMultiSelect("#accounts", { count: 2 });
         cy.pickMultiSelect("#categories", { count: 2 });
         cy.pickPeriod("#period");
-        cy.get('button[type="submit"]').click();
+        cy.get("@submit-btn").click();
       });
       cy.wait("@create-budget").then((interception) => {
         expect(interception.response?.statusCode).to.eq(201);
@@ -37,12 +38,13 @@ describe("authorized budgets page", () => {
       cy.wait("@get-budgets").then((interception) => {
         cy.get('[data-cy="budget-item"]').last().click();
         cy.get('[gata-cy="edit-budget-form"]').within(() => {
+          cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
           cy.get("#name").type("test budget");
           cy.get("#amount").type("1000");
           cy.pickMultiSelect("#accounts", { count: 2 });
           cy.pickMultiSelect("#categories", { count: 2 });
           cy.pickPeriod("#period");
-          cy.get('button[type="submit"]').click();
+          cy.get("@submit-btn").click();
         });
         cy.wait("@update-budget").then((interception) => {
           expect(interception.response?.statusCode).to.eq(200);

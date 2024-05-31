@@ -10,9 +10,10 @@ describe("Login modal", () => {
     it("should login by form", () => {
       cy.get('[data-cy="modal-login-btn"]').click();
       cy.get('[data-cy="login-form"]').within(() => {
+        cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
         cy.get("#email").type(Cypress.env("E2E_LOGIN"));
         cy.get("#password").type(Cypress.env("E2E_PASSWORD"));
-        cy.get('button[type="submit"]').click();
+        cy.get("@submit-btn").click();
       });
       cy.wait("@login").then((interception) => {
         expect(interception.response?.statusCode).to.eq(200);
@@ -36,7 +37,7 @@ describe("Login modal", () => {
     });
   });
 
-  context("smartphone resolution", () => {
+  context("mobile resolution", () => {
     beforeEach(() => {
       cy.viewport("iphone-6");
       cy.visit(`/profile`);
@@ -48,9 +49,10 @@ describe("Login modal", () => {
       cy.get('[data-cy="mobile-menu-btn"]').click();
       cy.get('[data-cy="modal-login-btn"]').click();
       cy.get('[data-cy="login-form"]').within(() => {
+        cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
         cy.get("#email").type(Cypress.env("E2E_LOGIN"));
         cy.get("#password").type(Cypress.env("E2E_PASSWORD"));
-        cy.get('button[type="submit"]').click();
+        cy.get("@submit-btn").click();
       });
       cy.wait("@login").then((interception) => {
         expect(interception.response?.statusCode).to.eq(200);

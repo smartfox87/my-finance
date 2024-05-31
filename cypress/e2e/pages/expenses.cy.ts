@@ -16,12 +16,13 @@ describe("authorized expenses page", () => {
       cy.intercept("POST", `${Cypress.env("NEXT_PUBLIC_SUPABASE_URL")}/rest/v1/costs*`).as("create-expense");
       cy.get('[gata-cy="add-expense-modal-btm"]').click();
       cy.get('[gata-cy="add-expense-form"]').within(() => {
+        cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
         cy.get("#name").type("test expense");
         cy.get("#amount").type("1000");
         cy.pickSelect("#account", 0);
         cy.pickSelect("#category", 0);
         cy.pickDate("#date");
-        cy.get('button[type="submit"]').click();
+        cy.get("@submit-btn").click();
       });
       cy.wait("@create-expense").then((interception) => {
         expect(interception.response?.statusCode).to.eq(201);
@@ -37,12 +38,13 @@ describe("authorized expenses page", () => {
       cy.wait("@get-expenses").then((interception) => {
         cy.get('[data-cy="expense-item"]').last().click();
         cy.get('[gata-cy="edit-expense-form"]').within(() => {
+          cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
           cy.get("#name").type("test expense");
           cy.get("#amount").type("1000");
           cy.pickSelect("#account", 0);
           cy.pickSelect("#category", 0);
           cy.pickDate("#date");
-          cy.get('button[type="submit"]').click();
+          cy.get("@submit-btn").click();
         });
         cy.wait("@update-expense").then((interception) => {
           expect(interception.response?.statusCode).to.eq(200);
