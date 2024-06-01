@@ -1,4 +1,4 @@
-import { forwardRef, LegacyRef, useCallback, useEffect, useImperativeHandle, useLayoutEffect, useMemo, useRef } from "react";
+import { forwardRef, LegacyRef, useCallback, useEffect, useImperativeHandle, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Form, Input, UploadFile, InputRef, FormProps } from "antd";
 import dayjs, { Dayjs } from "dayjs";
@@ -16,26 +16,26 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
 
   const propsFieldsValues = useMemo(
     () =>
-      fields.map(({ type, id, value }: PropField): PropFieldValue => {
-        const item: PropFieldValue = { name: id, type };
-        if (type === "file") item.fileList = value;
-        else item.value = value && type === "date" ? dayjs(value) : value;
-        return item;
-      }),
+      fields
+        .map(({ type, id, value }: PropField): PropFieldValue => {
+          const item: PropFieldValue = { name: id, type };
+          if (type === "file") item.fileList = value;
+          else item.value = value && type === "date" ? dayjs(value) : value;
+          return item;
+        })
+        .reduce(
+          (acc, { name, value, fileList }) => ({
+            ...acc,
+            [name]: fileList || value,
+          }),
+          {},
+        ),
     [fields],
   );
   const propsFieldsIds = useMemo(() => fields.map(({ id }) => id), [fields]);
   const prevFieldsValuesRef = useRef<{ [key: string]: FormValue }>({});
-  const setPropsFormValues = () =>
-    form.setFieldsValue(
-      propsFieldsValues.reduce(
-        (acc, { name, value, fileList }) => ({
-          ...acc,
-          [name]: fileList || value,
-        }),
-        {},
-      ),
-    );
+  const setPropsFormValues = () => form.setFieldsValue(propsFieldsValues);
+  const [currentFieldsValues, setCurrentFieldsValues] = useState(propsFieldsValues);
 
   useEffect(() => {
     setPropsFormValues();
@@ -56,12 +56,13 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
         else form.setFieldsValue({ [id]: (newValue as string[]).filter((val: string) => val !== "all") });
       } else form.setFieldsValue({ [id]: newValue });
       prevFieldsValuesRef.current = form.getFieldsValue(propsFieldsIds);
+      setCurrentFieldsValues(form.getFieldsValue(propsFieldsIds));
       if (typeof onChange === "function") onChange();
     },
     [onChange],
   );
 
-  const isChangedFieldsData = JSON.stringify(propsFieldsValues) !== JSON.stringify(form.getFieldsValue(propsFieldsIds));
+  const isChangedFieldsData = JSON.stringify(propsFieldsValues) !== JSON.stringify(currentFieldsValues);
 
   const handleSubmitForm: FormProps<FormValues>["onFinish"] = async () => {
     try {

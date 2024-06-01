@@ -16,12 +16,13 @@ describe("authorized incomes page", () => {
       cy.intercept("POST", `${Cypress.env("NEXT_PUBLIC_SUPABASE_URL")}/rest/v1/incomes*`).as("create-income");
       cy.get('[gata-cy="add-income-modal-btm"]').click();
       cy.get('[gata-cy="add-income-form"]').within(() => {
+        cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
         cy.get("#name").type("test income");
         cy.get("#amount").type("1000");
         cy.pickSelect("#account", 0);
         cy.pickSelect("#category", 0);
         cy.pickDate("#date");
-        cy.get('button[type="submit"]').click();
+        cy.get("@submit-btn").click();
       });
       cy.wait("@create-income").then((interception) => {
         expect(interception.response?.statusCode).to.eq(201);
@@ -37,12 +38,13 @@ describe("authorized incomes page", () => {
       cy.wait("@get-incomes").then((interception) => {
         cy.get('[data-cy="income-item"]').last().click();
         cy.get('[gata-cy="edit-income-form"]').within(() => {
+          cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
           cy.get("#name").type("test income");
           cy.get("#amount").type("1000");
           cy.pickSelect("#account", 0);
           cy.pickSelect("#category", 0);
           cy.pickDate("#date");
-          cy.get('button[type="submit"]').click();
+          cy.get("@submit-btn").click();
         });
         cy.wait("@update-income").then((interception) => {
           expect(interception.response?.statusCode).to.eq(200);

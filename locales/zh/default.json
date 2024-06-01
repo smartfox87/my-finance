@@ -186,6 +186,9 @@
     "contact": {
       "success": "消息已成功发送。",
       "error": "发送消息时发生错误。"
+    },
+    "profile": {
+      "update": "用户资料已成功更新。"
     }
   },
   "detail": {
