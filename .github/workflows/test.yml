@@ -1,4 +1,4 @@
-name: E2E on Chrome
+name: test
 on:
     push:
         branches: [master]
@@ -13,24 +13,16 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
-
       - name: Set up Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-
-      - name: Cypress run
-        uses: cypress-io/github-action@v6
-        with:
-          browser: chrome
-          build: npm run build
-          start: npm run start
-          wait-on: ${{ vars.NEXT_PUBLIC_PUBLIC_URL }}
+      - name: test run
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_KEY }}
           SUPABASE_KEY_SERVICE: ${{ secrets.SUPABASE_KEY_SERVICE }}
-          NEXT_PUBLIC_PUBLIC_URL: ${{ vars.NEXT_PUBLIC_PUBLIC_URL }}
+          NEXT_PUBLIC_PUBL  IC_URL: ${{ vars.NEXT_PUBLIC_PUBLIC_URL }}
           NEXT_PUBLIC_DEMO_USER_EMAIL: ${{ secrets.NEXT_PUBLIC_DEMO_USER_EMAIL }}
           NEXT_PUBLIC_DEMO_USER_PASSWORD: ${{ secrets.NEXT_PUBLIC_DEMO_USER_PASSWORD }}
           NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY: ${{ secrets.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY }}
@@ -41,12 +33,4 @@ jobs:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           E2E_LOGIN: ${{ secrets.E2E_LOGIN }}
           E2E_PASSWORD: ${{ secrets.E2E_PASSWORD }}
-
-      - name: Upload Cypress artifacts
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: cypress-artifacts
-          path: |
-            cypress/screenshots
-            cypress/videos
+        run: echo "11111111111111111111111 ${{ env.NEXT_PUBLIC_PUBLIC_URL }} 222222222222222222 ${{ vars.NEXT_PUBLIC_PUBLIC_URL }}"

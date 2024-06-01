@@ -130,6 +130,16 @@ Cypress.Commands.add("pickPeriod", (selector) => {
   });
 });
 
+Cypress.Commands.add("pickRadioButton", (selector) => {
+  cy.get(selector).within(() => {
+    cy.get(".ant-radio-button-wrapper").then((items) => {
+      cy.wrap(items)
+        .eq(Math.floor(Math.random() * items.length))
+        .click();
+    });
+  });
+});
+
 Cypress.Commands.add("pickFile", (selector) => {
   cy.get(selector).selectFile("cypress/fixtures/images/jpg.jpg", { force: true, action: "select" });
 });
@@ -146,6 +156,7 @@ declare global {
       pickMultiSelect(selector: string, options: { indexes?: number[]; count?: number }): Chainable<void>;
       pickDate(selector: string): Chainable<void>;
       pickPeriod(selector: string): Chainable<void>;
+      pickRadioButton(selector: string): Chainable<void>;
       pickFile(selector: string): Chainable<void>;
     }
   }

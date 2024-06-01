@@ -189,6 +189,9 @@
     },
     "profile": {
       "update": "Profil użytkownika został pomyślnie zaktualizowany."
+    },
+    "settings": {
+      "update": "Ustawienia zostały pomyślnie zaktualizowane."
     }
   },
   "detail": {

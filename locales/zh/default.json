@@ -189,6 +189,9 @@
     },
     "profile": {
       "update": "用户资料已成功更新。"
+    },
+    "settings": {
+      "update": "设置已成功更新。"
     }
   },
   "detail": {
