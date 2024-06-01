@@ -17,20 +17,18 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Install dependencies
-        run: npm install
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
           browser: chrome
           build: npm run build
           start: npm run start
-          wait-on: ${{ variables.NEXT_PUBLIC_PUBLIC_URL }}
+          wait-on: ${{ env.NEXT_PUBLIC_PUBLIC_URL }}
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_KEY }}
           SUPABASE_KEY_SERVICE: ${{ secrets.SUPABASE_KEY_SERVICE }}
-          NEXT_PUBLIC_PUBLIC_URL: ${{ variables.NEXT_PUBLIC_PUBLIC_URL }}
+          NEXT_PUBLIC_PUBLIC_URL: ${{ env.NEXT_PUBLIC_PUBLIC_URL }}
           NEXT_PUBLIC_DEMO_USER_EMAIL: ${{ secrets.NEXT_PUBLIC_DEMO_USER_EMAIL }}
           NEXT_PUBLIC_DEMO_USER_PASSWORD: ${{ secrets.NEXT_PUBLIC_DEMO_USER_PASSWORD }}
           NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY: ${{ secrets.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY }}
