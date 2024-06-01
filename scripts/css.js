@@ -24,7 +24,7 @@ async function insertCssIntoHtml(cssFilePath, htmlFileName) {
   let htmlContent = fs.readFileSync(htmlFileName, "utf8");
   htmlContent = htmlContent.replace("</head>", `${styleContent}</head>`);
   const $ = cheerio.load(htmlContent);
-  $(`link[href="${cssFileName}"]`).remove();
+  $(`link[href*="${cssFileName}"]`).remove();
   // $("script")
   //   .filter((i, el) => $(el).text().includes(cssFileName))
   //   .map((i, el) => console.log("111111111111111111111111111111111111", htmlFileName, $(el).text()));
