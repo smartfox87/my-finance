@@ -35,7 +35,7 @@ export const AddNewBudget = memo(function AddNewBudget({ isAdaptive, onSave }) {
 
   return (
     <>
-      <Button size="large" gata-cy="add-budget-modal-btm" className="!flex items-center justify-center gap-3" onClick={handleToggleVisibility}>
+      <Button size="large" data-cy="add-budget-modal-btm" className="!flex items-center justify-center gap-3" onClick={handleToggleVisibility}>
         <SvgNewBudget className="h-[22px] w-[22px]" />
         {(!isAdaptive || !["xs", "xxs"].includes(viewport)) && t("buttons.add_budget")}
       </Button>
@@ -45,7 +45,7 @@ export const AddNewBudget = memo(function AddNewBudget({ isAdaptive, onSave }) {
         footer={<CalculatorModal title={t("common.amount_calculator")} buttonOpen={t("common.amount_calculator")} buttonSave={t("buttons.save_amount")} onSave={handleSetCalculatedAmount} />}
         onClose={handleToggleVisibility}
       >
-        <DefaultForm ref={formRef} fields={newBudgetFields} isResetAfterSave gata-cy="add-budget-form" onSaveForm={onSaveNewBudget} />
+        <DefaultForm ref={formRef} fields={newBudgetFields} isResetAfterSave data-cy="add-budget-form" onSaveForm={onSaveNewBudget} />
       </SideModal>
     </>
   );

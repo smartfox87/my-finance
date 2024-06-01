@@ -13,7 +13,7 @@ describe("authorized profile page", () => {
       cy.intercept("PATCH", `${Cypress.env("NEXT_PUBLIC_SUPABASE_URL")}/rest/v1/profile*`).as("update-profile");
       cy.wait("@get-profile").then((interception) => {
         expect(interception.response?.statusCode).to.eq(200);
-        cy.get('[gata-cy="edit-profile-form"]').within(() => {
+        cy.get('[data-cy="edit-profile-form"]').within(() => {
           cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
           cy.get("#full_name").should("have.value", interception.response?.body.full_name);
           cy.get("#full_name").clear({ force: true }).type(faker.person.fullName());

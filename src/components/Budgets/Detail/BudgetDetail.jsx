@@ -82,7 +82,7 @@ export const BudgetDetail = memo(function BudgetDetail({ onSave }) {
 
   return (
     <SideModal title={t("titles.detail_budget")} isOpen={isOpen} isLoading={isLoading} footer={footer} onClose={handleCloseModal}>
-      <DefaultForm ref={formRef} fields={budgetFields} gata-cy="edit-budget-form" onSaveForm={handleUpdateBudget} />
+      <DefaultForm ref={formRef} fields={budgetFields} data-cy="edit-budget-form" onSaveForm={handleUpdateBudget} />
     </SideModal>
   );
 });
