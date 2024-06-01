@@ -20,5 +20,5 @@ export default function SettingsContent() {
     }
   };
 
-  return <DefaultForm fields={profileFields} gata-cy="edit-settings-form" onSaveForm={handleSaveProfile} />;
+  return <DefaultForm fields={profileFields} data-cy="edit-settings-form" onSaveForm={handleSaveProfile} />;
 }

@@ -78,7 +78,7 @@ export const IncomeDetail = memo(function IncomeDetail({ onSave }) {
 
   return (
     <SideModal title={t("titles.detail_income")} isOpen={isOpen} isLoading={isLoading} footer={footer} onClose={handleCloseModal}>
-      <DefaultForm ref={formRef} fields={incomeFields} isVisible={isOpen} gata-cy="edit-income-form" onSaveForm={handleUpdateIncome} />
+      <DefaultForm ref={formRef} fields={incomeFields} isVisible={isOpen} data-cy="edit-income-form" onSaveForm={handleUpdateIncome} />
     </SideModal>
   );
 });

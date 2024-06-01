@@ -51,7 +51,7 @@ export default function ProfileContent() {
     <>
       {createPortal(headerActions, document.getElementById("layout-header"))}
       <PropValueList items={datesList} className="flex flex-wrap justify-between gap-x-6 gap-y-1" />
-      <DefaultForm fields={profileFields} gata-cy="edit-profile-form" onSaveForm={handleSaveProfile} />
+      <DefaultForm fields={profileFields} data-cy="edit-profile-form" onSaveForm={handleSaveProfile} />
     </>
   );
 }

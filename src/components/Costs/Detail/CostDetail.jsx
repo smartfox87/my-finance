@@ -78,7 +78,7 @@ export const CostDetail = memo(function CostDetail({ onSave }) {
 
   return (
     <SideModal title={t("titles.detail_expense")} isOpen={isOpen} isLoading={isLoading} footer={footer} onClose={handleCloseModal}>
-      <DefaultForm ref={formRef} fields={costFields} gata-cy="edit-expense-form" onSaveForm={handleUpdateCost} />
+      <DefaultForm ref={formRef} fields={costFields} data-cy="edit-expense-form" onSaveForm={handleUpdateCost} />
     </SideModal>
   );
 });

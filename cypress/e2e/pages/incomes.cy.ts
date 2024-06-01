@@ -14,8 +14,8 @@ describe("authorized incomes page", () => {
 
     it("should create income", () => {
       cy.intercept("POST", `${Cypress.env("NEXT_PUBLIC_SUPABASE_URL")}/rest/v1/incomes*`).as("create-income");
-      cy.get('[gata-cy="add-income-modal-btm"]').click();
-      cy.get('[gata-cy="add-income-form"]').within(() => {
+      cy.get('[data-cy="add-income-modal-btm"]').click();
+      cy.get('[data-cy="add-income-form"]').within(() => {
         cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
         cy.get("#name").type("test income");
         cy.get("#amount").type("1000");
@@ -37,7 +37,7 @@ describe("authorized incomes page", () => {
       cy.intercept("PATCH", `${Cypress.env("NEXT_PUBLIC_SUPABASE_URL")}/rest/v1/incomes*`).as("update-income");
       cy.wait("@get-incomes").then((interception) => {
         cy.get('[data-cy="income-item"]').last().click();
-        cy.get('[gata-cy="edit-income-form"]').within(() => {
+        cy.get('[data-cy="edit-income-form"]').within(() => {
           cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
           cy.get("#name").type("test income");
           cy.get("#amount").type("1000");

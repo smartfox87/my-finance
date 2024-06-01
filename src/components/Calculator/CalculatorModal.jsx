@@ -18,7 +18,7 @@ export const CalculatorModal = ({ title, buttonOpen, buttonSave, onSave }) => {
   };
 
   const saveBtn = (
-    <Button type="primary" className="!flex items-center justify-center gap-3" disabled={!value} onClick={handleSaveResult}>
+    <Button type="primary" data-cy="calculator-save-btn" className="!flex items-center justify-center gap-3" disabled={!value} onClick={handleSaveResult}>
       <SvgPassPrice className="h-5 w-5" />
       {buttonSave}
     </Button>
@@ -26,7 +26,7 @@ export const CalculatorModal = ({ title, buttonOpen, buttonSave, onSave }) => {
 
   return (
     <>
-      <Button size="large" className="!flex w-full items-center justify-center gap-3" onClick={handleToggleVisibility}>
+      <Button size="large" data-cy="calculator-modal-btn" className="!flex w-full items-center justify-center gap-3" onClick={handleToggleVisibility}>
         <SvgCalculator className="h-5 w-5" />
         {buttonOpen}
       </Button>

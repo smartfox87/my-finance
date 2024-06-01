@@ -14,6 +14,7 @@ export const CalculatorResult = ({ value, onKeyDown, onChange }) => {
       <input
         ref={inputRef}
         value={value}
+        data-cy="calculator-input"
         className="h-12 w-full appearance-none border-none bg-transparent text-2xl font-bold uppercase shadow-none outline-none"
         onChange={onChange}
         onKeyDown={onKeyDown}

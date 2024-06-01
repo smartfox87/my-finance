@@ -63,7 +63,7 @@ export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ o
 
   return (
     <>
-      <Button size="large" gata-cy="transfer-between-accounts-btn" className="!flex items-center justify-center gap-2" onClick={handleToggleVisibility}>
+      <Button size="large" data-cy="transfer-between-accounts-btn" className="!flex items-center justify-center gap-2" onClick={handleToggleVisibility}>
         <SvgTransfer className="h-7 w-7 shrink-0" />
         {!["xs", "xxs"].includes(viewport) && t("common.transfer_money")}
       </Button>
@@ -76,7 +76,7 @@ export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ o
         onInit={setIsInitialized}
       >
         <div className="flex flex-col gap-4">
-          <Form layout="vertical" form={form} fields={formFieldsValues} gata-cy="transfer-between-accounts-form" className="flex w-full flex-col" onFinish={handleSubmitForm}>
+          <Form layout="vertical" form={form} fields={formFieldsValues} data-cy="transfer-between-accounts-form" className="flex w-full flex-col" onFinish={handleSubmitForm}>
             <Form.Item label={t(`fields.simple.from`)} name="from" rules={[{ required: true, message: t("fields.errors.required") }]}>
               <Select
                 ref={focusInputRef}

@@ -35,7 +35,7 @@ export const AddNewAccount = memo(function AddNewAccount({ onSave }) {
 
   return (
     <>
-      <Button size="large" gata-cy="add-account-modal-btm" className="!flex items-center justify-center gap-2" onClick={handleToggleVisibility}>
+      <Button size="large" data-cy="add-account-modal-btm" className="!flex items-center justify-center gap-2" onClick={handleToggleVisibility}>
         <SvgNewAccount className="h-7 w-7" />
         {!["xs", "xxs"].includes(viewport) && t("common.add_account")}
       </Button>
@@ -45,7 +45,7 @@ export const AddNewAccount = memo(function AddNewAccount({ onSave }) {
         footer={<CalculatorModal title={t("common.balance_calculator")} buttonOpen={t("common.balance_calculator")} buttonSave={t("buttons.save_balance")} onSave={handleSetCalculatedAmount} />}
         onClose={handleToggleVisibility}
       >
-        <DefaultForm ref={formRef} fields={newAccountFields} gata-cy="add-account-form" isResetAfterSave onSaveForm={handleSaveNewAccount} />
+        <DefaultForm ref={formRef} fields={newAccountFields} data-cy="add-account-form" isResetAfterSave onSaveForm={handleSaveNewAccount} />
       </SideModal>
     </>
   );

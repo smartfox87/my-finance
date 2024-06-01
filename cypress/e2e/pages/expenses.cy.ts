@@ -14,8 +14,8 @@ describe("authorized expenses page", () => {
 
     it("should create expense", () => {
       cy.intercept("POST", `${Cypress.env("NEXT_PUBLIC_SUPABASE_URL")}/rest/v1/costs*`).as("create-expense");
-      cy.get('[gata-cy="add-expense-modal-btm"]').click();
-      cy.get('[gata-cy="add-expense-form"]').within(() => {
+      cy.get('[data-cy="add-expense-modal-btm"]').click();
+      cy.get('[data-cy="add-expense-form"]').within(() => {
         cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
         cy.get("#name").type("test expense");
         cy.get("#amount").type("1000");
@@ -37,7 +37,7 @@ describe("authorized expenses page", () => {
       cy.intercept("PATCH", `${Cypress.env("NEXT_PUBLIC_SUPABASE_URL")}/rest/v1/costs*`).as("update-expense");
       cy.wait("@get-expenses").then((interception) => {
         cy.get('[data-cy="expense-item"]').last().click();
-        cy.get('[gata-cy="edit-expense-form"]').within(() => {
+        cy.get('[data-cy="edit-expense-form"]').within(() => {
           cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
           cy.get("#name").type("test expense");
           cy.get("#amount").type("1000");

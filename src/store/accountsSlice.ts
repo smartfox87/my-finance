@@ -125,6 +125,9 @@ export const accountsSlice = createAppSlice({
       },
       {
         rejected: handleRejected,
+        fulfilled: (state) => {
+          state.accountItem = null;
+        },
       },
     ),
     setAccountItem: create.reducer<AccountItem>((state, { payload }) => {

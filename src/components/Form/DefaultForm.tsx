@@ -5,7 +5,7 @@ import dayjs, { Dayjs } from "dayjs";
 import { useLoading } from "@/hooks/loading.js";
 import SvgUpload from "@/assets/sprite/upload.svg";
 import { getFileSizeWithUnit } from "@/helpers/file.js";
-import { handleFilterSelectOptions } from "@/helpers/fields";
+import { cutDecimals, handleFilterSelectOptions, handleKeyDownDecimalsValidation, handleKeyUpCutDecimals } from "@/helpers/fields";
 import { ExtendedFormItemRule, PropField, FormItemRule, DefaultFormProps, PropFieldValue, FormValue, ChangedField, FormValues, ProcessedValues } from "@/types/Form";
 import dynamic from "next/dynamic";
 import { showErrorMessage } from "@/helpers/message";
@@ -59,7 +59,10 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
     [onChange, currentFieldsValues],
   );
 
-  const isChangedFieldsData = JSON.stringify(propsFieldsValues) !== JSON.stringify(currentFieldsValues);
+  const isChangedFieldsValues = useMemo(
+    () => Object.entries(propsFieldsValues).some(([key, value]) => (value || currentFieldsValues[key]) && JSON.stringify(value) !== JSON.stringify(currentFieldsValues[key])),
+    [propsFieldsValues, currentFieldsValues],
+  );
 
   const handleSubmitForm: FormProps<FormValues>["onFinish"] = async () => {
     try {
@@ -112,7 +115,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
   };
   const getFieldRules = ({ required, type }: { required?: boolean; type: ExtendedFormItemRule }) => {
     const rules: { required?: boolean; type?: FormItemRule; message: string }[] = [];
-    if ("number" === type || "email" === type) rules.push({ type, message: t(`fields.errors.${type}`) });
+    if ("email" === type) rules.push({ type, message: t(`fields.errors.${type}`) });
     if (required) rules.push({ required: true, message: t("fields.errors.required") });
     return rules;
   };
@@ -176,7 +179,17 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 />
               )}
               {type === "number" && InputNumber && (
-                <InputNumber size="large" autoFocus={!!focus} disabled={disabled} min={0} max={999999999999999} style={{ width: "100%" }} onChange={(value) => handleChangeFieldValue({ id, value })} />
+                <InputNumber
+                  size="large"
+                  autoFocus={!!focus}
+                  disabled={disabled}
+                  onKeyDown={handleKeyDownDecimalsValidation}
+                  onKeyUp={handleKeyUpCutDecimals}
+                  min={0}
+                  max={999999999999999}
+                  style={{ width: "100%" }}
+                  onChange={(value) => handleChangeFieldValue({ id, value: cutDecimals(value) })}
+                />
               )}
               {type === "textarea" && (
                 <Input.TextArea
@@ -237,10 +250,10 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
         },
       )}
       <div className="mt-2 flex gap-4">
-        <Button size="large" type="primary" htmlType="submit" loading={isLoading} className="w-1/3 grow" disabled={!isChangedFieldsData}>
+        <Button size="large" type="primary" htmlType="submit" loading={isLoading} className="w-1/3 grow" disabled={!isChangedFieldsValues}>
           {t("buttons.submit")}
         </Button>
-        <Button size="large" className="w-1/3 grow" disabled={!isChangedFieldsData} onClick={handleCancelForm}>
+        <Button size="large" className="w-1/3 grow" disabled={!isChangedFieldsValues} onClick={handleCancelForm}>
           {t("buttons.cancel")}
         </Button>
       </div>
