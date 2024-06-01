@@ -189,6 +189,9 @@
     },
     "profile": {
       "update": "Das Benutzerprofil wurde erfolgreich aktualisiert."
+    },
+    "settings": {
+      "update": "Die Einstellungen wurden erfolgreich aktualisiert."
     }
   },
   "detail": {

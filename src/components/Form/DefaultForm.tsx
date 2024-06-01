@@ -33,13 +33,11 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
     [fields],
   );
   const propsFieldsIds = useMemo(() => fields.map(({ id }) => id), [fields]);
-  const prevFieldsValuesRef = useRef<{ [key: string]: FormValue }>({});
-  const setPropsFormValues = () => form.setFieldsValue(propsFieldsValues);
-  const [currentFieldsValues, setCurrentFieldsValues] = useState(propsFieldsValues);
+  const [currentFieldsValues, setCurrentFieldsValues] = useState<{ [key: string]: FormValue }>(propsFieldsValues);
 
   useEffect(() => {
-    setPropsFormValues();
-    prevFieldsValuesRef.current = form.getFieldsValue(propsFieldsIds);
+    form.setFieldsValue(propsFieldsValues);
+    setCurrentFieldsValues(form.getFieldsValue(propsFieldsIds));
   }, [propsFieldsValues]);
 
   const [isLoading, setIsLoading] = useLoading(false);
@@ -52,14 +50,13 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
   const handleChangeFieldValue = useCallback(
     ({ id, value: newValue, multiple, type }: ChangedField) => {
       if (multiple && type === "select" && Array.isArray(newValue)) {
-        if (!newValue?.length || (!(prevFieldsValuesRef.current[id] as string[]).includes("all") && (newValue as string[]).includes("all"))) form.setFieldsValue({ [id]: ["all"] });
+        if (!newValue?.length || (!(currentFieldsValues[id] as string[]).includes("all") && (newValue as string[]).includes("all"))) form.setFieldsValue({ [id]: ["all"] });
         else form.setFieldsValue({ [id]: (newValue as string[]).filter((val: string) => val !== "all") });
       } else form.setFieldsValue({ [id]: newValue });
-      prevFieldsValuesRef.current = form.getFieldsValue(propsFieldsIds);
       setCurrentFieldsValues(form.getFieldsValue(propsFieldsIds));
       if (typeof onChange === "function") onChange();
     },
-    [onChange],
+    [onChange, currentFieldsValues],
   );
 
   const isChangedFieldsData = JSON.stringify(propsFieldsValues) !== JSON.stringify(currentFieldsValues);
@@ -86,7 +83,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
 
   const handleCancelForm = () => {
     if (onResetForm) onResetForm();
-    setPropsFormValues();
+    form.setFieldsValue(propsFieldsValues);
   };
 
   useImperativeHandle(ref, () => ({ handleChangeFieldValue }));

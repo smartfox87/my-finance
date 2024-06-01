@@ -189,6 +189,9 @@
     },
     "profile": {
       "update": "Le profil a été mis à jour avec succès."
+    },
+    "settings": {
+      "update": "Les paramètres ont été mis à jour avec succès."
     }
   },
   "detail": {
