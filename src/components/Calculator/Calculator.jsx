@@ -1,6 +1,7 @@
 import { forwardRef, useImperativeHandle, useState } from "react";
 import { CalculatorResult } from "@/components/Calculator/CalculatorResult.jsx";
 import { CalculatorKeyPad } from "@/components/Calculator/CalculatorKeyPad.jsx";
+import { decimalsKeys, mathOperatorsKeys, navigationKeys } from "@/initial-data/input";
 
 export const Calculator = forwardRef(function Calculator({ onCalculate }, ref) {
   const [result, setResult] = useState("");
@@ -29,8 +30,8 @@ export const Calculator = forwardRef(function Calculator({ onCalculate }, ref) {
     else setResult(result + button);
   };
 
+  const allowedKeys = [...decimalsKeys, ...navigationKeys, ...mathOperatorsKeys];
   const handleKeyDown = (event) => {
-    const allowedKeys = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "(", ")", "-", "+", "*", "/", "Backspace", "Enter", "Delete", "ArrowLeft", "ArrowRight", "Tab"];
     if (!allowedKeys.includes(event.key)) event.preventDefault();
     else if (event.key === "Enter") calculate();
   };
@@ -40,7 +41,7 @@ export const Calculator = forwardRef(function Calculator({ onCalculate }, ref) {
   useImperativeHandle(ref, () => ({ clear }));
 
   return (
-    <section className="flex flex-col gap-0.5">
+    <section data-cy="calculator-body" className="flex flex-col gap-0.5">
       <CalculatorResult value={result} onKeyDown={handleKeyDown} onChange={handleChange} />
       <CalculatorKeyPad onClick={handleClick} />
     </section>
