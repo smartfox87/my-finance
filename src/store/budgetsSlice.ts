@@ -81,6 +81,9 @@ export const budgetsSlice = createAppSlice({
       },
       {
         rejected: handleRejected,
+        fulfilled: (state) => {
+          state.budgetItem = null;
+        },
       },
     ),
     setBudgetsFilterValues: create.reducer<FilterValues>((state, { payload }) => {

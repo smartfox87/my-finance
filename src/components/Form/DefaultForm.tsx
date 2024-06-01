@@ -5,13 +5,10 @@ import dayjs, { Dayjs } from "dayjs";
 import { useLoading } from "@/hooks/loading.js";
 import SvgUpload from "@/assets/sprite/upload.svg";
 import { getFileSizeWithUnit } from "@/helpers/file.js";
-import { handleFilterSelectOptions } from "@/helpers/fields";
+import { cutDecimals, handleFilterSelectOptions, handleKeyDownDecimalsValidation, handleKeyUpCutDecimals } from "@/helpers/fields";
 import { ExtendedFormItemRule, PropField, FormItemRule, DefaultFormProps, PropFieldValue, FormValue, ChangedField, FormValues, ProcessedValues } from "@/types/Form";
 import dynamic from "next/dynamic";
 import { showErrorMessage } from "@/helpers/message";
-import { decimalsKeys, navigationKeys } from "@/initial-data/input";
-
-const allowedInputNumberKeys = [...decimalsKeys, ...navigationKeys];
 
 export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfterSave, isVisible = true, onSaveForm, onResetForm, onChange, ...props }: DefaultFormProps, ref) {
   const { t } = useTranslation();
@@ -118,7 +115,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
   };
   const getFieldRules = ({ required, type }: { required?: boolean; type: ExtendedFormItemRule }) => {
     const rules: { required?: boolean; type?: FormItemRule; message: string }[] = [];
-    if ("number" === type || "email" === type) rules.push({ type, message: t(`fields.errors.${type}`) });
+    if ("email" === type) rules.push({ type, message: t(`fields.errors.${type}`) });
     if (required) rules.push({ required: true, message: t("fields.errors.required") });
     return rules;
   };
@@ -186,12 +183,12 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                   size="large"
                   autoFocus={!!focus}
                   disabled={disabled}
-                  onKeyDown={(event) => !allowedInputNumberKeys.includes(event.key) && event.preventDefault()}
-                  step={0.01}
+                  onKeyDown={handleKeyDownDecimalsValidation}
+                  onKeyUp={handleKeyUpCutDecimals}
                   min={0}
                   max={999999999999999}
                   style={{ width: "100%" }}
-                  onChange={(value) => handleChangeFieldValue({ id, value })}
+                  onChange={(value) => handleChangeFieldValue({ id, value: cutDecimals(value) })}
                 />
               )}
               {type === "textarea" && (

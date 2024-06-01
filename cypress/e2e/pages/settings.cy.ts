@@ -1,7 +1,7 @@
 import { Dictionary } from "../../support/types";
 import { faker } from "@faker-js/faker";
 
-describe("authorized profile page", () => {
+describe("authorized settings page", () => {
   context("1920x1080 resolution", () => {
     beforeEach(() => {
       cy.login();

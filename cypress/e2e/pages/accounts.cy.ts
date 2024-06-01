@@ -11,10 +11,12 @@ describe("authorized accounts page", () => {
     it("should create account", () => {
       cy.intercept("POST", `${Cypress.env("NEXT_PUBLIC_SUPABASE_URL")}/rest/v1/accounts*`).as("create-account");
       cy.get('[gata-cy="add-account-modal-btm"]').click();
+      cy.pickCalculator("1000+1000");
       cy.get('[gata-cy="add-account-form"]').within(() => {
+        cy.get("#balance").as("balance").should("have.value", "2000").clear();
         cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
         cy.get("#name").type("test account");
-        cy.get("#balance").type("1000");
+        cy.get("@balance").type("1000");
         cy.get("@submit-btn").click();
       });
       cy.wait("@create-account").then((interception) => {
@@ -31,8 +33,10 @@ describe("authorized accounts page", () => {
         cy.get('[data-cy="account-item"]').last().click();
         cy.get('[gata-cy="edit-account-form"]').within(() => {
           cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
+          cy.pickCalculator("1000+1000");
+          cy.get("#balance").as("balance").should("have.value", "2000").clear();
           cy.get("#name").clear().type("test account 2");
-          cy.get("#balance").clear().type("2000");
+          cy.get("@balance").type("3000");
           cy.get("@submit-btn").click();
         });
         cy.wait("@update-account").then((interception) => {
@@ -52,7 +56,9 @@ describe("authorized accounts page", () => {
           cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
           cy.pickSelect("#from", -1);
           cy.pickSelect("#to", -2);
-          cy.get("#amount").type("100");
+          cy.pickCalculator("1000+1000");
+          cy.get("#amount").as("amount").should("have.value", "2000").clear();
+          cy.get("@amount").type("100");
           cy.get("@submit-btn").click();
         });
         cy.wait("@update-account").then((interception) => {

@@ -106,6 +106,9 @@ export const incomesSlice = createAppSlice({
       },
       {
         rejected: handleRejected,
+        fulfilled: (state) => {
+          state.incomeItem = null;
+        },
       },
     ),
     setIncomesFilterValues: create.reducer<FilterValues>((state, { payload }) => {

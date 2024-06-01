@@ -1,7 +1,7 @@
 import { forwardRef, useImperativeHandle, useState } from "react";
 import { CalculatorResult } from "@/components/Calculator/CalculatorResult.jsx";
 import { CalculatorKeyPad } from "@/components/Calculator/CalculatorKeyPad.jsx";
-import { decimalsKeys, mathOperatorsKeys, navigationKeys } from "@/initial-data/input";
+import { decimalsKeys, integerKeys, mathOperatorsKeys, navigationKeys } from "@/initial-data/input";
 
 export const Calculator = forwardRef(function Calculator({ onCalculate }, ref) {
   const [result, setResult] = useState("");
@@ -30,7 +30,7 @@ export const Calculator = forwardRef(function Calculator({ onCalculate }, ref) {
     else setResult(result + button);
   };
 
-  const allowedKeys = [...decimalsKeys, ...navigationKeys, ...mathOperatorsKeys];
+  const allowedKeys = [...integerKeys, ...decimalsKeys, ...navigationKeys, ...mathOperatorsKeys];
   const handleKeyDown = (event) => {
     if (!allowedKeys.includes(event.key)) event.preventDefault();
     else if (event.key === "Enter") calculate();

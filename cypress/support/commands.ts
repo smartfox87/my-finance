@@ -141,13 +141,15 @@ Cypress.Commands.add("pickRadioButton", (selector) => {
 });
 
 Cypress.Commands.add("pickCalculator", (expression = "500+500") => {
-  cy.get('[data-cy="calculator-modal-btn"]').click();
-  cy.get('[data-cy="calculator-body"]')
-    .should("be.visible")
-    .within(() => {
-      cy.get('[data-cy="calculator-input"]').type(expression).type("{enter}");
-    });
-  cy.get('[data-cy="calculator-save-btn"]').click();
+  cy.document().within(() => {
+    cy.get('[data-cy="calculator-modal-btn"]').click();
+    cy.get('[data-cy="calculator-body"]')
+      .should("be.visible")
+      .within(() => {
+        cy.get('[data-cy="calculator-input"]').type(expression).type("{enter}");
+      });
+    cy.get('[data-cy="calculator-save-btn"]').click();
+  });
 });
 
 Cypress.Commands.add("pickFile", (selector) => {

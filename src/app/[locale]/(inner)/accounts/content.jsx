@@ -13,6 +13,7 @@ import { AccountItem } from "@/components/Accounts/List/AccountItem";
 import { AccountDetail } from "@/components/Accounts/Detail/AccountDetail";
 import formatPrice from "@/helpers/formatPrice";
 import { createPortal } from "react-dom";
+import { getAccountTypesThunk } from "@/store/referencesSlice";
 
 export default function AccountsContent() {
   const { t } = useTranslation();
@@ -22,6 +23,7 @@ export default function AccountsContent() {
   const accountsList = useSelector(selectAccountsList);
   const handleGetData = useCallback(async () => {
     setIsLoading(true);
+    await dispatch(getAccountTypesThunk());
     await dispatch(getAccountsListThunk());
     setIsLoading(false);
   }, []);
