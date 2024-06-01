@@ -17,11 +17,12 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: npm install
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
           browser: chrome
-          install: true
           build: npm run build
           start: npm run start
           wait-on: ${{ variables.NEXT_PUBLIC_PUBLIC_URL }}
