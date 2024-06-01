@@ -21,6 +21,7 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           browser: chrome
+          install: true
           build: npm run build
           start: npm run start
           wait-on: ${{ variables.NEXT_PUBLIC_PUBLIC_URL }}
