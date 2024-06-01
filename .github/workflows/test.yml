@@ -1,0 +1,36 @@
+name: test
+on:
+    push:
+        branches: [master]
+    pull_request:
+        branches: [master]
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    strategy:
+        matrix:
+            node-version: [21.x]
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: test run
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_KEY }}
+          SUPABASE_KEY_SERVICE: ${{ secrets.SUPABASE_KEY_SERVICE }}
+          NEXT_PUBLIC_PUBL  IC_URL: ${{ vars.NEXT_PUBLIC_PUBLIC_URL }}
+          NEXT_PUBLIC_DEMO_USER_EMAIL: ${{ secrets.NEXT_PUBLIC_DEMO_USER_EMAIL }}
+          NEXT_PUBLIC_DEMO_USER_PASSWORD: ${{ secrets.NEXT_PUBLIC_DEMO_USER_PASSWORD }}
+          NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY: ${{ secrets.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY }}
+          NEXT_PUBLIC_PRODUCTION_URL: ${{ secrets.NEXT_PUBLIC_PRODUCTION_URL }}
+          GOOGLE_RECAPTCHA_API_KEY: ${{ secrets.GOOGLE_RECAPTCHA_API_KEY }}
+          GMAIL_LOGIN: ${{ secrets.GMAIL_LOGIN }}
+          GMAIL_PASSWORD: ${{ secrets.GMAIL_PASSWORD }}
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          E2E_LOGIN: ${{ secrets.E2E_LOGIN }}
+          E2E_PASSWORD: ${{ secrets.E2E_PASSWORD }}
+        run: echo "11111111111111111111111 ${{ env.NEXT_PUBLIC_PUBLIC_URL }} 222222222222222222 ${{ vars.NEXT_PUBLIC_PUBLIC_URL }}"
