@@ -44,6 +44,22 @@ Cypress.Commands.add("login", () => {
   );
 });
 
+Cypress.Commands.add("loginDemo", () => {
+  cy.session(
+    "login",
+    () => {
+      cy.viewport(1920, 1080);
+      cy.visit("/");
+      cy.intercept("POST", `${Cypress.env("NEXT_PUBLIC_SUPABASE_URL")}/auth/v1/token?grant_type=password`).as("login");
+      cy.get('[data-cy="demo-login-btn"]').click();
+      cy.wait("@login").then((interception) => {
+        expect(interception.response?.statusCode).to.eq(200);
+      });
+    },
+    { cacheAcrossSpecs: true },
+  );
+});
+
 Cypress.Commands.add("getDictionary", () => {
   cy.getLang().then((lang) => {
     cy.fixture(`locales/${lang}/default.json`).then((json) => {
@@ -162,6 +178,7 @@ declare global {
     interface Chainable {
       deleteE2EUser(): Chainable<void>;
       login(): Chainable<void>;
+      loginDemo(): Chainable<void>;
       getLang(): Chainable<string>;
       getDictionary(): Chainable<any>;
       pickSelect(selector: string, index?: number): Chainable<void>;

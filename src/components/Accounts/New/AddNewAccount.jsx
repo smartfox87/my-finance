@@ -25,7 +25,7 @@ export const AddNewAccount = memo(function AddNewAccount({ onSave }) {
   const handleSaveNewAccount = async (fieldsValues) => {
     const { error } = await dispatch(createAccountItemThunk(fieldsValues));
     if (error) return;
-    await onSave();
+    await onSave({ types: true });
     setIsOpen(false);
     showNotification({ title: t("notifications.account.create") });
   };

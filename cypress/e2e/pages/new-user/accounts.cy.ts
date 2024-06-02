@@ -1,4 +1,5 @@
-import { Dictionary } from "../../support/types";
+import { Dictionary } from "../../../support/types";
+import { faker } from "@faker-js/faker";
 
 describe("authorized accounts page", () => {
   context("1920x1080 resolution", () => {
@@ -11,11 +12,11 @@ describe("authorized accounts page", () => {
     it("should create account", () => {
       cy.intercept("POST", `${Cypress.env("NEXT_PUBLIC_SUPABASE_URL")}/rest/v1/accounts*`).as("create-account");
       cy.get('[data-cy="add-account-modal-btm"]').click();
-      cy.pickCalculator("1000+1000");
       cy.get('[data-cy="add-account-form"]').within(() => {
-        cy.get("#balance").as("balance").should("have.value", "2000").clear();
         cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
-        cy.get("#name").type("test account");
+        cy.pickCalculator("1000+1000");
+        cy.get("#balance").as("balance").should("have.value", "2000").clear();
+        cy.get("#name").type(faker.lorem.words(2));
         cy.get("@balance").type("1000");
         cy.get("@submit-btn").click();
       });
@@ -34,9 +35,9 @@ describe("authorized accounts page", () => {
         cy.get('[data-cy="edit-account-form"]').within(() => {
           cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
           cy.pickCalculator("1000+1000");
-          cy.get("#balance").as("balance").should("have.value", "2000").clear();
-          cy.get("#name").clear().type("test account 2");
-          cy.get("@balance").type("3000");
+          cy.get("#balance").as("balance").should("have.value", "2000");
+          cy.get("#name").clear().clear().type(faker.lorem.words(2));
+          cy.get("@balance").clear().type("3000");
           cy.get("@submit-btn").click();
         });
         cy.wait("@update-account").then((interception) => {
