@@ -39,6 +39,7 @@ describe("authorized expenses page", () => {
     it("should update expense", () => {
       cy.intercept("PATCH", `${Cypress.env("NEXT_PUBLIC_SUPABASE_URL")}/rest/v1/costs*`).as("update-expense");
       cy.wait("@get-expenses").then((interception) => {
+        expect(interception.response?.statusCode).to.eq(200);
         cy.get('[data-cy="expense-item"]').last().click();
         cy.get('[data-cy="edit-expense-form"]').within(() => {
           cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
@@ -63,6 +64,7 @@ describe("authorized expenses page", () => {
     it("should delete expense", () => {
       cy.intercept("DELETE", `${Cypress.env("NEXT_PUBLIC_SUPABASE_URL")}/rest/v1/costs*`).as("delete-expense");
       cy.wait("@get-expenses").then((interception) => {
+        expect(interception.response?.statusCode).to.eq(200);
         cy.get('[data-cy="expense-item"]').last().click();
         cy.get('[data-cy="delete-expense-btn"]').last().click();
         cy.wait("@delete-expense").then((interception) => {

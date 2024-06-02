@@ -172,7 +172,6 @@ Cypress.Commands.add("pickFile", (selector) => {
   cy.get(selector).selectFile("cypress/fixtures/images/jpg.jpg", { force: true, action: "select" });
 });
 
-// Declare namespace for custom Cypress commands
 declare global {
   namespace Cypress {
     interface Chainable {

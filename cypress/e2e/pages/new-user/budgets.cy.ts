@@ -39,6 +39,7 @@ describe("authorized budgets page", () => {
     it("should update budget", () => {
       cy.intercept("PATCH", `${Cypress.env("NEXT_PUBLIC_SUPABASE_URL")}/rest/v1/budgets*`).as("update-budget");
       cy.wait("@get-budgets").then((interception) => {
+        expect(interception.response?.statusCode).to.eq(200);
         cy.get('[data-cy="budget-item"]').last().click();
         cy.get('[data-cy="edit-budget-form"]').within(() => {
           cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
@@ -63,6 +64,7 @@ describe("authorized budgets page", () => {
     it("should delete budget", () => {
       cy.intercept("DELETE", `${Cypress.env("NEXT_PUBLIC_SUPABASE_URL")}/rest/v1/budgets*`).as("delete-budget");
       cy.wait("@get-budgets").then((interception) => {
+        expect(interception.response?.statusCode).to.eq(200);
         cy.get('[data-cy="budget-item"]').last().click();
         cy.get('[data-cy="delete-budget-btn"]').last().click();
         cy.wait("@delete-budget").then((interception) => {

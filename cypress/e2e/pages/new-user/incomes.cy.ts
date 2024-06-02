@@ -39,6 +39,7 @@ describe("authorized incomes page", () => {
     it("should update income", () => {
       cy.intercept("PATCH", `${Cypress.env("NEXT_PUBLIC_SUPABASE_URL")}/rest/v1/incomes*`).as("update-income");
       cy.wait("@get-incomes").then((interception) => {
+        expect(interception.response?.statusCode).to.eq(200);
         cy.get('[data-cy="income-item"]').last().click();
         cy.get('[data-cy="edit-income-form"]').within(() => {
           cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
@@ -63,6 +64,7 @@ describe("authorized incomes page", () => {
     it("should delete income", () => {
       cy.intercept("DELETE", `${Cypress.env("NEXT_PUBLIC_SUPABASE_URL")}/rest/v1/incomes*`).as("delete-income");
       cy.wait("@get-incomes").then((interception) => {
+        expect(interception.response?.statusCode).to.eq(200);
         cy.get('[data-cy="income-item"]').last().click();
         cy.get('[data-cy="delete-income-btn"]').last().click();
         cy.wait("@delete-income").then((interception) => {
