@@ -10,6 +10,7 @@ export const sortItems = ({ items, prop, order }: { items: SortItems; prop: Sort
       if (prop === "amount") return parseFloat(first.replace(/\s/g, "").replace(",", ".")) - parseFloat(second.replace(/\s/g, "").replace(",", "."));
       else if (prop === "name") return first.toLowerCase().localeCompare(second.toLowerCase());
     }
+    return 0;
   });
 };
 
