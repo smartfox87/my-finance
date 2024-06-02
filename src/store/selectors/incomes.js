@@ -28,8 +28,8 @@ export const selectIncomesByFilter = createSelector(
         const [first, second] = order === "asc" ? [a, b] : [b, a];
         if (prop === "amount") return first.amount - second.amount;
         else if (prop === "date") {
-          const difference = new Date(first.date) - new Date(second.date);
-          return difference === 0 ? new Date(first.created_at) - new Date(second.created_at) : difference;
+          const difference = first.date - second.date;
+          return difference === 0 ? first.created_at - second.created_at : difference;
         } else if (prop === "name") return first.name.localeCompare(second.name);
       }) || null,
 );

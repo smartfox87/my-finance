@@ -1,4 +1,6 @@
 import { supabaseClient } from "./supabase";
+import { SortItems, SortOrder, SortProp } from "./types";
+import { sortItems } from "./utils";
 
 Cypress.Commands.add("deleteE2EUser", () => {
   supabaseClient
@@ -77,17 +79,16 @@ Cypress.Commands.add("pickSelect", (selector, index) => {
       cy.get(".ant-select-item").then((options) => {
         const optionsLength = options.length;
         if (!optionsLength) throw new Error("No selectable options found.");
+        let resultIndex: number;
 
         if (typeof index === "number") {
-          if (index >= 0)
-            cy.wrap(options)
-              .eq(Math.min(index, optionsLength - 1))
-              .click({ force: true });
-          else cy.wrap(options).eq(Math.max(index, -optionsLength)).click({ force: true });
-        } else
-          cy.wrap(options)
-            .eq(Math.floor(Math.random() * optionsLength))
-            .click({ force: true });
+          if (index >= 0) resultIndex = Math.min(index, optionsLength - 1);
+          else resultIndex = Math.max(index, -optionsLength);
+        } else resultIndex = Math.floor(Math.random() * optionsLength);
+
+        cy.wrap(options).eq(resultIndex).click({ force: true });
+
+        cy.get(`${selector}_list_${resultIndex}`).then((value) => cy.wrap({ value: value.text() }).as("selectedValue"));
       });
     });
 });
@@ -172,6 +173,11 @@ Cypress.Commands.add("pickFile", (selector) => {
   cy.get(selector).selectFile("cypress/fixtures/images/jpg.jpg", { force: true, action: "select" });
 });
 
+Cypress.Commands.add("checkItemsSort", ({ items, prop, order } = {}) => {
+  if (!items?.length || !prop || !order) throw new Error("No check sort params found.");
+  cy.wrap(JSON.stringify(items) === JSON.stringify(sortItems({ items, prop, order })));
+});
+
 declare global {
   namespace Cypress {
     interface Chainable {
@@ -180,13 +186,14 @@ declare global {
       loginDemo(): Chainable<void>;
       getLang(): Chainable<string>;
       getDictionary(): Chainable<any>;
-      pickSelect(selector: string, index?: number): Chainable<void>;
+      pickSelect(selector: string, index?: number): Chainable<string>;
       pickMultiSelect(selector: string, options: { indexes?: number[]; count?: number }): Chainable<void>;
       pickDate(selector: string): Chainable<void>;
       pickPeriod(selector: string): Chainable<void>;
       pickRadioButton(selector: string): Chainable<void>;
       pickCalculator(expression: string): Chainable<void>;
       pickFile(selector: string): Chainable<void>;
+      checkItemsSort(props: { items: SortItems; prop: SortProp; order: SortOrder }): Chainable<Boolean>;
     }
   }
 }

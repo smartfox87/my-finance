@@ -12,7 +12,7 @@ import { useViewport } from "@/hooks/viewport.js";
 import { selectAccountsObject } from "@/store/selectors/accounts.js";
 import Link from "next/link";
 
-export const CostItem = ({ id, name, amount, date, category, account }) => {
+export const CostItem = ({ id, created_at, name, amount, date, category, account }) => {
   const { t } = useTranslation();
   const { isTouchDevice } = useViewport();
   const currency = useSelector(selectCurrency);
@@ -33,7 +33,7 @@ export const CostItem = ({ id, name, amount, date, category, account }) => {
       data-cy="expense-item"
       className="flex w-full flex-col gap-3 rounded-xl border border-gray-300 p-4 shadow-[0_3px_7px_0_#ddd] duration-300 hover:-translate-y-1 hover:shadow-[0_7px_7px_0_#ddd]"
     >
-      <CommonDate date={date} />
+      <CommonDate date={date} created={created_at} data-cy="item-date" />
       <ul className="flex grow flex-col gap-1">
         <li ref={nameRef} className="line-clamp-2 md:line-clamp-3">
           {isTooltipName ? (
@@ -42,7 +42,10 @@ export const CostItem = ({ id, name, amount, date, category, account }) => {
             </Tooltip>
           ) : (
             <>
-              {t("detail.name")}: <span className="font-bold">{capitalizedName}</span>
+              {t("detail.name")}:{" "}
+              <span data-cy="item-name" className="font-bold">
+                {capitalizedName}
+              </span>
             </>
           )}
         </li>
@@ -54,7 +57,7 @@ export const CostItem = ({ id, name, amount, date, category, account }) => {
         </li>
         <li className="mt-auto pt-2">
           {t("detail.amount")}:{" "}
-          <span className="font-bold">
+          <span data-cy="item-amount" className="font-bold">
             {formatPrice(amount)} {currency}
           </span>
         </li>
