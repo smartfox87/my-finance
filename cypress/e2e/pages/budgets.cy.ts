@@ -1,4 +1,5 @@
 import { Dictionary } from "../../support/types";
+import { faker } from "@faker-js/faker";
 
 describe("authorized budgets page", () => {
   context("1920x1080 resolution", () => {
@@ -17,8 +18,10 @@ describe("authorized budgets page", () => {
       cy.get('[data-cy="add-budget-modal-btm"]').click();
       cy.get('[data-cy="add-budget-form"]').within(() => {
         cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
-        cy.get("#name").type("test budget");
-        cy.get("#amount").type("1000");
+        cy.pickCalculator("1000+1000");
+        cy.get("#amount").as("amount").should("have.value", "2000").clear();
+        cy.get("#name").type(faker.lorem.words(2));
+        cy.get("@amount").type("1000");
         cy.pickMultiSelect("#accounts", { count: 2 });
         cy.pickMultiSelect("#categories", { count: 2 });
         cy.pickPeriod("#period");
@@ -39,8 +42,10 @@ describe("authorized budgets page", () => {
         cy.get('[data-cy="budget-item"]').last().click();
         cy.get('[data-cy="edit-budget-form"]').within(() => {
           cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
-          cy.get("#name").type("test budget");
-          cy.get("#amount").type("1000");
+          cy.pickCalculator("1000+1000");
+          cy.get("#amount").as("amount").should("have.value", "2000");
+          cy.get("#name").clear().type(faker.lorem.words(2));
+          cy.get("@amount").clear().type("3000");
           cy.pickMultiSelect("#accounts", { count: 2 });
           cy.pickMultiSelect("#categories", { count: 2 });
           cy.pickPeriod("#period");

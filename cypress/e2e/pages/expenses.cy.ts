@@ -1,4 +1,5 @@
 import { Dictionary } from "../../support/types";
+import { faker } from "@faker-js/faker";
 
 describe("authorized expenses page", () => {
   context("1920x1080 resolution", () => {
@@ -17,10 +18,12 @@ describe("authorized expenses page", () => {
       cy.get('[data-cy="add-expense-modal-btm"]').click();
       cy.get('[data-cy="add-expense-form"]').within(() => {
         cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
-        cy.get("#name").type("test expense");
-        cy.get("#amount").type("1000");
-        cy.pickSelect("#account", 0);
-        cy.pickSelect("#category", 0);
+        cy.pickCalculator("1000+1000");
+        cy.get("#amount").as("amount").should("have.value", "2000").clear();
+        cy.get("#name").type(faker.lorem.words(2));
+        cy.get("@amount").type("1000");
+        cy.pickSelect("#account", 2);
+        cy.pickSelect("#category", 2);
         cy.pickDate("#date");
         cy.get("@submit-btn").click();
       });
@@ -39,10 +42,12 @@ describe("authorized expenses page", () => {
         cy.get('[data-cy="expense-item"]').last().click();
         cy.get('[data-cy="edit-expense-form"]').within(() => {
           cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
-          cy.get("#name").type("test expense");
-          cy.get("#amount").type("1000");
-          cy.pickSelect("#account", 0);
-          cy.pickSelect("#category", 0);
+          cy.pickCalculator("1000+1000");
+          cy.get("#amount").as("amount").should("have.value", "2000").clear();
+          cy.get("#name").clear().type(faker.lorem.words(2));
+          cy.get("@amount").clear().type("1000");
+          cy.pickSelect("#account", 2);
+          cy.pickSelect("#category", 2);
           cy.pickDate("#date");
           cy.get("@submit-btn").click();
         });
