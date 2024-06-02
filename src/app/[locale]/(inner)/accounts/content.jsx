@@ -21,7 +21,7 @@ export default function AccountsContent() {
 
   const [isLoading, setIsLoading] = useLoading(false);
   const accountsList = useSelector(selectAccountsList);
-  const handleGetData = useCallback(async ({ types = false }) => {
+  const handleGetData = useCallback(async ({ types = false } = {}) => {
     setIsLoading(true);
     if (types) await dispatch(getAccountTypesThunk());
     await dispatch(getAccountsListThunk());

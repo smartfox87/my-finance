@@ -1,4 +1,4 @@
-import { Dictionary } from "../../support/types";
+import { Dictionary } from "../../../support/types";
 import { faker } from "@faker-js/faker";
 
 describe("authorized budgets page", () => {
