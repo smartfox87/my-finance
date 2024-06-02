@@ -38,24 +38,25 @@ export const IncomesFilter = memo(function IncomesFilter({ onSave }) {
     handleToggleVisibility();
   };
   const submitBtn = (
-    <Button size="large" className="w-full" onClick={handleApplyFilters}>
+    <Button size="large" data-cy="filter-incomes-submit" className="w-full" onClick={handleApplyFilters}>
       {t("buttons.apply")}
     </Button>
   );
 
   return (
     <>
-      <Button size="large" className="!flex items-center justify-center gap-3" onClick={handleToggleVisibility}>
+      <Button size="large" data-cy="filter-incomes-btn" className="!flex items-center justify-center gap-3" onClick={handleToggleVisibility}>
         <SvgFilter className="h-5 w-5" />
         {!["xs", "xxs"].includes(viewport) && t("buttons.set_filters")}
       </Button>
       <SideModal title={t("titles.set_filters")} isOpen={isOpen} footer={submitBtn} onClose={handleToggleVisibility} onInit={setIsInitialized}>
-        <ul className="flex w-full flex-col gap-4">
+        <ul data-cy="filter-incomes-form" className="flex w-full flex-col gap-4">
           {incomesFilterFields.map(({ id, type, label, label_translation, options, options_prefix, showSearch, multiple }, index) => (
             <li key={id} className="flex flex-col gap-4">
               {type === "select" && (
                 <Select
                   ref={!index ? fieldRef : null}
+                  id={id}
                   className="w-full"
                   size="large"
                   mode={multiple ? "multiple" : ""}
@@ -65,6 +66,7 @@ export const IncomesFilter = memo(function IncomesFilter({ onSave }) {
                     label: option || (label_translation ? `${options_prefix ? `${t(`fields.${options_prefix}`)} ` : ""}${t(`fields.${label_translation}`)}` : label || value),
                     value,
                   }))}
+                  getPopupContainer={(triggerNode) => triggerNode.parentElement}
                   showSearch={showSearch}
                   filterOption={showSearch ? handleFilterSelectOptions : null}
                   onChange={(value) => handleChangeFieldValue({ id, value })}

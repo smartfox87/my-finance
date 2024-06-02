@@ -2,7 +2,9 @@ import dictionary from "../fixtures/locales/en/default.json";
 
 export type Dictionary = typeof dictionary;
 
-export type SortItems = string[] | [string, string][];
+export type SortItem = string | [string, string];
+
+export type SortItems = SortItem[];
 
 export type SortProp = "name" | "date" | "amount";
 

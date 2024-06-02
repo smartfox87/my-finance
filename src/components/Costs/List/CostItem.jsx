@@ -38,7 +38,10 @@ export const CostItem = ({ id, created_at, name, amount, date, category, account
         <li ref={nameRef} className="line-clamp-2 md:line-clamp-3">
           {isTooltipName ? (
             <Tooltip title={capitalizedName}>
-              {t("detail.name")}: <span className="font-bold">{capitalizedName}</span>
+              {t("detail.name")}:{" "}
+              <span data-cy="item-name" className="font-bold">
+                {capitalizedName}
+              </span>
             </Tooltip>
           ) : (
             <>
