@@ -187,7 +187,7 @@ declare global {
       getLang(): Chainable<string>;
       getDictionary(): Chainable<any>;
       pickSelect(selector: string, options: { index?: number; returnValue?: boolean }): Chainable<string>;
-      pickMultiSelect(selector: string, options: { indexes?: number[]; count?: number }): Chainable<void>;
+      pickMultiSelect(selector: string, options?: { indexes?: number[]; count?: number }): Chainable<void>;
       pickDate(selector: string): Chainable<void>;
       pickPeriod(selector: string): Chainable<void>;
       pickRadioButton(selector: string): Chainable<void>;
