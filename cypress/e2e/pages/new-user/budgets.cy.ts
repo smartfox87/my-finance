@@ -22,8 +22,8 @@ describe("authorized budgets page", () => {
         cy.get("#amount").as("amount").should("have.value", "2000").clear();
         cy.get("#name").type(faker.lorem.words(2));
         cy.get("@amount").type("1000");
-        cy.pickMultiSelect("#accounts", { count: 2 });
-        cy.pickMultiSelect("#categories", { count: 2 });
+        cy.pickMultiSelect("#accounts", { indexesCount: 2 });
+        cy.pickMultiSelect("#categories", { indexesCount: 2 });
         cy.pickPeriod("#period");
         cy.get("@submit-btn").click();
       });
@@ -47,8 +47,8 @@ describe("authorized budgets page", () => {
           cy.get("#amount").as("amount").should("have.value", "2000");
           cy.get("#name").clear().type(faker.lorem.words(2));
           cy.get("@amount").clear().type("3000");
-          cy.pickMultiSelect("#accounts", { count: 2 });
-          cy.pickMultiSelect("#categories", { count: 2 });
+          cy.pickMultiSelect("#accounts", { indexesCount: 2 });
+          cy.pickMultiSelect("#categories", { indexesCount: 2 });
           cy.pickPeriod("#period");
           cy.get("@submit-btn").click();
         });

@@ -93,7 +93,7 @@ Cypress.Commands.add("pickSelect", (selector, { index, returnValue } = {}) => {
     });
 });
 
-Cypress.Commands.add("pickMultiSelect", (selector, { indexes = null, count = null } = {}) => {
+Cypress.Commands.add("pickMultiSelect", (selector, { indexes, indexesCount } = {}) => {
   cy.get(selector)
     .closest(".ant-select")
     .click()
@@ -102,9 +102,9 @@ Cypress.Commands.add("pickMultiSelect", (selector, { indexes = null, count = nul
         const optionsLength = options.length;
         if (!optionsLength) throw new Error("No selectable options found.");
 
-        if (typeof count === "number") {
+        if (typeof indexesCount === "number") {
           const selectedIndexes: Set<number> = new Set();
-          while (selectedIndexes.size < count) {
+          while (selectedIndexes.size < indexesCount) {
             const index = Math.floor(Math.random() * (optionsLength - 1)) + 1;
             selectedIndexes.add(index);
           }
@@ -187,7 +187,7 @@ declare global {
       getLang(): Chainable<string>;
       getDictionary(): Chainable<any>;
       pickSelect(selector: string, options?: { index?: number; returnValue?: boolean }): Chainable<string>;
-      pickMultiSelect(selector: string, options?: { indexes?: number[]; count?: number }): Chainable<void>;
+      pickMultiSelect(selector: string, options?: { indexes?: number[]; indexesCount?: number }): Chainable<void>;
       pickDate(selector: string): Chainable<void>;
       pickPeriod(selector: string): Chainable<void>;
       pickRadioButton(selector: string): Chainable<void>;
