@@ -22,8 +22,8 @@ describe("authorized expenses page", () => {
         cy.get("#amount").as("amount").should("have.value", "2000").clear();
         cy.get("#name").type(faker.lorem.words(2));
         cy.get("@amount").type("1000");
-        cy.pickSelect("#account", 2);
-        cy.pickSelect("#category", 2);
+        cy.pickSelect("#account", { index: 2 });
+        cy.pickSelect("#category", { index: 2 });
         cy.pickDate("#date");
         cy.get("@submit-btn").click();
       });
@@ -47,8 +47,8 @@ describe("authorized expenses page", () => {
           cy.get("#amount").as("amount").should("have.value", "2000").clear();
           cy.get("#name").clear().type(faker.lorem.words(2));
           cy.get("@amount").clear().type("1000");
-          cy.pickSelect("#account", 2);
-          cy.pickSelect("#category", 2);
+          cy.pickSelect("#account", { index: 2 });
+          cy.pickSelect("#category", { index: 2 });
           cy.pickDate("#date");
           cy.get("@submit-btn").click();
         });

@@ -57,8 +57,8 @@ describe("authorized accounts page", () => {
         cy.get('[data-cy="transfer-between-accounts-btn"]').click();
         cy.get('[data-cy="transfer-between-accounts-form"]').within(() => {
           cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
-          cy.pickSelect("#from", -1);
-          cy.pickSelect("#to", -2);
+          cy.pickSelect("#from", { index: -1 });
+          cy.pickSelect("#to", { index: -2 });
           cy.pickCalculator("1000+1000");
           cy.get("#amount").as("amount").should("have.value", "2000").clear();
           cy.get("@amount").type("100");

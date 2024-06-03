@@ -18,7 +18,7 @@ describe("authorized expenses page", () => {
           cy.get('[data-cy="filter-expenses-form"]')
             .closest(".ant-drawer-open")
             .within(() => {
-              cy.pickSelect("#sort", index).then(() => {
+              cy.pickSelect("#sort", { index, returnValue: true }).then(() => {
                 cy.get("@selectedValue").then((selectedValue) => {
                   if (!("value" in selectedValue) || typeof selectedValue.value !== "string") return;
                   const [prop, order] = selectedValue.value.split("_") as [SortProp, SortOrder];

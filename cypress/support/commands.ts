@@ -48,7 +48,7 @@ Cypress.Commands.add("login", () => {
 
 Cypress.Commands.add("loginDemo", () => {
   cy.session(
-    "login",
+    "loginDemo",
     () => {
       cy.viewport(1920, 1080);
       cy.visit("/");
@@ -71,7 +71,7 @@ Cypress.Commands.add("getDictionary", () => {
   });
 });
 
-Cypress.Commands.add("pickSelect", (selector, index) => {
+Cypress.Commands.add("pickSelect", (selector, { index, returnValue } = {}) => {
   cy.get(selector)
     .closest(".ant-select")
     .click()
@@ -88,7 +88,7 @@ Cypress.Commands.add("pickSelect", (selector, index) => {
 
         cy.wrap(options).eq(resultIndex).click({ force: true });
 
-        cy.get(`${selector}_list_${resultIndex}`).then((value) => cy.wrap({ value: value.text() }).as("selectedValue"));
+        if (returnValue) cy.get(`${selector}_list_${resultIndex}`).then((value) => cy.wrap({ value: value.text() }).as("selectedValue"));
       });
     });
 });
@@ -186,7 +186,7 @@ declare global {
       loginDemo(): Chainable<void>;
       getLang(): Chainable<string>;
       getDictionary(): Chainable<any>;
-      pickSelect(selector: string, index?: number): Chainable<string>;
+      pickSelect(selector: string, options: { index?: number; returnValue?: boolean }): Chainable<string>;
       pickMultiSelect(selector: string, options: { indexes?: number[]; count?: number }): Chainable<void>;
       pickDate(selector: string): Chainable<void>;
       pickPeriod(selector: string): Chainable<void>;
