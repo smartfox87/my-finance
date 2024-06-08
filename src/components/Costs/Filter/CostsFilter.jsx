@@ -41,14 +41,14 @@ export const CostsFilter = memo(function CostsFilter({ onSave }) {
     setIsLoading(false);
   };
   const submitBtn = (
-    <Button size="large" data-cy="expenses-filter-submit" className="w-full" onClick={handleApplyFilters}>
+    <Button size="large" loading={isLoading} data-cy="expenses-filter-submit" className="w-full" onClick={handleApplyFilters}>
       {t("buttons.apply")}
     </Button>
   );
 
   return (
     <>
-      <Button size="large" loading={isLoading} data-cy="expenses-filter-btn" className="!flex items-center justify-center gap-3" onClick={handleToggleVisibility}>
+      <Button size="large" data-cy="expenses-filter-btn" className="!flex items-center justify-center gap-3" onClick={handleToggleVisibility}>
         <SvgFilter className="h-5 w-5" />
         {!["xs", "xxs"].includes(viewport) && t("buttons.set_filters")}
       </Button>

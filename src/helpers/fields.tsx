@@ -24,4 +24,4 @@ export const handleKeyUpCutDecimals = (event: React.KeyboardEvent<HTMLInputEleme
   event.currentTarget.value = cutDecimals(event.currentTarget.value);
 };
 
-export const renderSelectOption = (option: FlattenOptionData<BaseOptionType>): ReactElement => <span data-value={option.value}>{option.label}</span>;
+export const renderSelectOption = ({ label, value }: FlattenOptionData<BaseOptionType>): ReactElement => <span data-value={value}>{label}</span>;

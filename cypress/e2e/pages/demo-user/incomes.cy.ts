@@ -14,8 +14,8 @@ describe("authorized incomes page", () => {
         expect(interception.response?.statusCode).to.eq(200);
         const sortOptionsCount = 6;
         getReverseIndexesArray(sortOptionsCount).forEach((index) => {
-          cy.get('[data-cy="filter-incomes-btn"]').click();
-          cy.get('[data-cy="filter-incomes-form"]')
+          cy.get('[data-cy="incomes-filter-btn"]').click();
+          cy.get('[data-cy="incomes-filter-form"]')
             .closest(".ant-drawer-open")
             .within(() => {
               cy.pickSelect("#sort", { index, returnValue: true }).then(() => {
@@ -23,7 +23,7 @@ describe("authorized incomes page", () => {
                   if (!("value" in selectedValue) || typeof selectedValue.value !== "string") return;
                   const [prop, order] = selectedValue.value.split("_") as [SortProp, SortOrder];
 
-                  cy.get('[data-cy="filter-incomes-submit"]').click();
+                  cy.get('[data-cy="incomes-filter-submit"]').click();
 
                   cy.document().within(() => {
                     cy.get('[data-cy="income-item"]').then((incomes) => {
