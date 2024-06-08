@@ -55,10 +55,16 @@ export const IncomeItem = ({ id, created_at, name, amount, date, category, accou
           </li>
         )}
         <li>
-          {t("detail.account")}: <span className="font-bold">{accountsObject?.[account]}</span>
+          {t("detail.account")}:{" "}
+          <span data-cy="item-account" className="font-bold">
+            {accountsObject?.[account]}
+          </span>
         </li>
         <li>
-          {t("detail.category")}: <span className="font-bold">{incomeCategoriesObject?.[category]}</span>
+          {t("detail.category")}:{" "}
+          <span data-cy="item-category" className="font-bold">
+            {incomeCategoriesObject?.[category]}
+          </span>
         </li>
         <li className="mt-auto pt-2">
           {t("detail.amount")}:{" "}

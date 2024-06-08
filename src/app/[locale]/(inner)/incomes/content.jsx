@@ -56,7 +56,8 @@ export default function IncomesContent() {
   const headerActions = filteredSortedIncomes?.length && (
     <>
       <div className="mr-auto flex gap-3">
-        {filteredSortedIncomes?.length} {t("common.items")}
+        <span data-cy="incomes-items-count">{filteredSortedIncomes?.length}</span>
+        {t("common.items")}
       </div>
       <div className="font-black lg:text-lg">
         <span className="mr-1">{t("common.total")}: </span>
