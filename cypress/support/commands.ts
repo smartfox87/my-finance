@@ -86,9 +86,12 @@ Cypress.Commands.add("pickSelect", (selector, { index, returnValue } = {}) => {
           else resultIndex = Math.max(index, -optionsLength);
         } else resultIndex = Math.floor(Math.random() * optionsLength);
 
-        cy.wrap(options).eq(resultIndex).click({ force: true });
-
-        if (returnValue) cy.get(`[id^=[${selector.substring(1)}_list_][aria-selected="true"]`).then((value) => cy.wrap({ label: value.attr("aria-label"), value: value.text() }).as("selectedValue"));
+        cy.wrap(options)
+          .eq(resultIndex)
+          .click({ force: true })
+          .then((option) => {
+            if (returnValue) cy.wrap({ label: option.text(), value: option.find("[data-value]").data("value") }).as("selectedValue");
+          });
       });
     });
 });
