@@ -1,5 +1,7 @@
 import { isValidElement, ReactElement } from "react";
 import { decimalsKeys, integerKeys, navigationKeys } from "@/initial-data/input";
+import { BaseOptionType } from "rc-select/es/Select";
+import { FlattenOptionData } from "rc-select/es/interface";
 
 export const handleFilterSelectOptions = (inputValue: string, option: any): boolean => {
   if (isValidElement(option.label)) return (option.label as ReactElement).props["data-text"]?.toLowerCase().includes(inputValue.toLowerCase());
@@ -21,3 +23,5 @@ export const handleKeyDownDecimalsValidation = (event: React.KeyboardEvent<HTMLI
 export const handleKeyUpCutDecimals = (event: React.KeyboardEvent<HTMLInputElement>): void => {
   event.currentTarget.value = cutDecimals(event.currentTarget.value);
 };
+
+export const renderSelectOption = (option: FlattenOptionData<BaseOptionType>): ReactElement => <span data-value={option.value}>{option.label}</span>;

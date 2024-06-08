@@ -1,6 +1,6 @@
 import { supabaseClient } from "./supabase";
-import { SortItems, SortOrder, SortProp } from "./types";
-import { sortItems } from "./utils";
+import { FilteredSinglePropItems, FilterPropValues, SelectedOptionsData, SortItems, SortOrder, SortProp } from "./types";
+import { compareSinglePropItemsToFilterPropValues, sortItems } from "./utils";
 
 Cypress.Commands.add("deleteE2EUser", () => {
   supabaseClient
@@ -88,12 +88,12 @@ Cypress.Commands.add("pickSelect", (selector, { index, returnValue } = {}) => {
 
         cy.wrap(options).eq(resultIndex).click({ force: true });
 
-        if (returnValue) cy.get(`${selector}_list_${resultIndex}`).then((value) => cy.wrap({ value: value.text() }).as("selectedValue"));
+        if (returnValue) cy.get(`[id^=[${selector.substring(1)}_list_][aria-selected="true"]`).then((value) => cy.wrap({ label: value.attr("aria-label"), value: value.text() }).as("selectedValue"));
       });
     });
 });
 
-Cypress.Commands.add("pickMultiSelect", (selector, { indexes, indexesCount } = {}) => {
+Cypress.Commands.add("pickMultiSelect", (selector, { indexes, indexesCount, minIndex = 0, returnValue } = {}) => {
   cy.get(selector)
     .closest(".ant-select")
     .click()
@@ -101,24 +101,24 @@ Cypress.Commands.add("pickMultiSelect", (selector, { indexes, indexesCount } = {
       cy.get(".ant-select-item").then((options) => {
         const optionsLength = options.length;
         if (!optionsLength) throw new Error("No selectable options found.");
+        const resultIndexes: Set<number> = new Set();
+        const selectedValue: SelectedOptionsData = [];
 
         if (typeof indexesCount === "number") {
-          const selectedIndexes: Set<number> = new Set();
-          while (selectedIndexes.size < indexesCount) {
-            const index = Math.floor(Math.random() * (optionsLength - 1)) + 1;
-            selectedIndexes.add(index);
-          }
-          selectedIndexes.forEach((index) => {
-            cy.wrap(options).eq(index).click({ force: true });
-          });
+          while (resultIndexes.size < indexesCount) resultIndexes.add(Math.floor(Math.random() * (optionsLength - minIndex)) + minIndex);
         } else if (Array.isArray(indexes)) {
-          Array.from(new Set(indexes)).forEach((index) => {
-            const safeIndex = index >= 0 ? Math.min(index, optionsLength - 1) : Math.max(index + optionsLength, 0);
-            if (safeIndex >= 0 && safeIndex < optionsLength) {
-              cy.wrap(options).eq(safeIndex).click({ force: true });
-            }
-          });
+          indexes.forEach((index) => resultIndexes.add(index >= 0 ? Math.min(index, optionsLength - 1) : Math.max(index + optionsLength, 0)));
         }
+
+        Array.from(resultIndexes).forEach((index) => {
+          cy.wrap(options)
+            .eq(index)
+            .click({ force: true })
+            .then((option) => {
+              if (returnValue) selectedValue.push({ label: option.text(), value: option.find("[data-value]").data("value") });
+            });
+        });
+        if (returnValue) cy.wrap(selectedValue).as("selectedValue");
       });
       cy.wrap(select).parent().click(0, 0);
     });
@@ -178,6 +178,11 @@ Cypress.Commands.add("checkItemsSort", ({ items, prop, order } = {}) => {
   cy.wrap(JSON.stringify(items) === JSON.stringify(sortItems({ items, prop, order })));
 });
 
+Cypress.Commands.add("checkSinglePropItemsFilter", ({ items, filterPropValues } = {}) => {
+  if (!items?.length || !filterPropValues?.length) throw new Error("No check filter params found.");
+  cy.wrap(compareSinglePropItemsToFilterPropValues({ items, filterPropValues }));
+});
+
 declare global {
   namespace Cypress {
     interface Chainable {
@@ -187,13 +192,14 @@ declare global {
       getLang(): Chainable<string>;
       getDictionary(): Chainable<any>;
       pickSelect(selector: string, options?: { index?: number; returnValue?: boolean }): Chainable<string>;
-      pickMultiSelect(selector: string, options?: { indexes?: number[]; indexesCount?: number }): Chainable<void>;
+      pickMultiSelect(selector: string, options?: { indexes?: number[]; indexesCount?: number; minIndex?: number; returnValue?: boolean }): Chainable<void>;
       pickDate(selector: string): Chainable<void>;
       pickPeriod(selector: string): Chainable<void>;
       pickRadioButton(selector: string): Chainable<void>;
       pickCalculator(expression: string): Chainable<void>;
       pickFile(selector: string): Chainable<void>;
       checkItemsSort(props: { items: SortItems; prop: SortProp; order: SortOrder }): Chainable<Boolean>;
+      checkSinglePropItemsFilter(props: { items: FilteredSinglePropItems; filterPropValues: FilterPropValues }): Chainable<Boolean>;
     }
   }
 }

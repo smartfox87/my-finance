@@ -32,7 +32,7 @@ export const ActiveCostsFilters = memo(function ActiveCostsFilters() {
     <ul className="flex flex-wrap gap-2">
       {activeFilters.map(({ id, label, value, textValue }) => (
         <li key={`${id}_${value}`}>
-          <Button type="primary" size="small" className="!flex items-center gap-1" onClick={() => handleClearFilter({ id, value })}>
+          <Button type="primary" size="small" data-cy={`active-filter-${id}`} className="!flex items-center gap-1" onClick={() => handleClearFilter({ id, value })}>
             <span>{label}:</span>
             <span className="font-bold">{textValue || value}</span>
             {checkIsClearableFilter({ id, value }) && <SvgCrossBold className="ml-1 h-2.5 w-2.5" />}

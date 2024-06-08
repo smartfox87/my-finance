@@ -9,3 +9,14 @@ export type SortItems = SortItem[];
 export type SortProp = "name" | "date" | "amount";
 
 export type SortOrder = "asc" | "desc";
+
+export interface SelectedOptionData {
+  label: string;
+  value: number | string;
+}
+
+export type SelectedOptionsData = SelectedOptionData[];
+
+export type FilterPropValues = string[];
+
+export type FilteredSinglePropItems = string[];

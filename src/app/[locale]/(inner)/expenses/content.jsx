@@ -56,7 +56,8 @@ export default function ExpensesContent() {
   const headerActions = filteredSortedCosts?.length && (
     <>
       <div className="mr-auto flex gap-3">
-        {filteredSortedCosts?.length} {t("common.items")}
+        <span data-cy="expenses-items-count">{filteredSortedCosts?.length}</span>
+        {t("common.items")}
       </div>
       <div className="font-black lg:text-lg">
         <span className="mr-1">{t("common.total")}: </span>

@@ -3,7 +3,7 @@ import { setIncomesFilterValues } from "@/store/incomesSlice";
 import { selectIncomesFilterFields, selectIncomesFilterValues } from "@/store/selectors/incomes.js";
 import { useTranslation } from "react-i18next";
 import { Select, Button } from "antd";
-import { handleFilterSelectOptions } from "@/helpers/fields.ts";
+import { handleFilterSelectOptions } from "@/helpers/fields";
 import { SideModal } from "@/components/Modals/SideModal.jsx";
 import { memo, useEffect, useState } from "react";
 import SvgFilter from "@/assets/sprite/filter.svg";

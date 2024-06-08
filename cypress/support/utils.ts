@@ -1,4 +1,4 @@
-import { SortItems, SortOrder, SortProp } from "./types";
+import { FilteredSinglePropItems, FilterPropValues, SortItems, SortOrder, SortProp } from "./types";
 
 export const sortItems = ({ items, prop, order }: { items: SortItems; prop: SortProp; order: SortOrder }) => {
   return items.slice().sort((a, b) => {
@@ -17,3 +17,6 @@ export const sortItems = ({ items, prop, order }: { items: SortItems; prop: Sort
 export const getIndexesArray = (length: number) => Array.from({ length }).map((_, index) => index);
 
 export const getReverseIndexesArray = (length: number) => getIndexesArray(length).reverse();
+
+export const compareSinglePropItemsToFilterPropValues = ({ items, filterPropValues }: { items: FilteredSinglePropItems; filterPropValues: FilterPropValues }) =>
+  items.every((item) => filterPropValues.includes(item));

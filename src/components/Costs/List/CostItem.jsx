@@ -53,10 +53,16 @@ export const CostItem = ({ id, created_at, name, amount, date, category, account
           )}
         </li>
         <li>
-          {t("detail.account")}: <span className="font-bold">{accountsObject?.[account]}</span>
+          {t("detail.account")}:{" "}
+          <span data-cy="item-account" className="font-bold">
+            {accountsObject?.[account]}
+          </span>
         </li>
         <li>
-          {t("detail.category")}: <span className="font-bold">{costCategoriesObject?.[category]}</span>
+          {t("detail.category")}:{" "}
+          <span data-cy="item-category" className="font-bold">
+            {costCategoriesObject?.[category]}
+          </span>
         </li>
         <li className="mt-auto pt-2">
           {t("detail.amount")}:{" "}
