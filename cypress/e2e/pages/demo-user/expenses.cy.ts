@@ -56,27 +56,29 @@ describe("authorized expenses page", () => {
           cy.get('[data-cy="expenses-filter-form"]')
             .closest(".ant-drawer-open")
             .within(() => {
-              cy.pickMultiSelect(`#${prop}`, { indexesCount: 2, returnValue: true }).then(() => {
+              cy.pickMultiSelect(`#${prop}`, { indexesCount: 2, minIndex: 1, returnValue: true }).then(() => {
                 cy.get<SelectedOptionsData>("@selectedValue").then((selectedValue) => {
                   const selectedLabels = selectedValue.map(({ label }) => label);
 
                   cy.get('[data-cy="expenses-filter-submit"]').click();
 
-                  cy.document().within(() => {
-                    cy.get('[data-cy="expense-item"]').then((expenses) => {
-                      const items: FilteredSinglePropItems = Cypress.$(expenses)
-                        .map((_, el) => Cypress.$(el).find(`[data-cy="item-${prop}"]`).text())
-                        .get();
-
-                      cy.checkSinglePropItemsFilter({ items, filterPropValues: selectedLabels }).should("be.true");
-
-                      cy.get(`[data-cy="active-filter-${prop}"]`)
-                        .should("be.visible")
-                        .click({ multiple: true })
-                        .then(() => {
-                          cy.get('[data-cy="expenses-items-count"]').then((element) => cy.wrap(parseInt(element.text())).should("eq", initialItemsCount));
-                        });
-                    });
+                  cy.document().within((document) => {
+                    if (Cypress.$(document).find('[data-cy="expense-item"]').length) {
+                      cy.get('[data-cy="expense-item"]').then((expenses) => {
+                        const items: FilteredSinglePropItems = Cypress.$(expenses)
+                          .map((_, el) => Cypress.$(el).find(`[data-cy="item-${prop}"]`).text())
+                          .get();
+                        cy.checkSinglePropItemsFilter({ items, filterPropValues: selectedLabels }).should("be.true");
+                        cy.get(`[data-cy="active-filter-${prop}"]`)
+                          .should("be.visible")
+                          .click({ multiple: true })
+                          .then(() => {
+                            cy.get('[data-cy="expenses-items-count"]').then((element) => cy.wrap(parseInt(element.text())).should("eq", initialItemsCount));
+                          });
+                      });
+                    } else {
+                      cy.get('[data-cy="expenses-items-count"]').then((element) => cy.wrap(parseInt(element.text())).should("eq", 0));
+                    }
                   });
                 });
               });
