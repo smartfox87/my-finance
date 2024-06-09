@@ -1,6 +1,6 @@
 import { supabaseClient } from "./supabase";
-import { FilteredSinglePropItems, FilterPropValues, SelectedOptionsData, SortItems, SortOrder, SortProp } from "./types";
-import { compareSinglePropItemsToFilterPropValues, sortItems } from "./utils";
+import type { FilteredMultiPropsItems, FilteredSinglePropItems, FilterPropValues, SelectedOptionsData, SortItems, SortOrder, SortProp } from "./types";
+import { compareMultiPropsItemsToFilterPropValues, compareSinglePropItemsToFilterPropValues, sortItems } from "./utils";
 
 Cypress.Commands.add("deleteE2EUser", () => {
   supabaseClient
@@ -96,7 +96,7 @@ Cypress.Commands.add("pickSelect", (selector, { index, returnValue } = {}) => {
     });
 });
 
-Cypress.Commands.add("pickMultiSelect", (selector, { indexes, indexesCount, minIndex = 0, returnValue } = {}) => {
+Cypress.Commands.add("pickMultiSelect", (selector, { indexes, indexesCount, minIndex = 0, returnValue, allSelectable = true } = {}) => {
   cy.get(selector)
     .closest(".ant-select")
     .click()
@@ -121,7 +121,13 @@ Cypress.Commands.add("pickMultiSelect", (selector, { indexes, indexesCount, minI
               if (returnValue) selectedValue.push({ label: option.text(), value: option.find("[data-value]").data("value") });
             });
         });
-        if (returnValue) cy.wrap(selectedValue).as("selectedValue");
+        if (returnValue) {
+          if (allSelectable)
+            cy.wrap(options)
+              .first()
+              .then((option) => selectedValue.unshift({ label: option.text(), value: option.find("[data-value]").data("value") }));
+          cy.wrap(selectedValue).as("selectedValue");
+        }
       });
       cy.wrap(select).parent().click(0, 0);
     });
@@ -186,6 +192,11 @@ Cypress.Commands.add("checkSinglePropItemsFilter", ({ items, filterPropValues } 
   cy.wrap(compareSinglePropItemsToFilterPropValues({ items, filterPropValues }));
 });
 
+Cypress.Commands.add("checkMultiPropsItemsFilter", ({ items, filterPropValues } = {}) => {
+  if (!items?.length || !filterPropValues?.length) throw new Error("No check filter params found.");
+  cy.wrap(compareMultiPropsItemsToFilterPropValues({ items, filterPropValues }));
+});
+
 declare global {
   namespace Cypress {
     interface Chainable {
@@ -195,7 +206,7 @@ declare global {
       getLang(): Chainable<string>;
       getDictionary(): Chainable<any>;
       pickSelect(selector: string, options?: { index?: number; returnValue?: boolean }): Chainable<string>;
-      pickMultiSelect(selector: string, options?: { indexes?: number[]; indexesCount?: number; minIndex?: number; returnValue?: boolean }): Chainable<void>;
+      pickMultiSelect(selector: string, options?: { indexes?: number[]; indexesCount?: number; minIndex?: number; returnValue?: boolean; allSelectable?: boolean }): Chainable<void>;
       pickDate(selector: string): Chainable<void>;
       pickPeriod(selector: string): Chainable<void>;
       pickRadioButton(selector: string): Chainable<void>;
@@ -203,6 +214,7 @@ declare global {
       pickFile(selector: string): Chainable<void>;
       checkItemsSort(props: { items: SortItems; prop: SortProp; order: SortOrder }): Chainable<Boolean>;
       checkSinglePropItemsFilter(props: { items: FilteredSinglePropItems; filterPropValues: FilterPropValues }): Chainable<Boolean>;
+      checkMultiPropsItemsFilter(props: { items: FilteredMultiPropsItems; filterPropValues: FilterPropValues }): Chainable<Boolean>;
     }
   }
 }

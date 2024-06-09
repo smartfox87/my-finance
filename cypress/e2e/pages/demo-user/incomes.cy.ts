@@ -77,6 +77,7 @@ describe("authorized incomes page", () => {
                       });
                     } else {
                       cy.get('[data-cy="incomes-items-count"]').then((element) => cy.wrap(parseInt(element.text())).should("eq", 0));
+                      cy.get(`[data-cy="active-filter-${prop}"]`).should("be.visible").click({ multiple: true });
                     }
                   });
                 });

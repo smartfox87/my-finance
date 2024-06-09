@@ -20,3 +20,5 @@ export type SelectedOptionsData = SelectedOptionData[];
 export type FilterPropValues = string[];
 
 export type FilteredSinglePropItems = string[];
+
+export type FilteredMultiPropsItems = string[][];

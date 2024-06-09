@@ -78,6 +78,7 @@ describe("authorized expenses page", () => {
                       });
                     } else {
                       cy.get('[data-cy="expenses-items-count"]').then((element) => cy.wrap(parseInt(element.text())).should("eq", 0));
+                      cy.get(`[data-cy="active-filter-${prop}"]`).should("be.visible").click({ multiple: true });
                     }
                   });
                 });

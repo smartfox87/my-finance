@@ -1,6 +1,6 @@
-import { FilteredSinglePropItems, FilterPropValues, SortItems, SortOrder, SortProp } from "./types";
+import type { FilteredMultiPropsItems, FilteredSinglePropItems, FilterPropValues, SortItems, SortOrder, SortProp } from "./types";
 
-export const sortItems = ({ items, prop, order }: { items: SortItems; prop: SortProp; order: SortOrder }) => {
+export const sortItems = ({ items, prop, order }: { items: SortItems; prop: SortProp; order: SortOrder }): SortItems => {
   return items.slice().sort((a, b) => {
     const [first, second] = order === "asc" ? [a, b] : [b, a];
     if (Array.isArray(first) && Array.isArray(second) && prop === "date") {
@@ -14,9 +14,12 @@ export const sortItems = ({ items, prop, order }: { items: SortItems; prop: Sort
   });
 };
 
-export const getIndexesArray = (length: number) => Array.from({ length }).map((_, index) => index);
+export const getIndexesArray = (length: number): number[] => Array.from({ length }).map((_, index) => index);
 
-export const getReverseIndexesArray = (length: number) => getIndexesArray(length).reverse();
+export const getReverseIndexesArray = (length: number): number[] => getIndexesArray(length).reverse();
 
-export const compareSinglePropItemsToFilterPropValues = ({ items, filterPropValues }: { items: FilteredSinglePropItems; filterPropValues: FilterPropValues }) =>
+export const compareSinglePropItemsToFilterPropValues = ({ items, filterPropValues }: { items: FilteredSinglePropItems; filterPropValues: FilterPropValues }): boolean =>
   items.every((item) => filterPropValues.includes(item));
+
+export const compareMultiPropsItemsToFilterPropValues = ({ items, filterPropValues }: { items: FilteredMultiPropsItems; filterPropValues: FilterPropValues }): boolean =>
+  items.every((item) => item.some((prop) => filterPropValues.includes(prop)));
