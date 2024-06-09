@@ -59,13 +59,13 @@ export default function ExpensesContent() {
         <span data-cy="expenses-items-count">{filteredSortedCosts?.length}</span>
         {t("common.items")}
       </div>
-      filteredSortedCosts?.length && (
-      <div className="font-black lg:text-lg">
-        <span className="mr-1">{t("common.total")}: </span>
-        {formatPrice(totalAmount)}
-        {currency}
-      </div>
-      );
+      {filteredSortedCosts?.length && (
+        <div className="font-black lg:text-lg">
+          <span className="mr-1">{t("common.total")}: </span>
+          {formatPrice(totalAmount)}
+          {currency}
+        </div>
+      )}
     </>
   );
 

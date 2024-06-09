@@ -59,13 +59,13 @@ export default function IncomesContent() {
         <span data-cy="incomes-items-count">{filteredSortedIncomes?.length}</span>
         {t("common.items")}
       </div>
-      filteredSortedIncomes?.length && (
-      <div className="font-black lg:text-lg">
-        <span className="mr-1">{t("common.total")}: </span>
-        {formatPrice(totalAmount)}
-        {currency}
-      </div>
-      );
+      {filteredSortedIncomes?.length && (
+        <div className="font-black lg:text-lg">
+          <span className="mr-1">{t("common.total")}: </span>
+          {formatPrice(totalAmount)}
+          {currency}
+        </div>
+      )}
     </>
   );
 
