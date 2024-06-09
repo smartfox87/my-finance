@@ -1,6 +1,5 @@
 import { supabase } from "@/api/supabase.js";
 import { getUserId } from "@/helpers/localStorage.js";
-// import { deleteIncomeCategoryApi } from "@/api/references";
 import { DatesPeriod, getCurrentDate } from "@/helpers/date";
 import { IncomeItemData } from "@/types/incomes";
 
@@ -19,7 +18,6 @@ export const createIncomeItemApi = (incomeData: IncomeItemData) =>
 
 export const deleteIncomeItemApi = async (incomeId: number) => {
   const { data, error } = await supabase.from("incomes").delete().match({ user_id: getUserId(), id: incomeId }).select("created_at, id, name, category, date, amount, account").single();
-  // if (data?.category) await deleteIncomeCategoryApi(data.category);
   return { data, error };
 };
 

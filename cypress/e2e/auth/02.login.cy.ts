@@ -58,11 +58,12 @@ describe("Login modal", () => {
         expect(interception.response?.statusCode).to.eq(200);
         expect(interception.response?.body.access_token).to.be.a("string");
         expect(interception.response?.body.user).to.be.an("object");
-      });
-      cy.get(".ant-drawer-close").click({ force: true });
-      cy.get('[data-cy="logout-btn"]').click();
-      cy.wait("@logout").then((interception) => {
-        expect(interception.response?.statusCode).to.eq(204);
+
+        cy.get(".ant-drawer-close").click({ force: true });
+        cy.get('[data-cy="logout-btn"]').click();
+        cy.wait("@logout").then((interception) => {
+          expect(interception.response?.statusCode).to.eq(204);
+        });
       });
     });
 

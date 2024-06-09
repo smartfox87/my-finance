@@ -22,14 +22,12 @@ export const LanguageToggle = () => {
 
     changeLocale(code);
 
-    // set cookie for next-i18n-router
     const days = 30;
     const date = new Date();
     date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
     const expires = date.toUTCString();
     document.cookie = `NEXT_LOCALE=${code};expires=${expires};path=/`;
 
-    // redirect to the new locale path
     if (language === i18nConfig.defaultLocale && !i18nConfig.prefixDefault) {
       router.push("/" + code + pathname);
     } else {

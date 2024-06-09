@@ -49,14 +49,20 @@ export const BudgetItem = ({ id, name, amount, accounts, categories, period: [st
           )}
         </li>
         <li>
-          {t("detail.account")}: <span className="font-bold">{accountsValue}</span>
+          {t("detail.account")}:{" "}
+          <span data-cy="item-accounts" className="font-bold">
+            {accountsValue}
+          </span>
         </li>
         <li>
-          {t("detail.category")}: <span className="font-bold">{categoriesValue}</span>
+          {t("detail.category")}:{" "}
+          <span data-cy="item-categories" className="font-bold">
+            {categoriesValue}
+          </span>
         </li>
         <li className="mt-auto pt-2">
           {t("detail.amount")}:{" "}
-          <span className="font-bold">
+          <span data-cy="item-amount" className="font-bold">
             {formatPrice(amount)} {currency}
           </span>
         </li>

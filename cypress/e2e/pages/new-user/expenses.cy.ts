@@ -22,8 +22,8 @@ describe("authorized expenses page", () => {
         cy.get("#amount").as("amount").should("have.value", "2000").clear();
         cy.get("#name").type(faker.lorem.words(2));
         cy.get("@amount").type("1000");
-        cy.pickSelect("#account", 2);
-        cy.pickSelect("#category", 2);
+        cy.pickSelect("#account", { index: 2 });
+        cy.pickSelect("#category", { index: 2 });
         cy.pickDate("#date");
         cy.get("@submit-btn").click();
       });
@@ -39,6 +39,7 @@ describe("authorized expenses page", () => {
     it("should update expense", () => {
       cy.intercept("PATCH", `${Cypress.env("NEXT_PUBLIC_SUPABASE_URL")}/rest/v1/costs*`).as("update-expense");
       cy.wait("@get-expenses").then((interception) => {
+        expect(interception.response?.statusCode).to.eq(200);
         cy.get('[data-cy="expense-item"]').last().click();
         cy.get('[data-cy="edit-expense-form"]').within(() => {
           cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
@@ -46,8 +47,8 @@ describe("authorized expenses page", () => {
           cy.get("#amount").as("amount").should("have.value", "2000").clear();
           cy.get("#name").clear().type(faker.lorem.words(2));
           cy.get("@amount").clear().type("1000");
-          cy.pickSelect("#account", 2);
-          cy.pickSelect("#category", 2);
+          cy.pickSelect("#account", { index: 2 });
+          cy.pickSelect("#category", { index: 2 });
           cy.pickDate("#date");
           cy.get("@submit-btn").click();
         });
@@ -63,6 +64,7 @@ describe("authorized expenses page", () => {
     it("should delete expense", () => {
       cy.intercept("DELETE", `${Cypress.env("NEXT_PUBLIC_SUPABASE_URL")}/rest/v1/costs*`).as("delete-expense");
       cy.wait("@get-expenses").then((interception) => {
+        expect(interception.response?.statusCode).to.eq(200);
         cy.get('[data-cy="expense-item"]').last().click();
         cy.get('[data-cy="delete-expense-btn"]').last().click();
         cy.wait("@delete-expense").then((interception) => {

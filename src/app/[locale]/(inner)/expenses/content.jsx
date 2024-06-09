@@ -53,10 +53,11 @@ export default function ExpensesContent() {
 
   const totalAmount = filteredSortedCosts?.reduce((acc, { amount }) => acc + amount, 0);
   const currency = useSelector(selectCurrency);
-  const headerActions = filteredSortedCosts?.length && (
+  const headerActions = Array.isArray(filteredSortedCosts) && (
     <>
-      <div className="mr-auto flex gap-3">
-        {filteredSortedCosts?.length} {t("common.items")}
+      <div className="mr-auto flex gap-1">
+        <span data-cy="expenses-items-count">{filteredSortedCosts?.length}</span>
+        {t("common.items")}
       </div>
       <div className="font-black lg:text-lg">
         <span className="mr-1">{t("common.total")}: </span>
