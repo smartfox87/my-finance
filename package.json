@@ -43,7 +43,7 @@
 		"redux": "^5.0.1"
 	},
 	"devDependencies": {
-		"@cypress/webpack-preprocessor": "^6.0.1",
+		"@cypress/webpack-preprocessor": "^6.0.2",
 		"@faker-js/faker": "^8.4.1",
 		"@next/bundle-analyzer": "^14.2.3",
 		"@svgr/webpack": "^8.1.0",
