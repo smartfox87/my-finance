@@ -9,39 +9,42 @@ describe("authorized budgets page", () => {
       cy.intercept("GET", `${Cypress.env("NEXT_PUBLIC_SUPABASE_URL")}/rest/v1/budgets*`).as("get-budgets");
     });
 
-    // it("should sort budgets", () => {
-    //   cy.wait("@get-budgets").then((interception) => {
-    //     expect(interception.response?.statusCode).to.eq(200);
-    //     const sortOptionsCount = 6;
-    //     getReverseIndexesArray(sortOptionsCount).forEach((index) => {
-    //       cy.get('[data-cy="budgets-filter-btn"]').click();
-    //       cy.get('[data-cy="budgets-filter-form"]')
-    //         .closest(".ant-drawer-open")
-    //         .within(() => {
-    //           cy.pickSelect("#sort", { index, returnValue: true }).then(() => {
-    //             cy.get("@selectedValue").then((selectedValue) => {
-    //               if (!("value" in selectedValue) || typeof selectedValue.value !== "string") return;
-    //               const [prop, order] = selectedValue.value.split("_") as [SortProp, SortOrder];
-    //
-    //               cy.get('[data-cy="budgets-filter-submit"]').click();
-    //
-    //               cy.document().within(() => {
-    //                 cy.get('[data-cy="budget-item"]').then((budgets) => {
-    //                   const items: SortItems = Cypress.$(budgets)
-    //                     .map((_, el) => {
-    //                       const item = Cypress.$(el).find(`[data-cy="item-${prop}"]`);
-    //                       return prop === "date" ? [item.attr("datetime"), item.data("created")] : item.text();
-    //                     })
-    //                     .get();
-    //                   cy.checkItemsSort({ items, prop, order }).should("be.true");
-    //                 });
-    //               });
-    //             });
-    //           });
-    //         });
-    //     });
-    //   });
-    // });
+    it("should sort budgets", () => {
+      cy.wait("@get-budgets").then((interception) => {
+        expect(interception.response?.statusCode).to.eq(200);
+        const sortOptionsCount = 6;
+        getReverseIndexesArray(sortOptionsCount).forEach((index) => {
+          cy.get('[data-cy="budgets-filter-btn"]').click();
+          cy.get('[data-cy="budgets-filter-form"]')
+            .closest(".ant-drawer-open")
+            .within(() => {
+              cy.pickSelect("#sort", { index, returnValue: true }).then(() => {
+                cy.get("@selectedValue").then((selectedValue) => {
+                  if (!("value" in selectedValue) || typeof selectedValue.value !== "string") return;
+                  const [prop, order] = selectedValue.value.split("_") as [SortProp, SortOrder];
+
+                  cy.get('[data-cy="budgets-filter-submit"]').click();
+
+                  cy.document().within(() => {
+                    cy.get('[data-cy="budget-item"]').then((budgets) => {
+                      const items: SortItems = Cypress.$(budgets)
+                        .map((_, el) => {
+                          const item = Cypress.$(el);
+                          const result = { created: item.data("created") };
+                          if (prop === "date") result[prop] = item.find(`[data-cy="item-${prop}"]`).attr("datetime");
+                          else result[prop] = item.find(`[data-cy="item-${prop}"]`).text();
+                          return result;
+                        })
+                        .get();
+                      cy.checkItemsSort({ items, order }).should("be.true");
+                    });
+                  });
+                });
+              });
+            });
+        });
+      });
+    });
 
     it("should filter budgets", () => {
       cy.wait("@get-budgets").then((interception) => {

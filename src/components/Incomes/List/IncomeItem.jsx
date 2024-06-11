@@ -31,9 +31,10 @@ export const IncomeItem = ({ id, created_at, name, amount, date, category, accou
     <Link
       href={`/incomes?incomeId=${id}`}
       data-cy="income-item"
+      data-created={created_at}
       className="focus-appearance flex w-full flex-col gap-3 rounded-xl border border-gray-300 p-4 shadow-[0_3px_7px_0_#ddd] duration-300 hover:-translate-y-1 hover:shadow-[0_7px_7px_0_#ddd]"
     >
-      <CommonDate date={date} created={created_at} data-cy="item-date" />
+      <CommonDate date={date} data-cy="item-date" />
       <ul className="flex grow flex-col gap-1">
         {capitalizedName?.length && (
           <li ref={nameRef} className="line-clamp-2 md:line-clamp-3">

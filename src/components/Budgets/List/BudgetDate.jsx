@@ -4,7 +4,9 @@ export const BudgetDate = ({ startDate, endDate }) => {
   const isDifferentMonths = startDate !== endDate;
   return (
     <div className="flex items-center justify-center gap-2 rounded-[8px] border border-black p-2 capitalize leading-none dark:border-white">
-      <time dateTime={startDate}>{getFullDate(startDate, "DD.MM.YYYY")}</time>
+      <time dateTime={startDate} data-cy="item-date">
+        {getFullDate(startDate, "DD.MM.YYYY")}
+      </time>
       {isDifferentMonths && (
         <>
           <span>-</span>

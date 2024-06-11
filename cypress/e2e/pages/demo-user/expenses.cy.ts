@@ -30,11 +30,14 @@ describe("authorized expenses page", () => {
                     cy.get('[data-cy="expense-item"]').then((expenses) => {
                       const items: SortItems = Cypress.$(expenses)
                         .map((_, el) => {
-                          const item = Cypress.$(el).find(`[data-cy="item-${prop}"]`);
-                          return prop === "date" ? [item.attr("datetime"), item.data("created")] : item.text();
+                          const item = Cypress.$(el);
+                          const result = { created: item.data("created") };
+                          if (prop === "date") result[prop] = item.find(`[data-cy="item-${prop}"]`).attr("datetime");
+                          else result[prop] = item.find(`[data-cy="item-${prop}"]`).text();
+                          return result;
                         })
                         .get();
-                      cy.checkItemsSort({ items, prop, order }).should("be.true");
+                      cy.checkItemsSort({ items, order }).should("be.true");
                     });
                   });
                 });

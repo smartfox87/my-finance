@@ -182,9 +182,9 @@ Cypress.Commands.add("pickFile", (selector) => {
   cy.get(selector).selectFile("cypress/fixtures/images/jpg.jpg", { force: true, action: "select" });
 });
 
-Cypress.Commands.add("checkItemsSort", ({ items, prop, order } = {}) => {
-  if (!items?.length || !prop || !order) throw new Error("No check sort params found.");
-  cy.wrap(JSON.stringify(items) === JSON.stringify(sortItems({ items, prop, order })));
+Cypress.Commands.add("checkItemsSort", ({ items, order } = {}) => {
+  if (!items?.length || !order) throw new Error("No check sort params found.");
+  cy.wrap(JSON.stringify(items) === JSON.stringify(sortItems({ items, order })));
 });
 
 Cypress.Commands.add("checkSinglePropItemsFilter", ({ items, filterPropValues } = {}) => {
@@ -212,7 +212,7 @@ declare global {
       pickRadioButton(selector: string): Chainable<void>;
       pickCalculator(expression: string): Chainable<void>;
       pickFile(selector: string): Chainable<void>;
-      checkItemsSort(props: { items: SortItems; prop: SortProp; order: SortOrder }): Chainable<Boolean>;
+      checkItemsSort(props: { items: SortItems; order: SortOrder }): Chainable<Boolean>;
       checkSinglePropItemsFilter(props: { items: FilteredSinglePropItems; filterPropValues: FilterPropValues }): Chainable<Boolean>;
       checkMultiPropsItemsFilter(props: { items: FilteredMultiPropsItems; filterPropValues: FilterPropValues }): Chainable<Boolean>;
     }
