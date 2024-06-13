@@ -194,12 +194,14 @@ Cypress.Commands.add("checkItemsSort", ({ items, prop, order } = {}) => {
       else return { created: String(item.data("created") ?? ""), name: propValue };
     })
     .get();
-  const result = JSON.stringify(sortedItems) === JSON.stringify(sortItems({ items: sortedItems, order }));
-  if (!result) {
-    cy.log("1111111111111111111111111111", JSON.stringify(sortedItems, null, 2));
-    cy.log("222222222222222222222222222222", JSON.stringify(sortItems({ items: sortedItems, order }), null, 2));
-  }
-  cy.wrap(result);
+  cy.getLang().then((locale) => {
+    const result = JSON.stringify(sortedItems) === JSON.stringify(sortItems({ items: sortedItems, order, locale }));
+    if (!result) {
+      cy.log("1111111111111111111111111111", JSON.stringify(sortedItems, null, 2));
+      cy.log("222222222222222222222222222222", JSON.stringify(sortItems({ items: sortedItems, order, locale }), null, 2));
+    }
+    cy.wrap(result);
+  });
 });
 
 Cypress.Commands.add("checkSinglePropItemsFilter", ({ items, filterPropValues } = {}) => {

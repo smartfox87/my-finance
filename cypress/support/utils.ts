@@ -12,13 +12,20 @@ export const getPropAndOrder = (selectedValue: JQuery<HTMLElement>): { prop: Sor
   return { prop, order };
 };
 
-const getFloatValue = (value: string): number => parseFloat(value.replace(/\s/g, "").replace(",", "."));
+const getFloatValue = (value: string, locale: string): number => {
+  const cleanedValue = value.replace(/[^\d.,-]/g, "");
+  const numberFormat = new Intl.NumberFormat(locale);
+  const groupSeparator = numberFormat.format(1111).replace(/1/g, "");
+  const decimalSeparator = numberFormat.format(1.1).replace(/1/g, "");
+  const result = cleanedValue.replace(new RegExp("\\" + groupSeparator, "g"), "").replace(new RegExp("\\" + decimalSeparator, "g"), ".");
+  return Number.isNaN(result) ? 0 : parseFloat(result);
+};
 
-export const sortItems = ({ items, order }: { items: SortItem[]; order: SortOrder }): SortItem[] => {
+export const sortItems = ({ items, order, locale }: { items: SortItem[]; order: SortOrder; locale: string }): SortItem[] => {
   return items.slice().sort((a, b) => {
     const [first, second] = order === SortOrder.ASC ? [a, b] : [b, a];
     let difference = 0;
-    if (first[SortProp.AMOUNT] && second[SortProp.AMOUNT]) difference = getFloatValue(first[SortProp.AMOUNT]) - getFloatValue(second[SortProp.AMOUNT]);
+    if (first[SortProp.AMOUNT] && second[SortProp.AMOUNT]) difference = getFloatValue(first[SortProp.AMOUNT], locale) - getFloatValue(second[SortProp.AMOUNT], locale);
     else if (first[SortProp.NAME] && second[SortProp.NAME]) difference = first[SortProp.NAME].toLowerCase().localeCompare(second[SortProp.NAME].toLowerCase());
     else if (first[SortProp.DATE] && second[SortProp.DATE]) difference = first.date.toLowerCase().localeCompare(second.date.toLowerCase());
     return difference === 0 ? first.created.localeCompare(second.created) : difference;
