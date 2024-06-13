@@ -195,11 +195,11 @@ Cypress.Commands.add("checkItemsSort", ({ items, prop, order } = {}) => {
     })
     .get();
   const result = JSON.stringify(sortedItems) === JSON.stringify(sortItems({ items: sortedItems, order }));
-  if (result) cy.wrap(result);
-  else {
+  if (!result) {
     console.warn("1111111111111111111111111111", JSON.stringify(sortedItems, null, 2));
     console.warn("222222222222222222222222222222", JSON.stringify(sortItems({ items: sortedItems, order }), null, 2));
   }
+  cy.wrap(result);
 });
 
 Cypress.Commands.add("checkSinglePropItemsFilter", ({ items, filterPropValues } = {}) => {
