@@ -195,12 +195,7 @@ Cypress.Commands.add("checkItemsSort", ({ items, prop, order } = {}) => {
     })
     .get();
   cy.getLang().then((locale) => {
-    const result = JSON.stringify(sortedItems) === JSON.stringify(sortItems({ items: sortedItems, order, locale }));
-    if (!result) {
-      cy.log("1111111111111111111111111111", JSON.stringify(sortedItems, null, 2));
-      cy.log("222222222222222222222222222222", JSON.stringify(sortItems({ items: sortedItems, order, locale }), null, 2));
-    }
-    cy.wrap(result);
+    cy.wrap(JSON.stringify(sortedItems) === JSON.stringify(sortItems({ items: sortedItems, order, locale })));
   });
 });
 
