@@ -1,5 +1,5 @@
 import type { FilteredSinglePropItems, SelectedOptionsData } from "../../../support/types";
-import { getReverseIndexesArray, isSortOrder, isSortProp } from "../../../support/utils";
+import { getPropAndOrder, getReverseIndexesArray } from "../../../support/utils";
 
 describe("authorized expenses page", () => {
   context("1920x1080 resolution", () => {
@@ -21,10 +21,7 @@ describe("authorized expenses page", () => {
             .within(() => {
               cy.pickSelect("#sort", { index, returnValue: true }).then(() => {
                 cy.get("@selectedValue").then((selectedValue) => {
-                  if (!("value" in selectedValue) || typeof selectedValue.value !== "string") return;
-                  const value = selectedValue.value.split("_");
-                  const prop = isSortProp(value[0]) ? value[0] : null;
-                  const order = isSortOrder(value[1]) ? value[1] : null;
+                  const { prop, order } = getPropAndOrder(selectedValue);
                   if (!prop || !order) return;
 
                   cy.get('[data-cy="expenses-filter-submit"]').click();

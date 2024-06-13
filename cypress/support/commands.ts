@@ -194,9 +194,12 @@ Cypress.Commands.add("checkItemsSort", ({ items, prop, order } = {}) => {
       else return { created: String(item.data("created") ?? ""), name: propValue };
     })
     .get();
-  console.log("1111111111111111111111111111", JSON.stringify(sortedItems, null, 2));
-  console.log("222222222222222222222222222222", JSON.stringify(sortItems({ items: sortedItems, order }), null, 2));
-  cy.wrap(JSON.stringify(sortedItems) === JSON.stringify(sortItems({ items: sortedItems, order })));
+  const result = JSON.stringify(sortedItems) === JSON.stringify(sortItems({ items: sortedItems, order }));
+  if (result) cy.wrap(result);
+  else {
+    console.warn("1111111111111111111111111111", JSON.stringify(sortedItems, null, 2));
+    console.warn("222222222222222222222222222222", JSON.stringify(sortItems({ items: sortedItems, order }), null, 2));
+  }
 });
 
 Cypress.Commands.add("checkSinglePropItemsFilter", ({ items, filterPropValues } = {}) => {

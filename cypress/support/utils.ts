@@ -1,8 +1,16 @@
 import { type FilteredMultiPropsItems, type FilteredSinglePropItems, type FilterPropValues, type SortItem, SortOrder, SortProp } from "./types";
 
-export const isSortProp = (value: any): value is SortProp => Object.values(SortProp).includes(value);
+const isSortProp = (value: any): value is SortProp => Object.values(SortProp).includes(value);
 
-export const isSortOrder = (value: any): value is SortOrder => Object.values(SortOrder).includes(value);
+const isSortOrder = (value: any): value is SortOrder => Object.values(SortOrder).includes(value);
+
+export const getPropAndOrder = (selectedValue: JQuery<HTMLElement>): { prop: SortProp | null; order: SortOrder | null } => {
+  if (!("value" in selectedValue) || typeof selectedValue.value !== "string") return { prop: null, order: null };
+  const value = selectedValue.value.split("_");
+  const prop = isSortProp(value[0]) ? value[0] : null;
+  const order = isSortOrder(value[1]) ? value[1] : null;
+  return { prop, order };
+};
 
 const getFloatValue = (value: string): number => parseFloat(value.replace(/\s/g, "").replace(",", "."));
 
