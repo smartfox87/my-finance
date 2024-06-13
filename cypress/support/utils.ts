@@ -1,14 +1,18 @@
-import type { FilteredMultiPropsItems, FilteredSinglePropItems, FilterPropValues, SortItems, SortOrder, SortProp } from "./types";
+import { type FilteredMultiPropsItems, type FilteredSinglePropItems, type FilterPropValues, type SortItem, SortOrder, SortProp } from "./types";
+
+export const isSortProp = (value: any): value is SortProp => Object.values(SortProp).includes(value);
+
+export const isSortOrder = (value: any): value is SortOrder => Object.values(SortOrder).includes(value);
 
 const getFloatValue = (value: string): number => parseFloat(value.replace(/\s/g, "").replace(",", "."));
 
-export const sortItems = ({ items, order }: { items: SortItems; order: SortOrder }): SortItems => {
+export const sortItems = ({ items, order }: { items: SortItem[]; order: SortOrder }): SortItem[] => {
   return items.slice().sort((a, b) => {
-    const [first, second] = order === "asc" ? [a, b] : [b, a];
+    const [first, second] = order === SortOrder.ASC ? [a, b] : [b, a];
     let difference = 0;
-    if ("amount" in first && "amount" in second) difference = getFloatValue(first.amount) - getFloatValue(second.amount);
-    else if ("name" in first && "name" in second) difference = first.name.toLowerCase().localeCompare(second.name.toLowerCase());
-    else if ("date" in first && "date" in second) difference = first.date.toLowerCase().localeCompare(second.date.toLowerCase());
+    if (first[SortProp.AMOUNT] && second[SortProp.AMOUNT]) difference = getFloatValue(first[SortProp.AMOUNT]) - getFloatValue(second[SortProp.AMOUNT]);
+    else if (first[SortProp.NAME] && second[SortProp.NAME]) difference = first[SortProp.NAME].toLowerCase().localeCompare(second[SortProp.NAME].toLowerCase());
+    else if (first[SortProp.DATE] && second[SortProp.DATE]) difference = first.date.toLowerCase().localeCompare(second.date.toLowerCase());
     return difference === 0 ? first.created.localeCompare(second.created) : difference;
   });
 };

@@ -1,5 +1,5 @@
-import { FilteredSinglePropItems, SelectedOptionsData, SortItems, SortOrder, SortProp } from "../../../support/types";
-import { getReverseIndexesArray } from "../../../support/utils";
+import type { FilteredSinglePropItems, SelectedOptionsData } from "../../../support/types";
+import { getReverseIndexesArray, isSortOrder, isSortProp } from "../../../support/utils";
 
 describe("authorized expenses page", () => {
   context("1920x1080 resolution", () => {
@@ -22,22 +22,16 @@ describe("authorized expenses page", () => {
               cy.pickSelect("#sort", { index, returnValue: true }).then(() => {
                 cy.get("@selectedValue").then((selectedValue) => {
                   if (!("value" in selectedValue) || typeof selectedValue.value !== "string") return;
-                  const [prop, order] = selectedValue.value.split("_") as [SortProp, SortOrder];
+                  const value = selectedValue.value.split("_");
+                  const prop = isSortProp(value[0]) ? value[0] : null;
+                  const order = isSortOrder(value[1]) ? value[1] : null;
+                  if (!prop || !order) return;
 
                   cy.get('[data-cy="expenses-filter-submit"]').click();
 
                   cy.document().within(() => {
                     cy.get('[data-cy="expense-item"]').then((expenses) => {
-                      const items: SortItems = Cypress.$(expenses)
-                        .map((_, el) => {
-                          const item = Cypress.$(el);
-                          const result = { created: item.data("created") };
-                          if (prop === "date") result[prop] = item.find(`[data-cy="item-${prop}"]`).attr("datetime");
-                          else result[prop] = item.find(`[data-cy="item-${prop}"]`).text();
-                          return result;
-                        })
-                        .get();
-                      cy.checkItemsSort({ items, order }).should("be.true");
+                      cy.checkItemsSort({ items: expenses, prop, order }).should("be.true");
                     });
                   });
                 });
