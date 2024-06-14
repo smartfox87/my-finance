@@ -1,14 +1,28 @@
 import dictionary from "../fixtures/locales/en/default.json";
+import type { RequireAtLeastOne } from "type-fest";
 
 export type Dictionary = typeof dictionary;
 
-export type SortItem = string | [string, string];
+export enum SortProp {
+  NAME = "name",
+  DATE = "date",
+  AMOUNT = "amount",
+}
 
-export type SortItems = SortItem[];
+export enum SortOrder {
+  ASC = "asc",
+  DESC = "desc",
+}
 
-export type SortProp = "name" | "date" | "amount";
+interface RequiredSortItem {
+  created: string;
+}
 
-export type SortOrder = "asc" | "desc";
+type AnySortItem = {
+  [key in SortProp]?: string;
+};
+
+export type SortItem = RequiredSortItem & RequireAtLeastOne<AnySortItem, SortProp>;
 
 export interface SelectedOptionData {
   label: string;

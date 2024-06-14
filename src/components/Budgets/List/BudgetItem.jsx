@@ -12,7 +12,7 @@ import { useViewport } from "@/hooks/viewport.js";
 import { selectAccountsObject } from "@/store/selectors/accounts.js";
 import Link from "next/link";
 
-export const BudgetItem = ({ id, name, amount, accounts, categories, period: [start_date, end_date] }) => {
+export const BudgetItem = ({ id, created_at, name, amount, accounts, categories, period: [start_date, end_date] }) => {
   const { t } = useTranslation();
   const { isTouchDevice } = useViewport();
   const currency = useSelector(selectCurrency);
@@ -33,6 +33,7 @@ export const BudgetItem = ({ id, name, amount, accounts, categories, period: [st
     <Link
       href={`/budgets?budgetId=${id}`}
       data-cy="budget-item"
+      data-created={created_at}
       className="flex w-full flex-col gap-3 rounded-xl border border-gray-300 p-4 shadow-[0_3px_7px_0_#ddd] duration-300 hover:-translate-y-1 hover:shadow-[0_7px_7px_0_#ddd]"
     >
       <BudgetDate startDate={start_date} endDate={end_date} />
@@ -40,11 +41,17 @@ export const BudgetItem = ({ id, name, amount, accounts, categories, period: [st
         <li className="line-clamp-2 md:line-clamp-3">
           {isTooltipName ? (
             <Tooltip title={capitalizedName}>
-              {t("detail.name")}: <span className="font-bold">{capitalizedName}</span>
+              {t("detail.name")}:{" "}
+              <span data-cy="item-name" className="font-bold">
+                {capitalizedName}
+              </span>
             </Tooltip>
           ) : (
             <>
-              {t("detail.name")}: <span className="font-bold">{capitalizedName}</span>
+              {t("detail.name")}:{" "}
+              <span data-cy="item-name" className="font-bold">
+                {capitalizedName}
+              </span>
             </>
           )}
         </li>

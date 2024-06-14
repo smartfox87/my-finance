@@ -3,6 +3,7 @@ import webpack from "@cypress/webpack-preprocessor";
 import path from "path";
 import { fileURLToPath } from "url";
 import "dotenv/config";
+import installLogsPrinter from "cypress-terminal-report/src/installLogsPrinter";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -32,6 +33,7 @@ export default defineConfig({
           watchOptions: {},
         }),
       );
+      installLogsPrinter(on);
       config.env.NEXT_PUBLIC_PUBLIC_URL = process.env.NEXT_PUBLIC_PUBLIC_URL;
       config.env.E2E_LOGIN = process.env.E2E_LOGIN;
       config.env.E2E_PASSWORD = process.env.E2E_PASSWORD;

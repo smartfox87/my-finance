@@ -1,5 +1,5 @@
-import { FilteredSinglePropItems, SelectedOptionsData, SortItems, SortOrder, SortProp } from "../../../support/types";
-import { getReverseIndexesArray } from "../../../support/utils";
+import type { FilteredSinglePropItems, SelectedOptionsData } from "../../../support/types";
+import { getPropAndOrder, getReverseIndexesArray } from "../../../support/utils";
 
 describe("authorized expenses page", () => {
   context("1920x1080 resolution", () => {
@@ -21,20 +21,14 @@ describe("authorized expenses page", () => {
             .within(() => {
               cy.pickSelect("#sort", { index, returnValue: true }).then(() => {
                 cy.get("@selectedValue").then((selectedValue) => {
-                  if (!("value" in selectedValue) || typeof selectedValue.value !== "string") return;
-                  const [prop, order] = selectedValue.value.split("_") as [SortProp, SortOrder];
+                  const { prop, order } = getPropAndOrder(selectedValue);
+                  if (!prop || !order) return;
 
                   cy.get('[data-cy="expenses-filter-submit"]').click();
 
                   cy.document().within(() => {
                     cy.get('[data-cy="expense-item"]').then((expenses) => {
-                      const items: SortItems = Cypress.$(expenses)
-                        .map((_, el) => {
-                          const item = Cypress.$(el).find(`[data-cy="item-${prop}"]`);
-                          return prop === "date" ? [item.attr("datetime"), item.data("created")] : item.text();
-                        })
-                        .get();
-                      cy.checkItemsSort({ items, prop, order }).should("be.true");
+                      cy.checkItemsSort({ items: expenses, prop, order }).should("be.true");
                     });
                   });
                 });

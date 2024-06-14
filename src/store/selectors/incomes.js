@@ -26,11 +26,11 @@ export const selectIncomesByFilter = createSelector(
       .sort((a, b) => {
         const [prop, order] = incomesFilterValues.sort.split("_");
         const [first, second] = order === "asc" ? [a, b] : [b, a];
-        if (prop === "amount") return first.amount - second.amount;
-        else if (prop === "date") {
-          const difference = first.date.localeCompare(second.date);
-          return difference === 0 ? first.created_at.localeCompare(second.created_at) : difference;
-        } else if (prop === "name") return first.name.localeCompare(second.name);
+        let difference = 0;
+        if (prop === "amount") difference = first.amount - second.amount;
+        else if (prop === "date") difference = first.date.localeCompare(second.date);
+        else if (prop === "name") return first.name.localeCompare(second.name);
+        return difference === 0 ? first.created_at.localeCompare(second.created_at) : difference;
       }) || null,
 );
 

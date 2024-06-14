@@ -1,5 +1,5 @@
 import { supabaseClient } from "./supabase";
-import type { FilteredMultiPropsItems, FilteredSinglePropItems, FilterPropValues, SelectedOptionsData, SortItems, SortOrder, SortProp } from "./types";
+import { FilteredMultiPropsItems, FilteredSinglePropItems, FilterPropValues, SelectedOptionsData, SortItem, SortOrder, SortProp } from "./types";
 import { compareMultiPropsItemsToFilterPropValues, compareSinglePropItemsToFilterPropValues, sortItems } from "./utils";
 
 Cypress.Commands.add("deleteE2EUser", () => {
@@ -183,8 +183,20 @@ Cypress.Commands.add("pickFile", (selector) => {
 });
 
 Cypress.Commands.add("checkItemsSort", ({ items, prop, order } = {}) => {
-  if (!items?.length || !prop || !order) throw new Error("No check sort params found.");
-  cy.wrap(JSON.stringify(items) === JSON.stringify(sortItems({ items, prop, order })));
+  if (!items?.length || !order) throw new Error("No check sort params found.");
+  const sortedItems: SortItem[] = Cypress.$(items)
+    .map((_, el) => {
+      const item = Cypress.$(el);
+      const propItem = item.find(`[data-cy="item-${prop}"]`);
+      const propValue = prop === SortProp.DATE ? propItem.attr("datetime") ?? "" : propItem.text() ?? "";
+      if (prop === SortProp.AMOUNT) return { created: String(item.data("created") ?? ""), amount: propValue };
+      if (prop === SortProp.DATE) return { created: String(item.data("created") ?? ""), date: propValue };
+      else return { created: String(item.data("created") ?? ""), name: propValue };
+    })
+    .get();
+  cy.getLang().then((locale) => {
+    cy.wrap(JSON.stringify(sortedItems) === JSON.stringify(sortItems({ items: sortedItems, order, locale })));
+  });
 });
 
 Cypress.Commands.add("checkSinglePropItemsFilter", ({ items, filterPropValues } = {}) => {
@@ -212,7 +224,7 @@ declare global {
       pickRadioButton(selector: string): Chainable<void>;
       pickCalculator(expression: string): Chainable<void>;
       pickFile(selector: string): Chainable<void>;
-      checkItemsSort(props: { items: SortItems; prop: SortProp; order: SortOrder }): Chainable<Boolean>;
+      checkItemsSort(props: { items: JQuery<HTMLElement>; prop: SortProp; order: SortOrder }): Chainable<Boolean>;
       checkSinglePropItemsFilter(props: { items: FilteredSinglePropItems; filterPropValues: FilterPropValues }): Chainable<Boolean>;
       checkMultiPropsItemsFilter(props: { items: FilteredMultiPropsItems; filterPropValues: FilterPropValues }): Chainable<Boolean>;
     }

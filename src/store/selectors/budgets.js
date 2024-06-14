@@ -31,11 +31,11 @@ export const selectBudgetsByFilter = createSelector(
       .sort((a, b) => {
         const [prop, order] = budgetsFilterValues.sort.split("_");
         const [first, second] = order === "asc" ? [a, b] : [b, a];
-        if (prop === "amount") return first.amount - second.amount;
-        else if (prop === "date") {
-          const difference = first.period[0] - second.period[0];
-          return difference === 0 ? first.created_at - second.created_at : difference;
-        } else if (prop === "name") return first.name.localeCompare(second.name);
+        let difference = 0;
+        if (prop === "amount") difference = first.amount - second.amount;
+        else if (prop === "date") difference = first.period[0].localeCompare(second.period[0]);
+        else if (prop === "name") return first.name.localeCompare(second.name);
+        return difference === 0 ? first.created_at.localeCompare(second.created_at) : difference;
       }) || null,
 );
 
