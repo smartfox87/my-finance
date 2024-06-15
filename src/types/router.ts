@@ -35,3 +35,5 @@ export enum Pages {
   STATISTICS = "statistics",
   CONTACT = "contact",
 }
+
+export type Page = `${Pages}`;

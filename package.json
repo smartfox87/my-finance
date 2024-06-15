@@ -4,9 +4,9 @@
 	"type": "module",
 	"private": true,
 	"scripts": {
-		"css": "node ./scripts/css.js",
-		"sitemap": "node ./scripts/sitemap.js",
-		"locales": "node ./scripts/locales.js",
+		"css": "node --loader ts-node/esm ./scripts/css.ts",
+		"sitemap": "node --loader ts-node/esm ./scripts/sitemap.ts",
+		"locales": "node --loader ts-node/esm ./scripts/locales.ts",
 		"dev": "npm run locales && next dev -p 3020",
 		"build": "npm run locales && next build && npm run css",
 		"start": "next start -p 3020",
@@ -48,6 +48,7 @@
 		"@faker-js/faker": "^8.4.1",
 		"@next/bundle-analyzer": "^14.2.4",
 		"@svgr/webpack": "^8.1.0",
+		"@types/fs-extra": "^11.0.4",
 		"@types/node": "^20",
 		"@types/react": "^18.3.3",
 		"@types/react-dom": "^18",
@@ -68,6 +69,7 @@
 		"sitemap": "^8.0.0",
 		"tailwindcss": "^3.4.4",
 		"ts-loader": "^9.5.1",
+		"ts-node": "^10.9.2",
 		"typescript": "^5",
 		"webpack": "^5.92.0"
 	}
