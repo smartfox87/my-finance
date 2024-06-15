@@ -37,22 +37,21 @@ jobs:
               }
 
               console.log('111111111111111111111111111111111', JSON.stringify(res.data.artifacts[0]), null, 2));
-#              const artifactsToDelete = res.data.artifacts.filter(({ name }) => name === 'cypress-artifacts2');
-#              console.log('111111111111111111111111111111111', JSON.stringify(res.data.artifacts.map(({ name }) => name), null, 2));
+              const artifactsToDelete = res.data.artifacts.filter(({ name }) => name === 'cypress-artifacts2');
 
-#              if (artifactsToDelete.length === 0) {
-#                console.log('No artifacts to delete.');
-#                return;
-#              }
-#
-#              for (const { id } of artifactsToDelete) {
-#                await github.rest.actions.deleteArtifact({
-#                  owner: context.repo.owner,
-#                  repo: context.repo.repo,
-#                  artifact_id: id,
-#                });
-#                console.log(`Deleted artifact with id: ${id}`);
-#              }
+              if (artifactsToDelete.length === 0) {
+                console.log('No artifacts to delete.');
+                return;
+              }
+
+              for (const { id } of artifactsToDelete) {
+                await github.rest.actions.deleteArtifact({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  artifact_id: id,
+                });
+                console.log(`Deleted artifact with id: ${id}`);
+              }
             } catch (error) {
               core.setFailed(`Action failed with error: ${error}`);
             }
