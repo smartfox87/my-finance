@@ -7,6 +7,10 @@ on:
 jobs:
   pipeline:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
     strategy:
         matrix:
             node-version: [21.x]
@@ -59,6 +63,7 @@ jobs:
         with:
           browser: chrome
           build: npm run build
+
           start: npm run start
           wait-on: ${{ vars.NEXT_PUBLIC_PUBLIC_URL }}
         env:
