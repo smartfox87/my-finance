@@ -37,6 +37,7 @@ jobs:
               }
 
               console.log('111111111111111111111111111111111', JSON.stringify(res.data.artifacts[0], null, 2));
+              console.log('111111111111111111111111111111111', JSON.stringify(res.data.artifacts.map(({ created_at }) => created_at), null, 2));
               const artifactsToDelete = res.data.artifacts.filter(({ name }) => name === 'cypress-artifacts2');
 
               if (artifactsToDelete.length === 0) {
