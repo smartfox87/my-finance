@@ -19,6 +19,41 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Delete Old Artifacts
+        uses: actions/github-script@v6
+        id: artifact
+        with:
+          script: |
+            try {
+              const res = await github.rest.actions.listArtifactsForRepo({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+              });
+
+              if (res.status !== 200) {
+                core.setFailed(`Failed to list artifacts: ${res.status}`);
+                return;
+              }
+
+              const artifactsToDelete = res.data.artifacts.filter(({ name }) => name === 'package');
+
+              if (artifactsToDelete.length === 0) {
+                console.log('No artifacts to delete.');
+                return;
+              }
+
+              for (const { id } of artifactsToDelete) {
+                await github.rest.actions.deleteArtifact({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  artifact_id: id,
+                });
+                console.log(`Deleted artifact with id: ${id}`);
+              }
+            } catch (error) {
+              core.setFailed(`Action failed with error: ${error}`);
+            }
+
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
@@ -43,27 +78,6 @@ jobs:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           E2E_LOGIN: ${{ secrets.E2E_LOGIN }}
           E2E_PASSWORD: ${{ secrets.E2E_PASSWORD }}
-
-
-      - name: Delete Old Artifacts
-        uses: actions/github-script@v6
-        id: artifact
-        with:
-          script: |
-            const res = await github.rest.actions.listArtifactsForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-            })
-
-            res.data.artifacts
-              .filter(({ name }) => name === 'package')
-              .forEach(({ id }) => {
-                github.rest.actions.deleteArtifact({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  artifact_id: id,
-                })
-              })
 
       - name: Upload Cypress artifacts
         if: failure()
