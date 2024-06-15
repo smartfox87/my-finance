@@ -26,31 +26,31 @@ jobs:
         with:
           script: |
             try {
-              const res = await github.rest.actions.listArtifactsForRepo({
+              const res = await github.rest.actions.listRepoWorkflows({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
               });
 
               if (res.status !== 200) {
-                core.setFailed(`Failed to list artifacts: ${res.status}`);
+                core.setFailed(`Failed to list workflows: ${res.status}`);
                 return;
               }
 
-              const artifactsToDelete = res.data.artifacts.filter(({ name }) => name === 'package');
-              console.log('111111111111111111111111111111111', artifactsToDelete.map(({ name }) => name));
+              const workflowsToDelete = res.data.workflows.filter(({ name }) => name === 'package');
+              console.log('111111111111111111111111111111111', JSON.stringify(workflowsToDelete.map(({ name }) => name), null, 2));
 
-              if (artifactsToDelete.length === 0) {
-                console.log('No artifacts to delete.');
+              if (workflowsToDelete.length === 0) {
+                console.log('No workflows to delete.');
                 return;
               }
 
-              for (const { id } of artifactsToDelete) {
+              for (const { id } of workflowsToDelete) {
                 await github.rest.actions.deleteArtifact({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
-                  artifact_id: id,
+                  workflow_id: id,
                 });
-                console.log(`Deleted artifact with id: ${id}`);
+                console.log(`Deleted workflow with id: ${id}`);
               }
             } catch (error) {
               core.setFailed(`Action failed with error: ${error}`);
