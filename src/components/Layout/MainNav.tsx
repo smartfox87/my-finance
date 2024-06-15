@@ -1,4 +1,4 @@
-import { INIT_NAV_LIST } from "@/initial-data/navigation.jsx";
+import { INIT_NAV_LIST } from "@/constants/navigation.jsx";
 import { useTranslation } from "react-i18next";
 import { memo, useMemo } from "react";
 import Link from "next/link";

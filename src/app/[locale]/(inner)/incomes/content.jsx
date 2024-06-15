@@ -7,7 +7,7 @@ import { useFilterSearchParams } from "@/hooks/filterSearchParams";
 import { getIncomesListThunk, setIncomesFilterValues } from "@/store/incomesSlice";
 import { useLoading } from "@/hooks/loading";
 import { Suspense, useCallback, useEffect } from "react";
-import { INITIAL_INCOMES_FILTER_FIELDS } from "@/initial-data/incomes";
+import { INITIAL_INCOMES_FILTER_FIELDS } from "@/constants/incomes";
 import { getUserId } from "@/helpers/localStorage";
 import { selectCurrency } from "@/store/selectors/profile";
 import formatPrice from "@/helpers/formatPrice";

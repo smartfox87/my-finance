@@ -1,5 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { INITIAL_COSTS_FILTER_FIELDS, INITIAL_COST_FIELDS } from "@/initial-data/costs.js";
+import { INITIAL_COSTS_FILTER_FIELDS, INITIAL_COST_FIELDS } from "@/constants/costs.js";
 import { selectCostCategories } from "@/store/selectors/references.js";
 import { selectCurrency } from "@/store/selectors/profile.jsx";
 import { i18nRef } from "@/i18n";
