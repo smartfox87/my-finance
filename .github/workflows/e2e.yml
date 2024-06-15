@@ -21,7 +21,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Delete Old Artifacts
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         id: artifact
         with:
           script: |
@@ -37,6 +37,7 @@ jobs:
               }
 
               const artifactsToDelete = res.data.artifacts.filter(({ name }) => name === 'package');
+              console.log('111111111111111111111111111111111', artifactsToDelete.map(({ name }) => name));
 
               if (artifactsToDelete.length === 0) {
                 console.log('No artifacts to delete.');
