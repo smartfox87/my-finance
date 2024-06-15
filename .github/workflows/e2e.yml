@@ -36,7 +36,8 @@ jobs:
                 return;
               }
 
-              const artifactsToDelete = res.data.artifacts.filter(({ name }) => name === 'cypress-artifacts');
+              console.log('111111111111111111111111111111111', JSON.stringify(res.data.artifacts[0]), null, 2));
+              const artifactsToDelete = res.data.artifacts.filter(({ name }) => name === 'cypress-artifacts2');
 #              console.log('111111111111111111111111111111111', JSON.stringify(res.data.artifacts.map(({ name }) => name), null, 2));
 
               if (artifactsToDelete.length === 0) {
