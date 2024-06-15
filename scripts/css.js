@@ -1,4 +1,4 @@
-import { locales, pages } from "../src/initial-data/router.js";
+import { locales, pages } from "../src/constants/router.js";
 import fs from "fs";
 import path from "path";
 import * as cheerio from "cheerio";

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { breakpoints } from "@/initial-data/breakpoints.js";
+import { breakpoints } from "@/constants/breakpoints.js";
 
 const viewports = [
   { name: "xl", query: `(min-width: ${breakpoints["xl-min"]}px)` },

@@ -1,4 +1,4 @@
-import { locales } from "@/initial-data/router";
+import { locales } from "@/constants/router";
 
 export type Locale = (typeof locales)[number];
 

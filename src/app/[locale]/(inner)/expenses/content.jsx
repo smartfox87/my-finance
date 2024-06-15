@@ -15,7 +15,7 @@ import { useFilterSearchParams } from "@/hooks/filterSearchParams";
 import { useLoading } from "@/hooks/loading";
 import { Suspense, useCallback, useEffect } from "react";
 import { getCostsListThunk, setCostsFilterValues } from "@/store/costsSlice";
-import { INITIAL_COSTS_FILTER_FIELDS } from "@/initial-data/costs";
+import { INITIAL_COSTS_FILTER_FIELDS } from "@/constants/costs";
 import { getUserId } from "@/helpers/localStorage";
 import { selectCurrency } from "@/store/selectors/profile";
 import { CostItem } from "@/components/Costs/List/CostItem";

@@ -1,5 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { INITIAL_BUDGETS_FILTER_FIELDS, INITIAL_BUDGET_FIELDS } from "@/initial-data/budgets.js";
+import { INITIAL_BUDGETS_FILTER_FIELDS, INITIAL_BUDGET_FIELDS } from "@/constants/budgets.js";
 import { selectCostCategories } from "@/store/selectors/references.js";
 import { selectCurrency } from "@/store/selectors/profile.jsx";
 import { selectAccountsList } from "@/store/selectors/accounts.js";

@@ -1,5 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { INITIAL_INCOMES_FILTER_FIELDS, INITIAL_INCOME_FIELDS } from "@/initial-data/incomes.js";
+import { INITIAL_INCOMES_FILTER_FIELDS, INITIAL_INCOME_FIELDS } from "@/constants/incomes.js";
 import { selectIncomeCategories } from "@/store/selectors/references.js";
 import { selectCurrency } from "@/store/selectors/profile.jsx";
 import { i18nRef } from "@/i18n";

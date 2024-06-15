@@ -16,7 +16,7 @@ import { useMonths } from "@/hooks/months";
 import { selectAccountTypesObject, selectCostCategories, selectCostCategoriesObject, selectIncomeCategories, selectIncomeCategoriesObject } from "@/store/selectors/references";
 import { selectCurrency } from "@/store/selectors/profile";
 import { useCallback, useEffect, useState } from "react";
-import { INITIAL_STATISTICS_FILTER_FIELDS } from "@/initial-data/statistics";
+import { INITIAL_STATISTICS_FILTER_FIELDS } from "@/constants/statistics";
 import { getUserId } from "@/helpers/localStorage";
 import formatPrice from "@/helpers/formatPrice";
 import { CostsBudgetsBarChart } from "@/components/Statistics/CostsBudgetsBarChart";

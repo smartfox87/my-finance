@@ -10,7 +10,7 @@ import formatPrice from "@/helpers/formatPrice";
 import { selectBudgetsByFilter, selectBudgetsFilterValues, selectBudgetsList } from "@/store/selectors/budgets";
 import { useFilterSearchParams } from "@/hooks/filterSearchParams";
 import { getBudgetsListThunk, setBudgetsFilterValues } from "@/store/budgetsSlice";
-import { INITIAL_BUDGETS_FILTER_FIELDS } from "@/initial-data/budgets";
+import { INITIAL_BUDGETS_FILTER_FIELDS } from "@/constants/budgets";
 import { getUserId } from "@/helpers/localStorage";
 import { AddNewBudget } from "@/components/Budgets/New/AddNewBudget";
 import { BudgetsFilter } from "@/components/Budgets/Filter/BudgetsFilter";

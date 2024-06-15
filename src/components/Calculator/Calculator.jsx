@@ -1,7 +1,7 @@
 import { forwardRef, useImperativeHandle, useState } from "react";
 import { CalculatorResult } from "@/components/Calculator/CalculatorResult.jsx";
 import { CalculatorKeyPad } from "@/components/Calculator/CalculatorKeyPad.jsx";
-import { decimalsKeys, integerKeys, mathOperatorsKeys, navigationKeys } from "@/initial-data/input";
+import { decimalsKeys, integerKeys, mathOperatorsKeys, navigationKeys } from "@/constants/input";
 
 export const Calculator = forwardRef(function Calculator({ onCalculate }, ref) {
   const [result, setResult] = useState("");

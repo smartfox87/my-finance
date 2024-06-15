@@ -1,6 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { selectCurrencies } from "@/store/selectors/references.js";
-import { INITIAL_PROFILE_FIELDS, INITIAL_SETTINGS_FIELDS } from "@/initial-data/profile.js";
+import { INITIAL_PROFILE_FIELDS, INITIAL_SETTINGS_FIELDS } from "@/constants/profile.js";
 
 export const selectProfile = ({ profile }) => profile?.profile || null;
 
