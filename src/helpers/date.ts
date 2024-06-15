@@ -1,9 +1,11 @@
 import dayjs from "dayjs";
 import quarterOfYear from "dayjs/plugin/quarterOfYear";
-import { Locale } from "../../i18nConfig";
+import { type Locale } from "@/types/router";
+import { type Period, Periods } from "@/types/date";
+import { periods } from "@/constants/date";
 dayjs.extend(quarterOfYear);
 
-export const toggleDayjsLocale = async (locale: Locale) => {
+export const toggleDayjsLocale = async (locale: Locale): Promise<void> => {
   if (locale === "en" || dayjs.locale() === locale) return;
   try {
     await import(`dayjs/locale/${locale}.js`);
@@ -12,9 +14,6 @@ export const toggleDayjsLocale = async (locale: Locale) => {
     console.error(`Failed to load locale: ${locale}`, error);
   }
 };
-
-export const periods = ["day", "week", "month", "quarter", "year"] as const;
-export type Period = (typeof periods)[number];
 
 export const periodOptions = periods.map((period) => ({ label: `complex.period.options.${period}`, value: period }));
 

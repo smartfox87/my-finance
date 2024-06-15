@@ -2,7 +2,7 @@ import "dotenv/config";
 import { writeFileSync } from "fs";
 import { SitemapStream, streamToPromise } from "sitemap";
 import { Readable } from "stream";
-import { locales, pages } from "../src/constants/router.js";
+import { locales, pages } from "../src/constants/router";
 
 const hostname = process.env.NEXT_PUBLIC_PRODUCTION_URL;
 const links = pages.map((url) => ({

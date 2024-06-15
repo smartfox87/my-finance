@@ -1,4 +1,4 @@
-import { Period } from "@/helpers/date";
+import { type Period } from "@/types/date";
 
 export interface ProfileData {
   full_name: string | null;

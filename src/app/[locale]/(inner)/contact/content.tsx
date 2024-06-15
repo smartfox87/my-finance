@@ -9,7 +9,7 @@ import { selectContactFields } from "@/store/selectors/contact";
 import { useSelector } from "react-redux";
 import { useAntd } from "@/hooks/antd.js";
 import { Organization, WithContext } from "schema-dts";
-import { languages } from "@/constants/router.js";
+import { languages } from "@/constants/router";
 
 type KeyType = "full_name" | "email" | "subject" | "message" | "files";
 

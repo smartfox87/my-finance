@@ -3,11 +3,12 @@ import initTranslations from "@/i18n";
 import StatisticsModule from "@/app/[locale]/(inner)/statistics/content-module";
 import { InnerLayout } from "@/components/Layout/InnerLayout";
 import { getJsonLdBreadcrumbs, getJsonLdWebsite } from "@/helpers/jsonLd";
-import { LinkItem } from "@/types/Breadcrumbs";
+import { LinkItem } from "@/types/breadcrumbs";
+import { type Locale } from "@/types/router";
 
 const i18nNamespaces = ["default"];
 
-export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
+export async function generateMetadata({ params: { locale } }: { params: { locale: Locale } }): Promise<Metadata> {
   const { t } = await initTranslations(locale, i18nNamespaces);
   return {
     title: t(`pages.statistics.title`),
@@ -16,7 +17,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
   };
 }
 
-export default async function Statistics({ params: { locale } }: { params: { locale: string } }) {
+export default async function Statistics({ params: { locale } }: { params: { locale: Locale } }) {
   const { t } = await initTranslations(locale, i18nNamespaces);
 
   const breadcrumbList: LinkItem[] = [

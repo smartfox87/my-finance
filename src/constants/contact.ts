@@ -1,4 +1,4 @@
-import { PropField } from "@/types/Form";
+import { PropField } from "@/types/form";
 
 export const INITIAL_CONTACT_FIELDS: PropField[] = [
   {

@@ -6,7 +6,7 @@ import { useLoading } from "@/hooks/loading.js";
 import SvgUpload from "@/assets/sprite/upload.svg";
 import { getFileSizeWithUnit } from "@/helpers/file.js";
 import { cutDecimals, handleFilterSelectOptions, handleKeyDownDecimalsValidation, handleKeyUpCutDecimals } from "@/helpers/fields";
-import { ExtendedFormItemRule, PropField, FormItemRule, DefaultFormProps, PropFieldValue, FormValue, ChangedField, FormValues, ProcessedValues } from "@/types/Form";
+import { ExtendedFormItemRule, PropField, FormItemRule, DefaultFormProps, PropFieldValue, FormValue, ChangedField, FormValues, ProcessedValues } from "@/types/form";
 import dynamic from "next/dynamic";
 import { showErrorMessage } from "@/helpers/message";
 
