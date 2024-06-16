@@ -11,6 +11,13 @@ import { showErrorMessage } from "@/helpers/message";
 import { ChangedField, DefaultFormProps, FieldType, FieldTypes, FormField, FormItemRule, FormValue, FormValues, ProcessedValues, PropFieldValue } from "@/types/form";
 import type { PickerMode } from "rc-picker/lib/interface";
 
+const PeriodComponent = dynamic(() => import("@/components/Form/PeriodField").then((mod) => mod.PeriodField));
+const DatePickerComponent = dynamic(() => import("antd/es/date-picker"));
+const SelectComponent = dynamic(() => import("antd/es/select"));
+const InputNumberComponent = dynamic(() => import("antd/es/input-number"));
+const RadioGroupComponent = dynamic(() => import("antd/es/radio").then((mod) => mod.Group));
+const UploadComponent = dynamic(() => import("antd/es/upload"));
+
 export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfterSave, isVisible = true, onSaveForm, onResetForm, onChange, ...props }: DefaultFormProps, ref) {
   const { t } = useTranslation();
   const [form] = Form.useForm();
@@ -92,13 +99,6 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
 
   useImperativeHandle(ref, () => ({ handleChangeFieldValue }));
 
-  const PeriodComponent = fields.find(({ type }) => type === FieldTypes.PERIOD) && dynamic(() => import("@/components/Form/PeriodField").then((mod) => mod.PeriodField));
-  const DatePickerComponent = fields.find(({ type }) => type === FieldTypes.DATE) && dynamic(() => import("antd/es/date-picker"));
-  const SelectComponent = fields.find(({ type }) => type === FieldTypes.SELECT) && dynamic(() => import("antd/es/select"));
-  const InputNumberComponent = fields.find(({ type }) => type === FieldTypes.NUMBER) && dynamic(() => import("antd/es/input-number"));
-  const RadioGroupComponent = fields.find(({ type }) => type === FieldTypes.RADIO_BUTTONS) && dynamic(() => import("antd/es/radio").then((mod) => mod.Group));
-  const UploadComponent = fields.find(({ type }) => type === FieldTypes.FILE) && dynamic(() => import("antd/es/upload"));
-
   const normFile = (e: { fileList: UploadFile[] }) => (Array.isArray(e) ? e : e?.fileList);
   const handleRemoveFile = (file: UploadFile) =>
     form.setFieldsValue({
@@ -162,7 +162,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 onChange={(event) => handleChangeFieldValue({ id, value: event.target.value })}
               />
             )}
-            {field.type === FieldTypes.SELECT && SelectComponent && (
+            {field.type === FieldTypes.SELECT && (
               <SelectComponent
                 size="large"
                 autoFocus={!!focus}
@@ -178,7 +178,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 onChange={(value) => handleChangeFieldValue({ id, value: value as string | string[], multiple: field.multiple, type: FieldTypes.SELECT })}
               />
             )}
-            {field.type === FieldTypes.DATE && DatePickerComponent && (
+            {field.type === FieldTypes.DATE && (
               <DatePickerComponent
                 size="large"
                 autoFocus={!!focus}
@@ -195,7 +195,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 onChange={(value) => handleChangeFieldValue({ id, value: value as Dayjs })}
               />
             )}
-            {field.type === FieldTypes.NUMBER && InputNumberComponent && (
+            {field.type === FieldTypes.NUMBER && (
               <InputNumberComponent
                 size="large"
                 autoFocus={!!focus}
@@ -208,8 +208,8 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 onChange={(value) => handleChangeFieldValue({ id, value: cutDecimals(value) })}
               />
             )}
-            {field.type === FieldTypes.PERIOD && PeriodComponent && <PeriodComponent id={id} onChange={(value: Dayjs) => handleChangeFieldValue({ id, value })} />}
-            {field.type === FieldTypes.RADIO_BUTTONS && RadioGroupComponent && (
+            {field.type === FieldTypes.PERIOD && <PeriodComponent id={id} onChange={(value: Dayjs) => handleChangeFieldValue({ id, value })} />}
+            {field.type === FieldTypes.RADIO_BUTTONS && (
               <RadioGroupComponent
                 className="w-full"
                 size="large"
@@ -219,7 +219,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 onChange={(event) => handleChangeFieldValue({ id, value: event.target.value })}
               />
             )}
-            {field.type === FieldTypes.FILE && UploadComponent && (
+            {field.type === FieldTypes.FILE && (
               <UploadComponent
                 listType="picture"
                 multiple={!!field.multiple}
