@@ -1,4 +1,4 @@
-import { supabase } from "@/api/supabase.js";
+import { supabase } from "@/api/supabase";
 import { getLanguage, getUserId } from "@/helpers/localStorage.js";
 import { AccountTypeData, IncomeCategoryData } from "@/types/references";
 

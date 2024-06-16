@@ -1,3 +1,15 @@
+import type { FieldType } from "@/types/form";
+
+export interface AccountField {
+  id: string;
+  type: FieldType;
+  label_translation: string;
+  value: string;
+  maxLength?: number;
+  required?: boolean;
+  focus?: boolean;
+}
+
 export interface AccountItemBalanceData {
   accountId: number;
   increase?: number;
@@ -20,5 +32,3 @@ export interface AccountItem {
   updated_at: string;
   name?: string;
 }
-
-export type AccountsList = AccountItem[];

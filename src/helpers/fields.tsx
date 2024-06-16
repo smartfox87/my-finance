@@ -1,7 +1,7 @@
 import { isValidElement, ReactElement } from "react";
 import { decimalsKeys, integerKeys, navigationKeys } from "@/constants/input";
-import { BaseOptionType } from "rc-select/es/Select";
-import { FlattenOptionData } from "rc-select/es/interface";
+import type { BaseOptionType } from "rc-select/es/Select";
+import type { FlattenOptionData } from "rc-select/es/interface";
 
 export const handleFilterSelectOptions = (inputValue: string, option: any): boolean => {
   if (isValidElement(option.label)) return (option.label as ReactElement).props["data-text"]?.toLowerCase().includes(inputValue.toLowerCase());
