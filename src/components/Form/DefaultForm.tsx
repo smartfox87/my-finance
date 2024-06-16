@@ -133,7 +133,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
             valuePropName={field.type === FieldTypes.FILE ? "fileList" : "value"}
             getValueFromEvent={field.type === FieldTypes.FILE ? normFile : (e) => e}
           >
-            {field.type === FieldTypes.TEXT && (
+            {(field.type === FieldTypes.TEXT || field.type === FieldTypes.EMAIL) && (
               <Input
                 size="large"
                 ref={focus ? (focusInputRef as LegacyRef<InputRef>) : undefined}

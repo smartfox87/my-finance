@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { INITIAL_SIGN_IN_FIELDS } from "@/constants/auth.js";
+import { INITIAL_SIGN_IN_FIELDS } from "@/constants/auth";
 import { useTranslation } from "react-i18next";
 import { lazy, Suspense, useState } from "react";
 import { useViewport } from "@/hooks/viewport.js";

@@ -1,4 +1,4 @@
-import { INITIAL_SIGN_UP_FIELDS } from "@/constants/auth.js";
+import { INITIAL_SIGN_UP_FIELDS } from "@/constants/auth";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { lazy, Suspense, useState } from "react";
