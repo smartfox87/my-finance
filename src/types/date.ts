@@ -16,4 +16,7 @@ export enum DatesPeriods {
 }
 
 export type DatesPeriod = `${DatesPeriods}`;
+
 export type PickerPeriod = `${PickerPeriods}`;
+
+export type DatesStrings = [string, string];

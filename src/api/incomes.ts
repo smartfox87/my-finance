@@ -1,9 +1,10 @@
 import { supabase } from "@/api/supabase";
 import { getUserId } from "@/helpers/localStorage.js";
-import { DatesValues, getCurrentDate } from "@/helpers/date";
-import { IncomeItemData } from "@/types/incomes";
+import { getCurrentDate } from "@/helpers/date";
+import type { IncomeItemData } from "@/types/incomes";
+import type { DatesStrings } from "@/types/date";
 
-export const getIncomesListApi = ({ period: [from, to] }: { period: DatesValues }) =>
+export const getIncomesListApi = ({ period: [from, to] }: { period: DatesStrings }) =>
   supabase.from("incomes").select("created_at, id, name, category, date, amount, account").or(`user_id.eq.${getUserId()}`).order("id").gte("date", from).lte("date", to);
 
 export const getIncomeItemApi = (incomeId: string) =>

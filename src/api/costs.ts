@@ -1,9 +1,10 @@
 import { supabase } from "@/api/supabase";
 import { getUserId } from "@/helpers/localStorage.js";
-import { DatesValues, getCurrentDate } from "@/helpers/date";
-import { CostItemData } from "@/types/costs";
+import { getCurrentDate } from "@/helpers/date";
+import type { CostItemData } from "@/types/costs";
+import type { DatesStrings } from "@/types/date";
 
-export const getCostsListApi = ({ period: [from, to] }: { period: DatesValues }) =>
+export const getCostsListApi = ({ period: [from, to] }: { period: DatesStrings }) =>
   supabase.from("costs").select("created_at, id, name, amount, date, category, account").eq("user_id", getUserId()).gte("date", from).lte("date", to);
 
 export const getCostItemApi = (costId: string) => supabase.from("costs").select("id, name, amount, date, category, account").match({ user_id: getUserId(), id: costId }).single();

@@ -8,7 +8,7 @@ import { SideModal } from "@/components/Modals/SideModal.jsx";
 import { memo, useEffect, useState } from "react";
 import SvgFilter from "@/assets/sprite/filter.svg";
 import { useViewport } from "@/hooks/viewport.js";
-import { PeriodField } from "@/components/Form/PeriodField.jsx";
+import { PeriodField } from "@/components/Form/PeriodField";
 import { setFilterValue } from "@/helpers/filters.js";
 import { useFilterFocus } from "@/hooks/filterFocus.js";
 
