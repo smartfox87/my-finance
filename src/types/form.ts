@@ -1,6 +1,7 @@
-import { Dayjs } from "dayjs";
-import { UploadFile } from "antd";
-import type { Period } from "@/types/date";
+import type { Dayjs } from "dayjs";
+import type { UploadFile } from "antd";
+import type { PickerPeriod } from "@/types/date";
+import type { SelectValue } from "antd/es/select";
 
 export enum FieldTypes {
   TEXT = "text",
@@ -21,10 +22,8 @@ export type FormItemRule = "number" | "email";
 
 export interface BaseFormField {
   id: string;
-  // type: FieldType;
-  value: any;
+  label_translation?: string;
   label?: string;
-  label_translation: string;
   label_suffix?: string;
   placeholder?: string;
   focus?: boolean;
@@ -34,28 +33,31 @@ export interface BaseFormField {
 
 export interface SelectFormField extends BaseFormField {
   type: FieldTypes.SELECT;
-  multiple?: boolean;
+  value: SelectValue;
   options: Array<{ option?: string; label?: string; label_translation?: string; value: string }>;
+  multiple?: boolean;
   showSearch?: boolean;
 }
 
 export interface RadioButtonsFormField extends BaseFormField {
   type: FieldTypes.RADIO_BUTTONS;
-  multiple?: boolean;
+  value: string;
   options: Array<{ option?: string; label?: string; label_translation?: string; value: string }>;
+  multiple?: boolean;
   showSearch?: boolean;
 }
 
 export interface DateFormField extends BaseFormField {
   type: FieldTypes.DATE;
-  picker: Period;
+  value: Dayjs;
+  picker: PickerPeriod;
   disabledDate?: (current: Dayjs) => boolean;
 }
 
 export interface FileFormField extends BaseFormField {
   type: FieldTypes.FILE;
+  value: UploadFile[];
   multiple?: boolean;
-  // fileList: any[];
   maxCount?: number;
   accept?: string;
   maxSize?: number;
@@ -63,27 +65,30 @@ export interface FileFormField extends BaseFormField {
 
 export interface PeriodFormField extends BaseFormField {
   type: FieldTypes.PERIOD;
+  value: [string, string];
 }
 
 export interface TextFormField extends BaseFormField {
-  type: FieldTypes.TEXT | FieldTypes.PASSWORD | FieldTypes.EMAIL | FieldTypes.NUMBER | FieldTypes.TEXTAREA;
+  type: FieldTypes.TEXT | FieldTypes.PASSWORD | FieldTypes.EMAIL | FieldTypes.TEXTAREA;
+  value: string;
   maxLength?: number;
 }
 
-export type FormField = PeriodFormField | TextFormField | SelectFormField | DateFormField | FileFormField | RadioButtonsFormField;
-
-export interface CommonFormField extends BaseFormField {
-  disabledDate?: (current: Dayjs) => boolean;
-  options?: Array<{ option?: string; label?: string; label_translation?: string; value: string }>;
-  maxCount?: number;
-  multiple?: boolean;
-  accept?: string;
-  maxSize?: number;
-  fileList?: any[];
-  showSearch?: boolean;
-  maxLength?: number;
-  picker?: "date" | "week" | "month" | "quarter" | "year";
+export interface NumberFormField extends BaseFormField {
+  type: FieldTypes.NUMBER;
+  value: number | string;
 }
+
+export type FormField = PeriodFormField | TextFormField | SelectFormField | DateFormField | FileFormField | RadioButtonsFormField | NumberFormField;
+
+export type ChangedField =
+  | Pick<PeriodFormField, "id" | "type" | "value">
+  | Pick<TextFormField, "id" | "type" | "value">
+  | Pick<SelectFormField, "id" | "type" | "value">
+  | Pick<DateFormField, "id" | "type" | "value">
+  | Pick<FileFormField, "id" | "type" | "value">
+  | Pick<RadioButtonsFormField, "id" | "type" | "value">
+  | Pick<NumberFormField, "id" | "type" | "value">;
 
 export interface DefaultFormProps {
   fields: FormField[];
@@ -101,14 +106,8 @@ export interface FormValues {
 }
 
 export interface ProcessedValues {
-  [key: string]: File[] | FormValue;
-}
-
-export interface ChangedField {
-  id: string;
-  value: FormValue;
-  multiple?: boolean;
-  type?: string;
+  [key: string]: any;
+  // [key: string]: File[] | FormValue;
 }
 
 export interface PropFieldValue {

@@ -1,6 +1,6 @@
 import { forwardRef, LegacyRef, useCallback, useEffect, useImperativeHandle, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Form, FormProps, Input, InputRef, type UploadFile } from "antd";
+import { Button, type DatePickerProps, Form, FormProps, Input, InputRef, SelectProps, type UploadFile } from "antd";
 import dayjs, { Dayjs } from "dayjs";
 import { useLoading } from "@/hooks/loading.js";
 import SvgUpload from "@/assets/sprite/upload.svg";
@@ -9,11 +9,11 @@ import { cutDecimals, handleFilterSelectOptions, handleKeyDownDecimalsValidation
 import dynamic from "next/dynamic";
 import { showErrorMessage } from "@/helpers/message";
 import { ChangedField, DefaultFormProps, FieldType, FieldTypes, FormField, FormItemRule, FormValue, FormValues, ProcessedValues, PropFieldValue } from "@/types/form";
-import type { PickerMode } from "rc-picker/lib/interface";
+import { SelectValue } from "antd/es/select";
 
 const PeriodComponent = dynamic(() => import("@/components/Form/PeriodField").then((mod) => mod.PeriodField));
-const DatePickerComponent = dynamic(() => import("antd/es/date-picker"));
-const SelectComponent = dynamic(() => import("antd/es/select"));
+const DatePickerComponent = dynamic<DatePickerProps>(() => import("antd/es/date-picker"));
+const SelectComponent = dynamic<SelectProps<SelectValue>>(() => import("antd/es/select"));
 const InputNumberComponent = dynamic(() => import("antd/es/input-number"));
 const RadioGroupComponent = dynamic(() => import("antd/es/radio").then((mod) => mod.Group));
 const UploadComponent = dynamic(() => import("antd/es/upload"));
@@ -24,63 +24,58 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
 
   const propsFieldsValues = useMemo(
     () =>
-      fields
-        .map(({ type, id, value }: FormField): PropFieldValue => {
-          const item: PropFieldValue = { name: id, type };
-          if (type === FieldTypes.FILE) item.fileList = value;
-          else item.value = value && type === FieldTypes.DATE ? dayjs(value) : value;
-          return item;
-        })
-        .reduce(
-          (acc, { name, value, fileList }) => ({
-            ...acc,
-            [name]: fileList || value,
-          }),
-          {},
-        ),
+      fields.reduce(
+        (acc, { id, type, value }) => ({
+          ...acc,
+          [id]: type === FieldTypes.DATE ? dayjs(value) : value,
+        }),
+        {},
+      ),
     [fields],
   );
-  const propsFieldsIds = useMemo(() => fields.map(({ id }) => id), [fields]);
-  const [currentFieldsValues, setCurrentFieldsValues] = useState<{ [key: string]: FormValue }>(propsFieldsValues);
+  const [currentFieldsValues, setCurrentFieldsValues] = useState<{ [key: string]: any }>(propsFieldsValues);
 
   useEffect(() => {
     form.setFieldsValue(propsFieldsValues);
-    setCurrentFieldsValues(form.getFieldsValue(propsFieldsIds));
+    console.log("111111111111111111111111111111", form.getFieldsValue(true));
+    setCurrentFieldsValues(form.getFieldsValue(true));
   }, [propsFieldsValues]);
 
-  const [isLoading, setIsLoading] = useLoading(false);
-
   const focusInputRef = useRef<HTMLInputElement | InputRef>(null);
+  // todo check importance isVisible
   useLayoutEffect(() => {
     if (isVisible) setTimeout(() => focusInputRef.current?.focus());
   }, [isVisible]);
 
   const handleChangeFieldValue = useCallback(
-    ({ id, value: newValue, multiple, type }: ChangedField) => {
-      if (multiple && type === FieldTypes.SELECT && Array.isArray(newValue)) {
-        if (!newValue?.length || (!(currentFieldsValues[id] as string[]).includes("all") && (newValue as string[]).includes("all"))) form.setFieldsValue({ [id]: ["all"] });
-        else form.setFieldsValue({ [id]: (newValue as string[]).filter((val: string) => val !== "all") });
-      } else form.setFieldsValue({ [id]: newValue });
-      setCurrentFieldsValues(form.getFieldsValue(propsFieldsIds));
+    ({ id, value, type }: ChangedField): void => {
+      if (type === FieldTypes.SELECT && Array.isArray(value)) {
+        if (!value?.length || (!(currentFieldsValues[id] as string[]).includes("all") && (value as string[]).includes("all"))) form.setFieldsValue({ [id]: ["all"] });
+        else form.setFieldsValue({ [id]: (value as string[]).filter((val: string) => val !== "all") });
+      } else form.setFieldsValue({ [id]: value });
+      setCurrentFieldsValues(form.getFieldsValue(true));
       if (typeof onChange === "function") onChange();
     },
     [onChange, currentFieldsValues],
   );
+  useImperativeHandle(ref, () => ({ handleChangeFieldValue }));
 
   const isChangedFieldsValues = useMemo(
     () => Object.entries(propsFieldsValues).some(([key, value]) => (value || currentFieldsValues[key]) && JSON.stringify(value) !== JSON.stringify(currentFieldsValues[key])),
     [propsFieldsValues, currentFieldsValues],
   );
 
-  const handleSubmitForm: FormProps<FormValues>["onFinish"] = async () => {
+  const [isLoading, setIsLoading] = useLoading(false);
+  // const handleSubmitForm: FormProps<FormValues>["onFinish"] = async () => {
+  const handleSubmitForm: FormProps["onFinish"] = async () => {
     try {
-      const values = await form.validateFields(propsFieldsIds);
+      const values = await form.validateFields();
       setIsLoading(true);
-      const processedValues = Object.keys(values).reduce((acc: ProcessedValues, key) => {
-        if (key.includes("file") && Array.isArray(values[key])) acc[key] = (values[key] as { originFileObj: File }[]).map(({ originFileObj }) => originFileObj);
-        else if (key.includes("date") && values[key]) acc[key] = (values[key] as Dayjs).format("YYYY-MM-DD");
-        else if (Array.isArray(values[key])) acc[key] = (values[key] as string[]).filter((val: string) => val !== "all");
-        else acc[key] = values[key];
+      const processedValues = Object.entries(values).reduce((acc: ProcessedValues, [key, value]) => {
+        if (key.includes("file") && Array.isArray(value)) acc[key] = (value as { originFileObj: File }[]).map(({ originFileObj }) => originFileObj);
+        else if (key.includes("date") && value) acc[key] = (value as Dayjs).format("YYYY-MM-DD");
+        else if (Array.isArray(value)) acc[key] = (value as string[]).filter((val: string) => val !== "all");
+        else acc[key] = value;
         return acc;
       }, {});
       await onSaveForm(processedValues);
@@ -96,8 +91,6 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
     if (onResetForm) onResetForm();
     form.setFieldsValue(propsFieldsValues);
   };
-
-  useImperativeHandle(ref, () => ({ handleChangeFieldValue }));
 
   const normFile = (e: { fileList: UploadFile[] }) => (Array.isArray(e) ? e : e?.fileList);
   const handleRemoveFile = (file: UploadFile) =>
@@ -140,7 +133,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 type={field.type}
                 maxLength={field.maxLength}
                 disabled={disabled}
-                onChange={(event) => handleChangeFieldValue({ id, value: event.target.value })}
+                onChange={(event) => handleChangeFieldValue({ id, type: field.type, value: event.target.value })}
               />
             )}
             {field.type === FieldTypes.PASSWORD && (
@@ -149,7 +142,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 size="large"
                 maxLength={field.maxLength}
                 disabled={disabled}
-                onChange={(event) => handleChangeFieldValue({ id, value: event.target.value })}
+                onChange={(event) => handleChangeFieldValue({ id, type: field.type, value: event.target.value })}
               />
             )}
             {field.type === FieldTypes.TEXTAREA && (
@@ -159,7 +152,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 maxLength={field.maxLength}
                 showCount={!!field.maxLength}
                 disabled={disabled}
-                onChange={(event) => handleChangeFieldValue({ id, value: event.target.value })}
+                onChange={(event) => handleChangeFieldValue({ id, type: field.type, value: event.target.value })}
               />
             )}
             {field.type === FieldTypes.SELECT && (
@@ -175,14 +168,15 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 showSearch={field.showSearch}
                 filterOption={field.showSearch ? handleFilterSelectOptions : undefined}
                 getPopupContainer={(triggerNode) => triggerNode.parentElement}
-                onChange={(value) => handleChangeFieldValue({ id, value: value as string | string[], multiple: field.multiple, type: FieldTypes.SELECT })}
+                onChange={(value) => handleChangeFieldValue({ id, type: field.type, value })}
+                // onChange={(value) => handleChangeFieldValue({ id, type: field.type, value, multiple: field.multiple })}
               />
             )}
             {field.type === FieldTypes.DATE && (
               <DatePickerComponent
                 size="large"
                 autoFocus={!!focus}
-                picker={field.picker as PickerMode}
+                picker={field.picker}
                 disabledDate={field.disabledDate}
                 disabled={disabled}
                 placeholder={placeholder}
@@ -192,7 +186,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                   type: "mask",
                 }}
                 style={{ width: "100%" }}
-                onChange={(value) => handleChangeFieldValue({ id, value: value as Dayjs })}
+                onChange={(value) => handleChangeFieldValue({ id, type: field.type, value })}
               />
             )}
             {field.type === FieldTypes.NUMBER && (
@@ -205,10 +199,10 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 min={0}
                 max={999999999999999}
                 style={{ width: "100%" }}
-                onChange={(value) => handleChangeFieldValue({ id, value: cutDecimals(value) })}
+                onChange={(value) => handleChangeFieldValue({ id, type: field.type, value: cutDecimals(value) })}
               />
             )}
-            {field.type === FieldTypes.PERIOD && <PeriodComponent id={id} onChange={(value: Dayjs) => handleChangeFieldValue({ id, value })} />}
+            {field.type === FieldTypes.PERIOD && <PeriodComponent id={id} value={field.value} onChange={(value) => handleChangeFieldValue({ id, type: field.type, value })} />}
             {field.type === FieldTypes.RADIO_BUTTONS && (
               <RadioGroupComponent
                 className="w-full"
@@ -216,7 +210,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 optionType="button"
                 buttonStyle="solid"
                 options={field.options?.map(({ label, value }) => ({ label: t(`fields.${label}`), value }))}
-                onChange={(event) => handleChangeFieldValue({ id, value: event.target.value })}
+                onChange={(event) => handleChangeFieldValue({ id, type: field.type, value: event.target.value })}
               />
             )}
             {field.type === FieldTypes.FILE && (

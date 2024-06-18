@@ -1,6 +1,6 @@
-import type { AccountField } from "@/types/accounts";
+import { FieldTypes, FormField } from "@/types/form";
 
-export const INITIAL_ACCOUNT_FIELDS: AccountField[] = [
-  { id: "name", label_translation: "simple.name", value: "", maxLength: 200, type: "text", required: true, focus: true },
-  { id: "balance", label_translation: "simple.balance", value: "", type: "number", required: true },
+export const INITIAL_ACCOUNT_FIELDS: FormField[] = [
+  { id: "name", label_translation: "simple.name", value: "", maxLength: 200, type: FieldTypes.TEXT, required: true, focus: true },
+  { id: "balance", label_translation: "simple.balance", value: "", type: FieldTypes.NUMBER, required: true },
 ];

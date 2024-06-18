@@ -1,3 +1,3 @@
-import { Periods } from "@/types/date";
+import { DatesPeriods } from "@/types/date";
 
-export const periods = Object.values(Periods);
+export const periods = Object.values(DatesPeriods);

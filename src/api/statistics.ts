@@ -1,14 +1,14 @@
 import { supabase } from "@/api/supabase";
 import { getUserId } from "@/helpers/localStorage.js";
-import { DatesPeriod, getFromPeriodDatesForApi, getToPeriodDatesForApi } from "@/helpers/date";
+import { DatesValues, getFromPeriodDatesForApi, getToPeriodDatesForApi } from "@/helpers/date";
 
-export const getCostsListForChartsApi = ({ period: [from, to] }: { period: DatesPeriod }) =>
+export const getCostsListForChartsApi = ({ period: [from, to] }: { period: DatesValues }) =>
   supabase.from("costs").select("amount, date, category, account").match({ user_id: getUserId() }).gte("date", from).lte("date", to);
 
-export const getIncomesListForChartsApi = ({ period: [from, to] }: { period: DatesPeriod }) =>
+export const getIncomesListForChartsApi = ({ period: [from, to] }: { period: DatesValues }) =>
   supabase.from("incomes").select("category, date, amount, account").match({ user_id: getUserId() }).gte("date", from).lte("date", to);
 
-export const getBudgetsListForChartsApi = ({ period }: { period: DatesPeriod }) =>
+export const getBudgetsListForChartsApi = ({ period }: { period: DatesValues }) =>
   supabase
     .from("view_budgets")
     .select("name, amount, period, categories")

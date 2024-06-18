@@ -40,8 +40,7 @@
 		"react-loader-spinner": "^6.1.6",
 		"react-redux": "^9.1.2",
 		"recharts": "^2.12.7",
-		"redux": "^5.0.1",
-		"type-fest": "^4.20.0"
+		"redux": "^5.0.1"
 	},
 	"devDependencies": {
 		"@cypress/webpack-preprocessor": "^6.0.2",
@@ -71,6 +70,7 @@
 		"ts-loader": "^9.5.1",
 		"ts-node": "^10.9.2",
 		"typescript": "^5",
+		"type-fest": "^4.20.0",
 		"webpack": "^5.92.0"
 	}
 }
