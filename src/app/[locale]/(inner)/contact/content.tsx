@@ -10,12 +10,10 @@ import { useSelector } from "react-redux";
 import { useAntd } from "@/hooks/antd.js";
 import { Organization, WithContext } from "schema-dts";
 import { languages } from "@/constants/router";
+import { FormValues } from "@/types/form";
+import { isRcFileArray, isStringNumber } from "@/types/predicates";
 
 type KeyType = "full_name" | "email" | "subject" | "message" | "files";
-
-type ContactData = {
-  [key in KeyType]: string | File[];
-};
 
 export default function ContactContent() {
   const { t } = useTranslation();
@@ -31,17 +29,16 @@ export default function ContactContent() {
     if (!isLoadedCaptcha) initCAPTCHA();
   };
 
-  const handleSendMessage = async (contactData: ContactData) => {
+  const handleSendMessage = async (contactData: FormValues): Promise<void> => {
     try {
       const score = await getScore();
       if (score < 0.5) return showNotification({ title: t("notifications.recaptcha_invalid") });
       const formData = new FormData();
-      Object.keys(contactData)
-        .filter((key: string): boolean => !!contactData[key as KeyType]?.length)
-        .forEach((key: string) => {
-          Array.isArray(contactData[key as KeyType])
-            ? (contactData[key as KeyType] as File[]).forEach((value: File) => formData.append(key, value))
-            : formData.append(key, contactData[key as KeyType] as string);
+      Object.entries(contactData)
+        .filter(([key, value]) => !!value)
+        .forEach(([key, value]) => {
+          if (isRcFileArray(value)) value.forEach((value) => formData.append(key, value));
+          else if (isStringNumber(value)) formData.append(key, value.toString());
         });
       const { success, error } = await fetch("/api/contact", { method: "POST", body: formData }).then((res) => res.json());
       if (success) {

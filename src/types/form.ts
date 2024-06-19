@@ -1,7 +1,9 @@
 import type { Dayjs } from "dayjs";
 import type { UploadFile } from "antd";
 import type { PickerPeriod } from "@/types/date";
-import type { SelectValue } from "antd/es/select";
+import type { RcFile } from "antd/es/upload";
+
+export type SelectValue = string | number | (string | number)[];
 
 export enum FieldTypes {
   TEXT = "text",
@@ -90,29 +92,15 @@ export type ChangedField =
   | Pick<RadioButtonsFormField, "id" | "type" | "value">
   | Pick<NumberFormField, "id" | "type" | "value">;
 
+export type FormValue = FormField["value"] | (RcFile | undefined)[];
+
+export type FormValues = Record<string, FormValue>;
+
 export interface DefaultFormProps {
   fields: FormField[];
+  onSaveForm: (formValues: Record<string, FormValue>) => Promise<void>;
   isResetAfterSave?: boolean;
   isVisible?: boolean;
-  onSaveForm: (formValues: any) => Promise<void>;
   onResetForm?: () => void;
   onChange?: () => void;
-}
-
-export type FormValue = null | number | string | string[] | UploadFile[] | Dayjs;
-
-export interface FormValues {
-  [key: string]: FormValue;
-}
-
-export interface ProcessedValues {
-  [key: string]: any;
-  // [key: string]: File[] | FormValue;
-}
-
-export interface PropFieldValue {
-  name: string;
-  type: string;
-  value?: FormValue;
-  fileList?: UploadFile[];
 }

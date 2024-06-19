@@ -1,15 +1,15 @@
 import { forwardRef, LegacyRef, useCallback, useEffect, useImperativeHandle, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, type DatePickerProps, Form, FormProps, Input, InputRef, SelectProps, type UploadFile } from "antd";
-import dayjs, { Dayjs } from "dayjs";
 import { useLoading } from "@/hooks/loading.js";
 import SvgUpload from "@/assets/sprite/upload.svg";
 import { getFileSizeWithUnit } from "@/helpers/file.js";
 import { cutDecimals, handleFilterSelectOptions, handleKeyDownDecimalsValidation, handleKeyUpCutDecimals } from "@/helpers/fields";
 import dynamic from "next/dynamic";
 import { showErrorMessage } from "@/helpers/message";
-import { ChangedField, DefaultFormProps, FieldType, FieldTypes, FormField, FormItemRule, FormValue, FormValues, ProcessedValues, PropFieldValue } from "@/types/form";
-import { SelectValue } from "antd/es/select";
+import { isStringArray, isUploadFileArray } from "@/types/predicates";
+import { ChangedField, DefaultFormProps, FieldType, FieldTypes, FormItemRule, FormValue, FormValues, SelectValue } from "@/types/form";
+import { Button, type DatePickerProps, Form, FormProps, Input, InputRef, SelectProps, type UploadFile } from "antd";
+import dayjs, { isDayjs } from "dayjs";
 
 const PeriodComponent = dynamic(() => import("@/components/Form/PeriodField").then((mod) => mod.PeriodField));
 const DatePickerComponent = dynamic<DatePickerProps>(() => import("antd/es/date-picker"));
@@ -20,7 +20,7 @@ const UploadComponent = dynamic(() => import("antd/es/upload"));
 
 export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfterSave, isVisible = true, onSaveForm, onResetForm, onChange, ...props }: DefaultFormProps, ref) {
   const { t } = useTranslation();
-  const [form] = Form.useForm();
+  const [form] = Form.useForm<FormValues>();
 
   const propsFieldsValues = useMemo(
     () =>
@@ -33,14 +33,14 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
       ),
     [fields],
   );
-  const [currentFieldsValues, setCurrentFieldsValues] = useState<{ [key: string]: any }>(propsFieldsValues);
+  const [currentFieldsValues, setCurrentFieldsValues] = useState<FormValues>(propsFieldsValues);
 
   useEffect(() => {
     form.setFieldsValue(propsFieldsValues);
-    console.log("111111111111111111111111111111", form.getFieldsValue(true));
     setCurrentFieldsValues(form.getFieldsValue(true));
   }, [propsFieldsValues]);
 
+  // todo check importance focusInputRef
   const focusInputRef = useRef<HTMLInputElement | InputRef>(null);
   // todo check importance isVisible
   useLayoutEffect(() => {
@@ -49,9 +49,10 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
 
   const handleChangeFieldValue = useCallback(
     ({ id, value, type }: ChangedField): void => {
-      if (type === FieldTypes.SELECT && Array.isArray(value)) {
-        if (!value?.length || (!(currentFieldsValues[id] as string[]).includes("all") && (value as string[]).includes("all"))) form.setFieldsValue({ [id]: ["all"] });
-        else form.setFieldsValue({ [id]: (value as string[]).filter((val: string) => val !== "all") });
+      const currentFieldValue = currentFieldsValues[id];
+      if (type === FieldTypes.SELECT && isStringArray(value) && isStringArray(currentFieldValue)) {
+        if (!value?.length || (!currentFieldValue.includes("all") && value.includes("all"))) form.setFieldsValue({ [id]: ["all"] });
+        else form.setFieldsValue({ [id]: value.filter((val) => val !== "all") });
       } else form.setFieldsValue({ [id]: value });
       setCurrentFieldsValues(form.getFieldsValue(true));
       if (typeof onChange === "function") onChange();
@@ -66,15 +67,14 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
   );
 
   const [isLoading, setIsLoading] = useLoading(false);
-  // const handleSubmitForm: FormProps<FormValues>["onFinish"] = async () => {
   const handleSubmitForm: FormProps["onFinish"] = async () => {
     try {
       const values = await form.validateFields();
       setIsLoading(true);
-      const processedValues = Object.entries(values).reduce((acc: ProcessedValues, [key, value]) => {
-        if (key.includes("file") && Array.isArray(value)) acc[key] = (value as { originFileObj: File }[]).map(({ originFileObj }) => originFileObj);
-        else if (key.includes("date") && value) acc[key] = (value as Dayjs).format("YYYY-MM-DD");
-        else if (Array.isArray(value)) acc[key] = (value as string[]).filter((val: string) => val !== "all");
+      const processedValues = Object.entries(values).reduce((acc: FormValues, [key, value]) => {
+        if (isUploadFileArray(value)) acc[key] = value.map(({ originFileObj }) => originFileObj);
+        else if (isDayjs(value)) acc[key] = value.format("YYYY-MM-DD");
+        else if (isStringArray(value)) acc[key] = value.filter((val) => val !== "all");
         else acc[key] = value;
         return acc;
       }, {});
