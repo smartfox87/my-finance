@@ -1,25 +1,25 @@
-import { PropField } from "@/types/Form";
+import { FieldTypes, type FormField } from "@/types/form";
 
-export const INITIAL_CONTACT_FIELDS: PropField[] = [
+export const INITIAL_CONTACT_FIELDS: FormField[] = [
   {
     id: "full_name",
     label_translation: "simple.full_name",
     value: "",
-    type: "text",
+    type: FieldTypes.TEXT,
     focus: true,
   },
   {
     id: "email",
     label_translation: "simple.email",
     value: "",
-    type: "email",
+    type: FieldTypes.EMAIL,
     required: true,
   },
   {
     id: "subject",
     label_translation: "complex.subject.label",
     value: "",
-    type: "select",
+    type: FieldTypes.SELECT,
     required: true,
     options: [
       { label_translation: "complex.subject.options.feedback", value: "feedback" },
@@ -34,14 +34,14 @@ export const INITIAL_CONTACT_FIELDS: PropField[] = [
     id: "message",
     label_translation: "simple.message",
     value: "",
-    type: "textarea",
+    type: FieldTypes.TEXTAREA,
     required: true,
   },
   {
     id: "files",
     label_translation: "simple.attachments",
     value: [],
-    type: "file",
+    type: FieldTypes.FILE,
     maxCount: 3,
     multiple: true,
     accept: "image/*,video/*",

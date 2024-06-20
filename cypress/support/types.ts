@@ -1,5 +1,5 @@
 import dictionary from "../fixtures/locales/en/default.json";
-import type { RequireAtLeastOne } from "type-fest";
+import type { RequireExactlyOne } from "type-fest";
 
 export type Dictionary = typeof dictionary;
 
@@ -22,7 +22,7 @@ type AnySortItem = {
   [key in SortProp]?: string;
 };
 
-export type SortItem = RequiredSortItem & RequireAtLeastOne<AnySortItem, SortProp>;
+export type SortItem = RequiredSortItem & RequireExactlyOne<AnySortItem, SortProp>;
 
 export interface SelectedOptionData {
   label: string;

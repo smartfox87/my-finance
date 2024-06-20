@@ -1,5 +1,5 @@
 import { BreadcrumbList, WebSite, WithContext } from "schema-dts";
-import { LinkItem } from "@/types/Breadcrumbs";
+import { LinkItem } from "@/types/breadcrumbs";
 
 export const getJsonLdBreadcrumbs = (linksList: LinkItem[]): WithContext<BreadcrumbList> => ({
   "@context": "https://schema.org",

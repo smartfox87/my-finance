@@ -1,4 +1,4 @@
-import { supabase } from "@/api/supabase.js";
+import { supabase } from "@/api/supabase";
 import { getUserId } from "@/helpers/localStorage.js";
 import { deleteAccountTypeApi } from "@/api/references";
 import { getCurrentDate } from "@/helpers/date";

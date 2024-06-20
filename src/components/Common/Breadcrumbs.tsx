@@ -1,4 +1,4 @@
-import { LinkItem } from "@/types/Breadcrumbs";
+import { LinkItem } from "@/types/breadcrumbs";
 
 export const Breadcrumbs = ({ list = [] }: { list: LinkItem[] }) => {
   return (

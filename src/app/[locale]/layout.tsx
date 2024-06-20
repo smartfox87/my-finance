@@ -5,8 +5,9 @@ import Providers from "./providers";
 import { ReactNodeLike } from "prop-types";
 import initTranslations from "@/i18n";
 import type { Metadata, Viewport } from "next";
+import { type Locale } from "@/types/router";
 
-export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
+export async function generateMetadata({ params: { locale } }: { params: { locale: Locale } }): Promise<Metadata> {
   const { t } = await initTranslations(locale, i18nNamespaces);
   const APP_NAME = t("seo.app_name");
   const APP_TITLE_TEMPLATE = `%s - ${APP_NAME}`;
@@ -72,7 +73,7 @@ export function generateStaticParams() {
   return i18nConfig.locales.map((locale) => ({ locale }));
 }
 
-export default async function LocaleLayout({ children, params: { locale } }: { children: ReactNodeLike; params: { locale: string } }) {
+export default async function LocaleLayout({ children, params: { locale } }: { children: ReactNodeLike; params: { locale: Locale } }) {
   const { resources } = await initTranslations(locale, i18nNamespaces);
 
   return (

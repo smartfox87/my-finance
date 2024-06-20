@@ -1,9 +1,10 @@
-import { supabase } from "@/api/supabase.js";
+import { supabase } from "@/api/supabase";
 import { getUserId } from "@/helpers/localStorage.js";
-import { DatesPeriod, getCurrentDate, getFromPeriodDatesForApi, getToPeriodDatesForApi } from "@/helpers/date";
-import { BudgetItemData } from "@/types/budgets";
+import { getCurrentDate, getFromPeriodDatesForApi, getToPeriodDatesForApi } from "@/helpers/date";
+import type { BudgetItemData } from "@/types/budgets";
+import type { DatesStrings } from "@/types/date";
 
-export const getBudgetsListApi = ({ period }: { period: DatesPeriod }) =>
+export const getBudgetsListApi = ({ period }: { period: DatesStrings }) =>
   supabase
     .from("budgets")
     .select("created_at, id, name, amount, period, accounts:accounts(id), categories:cost_categories(id)")

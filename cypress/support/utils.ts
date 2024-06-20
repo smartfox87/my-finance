@@ -7,9 +7,8 @@ const isSortOrder = (value: any): value is SortOrder => Object.values(SortOrder)
 export const getPropAndOrder = (selectedValue: JQuery<HTMLElement>): { prop: SortProp | null; order: SortOrder | null } => {
   if (!("value" in selectedValue) || typeof selectedValue.value !== "string") return { prop: null, order: null };
   const value = selectedValue.value.split("_");
-  const prop = isSortProp(value[0]) ? value[0] : null;
-  const order = isSortOrder(value[1]) ? value[1] : null;
-  return { prop, order };
+  if (!isSortProp(value[0]) || !isSortOrder(value[1])) return { prop: null, order: null };
+  return { prop: value[0], order: value[1] };
 };
 
 const getFloatValue = (value: string, locale: string): number => {

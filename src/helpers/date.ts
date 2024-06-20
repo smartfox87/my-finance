@@ -1,9 +1,11 @@
+import { type Locale } from "@/types/router";
+import { type DatesPeriod, DatesPeriods } from "@/types/date";
+import { periods } from "@/constants/date";
 import dayjs from "dayjs";
 import quarterOfYear from "dayjs/plugin/quarterOfYear";
-import { Locale } from "../../i18nConfig";
 dayjs.extend(quarterOfYear);
 
-export const toggleDayjsLocale = async (locale: Locale) => {
+export const toggleDayjsLocale = async (locale: Locale): Promise<void> => {
   if (locale === "en" || dayjs.locale() === locale) return;
   try {
     await import(`dayjs/locale/${locale}.js`);
@@ -12,9 +14,6 @@ export const toggleDayjsLocale = async (locale: Locale) => {
     console.error(`Failed to load locale: ${locale}`, error);
   }
 };
-
-export const periods = ["day", "week", "month", "quarter", "year"] as const;
-export type Period = (typeof periods)[number];
 
 export const periodOptions = periods.map((period) => ({ label: `complex.period.options.${period}`, value: period }));
 
@@ -27,7 +26,7 @@ export const getFullDate = (date: string, format = "YYYY MMMM DD") => {
   return dayjs(date).format(format);
 };
 
-export const getDatesPeriod = (initialDate: string, period: Period = "month") => {
+export const getDatesPeriod = (initialDate: string | undefined, period: DatesPeriod = DatesPeriods.MONTH): [string, string] => {
   const date = dayjs(initialDate);
   return [date.startOf(period).format("YYYY-MM-DD"), date.endOf(period).format("YYYY-MM-DD")];
 };
@@ -38,18 +37,16 @@ export const isStringADate = (str: any) => {
   return !isNaN(date);
 };
 
-export const findMatchingPeriod = (datesArray: string[]) => {
-  if (datesArray.length !== 2) return false;
-  const date1 = dayjs(datesArray[0]);
+export const findMatchingPeriod = (datesArray: [string, string]): null | DatesPeriod => {
+  if (datesArray.length !== 2) return null;
+  const date = dayjs(datesArray[0]);
   for (let period of periods) {
-    const startOfPeriod = date1.startOf(period).format("YYYY-MM-DD");
-    const endOfPeriod = date1.endOf(period).format("YYYY-MM-DD");
+    const startOfPeriod = date.startOf(period).format("YYYY-MM-DD");
+    const endOfPeriod = date.endOf(period).format("YYYY-MM-DD");
     if (startOfPeriod === datesArray[0] && endOfPeriod === datesArray[1]) return period;
   }
   return null;
 };
-
-export type DatesPeriod = [string, string];
 
 export const getPeriodDates = (dates: string) => JSON.parse(dates).map((date: string) => date.substring(0, 10));
 

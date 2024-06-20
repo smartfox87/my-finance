@@ -5,7 +5,6 @@ import { createContext, lazy, ReactNode, Suspense, useEffect, useMemo, useState 
 import { useLocale } from "@/hooks/locale";
 import { getUserId } from "@/helpers/localStorage.js";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
-import { Preloader } from "@/components/Layout/Preloader";
 import { Spinner } from "@/components/Layout/Spinner";
 
 interface DynamicAntdType {
@@ -23,6 +22,7 @@ export const AntdProvider = ({ children }: { children: ReactNode }) => {
   const [DynamicAntd, setDynamicAntd] = useState<DynamicAntdType>();
   const [isLoadedAntd, setIsLoadedAntd] = useState(false);
 
+  // todo fix dynamic imports
   const initAntd = () =>
     Promise.all([
       lazy(() => import("@ant-design/cssinjs/es/StyleContext").then(({ StyleProvider }) => ({ default: StyleProvider }))),

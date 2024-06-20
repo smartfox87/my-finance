@@ -2,17 +2,16 @@ import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/to
 import { createAccountItemApi, getAccountsListApi, updateAccountItemApi, deleteAccountItemApi, getAccountItemApi, createInitialAccountsApi } from "@/api/accounts";
 import { handleRejected } from "@/helpers/processExtraReducersCases";
 import { createAccountTypeApi, updateAccountTypeApi } from "@/api/references";
-import { AccountItem, AccountsList, AccountItemData, AccountItemBalanceData } from "@/types/accounts";
-import { rootReducer } from "@/store";
-import { RootState } from "@/store";
-import { AccountTypeData } from "@/types/references";
+import { RootState, rootReducer } from "@/store";
+import type { AccountItem, AccountItemData, AccountItemBalanceData } from "@/types/accounts";
+import type { AccountTypeData } from "@/types/references";
 
 const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
 });
 
 export interface AccountsSliceState {
-  accountsList: AccountsList | null;
+  accountsList: AccountItem[] | null;
   accountItem: AccountItem | null;
 }
 
@@ -25,8 +24,8 @@ export const accountsSlice = createAppSlice({
   name: "accounts",
   initialState,
   reducers: (create) => ({
-    getAccountsListThunk: create.asyncThunk<AccountsList, void, { rejectValue: string }>(
-      async (_, { rejectWithValue }): Promise<AccountsList> => {
+    getAccountsListThunk: create.asyncThunk<AccountItem[], void, { rejectValue: string }>(
+      async (_, { rejectWithValue }): Promise<AccountItem[]> => {
         const { data, error } = await getAccountsListApi();
         if (error) throw rejectWithValue(error.message);
         if (!data?.length) {

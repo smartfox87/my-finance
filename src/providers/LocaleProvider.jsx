@@ -3,7 +3,7 @@ import { setLanguage } from "@/store/commonSlice.js";
 import { useTranslation } from "react-i18next";
 import { store } from "@/store/index.ts";
 import { toggleDayjsLocale } from "@/helpers/date";
-import { locales } from "@/constants/router.js";
+import { locales } from "@/constants/router";
 
 export const languages = locales.reduce((acc, lang) => ({ ...acc, [lang]: null }), {});
 const getLocale = async (lang) => (languages[lang] ? languages[lang] : (languages[lang] = await import(`@/constants/antd-locales`).then((module) => module[lang]?.default)));

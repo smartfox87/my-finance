@@ -3,12 +3,13 @@ import { ReactNodeLike } from "prop-types";
 import initTranslations from "@/i18n";
 import { Suspense } from "react";
 import { Breadcrumbs } from "@/components/Common/Breadcrumbs";
-import { LinkItem } from "@/types/Breadcrumbs";
+import { LinkItem } from "@/types/breadcrumbs";
+import { type Locale } from "@/types/router";
 
 const i18nNamespaces = ["default"];
 
 interface Props {
-  locale: string;
+  locale: Locale;
   page: string;
   isAuth?: Boolean;
   breadcrumbs?: LinkItem[];

@@ -1,13 +1,14 @@
 import { isValidElement, ReactElement } from "react";
 import { decimalsKeys, integerKeys, navigationKeys } from "@/constants/input";
-import { BaseOptionType } from "rc-select/es/Select";
-import { FlattenOptionData } from "rc-select/es/interface";
+import type { BaseOptionType } from "rc-select/es/Select";
+import type { FlattenOptionData } from "rc-select/es/interface";
 
 export const handleFilterSelectOptions = (inputValue: string, option: any): boolean => {
   if (isValidElement(option.label)) return (option.label as ReactElement).props["data-text"]?.toLowerCase().includes(inputValue.toLowerCase());
   else return ((option.label as string) ?? "").toLowerCase().includes(inputValue.toLowerCase());
 };
 
+// todo fix internationalization
 export const cutDecimals = (value: number | string | null, decimals: number = 2): string => {
   if (!value) return "";
   const [integer, decimal] = value.toString().split(".");

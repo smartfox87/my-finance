@@ -1,7 +1,8 @@
 import { createInstance, i18n, Resource } from "i18next";
 import { initReactI18next } from "react-i18next/initReactI18next";
 import resourcesToBackend from "i18next-resources-to-backend";
-import { i18nConfig, Locale } from "../i18nConfig";
+import { i18nConfig } from "../i18nConfig";
+import type { Locale } from "@/types/router";
 
 export const i18nRef: { i18n?: i18n; resources?: Resource; t?: i18n["t"]; locale?: Locale } = {};
 
