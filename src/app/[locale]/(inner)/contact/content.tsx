@@ -18,7 +18,7 @@ type KeyType = "full_name" | "email" | "subject" | "message" | "files";
 export default function ContactContent() {
   const { t } = useTranslation();
   const contactFields = useSelector(selectContactFields);
-  const { initCAPTCHA, isLoadedCaptcha, getScore } = useRecaptcha();
+  const { initCaptcha, isLoadedCaptcha, getScore } = useRecaptcha();
   const { initAntd, isLoadedAntd } = useAntd();
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export default function ContactContent() {
   }, []);
 
   const handleFieldChange = () => {
-    if (!isLoadedCaptcha) initCAPTCHA();
+    if (!isLoadedCaptcha) initCaptcha();
   };
 
   const handleSendMessage = async (contactData: FormValues): Promise<void> => {

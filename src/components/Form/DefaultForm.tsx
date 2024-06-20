@@ -27,7 +27,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
       fields.reduce(
         (acc, { id, type, value }) => ({
           ...acc,
-          [id]: type === FieldTypes.DATE ? dayjs(value) : value,
+          [id]: type === FieldTypes.DATE && value ? dayjs(value) : value,
         }),
         {},
       ),

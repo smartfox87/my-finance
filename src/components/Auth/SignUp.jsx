@@ -13,7 +13,7 @@ export const SignUp = () => {
   const dispatch = useDispatch();
   const { viewport } = useViewport();
   const { t } = useTranslation();
-  const { initCAPTCHA, isLoadedCaptcha, getScore } = useRecaptcha();
+  const { initCaptcha, isLoadedCaptcha, getScore } = useRecaptcha();
 
   const { isOpenSignUpModal, setIsOpenSignUpModal } = useModalState();
   const { AuthModal, setAuthModal } = useModalState();
@@ -23,7 +23,7 @@ export const SignUp = () => {
   const loadAuthModal = async () => !AuthModal && setAuthModal(lazy(() => import("@/components/Auth/AuthModal.jsx").then(({ AuthModal }) => ({ default: AuthModal }))));
   const handleToggleVisibility = () => {
     setIsOpenSignUpModal((prevState) => !prevState);
-    Promise.all([!isLoadedAntd && initAntd(), !isLoadedCaptcha && initCAPTCHA(), loadAuthModal()]);
+    Promise.all([!isLoadedAntd && initAntd(), !isLoadedCaptcha && initCaptcha(), loadAuthModal()]);
   };
 
   const handleSubmitForm = async (fieldsValues) => {
