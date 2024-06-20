@@ -41,7 +41,7 @@
 		"react-redux": "^9.1.2",
 		"recharts": "^2.12.7",
 		"redux": "^5.0.1",
-		"type-fest": "^4.20.0"
+		"type-fest": "^4.20.1"
 	},
 	"devDependencies": {
 		"@cypress/webpack-preprocessor": "^6.0.2",
