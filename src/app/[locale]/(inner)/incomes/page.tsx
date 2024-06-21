@@ -4,9 +4,10 @@ import { InnerLayout } from "@/components/Layout/InnerLayout";
 import IncomesModule from "@/app/[locale]/(inner)/incomes/content-module";
 import { getJsonLdBreadcrumbs, getJsonLdWebsite } from "@/helpers/jsonLd";
 import { LinkItem } from "@/types/breadcrumbs";
-import { type Locale } from "@/types/router";
+import { type Locale, Pages } from "@/types/router";
+import { Namespaces } from "@/types/i18n";
 
-const i18nNamespaces = ["default"];
+const i18nNamespaces = [Namespaces.COMMON];
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: Locale } }): Promise<Metadata> {
   const { t } = await initTranslations(locale, i18nNamespaces);
@@ -29,7 +30,7 @@ export default async function Incomes({ params: { locale } }: { params: { locale
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(getJsonLdBreadcrumbs(breadcrumbList)) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(getJsonLdWebsite(t("seo.app_name"))) }} />
-      <InnerLayout locale={locale} page="incomes" breadcrumbs={breadcrumbList}>
+      <InnerLayout locale={locale} page={Pages.INCOMES} breadcrumbs={breadcrumbList}>
         <IncomesModule />
       </InnerLayout>
     </>

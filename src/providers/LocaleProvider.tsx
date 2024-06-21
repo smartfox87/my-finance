@@ -1,15 +1,16 @@
-import { createContext, useCallback, useEffect, useMemo, useState } from "react";
+import { createContext, ReactElement, useCallback, useEffect, useMemo, useState } from "react";
 import { setLanguage } from "@/store/commonSlice.js";
 import { useTranslation } from "react-i18next";
-import { store } from "@/store/index.ts";
+import { store } from "@/store/index";
 import { toggleDayjsLocale } from "@/helpers/date";
 import { locales } from "@/constants/router";
+import type { Locale } from "@/types/router";
 
-export const languages = locales.reduce((acc, lang) => ({ ...acc, [lang]: null }), {});
-const getLocale = async (lang) => (languages[lang] ? languages[lang] : (languages[lang] = await import(`@/constants/antd-locales`).then((module) => module[lang]?.default)));
+export const languages = locales.reduce((acc: Record<Locale, any>, lang) => ({ ...acc, [lang]: null }), {});
+const getLocale = async (lang: Locale) => (languages[lang] ? languages[lang] : (languages[lang] = await import(`@/constants/antd-locales`).then((module) => module[lang]?.default)));
 export const LocaleContext = createContext({ locale: Promise.resolve(), changeLocale: () => Promise.resolve() });
 
-export const LocaleProvider = ({ children }) => {
+export const LocaleProvider = ({ children }: { children: ReactElement }) => {
   const {
     i18n: { language, changeLanguage },
   } = useTranslation();

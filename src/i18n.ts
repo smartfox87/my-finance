@@ -3,15 +3,16 @@ import { initReactI18next } from "react-i18next/initReactI18next";
 import resourcesToBackend from "i18next-resources-to-backend";
 import { i18nConfig } from "../i18nConfig";
 import type { Locale } from "@/types/router";
+import type { Namespace } from "@/types/i18n";
 
 export const i18nRef: { i18n?: i18n; resources?: Resource; t?: i18n["t"]; locale?: Locale } = {};
 
-export default async function initTranslations(locale: Locale, namespaces: string[], i18nInstance?: i18n, resources?: Resource) {
+export default async function initTranslations(locale: Locale, namespaces: Namespace[], i18nInstance?: i18n, resources?: Resource) {
   i18nInstance = i18nInstance || createInstance();
 
   i18nInstance.use(initReactI18next);
 
-  if (!resources) i18nInstance.use(resourcesToBackend((language: Locale, namespace: string) => import(`../locales/${language}/${namespace}.json`)));
+  if (!resources) i18nInstance.use(resourcesToBackend((language: Locale, namespace: Namespace) => import(`../locales/${language}/${namespace}.json`)));
 
   await i18nInstance.init({
     lng: locale,

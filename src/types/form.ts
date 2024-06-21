@@ -18,13 +18,49 @@ export enum FieldTypes {
   DATE = "date",
 }
 
+export enum SimplyFieldNames {
+  NAME = "name",
+  BALANCE = "balance",
+  AMOUNT = "amount",
+  CATEGORY = "category",
+  ACCOUNT = "account",
+  CURRENCY = "currency",
+  PERIOD = "period",
+  FULL_NAME = "full_name",
+  EMAIL = "email",
+  BIRTHDATE = "birthdate",
+  PASSWORD = "password",
+}
+
+export enum ComplexFieldNames {
+  CATEGORY = "category",
+  ACCOUNT = "account",
+  PERIOD = "period",
+  SORT = "sort",
+  GENDER = "gender",
+  SUBJECT = "subject",
+}
+
+export enum FieldSelectOptions {
+  NAME_ASC = "name_asc",
+  NAME_DESC = "name_desc",
+  DATE_ASC = "date_asc",
+  DATE_DESC = "date_desc",
+  AMOUNT_ASC = "amount_asc",
+  AMOUNT_DESC = "amount_desc",
+}
+
+export type FieldTranslationLabel = `simple.${SimplyFieldNames}` | `complex.${ComplexFieldNames}.label`;
+export type FieldTranslationError = `fields.errors.${FieldTypes}`;
+export type FieldTranslationSelectOption = `complex.${FieldTypes}.options.${FieldSelectOptions}`;
+
 export type FieldType = `${FieldTypes}`;
 
-export type FormItemRule = "number" | "email";
+export type FormItemRule = FieldTypes.NUMBER | FieldTypes.EMAIL;
 
 export interface BaseFormField {
   id: string;
-  label_translation?: string;
+  label_translation?: FieldTranslationLabel;
   label?: string;
   label_suffix?: string;
   placeholder?: string;
@@ -37,6 +73,7 @@ export interface SelectFormField extends BaseFormField {
   type: FieldTypes.SELECT;
   value: SelectValue;
   options: Array<{ option?: string; label?: string; label_translation?: string; value: string }>;
+  options_prefix?: string;
   multiple?: boolean;
   showSearch?: boolean;
 }

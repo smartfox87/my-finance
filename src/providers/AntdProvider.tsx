@@ -1,37 +1,28 @@
 import { useDarkTheme } from "@/hooks/theme.js";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/store/selectors/auth.js";
-import { createContext, lazy, ReactNode, Suspense, useEffect, useMemo, useState } from "react";
+import { createContext, lazy, ReactNode, Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import { useLocale } from "@/hooks/locale";
 import { getUserId } from "@/helpers/localStorage.js";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { Spinner } from "@/components/Layout/Spinner";
+import dynamic from "next/dynamic";
 
-interface DynamicAntdType {
-  StyleProvider?: any;
-  ConfigProvider?: any;
-  theme?: any;
-}
-
+const StyleProvider = dynamic(() => import("@ant-design/cssinjs/es/StyleContext").then(({ StyleProvider }) => StyleProvider));
+const ConfigProvider = dynamic(() => import("antd/es/config-provider"));
 export const AntdContext = createContext({ initAntd: () => {}, isLoadedAntd: false });
 
 export const AntdProvider = ({ children }: { children: ReactNode }) => {
   const darkTheme = useDarkTheme();
   const { locale } = useLocale();
   const user = useSelector(selectUser);
-  const [DynamicAntd, setDynamicAntd] = useState<DynamicAntdType>();
   const [isLoadedAntd, setIsLoadedAntd] = useState(false);
+  const [theme, setTheme] = useState<any>();
 
-  // todo fix dynamic imports
-  const initAntd = () =>
-    Promise.all([
-      lazy(() => import("@ant-design/cssinjs/es/StyleContext").then(({ StyleProvider }) => ({ default: StyleProvider }))),
-      lazy(() => import("antd/es/config-provider")),
-      import("antd/es/theme"),
-    ]).then(([StyleProvider, ConfigProvider, theme]) => {
-      setDynamicAntd({ StyleProvider, ConfigProvider, theme: theme.default });
-      setIsLoadedAntd(true);
-    });
+  const initAntd = useCallback(async () => {
+    setTheme(await import("antd/es/theme").then(({ default: theme }) => theme));
+    setIsLoadedAntd(true);
+  }, []);
 
   useEffect(() => {
     if (getUserId() || user) initAntd();
@@ -41,14 +32,14 @@ export const AntdProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <Suspense fallback={<Spinner isVisible />}>
-      {isLoadedAntd && DynamicAntd ? (
+      {isLoadedAntd ? (
         <AntdContext.Provider value={contextValue}>
           <AntdRegistry>
-            <DynamicAntd.StyleProvider hashPriority="high">
-              <DynamicAntd.ConfigProvider locale={locale} theme={{ algorithm: darkTheme ? DynamicAntd.theme.darkAlgorithm : DynamicAntd.theme.defaultAlgorithm }}>
+            <StyleProvider hashPriority="high">
+              <ConfigProvider locale={locale} theme={{ algorithm: darkTheme ? theme.darkAlgorithm : theme.defaultAlgorithm }}>
                 {children}
-              </DynamicAntd.ConfigProvider>
-            </DynamicAntd.StyleProvider>
+              </ConfigProvider>
+            </StyleProvider>
           </AntdRegistry>
         </AntdContext.Provider>
       ) : (

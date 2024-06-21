@@ -1,9 +1,10 @@
 import { periodOptions } from "@/helpers/date";
+import { ComplexFieldNames, FieldTypes, SimplyFieldNames } from "@/types/form";
 
 export const INITIAL_SETTINGS_FIELDS = [
   {
     id: "currency",
-    label_translation: "simple.currency",
+    label_translation: `simple.${SimplyFieldNames.CURRENCY}`,
     value: "",
     type: "select",
     required: true,
@@ -13,7 +14,7 @@ export const INITIAL_SETTINGS_FIELDS = [
   },
   {
     id: "period",
-    label_translation: "simple.period",
+    label_translation: `simple.${SimplyFieldNames.PERIOD}`,
     value: "",
     type: "radio-buttons",
     required: true,
@@ -24,7 +25,7 @@ export const INITIAL_SETTINGS_FIELDS = [
 export const INITIAL_PROFILE_FIELDS = [
   {
     id: "full_name",
-    label_translation: "simple.full_name",
+    label_translation: `simple.${SimplyFieldNames.FULL_NAME}`,
     value: "",
     type: "text",
     required: true,
@@ -32,21 +33,21 @@ export const INITIAL_PROFILE_FIELDS = [
   },
   {
     id: "email",
-    label_translation: "simple.email",
+    label_translation: `simple.${SimplyFieldNames.EMAIL}`,
     value: "",
-    type: "email",
+    type: FieldTypes.EMAIL,
     required: true,
     disabled: true,
   },
   {
     id: "birthdate",
-    label_translation: "simple.birthdate",
+    label_translation: `simple.${SimplyFieldNames.BIRTHDATE}`,
     value: "",
     type: "date",
   },
   {
     id: "gender",
-    label_translation: "complex.gender.label",
+    label_translation: `complex.${ComplexFieldNames.GENDER}.label`,
     value: "",
     type: "select",
     options: [

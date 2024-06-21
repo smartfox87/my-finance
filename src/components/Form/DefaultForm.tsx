@@ -7,7 +7,7 @@ import { cutDecimals, handleFilterSelectOptions, handleKeyDownDecimalsValidation
 import dynamic from "next/dynamic";
 import { showErrorMessage } from "@/helpers/message";
 import { isStringArray, isUploadFileArray } from "@/types/predicates";
-import { ChangedField, DefaultFormProps, FieldType, FieldTypes, FormItemRule, FormValue, FormValues, SelectValue } from "@/types/form";
+import { ChangedField, DefaultFormProps, FieldTranslationError, FieldType, FieldTypes, FormItemRule, FormValues, SelectValue } from "@/types/form";
 import { Button, type DatePickerProps, Form, FormProps, Input, InputRef, SelectProps, type UploadFile } from "antd";
 import dayjs, { isDayjs } from "dayjs";
 
@@ -109,7 +109,10 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
   };
   const getFieldRules = ({ required, type }: { required?: boolean; type: FieldType }) => {
     const rules: { required?: boolean; type?: FormItemRule; message: string }[] = [];
-    if ("email" === type) rules.push({ type, message: t(`fields.errors.${type}`) });
+    if (!type && FieldTypes.EMAIL === type) {
+      const message: FieldTranslationError = `fields.errors.${type}`;
+      rules.push({ type, message: t(message) });
+    }
     if (required) rules.push({ required: true, message: t("fields.errors.required") });
     return rules;
   };

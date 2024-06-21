@@ -1,8 +1,9 @@
 import { type Locale } from "@/types/router";
-import { type DatesPeriod, DatesPeriods } from "@/types/date";
+import { type DatesPeriod, DatesPeriods, DatesPeriodsTranslationOption } from "@/types/date";
 import { periods } from "@/constants/date";
 import dayjs from "dayjs";
 import quarterOfYear from "dayjs/plugin/quarterOfYear";
+import { isDatesPeriod } from "@/types/predicates";
 dayjs.extend(quarterOfYear);
 
 export const toggleDayjsLocale = async (locale: Locale): Promise<void> => {
@@ -15,9 +16,13 @@ export const toggleDayjsLocale = async (locale: Locale): Promise<void> => {
   }
 };
 
-export const periodOptions = periods.map((period) => ({ label: `complex.period.options.${period}`, value: period }));
+export const periodOptions = periods.map((period): { label: DatesPeriodsTranslationOption; value: DatesPeriod } => ({ label: `complex.period.options.${period}`, value: period }));
 
-export const getPeriod = () => (typeof window !== "undefined" && localStorage.getItem("period") ? localStorage.getItem("period") : "year");
+export const getPeriod = (): DatesPeriod => {
+  if (typeof window !== "undefined") return DatesPeriods.YEAR;
+  const period = localStorage.getItem("period");
+  return isDatesPeriod(period) ? period : DatesPeriods.YEAR;
+};
 
 export const getCurrentDate = () => new Date().toISOString();
 
