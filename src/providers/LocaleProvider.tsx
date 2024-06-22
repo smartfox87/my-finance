@@ -5,8 +5,9 @@ import { store } from "@/store";
 import { toggleDayjsLocale } from "@/helpers/date";
 import { locales } from "@/constants/router";
 import type { Locale } from "@/types/router";
+import { AntdLocale } from "@/constants/antd-locales";
 
-export const languages = locales.reduce((acc: Record<Locale, any>, lang) => ({ ...acc, [lang]: null }), {});
+export const languages = locales.reduce((acc, lang): Record<Locale, AntdLocale | null> => ({ ...acc, [lang]: null }), {});
 const getLocale = async (lang: Locale) => (languages[lang] ? languages[lang] : (languages[lang] = await import(`@/constants/antd-locales`).then((module) => module[lang]?.default)));
 export const LocaleContext = createContext({ locale: Locale, changeLocale: () => Promise.resolve() });
 
@@ -18,7 +19,7 @@ export const LocaleProvider = ({ children }: { children: ReactElement }) => {
 
   const [locale, setLocale] = useState(getLocale(language));
   const changeLocale = useCallback(
-    async (lang) => {
+    async (lang: Locale) => {
       if (!language.includes(lang)) await changeLanguage(lang);
       dispatch(setLanguage(lang));
       const antdLocale = await getLocale(lang);
