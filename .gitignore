@@ -37,7 +37,7 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-src/types/next-env.d.ts
+@types/next-env.d.ts
 
 # Sentry Config File
 .sentryclirc
