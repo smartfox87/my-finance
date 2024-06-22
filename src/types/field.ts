@@ -66,14 +66,6 @@ export enum SelectFieldOptions {
   ALL = "all",
 }
 
-// export const ComplexFieldOptions = {
-//   ...SelectFieldOptions,
-//   ...DatesPeriods,
-// };
-// export type ComplexFieldOptions = typeof ComplexFieldOptions;
-// type ComplexFieldOptionsKeys = keyof typeof ComplexFieldOptions;
-// export type ComplexFieldOption = (typeof ComplexFieldOptions)[ComplexFieldOptionsKeys];
-
 export type FieldTranslationLabel = `simple.${SimpleFieldNames}` | `complex.${ComplexFieldNames}.label`;
 export type FieldTranslationError = `fields.errors.${FieldTypes}`;
 export type FieldTranslationSelectOption =

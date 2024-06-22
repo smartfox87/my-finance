@@ -4,12 +4,17 @@ import { useTranslation } from "react-i18next";
 import { store } from "@/store";
 import { toggleDayjsLocale } from "@/helpers/date";
 import { locales } from "@/constants/router";
-import type { Locale } from "@/types/router";
+import { Locale } from "@/types/router";
 import { AntdLocale } from "@/constants/antd-locales";
 
-export const languages = locales.reduce((acc, lang): Record<Locale, AntdLocale | null> => ({ ...acc, [lang]: null }), {});
-const getLocale = async (lang: Locale) => (languages[lang] ? languages[lang] : (languages[lang] = await import(`@/constants/antd-locales`).then((module) => module[lang]?.default)));
-export const LocaleContext = createContext({ locale: Locale, changeLocale: () => Promise.resolve() });
+export const languages: Record<Locale, AntdLocale | null> = Object.assign({}, ...locales.map((lang) => ({ [lang]: null })));
+
+const getLocale = async (lang: Locale): Promise<AntdLocale | null> => {
+  if (languages[lang] !== null) return languages[lang];
+  return await import(`@/constants/antd-locales`).then((module) => module.default[lang]);
+};
+
+export const LocaleContext = createContext<{ locale: AntdLocale | null; changeLocale: (lang: Locale) => Promise<void> }>({ locale: null, changeLocale: () => Promise.resolve() });
 
 export const LocaleProvider = ({ children }: { children: ReactElement }) => {
   const {
@@ -17,7 +22,7 @@ export const LocaleProvider = ({ children }: { children: ReactElement }) => {
   } = useTranslation();
   const dispatch = store.dispatch;
 
-  const [locale, setLocale] = useState(getLocale(language));
+  const [locale, setLocale] = useState<AntdLocale | null>(null);
   const changeLocale = useCallback(
     async (lang: Locale) => {
       if (!language.includes(lang)) await changeLanguage(lang);

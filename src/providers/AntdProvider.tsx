@@ -36,7 +36,7 @@ export const AntdProvider = ({ children }: { children: ReactNode }) => {
         <AntdContext.Provider value={contextValue}>
           <AntdRegistry>
             <StyleProvider hashPriority="high">
-              <ConfigProvider locale={locale} theme={{ algorithm: darkTheme ? theme.darkAlgorithm : theme.defaultAlgorithm }}>
+              <ConfigProvider locale={locale || undefined} theme={{ algorithm: darkTheme ? theme.darkAlgorithm : theme.defaultAlgorithm }}>
                 {children}
               </ConfigProvider>
             </StyleProvider>

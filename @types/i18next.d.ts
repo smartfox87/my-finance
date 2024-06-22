@@ -1,17 +1,19 @@
 import "i18next";
 import common from "../../locales/en/common.json";
-// import { TFunction } from "i18next";
+import { Callback, TFunction } from "i18next";
 import { Namespaces } from "@/types/i18n";
-import { Locales } from "@/types/router";
+import { Locale } from "@/types/router";
 
 declare module "i18next" {
   interface CustomTypeOptions {
     defaultNS: Namespaces.COMMON;
-    locales: Locales;
-    languages: Locales;
     resources: {
       common: typeof common;
     };
   }
+  interface i18n {
+    language: Locale;
+    languages: Locale[];
+    changeLanguage(lang: Locale, callback?: Callback): Promise<TFunction>;
+  }
 }
-// t: TFunction<Namespaces.COMMON>;

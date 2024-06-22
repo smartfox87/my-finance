@@ -5,16 +5,16 @@ import { i18nConfig } from "../i18nConfig";
 import type { Locale } from "@/types/router";
 import type { Namespace } from "@/types/i18n";
 
-export const i18nRef: { i18n?: i18n; resources?: Resource; t?: i18n["t"]; locale?: Locale } = {};
+export const i18nRef: { resources?: Resource; t?: i18n["t"]; locale?: Locale } = {};
 
 export default async function initTranslations(locale: Locale, namespaces: Namespace[], i18nInstance?: i18n, resources?: Resource) {
-  i18nInstance = i18nInstance || createInstance();
+  const instance = i18nInstance || createInstance();
 
-  i18nInstance.use(initReactI18next);
+  instance.use(initReactI18next);
 
-  if (!resources) i18nInstance.use(resourcesToBackend((language: Locale, namespace: Namespace) => import(`../locales/${language}/${namespace}.json`)));
+  if (!resources) instance.use(resourcesToBackend((language: Locale, namespace: Namespace) => import(`../locales/${language}/${namespace}.json`)));
 
-  await i18nInstance.init({
+  await instance.init({
     lng: locale,
     resources,
     fallbackLng: i18nConfig.defaultLocale,
@@ -25,14 +25,13 @@ export default async function initTranslations(locale: Locale, namespaces: Names
     preload: resources ? [] : [locale],
   });
 
-  i18nRef.i18n = i18nInstance;
-  i18nRef.resources = i18nInstance.services.resourceStore.data;
-  i18nRef.t = i18nInstance.t;
+  i18nRef.resources = instance.services.resourceStore.data;
+  i18nRef.t = instance.t;
   i18nRef.locale = locale;
 
   return {
-    i18n: i18nInstance,
-    resources: i18nInstance.services.resourceStore.data,
-    t: i18nInstance.t,
+    i18n: instance,
+    resources: instance.services.resourceStore.data,
+    t: instance.t,
   };
 }
