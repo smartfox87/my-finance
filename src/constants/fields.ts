@@ -1,7 +1,7 @@
-import { ComplexFieldNames, DateFormField, DatesPeriodFormField, FileFormField, NumberFormField, RadioButtonsFormField, SelectFormField, SimpleFieldNames, TextFormField } from "@/types/form";
+import { DateFormField, DatesPeriodFormField, FileFormField, NumberFormField, RadioButtonsFormField, SelectFormField, TextFormField } from "@/types/form";
 import { getDatesPeriod, getPeriod, periodOptions } from "@/helpers/date";
 import { PickerPeriods } from "@/types/date";
-import { FieldTypes } from "@/types/field";
+import { ComplexFieldNames, SelectFieldOptions, FieldTypes, SimpleFieldNames, SortFieldOptions, GenderFieldOptions, SubjectFieldOptions } from "@/types/field";
 
 export const SORT_FIELD: SelectFormField = {
   id: "sort",
@@ -9,12 +9,12 @@ export const SORT_FIELD: SelectFormField = {
   label_translation: `complex.${ComplexFieldNames.SORT}.label`,
   value: "date_desc",
   options: [
-    { label_translation: "complex.sort.options.name_asc", value: "name_asc" },
-    { label_translation: "complex.sort.options.name_desc", value: "name_desc" },
-    { label_translation: "complex.sort.options.date_asc", value: "date_asc" },
-    { label_translation: "complex.sort.options.date_desc", value: "date_desc" },
-    { label_translation: "complex.sort.options.amount_asc", value: "amount_asc" },
-    { label_translation: "complex.sort.options.amount_desc", value: "amount_desc" },
+    { label_translation: `complex.${ComplexFieldNames.SORT}.options.${SortFieldOptions.NAME_ASC}`, value: "name_asc" },
+    { label_translation: `complex.${ComplexFieldNames.SORT}.options.${SortFieldOptions.NAME_DESC}`, value: "name_desc" },
+    { label_translation: `complex.${ComplexFieldNames.SORT}.options.${SortFieldOptions.DATE_ASC}`, value: "date_asc" },
+    { label_translation: `complex.${ComplexFieldNames.SORT}.options.${SortFieldOptions.DATE_DESC}`, value: "date_desc" },
+    { label_translation: `complex.${ComplexFieldNames.SORT}.options.${SortFieldOptions.AMOUNT_ASC}`, value: "amount_asc" },
+    { label_translation: `complex.${ComplexFieldNames.SORT}.options.${SortFieldOptions.AMOUNT_DESC}`, value: "amount_desc" },
   ],
   options_prefix: "complex.sort.options.prefix",
   focus: true,
@@ -35,7 +35,7 @@ export const ACCOUNTS_FIELD: SelectFormField = {
   type: FieldTypes.SELECT,
   label_translation: `complex.${ComplexFieldNames.ACCOUNT}.label`,
   value: ["all"],
-  options: [{ label_translation: "complex.account.options.all", value: "all" }],
+  options: [{ label_translation: `complex.${ComplexFieldNames.ACCOUNT}.options.${SelectFieldOptions.ALL}`, value: "all" }],
   showSearch: true,
   multiple: true,
 };
@@ -55,7 +55,7 @@ export const CATEGORIES_FIELD: SelectFormField = {
   type: FieldTypes.SELECT,
   label_translation: `complex.${ComplexFieldNames.CATEGORY}.label`,
   value: ["all"],
-  options: [{ label_translation: "complex.category.options.all", value: "all" }],
+  options: [{ label_translation: `complex.${ComplexFieldNames.CATEGORY}.options.${SelectFieldOptions.ALL}`, value: "all" }],
   showSearch: true,
   multiple: true,
 };
@@ -132,8 +132,8 @@ export const GENDER_FIELD: SelectFormField = {
   label_translation: `complex.${ComplexFieldNames.GENDER}.label`,
   value: "",
   options: [
-    { label_translation: "complex.gender.options.female", value: "female" },
-    { label_translation: "complex.gender.options.male", value: "male" },
+    { label_translation: `complex.${ComplexFieldNames.GENDER}.options.${GenderFieldOptions.FEMALE}`, value: "female" },
+    { label_translation: `complex.${ComplexFieldNames.GENDER}.options.${GenderFieldOptions.MALE}`, value: "male" },
   ],
 };
 
@@ -143,12 +143,12 @@ export const SUBJECT_FIELD: SelectFormField = {
   label_translation: `complex.${ComplexFieldNames.SUBJECT}.label`,
   value: "",
   options: [
-    { label_translation: "complex.subject.options.feedback", value: "feedback" },
-    { label_translation: "complex.subject.options.bug", value: "bug" },
-    { label_translation: "complex.subject.options.support", value: "support" },
-    { label_translation: "complex.subject.options.suggestion", value: "suggestion" },
-    { label_translation: "complex.subject.options.collaboration", value: "collaboration" },
-    { label_translation: "complex.subject.options.other", value: "other" },
+    { label_translation: `complex.${ComplexFieldNames.SUBJECT}.options.${SubjectFieldOptions.FEEDBACK}`, value: "feedback" },
+    { label_translation: `complex.${ComplexFieldNames.SUBJECT}.options.${SubjectFieldOptions.BUG}`, value: "bug" },
+    { label_translation: `complex.${ComplexFieldNames.SUBJECT}.options.${SubjectFieldOptions.SUPPORT}`, value: "support" },
+    { label_translation: `complex.${ComplexFieldNames.SUBJECT}.options.${SubjectFieldOptions.SUGGESTION}`, value: "suggestion" },
+    { label_translation: `complex.${ComplexFieldNames.SUBJECT}.options.${SubjectFieldOptions.COLLABORATION}`, value: "collaboration" },
+    { label_translation: `complex.${ComplexFieldNames.SUBJECT}.options.${SubjectFieldOptions.OTHER}`, value: "other" },
   ],
   required: true,
 };

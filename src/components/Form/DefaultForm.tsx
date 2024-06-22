@@ -7,9 +7,10 @@ import { cutDecimals, handleFilterSelectOptions, handleKeyDownDecimalsValidation
 import dynamic from "next/dynamic";
 import { showErrorMessage } from "@/helpers/message";
 import { isStringArray, isUploadFileArray } from "@/types/predicates";
-import { ChangedField, DefaultFormProps, FieldTranslationError, FieldType, FieldTypes, FormItemRule, FormValues, SelectValue } from "@/types/form";
+import { ChangedField, DefaultFormProps, FormItemRule, FormValues, SelectValue } from "@/types/form";
 import { Button, type DatePickerProps, Form, FormProps, Input, InputRef, SelectProps, type UploadFile } from "antd";
 import dayjs, { isDayjs } from "dayjs";
+import { FieldTranslationError, FieldType, FieldTypes } from "@/types/field";
 
 const PeriodComponent = dynamic(() => import("@/components/Form/PeriodField").then((mod) => mod.PeriodField));
 const DatePickerComponent = dynamic<DatePickerProps>(() => import("antd/es/date-picker"));

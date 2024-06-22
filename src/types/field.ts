@@ -1,4 +1,4 @@
-export type SelectValue = string | number | (string | number)[];
+import { DatesPeriods } from "@/types/date";
 
 export enum FieldTypes {
   TEXT = "text",
@@ -7,7 +7,7 @@ export enum FieldTypes {
   NUMBER = "number",
   TEXTAREA = "textarea",
   SELECT = "select",
-  PERIOD = "period",
+  DATES_PERIOD = "period",
   RADIO_BUTTONS = "radio-buttons",
   FILE = "file",
   DATE = "date",
@@ -26,6 +26,8 @@ export enum SimpleFieldNames {
   EMAIL = "email",
   BIRTHDATE = "birthdate",
   PASSWORD = "password",
+  MESSAGE = "message",
+  ATTACHMENTS = "attachments",
 }
 
 export enum ComplexFieldNames {
@@ -37,7 +39,7 @@ export enum ComplexFieldNames {
   SUBJECT = "subject",
 }
 
-export enum FieldSelectOptions {
+export enum SortFieldOptions {
   NAME_ASC = "name_asc",
   NAME_DESC = "name_desc",
   DATE_ASC = "date_asc",
@@ -46,6 +48,37 @@ export enum FieldSelectOptions {
   AMOUNT_DESC = "amount_desc",
 }
 
+export enum GenderFieldOptions {
+  FEMALE = "female",
+  MALE = "male",
+}
+
+export enum SubjectFieldOptions {
+  FEEDBACK = "feedback",
+  BUG = "bug",
+  SUPPORT = "support",
+  SUGGESTION = "suggestion",
+  COLLABORATION = "collaboration",
+  OTHER = "other",
+}
+
+export enum SelectFieldOptions {
+  ALL = "all",
+}
+
+// export const ComplexFieldOptions = {
+//   ...SelectFieldOptions,
+//   ...DatesPeriods,
+// };
+// export type ComplexFieldOptions = typeof ComplexFieldOptions;
+// type ComplexFieldOptionsKeys = keyof typeof ComplexFieldOptions;
+// export type ComplexFieldOption = (typeof ComplexFieldOptions)[ComplexFieldOptionsKeys];
+
 export type FieldTranslationLabel = `simple.${SimpleFieldNames}` | `complex.${ComplexFieldNames}.label`;
 export type FieldTranslationError = `fields.errors.${FieldTypes}`;
-export type FieldTranslationSelectOption = `complex.${FieldTypes}.options.${FieldSelectOptions}`;
+export type FieldTranslationSelectOption =
+  | `complex.${ComplexFieldNames.SORT}.options.${SortFieldOptions}`
+  | `complex.${ComplexFieldNames.GENDER}.options.${GenderFieldOptions}`
+  | `complex.${ComplexFieldNames.SUBJECT}.options.${SubjectFieldOptions}`
+  | `complex.${ComplexFieldNames.ACCOUNT | ComplexFieldNames.CATEGORY}.options.${SelectFieldOptions}`;
+export type FieldTranslationRadioButtonOption = `complex.${ComplexFieldNames.PERIOD}.options.${DatesPeriods}`;
