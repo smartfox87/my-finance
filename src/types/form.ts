@@ -1,6 +1,6 @@
 import type { Dayjs } from "dayjs";
 import type { UploadFile } from "antd";
-import type { PickerPeriod } from "@/types/date";
+import { DatesStrings, PickerPeriod } from "@/types/date";
 import type { RcFile } from "antd/es/upload";
 
 export type SelectValue = string | number | (string | number)[];
@@ -12,7 +12,7 @@ export enum FieldTypes {
   NUMBER = "number",
   TEXTAREA = "textarea",
   SELECT = "select",
-  PERIOD = "period",
+  DATES_PERIOD = "period",
   RADIO_BUTTONS = "radio-buttons",
   FILE = "file",
   DATE = "date",
@@ -29,6 +29,8 @@ export enum SimpleFieldNames {
   EMAIL = "email",
   BIRTHDATE = "birthdate",
   PASSWORD = "password",
+  MESSAGE = "message",
+  ATTACHMENTS = "attachments",
 }
 
 export enum ComplexFieldNames {
@@ -101,9 +103,9 @@ export interface FileFormField extends BaseFormField {
   maxSize?: number;
 }
 
-export interface PeriodFormField extends BaseFormField {
-  type: FieldTypes.PERIOD;
-  value: [string, string];
+export interface DatesPeriodFormField extends BaseFormField {
+  type: FieldTypes.DATES_PERIOD;
+  value: DatesStrings;
 }
 
 export interface TextFormField extends BaseFormField {
@@ -117,10 +119,10 @@ export interface NumberFormField extends BaseFormField {
   value: number | string;
 }
 
-export type FormField = PeriodFormField | TextFormField | SelectFormField | DateFormField | FileFormField | RadioButtonsFormField | NumberFormField;
+export type FormField = DatesPeriodFormField | TextFormField | SelectFormField | DateFormField | FileFormField | RadioButtonsFormField | NumberFormField;
 
 export type ChangedField =
-  | Pick<PeriodFormField, "id" | "type" | "value">
+  | Pick<DatesPeriodFormField, "id" | "type" | "value">
   | Pick<TextFormField, "id" | "type" | "value">
   | Pick<SelectFormField, "id" | "type" | "value">
   | Pick<DateFormField, "id" | "type" | "value">

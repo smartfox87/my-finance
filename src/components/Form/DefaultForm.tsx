@@ -205,7 +205,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 onChange={(value) => handleChangeFieldValue({ id, type: field.type, value: cutDecimals(value) })}
               />
             )}
-            {field.type === FieldTypes.PERIOD && <PeriodComponent id={id} value={field.value} onChange={(value) => handleChangeFieldValue({ id, type: field.type, value })} />}
+            {field.type === FieldTypes.DATES_PERIOD && <PeriodComponent id={id} value={field.value} onChange={(value) => handleChangeFieldValue({ id, type: field.type, value })} />}
             {field.type === FieldTypes.RADIO_BUTTONS && (
               <RadioGroupComponent
                 className="w-full"
