@@ -50,7 +50,7 @@ export const PeriodField = ({ id = "", value, onChange }: { id: string; value: D
         value={periodValue}
         optionType="button"
         buttonStyle="solid"
-        options={periodOptions?.map(({ label, value }) => ({ label: t(`fields.${label}`), value }))}
+        options={periodOptions?.map(({ label_translation, value }) => ({ label: t(`fields.${label_translation}`), value }))}
         onChange={handleChangePeriod}
       />
       <div className="flex gap-0 2xs:gap-3">

@@ -10,8 +10,7 @@ export type FormItemRule = FieldTypes.NUMBER | FieldTypes.EMAIL;
 
 export interface BaseFormField {
   id: string;
-  label_translation?: FieldTranslationLabel;
-  label?: string;
+  label: FieldTranslationLabel;
   label_suffix?: string;
   placeholder?: string;
   focus?: boolean;
@@ -31,7 +30,7 @@ export interface SelectFormField extends BaseFormField {
 export interface RadioButtonsFormField extends BaseFormField {
   type: FieldTypes.RADIO_BUTTONS;
   value: string;
-  options: Array<{ option?: string; label?: string; label_translation?: FieldTranslationRadioButtonOption; value: string }>;
+  options: Array<{ label?: string; label_translation: FieldTranslationRadioButtonOption; value: string }>;
   multiple?: boolean;
   showSearch?: boolean;
 }

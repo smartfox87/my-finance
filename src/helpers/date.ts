@@ -1,9 +1,10 @@
 import { type Locale } from "@/types/router";
-import { type DatesPeriod, DatesPeriods, DatesPeriodsTranslationOption, DatesStrings } from "@/types/date";
+import { type DatesPeriod, DatesPeriods, DatesStrings } from "@/types/date";
 import { periods } from "@/constants/date";
 import dayjs from "dayjs";
 import quarterOfYear from "dayjs/plugin/quarterOfYear";
 import { isDatesPeriod } from "@/types/predicates";
+import { ComplexFieldNames, FieldTranslationRadioButtonOption } from "@/types/field";
 dayjs.extend(quarterOfYear);
 
 export const toggleDayjsLocale = async (locale: Locale): Promise<void> => {
@@ -16,7 +17,10 @@ export const toggleDayjsLocale = async (locale: Locale): Promise<void> => {
   }
 };
 
-export const periodOptions = periods.map((period): { label: DatesPeriodsTranslationOption; value: DatesPeriod } => ({ label: `complex.period.options.${period}`, value: period }));
+export const periodOptions = periods.map((period): { label_translation: FieldTranslationRadioButtonOption; value: DatesPeriod } => ({
+  label_translation: `complex.${ComplexFieldNames.PERIOD}.options.${period}`,
+  value: period,
+}));
 
 export const getPeriod = (): DatesPeriod => {
   if (typeof window !== "undefined") return DatesPeriods.YEAR;
