@@ -18,12 +18,11 @@ export enum FieldTypes {
   DATE = "date",
 }
 
-export enum SimplyFieldNames {
+export enum SimpleFieldNames {
   NAME = "name",
   BALANCE = "balance",
   AMOUNT = "amount",
-  CATEGORY = "category",
-  ACCOUNT = "account",
+  DATE = "date",
   CURRENCY = "currency",
   PERIOD = "period",
   FULL_NAME = "full_name",
@@ -50,7 +49,7 @@ export enum FieldSelectOptions {
   AMOUNT_DESC = "amount_desc",
 }
 
-export type FieldTranslationLabel = `simple.${SimplyFieldNames}` | `complex.${ComplexFieldNames}.label`;
+export type FieldTranslationLabel = `simple.${SimpleFieldNames}` | `complex.${ComplexFieldNames}.label`;
 export type FieldTranslationError = `fields.errors.${FieldTypes}`;
 export type FieldTranslationSelectOption = `complex.${FieldTypes}.options.${FieldSelectOptions}`;
 
@@ -88,8 +87,8 @@ export interface RadioButtonsFormField extends BaseFormField {
 
 export interface DateFormField extends BaseFormField {
   type: FieldTypes.DATE;
-  value: Dayjs;
   picker: PickerPeriod;
+  value?: Dayjs;
   disabledDate?: (current: Dayjs) => boolean;
 }
 

@@ -1,6 +1,4 @@
-import { SimplyFieldNames, FieldTypes, FormField } from "@/types/form";
+import { FieldTypes, type FormField } from "@/types/form";
+import { BALANCE_FIELD, NAME_FIELD } from "@/constants/fields";
 
-export const INITIAL_ACCOUNT_FIELDS: FormField[] = [
-  { id: "name", label_translation: `simple.${SimplyFieldNames.NAME}`, value: "", maxLength: 200, type: FieldTypes.TEXT, required: true, focus: true },
-  { id: "balance", label_translation: `simple.${SimplyFieldNames.BALANCE}`, value: "", type: FieldTypes.NUMBER, required: true },
-];
+export const INITIAL_ACCOUNT_FIELDS: FormField[] = [{ ...NAME_FIELD, maxLength: 200, type: FieldTypes.TEXT }, BALANCE_FIELD];
