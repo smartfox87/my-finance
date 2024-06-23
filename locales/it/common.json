@@ -58,8 +58,6 @@
       "name": "Nome",
       "amount": "Importo",
       "date": "Data",
-      "account": "Conto",
-      "category": "Categoria",
       "to": "Al conto",
       "from": "Dal conto",
       "balance": "Saldo",

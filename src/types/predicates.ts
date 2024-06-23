@@ -1,4 +1,5 @@
-import { RcFile, UploadFile } from "antd/es/upload/interface";
+import type { RcFile, UploadFile } from "antd/es/upload/interface";
+import { type DatesPeriod, DatesPeriods } from "@/types/date";
 
 export const isString = (value: any): value is string => typeof value === "string";
 
@@ -15,3 +16,5 @@ export const isRcFileArray = (value: any): value is RcFile[] => Array.isArray(va
 export const isUploadFile = (value: any): value is UploadFile => ["uid", "name"].every((key) => value[key] !== undefined);
 
 export const isUploadFileArray = (value: any): value is UploadFile[] => Array.isArray(value) && value.every((item) => isUploadFile(item));
+
+export const isDatesPeriod = (value: any): value is DatesPeriod => Object.values(DatesPeriods).includes(value);

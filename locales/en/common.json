@@ -58,8 +58,6 @@
       "name": "Name",
       "amount": "Amount",
       "date": "Date",
-      "account": "Account",
-      "category": "Category",
       "to": "To account",
       "from": "From account",
       "balance": "Balance",

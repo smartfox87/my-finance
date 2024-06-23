@@ -1,19 +1,19 @@
 import { AuthGuard } from "@/components/Auth/AuthGuard.jsx";
-import { ReactNodeLike } from "prop-types";
 import initTranslations from "@/i18n";
-import { Suspense } from "react";
+import { ReactNode, Suspense } from "react";
 import { Breadcrumbs } from "@/components/Common/Breadcrumbs";
 import { LinkItem } from "@/types/breadcrumbs";
-import { type Locale } from "@/types/router";
+import { type Locale, type Page } from "@/types/router";
+import { Namespaces } from "@/types/i18n";
 
-const i18nNamespaces = ["default"];
+const i18nNamespaces = [Namespaces.COMMON];
 
 interface Props {
   locale: Locale;
-  page: string;
+  page: Page;
   isAuth?: Boolean;
   breadcrumbs?: LinkItem[];
-  children: ReactNodeLike;
+  children: ReactNode;
 }
 
 export const InnerLayout = async ({ locale, page, isAuth = true, breadcrumbs, children }: Props) => {

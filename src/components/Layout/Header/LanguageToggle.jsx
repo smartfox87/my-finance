@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useEffect, useMemo } from "react";
 import { SimpleSelect } from "@/components/Form/SimpleSelect.jsx";
-import { languages } from "@/providers/LocaleProvider.jsx";
+import { languages } from "@/providers/LocaleProvider.tsx";
 import { useLocale } from "@/hooks/locale";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { i18nConfig } from "../../../../i18nConfig";

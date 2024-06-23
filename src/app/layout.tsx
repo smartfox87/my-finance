@@ -1,5 +1,5 @@
-import { ReactNodeLike } from "prop-types";
+import { ReactNode } from "react";
 
-export default async function RootLayout({ children }: { children: ReactNodeLike }) {
+export default async function RootLayout({ children }: { children: ReactNode }) {
   return <>{children}</>;
 }

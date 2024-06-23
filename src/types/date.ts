@@ -1,4 +1,3 @@
-// todo fix locales dictionary for date field
 export enum PickerPeriods {
   DATE = "date",
   WEEK = "week",

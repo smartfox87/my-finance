@@ -14,16 +14,15 @@ export const ActiveStatisticsFilters = memo(function ActiveStatisticsFilters() {
   const statisticsFilterFields = useSelector(selectStatisticsFilterFields);
   const statisticsFilterValues = useSelector(selectStatisticsFilterValues);
 
-  const activeFilters = statisticsFilterFields.reduce((acc, { id, label_translation, optionsObject }) => {
+  const activeFilters = statisticsFilterFields.reduce((acc, { id, label, optionsObject }) => {
     if (id === "period")
       acc.push({
         id,
-        label: t(`fields.${label_translation}`),
+        label: t(`fields.${label}`),
         value: statisticsFilterValues[id][0] === statisticsFilterValues[id][1] ? statisticsFilterValues[id][0] : statisticsFilterValues[id].join(" - "),
       });
-    else if (Array.isArray(statisticsFilterValues[id]))
-      acc.push(...statisticsFilterValues[id].map((value) => ({ id, label: t(`fields.${label_translation}`), value, textValue: optionsObject?.[value] })));
-    else acc.push({ id, label: t(`fields.${label_translation}`), value: statisticsFilterValues[id], textValue: optionsObject?.[statisticsFilterValues[id]] });
+    else if (Array.isArray(statisticsFilterValues[id])) acc.push(...statisticsFilterValues[id].map((value) => ({ id, label: t(`fields.${label}`), value, textValue: optionsObject?.[value] })));
+    else acc.push({ id, label: t(`fields.${label}`), value: statisticsFilterValues[id], textValue: optionsObject?.[statisticsFilterValues[id]] });
     return acc;
   }, []);
 

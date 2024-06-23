@@ -3,14 +3,14 @@ import { Button, DatePicker, Radio, type RadioChangeEvent } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { findMatchingPeriod, getDatesPeriod, periodOptions } from "@/helpers/date";
-import type { DatesPeriod } from "@/types/date";
+import { DatesPeriod, DatesStrings } from "@/types/date";
 
-const processDates = (dates: [string, string]): [Dayjs, Dayjs] => {
+const processDates = (dates: DatesStrings): [Dayjs, Dayjs] => {
   const [from, to] = dates;
   return [dayjs(from), dayjs(to)];
 };
 
-export const PeriodField = ({ id = "", value, onChange }: { id: string; value: [string, string]; onChange: (dates: [string, string]) => void }) => {
+export const PeriodField = ({ id = "", value, onChange }: { id: string; value: DatesStrings; onChange: (dates: DatesStrings) => void }) => {
   const { t } = useTranslation();
   const [datesValue, setDatesValue] = useState(processDates(value));
   const [periodValue, setPeriodValue] = useState<DatesPeriod | null>(findMatchingPeriod(value));
@@ -20,7 +20,7 @@ export const PeriodField = ({ id = "", value, onChange }: { id: string; value: [
     setPeriodValue(findMatchingPeriod(value));
   }, [value]);
 
-  const handleChangeFieldValue = (_: any, value: [string, string]): void => {
+  const handleChangeFieldValue = (_: any, value: DatesStrings): void => {
     const newPeriod = findMatchingPeriod(value);
     if (newPeriod) setPeriodValue(newPeriod);
     setDatesValue(processDates(value));
@@ -50,7 +50,7 @@ export const PeriodField = ({ id = "", value, onChange }: { id: string; value: [
         value={periodValue}
         optionType="button"
         buttonStyle="solid"
-        options={periodOptions?.map(({ label, value }) => ({ label: t(`fields.${label}`), value }))}
+        options={periodOptions?.map(({ label_translation, value }) => ({ label: t(`fields.${label_translation}`), value }))}
         onChange={handleChangePeriod}
       />
       <div className="flex gap-0 2xs:gap-3">

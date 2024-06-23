@@ -20,8 +20,8 @@ import { BudgetItem } from "@/components/Budgets/List/BudgetItem";
 import { BudgetDetail } from "@/components/Budgets/Detail/BudgetDetail";
 import { EmptyBudgets } from "@/components/Budgets/List/EmptyBudgets";
 import { FoundNothing } from "@/components/Common/FoundNothing";
-import { createPortal } from "react-dom";
 import { useAppDispatch } from "@/hooks/redux";
+import { InnerHeaderActionsPortal } from "@/components/Layout/Inner/InnerHeaderActionsPortal";
 
 export default function BudgetsContent() {
   const { t } = useTranslation();
@@ -100,7 +100,7 @@ export default function BudgetsContent() {
 
   return (
     <Preloader isLoading={isLoading}>
-      {createPortal(headerActions, document.getElementById("layout-header"))}
+      <InnerHeaderActionsPortal>{headerActions}</InnerHeaderActionsPortal>
       {content && <div className="flex flex-col gap-4 lg:gap-8">{content}</div>}
     </Preloader>
   );

@@ -1,4 +1,4 @@
-import { createContext, lazy, ReactNode, useEffect, useMemo, useState } from "react";
+import { createContext, ReactNode, useEffect, useMemo, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 
 export const ModalStateContext = createContext({});

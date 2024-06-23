@@ -1,3 +1,5 @@
+import { DatesStrings } from "@/types/date";
+
 export interface StatisticsCostItem {
   amount: number;
   date: string;
@@ -26,5 +28,5 @@ export interface StatisticsBudgetItem {
 export type StatisticsBudgetsList = StatisticsBudgetItem[];
 
 export interface StatisticsFilterValues {
-  period: [string, string];
+  period: DatesStrings;
 }

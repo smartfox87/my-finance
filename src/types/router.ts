@@ -26,7 +26,9 @@ export enum Languages {
   RUSSIAN = "russian",
 }
 
-export enum Pages {
+export type Language = `${Languages}`;
+
+export enum CeoPages {
   HOME = "",
   ACCOUNTS = "accounts",
   BUDGETS = "budgets",
@@ -36,4 +38,19 @@ export enum Pages {
   CONTACT = "contact",
 }
 
-export type Page = `${Pages}`;
+export enum OtherPages {
+  HOME = "home",
+  PROFILE = "profile",
+  SETTINGS = "settings",
+}
+
+export const Pages = {
+  ...CeoPages,
+  ...OtherPages,
+};
+
+export type Pages = typeof Pages;
+export type CeoPage = `${CeoPages}`;
+export type OtherPage = `${OtherPages}`;
+type PagesKeys = keyof typeof Pages;
+export type Page = (typeof Pages)[PagesKeys];

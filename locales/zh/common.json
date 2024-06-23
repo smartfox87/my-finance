@@ -58,8 +58,6 @@
       "name": "名称",
       "amount": "金额",
       "date": "日期",
-      "account": "账户",
-      "category": "类别",
       "to": "到账户",
       "from": "从账户",
       "balance": "余额",

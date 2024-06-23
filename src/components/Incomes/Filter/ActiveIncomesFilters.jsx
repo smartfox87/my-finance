@@ -14,15 +14,15 @@ export const ActiveIncomesFilters = memo(function ActiveIncomesFilters() {
   const incomesFilterFields = useSelector(selectIncomesFilterFields);
   const incomesFilterValues = useSelector(selectIncomesFilterValues);
 
-  const activeFilters = incomesFilterFields.reduce((acc, { id, label_translation, optionsObject }) => {
+  const activeFilters = incomesFilterFields.reduce((acc, { id, label, optionsObject }) => {
     if (id === "period")
       acc.push({
         id,
-        label: t(`fields.${label_translation}`),
+        label: t(`fields.${label}`),
         value: incomesFilterValues[id][0] === incomesFilterValues[id][1] ? incomesFilterValues[id][0] : incomesFilterValues[id].join(" - "),
       });
-    else if (Array.isArray(incomesFilterValues[id])) acc.push(...incomesFilterValues[id].map((value) => ({ id, label: t(`fields.${label_translation}`), value, textValue: optionsObject?.[value] })));
-    else acc.push({ id, label: t(`fields.${label_translation}`), value: incomesFilterValues[id], textValue: optionsObject?.[incomesFilterValues[id]] });
+    else if (Array.isArray(incomesFilterValues[id])) acc.push(...incomesFilterValues[id].map((value) => ({ id, label: t(`fields.${label}`), value, textValue: optionsObject?.[value] })));
+    else acc.push({ id, label: t(`fields.${label}`), value: incomesFilterValues[id], textValue: optionsObject?.[incomesFilterValues[id]] });
     return acc;
   }, []);
 

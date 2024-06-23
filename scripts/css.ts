@@ -2,7 +2,7 @@ import { locales, pages } from "../src/constants/router";
 import fs from "fs";
 import path from "path";
 import * as cheerio from "cheerio";
-import type { Locale, Page } from "../src/types/router";
+import type { Locale, CeoPage } from "../src/types/router";
 
 function getCssPaths(dir: string): string[] {
   const files = fs.readdirSync(dir);
@@ -13,7 +13,7 @@ const cssPaths = getCssPaths(".next/static/css");
 
 // const clearCssFiles = () => cssPaths.forEach((cssPath) => fs.writeFileSync(cssPath, ""));
 
-const htmlPaths = pages.reduce((acc: string[], page: Page): string[] => {
+const htmlPaths = pages.reduce((acc: string[], page: CeoPage): string[] => {
   const langPages = locales.map((locale: Locale): string => ".next/server/app/" + (page.length ? `${locale}/${page}.html` : `${locale}.html`));
   return acc.concat(langPages);
 }, []);

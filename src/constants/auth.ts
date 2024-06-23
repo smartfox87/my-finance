@@ -1,22 +1,5 @@
-export const INITIAL_SIGN_UP_FIELDS = [
-  { id: "full_name", label_translation: "simple.full_name", value: "", type: "text" },
-  { id: "email", label_translation: "simple.email", value: "", type: "email", required: true, focus: true },
-  {
-    id: "password",
-    label_translation: "simple.password",
-    value: "",
-    type: "password",
-    required: true,
-  },
-];
+import { EMAIL_FIELD, FULL_NAME_FIELD, PASSWORD_FIELD } from "@/constants/fields";
 
-export const INITIAL_SIGN_IN_FIELDS = [
-  { id: "email", label_translation: "simple.email", value: "", type: "email", required: true, focus: true },
-  {
-    id: "password",
-    label_translation: "simple.password",
-    value: "",
-    type: "password",
-    required: true,
-  },
-];
+export const INITIAL_SIGN_UP_FIELDS = [FULL_NAME_FIELD, EMAIL_FIELD, PASSWORD_FIELD];
+
+export const INITIAL_SIGN_IN_FIELDS = [{ ...EMAIL_FIELD, focus: true }, PASSWORD_FIELD];

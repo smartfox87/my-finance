@@ -7,9 +7,10 @@ import { cutDecimals, handleFilterSelectOptions, handleKeyDownDecimalsValidation
 import dynamic from "next/dynamic";
 import { showErrorMessage } from "@/helpers/message";
 import { isStringArray, isUploadFileArray } from "@/types/predicates";
-import { ChangedField, DefaultFormProps, FieldType, FieldTypes, FormItemRule, FormValue, FormValues, SelectValue } from "@/types/form";
+import { ChangedField, DefaultFormProps, FormItemRule, FormValues, SelectValue } from "@/types/form";
 import { Button, type DatePickerProps, Form, FormProps, Input, InputRef, SelectProps, type UploadFile } from "antd";
 import dayjs, { isDayjs } from "dayjs";
+import { FieldTranslationError, FieldType, FieldTypes } from "@/types/field";
 
 const PeriodComponent = dynamic(() => import("@/components/Form/PeriodField").then((mod) => mod.PeriodField));
 const DatePickerComponent = dynamic<DatePickerProps>(() => import("antd/es/date-picker"));
@@ -109,17 +110,20 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
   };
   const getFieldRules = ({ required, type }: { required?: boolean; type: FieldType }) => {
     const rules: { required?: boolean; type?: FormItemRule; message: string }[] = [];
-    if ("email" === type) rules.push({ type, message: t(`fields.errors.${type}`) });
+    if (!type && FieldTypes.EMAIL === type) {
+      const message: FieldTranslationError = `fields.errors.${type}`;
+      rules.push({ type, message: t(message) });
+    }
     if (required) rules.push({ required: true, message: t("fields.errors.required") });
     return rules;
   };
 
   return (
     <Form layout="vertical" form={form} className="flex w-full flex-col" {...props} onFinish={handleSubmitForm}>
-      {fields.map(({ id, label, label_translation, label_suffix, required, focus, disabled, placeholder, ...field }) => {
+      {fields.map(({ id, label, label_suffix, required, focus, disabled, placeholder, ...field }) => {
         return (
           <Form.Item
-            label={`${label_translation ? t(`fields.${label_translation}`) : label} ${label_suffix ? label_suffix : ""}`}
+            label={`${t(`fields.${label}`)} ${label_suffix ? label_suffix : ""}`}
             name={id}
             key={id}
             rules={getFieldRules({ required, type: field.type })}
@@ -169,7 +173,6 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 filterOption={field.showSearch ? handleFilterSelectOptions : undefined}
                 getPopupContainer={(triggerNode) => triggerNode.parentElement}
                 onChange={(value) => handleChangeFieldValue({ id, type: field.type, value })}
-                // onChange={(value) => handleChangeFieldValue({ id, type: field.type, value, multiple: field.multiple })}
               />
             )}
             {field.type === FieldTypes.DATE && (
@@ -202,14 +205,14 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 onChange={(value) => handleChangeFieldValue({ id, type: field.type, value: cutDecimals(value) })}
               />
             )}
-            {field.type === FieldTypes.PERIOD && <PeriodComponent id={id} value={field.value} onChange={(value) => handleChangeFieldValue({ id, type: field.type, value })} />}
+            {field.type === FieldTypes.DATES_PERIOD && <PeriodComponent id={id} value={field.value} onChange={(value) => handleChangeFieldValue({ id, type: field.type, value })} />}
             {field.type === FieldTypes.RADIO_BUTTONS && (
               <RadioGroupComponent
                 className="w-full"
                 size="large"
                 optionType="button"
                 buttonStyle="solid"
-                options={field.options?.map(({ label, value }) => ({ label: t(`fields.${label}`), value }))}
+                options={field.options?.map(({ label, label_translation, value }) => ({ label: label ? label : t(`fields.${label_translation}`), value }))}
                 onChange={(event) => handleChangeFieldValue({ id, type: field.type, value: event.target.value })}
               />
             )}

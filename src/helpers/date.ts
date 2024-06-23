@@ -1,8 +1,10 @@
 import { type Locale } from "@/types/router";
-import { type DatesPeriod, DatesPeriods } from "@/types/date";
+import { type DatesPeriod, DatesPeriods, DatesStrings } from "@/types/date";
 import { periods } from "@/constants/date";
 import dayjs from "dayjs";
 import quarterOfYear from "dayjs/plugin/quarterOfYear";
+import { isDatesPeriod } from "@/types/predicates";
+import { ComplexFieldNames, FieldTranslationRadioButtonOption } from "@/types/field";
 dayjs.extend(quarterOfYear);
 
 export const toggleDayjsLocale = async (locale: Locale): Promise<void> => {
@@ -15,9 +17,16 @@ export const toggleDayjsLocale = async (locale: Locale): Promise<void> => {
   }
 };
 
-export const periodOptions = periods.map((period) => ({ label: `complex.period.options.${period}`, value: period }));
+export const periodOptions = periods.map((period): { label_translation: FieldTranslationRadioButtonOption; value: DatesPeriod } => ({
+  label_translation: `complex.${ComplexFieldNames.PERIOD}.options.${period}`,
+  value: period,
+}));
 
-export const getPeriod = () => (typeof window !== "undefined" && localStorage.getItem("period") ? localStorage.getItem("period") : "year");
+export const getPeriod = (): DatesPeriod => {
+  if (typeof window === "undefined") return DatesPeriods.YEAR;
+  const period = localStorage.getItem("period");
+  return isDatesPeriod(period) ? period : DatesPeriods.YEAR;
+};
 
 export const getCurrentDate = () => new Date().toISOString();
 
@@ -26,7 +35,7 @@ export const getFullDate = (date: string, format = "YYYY MMMM DD") => {
   return dayjs(date).format(format);
 };
 
-export const getDatesPeriod = (initialDate: string | undefined, period: DatesPeriod = DatesPeriods.MONTH): [string, string] => {
+export const getDatesPeriod = (initialDate: string | undefined, period: DatesPeriod = DatesPeriods.MONTH): DatesStrings => {
   const date = dayjs(initialDate);
   return [date.startOf(period).format("YYYY-MM-DD"), date.endOf(period).format("YYYY-MM-DD")];
 };
@@ -37,7 +46,7 @@ export const isStringADate = (str: any) => {
   return !isNaN(date);
 };
 
-export const findMatchingPeriod = (datesArray: [string, string]): null | DatesPeriod => {
+export const findMatchingPeriod = (datesArray: DatesStrings): null | DatesPeriod => {
   if (datesArray.length !== 2) return null;
   const date = dayjs(datesArray[0]);
   for (let period of periods) {
