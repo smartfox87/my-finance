@@ -11,6 +11,4 @@ export const Namespaces = {
 
 export type Namespaces = typeof Namespaces;
 
-type NamespacesKeys = keyof typeof Namespaces;
-
-export type Namespace = (typeof Namespaces)[NamespacesKeys];
+export type Namespace = Namespaces[keyof Namespaces];

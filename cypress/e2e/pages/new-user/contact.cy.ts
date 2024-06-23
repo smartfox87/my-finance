@@ -1,4 +1,4 @@
-import { Dictionary } from "../../../support/types";
+import { Dictionary, Namespaces } from "../../../support/types";
 import { faker } from "@faker-js/faker";
 
 describe("Contact form", () => {
@@ -23,7 +23,7 @@ describe("Contact form", () => {
         expect(interception.response?.statusCode).to.eq(200);
         expect(interception.response?.body.success).to.be.true;
         cy.getDictionary().then((dictionary: Dictionary) => {
-          cy.get(".ant-notification-notice-message").contains(dictionary.notifications.contact.success);
+          cy.get(".ant-notification-notice-message").contains(dictionary[Namespaces.CONTACT].notifications.contact.success);
         });
       });
     });

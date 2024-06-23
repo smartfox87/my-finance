@@ -38,6 +38,8 @@ export enum CeoPages {
   CONTACT = "contact",
 }
 
+export type CeoPage = `${CeoPages}`;
+
 export enum OtherPages {
   HOME = "home",
   PROFILE = "profile",
@@ -50,7 +52,5 @@ export const Pages = {
 };
 
 export type Pages = typeof Pages;
-export type CeoPage = `${CeoPages}`;
-export type OtherPage = `${OtherPages}`;
-type PagesKeys = keyof typeof Pages;
-export type Page = (typeof Pages)[PagesKeys];
+
+export type Page = Pages[keyof Pages];

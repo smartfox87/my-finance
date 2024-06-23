@@ -1,4 +1,4 @@
-import { Dictionary } from "../../../support/types";
+import { Dictionary, Namespaces } from "../../../support/types";
 import { faker } from "@faker-js/faker";
 
 describe("authorized accounts page", () => {
@@ -23,7 +23,7 @@ describe("authorized accounts page", () => {
       cy.wait("@create-account").then((interception) => {
         expect(interception.response?.statusCode).to.eq(201);
         cy.getDictionary().then((dictionary: Dictionary) => {
-          cy.get(".ant-notification-notice-message").contains(dictionary.notifications.account.create);
+          cy.get(".ant-notification-notice-message").contains(dictionary[Namespaces.ACCOUNTS].notifications.account.create);
         });
       });
     });
@@ -44,7 +44,7 @@ describe("authorized accounts page", () => {
         cy.wait("@update-account").then((interception) => {
           expect(interception.response?.statusCode).to.eq(200);
           cy.getDictionary().then((dictionary: Dictionary) => {
-            cy.get(".ant-notification-notice-message").contains(dictionary.notifications.account.update);
+            cy.get(".ant-notification-notice-message").contains(dictionary[Namespaces.ACCOUNTS].notifications.account.update);
           });
         });
       });
@@ -67,7 +67,7 @@ describe("authorized accounts page", () => {
         cy.wait("@update-account").then((interception) => {
           expect(interception.response?.statusCode).to.eq(200);
           cy.getDictionary().then((dictionary: Dictionary) => {
-            cy.get(".ant-notification-notice-message").contains(dictionary.notifications.account.money_transfer);
+            cy.get(".ant-notification-notice-message").contains(dictionary[Namespaces.ACCOUNTS].notifications.account.money_transfer);
           });
         });
       });
@@ -82,7 +82,7 @@ describe("authorized accounts page", () => {
         cy.wait("@delete-account").then((interception) => {
           expect(interception.response?.statusCode).to.eq(200);
           cy.getDictionary().then((dictionary: Dictionary) => {
-            cy.get(".ant-notification-notice-message").contains(dictionary.notifications.account.delete);
+            cy.get(".ant-notification-notice-message").contains(dictionary[Namespaces.ACCOUNTS].notifications.account.delete);
           });
         });
       });

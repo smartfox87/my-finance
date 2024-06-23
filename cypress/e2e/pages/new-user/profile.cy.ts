@@ -1,4 +1,4 @@
-import { Dictionary } from "../../../support/types";
+import { Dictionary, Namespaces } from "../../../support/types";
 import { faker } from "@faker-js/faker";
 
 describe("authorized profile page", () => {
@@ -24,7 +24,7 @@ describe("authorized profile page", () => {
         cy.wait("@update-profile").then((interception) => {
           expect(interception.response?.statusCode).to.eq(200);
           cy.getDictionary().then((dictionary: Dictionary) => {
-            cy.get(".ant-notification-notice-message").contains(dictionary.notifications.profile.update);
+            cy.get(".ant-notification-notice-message").contains(dictionary[Namespaces.PROFILE].notifications.profile.update);
             cy.get("@submit-btn").should("be.disabled");
           });
         });

@@ -1,5 +1,5 @@
 import { supabaseClient } from "./supabase";
-import { FilteredMultiPropsItems, FilteredSinglePropItems, FilterPropValues, SelectedOptionsData, SortItem, SortOrder, SortProp } from "./types";
+import { FilteredMultiPropsItems, FilteredSinglePropItems, FilterPropValues, Namespaces, SelectedOptionsData, SortItem, SortOrder, SortProp } from "./types";
 import { compareMultiPropsItemsToFilterPropValues, compareSinglePropItemsToFilterPropValues, sortItems } from "./utils";
 
 Cypress.Commands.add("deleteE2EUser", () => {
@@ -64,9 +64,11 @@ Cypress.Commands.add("loginDemo", () => {
 
 Cypress.Commands.add("getDictionary", () => {
   cy.getLang().then((lang) => {
-    cy.fixture(`locales/${lang}/common.json`).then((json) => {
-      if (!json) throw new Error(`Could not load dictionary for language: ${lang}`);
-      cy.wrap(json);
+    const namespacesArray = Object.values(Namespaces);
+    Promise.all(namespacesArray.map((namespace) => cy.fixture(`locales/${lang}/${namespace}.json`))).then((jsonArray) => {
+      if (!jsonArray?.length) throw new Error(`Could not load dictionary for language: ${lang}`);
+      const jsonDictionaries = jsonArray.reduce((acc, json, index) => ({ ...acc, [namespacesArray[index]]: json }), {});
+      cy.wrap(jsonDictionaries);
     });
   });
 });

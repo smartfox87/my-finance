@@ -1,4 +1,4 @@
-import { Dictionary } from "../../../support/types";
+import { Dictionary, Namespaces } from "../../../support/types";
 import { faker } from "@faker-js/faker";
 
 describe("authorized expenses page", () => {
@@ -30,7 +30,7 @@ describe("authorized expenses page", () => {
       cy.wait("@create-expense").then((interception) => {
         expect(interception.response?.statusCode).to.eq(201);
         cy.getDictionary().then((dictionary: Dictionary) => {
-          cy.get(".ant-notification-notice-message").contains(dictionary.notifications.expense.create);
+          cy.get(".ant-notification-notice-message").contains(dictionary[Namespaces.EXPENSES].notifications.expense.create);
           cy.get('[data-cy="empty-expenses"]').should("not.exist");
         });
       });
@@ -55,7 +55,7 @@ describe("authorized expenses page", () => {
         cy.wait("@update-expense").then((interception) => {
           expect(interception.response?.statusCode).to.eq(200);
           cy.getDictionary().then((dictionary: Dictionary) => {
-            cy.get(".ant-notification-notice-message").contains(dictionary.notifications.expense.update);
+            cy.get(".ant-notification-notice-message").contains(dictionary[Namespaces.EXPENSES].notifications.expense.update);
           });
         });
       });
@@ -70,7 +70,7 @@ describe("authorized expenses page", () => {
         cy.wait("@delete-expense").then((interception) => {
           expect(interception.response?.statusCode).to.eq(200);
           cy.getDictionary().then((dictionary: Dictionary) => {
-            cy.get(".ant-notification-notice-message").contains(dictionary.notifications.expense.delete);
+            cy.get(".ant-notification-notice-message").contains(dictionary[Namespaces.EXPENSES].notifications.expense.delete);
             cy.get('[data-cy="empty-expenses"]').should("be.visible");
           });
         });

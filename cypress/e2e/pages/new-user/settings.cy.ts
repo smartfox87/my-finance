@@ -1,5 +1,4 @@
-import { Dictionary } from "../../../support/types";
-import { faker } from "@faker-js/faker";
+import { Dictionary, Namespaces } from "../../../support/types";
 
 describe("authorized settings page", () => {
   context("1920x1080 resolution", () => {
@@ -22,7 +21,7 @@ describe("authorized settings page", () => {
         cy.wait("@update-profile").then((interception) => {
           expect(interception.response?.statusCode).to.eq(200);
           cy.getDictionary().then((dictionary: Dictionary) => {
-            cy.get(".ant-notification-notice-message").contains(dictionary.notifications.settings.update);
+            cy.get(".ant-notification-notice-message").contains(dictionary[Namespaces.SETTINGS].notifications.settings.update);
             cy.get("@submit-btn").should("be.disabled");
           });
         });
