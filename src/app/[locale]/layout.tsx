@@ -8,12 +8,14 @@ import { type Locale } from "@/types/router";
 import { Namespaces } from "@/types/i18n";
 import { ReactNode } from "react";
 
+const i18nNamespaces = [Namespaces.COMMON, Namespaces.HOME];
+
 export async function generateMetadata({ params: { locale } }: { params: { locale: Locale } }): Promise<Metadata> {
   const { t } = await initTranslations(locale, i18nNamespaces);
   const APP_NAME = t("seo.app_name");
   const APP_TITLE_TEMPLATE = `%s - ${APP_NAME}`;
-  const APP_DEFAULT_TITLE = t("pages.home.title");
-  const APP_DESCRIPTION = t("pages.home.description");
+  const APP_DEFAULT_TITLE = t("page.title", { ns: Namespaces.HOME });
+  const APP_DESCRIPTION = t("page.description", { ns: Namespaces.HOME });
 
   return {
     applicationName: APP_NAME,
@@ -67,8 +69,6 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 export const viewport: Viewport = {
   themeColor: "#FFFFFF",
 };
-
-const i18nNamespaces = [Namespaces.COMMON];
 
 export function generateStaticParams() {
   return i18nConfig.locales.map((locale) => ({ locale }));
