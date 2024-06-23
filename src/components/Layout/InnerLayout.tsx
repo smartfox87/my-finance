@@ -6,8 +6,6 @@ import { LinkItem } from "@/types/breadcrumbs";
 import { type Locale, type Page } from "@/types/router";
 import { Namespaces } from "@/types/i18n";
 
-const i18nNamespaces = Object.values(Namespaces);
-
 interface Props {
   locale: Locale;
   page: Page;
@@ -17,7 +15,7 @@ interface Props {
 }
 
 export const InnerLayout = async ({ locale, page, isAuth = true, breadcrumbs, children }: Props) => {
-  const { t } = await initTranslations(locale, i18nNamespaces);
+  const { t } = await initTranslations(locale, [Namespaces.COMMON, page]);
   const title = t(`page.title`, { ns: page });
   const description = t(`page.description`, { ns: page });
 
