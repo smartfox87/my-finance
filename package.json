@@ -73,5 +73,9 @@
 		"typescript": "^5",
 		"type-fest": "^4.20.0",
 		"webpack": "^5.92.1"
-	}
+	},
+	"browserslist": [
+		"> 0.25%",
+		"not dead"
+	]
 }
