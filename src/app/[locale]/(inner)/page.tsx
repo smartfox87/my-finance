@@ -4,7 +4,7 @@ import HomeContent from "@/app/[locale]/(inner)/content";
 import { type Locale } from "@/types/router";
 import { Namespaces } from "@/types/i18n";
 
-const i18nNamespaces = [Namespaces.COMMON];
+const i18nNamespaces = [Namespaces.COMMON, Namespaces.HOME];
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: Locale } }): Promise<Metadata> {
   const { t } = await initTranslations(locale, i18nNamespaces);
