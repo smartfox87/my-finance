@@ -1,7 +1,7 @@
 import { useDarkTheme } from "@/hooks/theme.js";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/store/selectors/auth.js";
-import { createContext, lazy, ReactNode, Suspense, useCallback, useEffect, useMemo, useState } from "react";
+import { createContext, ReactNode, Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import { useLocale } from "@/hooks/locale";
 import { getUserId } from "@/helpers/localStorage.js";
 import { AntdRegistry } from "@ant-design/nextjs-registry";

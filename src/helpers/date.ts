@@ -23,7 +23,7 @@ export const periodOptions = periods.map((period): { label_translation: FieldTra
 }));
 
 export const getPeriod = (): DatesPeriod => {
-  if (typeof window !== "undefined") return DatesPeriods.YEAR;
+  if (typeof window === "undefined") return DatesPeriods.YEAR;
   const period = localStorage.getItem("period");
   return isDatesPeriod(period) ? period : DatesPeriods.YEAR;
 };

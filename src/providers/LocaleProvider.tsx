@@ -1,4 +1,4 @@
-import { createContext, ReactElement, useCallback, useEffect, useMemo, useState } from "react";
+import { createContext, ReactNode, useCallback, useEffect, useMemo, useState } from "react";
 import { setLanguage } from "@/store/commonSlice.js";
 import { useTranslation } from "react-i18next";
 import { store } from "@/store";
@@ -16,7 +16,7 @@ const getLocale = async (lang: Locale): Promise<AntdLocale | null> => {
 
 export const LocaleContext = createContext<{ locale: AntdLocale | null; changeLocale: (lang: Locale) => Promise<void> }>({ locale: null, changeLocale: () => Promise.resolve() });
 
-export const LocaleProvider = ({ children }: { children: ReactElement }) => {
+export const LocaleProvider = ({ children }: { children: ReactNode }) => {
   const {
     i18n: { language, changeLanguage },
   } = useTranslation();

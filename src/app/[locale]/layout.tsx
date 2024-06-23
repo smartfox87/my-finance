@@ -2,11 +2,11 @@ import "@/assets/styles/globals.css";
 import { i18nConfig } from "../../../i18nConfig";
 import { dir } from "i18next";
 import Providers from "./providers";
-import { ReactNodeLike } from "prop-types";
 import initTranslations from "@/i18n";
 import type { Metadata, Viewport } from "next";
 import { type Locale } from "@/types/router";
 import { Namespaces } from "@/types/i18n";
+import { ReactNode } from "react";
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: Locale } }): Promise<Metadata> {
   const { t } = await initTranslations(locale, i18nNamespaces);
@@ -74,7 +74,7 @@ export function generateStaticParams() {
   return i18nConfig.locales.map((locale) => ({ locale }));
 }
 
-export default async function LocaleLayout({ children, params: { locale } }: { children: ReactNodeLike; params: { locale: Locale } }) {
+export default async function LocaleLayout({ children, params: { locale } }: { children: ReactNode; params: { locale: Locale } }) {
   const { resources } = await initTranslations(locale, i18nNamespaces);
 
   return (
