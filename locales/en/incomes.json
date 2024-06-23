@@ -1,0 +1,14 @@
+{
+  "notifications": {
+    "income": {
+      "create": "The income has been successfully created.",
+      "update": "The income has been successfully updated.",
+      "delete": "The income has been successfully deleted."
+    }
+  },
+  "page": {
+      "title": "Incomes list",
+      "description": "Add, edit, and delete incomes. Track income and expenses.",
+      "keywords": "incomes, categories, accounts, period, money, finance"
+  }
+}

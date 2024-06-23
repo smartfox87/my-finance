@@ -1,0 +1,11 @@
+{
+  "notifications": {
+    "settings": {
+      "update": "The settings have been successfully updated."
+    }
+  },
+  "page": {
+      "title": "Settings",
+      "description": "Change settings. Change currency, default period"
+  }
+}

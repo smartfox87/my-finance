@@ -12,9 +12,9 @@ const i18nNamespaces = [Namespaces.COMMON];
 export async function generateMetadata({ params: { locale } }: { params: { locale: Locale } }): Promise<Metadata> {
   const { t } = await initTranslations(locale, i18nNamespaces);
   return {
-    title: t(`pages.statistics.title`),
-    description: t(`pages.statistics.description`),
-    keywords: t(`pages.statistics.keywords`),
+    title: t(`statistics.title`, { ns: Namespaces.STATISTICS }),
+    description: t(`statistics.description`, { ns: Namespaces.STATISTICS }),
+    keywords: t(`statistics.keywords`, { ns: Namespaces.STATISTICS }),
   };
 }
 

@@ -1,0 +1,14 @@
+{
+  "notifications": {
+    "budget": {
+      "create": "The budget has been successfully created.",
+      "update": "The budget has been successfully updated.",
+      "delete": "The budget has been successfully deleted."
+    }
+  },
+  "page": {
+      "title": "Budgets list",
+      "description": "Add, edit, and delete budgets. Set budget by category, account, and time period.",
+      "keywords": "budgets, categories, accounts, period, money, finance"
+  }
+}

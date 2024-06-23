@@ -159,38 +159,7 @@
   },
   "notifications": {
     "auth_requirement": "Please log in to access this page.",
-    "recaptcha_invalid": "You don't pass the reCAPTCHA validation. Try again.",
-    "expense": {
-      "create": "The expense has been successfully created.",
-      "update": "The expense has been successfully updated.",
-      "delete": "The expense has been successfully deleted."
-    },
-    "budget": {
-      "create": "The budget has been successfully created.",
-      "update": "The budget has been successfully updated.",
-      "delete": "The budget has been successfully deleted."
-    },
-    "account": {
-      "create": "The account has been successfully created.",
-      "update": "The account has been successfully updated.",
-      "delete": "The account has been successfully deleted.",
-      "money_transfer": "The money has been successfully transferred."
-    },
-    "income": {
-      "create": "The income has been successfully created.",
-      "update": "The income has been successfully updated.",
-      "delete": "The income has been successfully deleted."
-    },
-    "contact": {
-      "success": "The message has been successfully sent.",
-      "error": "An error occurred while sending the message."
-    },
-    "profile": {
-      "update": "The profile has been successfully updated."
-    },
-    "settings": {
-      "update": "The settings have been successfully updated."
-    }
+    "recaptcha_invalid": "You don't pass the reCAPTCHA validation. Try again."
   },
   "detail": {
     "name": "Name",
@@ -202,67 +171,7 @@
     "balance": "Balance",
     "updated_at": "Updated at"
   },
-  "statistics": {
-    "incomes_by_categories": "Incomes by categories",
-    "expenses_by_categories": "Expenses by categories",
-    "costs": "Expenses",
-    "budgets": "Budgets",
-    "budget": "Budget",
-    "incomes": "Incomes",
-    "accounts": "Accounts"
-  },
-  "pages": {
-    "home": {
-      "title": "Budget Management and Incomes, Accounts, Expenses Tracking & Statistics",
-      "description": "This is a convenient personal finance management tool designed to help you track income and expenses, manage accounts, and set budget by category, account, and time period. Optimize your finances and achieve your financial goals with detailed statistics and analytics.",
-      "keywords": "finance, management, tool, income, expenses, accounts, budget, statistics, analytics, money"
-    },
-    "statistics": {
-      "title": "Total statistics",
-      "description": "Track incomes, expenses and budgets by category, account, and time period. Optimize your finances and achieve your financial goals with detailed statistics and analytics.",
-      "keywords": "statistics, analytics, categories, accounts, incomes, budgets, period, money, finance"
-    },
-    "accounts": {
-      "title": "Accounts list",
-      "description": "Add, edit, and delete accounts. Transfer money between accounts.",
-      "keywords": "accounts, money, transfer, balance, money, finance"
-    },
-    "budgets": {
-      "title": "Budgets list",
-      "description": "Add, edit, and delete budgets. Set budget by category, account, and time period.",
-      "keywords": "budgets, categories, accounts, period, money, finance"
-    },
-    "expenses": {
-      "title": "Expenses list",
-      "description": "Add, edit, and delete expenses. Track income and expenses.",
-      "keywords": "expenses, categories, accounts, period, money, finance"
-    },
-    "incomes": {
-      "title": "Incomes list",
-      "description": "Add, edit, and delete incomes. Track income and expenses.",
-      "keywords": "incomes, categories, accounts, period, money, finance"
-    },
-    "profile": {
-      "title": "User profile",
-      "description": "Edit user profile. Change full name, email, birthdate, gender"
-    },
-    "settings": {
-      "title": "Settings",
-      "description": "Change settings. Change currency, default period"
-    },
-    "contact": {
-      "title": "Contact us",
-      "description": "Send us a message. We will be happy to help you."
-    }
-  },
   "seo": {
     "app_name": "My Finance"
-  },
-  "info": {
-    "phone": "Phone",
-    "email": "Email",
-    "address": "Address",
-    "working_hours": "Working hours",
-    "every_day": "Every day"
   }
 }

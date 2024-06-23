@@ -6,7 +6,7 @@ import { LinkItem } from "@/types/breadcrumbs";
 import { type Locale, type Page } from "@/types/router";
 import { Namespaces } from "@/types/i18n";
 
-const i18nNamespaces = [Namespaces.COMMON];
+const i18nNamespaces = Object.values(Namespaces);
 
 interface Props {
   locale: Locale;
@@ -18,8 +18,8 @@ interface Props {
 
 export const InnerLayout = async ({ locale, page, isAuth = true, breadcrumbs, children }: Props) => {
   const { t } = await initTranslations(locale, i18nNamespaces);
-  const title = t(`pages.${page}.title`);
-  const description = t(`pages.${page}.description`);
+  const title = t(`page.title`, { ns: page });
+  const description = t(`page.description`, { ns: page });
 
   return (
     <section className="relative flex grow flex-col gap-4 lg:gap-8">

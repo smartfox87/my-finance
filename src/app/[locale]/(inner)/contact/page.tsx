@@ -13,9 +13,9 @@ export async function generateMetadata({ params: { locale } }: { params: { local
   const { t } = await initTranslations(locale, i18nNamespaces);
   // todo add keywords
   return {
-    title: t(`pages.contact.title`),
-    description: t(`pages.contact.description`),
-    // keywords: t(`pages.contact.keywords`),
+    title: t(`contact.title`, { ns: Namespaces.CONTACT }),
+    description: t(`contact.description`, { ns: Namespaces.CONTACT }),
+    // keywords: t(`contact.keywords`, { ns: Namespaces.CONTACT }),
   };
 }
 

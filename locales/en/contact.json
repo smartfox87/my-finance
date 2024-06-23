@@ -1,0 +1,19 @@
+{
+  "notifications": {
+    "contact": {
+      "success": "The message has been successfully sent.",
+      "error": "An error occurred while sending the message."
+    }
+  },
+  "page": {
+      "title": "Contact us",
+      "description": "Send us a message. We will be happy to help you."
+  },
+  "info": {
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address",
+    "working_hours": "Working hours",
+    "every_day": "Every day"
+  }
+}

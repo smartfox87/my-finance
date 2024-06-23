@@ -1,0 +1,15 @@
+{
+  "notifications": {
+    "account": {
+      "create": "The account has been successfully created.",
+      "update": "The account has been successfully updated.",
+      "delete": "The account has been successfully deleted.",
+      "money_transfer": "The money has been successfully transferred."
+    }
+  },
+  "page": {
+      "title": "Accounts list",
+      "description": "Add, edit, and delete accounts. Transfer money between accounts.",
+      "keywords": "accounts, money, transfer, balance, money, finance"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "notifications": {
+    "expense": {
+      "create": "The expense has been successfully created.",
+      "update": "The expense has been successfully updated.",
+      "delete": "The expense has been successfully deleted."
+    }
+  },
+  "page": {
+      "title": "Expenses list",
+      "description": "Add, edit, and delete expenses. Track income and expenses.",
+      "keywords": "expenses, categories, accounts, period, money, finance"
+  }
+}

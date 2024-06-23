@@ -1,0 +1,11 @@
+{
+  "notifications": {
+    "profile": {
+      "update": "The profile has been successfully updated."
+    }
+  },
+  "page": {
+      "title": "User profile",
+      "description": "Edit user profile. Change full name, email, birthdate, gender"
+  }
+}

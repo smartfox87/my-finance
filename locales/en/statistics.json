@@ -1,0 +1,16 @@
+{
+  "statistics": {
+    "incomes_by_categories": "Incomes by categories",
+    "expenses_by_categories": "Expenses by categories",
+    "costs": "Expenses",
+    "budgets": "Budgets",
+    "budget": "Budget",
+    "incomes": "Incomes",
+    "accounts": "Accounts"
+  },
+  "page": {
+      "title": "Total statistics",
+      "description": "Track incomes, expenses and budgets by category, account, and time period. Optimize your finances and achieve your financial goals with detailed statistics and analytics.",
+      "keywords": "statistics, analytics, categories, accounts, incomes, budgets, period, money, finance"
+  }
+}
