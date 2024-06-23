@@ -3,6 +3,19 @@ import type { RequireAtLeastOne } from "type-fest";
 
 export type Dictionary = typeof dictionary;
 
+export enum Pages {
+  HOME = "home",
+  ACCOUNTS = "accounts",
+  INCOMES = "incomes",
+  EXPENSES = "expenses",
+  BUDGETS = "budgets",
+  STATISTICS = "statistics",
+  CONTACT = "contact",
+  PROFILE = "profile",
+  SETTINGS = "settings",
+}
+export type Page = `${Pages}`;
+
 export enum SortProp {
   NAME = "name",
   DATE = "date",
