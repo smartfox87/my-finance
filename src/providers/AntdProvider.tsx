@@ -4,12 +4,18 @@ import { selectUser } from "@/store/selectors/auth.js";
 import { createContext, ReactNode, Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import { useLocale } from "@/hooks/locale";
 import { getUserId } from "@/helpers/localStorage.js";
-import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { Spinner } from "@/components/Layout/Spinner";
 import dynamic from "next/dynamic";
 
+interface Theme {
+  defaultAlgorithm: any;
+  darkAlgorithm: any;
+}
+
 const StyleProvider = dynamic(() => import("@ant-design/cssinjs/es/StyleContext").then(({ StyleProvider }) => StyleProvider));
 const ConfigProvider = dynamic(() => import("antd/es/config-provider"));
+const AntdRegistry = dynamic(() => import("@ant-design/nextjs-registry").then(({ AntdRegistry }) => AntdRegistry));
+
 export const AntdContext = createContext({ initAntd: () => {}, isLoadedAntd: false });
 
 export const AntdProvider = ({ children }: { children: ReactNode }) => {
@@ -17,7 +23,7 @@ export const AntdProvider = ({ children }: { children: ReactNode }) => {
   const { locale } = useLocale();
   const user = useSelector(selectUser);
   const [isLoadedAntd, setIsLoadedAntd] = useState(false);
-  const [theme, setTheme] = useState<any>();
+  const [theme, setTheme] = useState<Theme>();
 
   const initAntd = useCallback(async () => {
     setTheme(await import("antd/es/theme").then(({ default: theme }) => theme));
@@ -32,7 +38,7 @@ export const AntdProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <Suspense fallback={<Spinner isVisible />}>
-      {isLoadedAntd ? (
+      {isLoadedAntd && theme ? (
         <AntdContext.Provider value={contextValue}>
           <AntdRegistry>
             <StyleProvider hashPriority="high">
