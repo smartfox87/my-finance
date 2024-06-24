@@ -16,11 +16,11 @@ export default function Providers({ children, locale, resources, i18nNamespaces 
       <RecaptchaProvider>
         <TranslationsProvider namespaces={i18nNamespaces} locale={locale} resources={resources}>
           <LocaleProvider>
-            <Suspense fallback={<Spinner isVisible />}>
-              <ModalStateProvider>
-                <AntdProvider>{children}</AntdProvider>
-              </ModalStateProvider>
-            </Suspense>
+            {/*<Suspense fallback={<Spinner isVisible />}>*/}
+            <ModalStateProvider>
+              <AntdProvider>{children}</AntdProvider>
+            </ModalStateProvider>
+            {/*</Suspense>*/}
           </LocaleProvider>
         </TranslationsProvider>
       </RecaptchaProvider>
