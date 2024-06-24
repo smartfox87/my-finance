@@ -1,4 +1,4 @@
-import { memo, Suspense, useCallback, useEffect, useRef, useState } from "react";
+import { memo, Suspense } from "react";
 import SvgMenu from "@/assets/sprite/menu.svg";
 import { useTranslation } from "react-i18next";
 import { SideModal } from "@/components/Modals/SideModal.jsx";
