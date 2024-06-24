@@ -7,6 +7,7 @@ import type { Metadata, Viewport } from "next";
 import { type Locale } from "@/types/router";
 import { Namespaces } from "@/types/i18n";
 import { ReactNode } from "react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: Locale } }): Promise<Metadata> {
   const { t } = await initTranslations(locale, i18nNamespaces);
@@ -80,6 +81,7 @@ export default async function LocaleLayout({ children, params: { locale } }: { c
   return (
     <html lang={locale} dir={dir(locale)} className="flex min-h-screen flex-col">
       <body className="flex w-full grow flex-col dark:bg-dark">
+        <SpeedInsights />
         <Providers locale={locale} resources={resources} i18nNamespaces={i18nNamespaces}>
           {children}
         </Providers>
