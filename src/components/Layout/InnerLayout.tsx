@@ -1,3 +1,5 @@
+"use client";
+
 import { AuthGuard } from "@/components/Auth/AuthGuard.jsx";
 import initTranslations from "@/i18n";
 import { ReactNode, Suspense } from "react";
@@ -5,6 +7,7 @@ import { Breadcrumbs } from "@/components/Common/Breadcrumbs";
 import { LinkItem } from "@/types/breadcrumbs";
 import { type Locale, type Page } from "@/types/router";
 import { Namespaces } from "@/types/i18n";
+import { Spinner } from "@/components/Layout/Spinner";
 
 const i18nNamespaces = [Namespaces.COMMON];
 
@@ -37,7 +40,8 @@ export const InnerLayout = async ({ locale, page, isAuth = true, breadcrumbs, ch
         )}
       </div>
       {breadcrumbs?.length && <Breadcrumbs list={breadcrumbs} />}
-      <Suspense fallback={<div />}>{isAuth ? <AuthGuard>{children}</AuthGuard> : children}</Suspense>
+      {/*<Suspense fallback={<div />}>{isAuth ? <AuthGuard>{children}</AuthGuard> : children}</Suspense>*/}
+      <Suspense fallback={<Spinner isVisible />}>{isAuth ? <AuthGuard>{children}</AuthGuard> : children}</Suspense>
     </section>
   );
 };
