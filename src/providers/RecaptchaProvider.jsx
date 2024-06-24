@@ -1,54 +1,56 @@
 "use client";
 
-import { createContext, createRef, lazy, Suspense, useEffect, useMemo, useState } from "react";
+import { createContext, createRef, lazy, Suspense, useCallback, useEffect, useMemo, useState } from "react";
+import dynamic from "next/dynamic";
 
 const siteKey = process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY;
 
-export const RecaptchaContext = createContext({ initCAPTCHA: async () => undefined, isLoadedCaptcha: false, getScore: async () => 0 });
+const GoogleRecaptcha = dynamic(() => import("react-google-recaptcha"), { ssr: false });
+export const RecaptchaContext = createContext({ initCaptcha: async () => undefined, isLoadedCaptcha: false, getScore: async () => 0 });
 
 export const RecaptchaProvider = ({ children }) => {
   const recaptchaRef = createRef();
 
-  const [DynamicReCAPTCHA, setDynamicReCAPTCHA] = useState();
-  const initCAPTCHA = async () => {
-    !DynamicReCAPTCHA && setDynamicReCAPTCHA(lazy(() => import("react-google-recaptcha")));
-  };
-
+  const [isInjectedCaptcha, setIsInjectedCaptcha] = useState(false);
   const [isLoadedCaptcha, setIsLoadedCaptcha] = useState(false);
-  const handleAsyncScriptLoad = () => setIsLoadedCaptcha(true);
 
-  const getScore = async ({ action = "signup" } = {}) => {
-    if (recaptchaRef.current) {
-      try {
-        const value = await recaptchaRef.current.executeAsync();
-        const body = {
-          event: {
-            token: value,
-            expectedAction: action,
-            siteKey: siteKey,
-          },
-        };
-        const { score } = await fetch("/api/recaptcha", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }).then((res) => res.json());
-        return score;
-      } catch (error) {
-        console.error(error);
-        return null;
-      }
-    }
-  };
+  const initCaptcha = useCallback(() => setIsInjectedCaptcha(true), []);
+  const handleAsyncScriptLoad = useCallback(() => setIsLoadedCaptcha(true), []);
+
+  const getScore = useCallback(
+    () =>
+      async ({ action = "signup" } = {}) => {
+        if (recaptchaRef.current) {
+          try {
+            const value = await recaptchaRef.current.executeAsync();
+            const body = {
+              event: {
+                token: value,
+                expectedAction: action,
+                siteKey: siteKey,
+              },
+            };
+            const { score } = await fetch("/api/recaptcha", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }).then((res) => res.json());
+            return score;
+          } catch (error) {
+            console.error(error);
+            return null;
+          }
+        }
+      },
+    [],
+  );
 
   useEffect(() => {
     window.recaptchaOptions = { enterprise: true };
   }, []);
 
-  const contextValue = useMemo(() => ({ initCAPTCHA, isLoadedCaptcha, getScore }), [initCAPTCHA, isLoadedCaptcha, getScore]);
+  const contextValue = useMemo(() => ({ initCaptcha, isLoadedCaptcha, getScore }), [initCaptcha, isLoadedCaptcha, getScore]);
 
   return (
     <RecaptchaContext.Provider value={contextValue}>
       {children}
-      <Suspense fallback={<div className="hidden" />}>
-        {DynamicReCAPTCHA && <DynamicReCAPTCHA ref={recaptchaRef} size="invisible" sitekey={siteKey} className="hidden" asyncScriptOnLoad={handleAsyncScriptLoad} />}
-      </Suspense>
+      {isInjectedCaptcha && <GoogleRecaptcha ref={recaptchaRef} size="invisible" sitekey={siteKey} className="hidden" asyncScriptOnLoad={handleAsyncScriptLoad} />}
     </RecaptchaContext.Provider>
   );
 };

@@ -12,8 +12,8 @@ import { TransferBetweenAccounts } from "@/components/Accounts/Detail/TransferBe
 import { AccountItem } from "@/components/Accounts/List/AccountItem";
 import { AccountDetail } from "@/components/Accounts/Detail/AccountDetail";
 import formatPrice from "@/helpers/formatPrice";
-import { createPortal } from "react-dom";
 import { getAccountTypesThunk } from "@/store/referencesSlice";
+import { InnerHeaderActionsPortal } from "@/components/Layout/Inner/InnerHeaderActionsPortal";
 
 export default function AccountsContent() {
   const { t } = useTranslation();
@@ -40,7 +40,7 @@ export default function AccountsContent() {
 
   return (
     <Preloader isLoading={isLoading}>
-      {createPortal(headerActions, document.getElementById("layout-header"))}
+      <InnerHeaderActionsPortal>{headerActions}</InnerHeaderActionsPortal>
       <div className="flex flex-col gap-4 lg:gap-8">
         <div className="container-edge container sticky top-16 z-20 -my-4 flex flex-col gap-4 bg-white py-4 dark:bg-dark">
           <div className="grid grid-cols-2 gap-4">

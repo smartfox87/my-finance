@@ -1,4 +1,4 @@
-import dictionary from "../fixtures/locales/en/default.json";
+import dictionary from "../fixtures/locales/en/common.json";
 import type { RequireAtLeastOne } from "type-fest";
 
 export type Dictionary = typeof dictionary;

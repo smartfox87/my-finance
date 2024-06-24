@@ -1,9 +1,10 @@
-import { locales, pages } from "../src/constants/router.js";
+import { locales, pages } from "../src/constants/router";
 import fs from "fs";
 import path from "path";
 import * as cheerio from "cheerio";
+import type { Locale, CeoPage } from "../src/types/router";
 
-function getCssPaths(dir) {
+function getCssPaths(dir: string): string[] {
   const files = fs.readdirSync(dir);
   return files.filter((file) => path.extname(file) === ".css").map((file) => path.join(dir, file));
 }
@@ -12,12 +13,12 @@ const cssPaths = getCssPaths(".next/static/css");
 
 // const clearCssFiles = () => cssPaths.forEach((cssPath) => fs.writeFileSync(cssPath, ""));
 
-const htmlPaths = pages.reduce((acc, page) => {
-  const langPages = locales.map((locale) => ".next/server/app/" + (page.length ? `${locale}/${page}.html` : `${locale}.html`));
+const htmlPaths = pages.reduce((acc: string[], page: CeoPage): string[] => {
+  const langPages = locales.map((locale: Locale): string => ".next/server/app/" + (page.length ? `${locale}/${page}.html` : `${locale}.html`));
   return acc.concat(langPages);
 }, []);
 
-async function insertCssIntoHtml(cssFilePath, htmlFileName) {
+async function insertCssIntoHtml(cssFilePath: string, htmlFileName: string): Promise<void> {
   const cssContent = fs.readFileSync(cssFilePath, "utf8");
   const styleContent = `<style>${cssContent}</style>`;
   const cssFileName = path.basename(cssFilePath);

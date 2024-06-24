@@ -20,7 +20,7 @@ import { getUserId } from "@/helpers/localStorage";
 import { selectCurrency } from "@/store/selectors/profile";
 import { CostItem } from "@/components/Costs/List/CostItem";
 import formatPrice from "@/helpers/formatPrice";
-import { createPortal } from "react-dom";
+import { InnerHeaderActionsPortal } from "@/components/Layout/Inner/InnerHeaderActionsPortal";
 
 export default function ExpensesContent() {
   const { t } = useTranslation();
@@ -101,7 +101,7 @@ export default function ExpensesContent() {
 
   return (
     <Preloader isLoading={isLoading}>
-      {createPortal(headerActions, document.getElementById("layout-header"))}
+      <InnerHeaderActionsPortal>{headerActions}</InnerHeaderActionsPortal>
       {content && <div className="flex flex-col gap-4 lg:gap-8">{content}</div>}
     </Preloader>
   );

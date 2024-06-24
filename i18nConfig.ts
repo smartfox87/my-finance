@@ -1,8 +1,7 @@
 import { locales } from "@/constants/router";
-
-export type Locale = (typeof locales)[number];
+import { Locales } from "@/types/router";
 
 export const i18nConfig = {
   locales,
-  defaultLocale: "en",
+  defaultLocale: Locales.EN,
 };

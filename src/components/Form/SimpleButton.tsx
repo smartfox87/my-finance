@@ -1,11 +1,11 @@
 import SvgLoadingBtn from "@/assets/sprite/loading-btn.svg";
-import { ReactNodeLike } from "prop-types";
+import { ReactNode } from "react";
 
 interface Props {
   size?: "large";
   type?: "primary";
   loading?: boolean;
-  children: ReactNodeLike;
+  children: ReactNode;
   onClick: () => void;
 }
 

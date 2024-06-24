@@ -58,8 +58,6 @@
       "name": "Nazwa",
       "amount": "Kwota",
       "date": "Data",
-      "account": "Konto",
-      "category": "Kategoria",
       "to": "Do konta",
       "from": "Z konta",
       "balance": "Saldo",

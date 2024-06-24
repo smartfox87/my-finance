@@ -1,3 +1,5 @@
+import { DatesStrings } from "@/types/date";
+
 export interface IncomeItem {
   id: number;
   amount: number;
@@ -19,5 +21,5 @@ export interface IncomeItemData {
 export type IncomesList = IncomeItem[];
 
 export interface IncomesFilterValues {
-  period: [string, string];
+  period: DatesStrings;
 }

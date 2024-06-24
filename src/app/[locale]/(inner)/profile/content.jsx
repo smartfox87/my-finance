@@ -9,10 +9,10 @@ import { Button } from "antd";
 import { PropValueList } from "@/components/Common/PropValueList";
 import { DefaultForm } from "@/components/Form/DefaultForm";
 import SvgLogout from "@/assets/sprite/logout.svg";
-import { createPortal } from "react-dom";
 import { clearProfile, getProfileThunk, updateProfileThunk } from "@/store/profileSlice";
 import { logoutUserThunk } from "@/store/authSlice";
 import { showNotification } from "@/helpers/modals.js";
+import { InnerHeaderActionsPortal } from "@/components/Layout/Inner/InnerHeaderActionsPortal";
 
 export default function ProfileContent() {
   const { t } = useTranslation();
@@ -49,7 +49,7 @@ export default function ProfileContent() {
 
   return (
     <>
-      {createPortal(headerActions, document.getElementById("layout-header"))}
+      <InnerHeaderActionsPortal>{headerActions}</InnerHeaderActionsPortal>
       <PropValueList items={datesList} className="flex flex-wrap justify-between gap-x-6 gap-y-1" />
       <DefaultForm fields={profileFields} data-cy="edit-profile-form" onSaveForm={handleSaveProfile} />
     </>

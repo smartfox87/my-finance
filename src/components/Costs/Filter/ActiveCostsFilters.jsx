@@ -14,15 +14,15 @@ export const ActiveCostsFilters = memo(function ActiveCostsFilters() {
   const costsFilterFields = useSelector(selectCostsFilterFields);
   const costsFilterValues = useSelector(selectCostsFilterValues);
 
-  const activeFilters = costsFilterFields.reduce((acc, { id, label_translation, optionsObject }) => {
+  const activeFilters = costsFilterFields.reduce((acc, { id, label, optionsObject }) => {
     if (id === "period")
       acc.push({
         id,
-        label: t(`fields.${label_translation}`),
+        label: t(`fields.${label}`),
         value: costsFilterValues[id][0] === costsFilterValues[id][1] ? costsFilterValues[id][0] : costsFilterValues[id].join(" - "),
       });
-    else if (Array.isArray(costsFilterValues[id])) acc.push(...costsFilterValues[id].map((value) => ({ id, label: t(`fields.${label_translation}`), value, textValue: optionsObject?.[value] })));
-    else acc.push({ id, label: t(`fields.${label_translation}`), value: costsFilterValues[id], textValue: optionsObject?.[costsFilterValues[id]] });
+    else if (Array.isArray(costsFilterValues[id])) acc.push(...costsFilterValues[id].map((value) => ({ id, label: t(`fields.${label}`), value, textValue: optionsObject?.[value] })));
+    else acc.push({ id, label: t(`fields.${label}`), value: costsFilterValues[id], textValue: optionsObject?.[costsFilterValues[id]] });
     return acc;
   }, []);
 

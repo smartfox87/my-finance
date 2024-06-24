@@ -20,5 +20,3 @@ export interface AccountItem {
   updated_at: string;
   name?: string;
 }
-
-export type AccountsList = AccountItem[];

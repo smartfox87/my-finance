@@ -1,10 +1,10 @@
-import { Period } from "@/helpers/date";
+import { type DatesPeriod } from "@/types/date";
 
 export interface ProfileData {
   full_name: string | null;
   birthdate: string | null;
   gender: string | null;
-  period: Period | null;
+  period: DatesPeriod | null;
   currency: number | null;
 }
 
@@ -22,6 +22,6 @@ export interface Profile {
   full_name: string | null;
   birthdate: string | null;
   gender: string | null;
-  period: Period | null;
+  period: DatesPeriod | null;
   currency: Currency | Currency[] | null;
 }

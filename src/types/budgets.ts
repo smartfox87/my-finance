@@ -1,3 +1,5 @@
+import { DatesStrings } from "@/types/date";
+
 type BudgetAccounts = { id: number }[];
 
 type CategoryAccounts = { id: number }[];
@@ -15,7 +17,7 @@ export interface BudgetItemData {
 }
 
 export interface BudgetsFilterValues {
-  period: [string, string];
+  period: DatesStrings;
 }
 
 export interface BudgetItem {

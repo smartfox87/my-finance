@@ -3,11 +3,13 @@ import initTranslations from "@/i18n";
 import { InnerLayout } from "@/components/Layout/InnerLayout";
 import ExpensesModule from "@/app/[locale]/(inner)/expenses/content-module";
 import { getJsonLdBreadcrumbs, getJsonLdWebsite } from "@/helpers/jsonLd";
-import { LinkItem } from "@/types/Breadcrumbs";
+import { LinkItem } from "@/types/breadcrumbs";
+import { type Locale, Pages } from "@/types/router";
+import { Namespaces } from "@/types/i18n";
 
-const i18nNamespaces = ["default"];
+const i18nNamespaces = [Namespaces.COMMON];
 
-export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
+export async function generateMetadata({ params: { locale } }: { params: { locale: Locale } }): Promise<Metadata> {
   const { t } = await initTranslations(locale, i18nNamespaces);
   return {
     title: t(`pages.expenses.title`),
@@ -16,7 +18,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
   };
 }
 
-export default async function Expenses({ params: { locale } }: { params: { locale: string } }) {
+export default async function Expenses({ params: { locale } }: { params: { locale: Locale } }) {
   const { t } = await initTranslations(locale, i18nNamespaces);
 
   const breadcrumbList: LinkItem[] = [
@@ -28,7 +30,7 @@ export default async function Expenses({ params: { locale } }: { params: { local
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(getJsonLdBreadcrumbs(breadcrumbList)) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(getJsonLdWebsite(t("seo.app_name"))) }} />
-      <InnerLayout locale={locale} page="expenses" breadcrumbs={breadcrumbList}>
+      <InnerLayout locale={locale} page={Pages.EXPENSES} breadcrumbs={breadcrumbList}>
         <ExpensesModule />
       </InnerLayout>
     </>

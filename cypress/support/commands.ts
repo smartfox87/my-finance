@@ -64,7 +64,7 @@ Cypress.Commands.add("loginDemo", () => {
 
 Cypress.Commands.add("getDictionary", () => {
   cy.getLang().then((lang) => {
-    cy.fixture(`locales/${lang}/default.json`).then((json) => {
+    cy.fixture(`locales/${lang}/common.json`).then((json) => {
       if (!json) throw new Error(`Could not load dictionary for language: ${lang}`);
       cy.wrap(json);
     });

@@ -58,8 +58,6 @@
       "name": "Nombre",
       "amount": "Cantidad",
       "date": "Fecha",
-      "account": "Cuenta",
-      "category": "Categoría",
       "to": "A la cuenta",
       "from": "Desde la cuenta",
       "balance": "Saldo",

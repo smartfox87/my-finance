@@ -58,8 +58,6 @@
       "name": "Nom",
       "amount": "Montant",
       "date": "Date",
-      "account": "Compte",
-      "category": "Catégorie",
       "to": "Au compte",
       "from": "Du compte",
       "balance": "Solde",
