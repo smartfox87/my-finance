@@ -8,7 +8,7 @@ declare module "i18next" {
   interface CustomTypeOptions {
     defaultNS: Namespaces.COMMON;
     resources: {
-      common: typeof common;
+      [Namespaces.COMMON]: typeof common;
     };
   }
   interface i18n {

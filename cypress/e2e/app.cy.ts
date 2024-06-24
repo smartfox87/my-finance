@@ -1,7 +1,6 @@
-import { Dictionary } from "../support/types";
+import { Dictionary, Page, Pages } from "../support/types";
 
-type Page = "accounts" | "incomes" | "expenses" | "budgets" | "statistics" | "profile" | "settings";
-const pages: Page[] = ["accounts", "incomes", "expenses", "budgets", "statistics", "profile", "settings"];
+const pages: Page[] = Object.values(Pages).filter((page) => page !== Pages.HOME && page !== Pages.CONTACT);
 
 describe("Unauthorized pages", () => {
   context("1920x1080 resolution", () => {

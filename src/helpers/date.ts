@@ -1,4 +1,4 @@
-import { type Locale } from "@/types/router";
+import { type Locale, Locales } from "@/types/router";
 import { type DatesPeriod, DatesPeriods, DatesStrings } from "@/types/date";
 import { periods } from "@/constants/date";
 import dayjs from "dayjs";
@@ -8,7 +8,7 @@ import { ComplexFieldNames, FieldTranslationRadioButtonOption } from "@/types/fi
 dayjs.extend(quarterOfYear);
 
 export const toggleDayjsLocale = async (locale: Locale): Promise<void> => {
-  if (locale === "en" || dayjs.locale() === locale) return;
+  if (locale === Locales.EN || dayjs.locale() === locale) return;
   try {
     await import(`dayjs/locale/${locale}.js`);
     dayjs.locale(locale);
