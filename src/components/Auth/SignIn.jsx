@@ -1,13 +1,15 @@
 import { useDispatch } from "react-redux";
 import { INITIAL_SIGN_IN_FIELDS } from "@/constants/auth";
 import { useTranslation } from "react-i18next";
-import { lazy, Suspense, useState } from "react";
 import { useViewport } from "@/hooks/viewport.js";
 import { useRecaptcha } from "@/hooks/recaptcha.js";
 import SvgSignIn from "@/assets/sprite/sign-in.svg";
 import { SimpleButton } from "@/components/Form/SimpleButton";
 import { useAntd } from "@/hooks/antd.js";
 import { useModalState } from "@/hooks/providers/modalState.js";
+import dynamic from "next/dynamic";
+
+const AuthModal = dynamic(() => import("@/components/Auth/AuthModal.jsx").then(({ AuthModal }) => ({ default: AuthModal })));
 
 export const SignIn = () => {
   const { t } = useTranslation();
@@ -15,15 +17,14 @@ export const SignIn = () => {
   const { viewport } = useViewport();
   const { initCaptcha, isLoadedCaptcha, getScore } = useRecaptcha();
 
-  const { isOpenSignInModal, setIsOpenSignInModal } = useModalState();
-  const { AuthModal, setAuthModal } = useModalState();
+  const { isLoadedAuthModal, isOpenSignInModal, toggleSignInModalVisibility } = useModalState();
   const { initAntd, isLoadedAntd } = useAntd();
-  const isLoading = isOpenSignInModal && (!isLoadedCaptcha || !AuthModal);
+  const isLoading = isOpenSignInModal && (!isLoadedCaptcha || !isLoadedAuthModal);
 
-  const loadAuthModal = async () => !AuthModal && setAuthModal(lazy(() => import("@/components/Auth/AuthModal.jsx").then(({ AuthModal }) => ({ default: AuthModal }))));
   const handleToggleVisibility = () => {
-    setIsOpenSignInModal((prevState) => !prevState);
-    Promise.all([!isLoadedAntd && initAntd(), !isLoadedCaptcha && initCaptcha(), !AuthModal && loadAuthModal()]);
+    toggleSignInModalVisibility();
+    if (!isLoadedAntd) initAntd();
+    if (!isLoadedCaptcha) initCaptcha();
   };
 
   const handleSubmitForm = async (fieldsValues) => {
@@ -39,18 +40,16 @@ export const SignIn = () => {
         <SvgSignIn className="h-4 w-4" />
         {!["xs", "xxs"].includes(viewport) ? t("buttons.sign_in") : null}
       </SimpleButton>
-      <Suspense fallback={<div className="hidden" />}>
-        {AuthModal && (
-          <AuthModal
-            type="login"
-            title={t("titles.authorisation")}
-            fields={INITIAL_SIGN_IN_FIELDS}
-            isOpen={isOpenSignInModal}
-            onSaveForm={handleSubmitForm}
-            onToggleVisibility={handleToggleVisibility}
-          />
-        )}
-      </Suspense>
+      {isLoadedAuthModal && (
+        <AuthModal
+          type="login"
+          title={t("titles.authorisation")}
+          fields={INITIAL_SIGN_IN_FIELDS}
+          isOpen={isOpenSignInModal}
+          onSaveForm={handleSubmitForm}
+          onToggleVisibility={handleToggleVisibility}
+        />
+      )}
     </>
   );
 };

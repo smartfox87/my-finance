@@ -4,8 +4,9 @@ import { selectUser } from "@/store/selectors/auth.js";
 import { createContext, ReactNode, Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import { useLocale } from "@/hooks/locale";
 import { getUserId } from "@/helpers/localStorage.js";
-import { Spinner } from "@/components/Layout/Spinner";
 import dynamic from "next/dynamic";
+import { Preloader } from "@/components/Layout/Preloader";
+import { useDebounce } from "@/hooks/debounce";
 
 interface Theme {
   defaultAlgorithm: any;
@@ -24,10 +25,15 @@ export const AntdProvider = ({ children }: { children: ReactNode }) => {
   const user = useSelector(selectUser);
   const [isLoadedAntd, setIsLoadedAntd] = useState(false);
   const [theme, setTheme] = useState<Theme>();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const stopLoading = useDebounce(() => setIsLoading(false), 500);
 
   const initAntd = useCallback(async () => {
-    setTheme(await import("antd/es/theme").then(({ default: theme }) => theme));
+    if (!isLoadedAntd) setIsLoading(true);
     setIsLoadedAntd(true);
+    setTheme(await import("antd/es/theme").then(({ default: theme }) => theme));
+    stopLoading();
   }, []);
 
   useEffect(() => {
@@ -37,7 +43,7 @@ export const AntdProvider = ({ children }: { children: ReactNode }) => {
   const contextValue = useMemo(() => ({ initAntd, isLoadedAntd }), [initAntd, isLoadedAntd]);
 
   return (
-    <Suspense fallback={<Spinner isVisible />}>
+    <Preloader isLoading={isLoading}>
       {isLoadedAntd && theme ? (
         <AntdContext.Provider value={contextValue}>
           <AntdRegistry>
@@ -51,6 +57,6 @@ export const AntdProvider = ({ children }: { children: ReactNode }) => {
       ) : (
         <AntdContext.Provider value={contextValue}>{children}</AntdContext.Provider>
       )}
-    </Suspense>
+    </Preloader>
   );
 };
