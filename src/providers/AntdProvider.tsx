@@ -4,7 +4,6 @@ import { selectUser } from "@/store/selectors/auth.js";
 import { createContext, ReactNode, Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import { useLocale } from "@/hooks/locale";
 import { getUserId } from "@/helpers/localStorage.js";
-import { Spinner } from "@/components/Layout/Spinner";
 import dynamic from "next/dynamic";
 import { Preloader } from "@/components/Layout/Preloader";
 import { useDebounce } from "@/hooks/debounce";
@@ -28,7 +27,7 @@ export const AntdProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<Theme>();
   const [isLoading, setIsLoading] = useState(false);
 
-  const stopLoading = useDebounce(() => setIsLoading(false), 1000);
+  const stopLoading = useDebounce(() => setIsLoading(false), 500);
 
   const initAntd = useCallback(async () => {
     if (!isLoadedAntd) setIsLoading(true);
