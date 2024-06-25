@@ -1,6 +1,4 @@
 import { createContext, ReactNode, SetStateAction, useCallback, useEffect, useMemo, useState } from "react";
-import { usePathname } from "next/navigation";
-import { fa } from "@faker-js/faker";
 import { useViewport } from "@/hooks/viewport";
 
 interface ModalStateContextType {
@@ -35,11 +33,6 @@ export const ModalStateProvider = ({ children }: { children: ReactNode }) => {
     if (!isLoadedAuthModal && !isOpenSignInModal) setIsLoadedAuthModal(true);
     setIsOpenSignUpModal((prev) => !prev);
   }, [isMobile, isOpenMenuModal, isOpenSignUpModal]);
-
-  const pathname = usePathname();
-  useEffect(() => {
-    setIsOpenMenuModal(false);
-  }, [pathname]);
 
   const contextValue = useMemo(
     () => ({ isOpenMenuModal, setIsOpenMenuModal, isOpenSignInModal, toggleSignInModalVisibility, isOpenSignUpModal, toggleSignUpModalVisibility, isLoadedAuthModal }),

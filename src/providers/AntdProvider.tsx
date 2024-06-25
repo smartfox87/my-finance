@@ -13,11 +13,16 @@ interface Theme {
   darkAlgorithm: any;
 }
 
+interface AntdContextType {
+  initAntd: () => void;
+  isLoadedAntd: boolean;
+}
+
 const StyleProvider = dynamic(() => import("@ant-design/cssinjs/es/StyleContext").then(({ StyleProvider }) => StyleProvider));
 const ConfigProvider = dynamic(() => import("antd/es/config-provider"));
 const AntdRegistry = dynamic(() => import("@ant-design/nextjs-registry").then(({ AntdRegistry }) => AntdRegistry));
 
-export const AntdContext = createContext({ initAntd: () => {}, isLoadedAntd: false });
+export const AntdContext = createContext<AntdContextType | undefined>(undefined);
 
 export const AntdProvider = ({ children }: { children: ReactNode }) => {
   const darkTheme = useDarkTheme();

@@ -1,11 +1,5 @@
 import { useTranslation } from "react-i18next";
 
-export const getMonthsByIndexList = (indexes = [], language) =>
-  indexes
-    .slice()
-    .sort((a, b) => a - b)
-    .map((index) => ({ index, name: new Date(`2000-${index}-01`).toLocaleDateString(language, { month: "long" }) }));
-
 export const useMonths = () => {
   const {
     i18n: { language },
