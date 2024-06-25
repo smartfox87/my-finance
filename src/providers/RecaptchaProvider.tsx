@@ -40,9 +40,7 @@ export const RecaptchaProvider = ({ children }: { children: ReactNode }) => {
   const getScore = useCallback(async ({ action = "signup" } = {}) => {
     if (recaptchaRef.current) {
       try {
-        // if (!("executeAsync" in recaptchaRef.current)) throw new Error("executeAsync is not supported in this version of react-google-recaptcha");
-        // const value = await recaptchaRef.current?.executeAsync();
-        const value = await recaptchaRef.current?.executeAsync();
+        const value = await recaptchaRef.current.executeAsync();
         const body = {
           event: {
             token: value,
