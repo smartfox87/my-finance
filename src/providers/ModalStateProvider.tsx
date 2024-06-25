@@ -1,33 +1,40 @@
 import { createContext, ReactNode, SetStateAction, useCallback, useEffect, useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
+import { fa } from "@faker-js/faker";
+import { useViewport } from "@/hooks/viewport";
 
-const initialData = {
-  isOpenMenuModal: false,
-  setIsOpenMenuModal: (value: SetStateAction<boolean>): void => undefined,
-  isOpenSignInModal: false,
-  toggleSignInModalVisibility: (): void => undefined,
-  isOpenSignUpModal: false,
-  toggleSignUpModalVisibility: (): void => undefined,
-  isLoadedAuthModal: false,
-};
+interface ModalStateContextType {
+  isOpenMenuModal: boolean;
+  setIsOpenMenuModal: (value: SetStateAction<boolean>) => void;
+  isOpenSignInModal: boolean;
+  toggleSignInModalVisibility: () => void;
+  isOpenSignUpModal: boolean;
+  toggleSignUpModalVisibility: () => void;
+  isLoadedAuthModal: boolean;
+}
 
-export const ModalStateContext = createContext(initialData);
+export const ModalStateContext = createContext<ModalStateContextType | undefined>(undefined);
 
 export const ModalStateProvider = ({ children }: { children: ReactNode }) => {
-  const [isOpenMenuModal, setIsOpenMenuModal] = useState(initialData.isOpenMenuModal);
-  const [isOpenSignInModal, setIsOpenSignInModal] = useState(initialData.isOpenSignInModal);
-  const [isOpenSignUpModal, setIsOpenSignUpModal] = useState(initialData.isOpenSignUpModal);
-  const [isLoadedAuthModal, setIsLoadedAuthModal] = useState(initialData.isLoadedAuthModal);
+  const [isOpenMenuModal, setIsOpenMenuModal] = useState(false);
+  const [isOpenSignInModal, setIsOpenSignInModal] = useState(false);
+  const [isOpenSignUpModal, setIsOpenSignUpModal] = useState(false);
+  const [isLoadedAuthModal, setIsLoadedAuthModal] = useState(false);
+
+  const { viewport } = useViewport();
+  const isMobile = useMemo(() => ["sm", "xs", "xxs"].includes(viewport), [viewport]);
 
   const toggleSignInModalVisibility = useCallback(() => {
+    if (isMobile && isOpenMenuModal && isOpenSignInModal) setIsOpenMenuModal(false);
     if (!isLoadedAuthModal && !isOpenSignInModal) setIsLoadedAuthModal(true);
     setIsOpenSignInModal((prev) => !prev);
-  }, []);
+  }, [isMobile, isOpenMenuModal, isOpenSignInModal]);
 
   const toggleSignUpModalVisibility = useCallback(() => {
+    if (isMobile && isOpenMenuModal && isOpenSignUpModal) setIsOpenMenuModal(false);
     if (!isLoadedAuthModal && !isOpenSignInModal) setIsLoadedAuthModal(true);
     setIsOpenSignUpModal((prev) => !prev);
-  }, []);
+  }, [isMobile, isOpenMenuModal, isOpenSignUpModal]);
 
   const pathname = usePathname();
   useEffect(() => {
