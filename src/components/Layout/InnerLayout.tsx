@@ -40,7 +40,6 @@ export const InnerLayout = async ({ locale, page, isAuth = true, breadcrumbs, ch
         )}
       </div>
       {breadcrumbs?.length && <Breadcrumbs list={breadcrumbs} />}
-      {/*<Suspense fallback={<div />}>{isAuth ? <AuthGuard>{children}</AuthGuard> : children}</Suspense>*/}
       <Suspense fallback={<Spinner isVisible />}>{isAuth ? <AuthGuard>{children}</AuthGuard> : children}</Suspense>
     </section>
   );

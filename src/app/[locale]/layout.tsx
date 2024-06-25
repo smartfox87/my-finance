@@ -7,6 +7,7 @@ import type { Metadata, Viewport } from "next";
 import { type Locale } from "@/types/router";
 import { Namespaces } from "@/types/i18n";
 import { ReactNode } from "react";
+// todo speed-insights
 // import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: Locale } }): Promise<Metadata> {
