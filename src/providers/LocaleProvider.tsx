@@ -3,21 +3,14 @@ import { setLanguage } from "@/store/commonSlice.js";
 import { useTranslation } from "react-i18next";
 import { store } from "@/store";
 import { toggleDayjsLocale } from "@/helpers/date";
-import { locales } from "@/constants/router";
-import { Locale } from "@/types/locales";
-import { AntdLocale } from "@/constants/antd-locales";
+import { AntdLocale, AntdLocales, Locale } from "@/types/locales";
 
 interface LocaleContextType {
-  locale: AntdLocale | null;
+  locale: AntdLocale | undefined;
   changeLocale: (lang: Locale) => Promise<void>;
 }
 
-export const languages: Record<Locale, AntdLocale | null> = Object.assign({}, ...locales.map((lang) => ({ [lang]: null })));
-
-const getLocale = async (lang: Locale): Promise<AntdLocale | null> => {
-  if (languages[lang] !== null) return languages[lang];
-  return await import(`@/constants/antd-locales`).then((module) => module.default[lang]);
-};
+const getLocale = (lang: Locale): Promise<AntdLocale> => import(`antd/lib/locale/${AntdLocales[lang]}`).then((module) => module.default);
 
 export const LocaleContext = createContext<LocaleContextType | undefined>(undefined);
 
@@ -27,9 +20,9 @@ export const LocaleProvider = ({ children }: { children: ReactNode }) => {
   } = useTranslation();
   const dispatch = store.dispatch;
 
-  const [locale, setLocale] = useState<AntdLocale | null>(null);
+  const [locale, setLocale] = useState<AntdLocale | undefined>();
   const changeLocale = useCallback(
-    async (lang: Locale) => {
+    async (lang: Locale): Promise<void> => {
       if (!language.includes(lang)) await changeLanguage(lang);
       dispatch(setLanguage(lang));
       const antdLocale = await getLocale(lang);
