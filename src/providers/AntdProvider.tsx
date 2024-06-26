@@ -34,13 +34,13 @@ export const AntdProvider = ({ children }: { children: ReactNode }) => {
   const [isLoadingAntd, setIsLoadingAntd] = useState(false);
 
   const initAntd = useCallback(async () => {
-    if (!isLoadedAntd) setIsLoadingAntd(true);
+    setIsLoadingAntd(true);
     setIsLoadedAntd(true);
     setTheme(await import("antd/es/theme").then(({ default: theme }) => theme));
   }, []);
 
   useEffect(() => {
-    if (getUserId() || user) initAntd();
+    if (!isLoadedAntd && (getUserId() || user)) initAntd();
   }, [user]);
 
   const contextValue = useMemo(() => ({ initAntd, isLoadedAntd, isLoadingAntd, setIsLoadingAntd }), [initAntd, isLoadedAntd, isLoadingAntd, setIsLoadingAntd]);
