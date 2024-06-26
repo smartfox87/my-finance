@@ -8,6 +8,7 @@ import { SimpleButton } from "@/components/Form/SimpleButton";
 import { useAntd } from "@/hooks/antd.js";
 import { useModalState } from "@/hooks/providers/modalState.js";
 import dynamic from "next/dynamic";
+import { useEffect } from "react";
 
 const AuthModal = dynamic(() => import("@/components/Auth/AuthModal.jsx").then(({ AuthModal }) => ({ default: AuthModal })));
 
@@ -18,7 +19,7 @@ export const SignIn = () => {
   const { initCaptcha, isLoadedCaptcha, getScore } = useRecaptcha();
 
   const { isLoadedAuthModal, isOpenSignInModal, toggleSignInModalVisibility } = useModalState();
-  const { initAntd, isLoadedAntd } = useAntd();
+  const { initAntd, isLoadedAntd, isLoadingAntd } = useAntd();
   const isLoading = isOpenSignInModal && (!isLoadedCaptcha || !isLoadedAuthModal);
 
   const handleToggleVisibility = () => {
@@ -45,7 +46,7 @@ export const SignIn = () => {
           type="login"
           title={t("titles.authorisation")}
           fields={INITIAL_SIGN_IN_FIELDS}
-          isOpen={isOpenSignInModal}
+          isOpen={!isLoadingAntd && isOpenSignInModal}
           onSaveForm={handleSubmitForm}
           onToggleVisibility={handleToggleVisibility}
         />

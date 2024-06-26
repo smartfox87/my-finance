@@ -18,7 +18,7 @@ export const SignUp = () => {
   const { initCaptcha, isLoadedCaptcha, getScore } = useRecaptcha();
 
   const { isLoadedAuthModal, isOpenSignUpModal, toggleSignUpModalVisibility } = useModalState();
-  const { initAntd, isLoadedAntd } = useAntd();
+  const { initAntd, isLoadedAntd, isLoadingAntd } = useAntd();
   const isLoading = isOpenSignUpModal && (!isLoadedCaptcha || !isLoadedAuthModal);
 
   const handleToggleVisibility = () => {
@@ -47,7 +47,7 @@ export const SignUp = () => {
           type="register"
           title={t("titles.registration")}
           fields={INITIAL_SIGN_UP_FIELDS}
-          isOpen={isOpenSignUpModal}
+          isOpen={!isLoadingAntd && isOpenSignUpModal}
           onSaveForm={handleSubmitForm}
           onToggleVisibility={handleToggleVisibility}
         />
