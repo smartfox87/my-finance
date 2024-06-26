@@ -7,7 +7,7 @@ import pl from "antd/locale/pl_PL";
 import hi from "antd/locale/hi_IN";
 import zh from "antd/locale/zh_CN";
 import ru from "antd/locale/ru_RU";
-import { Locale, Locales } from "@/types/router";
+import { Locale, Locales } from "@/types/locales";
 
 export type AntdLocale = typeof en;
 

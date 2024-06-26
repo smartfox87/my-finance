@@ -1,4 +1,5 @@
-import { type Language, Languages, type Locale, Locales, type CeoPage, CeoPages } from "../types/router";
+import { type CeoPage, CeoPages } from "../types/router";
+import { type Language, Languages, type Locale, Locales } from "../types/locales";
 
 export const locales: Locale[] = Object.values(Locales).sort((a, b) => a.localeCompare(b));
 

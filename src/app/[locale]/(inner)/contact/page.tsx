@@ -4,7 +4,8 @@ import { InnerLayout } from "@/components/Layout/InnerLayout";
 import ContactModule from "@/app/[locale]/(inner)/contact/content-module";
 import { getJsonLdBreadcrumbs, getJsonLdWebsite } from "@/helpers/jsonLd";
 import { LinkItem } from "@/types/breadcrumbs";
-import { type Locale, Pages } from "@/types/router";
+import { Pages } from "@/types/router";
+import { type Locale } from "@/types/locales";
 import { Namespaces } from "@/types/i18n";
 
 const i18nNamespaces = [Namespaces.COMMON];

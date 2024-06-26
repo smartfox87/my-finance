@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import initTranslations from "@/i18n";
 import HomeContent from "@/app/[locale]/(inner)/content";
-import { type Locale } from "@/types/router";
+import { type Locale } from "@/types/locales";
 import { Namespaces } from "@/types/i18n";
 
 const i18nNamespaces = [Namespaces.COMMON];

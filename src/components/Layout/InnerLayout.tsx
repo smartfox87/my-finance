@@ -5,7 +5,8 @@ import initTranslations from "@/i18n";
 import { ReactNode, Suspense } from "react";
 import { Breadcrumbs } from "@/components/Common/Breadcrumbs";
 import { LinkItem } from "@/types/breadcrumbs";
-import { type Locale, type Page } from "@/types/router";
+import { type Page } from "@/types/router";
+import { type Locale } from "@/types/locales";
 import { Namespaces } from "@/types/i18n";
 import { Spinner } from "@/components/Layout/Spinner";
 

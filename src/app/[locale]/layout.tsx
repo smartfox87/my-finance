@@ -4,7 +4,7 @@ import { dir } from "i18next";
 import Providers from "./providers";
 import initTranslations from "@/i18n";
 import type { Metadata, Viewport } from "next";
-import { type Locale } from "@/types/router";
+import { type Locale } from "@/types/locales";
 import { Namespaces } from "@/types/i18n";
 import { ReactNode } from "react";
 // todo speed-insights

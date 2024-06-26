@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { store } from "@/store";
 import { toggleDayjsLocale } from "@/helpers/date";
 import { locales } from "@/constants/router";
-import { Locale } from "@/types/router";
+import { Locale } from "@/types/locales";
 import { AntdLocale } from "@/constants/antd-locales";
 
 interface LocaleContextType {

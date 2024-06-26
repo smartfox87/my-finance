@@ -4,7 +4,8 @@ import { InnerLayout } from "@/components/Layout/InnerLayout";
 import AccountsModule from "@/app/[locale]/(inner)/accounts/content-module";
 import { getJsonLdBreadcrumbs, getJsonLdWebsite } from "@/helpers/jsonLd";
 import type { LinkItem } from "@/types/breadcrumbs";
-import { type Locale, Pages } from "@/types/router";
+import { Pages } from "@/types/router";
+import { type Locale } from "@/types/locales";
 import { ReactElement } from "react";
 import { Namespaces } from "@/types/i18n";
 
