@@ -13,7 +13,7 @@ import { useModalState } from "@/hooks/providers/modalState.js";
 
 export const MobileMenu = memo(function MobileMenu() {
   const { t } = useTranslation();
-  const { initAntd, isLoadedAntd } = useAntd();
+  const { initAntd, isLoadedAntd, isLoadingAntd } = useAntd();
   const { isOpenMenuModal, setIsOpenMenuModal } = useModalState();
   const user = useSelector(selectUser);
 
@@ -28,7 +28,7 @@ export const MobileMenu = memo(function MobileMenu() {
         <SvgMenu className="h-6 w-6" />
       </button>
       <Suspense fallback={<div className="hidden" />}>
-        <SideModal isOpen={isOpenMenuModal} onClose={handleToggleVisibility}>
+        <SideModal isOpen={!isLoadingAntd && isOpenMenuModal} onClose={handleToggleVisibility}>
           <div className="flex items-center justify-between gap-3">
             {user ? <ProfileMenu /> : <Auth />}
             <div className="relative z-20 ml-auto">

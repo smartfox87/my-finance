@@ -7,6 +7,11 @@ import { locales } from "@/constants/router";
 import { Locale } from "@/types/router";
 import { AntdLocale } from "@/constants/antd-locales";
 
+interface LocaleContextType {
+  locale: AntdLocale | null;
+  changeLocale: (lang: Locale) => Promise<void>;
+}
+
 export const languages: Record<Locale, AntdLocale | null> = Object.assign({}, ...locales.map((lang) => ({ [lang]: null })));
 
 const getLocale = async (lang: Locale): Promise<AntdLocale | null> => {
@@ -14,7 +19,7 @@ const getLocale = async (lang: Locale): Promise<AntdLocale | null> => {
   return await import(`@/constants/antd-locales`).then((module) => module.default[lang]);
 };
 
-export const LocaleContext = createContext<{ locale: AntdLocale | null; changeLocale: (lang: Locale) => Promise<void> }>({ locale: null, changeLocale: () => Promise.resolve() });
+export const LocaleContext = createContext<LocaleContextType | undefined>(undefined);
 
 export const LocaleProvider = ({ children }: { children: ReactNode }) => {
   const {
