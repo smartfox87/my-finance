@@ -33,7 +33,7 @@ export const AntdProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<Theme>();
   const [isLoadingAntd, setIsLoadingAntd] = useState(false);
 
-  const initAntd = useCallback(async () => {
+  const initAntd = useCallback(async (): Promise<void> => {
     setIsLoadingAntd(true);
     setIsLoadedAntd(true);
     setTheme(await import("antd/es/theme").then(({ default: theme }) => theme));
