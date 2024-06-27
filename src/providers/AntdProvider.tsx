@@ -27,7 +27,7 @@ export const AntdContext = createContext<AntdContextType | undefined>(undefined)
 
 export const AntdProvider = ({ children }: { children: ReactNode }) => {
   const darkTheme = useDarkTheme();
-  const { locale } = useLocale();
+  const { antdLocale } = useLocale();
   const user = useSelector(selectUser);
   const [isLoadedAntd, setIsLoadedAntd] = useState(false);
   const [theme, setTheme] = useState<Theme>();
@@ -51,7 +51,7 @@ export const AntdProvider = ({ children }: { children: ReactNode }) => {
         <AntdContext.Provider value={contextValue}>
           <AntdRegistry>
             <StyleProvider hashPriority="high">
-              <ConfigProvider locale={locale || undefined} theme={{ algorithm: darkTheme ? theme.darkAlgorithm : theme.defaultAlgorithm }}>
+              <ConfigProvider locale={antdLocale || undefined} theme={{ algorithm: darkTheme ? theme.darkAlgorithm : theme.defaultAlgorithm }}>
                 {children}
               </ConfigProvider>
             </StyleProvider>
