@@ -3,7 +3,7 @@ import { setLanguage } from "@/store/commonSlice.js";
 import { useTranslation } from "react-i18next";
 import { store } from "@/store";
 import { toggleDayjsLocale } from "@/helpers/date";
-import { AntdLocale, AntdLocales, Locale } from "@/types/locales";
+import { AntdLocale, AntdLocales, Locale, Locales } from "@/types/locales";
 
 interface LocaleContextType {
   locale: AntdLocale | undefined;
@@ -33,7 +33,7 @@ export const LocaleProvider = ({ children }: { children: ReactNode }) => {
   );
 
   useEffect(() => {
-    changeLocale(language);
+    if (language !== Locales.EN) changeLocale(language);
   }, []);
 
   const contextValue = useMemo(() => ({ locale, changeLocale }), [locale, changeLocale]);
