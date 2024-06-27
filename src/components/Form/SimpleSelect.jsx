@@ -4,8 +4,9 @@ import SvgArrowSelect from "@/assets/sprite/arrow-select.svg";
 export const SimpleSelect = ({ value, options, onChange }) => {
   const [isOpen, setIsOpen] = useState(false);
   const handleToggleVisibility = (state) => (state !== undefined ? setIsOpen(state) : setIsOpen(!isOpen));
-  const handleChange = (value) => {
-    onChange(value);
+  const handleChange = (val) => {
+    if (val === value) return setIsOpen(false);
+    onChange(val);
     setIsOpen(false);
   };
 
