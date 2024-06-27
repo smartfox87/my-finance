@@ -1,44 +1,17 @@
 import { useTranslation } from "react-i18next";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { SimpleSelect } from "@/components/Form/SimpleSelect.jsx";
 import { useLocale } from "@/hooks/locale";
-import { useParams, usePathname, useRouter } from "next/navigation";
-import { i18nConfig } from "../../../../i18nConfig";
 import { locales } from "@/constants/router";
 
 export const LanguageToggle = () => {
   const {
     i18n: { language },
   } = useTranslation();
-  const router = useRouter();
-  const { locale } = useParams();
-  const pathname = usePathname();
   const languageCode = language.substring(0, 2);
 
   const { changeLocale } = useLocale();
   const options = useMemo(() => Object.values(locales)?.map((locale) => ({ label: locale, value: locale })), []);
-  const handleChange = (code) => {
-    if (languageCode === code) return;
 
-    changeLocale(code);
-
-    const days = 30;
-    const date = new Date();
-    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-    const expires = date.toUTCString();
-    document.cookie = `NEXT_LOCALE=${code};expires=${expires};path=/`;
-
-    if (language === i18nConfig.defaultLocale && !i18nConfig.prefixDefault) {
-      router.push("/" + code + pathname);
-    } else {
-      router.push(pathname.replace(`/${language}`, `/${code}`));
-    }
-    router.refresh();
-  };
-
-  useEffect(() => {
-    if (locale && languageCode !== locale && Object.values(locales).includes(locale)) changeLocale(locale);
-  }, []);
-
-  return <SimpleSelect value={languageCode} options={options} onChange={handleChange} className="w-[58px]" />;
+  return <SimpleSelect value={languageCode} options={options} onChange={changeLocale} className="w-[58px]" />;
 };
