@@ -3,7 +3,7 @@ import { writeFileSync } from "fs";
 import { SitemapStream, streamToPromise } from "sitemap";
 import { Readable } from "stream";
 import { locales, pages } from "../src/constants/router";
-import { Locales } from "../src/types/router";
+import { Locales } from "../src/types/locales";
 
 const hostname = process.env.NEXT_PUBLIC_PRODUCTION_URL;
 const links = pages.map((url) => ({

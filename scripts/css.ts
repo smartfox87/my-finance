@@ -2,7 +2,8 @@ import { locales, pages } from "../src/constants/router";
 import fs from "fs";
 import path from "path";
 import * as cheerio from "cheerio";
-import type { Locale, CeoPage } from "../src/types/router";
+import type { CeoPage } from "../src/types/router";
+import type { Locale } from "../src/types/locales";
 
 function getCssPaths(dir: string): string[] {
   const files = fs.readdirSync(dir);

@@ -1,4 +1,4 @@
-import { type Locale, Locales } from "@/types/router";
+import { type Locale, Locales } from "@/types/locales";
 import { type DatesPeriod, DatesPeriods, DatesStrings } from "@/types/date";
 import { periods } from "@/constants/date";
 import dayjs from "dayjs";

@@ -2,7 +2,7 @@ import "i18next";
 import common from "../../locales/en/common.json";
 import { Callback, TFunction } from "i18next";
 import { Namespaces } from "@/types/i18n";
-import { Locale } from "@/types/router";
+import { Locale } from "@/types/locales";
 
 declare module "i18next" {
   interface CustomTypeOptions {

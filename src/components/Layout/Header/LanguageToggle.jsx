@@ -1,10 +1,10 @@
 import { useTranslation } from "react-i18next";
 import { useEffect, useMemo } from "react";
 import { SimpleSelect } from "@/components/Form/SimpleSelect.jsx";
-import { languages } from "@/providers/LocaleProvider.tsx";
 import { useLocale } from "@/hooks/locale";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { i18nConfig } from "../../../../i18nConfig";
+import { locales } from "@/constants/router";
 
 export const LanguageToggle = () => {
   const {
@@ -16,7 +16,7 @@ export const LanguageToggle = () => {
   const languageCode = language.substring(0, 2);
 
   const { changeLocale } = useLocale();
-  const options = useMemo(() => Object.keys(languages)?.map((locale) => ({ label: locale, value: locale })), []);
+  const options = useMemo(() => Object.values(locales)?.map((locale) => ({ label: locale, value: locale })), []);
   const handleChange = (code) => {
     if (languageCode === code) return;
 
@@ -37,7 +37,7 @@ export const LanguageToggle = () => {
   };
 
   useEffect(() => {
-    if (locale && languageCode !== locale && Object.keys(languages).includes(locale)) changeLocale(locale);
+    if (locale && languageCode !== locale && Object.values(locales).includes(locale)) changeLocale(locale);
   }, []);
 
   return <SimpleSelect value={languageCode} options={options} onChange={handleChange} className="w-[58px]" />;
