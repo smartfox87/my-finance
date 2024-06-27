@@ -27,7 +27,6 @@ export const LocaleProvider = ({ children }: { children: ReactNode }) => {
   const [antdLocale, setAntdLocale] = useState<AntdLocale | undefined>();
   const changeLocale = useCallback(
     async (lang: Locale): Promise<void> => {
-      console.log("222222222222222222222222222", languageCode);
       if (!isStringLocale(languageCode) || (isStringLocale(languageCode) && !locales.includes(languageCode))) return;
 
       await changeLanguage(lang);
@@ -51,10 +50,7 @@ export const LocaleProvider = ({ children }: { children: ReactNode }) => {
   );
 
   useEffect(() => {
-    if (locale && isStringLocale(locale) && languageCode !== i18nConfig.defaultLocale && locales.includes(locale)) {
-      console.log("1111111111111111111111111", languageCode, locale);
-      changeLocale(locale);
-    }
+    if (locale && isStringLocale(locale) && languageCode !== i18nConfig.defaultLocale && locales.includes(locale)) changeLocale(locale);
   }, []);
 
   const contextValue = useMemo(() => ({ antdLocale, changeLocale }), [antdLocale, changeLocale]);
