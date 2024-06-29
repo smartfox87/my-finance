@@ -16,6 +16,20 @@ export enum Pages {
 }
 export type Page = `${Pages}`;
 
+export enum Locales {
+  EN = "en",
+  DE = "de",
+  IT = "it",
+  ES = "es",
+  FR = "fr",
+  PL = "pl",
+  ZH = "zh",
+  HI = "hi",
+  RU = "ru",
+}
+
+export type Locale = `${Locales}`;
+
 export enum SortProp {
   NAME = "name",
   DATE = "date",
