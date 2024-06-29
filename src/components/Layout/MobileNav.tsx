@@ -5,7 +5,7 @@ import { memo, useMemo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export const MobileNav = memo(function MobileNav({ className = "" }: { className?: string }) {
+export const MobileNav = memo(function MobileNav() {
   const {
     t,
     i18n: { language },
@@ -19,7 +19,7 @@ export const MobileNav = memo(function MobileNav({ className = "" }: { className
   const filteredList = useMemo(() => INIT_NAV_LIST.filter(({ mobile_nav }) => !isMobile || (isMobile && mobile_nav)), [isMobile]);
 
   return (
-    <nav className={`shrink-0 border-t border-gray-300 ${className}`} aria-label="mobile navigation">
+    <nav className="shrink-0 border-t border-gray-300 lg:hidden" aria-label="mobile navigation">
       <ul className="flex">
         {filteredList.map(({ icon, full_name, short_name, url }) => (
           <li key={full_name} className="w-1/12 grow">
