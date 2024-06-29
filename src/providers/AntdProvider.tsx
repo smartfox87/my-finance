@@ -6,6 +6,8 @@ import { useLocale } from "@/hooks/locale";
 import { getUserId } from "@/helpers/localStorage.js";
 import dynamic from "next/dynamic";
 import { Preloader } from "@/components/Layout/Preloader";
+import { usePathname } from "next/navigation";
+import { Pages } from "@/types/router";
 
 interface Theme {
   defaultAlgorithm: any;
@@ -29,29 +31,39 @@ export const AntdProvider = ({ children }: { children: ReactNode }) => {
   const darkTheme = useDarkTheme();
   const { antdLocale } = useLocale();
   const user = useSelector(selectUser);
-  const [isLoadedAntd, setIsLoadedAntd] = useState(false);
+  const pathname = usePathname();
+
+  const isLoadedInitState = pathname.includes(Pages.CONTACT);
+  const [isLoadedAntd, setIsLoadedAntd] = useState(isLoadedInitState);
   const [theme, setTheme] = useState<Theme>();
   const [isLoadingAntd, setIsLoadingAntd] = useState(false);
 
   const initAntd = useCallback(async (): Promise<void> => {
-    setIsLoadingAntd(true);
-    setIsLoadedAntd(true);
+    if (!isLoadedAntd) {
+      setIsLoadingAntd(true);
+      setIsLoadedAntd(true);
+    }
     setTheme(await import("antd/es/theme").then(({ default: theme }) => theme));
   }, []);
 
   useEffect(() => {
-    if (!isLoadedAntd && (getUserId() || user)) initAntd();
+    if ((!theme && isLoadedInitState) || (!isLoadedAntd && (getUserId() || user))) initAntd();
   }, [user]);
 
   const contextValue = useMemo(() => ({ initAntd, isLoadedAntd, isLoadingAntd, setIsLoadingAntd }), [initAntd, isLoadedAntd, isLoadingAntd, setIsLoadingAntd]);
 
+  const themeSettings = useMemo(() => {
+    if (!theme) return undefined;
+    return { algorithm: darkTheme ? theme.darkAlgorithm : theme.defaultAlgorithm };
+  }, [theme]);
+
   return (
     <Preloader isLoading={isLoadingAntd}>
-      {isLoadedAntd && theme ? (
+      {isLoadedAntd ? (
         <AntdContext.Provider value={contextValue}>
           <AntdRegistry>
             <StyleProvider hashPriority="high">
-              <ConfigProvider locale={antdLocale || undefined} theme={{ algorithm: darkTheme ? theme.darkAlgorithm : theme.defaultAlgorithm }}>
+              <ConfigProvider locale={antdLocale || undefined} theme={themeSettings}>
                 {children}
               </ConfigProvider>
             </StyleProvider>
