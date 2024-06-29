@@ -4,12 +4,10 @@ import { InnerLayout } from "@/components/Layout/InnerLayout";
 import ProfileModule from "@/app/[locale]/(inner)/profile/content-module";
 import { Pages } from "@/types/router";
 import { type Locale } from "@/types/locales";
-import { Namespaces } from "@/types/i18n";
-
-const i18nNamespaces = [Namespaces.COMMON];
+import { allI18nNamespaces } from "@/constants/locales";
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: Locale } }): Promise<Metadata> {
-  const { t } = await initTranslations(locale, i18nNamespaces);
+  const { t } = await initTranslations(locale, allI18nNamespaces);
   return {
     title: t(`pages.profile.title`),
     description: t(`pages.profile.description`),

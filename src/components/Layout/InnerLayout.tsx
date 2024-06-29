@@ -7,10 +7,8 @@ import { Breadcrumbs } from "@/components/Common/Breadcrumbs";
 import { LinkItem } from "@/types/breadcrumbs";
 import { type Page } from "@/types/router";
 import { type Locale } from "@/types/locales";
-import { Namespaces } from "@/types/i18n";
 import { Spinner } from "@/components/Layout/Spinner";
-
-const i18nNamespaces = [Namespaces.COMMON];
+import { allI18nNamespaces } from "@/constants/locales";
 
 interface Props {
   locale: Locale;
@@ -21,7 +19,7 @@ interface Props {
 }
 
 export const InnerLayout = async ({ locale, page, isAuth = true, breadcrumbs, children }: Props) => {
-  const { t } = await initTranslations(locale, i18nNamespaces);
+  const { t } = await initTranslations(locale, allI18nNamespaces);
   const title = t(`pages.${page}.title`);
   const description = t(`pages.${page}.description`);
 

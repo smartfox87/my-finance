@@ -34,10 +34,10 @@ export const RecaptchaProvider = ({ children }: { children: ReactNode }) => {
   const [isInjectedCaptcha, setIsInjectedCaptcha] = useState(false);
   const [isLoadedCaptcha, setIsLoadedCaptcha] = useState(false);
 
-  const initCaptcha = useCallback(() => setIsInjectedCaptcha(true), []);
-  const handleAsyncScriptLoad = useCallback(() => setIsLoadedCaptcha(true), []);
+  const initCaptcha = useCallback((): void => setIsInjectedCaptcha(true), []);
+  const handleAsyncScriptLoad = useCallback((): void => setIsLoadedCaptcha(true), []);
 
-  const getScore = useCallback(async ({ action = "signup" } = {}): Promise<number> => {
+  const getScore = useCallback(async ({ action = "signup" }: { action?: string } = {}): Promise<number> => {
     try {
       if (!recaptchaRef.current) throw new Error("Recaptcha is not initialized");
       const value = await recaptchaRef.current.executeAsync();
@@ -52,7 +52,7 @@ export const RecaptchaProvider = ({ children }: { children: ReactNode }) => {
       return score;
     } catch (error) {
       if (process.env.NODE_ENV === "production") Sentry.captureException(error);
-      return 0.9;
+      return 0.999;
     }
   }, []);
 

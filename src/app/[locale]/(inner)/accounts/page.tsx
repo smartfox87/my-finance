@@ -7,12 +7,10 @@ import type { LinkItem } from "@/types/breadcrumbs";
 import { Pages } from "@/types/router";
 import { type Locale } from "@/types/locales";
 import { ReactElement } from "react";
-import { Namespaces } from "@/types/i18n";
-
-const i18nNamespaces = [Namespaces.COMMON];
+import { allI18nNamespaces } from "@/constants/locales";
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: Locale } }): Promise<Metadata> {
-  const { t } = await initTranslations(locale, i18nNamespaces);
+  const { t } = await initTranslations(locale, allI18nNamespaces);
   return {
     title: t(`pages.accounts.title`),
     description: t(`pages.accounts.description`),
@@ -21,7 +19,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 }
 
 export default async function Accounts({ params: { locale } }: { params: { locale: Locale } }): Promise<ReactElement> {
-  const { t } = await initTranslations(locale, i18nNamespaces);
+  const { t } = await initTranslations(locale, allI18nNamespaces);
 
   const breadcrumbList: LinkItem[] = [
     { path: "", name: t("navigation.home") },

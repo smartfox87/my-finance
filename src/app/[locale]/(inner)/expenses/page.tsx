@@ -6,12 +6,10 @@ import { getJsonLdBreadcrumbs, getJsonLdWebsite } from "@/helpers/jsonLd";
 import { LinkItem } from "@/types/breadcrumbs";
 import { Pages } from "@/types/router";
 import { type Locale } from "@/types/locales";
-import { Namespaces } from "@/types/i18n";
-
-const i18nNamespaces = [Namespaces.COMMON];
+import { allI18nNamespaces } from "@/constants/locales";
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: Locale } }): Promise<Metadata> {
-  const { t } = await initTranslations(locale, i18nNamespaces);
+  const { t } = await initTranslations(locale, allI18nNamespaces);
   return {
     title: t(`pages.expenses.title`),
     description: t(`pages.expenses.description`),
@@ -20,7 +18,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 }
 
 export default async function Expenses({ params: { locale } }: { params: { locale: Locale } }) {
-  const { t } = await initTranslations(locale, i18nNamespaces);
+  const { t } = await initTranslations(locale, allI18nNamespaces);
 
   const breadcrumbList: LinkItem[] = [
     { path: "", name: t("navigation.home") },

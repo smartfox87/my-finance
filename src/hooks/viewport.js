@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { breakpoints } from "@/constants/breakpoints.js";
 
 const viewports = [
@@ -17,6 +17,7 @@ const getViewportByIndex = (index) => viewports[index].name;
 export const useViewport = () => {
   const [viewport, setViewport] = useState(getViewportByIndex(4));
   const [isTouchDevice, setIsTouchDevice] = useState();
+  const isMobile = useMemo(() => ["sm", "xs", "xxs"].includes(viewport), [viewport]);
 
   useEffect(() => {
     const mediaQueryLists = viewports.map(({ query }) => matchMedia(query));
@@ -33,5 +34,5 @@ export const useViewport = () => {
     return () => mediaQueryLists.forEach((list) => list.removeEventListener("change", handleMatchMediaChange));
   }, []);
 
-  return { viewport, isTouchDevice };
+  return { viewport, isTouchDevice, isMobile };
 };
