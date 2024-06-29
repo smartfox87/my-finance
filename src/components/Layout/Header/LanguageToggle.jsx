@@ -13,5 +13,5 @@ export const LanguageToggle = () => {
   const { changeLocale } = useLocale();
   const options = useMemo(() => Object.values(locales)?.map((locale) => ({ label: locale, value: locale })), []);
 
-  return <SimpleSelect value={languageCode} options={options} onChange={changeLocale} className="w-[58px]" />;
+  return <SimpleSelect value={languageCode} options={options} className="w-[58px]" data-cy="locale-toggle" onChange={changeLocale} />;
 };

@@ -1,6 +1,7 @@
 import { supabaseClient } from "./supabase";
-import { FilteredMultiPropsItems, FilteredSinglePropItems, FilterPropValues, SelectedOptionsData, SortItem, SortOrder, SortProp } from "./types";
+import { FilteredMultiPropsItems, FilteredSinglePropItems, FilterPropValues, Locale, SelectedOptionsData, SortItem, SortOrder, SortProp } from "./types";
 import { compareMultiPropsItemsToFilterPropValues, compareSinglePropItemsToFilterPropValues, sortItems } from "./utils";
+import { locales } from "@/constants/router";
 
 Cypress.Commands.add("deleteE2EUser", () => {
   supabaseClient
@@ -62,9 +63,9 @@ Cypress.Commands.add("loginDemo", () => {
   );
 });
 
-Cypress.Commands.add("getDictionary", () => {
+Cypress.Commands.add("getDictionary", (locale?: Locale) => {
   cy.getLang().then((lang) => {
-    cy.fixture(`locales/${lang}/common.json`).then((json) => {
+    cy.fixture(`locales/${locale ? locale : lang}/common.json`).then((json) => {
       if (!json) throw new Error(`Could not load dictionary for language: ${lang}`);
       cy.wrap(json);
     });
@@ -182,6 +183,15 @@ Cypress.Commands.add("pickFile", (selector) => {
   cy.get(selector).selectFile("cypress/fixtures/images/jpg.jpg", { force: true, action: "select" });
 });
 
+Cypress.Commands.add("pickSiteLocale", (locale: Locale) => {
+  cy.get('[data-cy="locale-toggle"]').within(() => {
+    cy.get("> button").click();
+    cy.get(`li > button`).then((options) => {
+      cy.wrap(options).filter(`:contains("${locale}")`).click();
+    });
+  });
+});
+
 Cypress.Commands.add("checkItemsSort", ({ items, prop, order } = {}) => {
   if (!items?.length || !order) throw new Error("No check sort params found.");
   const sortedItems: SortItem[] = Cypress.$(items)
@@ -216,7 +226,7 @@ declare global {
       login(): Chainable<void>;
       loginDemo(): Chainable<void>;
       getLang(): Chainable<string>;
-      getDictionary(): Chainable<any>;
+      getDictionary(locale?: Locale): Chainable<any>;
       pickSelect(selector: string, options?: { index?: number; returnValue?: boolean }): Chainable<string>;
       pickMultiSelect(selector: string, options?: { indexes?: number[]; indexesCount?: number; minIndex?: number; returnValue?: boolean; allSelectable?: boolean }): Chainable<void>;
       pickDate(selector: string): Chainable<void>;
@@ -224,6 +234,7 @@ declare global {
       pickRadioButton(selector: string): Chainable<void>;
       pickCalculator(expression: string): Chainable<void>;
       pickFile(selector: string): Chainable<void>;
+      pickSiteLocale(locale: Locale): Chainable<void>;
       checkItemsSort(props: { items: JQuery<HTMLElement>; prop: SortProp; order: SortOrder }): Chainable<Boolean>;
       checkSinglePropItemsFilter(props: { items: FilteredSinglePropItems; filterPropValues: FilterPropValues }): Chainable<Boolean>;
       checkMultiPropsItemsFilter(props: { items: FilteredMultiPropsItems; filterPropValues: FilterPropValues }): Chainable<Boolean>;
