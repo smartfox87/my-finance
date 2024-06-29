@@ -46,7 +46,7 @@ export const LocaleProvider = ({ children }: { children: ReactNode }) => {
       }
       router.refresh();
     },
-    [language],
+    [language, locale],
   );
 
   useEffect(() => {
