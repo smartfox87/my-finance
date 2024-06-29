@@ -38,24 +38,21 @@ export const AntdProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<Theme>();
   const [isLoadingAntd, setIsLoadingAntd] = useState(false);
 
-  const initAntd = useCallback(async (): Promise<void> => {
+  const initAntd = useCallback((): void => {
     if (!isLoadedAntd) {
       setIsLoadingAntd(true);
       setIsLoadedAntd(true);
     }
-    setTheme(await import("antd/es/theme").then(({ default: theme }) => theme));
-  }, []);
+    import("antd/es/theme").then(({ default: theme }) => setTheme(theme));
+  }, [isLoadedAntd]);
 
   useEffect(() => {
     if ((!theme && isLoadedInitState) || (!isLoadedAntd && (getUserId() || user))) initAntd();
-  }, [user]);
+  }, [user, isLoadedInitState]);
 
   const contextValue = useMemo(() => ({ initAntd, isLoadedAntd, isLoadingAntd, setIsLoadingAntd }), [initAntd, isLoadedAntd, isLoadingAntd, setIsLoadingAntd]);
 
-  const themeSettings = useMemo(() => {
-    if (!theme) return undefined;
-    return { algorithm: darkTheme ? theme.darkAlgorithm : theme.defaultAlgorithm };
-  }, [theme]);
+  const themeSettings = useMemo(() => (theme ? { algorithm: darkTheme ? theme.darkAlgorithm : theme.defaultAlgorithm } : undefined), [theme]);
 
   return (
     <Preloader isLoading={isLoadingAntd}>

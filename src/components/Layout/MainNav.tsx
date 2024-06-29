@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useViewport } from "@/hooks/viewport";
 import { useModalState } from "@/hooks/providers/modalState";
 
-export const MainNav = memo(function MainNav() {
+export const MainNav = memo(function MainNav({ className = "" }: { className?: string }) {
   const {
     t,
     i18n: { language },
@@ -21,8 +21,8 @@ export const MainNav = memo(function MainNav() {
   const handleNavClick = () => isMobile && setIsOpenMenuModal(false);
 
   return (
-    <nav className="hidden shrink-0 border-gray-300 lg:block lg:border-r" aria-label="desktop navigation">
-      <ul className={`sticky top-16 flex grow flex-col py-4 ${isMobile ? "pl-1" : "container !pl-0"}`}>
+    <nav className={`shrink-0 border-gray-300 lg:border-r ${className}`} aria-label="desktop navigation">
+      <ul className="sticky top-16 flex grow flex-col py-4">
         {INIT_NAV_LIST.map(({ icon, full_name, url }) => (
           <li key={full_name} className="w-full">
             <Link

@@ -39,11 +39,8 @@ export const LocaleProvider = ({ children }: { children: ReactNode }) => {
       const expires = date.toUTCString();
       document.cookie = `NEXT_LOCALE=${lang};expires=${expires};path=/`;
 
-      if (languageCode === i18nConfig.defaultLocale && !i18nConfig.prefixDefault) {
-        router.push("/" + lang + pathname);
-      } else {
-        router.push(pathname.replace(`/${languageCode}`, `/${lang}`));
-      }
+      if (languageCode === i18nConfig.defaultLocale && !i18nConfig.prefixDefault) router.push("/" + lang + pathname);
+      else router.push(pathname.replace(`/${languageCode}`, `/${lang}`));
       router.refresh();
     },
     [language, locale],

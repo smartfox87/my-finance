@@ -35,7 +35,7 @@ export const MobileMenu = memo(function MobileMenu() {
               <LanguageToggle />
             </div>
           </div>
-          <MainNav />
+          <MainNav className="pl-1" />
         </SideModal>
       </Suspense>
     </>
