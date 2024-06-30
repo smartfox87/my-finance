@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import initTranslations from "@/i18n";
+import { initTranslations } from "@/i18n";
 import { InnerLayout } from "@/components/Layout/InnerLayout";
 import AccountsModule from "@/app/[locale]/(inner)/accounts/content-module";
 import { getJsonLdBreadcrumbs, getJsonLdWebsite } from "@/helpers/jsonLd";
@@ -7,10 +7,9 @@ import type { LinkItem } from "@/types/breadcrumbs";
 import { Pages } from "@/types/router";
 import { type Locale } from "@/types/locales";
 import { ReactElement } from "react";
-import { allI18nNamespaces } from "@/constants/locales";
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: Locale } }): Promise<Metadata> {
-  const { t } = await initTranslations(locale, allI18nNamespaces);
+  const { t } = await initTranslations({ locale });
   return {
     title: t(`pages.accounts.title`),
     description: t(`pages.accounts.description`),
@@ -19,7 +18,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 }
 
 export default async function Accounts({ params: { locale } }: { params: { locale: Locale } }): Promise<ReactElement> {
-  const { t } = await initTranslations(locale, allI18nNamespaces);
+  const { t } = await initTranslations({ locale });
 
   const breadcrumbList: LinkItem[] = [
     { path: "", name: t("navigation.home") },

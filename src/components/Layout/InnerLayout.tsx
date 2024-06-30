@@ -1,14 +1,13 @@
 "use client";
 
 import { AuthGuard } from "@/components/Auth/AuthGuard.jsx";
-import initTranslations from "@/i18n";
+import { initTranslations } from "@/i18n";
 import { ReactNode, Suspense } from "react";
 import { Breadcrumbs } from "@/components/Common/Breadcrumbs";
 import { LinkItem } from "@/types/breadcrumbs";
 import { type Page } from "@/types/router";
 import { type Locale } from "@/types/locales";
 import { Spinner } from "@/components/Layout/Spinner";
-import { allI18nNamespaces } from "@/constants/locales";
 
 interface Props {
   locale: Locale;
@@ -19,7 +18,7 @@ interface Props {
 }
 
 export const InnerLayout = async ({ locale, page, isAuth = true, breadcrumbs, children }: Props) => {
-  const { t } = await initTranslations(locale, allI18nNamespaces);
+  const { t } = await initTranslations({ locale });
   const title = t(`pages.${page}.title`);
   const description = t(`pages.${page}.description`);
 

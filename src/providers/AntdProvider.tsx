@@ -1,3 +1,5 @@
+"use client";
+
 import { useDarkTheme } from "@/hooks/theme.js";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/store/selectors/auth.js";
