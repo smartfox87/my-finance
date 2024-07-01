@@ -16,6 +16,7 @@ interface Props {
 }
 
 export const InnerLayout = async ({ locale, page, isAuth = true, breadcrumbs, children }: Props) => {
+  // todo check if this is the right way to do it
   const { t } = await initTranslations({ locale });
   const title = t(`pages.${page}.title`);
   const description = t(`pages.${page}.description`);
