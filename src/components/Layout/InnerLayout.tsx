@@ -1,5 +1,3 @@
-"use client";
-
 import { AuthGuard } from "@/components/Auth/AuthGuard.jsx";
 import { initTranslations } from "@/i18n";
 import { ReactNode, Suspense } from "react";
