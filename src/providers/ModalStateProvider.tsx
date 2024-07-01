@@ -1,5 +1,3 @@
-"use client";
-
 import { createContext, ReactNode, SetStateAction, useCallback, useMemo, useState } from "react";
 import { useViewport } from "@/hooks/viewport";
 

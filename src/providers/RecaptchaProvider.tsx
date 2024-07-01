@@ -1,5 +1,3 @@
-"use client";
-
 import { createContext, createRef, forwardRef, ReactNode, useCallback, useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import * as Sentry from "@sentry/nextjs";

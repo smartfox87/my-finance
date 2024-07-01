@@ -1,7 +1,7 @@
 import "@/assets/styles/globals.css";
 import { i18nConfig } from "../../../i18nConfig";
 import { dir } from "i18next";
-import Providers from "./providers";
+import { Providers } from "./providers";
 import { initTranslations } from "@/i18n";
 import type { Metadata, Viewport } from "next";
 import { type Locale } from "@/types/locales";
@@ -74,12 +74,14 @@ export function generateStaticParams() {
 }
 
 export default async function LocaleLayout({ children, params: { locale } }: { children: ReactNode; params: { locale: Locale } }) {
-  await initTranslations({ locale });
+  const { resources } = await initTranslations({ locale });
+  console.log("8888888888888888888888888", locale);
   return (
     <html lang={locale} dir={dir(locale)} className="flex min-h-screen flex-col">
       <body className="flex w-full grow flex-col dark:bg-dark">
         {/*<SpeedInsights />*/}
-        <Providers locale={locale}>{children}</Providers>
+        {/*<Providers>{children}</Providers>*/}
+        <Providers i18nResources={resources}>{children}</Providers>
       </body>
     </html>
   );
