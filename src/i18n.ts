@@ -40,7 +40,6 @@ export async function initTranslations({ locale, namespaces = allI18nNamespaces,
     defaultNS: namespaces[0],
     fallbackNS: namespaces[0],
     ns: namespaces,
-    preload: resources ? [] : i18nConfig.locales,
   });
 
   i18nRef.t = instance.t;
