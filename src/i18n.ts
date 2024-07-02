@@ -26,7 +26,6 @@ interface Result {
 export const i18nRef: I18nRef = {};
 
 export async function initTranslations({ locale, namespaces = allI18nNamespaces, i18nInstance, resources }: Props): Promise<Result> {
-  console.log("11111111111111111111111111111", locale, namespaces, !!i18nInstance, !!resources);
   const instance = i18nInstance || createInstance();
   instance.use(initReactI18next);
 

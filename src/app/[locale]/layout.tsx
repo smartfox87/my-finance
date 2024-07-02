@@ -75,7 +75,6 @@ export function generateStaticParams() {
 
 export default async function LocaleLayout({ children, params: { locale } }: { children: ReactNode; params: { locale: Locale } }) {
   const { resources } = await initTranslations({ locale });
-  console.log("8888888888888888888888888", locale);
   return (
     <html lang={locale} dir={dir(locale)} className="flex min-h-screen flex-col">
       <body className="flex w-full grow flex-col dark:bg-dark">
