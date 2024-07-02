@@ -51,7 +51,7 @@ export default function MainLayout({ children }: { children: ReactNode }) {
     <>
       <Header />
       <main className="container flex grow">
-        <MainNav />
+        <MainNav className="container hidden !w-auto !pl-0 lg:block" />
         <div className="relative flex min-w-0 grow flex-col py-4 md:py-6 lg:ml-6">{children}</div>
       </main>
       <div className="sticky bottom-0 z-30 bg-white dark:bg-dark">{["sm", "xs", "xxs"].includes(viewport) && <MobileNav />}</div>

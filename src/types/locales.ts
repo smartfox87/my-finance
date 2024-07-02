@@ -1,5 +1,11 @@
 import en from "antd/lib/locale/en_US";
 
+export enum I18nNamespaces {
+  COMMON = "common",
+}
+
+export type I18nNamespace = `${I18nNamespaces}`;
+
 export enum Locales {
   EN = "en",
   DE = "de",

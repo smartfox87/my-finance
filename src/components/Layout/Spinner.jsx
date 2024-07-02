@@ -1,3 +1,5 @@
+"use client";
+
 import { Watch } from "react-loader-spinner";
 
 export const Spinner = ({ isVisible = false, className = "" }) => {

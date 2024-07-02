@@ -1,17 +1,16 @@
 import "@/assets/styles/globals.css";
 import { i18nConfig } from "../../../i18nConfig";
 import { dir } from "i18next";
-import Providers from "./providers";
-import initTranslations from "@/i18n";
+import { Providers } from "./providers";
+import { initTranslations } from "@/i18n";
 import type { Metadata, Viewport } from "next";
 import { type Locale } from "@/types/locales";
-import { Namespaces } from "@/types/i18n";
 import { ReactNode } from "react";
 // todo speed-insights
 // import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: Locale } }): Promise<Metadata> {
-  const { t } = await initTranslations(locale, i18nNamespaces);
+  const { t } = await initTranslations({ locale });
   const APP_NAME = t("seo.app_name");
   const APP_TITLE_TEMPLATE = `%s - ${APP_NAME}`;
   const APP_DEFAULT_TITLE = t("pages.home.title");
@@ -70,22 +69,19 @@ export const viewport: Viewport = {
   themeColor: "#FFFFFF",
 };
 
-const i18nNamespaces = [Namespaces.COMMON];
-
 export function generateStaticParams() {
   return i18nConfig.locales.map((locale) => ({ locale }));
 }
 
 export default async function LocaleLayout({ children, params: { locale } }: { children: ReactNode; params: { locale: Locale } }) {
-  const { resources } = await initTranslations(locale, i18nNamespaces);
-
+  const { resources } = await initTranslations({ locale });
+  console.log("8888888888888888888888888", locale);
   return (
     <html lang={locale} dir={dir(locale)} className="flex min-h-screen flex-col">
       <body className="flex w-full grow flex-col dark:bg-dark">
         {/*<SpeedInsights />*/}
-        <Providers locale={locale} resources={resources} i18nNamespaces={i18nNamespaces}>
-          {children}
-        </Providers>
+        {/*<Providers>{children}</Providers>*/}
+        <Providers i18nResources={resources}>{children}</Providers>
       </body>
     </html>
   );
