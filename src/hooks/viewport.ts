@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Breakpoints, Viewport, Viewports } from "@/types/viewport.js";
+import { Breakpoints, Viewport, Viewports } from "@/types/viewport";
 
 const viewports: { name: Viewport; query: string }[] = [
   { name: Viewports.XL, query: `(min-width: ${Breakpoints["XL-MIN"]}px)` },

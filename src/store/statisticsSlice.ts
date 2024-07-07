@@ -1,7 +1,7 @@
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import { handleRejected } from "@/helpers/processExtraReducersCases";
 import { getBudgetsListForChartsApi, getCostsListForChartsApi, getIncomesListForChartsApi } from "@/api/statistics";
-import { setFilterValue } from "@/helpers/filters.js";
+import { setFilterValue } from "@/helpers/filters";
 import { getPeriodDates } from "@/helpers/date";
 import { rootReducer } from "@/store/index";
 import { StatisticsBudgetItem, StatisticsCostItem, StatisticsIncomeItem } from "@/types/statistics";

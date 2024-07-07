@@ -8,7 +8,7 @@ import { uppercaseFirstLetter } from "@/helpers/strings.js";
 import { selectCostCategoriesObject } from "@/store/selectors/references.js";
 import { useEffect, useRef, useState } from "react";
 import { isTextClamped } from "@/helpers/isTextClamped.js";
-import { useViewport } from "@/hooks/viewport.js";
+import { useViewport } from "@/hooks/viewport";
 import { selectAccountsObject } from "@/store/selectors/accounts.js";
 import Link from "next/link";
 

@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { selectCostCategories } from "@/store/selectors/references.js";
-import { useViewport } from "@/hooks/viewport.js";
+import { useViewport } from "@/hooks/viewport";
 import { Button } from "antd";
 
 export const CostCategories = ({ activeCategory, onChangeCategory }) => {

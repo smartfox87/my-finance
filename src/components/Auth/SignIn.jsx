@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { INITIAL_SIGN_IN_FIELDS } from "@/constants/auth";
 import { useTranslation } from "react-i18next";
-import { useViewport } from "@/hooks/viewport.js";
+import { useViewport } from "@/hooks/viewport";
 import { useRecaptcha } from "@/hooks/recaptcha.js";
 import SvgSignIn from "@/assets/sprite/sign-in.svg";
 import { SimpleButton } from "@/components/Form/SimpleButton";

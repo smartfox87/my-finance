@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useViewport } from "@/hooks/viewport.js";
+import { useViewport } from "@/hooks/viewport";
 
 export const CalculatorResult = ({ value, onKeyDown, onChange }) => {
   const inputRef = useRef(null);

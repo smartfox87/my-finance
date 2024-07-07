@@ -2,7 +2,7 @@ import { forwardRef, LegacyRef, useCallback, useEffect, useImperativeHandle, use
 import { useTranslation } from "react-i18next";
 import { useLoading } from "@/hooks/loading.js";
 import SvgUpload from "@/assets/sprite/upload.svg";
-import { getFileSizeWithUnit } from "@/helpers/file.js";
+import { getFileSizeWithUnit } from "@/helpers/file";
 import { cutDecimals, handleFilterSelectOptions, handleKeyDownDecimalsValidation, handleKeyUpCutDecimals } from "@/helpers/fields";
 import dynamic from "next/dynamic";
 import { showErrorMessage } from "@/helpers/message";

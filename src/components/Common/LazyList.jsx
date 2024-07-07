@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Preloader } from "@/components/Layout/Preloader.jsx";
-import { useViewport } from "@/hooks/viewport.js";
+import { useViewport } from "@/hooks/viewport";
 
 let blankArray = new Array(3).fill(null);
 

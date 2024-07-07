@@ -4,7 +4,7 @@ import { selectBudgetsFilterFields, selectBudgetsFilterValues } from "@/store/se
 import { useTranslation } from "react-i18next";
 import { setBudgetsFilterValues } from "@/store/budgetsSlice";
 import { memo } from "react";
-import { checkIsClearableFilter } from "@/helpers/filters.js";
+import { checkIsClearableFilter } from "@/helpers/filters";
 import SvgCrossBold from "@/assets/sprite/cross-bold.svg";
 import { FieldIds } from "@/types/field";
 

@@ -4,7 +4,7 @@ import { selectCostCategories } from "@/store/selectors/references.js";
 import { selectCurrency } from "@/store/selectors/profile.jsx";
 import { selectAccountsList } from "@/store/selectors/accounts.js";
 import { i18nRef } from "@/i18n";
-import { FieldValues } from "@/types/field.js";
+import { FieldValues } from "@/types/field";
 
 export const selectBudgetsList = ({ budgets }) => budgets?.budgetsList || null;
 

@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import { showNotification } from "@/helpers/modals.js";
 import { memo, useRef, useState } from "react";
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
-import { useViewport } from "@/hooks/viewport.js";
+import { useViewport } from "@/hooks/viewport";
 import SvgNewIncome from "@/assets/sprite/new-income.svg";
 
 export const AddNewIncome = memo(function AddNewIncome({ isAdaptive, onSave }) {

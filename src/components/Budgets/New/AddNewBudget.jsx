@@ -10,7 +10,7 @@ import { memo, useRef, useState } from "react";
 import SvgNewBudget from "@/assets/sprite/new-budget.svg";
 
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
-import { useViewport } from "@/hooks/viewport.js";
+import { useViewport } from "@/hooks/viewport";
 
 export const AddNewBudget = memo(function AddNewBudget({ isAdaptive, onSave }) {
   const { t } = useTranslation();

@@ -4,7 +4,7 @@ import { selectStatisticsFilterFields, selectStatisticsFilterValues } from "@/st
 import { useTranslation } from "react-i18next";
 import { setStatisticsFilterValues } from "@/store/statisticsSlice";
 import { memo } from "react";
-import { checkIsClearableFilter } from "@/helpers/filters.js";
+import { checkIsClearableFilter } from "@/helpers/filters";
 import SvgCrossBold from "@/assets/sprite/cross-bold.svg";
 import { FieldIds } from "@/types/field";
 

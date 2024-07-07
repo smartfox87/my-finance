@@ -4,7 +4,7 @@ import { selectCostsFilterFields, selectCostsFilterValues } from "@/store/select
 import { useTranslation } from "react-i18next";
 import { setCostsFilterValues } from "@/store/costsSlice";
 import { memo } from "react";
-import { checkIsClearableFilter } from "@/helpers/filters.js";
+import { checkIsClearableFilter } from "@/helpers/filters";
 import SvgCrossBold from "@/assets/sprite/cross-bold.svg";
 
 export const ActiveCostsFilters = memo(function ActiveCostsFilters() {

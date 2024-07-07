@@ -2,7 +2,7 @@
 
 import { Header } from "@/components/Layout/Header/Header.jsx";
 import { MainNav } from "@/components/Layout/MainNav";
-import { useViewport } from "@/hooks/viewport.js";
+import { useViewport } from "@/hooks/viewport";
 import { ReactNode, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/store/selectors/auth.js";

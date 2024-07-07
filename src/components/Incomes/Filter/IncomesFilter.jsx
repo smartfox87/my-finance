@@ -7,9 +7,9 @@ import { handleFilterSelectOptions, renderSelectOption } from "@/helpers/fields"
 import { SideModal } from "@/components/Modals/SideModal.jsx";
 import { memo, useEffect, useState } from "react";
 import SvgFilter from "@/assets/sprite/filter.svg";
-import { useViewport } from "@/hooks/viewport.js";
+import { useViewport } from "@/hooks/viewport";
 import { PeriodField } from "@/components/Form/PeriodField";
-import { setFilterValue } from "@/helpers/filters.js";
+import { setFilterValue } from "@/helpers/filters";
 import { useFilterFocus } from "@/hooks/filterFocus.js";
 
 export const IncomesFilter = memo(function IncomesFilter({ onSave }) {

@@ -8,7 +8,7 @@ import { Logo } from "@/components/Layout/Header/Logo.jsx";
 import { memo, Suspense } from "react";
 import { selectUser } from "@/store/selectors/auth.js";
 import { MobileMenu } from "@/components/Layout/Header/MobileMenu.jsx";
-import { useViewport } from "@/hooks/viewport.js";
+import { useViewport } from "@/hooks/viewport";
 
 export const Header = memo(function Header() {
   const { viewport } = useViewport();

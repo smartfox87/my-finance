@@ -3,7 +3,7 @@ import { selectCostCategories } from "@/store/selectors/references.js";
 import { i18nRef } from "@/i18n";
 import { selectAccountsList } from "@/store/selectors/accounts.js";
 import { INITIAL_STATISTICS_FILTER_FIELDS } from "@/constants/statistics";
-import { FieldValues } from "@/types/field.js";
+import { FieldValues } from "@/types/field";
 
 export const selectCostsListForCharts = ({ statistics }) => statistics?.costsListForCharts || null;
 
