@@ -4,16 +4,18 @@ import { handleRejected } from "@/helpers/processExtraReducersCases";
 import { setFilterValue } from "@/helpers/filters.js";
 import { getPeriodDates } from "@/helpers/date";
 import { rootReducer } from "@/store";
-import { BudgetItem, BudgetItemData, BudgetsFilterValues, BudgetsList } from "@/types/budgets";
-import { FilterValues } from "@/types/filter";
+import { BudgetItem, BudgetItemData } from "@/types/budgets";
+import { FilterItem, FilterPeriodStateItem, FilterState } from "@/types/filter";
+import { FieldIds } from "@/types/field";
+import { isDatesStrings } from "@/types/date";
 
 const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
 });
 
 export interface BudgetsSliceState {
-  budgetsFilterValues: BudgetsFilterValues | null;
-  budgetsList: BudgetsList | null;
+  budgetsFilterValues: FilterState | null;
+  budgetsList: BudgetItem[] | null;
   budgetItem: BudgetItem | null;
 }
 
@@ -27,9 +29,11 @@ export const budgetsSlice = createAppSlice({
   name: "budgets",
   initialState,
   reducers: (create) => ({
-    getBudgetsListThunk: create.asyncThunk<BudgetsList, BudgetsFilterValues, { rejectValue: string }>(
+    getBudgetsListThunk: create.asyncThunk<BudgetItem[], FilterState, { rejectValue: string }>(
       async (params, { rejectWithValue }) => {
-        const { data, error } = await getBudgetsListApi(params);
+        if (!params[FieldIds.PERIOD] || !isDatesStrings(params[FieldIds.PERIOD])) throw rejectWithValue("Period is required");
+        const filter: FilterPeriodStateItem = { [FieldIds.PERIOD]: params[FieldIds.PERIOD] };
+        const { data, error } = await getBudgetsListApi(filter);
         if (error) throw rejectWithValue(error.message);
         return data;
       },
@@ -86,7 +90,7 @@ export const budgetsSlice = createAppSlice({
         },
       },
     ),
-    setBudgetsFilterValues: create.reducer<FilterValues>((state, { payload }) => {
+    setBudgetsFilterValues: create.reducer<FilterItem[]>((state, { payload }) => {
       state.budgetsFilterValues = payload.reduce((acc, field) => setFilterValue(acc, field), state.budgetsFilterValues);
     }),
     setBudgetItem: create.reducer<BudgetItem>((state, { payload }) => {

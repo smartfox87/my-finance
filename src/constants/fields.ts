@@ -1,10 +1,11 @@
 import { DateFormField, DatesPeriodFormField, FileFormField, NumberFormField, RadioButtonsFormField, SelectFormField, TextFormField } from "@/types/form";
 import { getDatesPeriod, getPeriod, periodOptions } from "@/helpers/date";
 import { PickerPeriods } from "@/types/date";
-import { ComplexFieldNames, SelectFieldOptions, FieldTypes, SimpleFieldNames, SortFieldOptions, GenderFieldOptions, SubjectFieldOptions } from "@/types/field";
+import { ComplexFieldNames, SelectFieldOptions, FieldTypes, SimpleFieldNames, SortFieldOptions, GenderFieldOptions, SubjectFieldOptions, FieldValues } from "@/types/field";
+import { FieldIds } from "@/types/field";
 
 export const SORT_FIELD: SelectFormField = {
-  id: "sort",
+  id: FieldIds.SORT,
   type: FieldTypes.SELECT,
   label: `complex.${ComplexFieldNames.SORT}.label`,
   value: "date_desc",
@@ -21,7 +22,7 @@ export const SORT_FIELD: SelectFormField = {
 };
 
 export const ACCOUNT_FIELD: SelectFormField = {
-  id: "account",
+  id: FieldIds.ACCOUNT,
   type: FieldTypes.SELECT,
   label: `complex.${ComplexFieldNames.ACCOUNT}.label`,
   value: "",
@@ -31,17 +32,17 @@ export const ACCOUNT_FIELD: SelectFormField = {
 };
 
 export const ACCOUNTS_FIELD: SelectFormField = {
-  id: "accounts",
+  id: FieldIds.ACCOUNTS,
   type: FieldTypes.SELECT,
   label: `complex.${ComplexFieldNames.ACCOUNT}.label`,
-  value: ["all"],
-  options: [{ label_translation: `complex.${ComplexFieldNames.ACCOUNT}.options.${SelectFieldOptions.ALL}`, value: "all" }],
+  value: [FieldValues.ALL],
+  options: [{ label_translation: `complex.${ComplexFieldNames.ACCOUNT}.options.${SelectFieldOptions.ALL}`, value: FieldValues.ALL }],
   showSearch: true,
   multiple: true,
 };
 
 export const CATEGORY_FIELD: SelectFormField = {
-  id: "category",
+  id: FieldIds.CATEGORY,
   type: FieldTypes.SELECT,
   label: `complex.${ComplexFieldNames.CATEGORY}.label`,
   value: "",
@@ -51,30 +52,30 @@ export const CATEGORY_FIELD: SelectFormField = {
 };
 
 export const CATEGORIES_FIELD: SelectFormField = {
-  id: "categories",
+  id: FieldIds.CATEGORIES,
   type: FieldTypes.SELECT,
   label: `complex.${ComplexFieldNames.CATEGORY}.label`,
-  value: ["all"],
-  options: [{ label_translation: `complex.${ComplexFieldNames.CATEGORY}.options.${SelectFieldOptions.ALL}`, value: "all" }],
+  value: [FieldValues.ALL],
+  options: [{ label_translation: `complex.${ComplexFieldNames.CATEGORY}.options.${SelectFieldOptions.ALL}`, value: FieldValues.ALL }],
   showSearch: true,
   multiple: true,
 };
 
 export const DATES_PERIOD_FIELD: DatesPeriodFormField = {
-  id: "period",
+  id: FieldIds.PERIOD,
   type: FieldTypes.DATES_PERIOD,
   label: `complex.${ComplexFieldNames.PERIOD}.label`,
   value: getDatesPeriod(undefined, getPeriod()),
 };
 
-export const NAME_FIELD: TextFormField = { id: "name", type: FieldTypes.TEXTAREA, label: `simple.${SimpleFieldNames.NAME}`, value: "", maxLength: 1000, required: true, focus: true };
+export const NAME_FIELD: TextFormField = { id: FieldIds.NAME, type: FieldTypes.TEXTAREA, label: `simple.${SimpleFieldNames.NAME}`, value: "", maxLength: 1000, required: true, focus: true };
 
-export const AMOUNT_FIELD: NumberFormField = { id: "amount", type: FieldTypes.NUMBER, label: `simple.${SimpleFieldNames.AMOUNT}`, label_suffix: "", value: "", required: true };
+export const AMOUNT_FIELD: NumberFormField = { id: FieldIds.AMOUNT, type: FieldTypes.NUMBER, label: `simple.${SimpleFieldNames.AMOUNT}`, label_suffix: "", value: "", required: true };
 
-export const BALANCE_FIELD: NumberFormField = { id: "balance", type: FieldTypes.NUMBER, label: `simple.${SimpleFieldNames.BALANCE}`, value: "", required: true };
+export const BALANCE_FIELD: NumberFormField = { id: FieldIds.BALANCE, type: FieldTypes.NUMBER, label: `simple.${SimpleFieldNames.BALANCE}`, value: "", required: true };
 
 export const DATE_FIELD: DateFormField = {
-  id: "date",
+  id: FieldIds.DATE,
   type: FieldTypes.DATE,
   label: `simple.${SimpleFieldNames.DATE}`,
   value: undefined,
@@ -84,7 +85,7 @@ export const DATE_FIELD: DateFormField = {
 };
 
 export const CURRENCY_FIELD: SelectFormField = {
-  id: "currency",
+  id: FieldIds.CURRENCY,
   type: FieldTypes.SELECT,
   label: `simple.${SimpleFieldNames.CURRENCY}`,
   value: "",
@@ -95,7 +96,7 @@ export const CURRENCY_FIELD: SelectFormField = {
 };
 
 export const PERIOD_FIELD: RadioButtonsFormField = {
-  id: "period",
+  id: FieldIds.PERIOD,
   type: FieldTypes.RADIO_BUTTONS,
   label: `simple.${SimpleFieldNames.PERIOD}`,
   value: "",
@@ -104,7 +105,7 @@ export const PERIOD_FIELD: RadioButtonsFormField = {
 };
 
 export const FULL_NAME_FIELD: TextFormField = {
-  id: "full_name",
+  id: FieldIds.FULL_NAME,
   type: FieldTypes.TEXT,
   label: `simple.${SimpleFieldNames.FULL_NAME}`,
   value: "",
@@ -112,7 +113,7 @@ export const FULL_NAME_FIELD: TextFormField = {
 };
 
 export const EMAIL_FIELD: TextFormField = {
-  id: "email",
+  id: FieldIds.EMAIL,
   type: FieldTypes.EMAIL,
   label: `simple.${SimpleFieldNames.EMAIL}`,
   value: "",
@@ -120,14 +121,14 @@ export const EMAIL_FIELD: TextFormField = {
 };
 
 export const BIRTHDATE_FIELD: DateFormField = {
-  id: "birthdate",
+  id: FieldIds.BIRTHDATE,
   type: FieldTypes.DATE,
   label: `simple.${SimpleFieldNames.BIRTHDATE}`,
   picker: PickerPeriods.DATE,
 };
 
 export const GENDER_FIELD: SelectFormField = {
-  id: "gender",
+  id: FieldIds.GENDER,
   type: FieldTypes.SELECT,
   label: `complex.${ComplexFieldNames.GENDER}.label`,
   value: "",
@@ -138,7 +139,7 @@ export const GENDER_FIELD: SelectFormField = {
 };
 
 export const SUBJECT_FIELD: SelectFormField = {
-  id: "subject",
+  id: FieldIds.SUBJECT,
   type: FieldTypes.SELECT,
   label: `complex.${ComplexFieldNames.SUBJECT}.label`,
   value: "",
@@ -154,7 +155,7 @@ export const SUBJECT_FIELD: SelectFormField = {
 };
 
 export const MESSAGE_FIELD: TextFormField = {
-  id: "message",
+  id: FieldIds.MESSAGE,
   type: FieldTypes.TEXTAREA,
   label: `simple.${SimpleFieldNames.MESSAGE}`,
   value: "",
@@ -162,7 +163,7 @@ export const MESSAGE_FIELD: TextFormField = {
 };
 
 export const FILES_FIELD: FileFormField = {
-  id: "files",
+  id: FieldIds.FILES,
   type: FieldTypes.FILE,
   label: `simple.${SimpleFieldNames.ATTACHMENTS}`,
   value: [],
@@ -173,7 +174,7 @@ export const FILES_FIELD: FileFormField = {
 };
 
 export const PASSWORD_FIELD: TextFormField = {
-  id: "password",
+  id: FieldIds.PASSWORD,
   type: FieldTypes.PASSWORD,
   label: `simple.${SimpleFieldNames.PASSWORD}`,
   value: "",

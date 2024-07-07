@@ -1,5 +1,3 @@
-import { DatesStrings } from "@/types/date";
-
 export interface IncomeItem {
   id: number;
   amount: number;
@@ -16,10 +14,4 @@ export interface IncomeItemData {
   account: number;
   category: number;
   name: string;
-}
-
-export type IncomesList = IncomeItem[];
-
-export interface IncomesFilterValues {
-  period: DatesStrings;
 }
