@@ -3,17 +3,12 @@ import { createAccountItemApi, getAccountsListApi, updateAccountItemApi, deleteA
 import { handleRejected } from "@/helpers/processExtraReducersCases";
 import { createAccountTypeApi, updateAccountTypeApi } from "@/api/references";
 import { RootState, rootReducer } from "@/store";
-import type { AccountItem, AccountItemData, AccountItemBalanceData } from "@/types/accounts";
+import type { AccountItem, AccountItemData, AccountItemBalanceData, AccountsSliceState } from "@/types/accounts";
 import type { AccountTypeData } from "@/types/references";
 
 const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
 });
-
-export interface AccountsSliceState {
-  accountsList: AccountItem[] | null;
-  accountItem: AccountItem | null;
-}
 
 const initialState: AccountsSliceState = {
   accountsList: null,

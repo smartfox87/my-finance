@@ -1,9 +1,11 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { selectCurrency } from "@/store/selectors/profile.jsx";
+import { selectCurrency } from "@/store/selectors/profile";
 import { INITIAL_ACCOUNT_FIELDS } from "@/constants/accounts";
-import { selectAccountTypesObject } from "@/store/selectors/references.js";
+import { selectAccountTypesObject } from "@/store/selectors/references";
+import { LazyLoadedSlices } from "@/store";
+import { AccountItem } from "@/types/accounts";
 
-export const selectAccounts = ({ accounts }) => accounts?.accountsList || null;
+export const selectAccounts = ({ accounts }: LazyLoadedSlices): AccountItem[] | null => accounts?.accountsList || null;
 
 export const selectAccountsList = createSelector(
   [selectAccounts, selectAccountTypesObject],

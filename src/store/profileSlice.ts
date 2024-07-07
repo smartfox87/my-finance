@@ -2,17 +2,13 @@ import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/to
 import { getProfileApi, updateProfileApi } from "@/api/profile";
 import { handleRejected } from "@/helpers/processExtraReducersCases";
 import { rootReducer } from "@/store";
-import { Profile, ProfileData } from "@/types/profile";
+import { Profile, ProfileData, ProfileSliceState } from "@/types/profile";
 
 const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
 });
 
 const setPeriod = ({ period }: Profile) => localStorage.setItem("period", period || "year");
-
-export interface ProfileSliceState {
-  profile: Profile | null;
-}
 
 const initialState: ProfileSliceState = {
   profile: null,

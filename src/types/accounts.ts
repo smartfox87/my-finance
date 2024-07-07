@@ -1,3 +1,9 @@
+import { FieldIds } from "@/types/field";
+
+export type AccountKey = FieldIds.BALANCE;
+
+export const isAccountKey = (key: string): key is AccountKey => FieldIds.BALANCE === key;
+
 export interface AccountItemBalanceData {
   accountId: number;
   increase?: number;
@@ -5,7 +11,7 @@ export interface AccountItemBalanceData {
 }
 
 export interface AccountItemBalance {
-  balance: number;
+  [FieldIds.BALANCE]: number;
 }
 
 export interface AccountItemData extends AccountItemBalance {
@@ -15,8 +21,13 @@ export interface AccountItemData extends AccountItemBalance {
 
 export interface AccountItem {
   id: number;
-  account_type_id: number;
-  balance: number;
   updated_at: string;
+  account_type_id: number;
+  [FieldIds.BALANCE]: number;
   name?: string;
+}
+
+export interface AccountsSliceState {
+  accountsList: AccountItem[] | null;
+  accountItem: AccountItem | null;
 }

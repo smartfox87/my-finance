@@ -2,17 +2,17 @@ import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/to
 import { handleRejected } from "@/helpers/processExtraReducersCases";
 import { getAccountTypesApi, getCostCategoriesApi, getCurrenciesApi, getIncomeCategoriesApi } from "@/api/references";
 import { rootReducer } from "@/store";
-import { AccountTypes, CostCategories, Currencies, IncomeCategories } from "@/types/references";
+import { AccountType, CostCategory, Currency, IncomeCategory } from "@/types/references";
 
 const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
 });
 
 export interface ReferencesSliceState {
-  costCategories: CostCategories | null;
-  accountTypes: AccountTypes | null;
-  incomeCategories: IncomeCategories | null;
-  currencies: Currencies | null;
+  costCategories: CostCategory[] | null;
+  accountTypes: AccountType[] | null;
+  incomeCategories: IncomeCategory[] | null;
+  currencies: Currency[] | null;
 }
 
 const initialState: ReferencesSliceState = {
@@ -26,7 +26,7 @@ export const referencesSlice = createAppSlice({
   name: "references",
   initialState,
   reducers: (create) => ({
-    getCostCategoriesThunk: create.asyncThunk<CostCategories, void, { rejectValue: string }>(
+    getCostCategoriesThunk: create.asyncThunk<CostCategory[], void, { rejectValue: string }>(
       async (_, { rejectWithValue }) => {
         const { data, error } = await getCostCategoriesApi();
         if (error) throw rejectWithValue(error.message);
@@ -39,7 +39,7 @@ export const referencesSlice = createAppSlice({
         },
       },
     ),
-    getAccountTypesThunk: create.asyncThunk<AccountTypes, void, { rejectValue: string }>(
+    getAccountTypesThunk: create.asyncThunk<AccountType[], void, { rejectValue: string }>(
       async (_, { rejectWithValue }) => {
         const { data, error } = await getAccountTypesApi();
         if (error) throw rejectWithValue(error.message);
@@ -52,7 +52,7 @@ export const referencesSlice = createAppSlice({
         },
       },
     ),
-    getIncomeCategoriesThunk: create.asyncThunk<IncomeCategories, void, { rejectValue: string }>(
+    getIncomeCategoriesThunk: create.asyncThunk<IncomeCategory[], void, { rejectValue: string }>(
       async (_, { rejectWithValue }) => {
         const { data, error } = await getIncomeCategoriesApi();
         if (error) throw rejectWithValue(error.message);
@@ -65,7 +65,7 @@ export const referencesSlice = createAppSlice({
         },
       },
     ),
-    getCurrenciesThunk: create.asyncThunk<Currencies, void, { rejectValue: string }>(
+    getCurrenciesThunk: create.asyncThunk<Currency[], void, { rejectValue: string }>(
       async (_, { rejectWithValue }) => {
         const { data, error } = await getCurrenciesApi();
         if (error) throw rejectWithValue(error.message);

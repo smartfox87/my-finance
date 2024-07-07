@@ -3,13 +3,13 @@ import { useTranslation } from "react-i18next";
 import { Tooltip } from "antd";
 import formatPrice from "@/helpers/formatPrice.js";
 import { useSelector } from "react-redux";
-import { selectCurrency } from "@/store/selectors/profile.jsx";
+import { selectCurrency } from "@/store/selectors/profile";
 import { uppercaseFirstLetter } from "@/helpers/strings.js";
-import { selectCostCategoriesObject } from "@/store/selectors/references.js";
+import { selectCostCategoriesObject } from "@/store/selectors/references";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { isTextClamped } from "@/helpers/isTextClamped.js";
 import { useViewport } from "@/hooks/viewport";
-import { selectAccountsObject } from "@/store/selectors/accounts.js";
+import { selectAccountsObject } from "@/store/selectors/accounts";
 import Link from "next/link";
 
 export const BudgetItem = ({ id, created_at, name, amount, accounts, categories, period: [start_date, end_date] }) => {

@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { selectProfile } from "@/store/selectors/profile.jsx";
+import { selectProfile } from "@/store/selectors/profile";
 import SvgUser from "@/assets/sprite/user.svg";
 import Link from "next/link";
 import { useViewport } from "@/hooks/viewport";
