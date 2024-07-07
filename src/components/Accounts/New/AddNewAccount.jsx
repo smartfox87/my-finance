@@ -9,7 +9,7 @@ import { showNotification } from "@/helpers/modals.js";
 import { memo, useRef, useState } from "react";
 import SvgNewAccount from "@/assets/sprite/new-account.svg";
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
-import { useViewport } from "@/hooks/viewport.js";
+import { useViewport } from "@/hooks/viewport";
 import { useAppDispatch } from "@/hooks/redux";
 
 export const AddNewAccount = memo(function AddNewAccount({ onSave }) {

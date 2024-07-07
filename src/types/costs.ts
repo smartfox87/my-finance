@@ -1,5 +1,3 @@
-import { DatesStrings } from "@/types/date";
-
 export interface CostItem {
   id: number;
   amount: number;
@@ -16,10 +14,4 @@ export interface CostItemData {
   account: number;
   category: number;
   name: string;
-}
-
-export type CostsList = CostItem[];
-
-export interface CostsFilterValues {
-  period: DatesStrings;
 }

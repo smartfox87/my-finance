@@ -6,7 +6,7 @@ import { selectCurrency } from "@/store/selectors/profile.jsx";
 import { uppercaseFirstLetter } from "@/helpers/strings.js";
 import { useEffect, useRef, useState } from "react";
 import { isTextClamped } from "@/helpers/isTextClamped.js";
-import { useViewport } from "@/hooks/viewport.js";
+import { useViewport } from "@/hooks/viewport";
 import { getFullDate } from "@/helpers/date";
 import Link from "next/link";
 

@@ -9,7 +9,7 @@ import { showNotification } from "@/helpers/modals.js";
 import { memo, useRef, useState } from "react";
 import SvgNewExpense from "@/assets/sprite/new-expense.svg";
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
-import { useViewport } from "@/hooks/viewport.js";
+import { useViewport } from "@/hooks/viewport";
 
 export const AddNewCost = memo(function AddNewCost({ isAdaptive, onSave }) {
   const { t } = useTranslation();

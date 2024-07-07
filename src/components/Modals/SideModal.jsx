@@ -1,4 +1,4 @@
-import { useViewport } from "@/hooks/viewport.js";
+import { useViewport } from "@/hooks/viewport";
 import { Preloader } from "@/components/Layout/Preloader.jsx";
 import { lazy, useEffect, useState } from "react";
 

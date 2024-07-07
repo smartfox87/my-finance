@@ -2,20 +2,22 @@ import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/to
 import { createIncomeItemApi, getIncomesListApi, updateIncomeItemApi, deleteIncomeItemApi, getIncomeItemApi } from "@/api/incomes";
 import { handleRejected } from "@/helpers/processExtraReducersCases";
 import { updateAccountBalanceThunk } from "@/store/accountsSlice";
-import { setFilterValue } from "@/helpers/filters.js";
+import { setFilterValue } from "@/helpers/filters";
 import { rootReducer } from "@/store";
-import { IncomeItem, IncomeItemData, IncomesFilterValues, IncomesList } from "@/types/incomes";
+import { IncomeItem, IncomeItemData } from "@/types/incomes";
 import { AppDispatch, RootState } from "@/store";
 import { AccountItemBalanceData } from "@/types/accounts";
-import { FilterValues } from "@/types/filter";
+import { FilterItem, FilterPeriodStateItem, FilterState } from "@/types/filter";
+import { FieldIds } from "@/types/field";
+import { isDatesStrings } from "@/types/date";
 
 const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
 });
 
 export interface IncomesSliceState {
-  incomesFilterValues: IncomesFilterValues | null;
-  incomesList: IncomesList | null;
+  incomesFilterValues: FilterState | null;
+  incomesList: IncomeItem[] | null;
   incomeItem: IncomeItem | null;
 }
 
@@ -29,9 +31,11 @@ export const incomesSlice = createAppSlice({
   name: "incomes",
   initialState,
   reducers: (create) => ({
-    getIncomesListThunk: create.asyncThunk<IncomesList, IncomesFilterValues, { rejectValue: string }>(
+    getIncomesListThunk: create.asyncThunk<IncomeItem[], FilterState, { rejectValue: string }>(
       async (params, { rejectWithValue }) => {
-        const { data, error } = await getIncomesListApi(params);
+        if (!params[FieldIds.PERIOD] || !isDatesStrings(params[FieldIds.PERIOD])) throw rejectWithValue("Period is required");
+        const filter: FilterPeriodStateItem = { [FieldIds.PERIOD]: params[FieldIds.PERIOD] };
+        const { data, error } = await getIncomesListApi(filter);
         if (error) throw rejectWithValue(error.message);
         return data;
       },
@@ -111,7 +115,7 @@ export const incomesSlice = createAppSlice({
         },
       },
     ),
-    setIncomesFilterValues: create.reducer<FilterValues>((state, { payload }) => {
+    setIncomesFilterValues: create.reducer<FilterItem[]>((state, { payload }) => {
       state.incomesFilterValues = payload.reduce((acc, field) => setFilterValue(acc, field), state.incomesFilterValues);
     }),
     setIncomeItem: create.reducer<IncomeItem>((state, { payload }) => {

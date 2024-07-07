@@ -2,15 +2,16 @@ import { supabase } from "@/api/supabase";
 import { getUserId } from "@/helpers/localStorage.js";
 import { getCurrentDate, getFromPeriodDatesForApi, getToPeriodDatesForApi } from "@/helpers/date";
 import type { BudgetItemData } from "@/types/budgets";
-import type { DatesStrings } from "@/types/date";
+import { FilterPeriodStateItem } from "@/types/filter";
+import { FieldIds } from "@/types/field";
 
-export const getBudgetsListApi = ({ period }: { period: DatesStrings }) =>
+export const getBudgetsListApi = (filter: FilterPeriodStateItem) =>
   supabase
     .from("budgets")
     .select("created_at, id, name, amount, period, accounts:accounts(id), categories:cost_categories(id)")
     .eq("user_id", getUserId())
-    .rangeGte("period", getFromPeriodDatesForApi(period))
-    .rangeLte("period", getToPeriodDatesForApi(period));
+    .rangeGte("period", getFromPeriodDatesForApi(filter[FieldIds.PERIOD]))
+    .rangeLte("period", getToPeriodDatesForApi(filter[FieldIds.PERIOD]));
 
 export const getBudgetItemApi = (budgetId: string) =>
   supabase.from("budgets").select("id, name, amount, period, accounts:accounts(id), categories:cost_categories(id)").match({ user_id: getUserId(), id: budgetId }).single();

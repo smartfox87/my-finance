@@ -1,5 +1,8 @@
 import dictionary from "../fixtures/locales/en/common.json";
-import type { RequireAtLeastOne } from "type-fest";
+
+type AtLeastOneProp<T, K extends keyof T = keyof T> = {
+  [Key in K]: Required<Pick<T, Key>> & Partial<Omit<T, Key>>;
+}[K];
 
 export type Dictionary = typeof dictionary;
 
@@ -49,7 +52,7 @@ type AnySortItem = {
   [key in SortProp]?: string;
 };
 
-export type SortItem = RequiredSortItem & RequireAtLeastOne<AnySortItem, SortProp>;
+export type SortItem = RequiredSortItem & AtLeastOneProp<AnySortItem, SortProp>;
 
 export interface SelectedOptionData {
   label: string;

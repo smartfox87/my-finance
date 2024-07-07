@@ -1,12 +1,6 @@
-import { DatesStrings } from "@/types/date";
-
 type BudgetAccounts = { id: number }[];
 
 type CategoryAccounts = { id: number }[];
-
-export interface BudgetItemBalance {
-  balance: number;
-}
 
 export interface BudgetItemData {
   name: string;
@@ -14,10 +8,6 @@ export interface BudgetItemData {
   period: string;
   accounts: BudgetAccounts;
   categories: CategoryAccounts;
-}
-
-export interface BudgetsFilterValues {
-  period: DatesStrings;
 }
 
 export interface BudgetItem {
@@ -29,5 +19,3 @@ export interface BudgetItem {
   categories: CategoryAccounts;
   created_at?: string;
 }
-
-export type BudgetsList = BudgetItem[];

@@ -2,19 +2,21 @@ import { asyncThunkCreator, buildCreateSlice } from "@reduxjs/toolkit";
 import { createCostItemApi, getCostsListApi, updateCostItemApi, deleteCostItemApi, getCostItemApi } from "@/api/costs";
 import { handleRejected } from "@/helpers/processExtraReducersCases";
 import { updateAccountBalanceThunk } from "@/store/accountsSlice";
-import { setFilterValue } from "@/helpers/filters.js";
+import { setFilterValue } from "@/helpers/filters";
 import type { WithSlice } from "@reduxjs/toolkit";
 import { AppDispatch, rootReducer, RootState } from "@/store";
-import { CostItem, CostItemData, CostsFilterValues, CostsList } from "@/types/costs";
-import { FilterValues } from "@/types/filter";
+import { CostItem, CostItemData } from "@/types/costs";
+import { FilterItem, FilterPeriodStateItem, FilterState } from "@/types/filter";
+import { FieldIds } from "@/types/field";
+import { isDatesStrings } from "@/types/date";
 
 const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
 });
 
 export interface CostsSliceState {
-  costsFilterValues: CostsFilterValues | null;
-  costsList: CostsList | null;
+  costsFilterValues: FilterState | null;
+  costsList: CostItem[] | null;
   costItem: CostItem | null;
 }
 
@@ -28,9 +30,11 @@ export const costsSlice = createAppSlice({
   name: "costs",
   initialState,
   reducers: (create) => ({
-    getCostsListThunk: create.asyncThunk<CostsList, CostsFilterValues, { rejectValue: string }>(
+    getCostsListThunk: create.asyncThunk<CostItem[], FilterState, { rejectValue: string }>(
       async (params, { rejectWithValue }) => {
-        const { data, error } = await getCostsListApi(params);
+        if (!params[FieldIds.PERIOD] || !isDatesStrings(params[FieldIds.PERIOD])) throw rejectWithValue("Period is required");
+        const filter: FilterPeriodStateItem = { [FieldIds.PERIOD]: params[FieldIds.PERIOD] };
+        const { data, error } = await getCostsListApi(filter);
         if (error) throw rejectWithValue(error.message);
         return data;
       },
@@ -104,7 +108,7 @@ export const costsSlice = createAppSlice({
         },
       },
     ),
-    setCostsFilterValues: create.reducer<FilterValues>((state, { payload }) => {
+    setCostsFilterValues: create.reducer<FilterItem[]>((state, { payload }) => {
       state.costsFilterValues = payload.reduce((acc, field) => setFilterValue(acc, field), state.costsFilterValues);
     }),
     setCostItem: create.reducer<CostItem>((state, { payload }) => {

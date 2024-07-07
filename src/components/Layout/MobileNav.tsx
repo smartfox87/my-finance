@@ -1,6 +1,6 @@
-import { INIT_NAV_LIST } from "@/constants/navigation.jsx";
+import { INIT_NAV_LIST } from "@/constants/navigation";
 import { useTranslation } from "react-i18next";
-import { useViewport } from "@/hooks/viewport.js";
+import { useViewport } from "@/hooks/viewport";
 import { memo, useMemo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";

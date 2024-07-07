@@ -4,7 +4,7 @@ import { selectIncomesFilterFields, selectIncomesFilterValues } from "@/store/se
 import { useTranslation } from "react-i18next";
 import { setIncomesFilterValues } from "@/store/incomesSlice";
 import { memo } from "react";
-import { checkIsClearableFilter } from "@/helpers/filters.js";
+import { checkIsClearableFilter } from "@/helpers/filters";
 import SvgCrossBold from "@/assets/sprite/cross-bold.svg";
 
 export const ActiveIncomesFilters = memo(function ActiveIncomesFilters() {

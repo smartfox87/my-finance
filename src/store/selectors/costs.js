@@ -4,6 +4,7 @@ import { selectCostCategories } from "@/store/selectors/references.js";
 import { selectCurrency } from "@/store/selectors/profile.jsx";
 import { i18nRef } from "@/i18n";
 import { selectAccountsList } from "@/store/selectors/accounts.js";
+import { FieldValues } from "@/types/field";
 
 export const selectCostsList = ({ costs }) => costs?.costsList || null;
 
@@ -11,9 +12,9 @@ export const selectCostItem = ({ costs }) => costs?.costItem || null;
 
 export const selectCostsFilterValues = ({ costs }) => costs?.costsFilterValues || null;
 
-const checkCategoryCondition = (filterCategory, costCategoryId) => filterCategory.includes(costCategoryId) || filterCategory.includes("all");
+const checkCategoryCondition = (filterCategory, costCategoryId) => filterCategory.includes(costCategoryId) || filterCategory.includes(FieldValues.ALL);
 const checkPeriodCondition = ([fromDate, toDate], date) => date >= fromDate && date <= toDate;
-const checkAccountCondition = (filterAccount, incomeAccountId) => filterAccount.includes(incomeAccountId) || filterAccount.includes("all");
+const checkAccountCondition = (filterAccount, incomeAccountId) => filterAccount.includes(incomeAccountId) || filterAccount.includes(FieldValues.ALL);
 export const selectCostsByFilter = createSelector(
   [selectCostsList, selectCostsFilterValues],
   (allCosts, costsFilterValues) =>

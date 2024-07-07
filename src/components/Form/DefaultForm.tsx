@@ -2,7 +2,7 @@ import { forwardRef, LegacyRef, useCallback, useEffect, useImperativeHandle, use
 import { useTranslation } from "react-i18next";
 import { useLoading } from "@/hooks/loading.js";
 import SvgUpload from "@/assets/sprite/upload.svg";
-import { getFileSizeWithUnit } from "@/helpers/file.js";
+import { getFileSizeWithUnit } from "@/helpers/file";
 import { cutDecimals, handleFilterSelectOptions, handleKeyDownDecimalsValidation, handleKeyUpCutDecimals } from "@/helpers/fields";
 import dynamic from "next/dynamic";
 import { showErrorMessage } from "@/helpers/message";
@@ -10,7 +10,7 @@ import { isStringArray, isUploadFileArray } from "@/types/predicates";
 import { ChangedField, DefaultFormProps, FormItemRule, FormValues, SelectValue } from "@/types/form";
 import { Button, type DatePickerProps, Form, FormProps, Input, InputRef, SelectProps, type UploadFile } from "antd";
 import dayjs, { isDayjs } from "dayjs";
-import { FieldTranslationError, FieldType, FieldTypes } from "@/types/field";
+import { FieldTranslationError, FieldType, FieldTypes, FieldValues } from "@/types/field";
 
 const PeriodComponent = dynamic(() => import("@/components/Form/PeriodField").then((mod) => mod.PeriodField));
 const DatePickerComponent = dynamic<DatePickerProps>(() => import("antd/es/date-picker"));
@@ -52,8 +52,8 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
     ({ id, value, type }: ChangedField): void => {
       const currentFieldValue = currentFieldsValues[id];
       if (type === FieldTypes.SELECT && isStringArray(value) && isStringArray(currentFieldValue)) {
-        if (!value?.length || (!currentFieldValue.includes("all") && value.includes("all"))) form.setFieldsValue({ [id]: ["all"] });
-        else form.setFieldsValue({ [id]: value.filter((val) => val !== "all") });
+        if (!value?.length || (!currentFieldValue.includes(FieldValues.ALL) && value.includes(FieldValues.ALL))) form.setFieldsValue({ [id]: [FieldValues.ALL] });
+        else form.setFieldsValue({ [id]: value.filter((val) => val !== FieldValues.ALL) });
       } else form.setFieldsValue({ [id]: value });
       setCurrentFieldsValues(form.getFieldsValue(true));
       if (typeof onChange === "function") onChange();
@@ -75,7 +75,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
       const processedValues = Object.entries(values).reduce((acc: FormValues, [key, value]) => {
         if (isUploadFileArray(value)) acc[key] = value.map(({ originFileObj }) => originFileObj);
         else if (isDayjs(value)) acc[key] = value.format("YYYY-MM-DD");
-        else if (isStringArray(value)) acc[key] = value.filter((val) => val !== "all");
+        else if (isStringArray(value)) acc[key] = value.filter((val) => val !== FieldValues.ALL);
         else acc[key] = value;
         return acc;
       }, {});

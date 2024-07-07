@@ -1,21 +1,23 @@
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import { handleRejected } from "@/helpers/processExtraReducersCases";
 import { getBudgetsListForChartsApi, getCostsListForChartsApi, getIncomesListForChartsApi } from "@/api/statistics";
-import { setFilterValue } from "@/helpers/filters.js";
+import { setFilterValue } from "@/helpers/filters";
 import { getPeriodDates } from "@/helpers/date";
 import { rootReducer } from "@/store/index";
-import { StatisticsBudgetsList, StatisticsCostsList, StatisticsFilterValues, StatisticsIncomesList } from "@/types/statistics";
-import { FilterValues } from "@/types/filter";
+import { StatisticsBudgetItem, StatisticsCostItem, StatisticsIncomeItem } from "@/types/statistics";
+import { FilterItem, FilterPeriodStateItem, FilterState } from "@/types/filter";
+import { FieldIds } from "@/types/field";
+import { isDatesStrings } from "@/types/date";
 
 const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
 });
 
 export interface StatisticsSliceState {
-  statisticsFilterValues: StatisticsFilterValues | null;
-  costsListForCharts: StatisticsCostsList | null;
-  incomesListForCharts: StatisticsIncomesList | null;
-  budgetsListForCharts: StatisticsBudgetsList | null;
+  statisticsFilterValues: FilterState | null;
+  costsListForCharts: StatisticsCostItem[] | null;
+  incomesListForCharts: StatisticsIncomeItem[] | null;
+  budgetsListForCharts: StatisticsBudgetItem[] | null;
 }
 
 const initialState: StatisticsSliceState = {
@@ -29,9 +31,11 @@ export const statisticsSlice = createAppSlice({
   name: "statistics",
   initialState,
   reducers: (create) => ({
-    getCostsListForChartsThunk: create.asyncThunk<StatisticsCostsList, StatisticsFilterValues, { rejectValue: string }>(
+    getCostsListForChartsThunk: create.asyncThunk<StatisticsCostItem[], FilterState, { rejectValue: string }>(
       async (params, { rejectWithValue }) => {
-        const { data, error } = await getCostsListForChartsApi(params);
+        if (!params[FieldIds.PERIOD] || !isDatesStrings(params[FieldIds.PERIOD])) throw rejectWithValue("Period is required");
+        const filter: FilterPeriodStateItem = { [FieldIds.PERIOD]: params[FieldIds.PERIOD] };
+        const { data, error } = await getCostsListForChartsApi(filter);
         if (error) return rejectWithValue(error.message);
         return data;
       },
@@ -42,9 +46,11 @@ export const statisticsSlice = createAppSlice({
         },
       },
     ),
-    getIncomesListForChartsThunk: create.asyncThunk<StatisticsIncomesList, StatisticsFilterValues, { rejectValue: string }>(
+    getIncomesListForChartsThunk: create.asyncThunk<StatisticsIncomeItem[], FilterState, { rejectValue: string }>(
       async (params, { rejectWithValue }) => {
-        const { data, error } = await getIncomesListForChartsApi(params);
+        if (!params[FieldIds.PERIOD] || !isDatesStrings(params[FieldIds.PERIOD])) throw rejectWithValue("Period is required");
+        const filter: FilterPeriodStateItem = { [FieldIds.PERIOD]: params[FieldIds.PERIOD] };
+        const { data, error } = await getIncomesListForChartsApi(filter);
         if (error) return rejectWithValue(error.message);
         return data;
       },
@@ -55,9 +61,11 @@ export const statisticsSlice = createAppSlice({
         },
       },
     ),
-    getBudgetsListForChartsThunk: create.asyncThunk<StatisticsBudgetsList, StatisticsFilterValues, { rejectValue: string }>(
+    getBudgetsListForChartsThunk: create.asyncThunk<StatisticsBudgetItem[], FilterState, { rejectValue: string }>(
       async (params, { rejectWithValue }) => {
-        const { data, error } = await getBudgetsListForChartsApi(params);
+        if (!params[FieldIds.PERIOD] || !isDatesStrings(params[FieldIds.PERIOD])) throw rejectWithValue("Period is required");
+        const filter: FilterPeriodStateItem = { [FieldIds.PERIOD]: params[FieldIds.PERIOD] };
+        const { data, error } = await getBudgetsListForChartsApi(filter);
         if (error) return rejectWithValue(error.message);
         return data;
       },
@@ -68,7 +76,7 @@ export const statisticsSlice = createAppSlice({
         },
       },
     ),
-    setStatisticsFilterValues: create.reducer<FilterValues>((state, { payload }) => {
+    setStatisticsFilterValues: create.reducer<FilterItem[]>((state, { payload }) => {
       state.statisticsFilterValues = payload.reduce((acc, field) => setFilterValue(acc, field), state.statisticsFilterValues);
     }),
   }),

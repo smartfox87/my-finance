@@ -4,8 +4,9 @@ import { selectStatisticsFilterFields, selectStatisticsFilterValues } from "@/st
 import { useTranslation } from "react-i18next";
 import { setStatisticsFilterValues } from "@/store/statisticsSlice";
 import { memo } from "react";
-import { checkIsClearableFilter } from "@/helpers/filters.js";
+import { checkIsClearableFilter } from "@/helpers/filters";
 import SvgCrossBold from "@/assets/sprite/cross-bold.svg";
+import { FieldIds } from "@/types/field";
 
 export const ActiveStatisticsFilters = memo(function ActiveStatisticsFilters() {
   const { t } = useTranslation();
@@ -15,7 +16,7 @@ export const ActiveStatisticsFilters = memo(function ActiveStatisticsFilters() {
   const statisticsFilterValues = useSelector(selectStatisticsFilterValues);
 
   const activeFilters = statisticsFilterFields.reduce((acc, { id, label, optionsObject }) => {
-    if (id === "period")
+    if (id === FieldIds.PERIOD)
       acc.push({
         id,
         label: t(`fields.${label}`),

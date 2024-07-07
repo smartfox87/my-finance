@@ -1,7 +1,7 @@
 import { INITIAL_SIGN_UP_FIELDS } from "@/constants/auth";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { useViewport } from "@/hooks/viewport.js";
+import { useViewport } from "@/hooks/viewport";
 import { useRecaptcha } from "@/hooks/recaptcha.js";
 import SvgSignUp from "@/assets/sprite/sign-up.svg";
 import { SimpleButton } from "@/components/Form/SimpleButton";

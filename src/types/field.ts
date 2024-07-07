@@ -1,5 +1,28 @@
 import { DatesPeriods } from "@/types/date";
 
+export enum FieldIds {
+  SORT = "sort",
+  PERIOD = "period",
+  ACCOUNT = "account",
+  ACCOUNTS = "accounts",
+  CATEGORY = "category",
+  CATEGORIES = "categories",
+  NAME = "name",
+  AMOUNT = "amount",
+  BALANCE = "balance",
+  DATE = "date",
+  CURRENCY = "currency",
+  FULL_NAME = "full_name",
+  EMAIL = "email",
+  BIRTHDATE = "birthdate",
+  GENDER = "gender",
+  SUBJECT = "subject",
+  MESSAGE = "message",
+  FILES = "files",
+  PASSWORD = "password",
+}
+export type FieldId = `${FieldIds}`;
+
 export enum FieldTypes {
   TEXT = "text",
   PASSWORD = "password",
@@ -11,6 +34,10 @@ export enum FieldTypes {
   RADIO_BUTTONS = "radio-buttons",
   FILE = "file",
   DATE = "date",
+}
+
+export enum FieldValues {
+  ALL = "all",
 }
 
 export type FieldType = `${FieldTypes}`;

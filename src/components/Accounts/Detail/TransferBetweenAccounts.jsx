@@ -9,7 +9,7 @@ import { useLoading } from "@/hooks/loading.js";
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
 import { handleFilterSelectOptions } from "@/helpers/fields";
 import { Button, Form, InputNumber, Select } from "antd";
-import { useViewport } from "@/hooks/viewport.js";
+import { useViewport } from "@/hooks/viewport";
 import SvgTransfer from "@/assets/sprite/transfer.svg";
 import { useAppDispatch } from "@/hooks/redux";
 
