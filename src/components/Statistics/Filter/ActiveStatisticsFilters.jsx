@@ -1,6 +1,6 @@
 import { Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { selectStatisticsFilterFields, selectStatisticsFilterValues } from "@/store/selectors/statistics.js";
+import { selectStatisticsFilterFields, selectStatisticsFilterValues } from "@/store/selectors/statistics";
 import { useTranslation } from "react-i18next";
 import { setStatisticsFilterValues } from "@/store/statisticsSlice";
 import { memo } from "react";

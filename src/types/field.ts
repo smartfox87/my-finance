@@ -21,7 +21,6 @@ export enum FieldIds {
   FILES = "files",
   PASSWORD = "password",
 }
-export type FieldId = `${FieldIds}`;
 
 export enum FieldTypes {
   TEXT = "text",
@@ -30,6 +29,7 @@ export enum FieldTypes {
   NUMBER = "number",
   TEXTAREA = "textarea",
   SELECT = "select",
+  MULTISELECT = "multiselect",
   DATES_PERIOD = "period",
   RADIO_BUTTONS = "radio-buttons",
   FILE = "file",
@@ -39,6 +39,18 @@ export enum FieldTypes {
 export enum FieldValues {
   ALL = "all",
 }
+
+export type MultiSelectOptionValue = number | FieldValues.ALL;
+
+export type MultiSelectValue = MultiSelectOptionValue[];
+
+export type SingleSelectValue = number | string;
+
+type ConditionalSelectValue<T> = T extends { mode: "multiple" } ? MultiSelectValue : SingleSelectValue;
+
+export type SelectComponentProps<T> = T & { value?: ConditionalSelectValue<T> };
+
+export type SelectValue = SingleSelectValue | MultiSelectValue;
 
 export type FieldType = `${FieldTypes}`;
 
@@ -91,6 +103,11 @@ export enum SubjectFieldOptions {
 
 export enum SelectFieldOptions {
   ALL = "all",
+}
+
+export interface SelectFieldOption {
+  label: string;
+  value: number | string;
 }
 
 export type FieldTranslationLabel = `simple.${SimpleFieldNames}` | `complex.${ComplexFieldNames}.label`;

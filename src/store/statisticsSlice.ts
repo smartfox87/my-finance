@@ -4,7 +4,7 @@ import { getBudgetsListForChartsApi, getCostsListForChartsApi, getIncomesListFor
 import { setFilterValue } from "@/helpers/filters";
 import { getPeriodDates } from "@/helpers/date";
 import { rootReducer } from "@/store/index";
-import { StatisticsBudgetItem, StatisticsCostItem, StatisticsIncomeItem } from "@/types/statistics";
+import { ProcessedStatisticsBudgetItem, StatisticsBudgetItem, StatisticsCostItem, StatisticsIncomeItem } from "@/types/statistics";
 import { FilterItem, FilterPeriodStateItem, FilterState } from "@/types/filter";
 import { FieldIds } from "@/types/field";
 import { isDatesStrings } from "@/types/date";
@@ -17,7 +17,7 @@ export interface StatisticsSliceState {
   statisticsFilterValues: FilterState | null;
   costsListForCharts: StatisticsCostItem[] | null;
   incomesListForCharts: StatisticsIncomeItem[] | null;
-  budgetsListForCharts: StatisticsBudgetItem[] | null;
+  budgetsListForCharts: ProcessedStatisticsBudgetItem[] | null;
 }
 
 const initialState: StatisticsSliceState = {
@@ -33,7 +33,7 @@ export const statisticsSlice = createAppSlice({
   reducers: (create) => ({
     getCostsListForChartsThunk: create.asyncThunk<StatisticsCostItem[], FilterState, { rejectValue: string }>(
       async (params, { rejectWithValue }) => {
-        if (!params[FieldIds.PERIOD] || !isDatesStrings(params[FieldIds.PERIOD])) throw rejectWithValue("Period is required");
+        if (!(FieldIds.PERIOD in params) || !isDatesStrings(params[FieldIds.PERIOD])) throw rejectWithValue("Period is required");
         const filter: FilterPeriodStateItem = { [FieldIds.PERIOD]: params[FieldIds.PERIOD] };
         const { data, error } = await getCostsListForChartsApi(filter);
         if (error) return rejectWithValue(error.message);
@@ -48,7 +48,7 @@ export const statisticsSlice = createAppSlice({
     ),
     getIncomesListForChartsThunk: create.asyncThunk<StatisticsIncomeItem[], FilterState, { rejectValue: string }>(
       async (params, { rejectWithValue }) => {
-        if (!params[FieldIds.PERIOD] || !isDatesStrings(params[FieldIds.PERIOD])) throw rejectWithValue("Period is required");
+        if (!(FieldIds.PERIOD in params) || !isDatesStrings(params[FieldIds.PERIOD])) throw rejectWithValue("Period is required");
         const filter: FilterPeriodStateItem = { [FieldIds.PERIOD]: params[FieldIds.PERIOD] };
         const { data, error } = await getIncomesListForChartsApi(filter);
         if (error) return rejectWithValue(error.message);
@@ -63,7 +63,7 @@ export const statisticsSlice = createAppSlice({
     ),
     getBudgetsListForChartsThunk: create.asyncThunk<StatisticsBudgetItem[], FilterState, { rejectValue: string }>(
       async (params, { rejectWithValue }) => {
-        if (!params[FieldIds.PERIOD] || !isDatesStrings(params[FieldIds.PERIOD])) throw rejectWithValue("Period is required");
+        if (!(FieldIds.PERIOD in params) || !isDatesStrings(params[FieldIds.PERIOD])) throw rejectWithValue("Period is required");
         const filter: FilterPeriodStateItem = { [FieldIds.PERIOD]: params[FieldIds.PERIOD] };
         const { data, error } = await getBudgetsListForChartsApi(filter);
         if (error) return rejectWithValue(error.message);
