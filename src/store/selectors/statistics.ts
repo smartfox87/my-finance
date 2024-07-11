@@ -17,9 +17,9 @@ export const selectIncomesListForCharts = ({ statistics }: LazyLoadedSlices) => 
 
 export const selectStatisticsFilterValues = ({ statistics }: LazyLoadedSlices) => statistics?.statisticsFilterValues || null;
 
-const checkCategoryCondition = (filterCategory: (number | FieldValues.ALL)[], costCategoryId: number): boolean => filterCategory.includes(costCategoryId) || filterCategory.includes(FieldValues.ALL);
+const checkCategoryCondition = (filterCategory: MultiSelectValue, costCategoryId: number): boolean => filterCategory.includes(costCategoryId) || filterCategory.includes(FieldValues.ALL);
 const checkPeriodCondition = ([fromDate, toDate]: DatesStrings, date: string): boolean => date >= fromDate && date <= toDate;
-const checkAccountCondition = (filterAccount: (number | FieldValues.ALL)[], incomeAccountId: number): boolean => filterAccount.includes(incomeAccountId) || filterAccount.includes(FieldValues.ALL);
+const checkAccountCondition = (filterAccount: MultiSelectValue, incomeAccountId: number): boolean => filterAccount.includes(incomeAccountId) || filterAccount.includes(FieldValues.ALL);
 export const selectCostsListForChartsByFilter = createSelector([selectCostsListForCharts, selectStatisticsFilterValues], (costs, statisticsFilterValues) =>
   costs && statisticsFilterValues
     ? costs

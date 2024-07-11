@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setCostsFilterValues } from "@/store/costsSlice";
-import { selectCostsFilterFields, selectCostsFilterValues } from "@/store/selectors/costs.js";
+import { selectCostsFilterFields, selectCostsFilterValues } from "@/store/selectors/costs";
 import { useTranslation } from "react-i18next";
 import { Select, Button } from "antd";
 import { handleFilterSelectOptions, renderSelectOption } from "@/helpers/fields";

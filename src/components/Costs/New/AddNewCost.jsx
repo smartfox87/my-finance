@@ -2,7 +2,7 @@ import { Button } from "antd";
 import { SideModal } from "@/components/Modals/SideModal.jsx";
 import { DefaultForm } from "@/components/Form/DefaultForm.tsx";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCostFields } from "@/store/selectors/costs.js";
+import { selectCostFields } from "@/store/selectors/costs";
 import { createCostItemThunk } from "@/store/costsSlice";
 import { useTranslation } from "react-i18next";
 import { showNotification } from "@/helpers/modals.js";

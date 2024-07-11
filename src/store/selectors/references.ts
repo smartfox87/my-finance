@@ -11,6 +11,7 @@ export const selectIncomeCategoriesObject = createSelector([selectIncomeCategori
 
 export const selectCostCategoriesObject = createSelector([selectCostCategories], (costCategories) => costCategories?.reduce((acc, { id, name }) => ({ ...acc, [id]: name }), {}));
 
+// notice: convert array to object with saving types
 export const selectAccountTypesObject = createSelector([selectAccountTypes], (accountTypes) =>
   accountTypes ? Object.assign({}, ...accountTypes.map(({ id, user_id, name, general_name }) => ({ [id]: { name: name || general_name, user_id } }))) : null,
 );

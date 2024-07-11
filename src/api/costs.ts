@@ -10,7 +10,7 @@ export const getCostsListApi = (filter: FilterPeriodStateItem) => {
   return supabase.from("costs").select("created_at, id, name, amount, date, category, account").eq("user_id", getUserId()).gte("date", from).lte("date", to);
 };
 
-export const getCostItemApi = (costId: string) => supabase.from("costs").select("id, name, amount, date, category, account").match({ user_id: getUserId(), id: costId }).single();
+export const getCostItemApi = (costId: string) => supabase.from("costs").select("created_at, id, name, amount, date, category, account").match({ user_id: getUserId(), id: costId }).single();
 
 export const createCostItemApi = (costData: CostItemData) =>
   supabase
@@ -27,5 +27,5 @@ export const updateCostItemApi = ({ costId, costData }: { costId: number; costDa
     .from("costs")
     .update({ ...costData, updated_at: getCurrentDate() })
     .match({ user_id: getUserId(), id: costId })
-    .select("id, name, amount, date, category, account")
+    .select("created_at, id, name, amount, date, category, account")
     .single();

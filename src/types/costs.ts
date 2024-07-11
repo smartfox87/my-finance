@@ -5,7 +5,7 @@ export interface CostItem {
   account: number;
   category: number;
   name: string;
-  created_at?: string;
+  created_at: string;
 }
 
 export interface CostItemData {

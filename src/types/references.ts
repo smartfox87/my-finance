@@ -1,17 +1,17 @@
 export interface CostCategory {
-  id: string;
+  id: number;
   name: string;
 }
 
 export interface AccountType {
-  id: string;
+  id: number;
   user_id: string;
   name: string;
   general_name?: string;
 }
 
 export interface AccountTypesObject {
-  id: string;
+  id: number;
   user_id: string;
   name: string;
   general_name?: string;
@@ -22,7 +22,7 @@ export interface AccountTypeData {
 }
 
 export interface IncomeCategory {
-  id: string;
+  id: number;
   user_id: string;
   name: string;
 }
@@ -32,7 +32,7 @@ export interface IncomeCategoryData {
 }
 
 export interface Currency {
-  id: string;
+  id: number;
   name: string;
   code: string;
   symbol: string;

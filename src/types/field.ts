@@ -44,13 +44,17 @@ export type MultiSelectOptionValue = number | FieldValues.ALL;
 
 export type MultiSelectValue = MultiSelectOptionValue[];
 
+export interface MultiSelectOption {
+  value: MultiSelectOptionValue;
+  label?: string;
+  label_translation?: FieldTranslationSelectOption;
+}
+
 export type SingleSelectValue = number | string;
 
 type ConditionalSelectValue<T> = T extends { mode: "multiple" } ? MultiSelectValue : SingleSelectValue;
 
 export type SelectComponentProps<T> = T & { value?: ConditionalSelectValue<T> };
-
-export type SelectValue = SingleSelectValue | MultiSelectValue;
 
 export type FieldType = `${FieldTypes}`;
 

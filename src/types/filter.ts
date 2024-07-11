@@ -17,11 +17,11 @@ export interface FilterPeriodStateItem {
 }
 
 export interface FilterState extends Partial<FilterPeriodStateItem> {
+  [FieldIds.SORT]: string;
   [FieldIds.CATEGORY]?: MultiSelectValue;
   [FieldIds.CATEGORIES]?: MultiSelectValue;
   [FieldIds.ACCOUNT]?: MultiSelectValue;
   [FieldIds.ACCOUNTS]?: MultiSelectValue;
-  [FieldIds.SORT]?: string;
 }
 
 export type FilterStateKey = keyof FilterState;
