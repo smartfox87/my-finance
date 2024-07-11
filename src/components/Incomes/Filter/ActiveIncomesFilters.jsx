@@ -1,6 +1,6 @@
 import { Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { selectIncomesFilterFields, selectIncomesFilterValues } from "@/store/selectors/incomes.js";
+import { selectIncomesFilterFields, selectIncomesFilterValues } from "@/store/selectors/incomes";
 import { useTranslation } from "react-i18next";
 import { setIncomesFilterValues } from "@/store/incomesSlice";
 import { memo } from "react";

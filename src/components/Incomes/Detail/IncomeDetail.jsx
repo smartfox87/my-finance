@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { memo, useEffect, useRef, useState } from "react";
-import { selectIncomeFields, selectIncomeItem } from "@/store/selectors/incomes.js";
+import { selectIncomeFields, selectIncomeItem } from "@/store/selectors/incomes";
 import { deleteIncomeItemThunk, getIncomeItemThunk, setIncomeItem, updateIncomeItemThunk } from "@/store/incomesSlice";
 import { DefaultForm } from "@/components/Form/DefaultForm.tsx";
 import { getOnlyValuesFromData } from "@/helpers/processData.js";

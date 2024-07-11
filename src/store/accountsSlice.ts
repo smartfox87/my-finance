@@ -124,7 +124,7 @@ export const accountsSlice = createAppSlice({
         },
       },
     ),
-    setAccountItem: create.reducer<AccountItem>((state, { payload }) => {
+    setAccountItem: create.reducer<AccountItem | null>((state, { payload }) => {
       state.accountItem = payload;
     }),
   }),

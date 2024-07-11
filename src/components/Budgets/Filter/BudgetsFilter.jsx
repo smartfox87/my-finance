@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setBudgetsFilterValues } from "@/store/budgetsSlice";
-import { selectBudgetsFilterFields, selectBudgetsFilterValues } from "@/store/selectors/budgets.js";
+import { selectBudgetsFilterFields, selectBudgetsFilterValues } from "@/store/selectors/budgets";
 import { useTranslation } from "react-i18next";
 import { Select, Button } from "antd";
 import { handleFilterSelectOptions, renderSelectOption } from "@/helpers/fields";

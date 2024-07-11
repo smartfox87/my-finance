@@ -4,10 +4,11 @@ import { handleRejected } from "@/helpers/processExtraReducersCases";
 import { setFilterValue } from "@/helpers/filters";
 import { getPeriodDates } from "@/helpers/date";
 import { rootReducer } from "@/store";
-import { BudgetItem, BudgetItemData } from "@/types/budgets";
+import { BudgetItem, BudgetItemData, ProcessedBudgetItem } from "@/types/budgets";
 import { FilterItem, FilterPeriodStateItem, FilterState } from "@/types/filter";
 import { FieldIds } from "@/types/field";
 import { isDatesStrings } from "@/types/date";
+import { processBudgetItem } from "@/helpers/budgets";
 
 const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
@@ -15,8 +16,8 @@ const createAppSlice = buildCreateSlice({
 
 export interface BudgetsSliceState {
   budgetsFilterValues: FilterState | null;
-  budgetsList: BudgetItem[] | null;
-  budgetItem: BudgetItem | null;
+  budgetsList: ProcessedBudgetItem[] | null;
+  budgetItem: ProcessedBudgetItem | null;
 }
 
 const initialState: BudgetsSliceState = {
@@ -40,7 +41,7 @@ export const budgetsSlice = createAppSlice({
       {
         rejected: handleRejected,
         fulfilled: (state, { payload }) => {
-          state.budgetsList = payload.map((budget) => ({ ...budget, period: getPeriodDates(budget.period) }));
+          state.budgetsList = payload.map(processBudgetItem);
         },
       },
     ),
@@ -63,7 +64,7 @@ export const budgetsSlice = createAppSlice({
       {
         rejected: handleRejected,
         fulfilled: (state, { payload }) => {
-          state.budgetItem = { ...payload, period: getPeriodDates(payload.period) };
+          state.budgetItem = processBudgetItem(payload);
         },
       },
     ),
@@ -93,7 +94,7 @@ export const budgetsSlice = createAppSlice({
     setBudgetsFilterValues: create.reducer<FilterItem[]>((state, { payload }) => {
       state.budgetsFilterValues = payload.reduce((acc, field) => setFilterValue(acc, field), state.budgetsFilterValues);
     }),
-    setBudgetItem: create.reducer<BudgetItem>((state, { payload }) => {
+    setBudgetItem: create.reducer<ProcessedBudgetItem | null>((state, { payload }) => {
       state.budgetItem = payload;
     }),
   }),

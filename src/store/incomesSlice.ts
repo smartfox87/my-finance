@@ -118,7 +118,7 @@ export const incomesSlice = createAppSlice({
     setIncomesFilterValues: create.reducer<FilterItem[]>((state, { payload }) => {
       state.incomesFilterValues = payload.reduce((acc, field) => setFilterValue(acc, field), state.incomesFilterValues);
     }),
-    setIncomeItem: create.reducer<IncomeItem>((state, { payload }) => {
+    setIncomeItem: create.reducer<IncomeItem | null>((state, { payload }) => {
       state.incomeItem = payload;
     }),
   }),

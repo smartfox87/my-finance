@@ -14,7 +14,7 @@ export const getBudgetsListApi = (filter: FilterPeriodStateItem) =>
     .rangeLte("period", getToPeriodDatesForApi(filter[FieldIds.PERIOD]));
 
 export const getBudgetItemApi = (budgetId: string) =>
-  supabase.from("budgets").select("id, name, amount, period, accounts(id), categories:cost_categories(id)").match({ user_id: getUserId(), id: budgetId }).single();
+  supabase.from("budgets").select("created_at, id, name, amount, period, accounts(id), categories:cost_categories(id)").match({ user_id: getUserId(), id: budgetId }).single();
 
 export const createBudgetItemApi = async ({ name, amount, period, categories, accounts }: BudgetItemData) => {
   const { data, error } = await supabase.from("budgets").insert({ name, amount, period, user_id: getUserId() }).select().single();
@@ -31,7 +31,7 @@ export const updateBudgetItemApi = async ({ budgetId, budgetData: { name, amount
     .from("budgets")
     .update({ name, amount, period, updated_at: getCurrentDate() })
     .match({ user_id: getUserId(), id: budgetId })
-    .select("id, name, amount, period, accounts(id), categories:cost_categories(id)")
+    .select("created_at, id, name, amount, period, accounts(id), categories:cost_categories(id)")
     .single();
   if (!data) return { data, error };
 
