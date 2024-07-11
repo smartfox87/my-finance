@@ -2,19 +2,22 @@ import { FieldIds } from "@/types/field";
 import { DatesStrings } from "@/types/date";
 import { MultiSelectValue } from "@/types/field";
 
-type FilterValue = string | MultiSelectValue;
-
 export interface FilterPeriodItem {
   id: FieldIds.PERIOD;
   value: DatesStrings;
 }
 
-export interface FilterCommonItem {
-  id: FieldIds.CATEGORIES | FieldIds.ACCOUNTS | FieldIds.SORT;
-  value: FilterValue;
+export interface FilterSortItem {
+  id: FieldIds.SORT;
+  value: string;
 }
 
-export type FilterItem = FilterCommonItem | FilterPeriodItem;
+export interface FilterMultiItem {
+  id: FieldIds.CATEGORIES | FieldIds.ACCOUNTS;
+  value: MultiSelectValue;
+}
+
+export type FilterItem = FilterMultiItem | FilterPeriodItem | FilterSortItem;
 
 export interface FilterPeriodStateItem {
   [FieldIds.PERIOD]: DatesStrings;

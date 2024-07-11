@@ -5,7 +5,7 @@ import { INITIAL_STATISTICS_FILTER_FIELDS } from "@/constants/statistics";
 import { FieldIds } from "@/types/field";
 import { LazyLoadedSlices } from "@/store";
 import { isFilterStateKey } from "@/types/filter";
-import { checkAccountCondition, checkAccountsCondition, checkCategoriesCondition, checkCategoryCondition, checkPeriodCondition, checkPeriodsCondition } from "@/helpers/selectors";
+import { checkSingleItemCondition, checkMultiItemCondition, checkPeriodCondition, checkPeriodsCondition } from "@/helpers/selectors";
 import { getOptionsFromItemsList, getOptionsObjectFromOptions } from "@/helpers/selectors";
 
 export const selectCostsListForCharts = ({ statistics }: LazyLoadedSlices) => statistics?.costsListForCharts || null;
@@ -22,9 +22,9 @@ export const selectCostsListForChartsByFilter = createSelector([selectCostsListF
         .slice()
         .filter(
           ({ date, category, account }) =>
-            checkCategoryCondition(statisticsFilterValues[FieldIds.CATEGORIES], category) &&
+            checkSingleItemCondition(statisticsFilterValues[FieldIds.CATEGORIES], category) &&
             checkPeriodCondition(statisticsFilterValues[FieldIds.PERIOD], date) &&
-            checkAccountCondition(statisticsFilterValues[FieldIds.ACCOUNTS], account),
+            checkSingleItemCondition(statisticsFilterValues[FieldIds.ACCOUNTS], account),
         )
     : null,
 );
@@ -35,9 +35,9 @@ export const selectIncomesListForChartsByFilter = createSelector([selectIncomesL
         .slice()
         .filter(
           ({ date, category, account }) =>
-            checkCategoryCondition(statisticsFilterValues[FieldIds.CATEGORIES], category) &&
+            checkSingleItemCondition(statisticsFilterValues[FieldIds.CATEGORIES], category) &&
             checkPeriodCondition(statisticsFilterValues[FieldIds.PERIOD], date) &&
-            checkAccountCondition(statisticsFilterValues[FieldIds.ACCOUNTS], account),
+            checkSingleItemCondition(statisticsFilterValues[FieldIds.ACCOUNTS], account),
         )
     : null,
 );
@@ -48,9 +48,9 @@ export const selectBudgetsListForChartsByFilter = createSelector([selectBudgetsL
         .slice()
         .filter(
           ({ period, categories, accounts }) =>
-            checkCategoriesCondition(statisticsFilterValues[FieldIds.CATEGORIES], categories) &&
+            checkMultiItemCondition(statisticsFilterValues[FieldIds.CATEGORIES], categories) &&
             checkPeriodsCondition(statisticsFilterValues[FieldIds.PERIOD], period) &&
-            checkAccountsCondition(statisticsFilterValues[FieldIds.ACCOUNTS], accounts),
+            checkMultiItemCondition(statisticsFilterValues[FieldIds.ACCOUNTS], accounts),
         )
     : null,
 );

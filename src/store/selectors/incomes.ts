@@ -5,7 +5,7 @@ import { selectCurrency } from "@/store/selectors/profile";
 import { selectAccountsList } from "@/store/selectors/accounts";
 import { FieldIds, FieldTypes } from "@/types/field";
 import { LazyLoadedSlices } from "@/store";
-import { checkAccountCondition, checkCategoryCondition, checkPeriodCondition } from "@/helpers/selectors";
+import { checkSingleItemCondition, checkPeriodCondition } from "@/helpers/selectors";
 import { getOptionsFromItemsList, getOptionsObjectFromOptions } from "@/helpers/selectors";
 
 export const selectIncomesList = ({ incomes }: LazyLoadedSlices) => incomes?.incomesList || null;
@@ -20,9 +20,9 @@ export const selectIncomesByFilter = createSelector([selectIncomesList, selectIn
         .slice()
         .filter(
           ({ date, category, account }) =>
-            checkCategoryCondition(incomesFilterValues[FieldIds.CATEGORIES], category) &&
+            checkSingleItemCondition(incomesFilterValues[FieldIds.CATEGORIES], category) &&
             checkPeriodCondition(incomesFilterValues[FieldIds.PERIOD], date) &&
-            checkAccountCondition(incomesFilterValues[FieldIds.ACCOUNTS], account),
+            checkSingleItemCondition(incomesFilterValues[FieldIds.ACCOUNTS], account),
         )
         .sort((a, b) => {
           if (!incomesFilterValues[FieldIds.SORT]) return a.created_at.localeCompare(b.created_at);
