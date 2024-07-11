@@ -18,7 +18,7 @@ export const selectAccountsList = createSelector(
       }) || null,
 );
 
-export const selectAccountsObject = createSelector([selectAccountsList], (accountsList) => accountsList?.reduce((acc, { id, name }) => ({ ...acc, [id]: name }), {})) || null;
+export const selectAccountsObject = createSelector([selectAccountsList], (accountsList) => (accountsList ? Object.assign({}, ...accountsList.map(({ id, name }) => ({ [id]: name }))) : null));
 
 export const selectAccountItem = createSelector([({ accounts }) => accounts?.accountItem, selectAccountTypesObject], (accountItem, accountTypesObject) => {
   if (!accountItem || !accountTypesObject) return null;

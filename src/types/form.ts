@@ -2,16 +2,7 @@ import type { Dayjs } from "dayjs";
 import type { UploadFile } from "antd";
 import { DatesStrings, PickerPeriod } from "@/types/date";
 import type { RcFile } from "antd/es/upload";
-import {
-  FieldIds,
-  FieldTranslationLabel,
-  FieldTranslationRadioButtonOption,
-  FieldTranslationSelectOption,
-  FieldTypes,
-  MultiSelectOptionValue,
-  MultiSelectValue,
-  SingleSelectValue,
-} from "@/types/field";
+import { FieldIds, FieldTranslationLabel, FieldTranslationRadioButtonOption, FieldTypes, MultiSelectOptionValue, MultiSelectValue, SelectOption, SingleSelectValue } from "@/types/field";
 
 export type FormItemRule = FieldTypes.NUMBER | FieldTypes.EMAIL;
 
@@ -31,7 +22,7 @@ export interface SingleSelectFormField extends BaseFormField {
   id: SingleSelectFormFieldId;
   type: FieldTypes.SELECT;
   value: SingleSelectValue;
-  options: Array<{ option?: string; label?: string; label_translation?: FieldTranslationSelectOption; value: SingleSelectValue }>;
+  options: SelectOption<SingleSelectValue>[];
   options_prefix?: string;
   showSearch?: boolean;
 }
@@ -42,7 +33,7 @@ export interface MultiSelectFormField extends BaseFormField {
   id: MultiSelectFormFieldId;
   type: FieldTypes.MULTISELECT;
   value: MultiSelectValue;
-  options: Array<{ option?: string; label?: string; label_translation?: FieldTranslationSelectOption; value: MultiSelectOptionValue }>;
+  options: SelectOption<MultiSelectOptionValue>[];
   options_prefix?: string;
   showSearch?: boolean;
 }

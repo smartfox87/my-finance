@@ -4,10 +4,10 @@ import { selectCostCategories } from "@/store/selectors/references";
 import { selectCurrency } from "@/store/selectors/profile";
 import { i18nRef } from "@/i18n";
 import { selectAccountsList } from "@/store/selectors/accounts";
-import { FieldIds, FieldTypes, FieldValues, MultiSelectValue, SelectFieldOption } from "@/types/field";
+import { FieldIds, FieldTypes } from "@/types/field";
 import { LazyLoadedSlices } from "@/store";
-import { DatesStrings } from "@/types/date";
-import { getOptionsFromAccountsList, getOptionsFromCostCategories, getOptionsObjectFromOptions } from "@/helpers/filters";
+import { getOptionsFromItemsList, getOptionsObjectFromOptions } from "@/helpers/selectors";
+import { checkAccountCondition, checkCategoryCondition, checkPeriodCondition } from "@/helpers/selectors";
 
 export const selectCostsList = ({ costs }: LazyLoadedSlices) => costs?.costsList || null;
 
@@ -15,29 +15,24 @@ export const selectCostItem = ({ costs }: LazyLoadedSlices) => costs?.costItem |
 
 export const selectCostsFilterValues = ({ costs }: LazyLoadedSlices) => costs?.costsFilterValues || null;
 
-const checkCategoryCondition = (filterCategory: MultiSelectValue, costCategoryId: number): boolean => filterCategory.includes(costCategoryId) || filterCategory.includes(FieldValues.ALL);
-const checkPeriodCondition = ([fromDate, toDate]: DatesStrings, date: string): boolean => date >= fromDate && date <= toDate;
-const checkAccountCondition = (filterAccount: MultiSelectValue, costAccountId: number): boolean => filterAccount.includes(costAccountId) || filterAccount.includes(FieldValues.ALL);
 export const selectCostsByFilter = createSelector([selectCostsList, selectCostsFilterValues], (allCosts, costsFilterValues) =>
   costsFilterValues && allCosts
     ? allCosts
         .slice()
         .filter(
           ({ date, category, account }) =>
-            FieldIds.CATEGORIES in costsFilterValues &&
-            checkCategoryCondition(costsFilterValues[FieldIds.CATEGORIES]!, category) &&
-            FieldIds.PERIOD in costsFilterValues &&
-            checkPeriodCondition(costsFilterValues[FieldIds.PERIOD]!, date) &&
-            FieldIds.ACCOUNTS in costsFilterValues &&
-            checkAccountCondition(costsFilterValues[FieldIds.ACCOUNTS]!, account),
+            checkCategoryCondition(costsFilterValues[FieldIds.CATEGORIES], category) &&
+            checkPeriodCondition(costsFilterValues[FieldIds.PERIOD], date) &&
+            checkAccountCondition(costsFilterValues[FieldIds.ACCOUNTS], account),
         )
         .sort((a, b) => {
+          if (!costsFilterValues[FieldIds.SORT]) return a.created_at.localeCompare(b.created_at);
           const [prop, order] = costsFilterValues[FieldIds.SORT].split("_");
           const [first, second] = order === "asc" ? [a, b] : [b, a];
           let difference = 0;
-          if (prop === "amount") difference = first.amount - second.amount;
-          else if (prop === "date") difference = first.date.localeCompare(second.date);
-          else if (prop === "name") return first.name.localeCompare(second.name);
+          if (prop === FieldIds.AMOUNT) difference = first.amount - second.amount;
+          else if (prop === FieldIds.DATE) difference = first.date.localeCompare(second.date);
+          else if (prop === FieldIds.NAME) return first.name.localeCompare(second.name);
           return difference === 0 ? first.created_at.localeCompare(second.created_at) : difference;
         })
     : null,
@@ -46,11 +41,11 @@ export const selectCostsByFilter = createSelector([selectCostsList, selectCostsF
 export const selectCostsFilterFields = createSelector([selectCostCategories, selectAccountsList], (costCategories, accountsList) =>
   INITIAL_COSTS_FILTER_FIELDS.map((field) => {
     if (field.id === FieldIds.CATEGORIES && costCategories?.length) {
-      const options = field.options.concat(getOptionsFromCostCategories(costCategories));
+      const options = field.options.concat(getOptionsFromItemsList(costCategories));
       const optionsObject = getOptionsObjectFromOptions(options);
       return { ...field, optionsObject, options };
     } else if (field.id === FieldIds.ACCOUNTS && accountsList?.length) {
-      const options = field.options.concat(getOptionsFromAccountsList(accountsList));
+      const options = field.options.concat(getOptionsFromItemsList(accountsList));
       const optionsObject = getOptionsObjectFromOptions(options);
       return { ...field, optionsObject, options };
     } else if (field.type === FieldTypes.SELECT) {
@@ -67,8 +62,8 @@ export const selectCostsFilterFields = createSelector([selectCostCategories, sel
 
 export const selectCostFields = createSelector([selectCostCategories, selectAccountsList, selectCurrency], (costCategories, accountsList, currency) =>
   INITIAL_COST_FIELDS.map((field) => {
-    if (field.id === FieldIds.CATEGORY) return { ...field, options: field.options.concat(getOptionsFromCostCategories(costCategories || [])) };
-    else if (field.id === FieldIds.ACCOUNT) return { ...field, options: field.options.concat(getOptionsFromAccountsList(accountsList || [])) };
+    if (field.id === FieldIds.CATEGORY) return { ...field, options: field.options.concat(getOptionsFromItemsList(costCategories || [])) };
+    else if (field.id === FieldIds.ACCOUNT) return { ...field, options: field.options.concat(getOptionsFromItemsList(accountsList || [])) };
     else if (field.id === FieldIds.AMOUNT) return { ...field, label_suffix: currency };
     else return field;
   }),

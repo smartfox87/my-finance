@@ -1,13 +1,12 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { selectCostCategories } from "@/store/selectors/references";
-import { i18nRef } from "@/i18n";
 import { selectAccountsList } from "@/store/selectors/accounts";
 import { INITIAL_STATISTICS_FILTER_FIELDS } from "@/constants/statistics";
-import { FieldIds, FieldValues, SelectFieldOption } from "@/types/field";
+import { FieldIds } from "@/types/field";
 import { LazyLoadedSlices } from "@/store";
-import { DatesStrings, isDatesStrings } from "@/types/date";
 import { isFilterStateKey } from "@/types/filter";
-import { MultiSelectValue } from "@/types/field";
+import { checkAccountCondition, checkAccountsCondition, checkCategoriesCondition, checkCategoryCondition, checkPeriodCondition, checkPeriodsCondition } from "@/helpers/selectors";
+import { getOptionsFromItemsList, getOptionsObjectFromOptions } from "@/helpers/selectors";
 
 export const selectCostsListForCharts = ({ statistics }: LazyLoadedSlices) => statistics?.costsListForCharts || null;
 
@@ -17,22 +16,15 @@ export const selectIncomesListForCharts = ({ statistics }: LazyLoadedSlices) => 
 
 export const selectStatisticsFilterValues = ({ statistics }: LazyLoadedSlices) => statistics?.statisticsFilterValues || null;
 
-const checkCategoryCondition = (filterCategory: MultiSelectValue, costCategoryId: number): boolean => filterCategory.includes(costCategoryId) || filterCategory.includes(FieldValues.ALL);
-const checkPeriodCondition = ([fromDate, toDate]: DatesStrings, date: string): boolean => date >= fromDate && date <= toDate;
-const checkAccountCondition = (filterAccount: MultiSelectValue, incomeAccountId: number): boolean => filterAccount.includes(incomeAccountId) || filterAccount.includes(FieldValues.ALL);
 export const selectCostsListForChartsByFilter = createSelector([selectCostsListForCharts, selectStatisticsFilterValues], (costs, statisticsFilterValues) =>
   costs && statisticsFilterValues
     ? costs
         .slice()
         .filter(
           ({ date, category, account }) =>
-            FieldIds.CATEGORY in statisticsFilterValues &&
-            checkCategoryCondition(statisticsFilterValues[FieldIds.CATEGORY]!, category) &&
-            FieldIds.PERIOD in statisticsFilterValues &&
-            isDatesStrings(statisticsFilterValues[FieldIds.PERIOD]) &&
-            checkPeriodCondition(statisticsFilterValues[FieldIds.PERIOD]!, date) &&
-            FieldIds.ACCOUNT in statisticsFilterValues &&
-            checkAccountCondition(statisticsFilterValues[FieldIds.ACCOUNT]!, account),
+            checkCategoryCondition(statisticsFilterValues[FieldIds.CATEGORIES], category) &&
+            checkPeriodCondition(statisticsFilterValues[FieldIds.PERIOD], date) &&
+            checkAccountCondition(statisticsFilterValues[FieldIds.ACCOUNTS], account),
         )
     : null,
 );
@@ -43,48 +35,35 @@ export const selectIncomesListForChartsByFilter = createSelector([selectIncomesL
         .slice()
         .filter(
           ({ date, category, account }) =>
-            FieldIds.CATEGORY in statisticsFilterValues &&
-            checkCategoryCondition(statisticsFilterValues[FieldIds.CATEGORY]!, category) &&
-            FieldIds.PERIOD in statisticsFilterValues &&
-            isDatesStrings(statisticsFilterValues[FieldIds.PERIOD]) &&
-            checkPeriodCondition(statisticsFilterValues[FieldIds.PERIOD]!, date) &&
-            FieldIds.ACCOUNT in statisticsFilterValues &&
-            checkAccountCondition(statisticsFilterValues[FieldIds.ACCOUNT]!, account),
+            checkCategoryCondition(statisticsFilterValues[FieldIds.CATEGORIES], category) &&
+            checkPeriodCondition(statisticsFilterValues[FieldIds.PERIOD], date) &&
+            checkAccountCondition(statisticsFilterValues[FieldIds.ACCOUNTS], account),
         )
     : null,
 );
 
-const checkPeriodsCondition = ([filterFrom, filterTo]: DatesStrings, [itemFrom, itemTo]: DatesStrings) => itemFrom >= filterFrom && itemTo <= filterTo;
-const checkCategoriesCondition = (filterCategory: MultiSelectValue, itemCategories: MultiSelectValue) =>
-  filterCategory.includes(FieldValues.ALL) || filterCategory.some((categoryId) => itemCategories.includes(categoryId));
-const checkAccountsCondition = (filterAccount: MultiSelectValue, itemAccounts: MultiSelectValue) =>
-  filterAccount.includes(FieldValues.ALL) || filterAccount.some((accountId) => itemAccounts.includes(accountId));
 export const selectBudgetsListForChartsByFilter = createSelector([selectBudgetsListForCharts, selectStatisticsFilterValues], (budgets, statisticsFilterValues) =>
   budgets && statisticsFilterValues
     ? budgets
         .slice()
         .filter(
           ({ period, categories, accounts }) =>
-            FieldIds.CATEGORY in statisticsFilterValues &&
-            checkCategoriesCondition(statisticsFilterValues[FieldIds.CATEGORY]!, categories) &&
-            FieldIds.PERIOD in statisticsFilterValues &&
-            isDatesStrings(statisticsFilterValues[FieldIds.PERIOD]) &&
-            checkPeriodsCondition(statisticsFilterValues[FieldIds.PERIOD]!, period) &&
-            FieldIds.ACCOUNT in statisticsFilterValues &&
-            checkAccountsCondition(statisticsFilterValues[FieldIds.ACCOUNT]!, accounts),
+            checkCategoriesCondition(statisticsFilterValues[FieldIds.CATEGORIES], categories) &&
+            checkPeriodsCondition(statisticsFilterValues[FieldIds.PERIOD], period) &&
+            checkAccountsCondition(statisticsFilterValues[FieldIds.ACCOUNTS], accounts),
         )
     : null,
 );
 
 export const selectStatisticsFilterFields = createSelector([selectCostCategories, selectAccountsList], (costCategories, accountsList) =>
   INITIAL_STATISTICS_FILTER_FIELDS.map((field) => {
-    if (field.id === FieldIds.CATEGORY && costCategories?.length) {
-      const options = field.options.concat(costCategories?.map(({ id, name }): SelectFieldOption => ({ value: id, label: name })));
-      const optionsObject = options.reduce((acc, { value, label, label_translation }) => ({ ...acc, [value]: label_translation && i18nRef.t ? i18nRef.t(`fields.${label_translation}`) : label }), {});
+    if (field.id === FieldIds.CATEGORIES && costCategories?.length) {
+      const options = field.options.concat(getOptionsFromItemsList(costCategories));
+      const optionsObject = getOptionsObjectFromOptions(options);
       return { ...field, optionsObject, options };
-    } else if (field.id === FieldIds.ACCOUNT && accountsList?.length) {
-      const options = field.options.concat(accountsList?.map(({ id, name }): SelectFieldOption => ({ value: id, label: name })));
-      const optionsObject = options.reduce((acc, { value, label, label_translation }) => ({ ...acc, [value]: label_translation && i18nRef.t ? i18nRef.t(`fields.${label_translation}`) : label }), {});
+    } else if (field.id === FieldIds.ACCOUNTS && accountsList?.length) {
+      const options = field.options.concat(getOptionsFromItemsList(accountsList));
+      const optionsObject = getOptionsObjectFromOptions(options);
       return { ...field, optionsObject, options };
     } else {
       return field;

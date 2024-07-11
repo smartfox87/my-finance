@@ -4,11 +4,15 @@ import { MultiSelectValue } from "@/types/field";
 
 type FilterValue = string | MultiSelectValue;
 
-type FilterId = FieldIds.CATEGORY | FieldIds.CATEGORIES | FieldIds.ACCOUNT | FieldIds.ACCOUNTS | FieldIds.SORT;
+export interface FilterPeriodItem {
+  id: FieldIds.PERIOD;
+  value: DatesStrings;
+}
 
-export type FilterCommonItem = { id: FilterId; value: FilterValue };
-
-export type FilterPeriodItem = { id: FieldIds.PERIOD; value: DatesStrings };
+export interface FilterCommonItem {
+  id: FieldIds.CATEGORIES | FieldIds.ACCOUNTS | FieldIds.SORT;
+  value: FilterValue;
+}
 
 export type FilterItem = FilterCommonItem | FilterPeriodItem;
 
@@ -17,10 +21,8 @@ export interface FilterPeriodStateItem {
 }
 
 export interface FilterState extends Partial<FilterPeriodStateItem> {
-  [FieldIds.SORT]: string;
-  [FieldIds.CATEGORY]?: MultiSelectValue;
+  [FieldIds.SORT]?: string;
   [FieldIds.CATEGORIES]?: MultiSelectValue;
-  [FieldIds.ACCOUNT]?: MultiSelectValue;
   [FieldIds.ACCOUNTS]?: MultiSelectValue;
 }
 
