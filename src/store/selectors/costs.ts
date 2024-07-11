@@ -1,10 +1,10 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { INITIAL_COSTS_FILTER_FIELDS, INITIAL_COST_FIELDS } from "@/constants/costs";
+import { INITIAL_COST_FIELDS, INITIAL_COSTS_FILTER_FIELDS } from "@/constants/costs";
 import { selectCostCategories } from "@/store/selectors/references";
 import { selectCurrency } from "@/store/selectors/profile";
 import { i18nRef } from "@/i18n";
 import { selectAccountsList } from "@/store/selectors/accounts";
-import { FieldIds, FieldValues, MultiSelectValue, SelectFieldOption } from "@/types/field";
+import { FieldIds, FieldTypes, FieldValues, MultiSelectValue, SelectFieldOption } from "@/types/field";
 import { LazyLoadedSlices } from "@/store";
 import { DatesStrings } from "@/types/date";
 import { getOptionsFromAccountsList, getOptionsFromCostCategories, getOptionsObjectFromOptions } from "@/helpers/filters";
@@ -53,7 +53,7 @@ export const selectCostsFilterFields = createSelector([selectCostCategories, sel
       const options = field.options.concat(getOptionsFromAccountsList(accountsList));
       const optionsObject = getOptionsObjectFromOptions(options);
       return { ...field, optionsObject, options };
-    } else if (field.type === "select") {
+    } else if (field.type === FieldTypes.SELECT) {
       const optionsObject = field.options.reduce(
         (acc, { value, label, label_translation }) => ({ ...acc, [value]: label_translation && i18nRef.t ? i18nRef.t(`fields.${label_translation}`) : label }),
         {},
@@ -67,9 +67,9 @@ export const selectCostsFilterFields = createSelector([selectCostCategories, sel
 
 export const selectCostFields = createSelector([selectCostCategories, selectAccountsList, selectCurrency], (costCategories, accountsList, currency) =>
   INITIAL_COST_FIELDS.map((field) => {
-    if (field.id === "category") return { ...field, options: field.options.concat(costCategories?.map(({ id, name }): SelectFieldOption => ({ value: id, label: name })) || []) };
-    else if (field.id === "account") return { ...field, options: field.options.concat(accountsList?.map(({ id, name }): SelectFieldOption => ({ value: id, label: name })) || []) };
-    else if (field.id === "amount") return { ...field, label_suffix: currency };
+    if (field.id === FieldIds.CATEGORY) return { ...field, options: field.options.concat(getOptionsFromCostCategories(costCategories || [])) };
+    else if (field.id === FieldIds.ACCOUNT) return { ...field, options: field.options.concat(getOptionsFromAccountsList(accountsList || [])) };
+    else if (field.id === FieldIds.AMOUNT) return { ...field, label_suffix: currency };
     else return field;
   }),
 );
