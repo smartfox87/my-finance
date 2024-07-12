@@ -7,8 +7,9 @@ import { FilterState } from "@/types/filter";
 import { CostItem } from "@/types/costs";
 import { IncomeItem } from "@/types/incomes";
 import { ProcessedBudgetItem } from "@/types/budgets";
-import { FormField } from "@/types/form";
+import { FilterField } from "@/types/form";
 import { ProcessedStatisticsBudgetItem, StatisticsCostItem, StatisticsIncomeItem } from "@/types/statistics";
+import { OptionsObject, ProcessedFilterField } from "@/types/selectors";
 
 export const checkSingleItemCondition = (filterItem: MultiSelectValue | undefined, itemId: number): boolean =>
   filterItem !== undefined && (filterItem.includes(itemId) || filterItem.includes(FieldValues.ALL));
@@ -52,19 +53,24 @@ export const sortItemsList = <T extends CostItem | IncomeItem | ProcessedBudgetI
 
 export const getOptionsFromItemsList = <T extends ProcessedAccountItem | CostCategory>(itemsList: T[]) => itemsList?.map(({ id, name }): MultiSelectOption => ({ value: id, label: name }));
 
-export const getOptionsObjectFromOptions = <T extends SingleSelectValue | MultiSelectOptionValue>(options: SelectOption<T>[]): { [key: number]: string } =>
+export const getOptionsObjectFromOptions = <T extends SingleSelectValue | MultiSelectOptionValue>(options: SelectOption<T>[]): OptionsObject =>
   Object.assign({}, ...options.map(({ value, label, label_translation }) => ({ [value]: label_translation && i18nRef.t ? i18nRef.t(`fields.${label_translation}`) : label }), {}));
 
-export const processFilterFields = <T extends IncomeCategory | CostCategory>(initialFieldsData: FormField[], categoriesList: T[] | null, accountsList: ProcessedAccountItem[] | null) =>
-  initialFieldsData.map((field) => {
-    if (field.id === FieldIds.CATEGORIES && categoriesList?.length) {
-      const options = field.options.concat(getOptionsFromItemsList(categoriesList));
-      const optionsObject = getOptionsObjectFromOptions(options);
-      return { ...field, optionsObject, options };
-    } else if (field.id === FieldIds.ACCOUNTS && accountsList?.length) {
-      const options = field.options.concat(getOptionsFromItemsList(accountsList));
-      const optionsObject = getOptionsObjectFromOptions(options);
-      return { ...field, optionsObject, options };
+export const processFilterFields = <T extends IncomeCategory | CostCategory>(initialFieldsData: FilterField[], categoriesList: T[] | null, accountsList: ProcessedAccountItem[] | null) =>
+  initialFieldsData.map((field): ProcessedFilterField => {
+    if (field.type === FieldTypes.MULTISELECT) {
+      if (field.id === FieldIds.CATEGORIES && categoriesList?.length) {
+        const options = field.options.concat(getOptionsFromItemsList(categoriesList));
+        const optionsObject = getOptionsObjectFromOptions(options);
+        return { ...field, optionsObject, options };
+      } else if (field.id === FieldIds.ACCOUNTS && accountsList?.length) {
+        const options = field.options.concat(getOptionsFromItemsList(accountsList));
+        const optionsObject = getOptionsObjectFromOptions(options);
+        return { ...field, optionsObject, options };
+      } else {
+        const optionsObject = getOptionsObjectFromOptions(field.options);
+        return { ...field, optionsObject };
+      }
     } else if (field.type === FieldTypes.SELECT) {
       const optionsObject = getOptionsObjectFromOptions(field.options);
       return { ...field, optionsObject };
