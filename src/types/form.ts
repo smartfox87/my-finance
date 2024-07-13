@@ -97,8 +97,6 @@ export type NumberFormField = BaseFormField & {
 
 export type FormField = DatesPeriodFormField | TextFormField | SingleSelectFormField | MultiSelectFormField | DateFormField | FileFormField | RadioButtonsFormField | NumberFormField;
 
-export type FilterField = DatesPeriodFormField | SingleSelectFormField | MultiSelectFormField;
-
 export type ChangedField =
   | Pick<DatesPeriodFormField, "id" | "type" | "value">
   | Pick<TextFormField, "id" | "type" | "value">

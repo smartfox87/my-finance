@@ -7,7 +7,7 @@ import { FilterState } from "@/types/filter";
 import { CostItem } from "@/types/costs";
 import { IncomeItem } from "@/types/incomes";
 import { ProcessedBudgetItem } from "@/types/budgets";
-import { FilterField } from "@/types/form";
+import { FilterField } from "@/types/filter";
 import { ProcessedStatisticsBudgetItem, StatisticsCostItem, StatisticsIncomeItem } from "@/types/statistics";
 import { OptionsObject, ProcessedFilterField } from "@/types/selectors";
 
