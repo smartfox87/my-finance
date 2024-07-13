@@ -1,4 +1,4 @@
-import { FieldIds } from "@/types/field";
+import { FieldIds, MultiSelectOptionValue } from "@/types/field";
 import { DatesStrings } from "@/types/date";
 import { MultiSelectValue } from "@/types/field";
 
@@ -32,3 +32,27 @@ export interface FilterState extends Partial<FilterPeriodStateItem> {
 export type FilterStateKey = keyof FilterState;
 
 export const isFilterStateKey = (key: any): key is FilterStateKey => FieldIds.PERIOD === key || FieldIds.CATEGORY === key || FieldIds.ACCOUNT === key || FieldIds.SORT === key;
+
+type ActiveMultiSelectFilterItem = {
+  id: FieldIds.ACCOUNTS | FieldIds.CATEGORIES;
+  value: MultiSelectOptionValue;
+  label?: string;
+  textValue?: string;
+};
+
+type ActiveSortSelectFilterItem = {
+  id: FieldIds.SORT;
+  value?: string;
+  label?: string;
+  textValue?: string;
+};
+
+type ActiveDatesPeriodFilterItem = {
+  id: FieldIds.PERIOD;
+  value?: string;
+  label?: string;
+};
+
+export type ActiveFilterItem = ActiveMultiSelectFilterItem | ActiveSortSelectFilterItem | ActiveDatesPeriodFilterItem;
+
+export type ActiveFilterItemValue = Pick<ActiveFilterItem, "value" | "id">;

@@ -20,3 +20,5 @@ export const isUploadFile = (value: any): value is UploadFile => ["uid", "name"]
 export const isUploadFileArray = (value: any): value is UploadFile[] => Array.isArray(value) && value.every((item) => isUploadFile(item));
 
 export const isDatesPeriod = (value: any): value is DatesPeriod => Object.values(DatesPeriods).includes(value);
+
+export const isTruthy = <T>(value?: T | undefined | null | false): value is T => !!value;

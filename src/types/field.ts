@@ -45,21 +45,7 @@ export type MultiSelectOptionValue = number | FieldValues.ALL;
 
 export type MultiSelectValue = MultiSelectOptionValue[];
 
-export interface MultiSelectOption {
-  value: MultiSelectOptionValue;
-  label?: string;
-  label_translation?: FieldTranslationSelectOption;
-  option?: ReactNode;
-}
-
 export type SingleSelectValue = number | string;
-
-export interface SingleSelectOption {
-  value: SingleSelectValue;
-  label?: string;
-  label_translation?: FieldTranslationSelectOption;
-  option?: ReactNode;
-}
 
 export interface SelectOption<T> {
   value: T;
@@ -123,11 +109,6 @@ export enum SubjectFieldOptions {
 
 export enum SelectFieldOptions {
   ALL = "all",
-}
-
-export interface SelectFieldOption {
-  label: string;
-  value: number | string;
 }
 
 export type FieldTranslationLabel = `simple.${SimpleFieldNames}` | `complex.${ComplexFieldNames}.label`;

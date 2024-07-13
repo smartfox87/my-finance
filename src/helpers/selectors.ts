@@ -1,4 +1,4 @@
-import { FieldIds, FieldTypes, FieldValues, MultiSelectOption, MultiSelectOptionValue, MultiSelectValue, SelectOption, SingleSelectValue } from "@/types/field";
+import { FieldIds, FieldTypes, FieldValues, MultiSelectOptionValue, MultiSelectValue, SelectOption, SingleSelectValue } from "@/types/field";
 import { DatesStrings } from "@/types/date";
 import { ProcessedAccountItem } from "@/types/accounts";
 import { CostCategory, IncomeCategory } from "@/types/references";
@@ -51,7 +51,8 @@ export const sortItemsList = <T extends CostItem | IncomeItem | ProcessedBudgetI
     return difference === 0 ? first.created_at.localeCompare(second.created_at) : difference;
   });
 
-export const getOptionsFromItemsList = <T extends ProcessedAccountItem | CostCategory>(itemsList: T[]) => itemsList?.map(({ id, name }): MultiSelectOption => ({ value: id, label: name }));
+export const getOptionsFromItemsList = <T extends ProcessedAccountItem | CostCategory>(itemsList: T[]) =>
+  itemsList?.map(({ id, name }): SelectOption<MultiSelectOptionValue> => ({ value: id, label: name }));
 
 export const getOptionsObjectFromOptions = <T extends SingleSelectValue | MultiSelectOptionValue>(options: SelectOption<T>[]): OptionsObject =>
   Object.assign({}, ...options.map(({ value, label, label_translation }) => ({ [value]: label_translation && i18nRef.t ? i18nRef.t(`fields.${label_translation}`) : label }), {}));

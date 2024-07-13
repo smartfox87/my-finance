@@ -1,17 +1,25 @@
-import { DatesPeriodFormField, FormField, MultiSelectFormField, SingleSelectFormField } from "@/types/form";
-
-export type FilterField = MultiSelectFormField | SingleSelectFormField | DatesPeriodFormField;
+import { DatesPeriodFormField, MultiSelectFormField, SingleSelectFormField } from "@/types/form";
+import { FieldIds } from "@/types/field";
 
 export interface OptionsObject {
-  [key: number]: string;
+  [key: string]: string;
 }
 
-type ProcessedMultiSelectFilterField = MultiSelectFormField & {
+interface ProcessedMultiSelectFilterField extends MultiSelectFormField {
   optionsObject: OptionsObject;
-};
+}
 
-type ProcessedSingleSelectFilterField = SingleSelectFormField & {
+interface ProcessedSingleSelectFilterField extends SingleSelectFormField {
+  id: FieldIds.SORT;
   optionsObject: OptionsObject;
-};
+}
+
+// type ProcessedMultiSelectFilterField = MultiSelectFormField & {
+//   optionsObject: OptionsObject;
+// };
+
+// type ProcessedSingleSelectFilterField = SingleSelectFormField & {
+//   optionsObject: OptionsObject;
+// };
 
 export type ProcessedFilterField = ProcessedMultiSelectFilterField | ProcessedSingleSelectFilterField | DatesPeriodFormField;
