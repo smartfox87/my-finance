@@ -1,14 +1,14 @@
 import { Session, User } from "@supabase/auth-js";
 
-export interface LoginData {
+export type LoginData = {
   email: string;
   password: string;
-}
+};
 
-export interface RegisterData extends LoginData {
+export type RegisterData = LoginData & {
   score: number;
   full_name?: string;
-}
+};
 
 export interface UserPayload {
   user: User | null;

@@ -6,50 +6,50 @@ import { FieldIds, FieldTranslationLabel, FieldTranslationRadioButtonOption, Fie
 
 export type FormItemRule = FieldTypes.NUMBER | FieldTypes.EMAIL;
 
-export interface BaseFormField {
+export type BaseFormField = {
   label: FieldTranslationLabel;
   label_suffix?: string;
   placeholder?: string;
   focus?: boolean;
   required?: boolean;
   disabled?: boolean;
-}
+};
 
 export type SingleSelectFormFieldId = FieldIds.SORT | FieldIds.ACCOUNT | FieldIds.CATEGORY | FieldIds.CURRENCY | FieldIds.GENDER | FieldIds.SUBJECT;
 export const isSingleSelectFormFieldId = (id: string): id is SingleSelectFormFieldId =>
   FieldIds.SORT === id || FieldIds.ACCOUNT === id || FieldIds.CATEGORY === id || FieldIds.CURRENCY === id || FieldIds.GENDER === id || FieldIds.SUBJECT === id;
-export interface SingleSelectFormField extends BaseFormField {
+export type SingleSelectFormField = BaseFormField & {
   id: SingleSelectFormFieldId;
   type: FieldTypes.SELECT;
   value: SingleSelectValue;
   options: SelectOption<SingleSelectValue>[];
   options_prefix?: string;
   showSearch?: boolean;
-}
+};
 
 export type MultiSelectFormFieldId = FieldIds.ACCOUNTS | FieldIds.CATEGORIES;
 export const isMultiSelectFormFieldId = (id: string): id is MultiSelectFormFieldId => FieldIds.ACCOUNTS === id || FieldIds.CATEGORIES === id;
-export interface MultiSelectFormField extends BaseFormField {
+export type MultiSelectFormField = BaseFormField & {
   id: MultiSelectFormFieldId;
   type: FieldTypes.MULTISELECT;
   value: MultiSelectValue;
   options: SelectOption<MultiSelectOptionValue>[];
   options_prefix?: string;
   showSearch?: boolean;
-}
+};
 
 type RadioButtonsFormFieldId = FieldIds.PERIOD;
 export const isRadioButtonsFormFieldId = (id: string): id is RadioButtonsFormFieldId => FieldIds.PERIOD === id;
-export interface RadioButtonsFormField extends BaseFormField {
+export type RadioButtonsFormField = BaseFormField & {
   id: RadioButtonsFormFieldId;
   type: FieldTypes.RADIO_BUTTONS;
   value: string;
   options: Array<{ label?: string; label_translation: FieldTranslationRadioButtonOption; value: string }>;
-}
+};
 
 type FileFormFieldId = FieldIds.FILES;
 export const isFileFormFieldId = (id: string): id is FileFormFieldId => FieldIds.FILES === id;
-export interface FileFormField extends BaseFormField {
+export type FileFormField = BaseFormField & {
   id: FileFormFieldId;
   type: FieldTypes.FILE;
   value: UploadFile[];
@@ -57,43 +57,43 @@ export interface FileFormField extends BaseFormField {
   maxCount?: number;
   accept?: string;
   maxSize?: number;
-}
+};
 
 type DateFormFieldId = FieldIds.DATE | FieldIds.BIRTHDATE;
 export const isDateFormFieldId = (id: string): id is DateFormFieldId => FieldIds.DATE === id || FieldIds.BIRTHDATE === id;
-export interface DateFormField extends BaseFormField {
+export type DateFormField = BaseFormField & {
   id: DateFormFieldId;
   type: FieldTypes.DATE;
   picker: PickerPeriod;
   value?: Dayjs;
   disabledDate?: (current: Dayjs) => boolean;
-}
+};
 
 export type DatesPeriodFormFieldId = FieldIds.PERIOD;
 export const isDatesPeriodFormFieldId = (id: string): id is DatesPeriodFormFieldId => FieldIds.PERIOD === id;
-export interface DatesPeriodFormField extends BaseFormField {
+export type DatesPeriodFormField = BaseFormField & {
   id: DatesPeriodFormFieldId;
   type: FieldTypes.DATES_PERIOD;
   value: DatesStrings;
-}
+};
 
 type TextFormFieldId = FieldIds.NAME | FieldIds.FULL_NAME | FieldIds.EMAIL | FieldIds.MESSAGE | FieldIds.PASSWORD;
 export const isTextFormFieldId = (id: string): id is TextFormFieldId =>
   FieldIds.NAME === id || FieldIds.FULL_NAME === id || FieldIds.EMAIL === id || FieldIds.MESSAGE === id || FieldIds.PASSWORD === id;
-export interface TextFormField extends BaseFormField {
+export type TextFormField = BaseFormField & {
   id: TextFormFieldId;
   type: FieldTypes.TEXT | FieldTypes.PASSWORD | FieldTypes.EMAIL | FieldTypes.TEXTAREA;
   value: string;
   maxLength?: number;
-}
+};
 
 type NumberFormFieldId = FieldIds.AMOUNT | FieldIds.BALANCE;
 export const isNumberFormFieldId = (id: string): id is NumberFormFieldId => FieldIds.AMOUNT === id || FieldIds.BALANCE === id;
-export interface NumberFormField extends BaseFormField {
+export type NumberFormField = BaseFormField & {
   id: NumberFormFieldId;
   type: FieldTypes.NUMBER;
   value: number | string;
-}
+};
 
 export type FormField = DatesPeriodFormField | TextFormField | SingleSelectFormField | MultiSelectFormField | DateFormField | FileFormField | RadioButtonsFormField | NumberFormField;
 

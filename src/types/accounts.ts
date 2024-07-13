@@ -6,14 +6,14 @@ export interface AccountItemBalanceData {
   decrease?: number;
 }
 
-export interface AccountItemBalance {
+export type AccountItemBalance = {
   [FieldIds.BALANCE]: number;
-}
+};
 
-export interface AccountItemData extends AccountItemBalance {
+export type AccountItemData = AccountItemBalance & {
   account_type_id?: number;
   name: string;
-}
+};
 
 export interface AccountItem {
   id: number;

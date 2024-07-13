@@ -19,15 +19,15 @@ export interface FilterMultiItem {
 
 export type FilterItem = FilterMultiItem | FilterPeriodItem | FilterSortItem;
 
-export interface FilterPeriodStateItem {
+export type FilterPeriodStateItem = {
   [FieldIds.PERIOD]: DatesStrings;
-}
+};
 
-export interface FilterState extends Partial<FilterPeriodStateItem> {
+export type FilterState = Partial<FilterPeriodStateItem> & {
   [FieldIds.SORT]?: string;
   [FieldIds.CATEGORIES]?: MultiSelectValue;
   [FieldIds.ACCOUNTS]?: MultiSelectValue;
-}
+};
 
 export type FilterStateKey = keyof FilterState;
 

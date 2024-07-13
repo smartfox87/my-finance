@@ -5,21 +5,13 @@ export interface OptionsObject {
   [key: string]: string;
 }
 
-interface ProcessedMultiSelectFilterField extends MultiSelectFormField {
+type ProcessedMultiSelectFilterField = MultiSelectFormField & {
   optionsObject: OptionsObject;
-}
+};
 
-interface ProcessedSingleSelectFilterField extends SingleSelectFormField {
+type ProcessedSingleSelectFilterField = SingleSelectFormField & {
   id: FieldIds.SORT;
   optionsObject: OptionsObject;
-}
-
-// type ProcessedMultiSelectFilterField = MultiSelectFormField & {
-//   optionsObject: OptionsObject;
-// };
-
-// type ProcessedSingleSelectFilterField = SingleSelectFormField & {
-//   optionsObject: OptionsObject;
-// };
+};
 
 export type ProcessedFilterField = ProcessedMultiSelectFilterField | ProcessedSingleSelectFilterField | DatesPeriodFormField;
