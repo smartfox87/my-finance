@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { memo, useEffect, useRef, useState } from "react";
-import { selectCostFields, selectCostItem } from "@/store/selectors/costs.js";
+import { selectCostFields, selectCostItem } from "@/store/selectors/costs";
 import { deleteCostItemThunk, getCostItemThunk, setCostItem, updateCostItemThunk } from "@/store/costsSlice";
 import { DefaultForm } from "@/components/Form/DefaultForm.tsx";
 import { getOnlyValuesFromData } from "@/helpers/processData.js";

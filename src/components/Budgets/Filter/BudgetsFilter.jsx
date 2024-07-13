@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setBudgetsFilterValues } from "@/store/budgetsSlice";
-import { selectBudgetsFilterFields, selectBudgetsFilterValues } from "@/store/selectors/budgets.js";
+import { selectBudgetsFilterFields, selectBudgetsFilterValues } from "@/store/selectors/budgets";
 import { useTranslation } from "react-i18next";
 import { Select, Button } from "antd";
 import { handleFilterSelectOptions, renderSelectOption } from "@/helpers/fields";
@@ -11,6 +11,7 @@ import { useViewport } from "@/hooks/viewport";
 import { PeriodField } from "@/components/Form/PeriodField";
 import { useFilterFocus } from "@/hooks/filterFocus.js";
 import { setFilterValue } from "@/helpers/filters";
+import { FieldTypes } from "@/types/field";
 
 export const BudgetsFilter = memo(function BudgetsFilter({ onSave }) {
   const { t } = useTranslation();
@@ -56,7 +57,7 @@ export const BudgetsFilter = memo(function BudgetsFilter({ onSave }) {
         <ul data-cy="budgets-filter-form" className="flex w-full flex-col gap-4">
           {budgetsFilterFields.map(({ id, type, label, label_translation, options, options_prefix, showSearch, multiple }, index) => (
             <li key={id} className="flex flex-col gap-4">
-              {type === "select" && (
+              {(type === FieldTypes.MULTISELECT || type === FieldTypes.SELECT) && (
                 <Select
                   ref={!index ? fieldRef : null}
                   id={id}
@@ -76,7 +77,7 @@ export const BudgetsFilter = memo(function BudgetsFilter({ onSave }) {
                   onChange={(value) => handleChangeFieldValue({ id, value })}
                 />
               )}
-              {type === "period" && <PeriodField id={id} value={filterValues[id]} onChange={(value) => handleChangeFieldValue({ id, value })} />}
+              {type === FieldTypes.DATES_PERIOD && <PeriodField id={id} value={filterValues[id]} onChange={(value) => handleChangeFieldValue({ id, value })} />}
             </li>
           ))}
         </ul>

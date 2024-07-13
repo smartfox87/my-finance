@@ -1,3 +1,5 @@
+import { DatesStrings } from "@/types/date";
+
 export interface StatisticsCostItem {
   amount: number;
   date: string;
@@ -17,4 +19,13 @@ export interface StatisticsBudgetItem {
   name: string;
   period: string;
   categories: number[];
+  accounts: number[];
+}
+
+export interface ProcessedStatisticsBudgetItem {
+  amount: number;
+  name: string;
+  period: DatesStrings;
+  categories: number[];
+  accounts: number[];
 }

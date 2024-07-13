@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { selectCostCategories } from "@/store/selectors/references.js";
+import { selectCostCategories } from "@/store/selectors/references";
 import { useViewport } from "@/hooks/viewport";
 import { Button } from "antd";
 

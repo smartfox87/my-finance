@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { memo, useLayoutEffect, useMemo, useRef, useState } from "react";
-import { selectAccountsList } from "@/store/selectors/accounts.js";
+import { selectAccountsList } from "@/store/selectors/accounts";
 import { transferAccountsBalanceThunk } from "@/store/accountsSlice";
 import { showNotification } from "@/helpers/modals.js";
 import { SideModal } from "@/components/Modals/SideModal.jsx";

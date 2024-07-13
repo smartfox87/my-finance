@@ -2,7 +2,7 @@ import { Button } from "antd";
 import { SideModal } from "@/components/Modals/SideModal.jsx";
 import { DefaultForm } from "@/components/Form/DefaultForm.tsx";
 import { useDispatch, useSelector } from "react-redux";
-import { selectIncomeFields } from "@/store/selectors/incomes.js";
+import { selectIncomeFields } from "@/store/selectors/incomes";
 import { createIncomeItemThunk } from "@/store/incomesSlice";
 import { useTranslation } from "react-i18next";
 import { showNotification } from "@/helpers/modals.js";

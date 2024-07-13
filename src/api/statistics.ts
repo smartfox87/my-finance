@@ -14,10 +14,11 @@ export const getIncomesListForChartsApi = (filter: FilterPeriodStateItem) => {
   return supabase.from("incomes").select("category, date, amount, account").match({ user_id: getUserId() }).gte("date", from).lte("date", to);
 };
 
+// todo check accounts filtering
 export const getBudgetsListForChartsApi = (filter: FilterPeriodStateItem) =>
   supabase
     .from("view_budgets")
-    .select("name, amount, period, categories")
+    .select("name, amount, period, categories, accounts")
     .match({ user_id: getUserId() })
     .rangeGte("period", getFromPeriodDatesForApi(filter[FieldIds.PERIOD]))
     .rangeLte("period", getToPeriodDatesForApi(filter[FieldIds.PERIOD]));

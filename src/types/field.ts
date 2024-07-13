@@ -1,4 +1,5 @@
 import { DatesPeriods } from "@/types/date";
+import { ReactNode } from "react";
 
 export enum FieldIds {
   SORT = "sort",
@@ -21,7 +22,6 @@ export enum FieldIds {
   FILES = "files",
   PASSWORD = "password",
 }
-export type FieldId = `${FieldIds}`;
 
 export enum FieldTypes {
   TEXT = "text",
@@ -30,6 +30,7 @@ export enum FieldTypes {
   NUMBER = "number",
   TEXTAREA = "textarea",
   SELECT = "select",
+  MULTISELECT = "multiselect",
   DATES_PERIOD = "period",
   RADIO_BUTTONS = "radio-buttons",
   FILE = "file",
@@ -39,6 +40,23 @@ export enum FieldTypes {
 export enum FieldValues {
   ALL = "all",
 }
+
+export type MultiSelectOptionValue = number | FieldValues.ALL;
+
+export type MultiSelectValue = MultiSelectOptionValue[];
+
+export type SingleSelectValue = number | string;
+
+export interface SelectOption<T> {
+  value: T;
+  label?: string;
+  label_translation?: FieldTranslationSelectOption;
+  option?: ReactNode;
+}
+
+type ConditionalSelectValue<T> = T extends { mode: "multiple" } ? MultiSelectValue : SingleSelectValue;
+
+export type SelectComponentProps<T> = T & { value?: ConditionalSelectValue<T> };
 
 export type FieldType = `${FieldTypes}`;
 

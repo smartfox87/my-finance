@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { memo, useEffect, useRef, useState } from "react";
-import { selectAccountFields, selectAccountItem } from "@/store/selectors/accounts.js";
+import { selectAccountFields, selectAccountItem } from "@/store/selectors/accounts";
 import { deleteAccountItemThunk, getAccountItemThunk, setAccountItem, updateAccountItemThunk } from "@/store/accountsSlice";
 import { DefaultForm } from "@/components/Form/DefaultForm.tsx";
 import { getOnlyValuesFromData } from "@/helpers/processData.js";

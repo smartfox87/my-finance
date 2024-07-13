@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { Tooltip } from "antd";
 import formatPrice from "@/helpers/formatPrice.js";
 import { useSelector } from "react-redux";
-import { selectCurrency } from "@/store/selectors/profile.jsx";
+import { selectCurrency } from "@/store/selectors/profile";
 import { uppercaseFirstLetter } from "@/helpers/strings.js";
 import { useEffect, useRef, useState } from "react";
 import { isTextClamped } from "@/helpers/isTextClamped.js";

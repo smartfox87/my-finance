@@ -6,15 +6,28 @@ import { getFileSizeWithUnit } from "@/helpers/file";
 import { cutDecimals, handleFilterSelectOptions, handleKeyDownDecimalsValidation, handleKeyUpCutDecimals } from "@/helpers/fields";
 import dynamic from "next/dynamic";
 import { showErrorMessage } from "@/helpers/message";
-import { isStringArray, isUploadFileArray } from "@/types/predicates";
-import { ChangedField, DefaultFormProps, FormItemRule, FormValues, SelectValue } from "@/types/form";
+import { isMultiSelectValues, isUploadFileArray } from "@/types/predicates";
+import {
+  ChangedField,
+  DefaultFormProps,
+  FormItemRule,
+  FormValues,
+  isDateFormFieldId,
+  isDatesPeriodFormFieldId,
+  isFileFormFieldId,
+  isNumberFormFieldId,
+  isRadioButtonsFormFieldId,
+  isMultiSelectFormFieldId,
+  isSingleSelectFormFieldId,
+  isTextFormFieldId,
+} from "@/types/form";
 import { Button, type DatePickerProps, Form, FormProps, Input, InputRef, SelectProps, type UploadFile } from "antd";
 import dayjs, { isDayjs } from "dayjs";
-import { FieldTranslationError, FieldType, FieldTypes, FieldValues } from "@/types/field";
+import { FieldTranslationError, FieldType, FieldTypes, FieldValues, SelectComponentProps } from "@/types/field";
 
 const PeriodComponent = dynamic(() => import("@/components/Form/PeriodField").then((mod) => mod.PeriodField));
 const DatePickerComponent = dynamic<DatePickerProps>(() => import("antd/es/date-picker"));
-const SelectComponent = dynamic<SelectProps<SelectValue>>(() => import("antd/es/select"));
+const SelectComponent = dynamic<SelectComponentProps<SelectProps>>(() => import("antd/es/select"));
 const InputNumberComponent = dynamic(() => import("antd/es/input-number"));
 const RadioGroupComponent = dynamic(() => import("antd/es/radio").then((mod) => mod.Group));
 const UploadComponent = dynamic(() => import("antd/es/upload"));
@@ -51,7 +64,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
   const handleChangeFieldValue = useCallback(
     ({ id, value, type }: ChangedField): void => {
       const currentFieldValue = currentFieldsValues[id];
-      if (type === FieldTypes.SELECT && isStringArray(value) && isStringArray(currentFieldValue)) {
+      if (type === FieldTypes.MULTISELECT && isMultiSelectValues(value) && isMultiSelectValues(currentFieldValue)) {
         if (!value?.length || (!currentFieldValue.includes(FieldValues.ALL) && value.includes(FieldValues.ALL))) form.setFieldsValue({ [id]: [FieldValues.ALL] });
         else form.setFieldsValue({ [id]: value.filter((val) => val !== FieldValues.ALL) });
       } else form.setFieldsValue({ [id]: value });
@@ -75,7 +88,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
       const processedValues = Object.entries(values).reduce((acc: FormValues, [key, value]) => {
         if (isUploadFileArray(value)) acc[key] = value.map(({ originFileObj }) => originFileObj);
         else if (isDayjs(value)) acc[key] = value.format("YYYY-MM-DD");
-        else if (isStringArray(value)) acc[key] = value.filter((val) => val !== FieldValues.ALL);
+        else if (isMultiSelectValues(value)) acc[key] = value.filter((val) => val !== FieldValues.ALL);
         else acc[key] = value;
         return acc;
       }, {});
@@ -130,7 +143,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
             valuePropName={field.type === FieldTypes.FILE ? "fileList" : "value"}
             getValueFromEvent={field.type === FieldTypes.FILE ? normFile : (e) => e}
           >
-            {(field.type === FieldTypes.TEXT || field.type === FieldTypes.EMAIL) && (
+            {(field.type === FieldTypes.TEXT || field.type === FieldTypes.EMAIL) && isTextFormFieldId(id) && (
               <Input
                 size="large"
                 ref={focus ? (focusInputRef as LegacyRef<InputRef>) : undefined}
@@ -140,7 +153,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 onChange={(event) => handleChangeFieldValue({ id, type: field.type, value: event.target.value })}
               />
             )}
-            {field.type === FieldTypes.PASSWORD && (
+            {field.type === FieldTypes.PASSWORD && isTextFormFieldId(id) && (
               <Input.Password
                 ref={focus ? (focusInputRef as LegacyRef<InputRef>) : undefined}
                 size="large"
@@ -149,7 +162,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 onChange={(event) => handleChangeFieldValue({ id, type: field.type, value: event.target.value })}
               />
             )}
-            {field.type === FieldTypes.TEXTAREA && (
+            {field.type === FieldTypes.TEXTAREA && isTextFormFieldId(id) && (
               <Input.TextArea
                 ref={focus ? focusInputRef : undefined}
                 rows={5}
@@ -159,11 +172,10 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 onChange={(event) => handleChangeFieldValue({ id, type: field.type, value: event.target.value })}
               />
             )}
-            {field.type === FieldTypes.SELECT && (
+            {field.type === FieldTypes.SELECT && isSingleSelectFormFieldId(id) && (
               <SelectComponent
                 size="large"
                 autoFocus={!!focus}
-                mode={field.multiple ? "multiple" : undefined}
                 disabled={disabled}
                 options={field.options?.map(({ option, label, label_translation, value }) => ({
                   label: option || (label_translation ? t(`fields.${label_translation}`) : label || value),
@@ -175,7 +187,23 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 onChange={(value) => handleChangeFieldValue({ id, type: field.type, value })}
               />
             )}
-            {field.type === FieldTypes.DATE && (
+            {field.type === FieldTypes.MULTISELECT && isMultiSelectFormFieldId(id) && (
+              <SelectComponent
+                size="large"
+                autoFocus={!!focus}
+                mode="multiple"
+                disabled={disabled}
+                options={field.options?.map(({ option, label, label_translation, value }) => ({
+                  label: option || (label_translation ? t(`fields.${label_translation}`) : label || value),
+                  value,
+                }))}
+                showSearch={field.showSearch}
+                filterOption={field.showSearch ? handleFilterSelectOptions : undefined}
+                getPopupContainer={(triggerNode) => triggerNode.parentElement}
+                onChange={(value) => handleChangeFieldValue({ id, type: field.type, value })}
+              />
+            )}
+            {field.type === FieldTypes.DATE && isDateFormFieldId(id) && (
               <DatePickerComponent
                 size="large"
                 autoFocus={!!focus}
@@ -192,7 +220,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 onChange={(value) => handleChangeFieldValue({ id, type: field.type, value })}
               />
             )}
-            {field.type === FieldTypes.NUMBER && (
+            {field.type === FieldTypes.NUMBER && isNumberFormFieldId(id) && (
               <InputNumberComponent
                 size="large"
                 autoFocus={!!focus}
@@ -205,8 +233,10 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 onChange={(value) => handleChangeFieldValue({ id, type: field.type, value: cutDecimals(value) })}
               />
             )}
-            {field.type === FieldTypes.DATES_PERIOD && <PeriodComponent id={id} value={field.value} onChange={(value) => handleChangeFieldValue({ id, type: field.type, value })} />}
-            {field.type === FieldTypes.RADIO_BUTTONS && (
+            {field.type === FieldTypes.DATES_PERIOD && isDatesPeriodFormFieldId(id) && (
+              <PeriodComponent id={id} value={field.value} onChange={(value) => handleChangeFieldValue({ id, type: field.type, value })} />
+            )}
+            {field.type === FieldTypes.RADIO_BUTTONS && isRadioButtonsFormFieldId(id) && (
               <RadioGroupComponent
                 className="w-full"
                 size="large"
@@ -216,7 +246,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 onChange={(event) => handleChangeFieldValue({ id, type: field.type, value: event.target.value })}
               />
             )}
-            {field.type === FieldTypes.FILE && (
+            {field.type === FieldTypes.FILE && isFileFormFieldId(id) && (
               <UploadComponent
                 listType="picture"
                 multiple={!!field.multiple}

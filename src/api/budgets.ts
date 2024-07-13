@@ -8,13 +8,13 @@ import { FieldIds } from "@/types/field";
 export const getBudgetsListApi = (filter: FilterPeriodStateItem) =>
   supabase
     .from("budgets")
-    .select("created_at, id, name, amount, period, accounts:accounts(id), categories:cost_categories(id)")
+    .select("created_at, id, name, amount, period, accounts(id), categories:cost_categories(id)")
     .eq("user_id", getUserId())
     .rangeGte("period", getFromPeriodDatesForApi(filter[FieldIds.PERIOD]))
     .rangeLte("period", getToPeriodDatesForApi(filter[FieldIds.PERIOD]));
 
 export const getBudgetItemApi = (budgetId: string) =>
-  supabase.from("budgets").select("id, name, amount, period, accounts:accounts(id), categories:cost_categories(id)").match({ user_id: getUserId(), id: budgetId }).single();
+  supabase.from("budgets").select("created_at, id, name, amount, period, accounts(id), categories:cost_categories(id)").match({ user_id: getUserId(), id: budgetId }).single();
 
 export const createBudgetItemApi = async ({ name, amount, period, categories, accounts }: BudgetItemData) => {
   const { data, error } = await supabase.from("budgets").insert({ name, amount, period, user_id: getUserId() }).select().single();
@@ -24,14 +24,14 @@ export const createBudgetItemApi = async ({ name, amount, period, categories, ac
 };
 
 export const deleteBudgetItemApi = (budgetId: number) =>
-  supabase.from("budgets").delete().match({ user_id: getUserId(), id: budgetId }).select("created_at, id, name, amount, period, accounts:accounts(id), categories:cost_categories(id)").single();
+  supabase.from("budgets").delete().match({ user_id: getUserId(), id: budgetId }).select("created_at, id, name, amount, period, accounts(id), categories:cost_categories(id)").single();
 
 export const updateBudgetItemApi = async ({ budgetId, budgetData: { name, amount, period, categories, accounts } }: { budgetId: number; budgetData: BudgetItemData }) => {
   const { data, error } = await supabase
     .from("budgets")
     .update({ name, amount, period, updated_at: getCurrentDate() })
     .match({ user_id: getUserId(), id: budgetId })
-    .select("id, name, amount, period, accounts:accounts(id), categories:cost_categories(id)")
+    .select("created_at, id, name, amount, period, accounts(id), categories:cost_categories(id)")
     .single();
   if (!data) return { data, error };
 

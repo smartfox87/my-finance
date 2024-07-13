@@ -1,24 +1,28 @@
 export interface CostCategory {
-  id: string;
+  id: number;
   name: string;
 }
 
-export type CostCategories = CostCategory[];
-
 export interface AccountType {
-  id: string;
+  id: number;
   user_id: string;
   name: string;
+  general_name?: string;
+}
+
+export interface AccountTypesObject {
+  id: number;
+  user_id: string;
+  name: string;
+  general_name?: string;
 }
 
 export interface AccountTypeData {
   general_name: string;
 }
 
-export type AccountTypes = AccountType[];
-
 export interface IncomeCategory {
-  id: string;
+  id: number;
   user_id: string;
   name: string;
 }
@@ -27,13 +31,9 @@ export interface IncomeCategoryData {
   general_name: string;
 }
 
-export type IncomeCategories = IncomeCategory[];
-
 export interface Currency {
-  id: string;
+  id: number;
   name: string;
   code: string;
   symbol: string;
 }
-
-export type Currencies = Currency[];

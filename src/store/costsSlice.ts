@@ -111,7 +111,7 @@ export const costsSlice = createAppSlice({
     setCostsFilterValues: create.reducer<FilterItem[]>((state, { payload }) => {
       state.costsFilterValues = payload.reduce((acc, field) => setFilterValue(acc, field), state.costsFilterValues);
     }),
-    setCostItem: create.reducer<CostItem>((state, { payload }) => {
+    setCostItem: create.reducer<CostItem | null>((state, { payload }) => {
       state.costItem = payload;
     }),
   }),

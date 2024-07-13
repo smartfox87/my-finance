@@ -1,4 +1,4 @@
-import type { FilteredSinglePropItems, SelectedOptionsData } from "../../../support/types";
+import { FieldIds, FilteredSinglePropItems, SelectedOptionsData } from "../../../support/types";
 import { getPropAndOrder, getReverseIndexesArray } from "../../../support/utils";
 
 describe("authorized incomes page", () => {
@@ -18,7 +18,7 @@ describe("authorized incomes page", () => {
           cy.get('[data-cy="incomes-filter-form"]')
             .closest(".ant-drawer-open")
             .within(() => {
-              cy.pickSelect("#sort", { index, returnValue: true }).then(() => {
+              cy.pickSelect(`#${FieldIds.SORT}`, { index, returnValue: true }).then(() => {
                 cy.get("@selectedValue").then((selectedValue) => {
                   const { prop, order } = getPropAndOrder(selectedValue);
                   if (!prop || !order) return;
@@ -44,7 +44,7 @@ describe("authorized incomes page", () => {
         let initialItemsCount: number = 0;
         cy.get('[data-cy="incomes-items-count"]').then((element) => (initialItemsCount = parseInt(element.text())));
 
-        ["account", "category"].forEach((prop) => {
+        [FieldIds.ACCOUNTS, FieldIds.CATEGORIES].forEach((prop) => {
           cy.get('[data-cy="incomes-filter-btn"]').click();
           cy.get('[data-cy="incomes-filter-form"]')
             .closest(".ant-drawer-open")

@@ -1,10 +1,10 @@
-import { DateFormField, DatesPeriodFormField, FileFormField, NumberFormField, RadioButtonsFormField, SelectFormField, TextFormField } from "@/types/form";
+import { DateFormField, DatesPeriodFormField, FileFormField, NumberFormField, RadioButtonsFormField, MultiSelectFormField, SingleSelectFormField, TextFormField } from "@/types/form";
 import { getDatesPeriod, getPeriod, periodOptions } from "@/helpers/date";
 import { PickerPeriods } from "@/types/date";
 import { ComplexFieldNames, SelectFieldOptions, FieldTypes, SimpleFieldNames, SortFieldOptions, GenderFieldOptions, SubjectFieldOptions, FieldValues } from "@/types/field";
 import { FieldIds } from "@/types/field";
 
-export const SORT_FIELD: SelectFormField = {
+export const SORT_FIELD: SingleSelectFormField = {
   id: FieldIds.SORT,
   type: FieldTypes.SELECT,
   label: `complex.${ComplexFieldNames.SORT}.label`,
@@ -21,7 +21,7 @@ export const SORT_FIELD: SelectFormField = {
   focus: true,
 };
 
-export const ACCOUNT_FIELD: SelectFormField = {
+export const ACCOUNT_FIELD: SingleSelectFormField = {
   id: FieldIds.ACCOUNT,
   type: FieldTypes.SELECT,
   label: `complex.${ComplexFieldNames.ACCOUNT}.label`,
@@ -31,9 +31,9 @@ export const ACCOUNT_FIELD: SelectFormField = {
   showSearch: true,
 };
 
-export const ACCOUNTS_FIELD: SelectFormField = {
+export const ACCOUNTS_FIELD: MultiSelectFormField = {
   id: FieldIds.ACCOUNTS,
-  type: FieldTypes.SELECT,
+  type: FieldTypes.MULTISELECT,
   label: `complex.${ComplexFieldNames.ACCOUNT}.label`,
   value: [FieldValues.ALL],
   options: [{ label_translation: `complex.${ComplexFieldNames.ACCOUNT}.options.${SelectFieldOptions.ALL}`, value: FieldValues.ALL }],
@@ -41,7 +41,7 @@ export const ACCOUNTS_FIELD: SelectFormField = {
   multiple: true,
 };
 
-export const CATEGORY_FIELD: SelectFormField = {
+export const CATEGORY_FIELD: SingleSelectFormField = {
   id: FieldIds.CATEGORY,
   type: FieldTypes.SELECT,
   label: `complex.${ComplexFieldNames.CATEGORY}.label`,
@@ -51,9 +51,9 @@ export const CATEGORY_FIELD: SelectFormField = {
   showSearch: true,
 };
 
-export const CATEGORIES_FIELD: SelectFormField = {
+export const CATEGORIES_FIELD: MultiSelectFormField = {
   id: FieldIds.CATEGORIES,
-  type: FieldTypes.SELECT,
+  type: FieldTypes.MULTISELECT,
   label: `complex.${ComplexFieldNames.CATEGORY}.label`,
   value: [FieldValues.ALL],
   options: [{ label_translation: `complex.${ComplexFieldNames.CATEGORY}.options.${SelectFieldOptions.ALL}`, value: FieldValues.ALL }],
@@ -84,7 +84,7 @@ export const DATE_FIELD: DateFormField = {
   placeholder: "YYYY-MM-DD",
 };
 
-export const CURRENCY_FIELD: SelectFormField = {
+export const CURRENCY_FIELD: SingleSelectFormField = {
   id: FieldIds.CURRENCY,
   type: FieldTypes.SELECT,
   label: `simple.${SimpleFieldNames.CURRENCY}`,
@@ -127,7 +127,7 @@ export const BIRTHDATE_FIELD: DateFormField = {
   picker: PickerPeriods.DATE,
 };
 
-export const GENDER_FIELD: SelectFormField = {
+export const GENDER_FIELD: SingleSelectFormField = {
   id: FieldIds.GENDER,
   type: FieldTypes.SELECT,
   label: `complex.${ComplexFieldNames.GENDER}.label`,
@@ -138,7 +138,7 @@ export const GENDER_FIELD: SelectFormField = {
   ],
 };
 
-export const SUBJECT_FIELD: SelectFormField = {
+export const SUBJECT_FIELD: SingleSelectFormField = {
   id: FieldIds.SUBJECT,
   type: FieldTypes.SELECT,
   label: `complex.${ComplexFieldNames.SUBJECT}.label`,

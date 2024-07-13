@@ -9,5 +9,6 @@ export const InnerHeaderActionsPortal = ({ children }: { children: ReactNode }) 
     return () => setMounted(false);
   }, []);
 
+  // notice: createPortal target element must be already mounted
   return mounted ? createPortal(children, document.getElementById("layout-header")!) : null;
 };
