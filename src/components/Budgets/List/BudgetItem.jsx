@@ -18,8 +18,8 @@ export const BudgetItem = ({ id, created_at, name, amount, accounts, categories,
   const currency = useSelector(selectCurrency);
   const accountsObject = useSelector(selectAccountsObject);
   const costCategoriesObject = useSelector(selectCostCategoriesObject);
-  const accountsValue = useMemo(() => accounts?.map(({ id }) => accountsObject?.[id]).join(", ") || t("detail.all_accounts"), [accounts, accountsObject, t]);
-  const categoriesValue = useMemo(() => categories?.map(({ id }) => costCategoriesObject?.[id]).join(", ") || t("detail.all_categories"), [categories, costCategoriesObject, t]);
+  const accountsValue = useMemo(() => accounts?.map((id) => accountsObject?.[id]).join(", ") || t("detail.all_accounts"), [accounts, accountsObject, t]);
+  const categoriesValue = useMemo(() => categories?.map((id) => costCategoriesObject?.[id]).join(", ") || t("detail.all_categories"), [categories, costCategoriesObject, t]);
   const nameRef = useRef(null);
   const [isTooltipName, setIsTooltipName] = useState(false);
   const capitalizedName = uppercaseFirstLetter(name);
