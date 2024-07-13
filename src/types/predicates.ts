@@ -9,7 +9,7 @@ export const isNumber = (value: any): value is number => typeof value === "numbe
 
 export const isStringNumber = (value: any): value is string | number => isString(value) || isNumber(value);
 
-export const isMultiSelectValues = (value: any): value is MultiSelectValue => Array.isArray(value) && value.every((item) => typeof item === "number" || item === FieldValues.ALL);
+export const isMultiSelectValue = (value: any): value is MultiSelectValue => Array.isArray(value) && value.every((item) => typeof item === "number" || item === FieldValues.ALL);
 
 export const isRcFile = (value: any): value is RcFile => "uid" in value && !("name" in value);
 

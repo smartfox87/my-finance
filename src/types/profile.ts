@@ -31,7 +31,6 @@ export interface Profile {
   [FieldIds.PERIOD]: DatesPeriod | null;
   [FieldIds.CURRENCY]: Currency | Currency[] | null;
 }
-// currency: Currency | Currency[] | null;
 
 export interface ProfileSliceState {
   profile: Profile | null;

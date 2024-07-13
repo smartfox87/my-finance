@@ -6,7 +6,7 @@ import { getFileSizeWithUnit } from "@/helpers/file";
 import { cutDecimals, handleFilterSelectOptions, handleKeyDownDecimalsValidation, handleKeyUpCutDecimals } from "@/helpers/fields";
 import dynamic from "next/dynamic";
 import { showErrorMessage } from "@/helpers/message";
-import { isMultiSelectValues, isUploadFileArray } from "@/types/predicates";
+import { isMultiSelectValue, isUploadFileArray } from "@/types/predicates";
 import {
   ChangedField,
   DefaultFormProps,
@@ -64,7 +64,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
   const handleChangeFieldValue = useCallback(
     ({ id, value, type }: ChangedField): void => {
       const currentFieldValue = currentFieldsValues[id];
-      if (type === FieldTypes.MULTISELECT && isMultiSelectValues(value) && isMultiSelectValues(currentFieldValue)) {
+      if (type === FieldTypes.MULTISELECT && isMultiSelectValue(value) && isMultiSelectValue(currentFieldValue)) {
         if (!value?.length || (!currentFieldValue.includes(FieldValues.ALL) && value.includes(FieldValues.ALL))) form.setFieldsValue({ [id]: [FieldValues.ALL] });
         else form.setFieldsValue({ [id]: value.filter((val) => val !== FieldValues.ALL) });
       } else form.setFieldsValue({ [id]: value });
@@ -88,7 +88,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
       const processedValues = Object.entries(values).reduce((acc: FormValues, [key, value]) => {
         if (isUploadFileArray(value)) acc[key] = value.map(({ originFileObj }) => originFileObj);
         else if (isDayjs(value)) acc[key] = value.format("YYYY-MM-DD");
-        else if (isMultiSelectValues(value)) acc[key] = value.filter((val) => val !== FieldValues.ALL);
+        else if (isMultiSelectValue(value)) acc[key] = value.filter((val) => val !== FieldValues.ALL);
         else acc[key] = value;
         return acc;
       }, {});

@@ -1,6 +1,6 @@
 import { FieldIds, FieldTypes, FieldValues } from "@/types/field";
 import { ActiveFilterItem, ActiveFilterItemValue, FilterItem, FilterState } from "@/types/filter";
-import { isMultiSelectValues, isTruthy } from "@/types/predicates";
+import { isMultiSelectValue, isTruthy } from "@/types/predicates";
 import { ProcessedFilterField } from "@/types/selectors";
 import { i18nRef } from "@/i18n";
 
@@ -38,7 +38,7 @@ export const checkIsClearableFilter = ({ id, value }: ActiveFilterItemValue) => 
 
 export const setFilterValue = (filterValues: FilterState | null, { id, value }: FilterItem) => {
   const state: FilterState = filterValues ? { ...filterValues } : {};
-  if (isMultiSelectValues(value) && (id === FieldIds.CATEGORIES || id === FieldIds.ACCOUNTS)) {
+  if (isMultiSelectValue(value) && (id === FieldIds.CATEGORIES || id === FieldIds.ACCOUNTS)) {
     if (!value?.length || (!state[id]?.includes(FieldValues.ALL) && value.includes(FieldValues.ALL)) || (value.length === 1 && value.includes(FieldValues.ALL))) {
       state[id] = [FieldValues.ALL];
     } else {

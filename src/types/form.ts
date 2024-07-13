@@ -115,7 +115,7 @@ export type FormValues = Record<string, FormValue>;
 
 export interface DefaultFormProps {
   fields: FormField[];
-  onSaveForm: (formValues: Record<string, FormValue>) => Promise<void>;
+  onSaveForm: (formValues: FormValues) => Promise<void>;
   isResetAfterSave?: boolean;
   isVisible?: boolean;
   onResetForm?: () => void;
