@@ -6,7 +6,7 @@ import { ProfileMenu } from "@/components/Profile/ProfileMenu.jsx";
 import { LanguageToggle } from "@/components/Layout/Header/LanguageToggle.jsx";
 import { Logo } from "@/components/Layout/Header/Logo.jsx";
 import { memo, Suspense } from "react";
-import { selectUser } from "@/store/selectors/auth.js";
+import { selectUser } from "@/store/selectors/auth";
 import { MobileMenu } from "@/components/Layout/Header/MobileMenu.jsx";
 import { useViewport } from "@/hooks/viewport";
 

@@ -6,7 +6,7 @@ import { ProfileMenu } from "@/components/Profile/ProfileMenu.jsx";
 import { Auth } from "@/components/Auth/Auth.jsx";
 import { LanguageToggle } from "@/components/Layout/Header/LanguageToggle.jsx";
 import { useSelector } from "react-redux";
-import { selectUser } from "@/store/selectors/auth.js";
+import { selectUser } from "@/store/selectors/auth";
 import { MainNav } from "@/components/Layout/MainNav";
 import { useAntd } from "@/hooks/antd.js";
 import { useModalState } from "@/hooks/providers/modalState.js";

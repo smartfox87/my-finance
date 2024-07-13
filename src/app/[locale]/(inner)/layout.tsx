@@ -5,7 +5,7 @@ import { MainNav } from "@/components/Layout/MainNav";
 import { useViewport } from "@/hooks/viewport";
 import { ReactNode, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { selectUser } from "@/store/selectors/auth.js";
+import { selectUser } from "@/store/selectors/auth";
 import { useTranslation } from "react-i18next";
 import { getUserId } from "@/helpers/localStorage.js";
 import { MobileNav } from "@/components/Layout/MobileNav";
