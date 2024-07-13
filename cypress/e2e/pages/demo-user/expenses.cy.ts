@@ -1,4 +1,4 @@
-import type { FilteredSinglePropItems, SelectedOptionsData } from "../../../support/types";
+import { FieldIds, FilteredSinglePropItems, SelectedOptionsData } from "../../../support/types";
 import { getPropAndOrder, getReverseIndexesArray } from "../../../support/utils";
 
 describe("authorized expenses page", () => {
@@ -19,7 +19,7 @@ describe("authorized expenses page", () => {
           cy.get('[data-cy="expenses-filter-form"]')
             .closest(".ant-drawer-open")
             .within(() => {
-              cy.pickSelect("#sort", { index, returnValue: true }).then(() => {
+              cy.pickSelect(`#${FieldIds.SORT}`, { index, returnValue: true }).then(() => {
                 cy.get("@selectedValue").then((selectedValue) => {
                   const { prop, order } = getPropAndOrder(selectedValue);
                   if (!prop || !order) return;
@@ -45,7 +45,7 @@ describe("authorized expenses page", () => {
         let initialItemsCount: number = 0;
         cy.get('[data-cy="expenses-items-count"]').then((element) => (initialItemsCount = parseInt(element.text())));
 
-        ["account", "category"].forEach((prop) => {
+        [FieldIds.ACCOUNTS, FieldIds.CATEGORIES].forEach((prop) => {
           cy.get('[data-cy="expenses-filter-btn"]').click();
           cy.get('[data-cy="expenses-filter-form"]')
             .closest(".ant-drawer-open")

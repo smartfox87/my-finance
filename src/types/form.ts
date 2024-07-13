@@ -25,6 +25,7 @@ export type SingleSelectFormField = BaseFormField & {
   options: SelectOption<SingleSelectValue>[];
   options_prefix?: string;
   showSearch?: boolean;
+  multiple?: boolean;
 };
 
 export type MultiSelectFormFieldId = FieldIds.ACCOUNTS | FieldIds.CATEGORIES;
@@ -36,6 +37,7 @@ export type MultiSelectFormField = BaseFormField & {
   options: SelectOption<MultiSelectOptionValue>[];
   options_prefix?: string;
   showSearch?: boolean;
+  multiple?: boolean;
 };
 
 type RadioButtonsFormFieldId = FieldIds.PERIOD;

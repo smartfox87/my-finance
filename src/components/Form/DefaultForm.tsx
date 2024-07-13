@@ -67,7 +67,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
       if (type === FieldTypes.MULTISELECT && isMultiSelectValues(value) && isMultiSelectValues(currentFieldValue)) {
         if (!value?.length || (!currentFieldValue.includes(FieldValues.ALL) && value.includes(FieldValues.ALL))) form.setFieldsValue({ [id]: [FieldValues.ALL] });
         else form.setFieldsValue({ [id]: value.filter((val) => val !== FieldValues.ALL) });
-      } else if (type === FieldTypes.SELECT) form.setFieldsValue({ [id]: value });
+      } else form.setFieldsValue({ [id]: value });
       setCurrentFieldsValues(form.getFieldsValue(true));
       if (typeof onChange === "function") onChange();
     },

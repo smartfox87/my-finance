@@ -66,3 +66,25 @@ export type FilterPropValues = string[];
 export type FilteredSinglePropItems = string[];
 
 export type FilteredMultiPropsItems = string[][];
+
+export enum FieldIds {
+  SORT = "sort",
+  PERIOD = "period",
+  ACCOUNT = "account",
+  ACCOUNTS = "accounts",
+  CATEGORY = "category",
+  CATEGORIES = "categories",
+  NAME = "name",
+  AMOUNT = "amount",
+  BALANCE = "balance",
+  DATE = "date",
+  CURRENCY = "currency",
+  FULL_NAME = "full_name",
+  EMAIL = "email",
+  BIRTHDATE = "birthdate",
+  GENDER = "gender",
+  SUBJECT = "subject",
+  MESSAGE = "message",
+  FILES = "files",
+  PASSWORD = "password",
+}

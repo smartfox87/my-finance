@@ -38,6 +38,7 @@ export const ACCOUNTS_FIELD: MultiSelectFormField = {
   value: [FieldValues.ALL],
   options: [{ label_translation: `complex.${ComplexFieldNames.ACCOUNT}.options.${SelectFieldOptions.ALL}`, value: FieldValues.ALL }],
   showSearch: true,
+  multiple: true,
 };
 
 export const CATEGORY_FIELD: SingleSelectFormField = {
@@ -57,6 +58,7 @@ export const CATEGORIES_FIELD: MultiSelectFormField = {
   value: [FieldValues.ALL],
   options: [{ label_translation: `complex.${ComplexFieldNames.CATEGORY}.options.${SelectFieldOptions.ALL}`, value: FieldValues.ALL }],
   showSearch: true,
+  multiple: true,
 };
 
 export const DATES_PERIOD_FIELD: DatesPeriodFormField = {

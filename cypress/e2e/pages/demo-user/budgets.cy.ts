@@ -1,4 +1,4 @@
-import type { FilteredMultiPropsItems, SelectedOptionsData } from "../../../support/types";
+import { FieldIds, FilteredMultiPropsItems, SelectedOptionsData } from "../../../support/types";
 import { getPropAndOrder, getReverseIndexesArray } from "../../../support/utils";
 
 describe("authorized budgets page", () => {
@@ -18,7 +18,7 @@ describe("authorized budgets page", () => {
           cy.get('[data-cy="budgets-filter-form"]')
             .closest(".ant-drawer-open")
             .within(() => {
-              cy.pickSelect("#sort", { index, returnValue: true }).then(() => {
+              cy.pickSelect(`#${FieldIds.SORT}`, { index, returnValue: true }).then(() => {
                 cy.get("@selectedValue").then((selectedValue) => {
                   const { prop, order } = getPropAndOrder(selectedValue);
                   if (!prop || !order) return;
@@ -44,7 +44,7 @@ describe("authorized budgets page", () => {
         let initialItemsCount: number = 0;
         cy.get('[data-cy="budgets-items-count"]').then((element) => (initialItemsCount = parseInt(element.text())));
 
-        ["accounts", "categories"].forEach((prop) => {
+        [FieldIds.ACCOUNTS, FieldIds.CATEGORIES].forEach((prop) => {
           cy.get('[data-cy="budgets-filter-btn"]').click();
           cy.get('[data-cy="budgets-filter-form"]')
             .closest(".ant-drawer-open")
