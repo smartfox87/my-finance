@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useMemo } from "react";
 import { SimpleSelect } from "@/components/Form/SimpleSelect.jsx";
-import { useLocale } from "@/hooks/locale";
+import { useLocale } from "@/hooks/providers/locale";
 import { locales } from "@/constants/router";
 
 export const LanguageToggle = () => {

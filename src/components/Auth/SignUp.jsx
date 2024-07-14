@@ -2,11 +2,11 @@ import { INITIAL_SIGN_UP_FIELDS } from "@/constants/auth";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { useViewport } from "@/hooks/viewport";
-import { useRecaptcha } from "@/hooks/recaptcha.js";
+import { useRecaptcha } from "@/hooks/providers/recaptcha.ts";
 import SvgSignUp from "@/assets/sprite/sign-up.svg";
 import { SimpleButton } from "@/components/Form/SimpleButton";
-import { useAntd } from "@/hooks/antd.js";
-import { useModalState } from "@/hooks/providers/modalState.js";
+import { useAntd } from "@/hooks/providers/antd.ts";
+import { useModalState } from "@/hooks/providers/modalState";
 import dynamic from "next/dynamic";
 
 const AuthModal = dynamic(() => import("@/components/Auth/AuthModal.jsx").then(({ AuthModal }) => ({ default: AuthModal })));

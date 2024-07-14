@@ -3,7 +3,7 @@
 import { useTranslation } from "react-i18next";
 import { DefaultForm } from "@/components/Form/DefaultForm";
 import { showNotification } from "@/helpers/modals";
-import { useRecaptcha } from "@/hooks/recaptcha";
+import { useRecaptcha } from "@/hooks/providers/recaptcha";
 import { selectContactFields } from "@/store/selectors/contact";
 import { useSelector } from "react-redux";
 import { Organization, WithContext } from "schema-dts";

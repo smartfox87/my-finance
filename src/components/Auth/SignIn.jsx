@@ -2,11 +2,11 @@ import { useDispatch } from "react-redux";
 import { INITIAL_SIGN_IN_FIELDS } from "@/constants/auth";
 import { useTranslation } from "react-i18next";
 import { useViewport } from "@/hooks/viewport";
-import { useRecaptcha } from "@/hooks/recaptcha.js";
+import { useRecaptcha } from "@/hooks/providers/recaptcha.ts";
 import SvgSignIn from "@/assets/sprite/sign-in.svg";
 import { SimpleButton } from "@/components/Form/SimpleButton";
-import { useAntd } from "@/hooks/antd.js";
-import { useModalState } from "@/hooks/providers/modalState.js";
+import { useAntd } from "@/hooks/providers/antd.ts";
+import { useModalState } from "@/hooks/providers/modalState";
 import dynamic from "next/dynamic";
 import { useEffect } from "react";
 
