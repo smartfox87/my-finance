@@ -6,11 +6,7 @@ import { i18nConfig } from "../../i18nConfig";
 import { locales } from "@/constants/router";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { isStringLocale } from "@/predicates/locale";
-
-interface LocaleContextType {
-  antdLocale: AntdLocale | undefined;
-  changeLocale: (lang: Locale) => Promise<void>;
-}
+import { LocaleContextType } from "@/types/localeProvider";
 
 const getAntdLocale = (lang: Locale): Promise<AntdLocale> => import(`antd/lib/locale/${AntdLocales[lang]}`).then((module) => module.default);
 

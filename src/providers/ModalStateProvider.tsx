@@ -1,15 +1,6 @@
-import { createContext, ReactNode, SetStateAction, useCallback, useMemo, useState } from "react";
+import { createContext, ReactNode, useCallback, useMemo, useState } from "react";
 import { useViewport } from "@/hooks/viewport";
-
-interface ModalStateContextType {
-  isOpenMenuModal: boolean;
-  setIsOpenMenuModal: (value: SetStateAction<boolean>) => void;
-  isOpenSignInModal: boolean;
-  toggleSignInModalVisibility: () => void;
-  isOpenSignUpModal: boolean;
-  toggleSignUpModalVisibility: () => void;
-  isLoadedAuthModal: boolean;
-}
+import { ModalStateContextType } from "@/types/modalStateProvider";
 
 export const ModalStateContext = createContext<ModalStateContextType | undefined>(undefined);
 

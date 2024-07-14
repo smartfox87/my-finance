@@ -2,12 +2,7 @@ import { createContext, createRef, forwardRef, ReactNode, useCallback, useEffect
 import dynamic from "next/dynamic";
 import * as Sentry from "@sentry/nextjs";
 import ReCAPTCHA, { type ReCAPTCHAProps } from "react-google-recaptcha";
-
-interface RecaptchaContextType {
-  initCaptcha: () => void;
-  isLoadedCaptcha: boolean;
-  getScore: (options?: { action?: string }) => Promise<number>;
-}
+import { RecaptchaContextType } from "@/types/recaptchaProvider";
 
 const siteKey = process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY;
 

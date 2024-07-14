@@ -8,18 +8,7 @@ import dynamic from "next/dynamic";
 import { Preloader } from "@/components/Layout/Preloader";
 import { usePathname } from "next/navigation";
 import { Pages } from "@/types/router";
-
-interface Theme {
-  defaultAlgorithm: any;
-  darkAlgorithm: any;
-}
-
-interface AntdContextType {
-  initAntd: () => void;
-  isLoadedAntd: boolean;
-  isLoadingAntd: boolean;
-  setIsLoadingAntd: (isLoading: boolean) => void;
-}
+import { AntdContextType, Theme } from "@/types/antdProvider";
 
 const StyleProvider = dynamic(() => import("@ant-design/cssinjs/es/StyleContext").then(({ StyleProvider }) => StyleProvider));
 const ConfigProvider = dynamic(() => import("antd/es/config-provider"));
