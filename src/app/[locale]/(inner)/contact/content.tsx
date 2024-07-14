@@ -1,18 +1,16 @@
 "use client";
 
 import { useTranslation } from "react-i18next";
-import { Preloader } from "@/components/Layout/Preloader";
 import { DefaultForm } from "@/components/Form/DefaultForm";
 import { showNotification } from "@/helpers/modals";
-import { useEffect } from "react";
 import { useRecaptcha } from "@/hooks/recaptcha";
 import { selectContactFields } from "@/store/selectors/contact";
 import { useSelector } from "react-redux";
-import { useAntd } from "@/hooks/antd.js";
 import { Organization, WithContext } from "schema-dts";
 import { languages } from "@/constants/router";
 import { FormValues } from "@/types/form";
-import { isRcFileArray, isStringNumber } from "@/types/predicates";
+import { isRcFileArray } from "@/predicates/field";
+import { isStringNumber } from "@/predicates/common";
 
 export default function ContactContent() {
   const { t } = useTranslation();

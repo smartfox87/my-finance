@@ -3,8 +3,8 @@ import { selectCostCategories } from "@/store/selectors/references";
 import { selectAccountsList } from "@/store/selectors/accounts";
 import { INITIAL_STATISTICS_FILTER_FIELDS } from "@/constants/statistics";
 import { LazyLoadedSlices } from "@/store";
-import { isFilterStateKey } from "@/types/filter";
 import { processFilterFields, filterSingleItemsList, filterMultiItemsList } from "@/helpers/selectors";
+import { isFilterStateKey } from "@/predicates/filter";
 
 export const selectCostsListForCharts = ({ statistics }: LazyLoadedSlices) => statistics?.costsListForCharts || null;
 

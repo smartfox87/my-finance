@@ -3,8 +3,8 @@ import { type DatesPeriod, DatesPeriods, DatesStrings } from "@/types/date";
 import { periods } from "@/constants/date";
 import dayjs from "dayjs";
 import quarterOfYear from "dayjs/plugin/quarterOfYear";
-import { isDatesPeriod } from "@/types/predicates";
 import { ComplexFieldNames, FieldTranslationRadioButtonOption } from "@/types/field";
+import { isDatesPeriod } from "@/predicates/field";
 dayjs.extend(quarterOfYear);
 
 export const toggleDayjsLocale = async (locale: Locale): Promise<void> => {

@@ -2,13 +2,12 @@ import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/to
 import { createBudgetItemApi, getBudgetsListApi, updateBudgetItemApi, deleteBudgetItemApi, getBudgetItemApi } from "@/api/budgets";
 import { handleRejected } from "@/helpers/processExtraReducersCases";
 import { setFilterValue } from "@/helpers/filters";
-import { getPeriodDates } from "@/helpers/date";
 import { rootReducer } from "@/store";
 import { BudgetItem, BudgetItemData, ProcessedBudgetItem } from "@/types/budgets";
 import { FilterItem, FilterPeriodStateItem, FilterState } from "@/types/filter";
 import { FieldIds } from "@/types/field";
-import { isDatesStrings } from "@/types/date";
 import { processBudgetItem } from "@/helpers/budgets";
+import { isDatesStrings } from "@/predicates/date";
 
 const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },

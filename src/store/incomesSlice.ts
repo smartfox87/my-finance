@@ -9,7 +9,7 @@ import { AppDispatch, RootState } from "@/store";
 import { AccountItemBalanceData } from "@/types/accounts";
 import { FilterItem, FilterPeriodStateItem, FilterState } from "@/types/filter";
 import { FieldIds } from "@/types/field";
-import { isDatesStrings } from "@/types/date";
+import { isDatesStrings } from "@/predicates/date";
 
 const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },

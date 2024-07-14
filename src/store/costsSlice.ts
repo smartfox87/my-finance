@@ -8,7 +8,7 @@ import { AppDispatch, rootReducer, RootState } from "@/store";
 import { CostItem, CostItemData } from "@/types/costs";
 import { FilterItem, FilterPeriodStateItem, FilterState } from "@/types/filter";
 import { FieldIds } from "@/types/field";
-import { isDatesStrings } from "@/types/date";
+import { isDatesStrings } from "@/predicates/date";
 
 const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },

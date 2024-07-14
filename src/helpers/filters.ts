@@ -1,8 +1,9 @@
 import { FieldIds, FieldTypes, FieldValues } from "@/types/field";
 import { ActiveFilterItem, ActiveFilterItemValue, FilterItem, FilterState } from "@/types/filter";
-import { isMultiSelectValue, isTruthy } from "@/types/predicates";
 import { ProcessedFilterField } from "@/types/selectors";
 import { i18nRef } from "@/i18n";
+import { isMultiSelectValue } from "@/predicates/field";
+import { isTruthy } from "@/predicates/common";
 
 export const getActiveFilters = (processedFilterFields: ProcessedFilterField[], filterValues: FilterState | null): ActiveFilterItem[] =>
   processedFilterFields

@@ -33,8 +33,6 @@ export type FilterState = Partial<FilterPeriodStateItem> & {
 
 export type FilterStateKey = keyof FilterState;
 
-export const isFilterStateKey = (key: any): key is FilterStateKey => FieldIds.PERIOD === key || FieldIds.CATEGORY === key || FieldIds.ACCOUNT === key || FieldIds.SORT === key;
-
 export type FilterField =
   | DatesPeriodFormField
   | (SingleSelectFormField & {

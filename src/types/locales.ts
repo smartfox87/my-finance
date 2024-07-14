@@ -36,8 +36,6 @@ export type AntdLocale = typeof en;
 
 export type Locale = `${Locales}`;
 
-export const isStringLocale = (locale: any): locale is Locale => Object.values(Locales).includes(locale);
-
 export const Languages = {
   [Locales.EN]: "english",
   [Locales.DE]: "german",

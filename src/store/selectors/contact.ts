@@ -3,7 +3,7 @@ import { INITIAL_CONTACT_FIELDS } from "@/constants/contact";
 import { selectProfile } from "@/store/selectors/profile";
 import { FieldIds } from "@/types/field";
 import { FormField } from "@/types/form";
-import { isString, isTruthy } from "@/types/predicates";
+import { isString, isTruthy } from "@/predicates/common";
 
 export const selectContactFields = createSelector([selectProfile], (profile): FormField[] =>
   INITIAL_CONTACT_FIELDS.map((field) => {

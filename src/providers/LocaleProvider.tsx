@@ -1,10 +1,11 @@
 import { createContext, ReactNode, useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toggleDayjsLocale } from "@/helpers/date";
-import { AntdLocale, AntdLocales, isStringLocale, Locale, Locales } from "@/types/locales";
+import { AntdLocale, AntdLocales, Locale } from "@/types/locales";
 import { i18nConfig } from "../../i18nConfig";
 import { locales } from "@/constants/router";
 import { useParams, usePathname, useRouter } from "next/navigation";
+import { isStringLocale } from "@/predicates/locale";
 
 interface LocaleContextType {
   antdLocale: AntdLocale | undefined;

@@ -16,8 +16,6 @@ export type BaseFormField = {
 };
 
 export type SingleSelectFormFieldId = FieldIds.SORT | FieldIds.ACCOUNT | FieldIds.CATEGORY | FieldIds.CURRENCY | FieldIds.GENDER | FieldIds.SUBJECT;
-export const isSingleSelectFormFieldId = (id: string): id is SingleSelectFormFieldId =>
-  FieldIds.SORT === id || FieldIds.ACCOUNT === id || FieldIds.CATEGORY === id || FieldIds.CURRENCY === id || FieldIds.GENDER === id || FieldIds.SUBJECT === id;
 export type SingleSelectFormField = BaseFormField & {
   id: SingleSelectFormFieldId;
   type: FieldTypes.SELECT;
@@ -29,7 +27,6 @@ export type SingleSelectFormField = BaseFormField & {
 };
 
 export type MultiSelectFormFieldId = FieldIds.ACCOUNTS | FieldIds.CATEGORIES;
-export const isMultiSelectFormFieldId = (id: string): id is MultiSelectFormFieldId => FieldIds.ACCOUNTS === id || FieldIds.CATEGORIES === id;
 export type MultiSelectFormField = BaseFormField & {
   id: MultiSelectFormFieldId;
   type: FieldTypes.MULTISELECT;
@@ -40,8 +37,7 @@ export type MultiSelectFormField = BaseFormField & {
   multiple?: boolean;
 };
 
-type RadioButtonsFormFieldId = FieldIds.PERIOD;
-export const isRadioButtonsFormFieldId = (id: string): id is RadioButtonsFormFieldId => FieldIds.PERIOD === id;
+export type RadioButtonsFormFieldId = FieldIds.PERIOD;
 export type RadioButtonsFormField = BaseFormField & {
   id: RadioButtonsFormFieldId;
   type: FieldTypes.RADIO_BUTTONS;
@@ -49,8 +45,7 @@ export type RadioButtonsFormField = BaseFormField & {
   options: Array<{ label?: string; label_translation: FieldTranslationRadioButtonOption; value: string }>;
 };
 
-type FileFormFieldId = FieldIds.FILES;
-export const isFileFormFieldId = (id: string): id is FileFormFieldId => FieldIds.FILES === id;
+export type FileFormFieldId = FieldIds.FILES;
 export type FileFormField = BaseFormField & {
   id: FileFormFieldId;
   type: FieldTypes.FILE;
@@ -61,8 +56,7 @@ export type FileFormField = BaseFormField & {
   maxSize?: number;
 };
 
-type DateFormFieldId = FieldIds.DATE | FieldIds.BIRTHDATE;
-export const isDateFormFieldId = (id: string): id is DateFormFieldId => FieldIds.DATE === id || FieldIds.BIRTHDATE === id;
+export type DateFormFieldId = FieldIds.DATE | FieldIds.BIRTHDATE;
 export type DateFormField = BaseFormField & {
   id: DateFormFieldId;
   type: FieldTypes.DATE;
@@ -72,16 +66,13 @@ export type DateFormField = BaseFormField & {
 };
 
 export type DatesPeriodFormFieldId = FieldIds.PERIOD;
-export const isDatesPeriodFormFieldId = (id: string): id is DatesPeriodFormFieldId => FieldIds.PERIOD === id;
 export type DatesPeriodFormField = BaseFormField & {
   id: DatesPeriodFormFieldId;
   type: FieldTypes.DATES_PERIOD;
   value: DatesStrings;
 };
 
-type TextFormFieldId = FieldIds.NAME | FieldIds.FULL_NAME | FieldIds.EMAIL | FieldIds.MESSAGE | FieldIds.PASSWORD;
-export const isTextFormFieldId = (id: string): id is TextFormFieldId =>
-  FieldIds.NAME === id || FieldIds.FULL_NAME === id || FieldIds.EMAIL === id || FieldIds.MESSAGE === id || FieldIds.PASSWORD === id;
+export type TextFormFieldId = FieldIds.NAME | FieldIds.FULL_NAME | FieldIds.EMAIL | FieldIds.MESSAGE | FieldIds.PASSWORD;
 export type TextFormField = BaseFormField & {
   id: TextFormFieldId;
   type: FieldTypes.TEXT | FieldTypes.PASSWORD | FieldTypes.EMAIL | FieldTypes.TEXTAREA;
@@ -89,8 +80,7 @@ export type TextFormField = BaseFormField & {
   maxLength?: number;
 };
 
-type NumberFormFieldId = FieldIds.AMOUNT | FieldIds.BALANCE;
-export const isNumberFormFieldId = (id: string): id is NumberFormFieldId => FieldIds.AMOUNT === id || FieldIds.BALANCE === id;
+export type NumberFormFieldId = FieldIds.AMOUNT | FieldIds.BALANCE;
 export type NumberFormField = BaseFormField & {
   id: NumberFormFieldId;
   type: FieldTypes.NUMBER;

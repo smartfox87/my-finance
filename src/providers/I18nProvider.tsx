@@ -2,8 +2,8 @@ import { I18nextProvider } from "react-i18next";
 import { createInstance, Resource } from "i18next";
 import { initTranslations } from "@/i18n";
 import { useParams } from "next/navigation";
-import { isStringLocale } from "@/types/locales";
 import { ReactNode } from "react";
+import { isStringLocale } from "@/predicates/locale";
 
 export function I18nProvider({ children, resources }: { children: ReactNode; resources: Resource }) {
   const i18nInstance = createInstance();

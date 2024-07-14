@@ -6,24 +6,21 @@ import { getFileSizeWithUnit } from "@/helpers/file";
 import { cutDecimals, handleFilterSelectOptions, handleKeyDownDecimalsValidation, handleKeyUpCutDecimals } from "@/helpers/fields";
 import dynamic from "next/dynamic";
 import { showErrorMessage } from "@/helpers/message";
-import { isMultiSelectValue, isUploadFileArray } from "@/types/predicates";
-import {
-  ChangedField,
-  DefaultFormProps,
-  FormItemRule,
-  FormValues,
-  isDateFormFieldId,
-  isDatesPeriodFormFieldId,
-  isFileFormFieldId,
-  isNumberFormFieldId,
-  isRadioButtonsFormFieldId,
-  isMultiSelectFormFieldId,
-  isSingleSelectFormFieldId,
-  isTextFormFieldId,
-} from "@/types/form";
+import { ChangedField, DefaultFormProps, FormItemRule, FormValues } from "@/types/form";
 import { Button, type DatePickerProps, Form, FormProps, Input, InputRef, SelectProps, type UploadFile } from "antd";
 import dayjs, { isDayjs } from "dayjs";
 import { FieldTranslationError, FieldType, FieldTypes, FieldValues, SelectComponentProps } from "@/types/field";
+import { isMultiSelectValue, isUploadFileArray } from "@/predicates/field";
+import {
+  isDateFormFieldId,
+  isDatesPeriodFormFieldId,
+  isFileFormFieldId,
+  isMultiSelectFormFieldId,
+  isNumberFormFieldId,
+  isRadioButtonsFormFieldId,
+  isSingleSelectFormFieldId,
+  isTextFormFieldId,
+} from "@/predicates/form";
 
 const PeriodComponent = dynamic(() => import("@/components/Form/PeriodField").then((mod) => mod.PeriodField));
 const DatePickerComponent = dynamic<DatePickerProps>(() => import("antd/es/date-picker"));
