@@ -1,6 +1,6 @@
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import { getUserSession, handleAuthStateChange, loginDemoUserApi, loginUserApi, loginUserByProviderApi, logoutUserApi, registerUserApi } from "@/api/auth";
-import { handleRejectedReducerAction } from "@/helpers/processExtraReducersCases";
+import { handleRejectedReducerAction } from "@/helpers/errors";
 import { RegisterData, UserPayload, LoginData, SessionPayload } from "@/types/auth";
 import { rootReducer } from "@/store";
 import { Provider, User } from "@supabase/auth-js";

@@ -11,6 +11,7 @@ import { languages } from "@/constants/router";
 import { FormValues } from "@/types/form";
 import { isRcFileArray } from "@/predicates/field";
 import { isStringNumber } from "@/predicates/common";
+import { showCommonError } from "@/helpers/errors";
 
 export default function ContactContent() {
   const { t } = useTranslation();
@@ -37,7 +38,7 @@ export default function ContactContent() {
         showNotification({ title: t("notifications.contact.success") });
       } else {
         console.error(error);
-        showNotification({ title: t("notifications.error.common") });
+        showCommonError();
       }
     } catch (error: unknown) {
       if (error instanceof Error) {

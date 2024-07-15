@@ -1,6 +1,6 @@
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import { createBudgetItemApi, getBudgetsListApi, updateBudgetItemApi, deleteBudgetItemApi, getBudgetItemApi } from "@/api/budgets";
-import { handleRejectedReducerAction } from "@/helpers/processExtraReducersCases";
+import { handleRejectedReducerAction } from "@/helpers/errors";
 import { setFilterValue } from "@/helpers/filters";
 import { rootReducer } from "@/store";
 import { BudgetItem, BudgetItemData, ProcessedBudgetItem } from "@/types/budgets";

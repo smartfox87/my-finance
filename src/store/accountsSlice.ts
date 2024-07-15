@@ -1,6 +1,6 @@
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import { createAccountItemApi, getAccountsListApi, updateAccountItemApi, deleteAccountItemApi, getAccountItemApi, createInitialAccountsApi } from "@/api/accounts";
-import { handleRejectedReducerAction } from "@/helpers/processExtraReducersCases";
+import { handleRejectedReducerAction } from "@/helpers/errors";
 import { createAccountTypeApi, updateAccountTypeApi } from "@/api/references";
 import { RootState, rootReducer } from "@/store";
 import type { AccountItem, AccountItemData, AccountItemBalanceData, AccountsSliceState } from "@/types/accounts";

@@ -1,6 +1,6 @@
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import { getProfileApi, updateProfileApi } from "@/api/profile";
-import { handleRejectedReducerAction } from "@/helpers/processExtraReducersCases";
+import { handleRejectedReducerAction } from "@/helpers/errors";
 import { rootReducer } from "@/store";
 import { Profile, ProfileData, ProfileSliceState } from "@/types/profile";
 
