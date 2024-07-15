@@ -1,4 +1,4 @@
-import { FieldValues, MultiSelectValue, SingleSelectValue } from "@/types/field";
+import { FieldId, FieldIds, FieldValues, MultiSelectValue, SingleSelectValue } from "@/types/field";
 import type { RcFile, UploadFile } from "antd/es/upload/interface";
 import { isNumber } from "@/predicates/common";
 import { DatesPeriod, DatesPeriods } from "@/types/date";
@@ -14,3 +14,5 @@ export const isRcFile = (value: any): value is RcFile => "uid" in value && !("na
 export const isRcFileArray = (value: any): value is RcFile[] => Array.isArray(value) && value.every((item) => isRcFile(item));
 
 export const isDatesPeriod = (value: any): value is DatesPeriod => Object.values(DatesPeriods).includes(value);
+
+export const isFieldId = (value: any): value is FieldId => Object.values(FieldIds).includes(value);

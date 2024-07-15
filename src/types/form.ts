@@ -2,7 +2,7 @@ import type { Dayjs } from "dayjs";
 import type { UploadFile } from "antd";
 import { DatesStrings, PickerPeriod } from "@/types/date";
 import type { RcFile } from "antd/es/upload";
-import { FieldIds, FieldTranslationLabel, FieldTranslationRadioButtonOption, FieldTypes, MultiSelectOptionValue, MultiSelectValue, SelectOption, SingleSelectValue } from "@/types/field";
+import { FieldId, FieldIds, FieldTranslationLabel, FieldTranslationRadioButtonOption, FieldTypes, MultiSelectOptionValue, MultiSelectValue, SelectOption, SingleSelectValue } from "@/types/field";
 
 export type FormItemRule = FieldTypes.NUMBER | FieldTypes.EMAIL;
 
@@ -101,7 +101,7 @@ export type ChangedField =
 
 export type FormValue = FormField["value"] | RcFile[];
 
-export type FormValues = Record<string, FormValue>;
+export type FormValues = Record<FieldId, FormValue>;
 
 export interface DefaultFormSaveHandler {
   (formValues: FormValues): Promise<void>;

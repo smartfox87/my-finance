@@ -10,7 +10,7 @@ import { ChangedField, DefaultFormProps, FormItemRule, FormValues } from "@/type
 import { Button, type DatePickerProps, Form, FormProps, Input, InputRef, SelectProps, type UploadFile } from "antd";
 import dayjs, { isDayjs } from "dayjs";
 import { FieldTranslationError, FieldType, FieldTypes, FieldValues, SelectComponentProps } from "@/types/field";
-import { isMultiSelectValue, isUploadFileArray } from "@/predicates/field";
+import { isFieldId, isMultiSelectValue, isUploadFileArray } from "@/predicates/field";
 import {
   isDateFormFieldId,
   isDatesPeriodFormFieldId,
@@ -36,12 +36,11 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
 
   const propsFieldsValues = useMemo(
     (): FormValues =>
-      fields.reduce(
-        (acc, { id, type, value }) => ({
-          ...acc,
-          [id]: type === FieldTypes.DATE && value ? dayjs(value) : value,
-        }),
+      Object.assign(
         {},
+        ...fields.map(({ id, type, value }) => ({
+          [id]: type === FieldTypes.DATE && value ? dayjs(value) : value,
+        })),
       ),
     [fields],
   );
@@ -74,7 +73,8 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
   useImperativeHandle(ref, () => ({ handleChangeFieldValue }));
 
   const isChangedFieldsValues = useMemo(
-    (): boolean => Object.entries(propsFieldsValues).some(([key, value]) => (value || currentFieldsValues[key]) && JSON.stringify(value) !== JSON.stringify(currentFieldsValues[key])),
+    (): boolean =>
+      Object.entries(propsFieldsValues).some(([key, value]) => isFieldId(key) && (value || currentFieldsValues[key]) && JSON.stringify(value) !== JSON.stringify(currentFieldsValues[key])),
     [propsFieldsValues, currentFieldsValues],
   );
 
@@ -83,14 +83,16 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
     try {
       const values = await form.validateFields();
       setIsLoading(true);
-      const processedValues = Object.entries(values).reduce((acc: FormValues, [key, value]) => {
-        if (isUploadFileArray(value)) acc[key] = value.map(({ originFileObj }) => originFileObj).filter(isTruthy);
-        // todo optimize date format for single function
-        else if (isDayjs(value)) acc[key] = value.format("YYYY-MM-DD");
-        else if (isMultiSelectValue(value)) acc[key] = value.filter((val) => val !== FieldValues.ALL);
-        else acc[key] = value;
-        return acc;
-      }, {});
+      const processedValues: FormValues = Object.assign(
+        {},
+        ...Object.entries(values).map(([key, value]) => {
+          if (isUploadFileArray(value)) return { [key]: value.map(({ originFileObj }) => originFileObj).filter(isTruthy) };
+          // todo optimize date format for single function
+          else if (isDayjs(value)) return { [key]: value.format("YYYY-MM-DD") };
+          else if (isMultiSelectValue(value)) return { [key]: value.filter((val) => val !== FieldValues.ALL) };
+          else return { [key]: value };
+        }),
+      );
       await onSaveForm(processedValues);
       if (isResetAfterSave) form.resetFields();
     } catch (errorInfo) {
