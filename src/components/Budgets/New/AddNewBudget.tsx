@@ -13,6 +13,7 @@ import { useViewport } from "@/hooks/viewport";
 import { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 import { FieldIds, FieldTypes } from "@/types/field";
 import { useAppDispatch } from "@/hooks/redux";
+import { isBudgetItemData } from "@/predicates/budget";
 
 export const AddNewBudget = memo(function AddNewBudget({ isAdaptive, onSave }: { isAdaptive: boolean; onSave: () => Promise<void> }) {
   const { t } = useTranslation();
@@ -25,11 +26,15 @@ export const AddNewBudget = memo(function AddNewBudget({ isAdaptive, onSave }: {
   const newBudgetFields = useSelector(selectBudgetFields);
 
   const onSaveNewBudget: DefaultFormSaveHandler = async (fieldsValues) => {
-    const response = await dispatch(createBudgetItemThunk(fieldsValues));
-    if (response.error) return;
-    await onSave();
-    setIsOpen(false);
-    showNotification({ title: t("notifications.budget.create") });
+    try {
+      if (!isBudgetItemData(fieldsValues)) return;
+      const response = await dispatch(createBudgetItemThunk(fieldsValues)).unwrap();
+      await onSave();
+      setIsOpen(false);
+      showNotification({ title: t("notifications.budget.create") });
+    } catch (error) {
+      showNotification({ title: t("notifications.error.common"), type: "error" });
+    }
   };
 
   const formRef = useRef<DefaultFormRef>(null);

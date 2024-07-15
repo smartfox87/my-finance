@@ -1,6 +1,6 @@
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import { createBudgetItemApi, getBudgetsListApi, updateBudgetItemApi, deleteBudgetItemApi, getBudgetItemApi } from "@/api/budgets";
-import { handleRejected } from "@/helpers/processExtraReducersCases";
+import { handleRejectedReducerAction } from "@/helpers/processExtraReducersCases";
 import { setFilterValue } from "@/helpers/filters";
 import { rootReducer } from "@/store";
 import { BudgetItem, BudgetItemData, ProcessedBudgetItem } from "@/types/budgets";
@@ -38,7 +38,7 @@ export const budgetsSlice = createAppSlice({
         return data;
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
         fulfilled: (state, { payload }) => {
           state.budgetsList = payload.map(processBudgetItem);
         },
@@ -51,7 +51,7 @@ export const budgetsSlice = createAppSlice({
         return data;
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
       },
     ),
     getBudgetItemThunk: create.asyncThunk<BudgetItem, string, { rejectValue: string }>(
@@ -61,7 +61,7 @@ export const budgetsSlice = createAppSlice({
         return data;
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
         fulfilled: (state, { payload }) => {
           state.budgetItem = processBudgetItem(payload);
         },
@@ -74,7 +74,7 @@ export const budgetsSlice = createAppSlice({
         return data;
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
       },
     ),
     deleteBudgetItemThunk: create.asyncThunk<BudgetItem, number, { rejectValue: string }>(
@@ -84,7 +84,7 @@ export const budgetsSlice = createAppSlice({
         return data;
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
         fulfilled: (state) => {
           state.budgetItem = null;
         },

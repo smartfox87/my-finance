@@ -1,6 +1,6 @@
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import { createIncomeItemApi, getIncomesListApi, updateIncomeItemApi, deleteIncomeItemApi, getIncomeItemApi } from "@/api/incomes";
-import { handleRejected } from "@/helpers/processExtraReducersCases";
+import { handleRejectedReducerAction } from "@/helpers/processExtraReducersCases";
 import { updateAccountBalanceThunk } from "@/store/accountsSlice";
 import { setFilterValue } from "@/helpers/filters";
 import { rootReducer } from "@/store";
@@ -40,7 +40,7 @@ export const incomesSlice = createAppSlice({
         return data;
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
         fulfilled: (state, { payload }) => {
           state.incomesList = payload;
         },
@@ -57,7 +57,7 @@ export const incomesSlice = createAppSlice({
         return data;
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
       },
     ),
     getIncomeItemThunk: create.asyncThunk<IncomeItem, string, { rejectValue: string }>(
@@ -67,7 +67,7 @@ export const incomesSlice = createAppSlice({
         return data;
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
         fulfilled: (state, { payload }) => {
           state.incomeItem = payload;
         },
@@ -90,7 +90,7 @@ export const incomesSlice = createAppSlice({
         return data;
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
         fulfilled: (state, { payload }) => {
           if (Array.isArray(state.incomesList)) state.incomesList = state.incomesList.map((income) => (income.id === payload.id ? payload : income));
         },
@@ -109,7 +109,7 @@ export const incomesSlice = createAppSlice({
         return data;
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
         fulfilled: (state) => {
           state.incomeItem = null;
         },

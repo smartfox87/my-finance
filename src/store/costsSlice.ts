@@ -1,6 +1,6 @@
 import { asyncThunkCreator, buildCreateSlice } from "@reduxjs/toolkit";
 import { createCostItemApi, getCostsListApi, updateCostItemApi, deleteCostItemApi, getCostItemApi } from "@/api/costs";
-import { handleRejected } from "@/helpers/processExtraReducersCases";
+import { handleRejectedReducerAction } from "@/helpers/processExtraReducersCases";
 import { updateAccountBalanceThunk } from "@/store/accountsSlice";
 import { setFilterValue } from "@/helpers/filters";
 import type { WithSlice } from "@reduxjs/toolkit";
@@ -39,7 +39,7 @@ export const costsSlice = createAppSlice({
         return data;
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
         fulfilled: (state, { payload }) => {
           state.costsList = payload;
         },
@@ -53,7 +53,7 @@ export const costsSlice = createAppSlice({
         return data;
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
       },
     ),
     getCostItemThunk: create.asyncThunk<CostItem, string, { rejectValue: string }>(
@@ -63,7 +63,7 @@ export const costsSlice = createAppSlice({
         return data;
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
         fulfilled: (state, { payload }) => {
           state.costItem = payload;
         },
@@ -87,7 +87,7 @@ export const costsSlice = createAppSlice({
         return data;
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
       },
     ),
     deleteCostItemThunk: create.asyncThunk<CostItem, number, { rejectValue: string }>(
@@ -102,7 +102,7 @@ export const costsSlice = createAppSlice({
         return data;
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
         fulfilled: (state) => {
           state.costItem = null;
         },

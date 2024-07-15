@@ -11,7 +11,7 @@ import { ProfileSliceState } from "@/types/profile";
 
 type State = IncomesSliceState | AccountsSliceState | BudgetsSliceState | AuthSliceState | ProfileSliceState | ReferencesSliceState | CostsSliceState | StatisticsSliceState;
 
-export const handleRejected = (state: State, { payload, error }: { payload?: string; error: SerializedError }) => {
+export const handleRejectedReducerAction = (state: State, { payload, error }: { payload?: string; error: SerializedError }) => {
   const errorText = payload || error.message;
   if (errorText) showErrorMessage(errorText, 8);
 };
