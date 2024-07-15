@@ -37,12 +37,12 @@ export default function ContactContent() {
         showNotification({ title: t("notifications.contact.success") });
       } else {
         console.error(error);
-        showNotification({ title: t("notifications.contact.error") });
+        showNotification({ title: t("notifications.error.common") });
       }
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.error(error);
-        showNotification({ title: error.message || t("notifications.contact.error") });
+        showNotification({ title: error.message || t("notifications.error.common") });
       }
     }
   };

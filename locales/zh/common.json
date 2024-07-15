@@ -142,8 +142,7 @@
     "add_income": "添加新收入",
     "transfer_money": "账户间转账",
     "amount_calculator": "金额计算器",
-    "total": "总计",
-    "error": "出了些问题！"
+    "total": "总计"
   },
   "titles": {
     "authorisation": "授权",
@@ -182,14 +181,16 @@
       "delete": "收入已成功删除。"
     },
     "contact": {
-      "success": "消息已成功发送。",
-      "error": "发送消息时发生错误。"
+      "success": "消息已成功发送。"
     },
     "profile": {
       "update": "用户资料已成功更新。"
     },
     "settings": {
       "update": "设置已成功更新。"
+    },
+    "error": {
+      "common": "出了些问题，请重试。"
     }
   },
   "detail": {

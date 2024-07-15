@@ -142,8 +142,7 @@
     "add_income": "Add new income",
     "transfer_money": "Transfer between accounts",
     "amount_calculator": "Amount calculator",
-    "total": "Total",
-    "error": "Something went wrong!"
+    "total": "Total"
   },
   "titles": {
     "authorisation": "Authorisation",
@@ -182,14 +181,16 @@
       "delete": "The income has been successfully deleted."
     },
     "contact": {
-      "success": "The message has been successfully sent.",
-      "error": "An error occurred while sending the message."
+      "success": "The message has been successfully sent."
     },
     "profile": {
       "update": "The profile has been successfully updated."
     },
     "settings": {
       "update": "The settings have been successfully updated."
+    },
+    "error": {
+      "common": "Something went wrong, please try again."
     }
   },
   "detail": {

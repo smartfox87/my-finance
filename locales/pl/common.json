@@ -142,8 +142,7 @@
     "add_income": "Dodaj nowy dochód",
     "transfer_money": "Przelew między kontami",
     "amount_calculator": "Kalkulator kwoty",
-    "total": "Razem",
-    "error": "Coś poszło nie tak!"
+    "total": "Razem"
   },
   "titles": {
     "authorisation": "Autoryzacja",
@@ -182,14 +181,16 @@
       "delete": "Dochód został pomyślnie usunięty."
     },
     "contact": {
-      "success": "Wiadomość została pomyślnie wysłana.",
-      "error": "Wystąpił błąd podczas wysyłania wiadomości."
+      "success": "Wiadomość została pomyślnie wysłana."
     },
     "profile": {
       "update": "Profil użytkownika został pomyślnie zaktualizowany."
     },
     "settings": {
       "update": "Ustawienia zostały pomyślnie zaktualizowane."
+    },
+    "error": {
+      "common": "Coś poszło nie tak, spróbuj ponownie."
     }
   },
   "detail": {
