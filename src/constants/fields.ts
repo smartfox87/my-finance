@@ -4,7 +4,7 @@ import { PickerPeriods } from "@/types/date";
 import { ComplexFieldNames, SelectFieldOptions, FieldTypes, SimpleFieldNames, SortFieldOptions, GenderFieldOptions, SubjectFieldOptions, FieldValues } from "@/types/field";
 import { FieldIds } from "@/types/field";
 
-export const SORT_FIELD: SingleSelectFormField = {
+export const SORT_FIELD: SingleSelectFormField<string, FieldIds.SORT> = {
   id: FieldIds.SORT,
   type: FieldTypes.SELECT,
   label: `complex.${ComplexFieldNames.SORT}.label`,

@@ -16,11 +16,11 @@ export type BaseFormField = {
 };
 
 export type SingleSelectFormFieldId = FieldIds.SORT | FieldIds.ACCOUNT | FieldIds.CATEGORY | FieldIds.CURRENCY | FieldIds.GENDER | FieldIds.SUBJECT;
-export type SingleSelectFormField = BaseFormField & {
-  id: SingleSelectFormFieldId;
+export type SingleSelectFormField<T extends SingleSelectValue = SingleSelectValue, S extends SingleSelectFormFieldId = SingleSelectFormFieldId> = BaseFormField & {
+  id: S;
   type: FieldTypes.SELECT;
-  value: SingleSelectValue;
-  options: SelectOption<SingleSelectValue>[];
+  value: T;
+  options: SelectOption<T>[];
   options_prefix?: string;
   showSearch?: boolean;
   multiple?: boolean;
@@ -99,15 +99,24 @@ export type ChangedField =
   | Pick<RadioButtonsFormField, "id" | "type" | "value">
   | Pick<NumberFormField, "id" | "type" | "value">;
 
-export type FormValue = FormField["value"] | (RcFile | undefined)[];
+export type FormValue = FormField["value"] | RcFile[];
 
 export type FormValues = Record<string, FormValue>;
 
+export interface DefaultFormSaveHandler {
+  (formValues: FormValues): Promise<void>;
+}
+
 export interface DefaultFormProps {
   fields: FormField[];
-  onSaveForm: (formValues: FormValues) => Promise<void>;
+  onSaveForm: DefaultFormSaveHandler;
   isResetAfterSave?: boolean;
   isVisible?: boolean;
   onResetForm?: () => void;
   onChange?: () => void;
+}
+
+// notice: createRef type with target component inner functions and variables
+export interface DefaultFormRef {
+  handleChangeFieldValue: (field: ChangedField) => void;
 }

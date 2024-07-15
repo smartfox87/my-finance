@@ -4,8 +4,9 @@ import { useDispatch } from "react-redux";
 import { isStringADate } from "@/helpers/date";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import queryString from "query-string";
+import { FilterState, setFilterStateValues } from "@/types/filter";
 
-export const useFilterSearchParams = (filterValues, setFilterValues) => {
+export const useFilterSearchParams = (filterValues: FilterState | null, setFilterValues: setFilterStateValues) => {
   const dispatch = useDispatch();
   const searchParams = useSearchParams();
   const router = useRouter();

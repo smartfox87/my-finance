@@ -1,20 +1,22 @@
 import { Button } from "antd";
 import { SideModal } from "@/components/Modals/SideModal.jsx";
-import { DefaultForm } from "@/components/Form/DefaultForm.tsx";
-import { useDispatch, useSelector } from "react-redux";
+import { DefaultForm } from "@/components/Form/DefaultForm";
+import { useSelector } from "react-redux";
 import { selectBudgetFields } from "@/store/selectors/budgets";
 import { createBudgetItemThunk } from "@/store/budgetsSlice";
 import { useTranslation } from "react-i18next";
 import { showNotification } from "@/helpers/modals.js";
 import { memo, useRef, useState } from "react";
 import SvgNewBudget from "@/assets/sprite/new-budget.svg";
-
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
 import { useViewport } from "@/hooks/viewport";
+import { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
+import { FieldIds, FieldTypes } from "@/types/field";
+import { useAppDispatch } from "@/hooks/redux";
 
-export const AddNewBudget = memo(function AddNewBudget({ isAdaptive, onSave }) {
+export const AddNewBudget = memo(function AddNewBudget({ isAdaptive, onSave }: { isAdaptive: boolean; onSave: () => Promise<void> }) {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { viewport } = useViewport();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -22,16 +24,16 @@ export const AddNewBudget = memo(function AddNewBudget({ isAdaptive, onSave }) {
 
   const newBudgetFields = useSelector(selectBudgetFields);
 
-  const onSaveNewBudget = async (fieldsValues) => {
-    const { error } = await dispatch(createBudgetItemThunk(fieldsValues));
-    if (error) return;
-    onSave();
+  const onSaveNewBudget: DefaultFormSaveHandler = async (fieldsValues) => {
+    const response = await dispatch(createBudgetItemThunk(fieldsValues));
+    if (response.error) return;
+    await onSave();
     setIsOpen(false);
     showNotification({ title: t("notifications.budget.create") });
   };
 
-  const formRef = useRef();
-  const handleSetCalculatedAmount = (value) => formRef.current.handleChangeFieldValue({ id: "amount", value });
+  const formRef = useRef<DefaultFormRef>(null);
+  const handleSetCalculatedAmount = (value: number) => formRef.current?.handleChangeFieldValue({ id: FieldIds.AMOUNT, type: FieldTypes.NUMBER, value });
 
   return (
     <>

@@ -9,7 +9,7 @@ import { memo, useEffect, useState } from "react";
 import SvgFilter from "@/assets/sprite/filter.svg";
 import { useViewport } from "@/hooks/viewport";
 import { PeriodField } from "@/components/Form/PeriodField";
-import { useFilterFocus } from "@/hooks/filterFocus.js";
+import { useFilterFocus } from "@/hooks/filterFocus";
 import { setFilterValue } from "@/helpers/filters";
 import { FieldTypes } from "@/types/field";
 

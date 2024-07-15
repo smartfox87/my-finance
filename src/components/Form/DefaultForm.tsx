@@ -21,6 +21,7 @@ import {
   isSingleSelectFormFieldId,
   isTextFormFieldId,
 } from "@/predicates/form";
+import { isTruthy } from "@/predicates/common";
 
 const PeriodComponent = dynamic(() => import("@/components/Form/PeriodField").then((mod) => mod.PeriodField));
 const DatePickerComponent = dynamic<DatePickerProps>(() => import("antd/es/date-picker"));
@@ -34,7 +35,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
   const [form] = Form.useForm<FormValues>();
 
   const propsFieldsValues = useMemo(
-    () =>
+    (): FormValues =>
       fields.reduce(
         (acc, { id, type, value }) => ({
           ...acc,
@@ -73,17 +74,18 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
   useImperativeHandle(ref, () => ({ handleChangeFieldValue }));
 
   const isChangedFieldsValues = useMemo(
-    () => Object.entries(propsFieldsValues).some(([key, value]) => (value || currentFieldsValues[key]) && JSON.stringify(value) !== JSON.stringify(currentFieldsValues[key])),
+    (): boolean => Object.entries(propsFieldsValues).some(([key, value]) => (value || currentFieldsValues[key]) && JSON.stringify(value) !== JSON.stringify(currentFieldsValues[key])),
     [propsFieldsValues, currentFieldsValues],
   );
 
   const [isLoading, setIsLoading] = useLoading(false);
-  const handleSubmitForm: FormProps["onFinish"] = async () => {
+  const handleSubmitForm: FormProps["onFinish"] = async (): Promise<void> => {
     try {
       const values = await form.validateFields();
       setIsLoading(true);
       const processedValues = Object.entries(values).reduce((acc: FormValues, [key, value]) => {
-        if (isUploadFileArray(value)) acc[key] = value.map(({ originFileObj }) => originFileObj);
+        if (isUploadFileArray(value)) acc[key] = value.map(({ originFileObj }) => originFileObj).filter(isTruthy);
+        // todo optimize date format for single function
         else if (isDayjs(value)) acc[key] = value.format("YYYY-MM-DD");
         else if (isMultiSelectValue(value)) acc[key] = value.filter((val) => val !== FieldValues.ALL);
         else acc[key] = value;
@@ -98,17 +100,17 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
     }
   };
 
-  const handleCancelForm = () => {
+  const handleCancelForm = (): void => {
     if (onResetForm) onResetForm();
     form.setFieldsValue(propsFieldsValues);
   };
 
-  const normFile = (e: { fileList: UploadFile[] }) => (Array.isArray(e) ? e : e?.fileList);
-  const handleRemoveFile = (file: UploadFile) =>
+  const normFile = (e: { fileList: UploadFile[] }): UploadFile[] => (Array.isArray(e) ? e : e?.fileList);
+  const handleRemoveFile = (file: UploadFile): void =>
     form.setFieldsValue({
       [file.uid]: form.getFieldValue(file.uid).filter(({ uid }: { uid: string }) => uid !== file.uid),
     });
-  const handleAddFile = async (file: UploadFile, { maxSize }: { maxSize: number }) => {
+  const handleAddFile = async (file: UploadFile, { maxSize }: { maxSize: number }): Promise<boolean | string> => {
     if (file.size && file.size <= maxSize) {
       form.setFieldsValue({
         [file.uid]: form.getFieldValue(file.uid).concat([file]),

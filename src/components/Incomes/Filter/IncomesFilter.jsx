@@ -10,7 +10,7 @@ import SvgFilter from "@/assets/sprite/filter.svg";
 import { useViewport } from "@/hooks/viewport";
 import { PeriodField } from "@/components/Form/PeriodField";
 import { setFilterValue } from "@/helpers/filters";
-import { useFilterFocus } from "@/hooks/filterFocus.js";
+import { useFilterFocus } from "@/hooks/filterFocus";
 import { FieldTypes } from "@/types/field";
 
 export const IncomesFilter = memo(function IncomesFilter({ onSave }) {

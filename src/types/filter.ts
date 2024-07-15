@@ -2,7 +2,7 @@ import { FieldIds, MultiSelectOptionValue } from "@/types/field";
 import { DatesStrings } from "@/types/date";
 import { MultiSelectValue } from "@/types/field";
 import { DatesPeriodFormField, MultiSelectFormField, SingleSelectFormField } from "@/types/form";
-import { OptionsObject } from "@/types/selectors";
+import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 
 export interface FilterPeriodItem {
   id: FieldIds.PERIOD;
@@ -33,12 +33,7 @@ export type FilterState = Partial<FilterPeriodStateItem> & {
 
 export type FilterStateKey = keyof FilterState;
 
-export type FilterField =
-  | DatesPeriodFormField
-  | (SingleSelectFormField & {
-      id: FieldIds.SORT;
-    })
-  | MultiSelectFormField;
+export type FilterField = DatesPeriodFormField | SingleSelectFormField<string, FieldIds.SORT> | MultiSelectFormField;
 
 type ActiveMultiSelectFilterItem = {
   id: FieldIds.ACCOUNTS | FieldIds.CATEGORIES;
@@ -63,3 +58,5 @@ type ActiveDatesPeriodFilterItem = {
 export type ActiveFilterItem = ActiveMultiSelectFilterItem | ActiveSortSelectFilterItem | ActiveDatesPeriodFilterItem;
 
 export type ActiveFilterItemValue = Pick<ActiveFilterItem, "value" | "id">;
+
+export type setFilterStateValues = ActionCreatorWithPayload<FilterItem[], "budgets/setBudgetsFilterValues">;

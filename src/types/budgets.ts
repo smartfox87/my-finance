@@ -1,11 +1,12 @@
 import { DatesStrings } from "@/types/date";
+import { FieldIds } from "@/types/field";
 
 export interface BudgetItemData {
-  name: string;
-  amount: number;
-  period: string;
-  accounts: number[];
-  categories: number[];
+  [FieldIds.NAME]: string;
+  [FieldIds.AMOUNT]: number;
+  [FieldIds.PERIOD]: string;
+  [FieldIds.ACCOUNTS]: number[];
+  [FieldIds.CATEGORIES]: number[];
 }
 
 export interface BudgetItem {
