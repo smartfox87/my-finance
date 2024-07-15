@@ -25,7 +25,7 @@
 		"@ducanh2912/next-pwa": "^10.2.7",
 		"@reduxjs/toolkit": "^2.2.6",
 		"@sentry/nextjs": "^8.17.0",
-		"@supabase/supabase-js": "^2.44.3",
+		"@supabase/supabase-js": "^2.44.4",
 		"@vercel/speed-insights": "^1.0.12",
 		"antd": "^5.19.1",
 		"i18next": "^23.11.5",
