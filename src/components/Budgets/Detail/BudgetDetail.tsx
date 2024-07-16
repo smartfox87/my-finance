@@ -14,7 +14,7 @@ import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
 import { Button } from "antd";
 import { useSearchParams, useRouter } from "next/navigation";
 
-export const BudgetDetail = memo(function BudgetDetail({ onSave }) {
+export const BudgetDetail = memo(function BudgetDetail({ onSave }: { onSave: () => Promise<void> }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const router = useRouter();

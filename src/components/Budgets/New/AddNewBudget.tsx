@@ -16,7 +16,7 @@ import { useAppDispatch } from "@/hooks/redux";
 import { isBudgetItemData } from "@/predicates/budget";
 import { showCommonError } from "@/helpers/errors";
 
-export const AddNewBudget = memo(function AddNewBudget({ isAdaptive, onSave }: { isAdaptive: boolean; onSave: () => Promise<void> }) {
+export const AddNewBudget = memo(function AddNewBudget({ isAdaptive, onSave }: { isAdaptive?: boolean; onSave: () => Promise<void> }) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { viewport } = useViewport();

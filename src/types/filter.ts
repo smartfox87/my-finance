@@ -33,6 +33,7 @@ export type FilterState = Partial<FilterPeriodStateItem> & {
 
 export type FilterStateKey = keyof FilterState;
 
+// todo use such generic for all field types
 export type FilterField = DatesPeriodFormField | SingleSelectFormField<string, FieldIds.SORT> | MultiSelectFormField;
 
 type ActiveMultiSelectFilterItem = {

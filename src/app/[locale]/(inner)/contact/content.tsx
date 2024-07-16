@@ -18,7 +18,7 @@ export default function ContactContent() {
   const contactFields = useSelector(selectContactFields);
   const { initCaptcha, isLoadedCaptcha, getScore } = useRecaptcha();
 
-  const handleFieldChange = () => {
+  const handleFieldChange = (): void => {
     if (!isLoadedCaptcha) initCaptcha();
   };
 
@@ -27,12 +27,10 @@ export default function ContactContent() {
       const score = await getScore();
       if (score < 0.5) return showNotification({ title: t("notifications.recaptcha_invalid") });
       const formData = new FormData();
-      Object.entries(contactData)
-        .filter(([key, value]) => !!value)
-        .forEach(([key, value]) => {
-          if (isRcFileArray(value)) value.forEach((value) => formData.append(key, value));
-          else if (isStringNumber(value)) formData.append(key, value.toString());
-        });
+      Object.entries(contactData).forEach(([key, value]) => {
+        if (isRcFileArray(value)) value.forEach((value) => formData.append(key, value));
+        else if (isStringNumber(value)) formData.append(key, value.toString());
+      });
       const { success, error } = await fetch("/api/contact", { method: "POST", body: formData }).then((res) => res.json());
       if (success) {
         showNotification({ title: t("notifications.contact.success") });

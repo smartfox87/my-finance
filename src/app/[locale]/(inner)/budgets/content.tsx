@@ -23,6 +23,8 @@ import { FoundNothing } from "@/components/Common/FoundNothing";
 import { useAppDispatch } from "@/hooks/redux";
 import { InnerHeaderActionsPortal } from "@/components/Layout/Inner/InnerHeaderActionsPortal";
 import { FilterItem } from "@/types/filter";
+import { isTruthy } from "@/predicates/common";
+import { isFilterMultiItem, isFilterPeriodItem, isFilterSortItem } from "@/predicates/filter";
 
 export default function BudgetsContent() {
   const { t } = useTranslation();
@@ -45,7 +47,14 @@ export default function BudgetsContent() {
     const injectAndLoadData = async () => {
       if (!budgetsFilterValues) {
         await import("@/store/budgetsSlice");
-        dispatch(setBudgetsFilterValues(INITIAL_BUDGETS_FILTER_FIELDS.map(({ id, value }): FilterItem => ({ id, value }))));
+        dispatch(
+          setBudgetsFilterValues(
+            INITIAL_BUDGETS_FILTER_FIELDS.map((item): FilterItem | undefined => {
+              const filterItem = { id: item.id, value: item.value };
+              if (isFilterPeriodItem(filterItem) || isFilterSortItem(filterItem) || isFilterMultiItem(filterItem)) return filterItem;
+            }).filter(isTruthy),
+          ),
+        );
       }
       if (!budgetsList?.length) await handleGetData();
     };

@@ -15,9 +15,15 @@ export const useFilterSearchParams = (filterValues: FilterState | null, setFilte
   const sortedFilterValues = useMemo(
     () =>
       filterValues
-        ? Object.entries(filterValues)
-            ?.sort((a, b) => a[0].localeCompare(b[0]))
-            .reduce((acc, [id, value]) => ({ ...acc, [id]: value }), {})
+        ? Object.assign(
+            {},
+            ...Object.entries(filterValues)
+              .sort((a, b) => a[0].localeCompare(b[0]))
+              .map(([id, value]) => {
+                const item = { [id]: value };
+                return item;
+              }),
+          )
         : null,
     [filterValues],
   );

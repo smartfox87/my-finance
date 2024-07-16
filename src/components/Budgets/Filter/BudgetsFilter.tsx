@@ -13,7 +13,7 @@ import { useFilterFocus } from "@/hooks/filterFocus";
 import { setFilterValue } from "@/helpers/filters";
 import { FieldTypes } from "@/types/field";
 
-export const BudgetsFilter = memo(function BudgetsFilter({ onSave }) {
+export const BudgetsFilter = memo(function BudgetsFilter({ onSave }: { onSave: () => Promise<void> }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { viewport } = useViewport();
