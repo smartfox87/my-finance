@@ -1,10 +1,9 @@
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { memo, useEffect, useRef, useState } from "react";
 import { selectCostFields, selectCostItem } from "@/store/selectors/costs";
 import { deleteCostItemThunk, getCostItemThunk, setCostItem, updateCostItemThunk } from "@/store/costsSlice";
-import { DefaultForm } from "@/components/Form/DefaultForm.tsx";
-import { getOnlyValuesFromData } from "@/helpers/processData";
+import { DefaultForm } from "@/components/Form/DefaultForm";
 import { showNotification } from "@/helpers/modals.js";
 import { SideModal } from "@/components/Modals/SideModal";
 import { useLoading } from "@/hooks/loading.js";
@@ -12,10 +11,16 @@ import SvgDelete from "@/assets/sprite/delete.svg";
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
 import { Button } from "antd";
 import { useSearchParams, useRouter } from "next/navigation";
+import { CostItemField } from "@/types/costs";
+import { isCostItemData } from "@/predicates/costs";
+import { showCommonError } from "@/helpers/errors";
+import { useAppDispatch } from "@/hooks/redux";
+import { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
+import { FieldIds, FieldTypes } from "@/types/field";
 
-export const CostDetail = memo(function CostDetail({ onSave }) {
+export const CostDetail = memo(function CostDetail({ onSave }: { onSave: () => Promise<void> }) {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const searchParams = useSearchParams();
   const router = useRouter();
   const costId = searchParams.get("costId");
@@ -39,32 +44,42 @@ export const CostDetail = memo(function CostDetail({ onSave }) {
   }, [costId]);
 
   const costItem = useSelector(selectCostItem);
-  const costValues = costItem ? getOnlyValuesFromData(costItem) : {};
-  const costFields = useSelector(selectCostFields).map((field) => ({ ...field, value: costValues[field.id] }));
+  const costFields = useSelector(selectCostFields).map((field): CostItemField => {
+    if (!costItem) return field;
+    const filledField: CostItemField = { ...field };
+    filledField.value = costItem[field.id] ?? filledField.value;
+    return filledField;
+  });
 
-  const handleUpdateCost = async (fieldsValues) => {
-    const { error } = await dispatch(updateCostItemThunk({ costId: costItem.id, costData: fieldsValues }));
-    setIsLoading(false);
-    if (!error) {
+  const handleUpdateCost: DefaultFormSaveHandler = async (fieldsValues) => {
+    try {
+      if (!(costItem && isCostItemData(fieldsValues))) return;
+      await dispatch(updateCostItemThunk({ costId: costItem.id, costData: fieldsValues })).unwrap();
+      setIsLoading(false);
       await onSave();
       handleCloseModal();
       showNotification({ title: t("notifications.expense.update") });
+    } catch (error) {
+      showCommonError();
     }
   };
 
-  const handleDeleteCost = async () => {
-    setIsBtnLoading(true);
-    const { error } = await dispatch(deleteCostItemThunk(costItem.id));
-    setIsBtnLoading(false);
-    if (!error) {
+  const handleDeleteCost = async (): Promise<void> => {
+    try {
+      if (!costItem) return;
+      setIsBtnLoading(true);
+      await dispatch(deleteCostItemThunk(costItem.id)).unwrap();
+      setIsBtnLoading(false);
       await onSave();
       handleCloseModal();
       showNotification({ title: t("notifications.expense.delete") });
+    } catch (error) {
+      showCommonError();
     }
   };
 
-  const formRef = useRef();
-  const handleSetCalculatedAmount = (value) => formRef.current.handleChangeFieldValue({ id: "amount", value });
+  const formRef = useRef<DefaultFormRef>(null);
+  const handleSetCalculatedAmount = (value: number): void => formRef.current?.handleChangeFieldValue({ id: FieldIds.AMOUNT, type: FieldTypes.NUMBER, value });
 
   const footer = (
     <div className="flex flex-col gap-4">

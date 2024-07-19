@@ -16,11 +16,11 @@ export type BaseFormField = {
 };
 
 export type SingleSelectFormFieldId = FieldIds.SORT | FieldIds.ACCOUNT | FieldIds.CATEGORY | FieldIds.CURRENCY | FieldIds.GENDER | FieldIds.SUBJECT;
-export type SingleSelectFormField<T extends SingleSelectValue = SingleSelectValue, S extends SingleSelectFormFieldId = SingleSelectFormFieldId> = BaseFormField & {
-  id: S;
+export type SingleSelectFormField<I extends SingleSelectFormFieldId = SingleSelectFormFieldId, V extends SingleSelectValue = SingleSelectValue> = BaseFormField & {
+  id: I;
   type: FieldTypes.SELECT;
-  value: T;
-  options: SelectOption<T>[];
+  value: V;
+  options: SelectOption<V>[];
   options_prefix?: string;
   showSearch?: boolean;
   multiple?: boolean;
@@ -57,8 +57,8 @@ export type FileFormField = BaseFormField & {
 };
 
 export type DateFormFieldId = FieldIds.DATE | FieldIds.BIRTHDATE;
-export type DateFormField = BaseFormField & {
-  id: DateFormFieldId;
+export type DateFormField<I extends DateFormFieldId = DateFormFieldId> = BaseFormField & {
+  id: I;
   type: FieldTypes.DATE;
   picker: PickerPeriod;
   value: Dayjs | null;
@@ -83,10 +83,10 @@ export type TextFormField<I extends TextFormFieldId = TextFormFieldId, T extends
 
 export type NumberFormFieldId = FieldIds.AMOUNT | FieldIds.BALANCE;
 // todo check value type
-export type NumberFormField<I extends NumberFormFieldId = NumberFormFieldId> = BaseFormField & {
+export type NumberFormField<I extends NumberFormFieldId = NumberFormFieldId, V extends number | string = number | string> = BaseFormField & {
   id: I;
   type: FieldTypes.NUMBER;
-  value: number | string;
+  value: V;
 };
 
 export type FormField = DatesPeriodFormField | TextFormField | SingleSelectFormField | MultiSelectFormField | DateFormField | FileFormField | RadioButtonsFormField | NumberFormField;
