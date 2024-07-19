@@ -16,7 +16,7 @@ import { FieldTypes } from "@/types/field";
 export const StatisticsFilter = memo(function StatisticsFilter({ onSave }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { viewport } = useViewport();
+  const { isMobile } = useViewport();
 
   const [isOpen, setIsOpen] = useState(false);
   const handleToggleVisibility = () => setIsOpen((prevState) => !prevState);
@@ -48,7 +48,7 @@ export const StatisticsFilter = memo(function StatisticsFilter({ onSave }) {
     <>
       <Button size="large" className="!flex items-center justify-center gap-3" onClick={handleToggleVisibility}>
         <SvgFilter className="h-5 w-5" />
-        {!["xs", "xxs"].includes(viewport) && t("buttons.set_filters")}
+        {!isMobile && t("buttons.set_filters")}
       </Button>
       <SideModal title={t("titles.set_filters")} isOpen={isOpen} footer={submitBtn} onClose={handleToggleVisibility} onInit={setIsInitialized}>
         <ul className="flex w-full flex-col gap-4">

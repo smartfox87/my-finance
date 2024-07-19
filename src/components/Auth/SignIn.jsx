@@ -15,7 +15,7 @@ const AuthModal = dynamic(() => import("@/components/Auth/AuthModal.jsx").then((
 export const SignIn = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { viewport } = useViewport();
+  const { isMobile } = useViewport();
   const { initCaptcha, isLoadedCaptcha, getScore } = useRecaptcha();
 
   const { isLoadedAuthModal, isOpenSignInModal, toggleSignInModalVisibility } = useModalState();
@@ -39,7 +39,7 @@ export const SignIn = () => {
     <>
       <SimpleButton type="primary" loading={isLoading} data-cy="modal-login-btn" onClick={handleToggleVisibility}>
         <SvgSignIn className="h-4 w-4" />
-        {!["xs", "xxs"].includes(viewport) ? t("buttons.sign_in") : null}
+        {!isMobile ? t("buttons.sign_in") : null}
       </SimpleButton>
       {isLoadedAuthModal && (
         <AuthModal

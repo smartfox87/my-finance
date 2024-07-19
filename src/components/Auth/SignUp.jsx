@@ -13,7 +13,7 @@ const AuthModal = dynamic(() => import("@/components/Auth/AuthModal.jsx").then((
 
 export const SignUp = () => {
   const dispatch = useDispatch();
-  const { viewport } = useViewport();
+  const { isMobile } = useViewport();
   const { t } = useTranslation();
   const { initCaptcha, isLoadedCaptcha, getScore } = useRecaptcha();
 
@@ -40,7 +40,7 @@ export const SignUp = () => {
     <>
       <SimpleButton type="primary" loading={isLoading} data-cy="register-btn" onClick={handleToggleVisibility}>
         <SvgSignUp className="h-4 w-4" />
-        {!["xs", "xxs"].includes(viewport) ? t("buttons.sign_up") : null}
+        {!isMobile ? t("buttons.sign_up") : null}
       </SimpleButton>
       {isLoadedAuthModal && (
         <AuthModal

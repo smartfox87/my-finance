@@ -11,7 +11,7 @@ export const MobileNav = memo(function MobileNav() {
     i18n: { language },
   } = useTranslation();
   const pathname = usePathname().replace(`/${language}`, "");
-  const { viewport, isTablet } = useViewport();
+  const { isMobile, isTablet } = useViewport();
 
   const getNavLinkClassName = (url: string) => (url === pathname ? "text-blue-600 dark:text-blue-400" : "");
 
@@ -24,7 +24,7 @@ export const MobileNav = memo(function MobileNav() {
           <li key={full_name} className="w-1/12 grow">
             <Link href={url} className={`${getNavLinkClassName(url)} flex flex-col items-center gap-1 py-2 text-center text-xs duration-300 hover:text-blue-600 dark:hover:text-blue-400`}>
               {icon}
-              {["xs", "xxs"].includes(viewport) && short_name ? t(short_name) : t(full_name)}
+              {isMobile && short_name ? t(short_name) : t(full_name)}
             </Link>
           </li>
         ))}

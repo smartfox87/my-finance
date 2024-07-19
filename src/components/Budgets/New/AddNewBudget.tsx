@@ -19,7 +19,7 @@ import { showCommonError } from "@/helpers/errors";
 export const AddNewBudget = memo(function AddNewBudget({ isAdaptive, onSave }: { isAdaptive?: boolean; onSave: () => Promise<void> }) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const { viewport } = useViewport();
+  const { isMobile } = useViewport();
 
   const [isOpen, setIsOpen] = useState(false);
   const handleToggleVisibility = () => setIsOpen((prevState) => !prevState);
@@ -45,7 +45,7 @@ export const AddNewBudget = memo(function AddNewBudget({ isAdaptive, onSave }: {
     <>
       <Button size="large" data-cy="add-budget-modal-btm" className="!flex items-center justify-center gap-3" onClick={handleToggleVisibility}>
         <SvgNewBudget className="h-[22px] w-[22px]" />
-        {(!isAdaptive || !["xs", "xxs"].includes(viewport)) && t("buttons.add_budget")}
+        {(!isAdaptive || !isMobile) && t("buttons.add_budget")}
       </Button>
       <SideModal
         title={t("titles.add_budget")}

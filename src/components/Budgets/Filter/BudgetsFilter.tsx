@@ -18,7 +18,7 @@ import { FilterItem, FilterState } from "@/types/filter";
 export const BudgetsFilter = memo(function BudgetsFilter({ onSave }: { onSave: () => Promise<void> }) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const { viewport } = useViewport();
+  const { isMobile } = useViewport();
 
   const [isOpen, setIsOpen] = useState(false);
   const handleToggleVisibility = () => setIsOpen((prevState) => !prevState);
@@ -54,7 +54,7 @@ export const BudgetsFilter = memo(function BudgetsFilter({ onSave }: { onSave: (
     <>
       <Button size="large" data-cy="budgets-filter-btn" className="!flex items-center justify-center gap-3" onClick={handleToggleVisibility}>
         <SvgFilter className="h-5 w-5" />
-        {!["xs", "xxs"].includes(viewport) && t("buttons.set_filters")}
+        {!isMobile && t("buttons.set_filters")}
       </Button>
       <SideModal title={t("titles.set_filters")} isOpen={isOpen} footer={submitBtn} onClose={handleToggleVisibility} onInit={setIsInitialized}>
         <ul data-cy="budgets-filter-form" className="flex w-full flex-col gap-4">

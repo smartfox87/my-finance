@@ -23,8 +23,8 @@ export const SideModal = ({
   isLoading?: boolean;
   onInit?: (isInit: boolean) => void;
 }) => {
-  const { viewport } = useViewport();
-  const placement = ["xs", "xxs"].includes(viewport) ? "bottom" : "right";
+  const { isMobile } = useViewport();
+  const placement = isMobile ? "bottom" : "right";
   const { isInitializedModal, setIsInitializedModal } = useModalState();
   const handleInit = () => onInit && onInit(true);
 

@@ -4,7 +4,7 @@ import { useViewport } from "@/hooks/viewport";
 import { Button } from "antd";
 
 export const CostCategories = ({ activeCategory, onChangeCategory }) => {
-  const { viewport } = useViewport();
+  const { isMobile } = useViewport();
 
   const costCategories = useSelector(selectCostCategories);
 
@@ -13,7 +13,7 @@ export const CostCategories = ({ activeCategory, onChangeCategory }) => {
       <ul className="flex flex-wrap gap-1.5 md:gap-2">
         {costCategories?.map(({ id, name }) => (
           <li key={id}>
-            <Button size={["xs", "xxs"].includes(viewport) ? "small" : "middle"} type={activeCategory === id ? "primary" : "default"} onClick={() => onChangeCategory(id)}>
+            <Button size={isMobile ? "small" : "middle"} type={activeCategory === id ? "primary" : "default"} onClick={() => onChangeCategory(id)}>
               {name}
             </Button>
           </li>
