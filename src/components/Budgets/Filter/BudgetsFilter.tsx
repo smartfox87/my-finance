@@ -14,6 +14,7 @@ import { prepareObjectValuesForFilterStateValues, setFilterValue } from "@/helpe
 import { FieldIds, FieldTypes } from "@/types/field";
 import { useAppDispatch } from "@/hooks/redux";
 import { FilterItem, FilterState } from "@/types/filter";
+import { BaseSelectRef } from "rc-select";
 
 export const BudgetsFilter = memo(function BudgetsFilter({ onSave }: { onSave: () => Promise<void> }) {
   const { t } = useTranslation();
@@ -24,7 +25,7 @@ export const BudgetsFilter = memo(function BudgetsFilter({ onSave }: { onSave: (
   const handleToggleVisibility = () => setIsOpen((prevState) => !prevState);
 
   const [isInitialized, setIsInitialized] = useState(false);
-  const [fieldRef] = useFilterFocus(isOpen, isInitialized);
+  const [fieldRef] = useFilterFocus<BaseSelectRef>(isOpen, isInitialized);
 
   const budgetsFilterFields = useSelector(selectBudgetsFilterFields);
   const budgetsFilterValues = useSelector(selectBudgetsFilterValues);
@@ -62,7 +63,7 @@ export const BudgetsFilter = memo(function BudgetsFilter({ onSave }: { onSave: (
             <li key={field.id} className="flex flex-col gap-4">
               {field.type === FieldTypes.MULTISELECT && (
                 <Select
-                  autoFocus={!index}
+                  ref={!index ? fieldRef : undefined}
                   id={field.id}
                   className="w-full"
                   size="large"
