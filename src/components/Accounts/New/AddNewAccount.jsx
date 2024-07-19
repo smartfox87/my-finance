@@ -1,5 +1,5 @@
 import { Button } from "antd";
-import { SideModal } from "@/components/Modals/SideModal.jsx";
+import { SideModal } from "@/components/Modals/SideModal";
 import { DefaultForm } from "@/components/Form/DefaultForm.tsx";
 import { useSelector } from "react-redux";
 import { selectAccountFields } from "@/store/selectors/accounts";
@@ -15,7 +15,7 @@ import { useAppDispatch } from "@/hooks/redux";
 export const AddNewAccount = memo(function AddNewAccount({ onSave }) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const { viewport } = useViewport();
+  const { isMobile } = useViewport();
 
   const [isOpen, setIsOpen] = useState(false);
   const handleToggleVisibility = () => setIsOpen((prevState) => !prevState);
@@ -37,7 +37,7 @@ export const AddNewAccount = memo(function AddNewAccount({ onSave }) {
     <>
       <Button size="large" data-cy="add-account-modal-btm" className="!flex items-center justify-center gap-2" onClick={handleToggleVisibility}>
         <SvgNewAccount className="h-7 w-7" />
-        {!["xs", "xxs"].includes(viewport) && t("common.add_account")}
+        {!isMobile && t("common.add_account")}
       </Button>
       <SideModal
         title={t("common.add_account")}

@@ -23,6 +23,8 @@ export enum FieldIds {
   PASSWORD = "password",
 }
 
+export type FieldId = `${FieldIds}`;
+
 export enum FieldTypes {
   TEXT = "text",
   PASSWORD = "password",

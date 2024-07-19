@@ -1,6 +1,6 @@
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import { getProfileApi, updateProfileApi } from "@/api/profile";
-import { handleRejected } from "@/helpers/processExtraReducersCases";
+import { handleRejectedReducerAction } from "@/helpers/errors";
 import { rootReducer } from "@/store";
 import { Profile, ProfileData, ProfileSliceState } from "@/types/profile";
 
@@ -25,7 +25,7 @@ export const profileSlice = createAppSlice({
         return data;
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
         fulfilled: (state, { payload }) => {
           state.profile = payload;
           setPeriod(payload);
@@ -39,7 +39,7 @@ export const profileSlice = createAppSlice({
         return data;
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
         fulfilled: (state, { payload }) => {
           state.profile = payload;
           setPeriod(payload);

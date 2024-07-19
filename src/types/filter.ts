@@ -2,7 +2,7 @@ import { FieldIds, MultiSelectOptionValue } from "@/types/field";
 import { DatesStrings } from "@/types/date";
 import { MultiSelectValue } from "@/types/field";
 import { DatesPeriodFormField, MultiSelectFormField, SingleSelectFormField } from "@/types/form";
-import { OptionsObject } from "@/types/selectors";
+import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 
 export interface FilterPeriodItem {
   id: FieldIds.PERIOD;
@@ -33,14 +33,10 @@ export type FilterState = Partial<FilterPeriodStateItem> & {
 
 export type FilterStateKey = keyof FilterState;
 
-export const isFilterStateKey = (key: any): key is FilterStateKey => FieldIds.PERIOD === key || FieldIds.CATEGORY === key || FieldIds.ACCOUNT === key || FieldIds.SORT === key;
+export type FilterStateValue = Exclude<FilterState[FilterStateKey], undefined>;
 
-export type FilterField =
-  | DatesPeriodFormField
-  | (SingleSelectFormField & {
-      id: FieldIds.SORT;
-    })
-  | MultiSelectFormField;
+// todo use such generic for all field types
+export type FilterField = DatesPeriodFormField | SingleSelectFormField<string, FieldIds.SORT> | MultiSelectFormField;
 
 type ActiveMultiSelectFilterItem = {
   id: FieldIds.ACCOUNTS | FieldIds.CATEGORIES;
@@ -65,3 +61,5 @@ type ActiveDatesPeriodFilterItem = {
 export type ActiveFilterItem = ActiveMultiSelectFilterItem | ActiveSortSelectFilterItem | ActiveDatesPeriodFilterItem;
 
 export type ActiveFilterItemValue = Pick<ActiveFilterItem, "value" | "id">;
+
+export type setFilterStateValues = ActionCreatorWithPayload<FilterItem[], "budgets/setBudgetsFilterValues">;

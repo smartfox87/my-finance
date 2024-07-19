@@ -2,7 +2,7 @@ import type { Dayjs } from "dayjs";
 import type { UploadFile } from "antd";
 import { DatesStrings, PickerPeriod } from "@/types/date";
 import type { RcFile } from "antd/es/upload";
-import { FieldIds, FieldTranslationLabel, FieldTranslationRadioButtonOption, FieldTypes, MultiSelectOptionValue, MultiSelectValue, SelectOption, SingleSelectValue } from "@/types/field";
+import { FieldId, FieldIds, FieldTranslationLabel, FieldTranslationRadioButtonOption, FieldTypes, MultiSelectOptionValue, MultiSelectValue, SelectOption, SingleSelectValue } from "@/types/field";
 
 export type FormItemRule = FieldTypes.NUMBER | FieldTypes.EMAIL;
 
@@ -16,20 +16,17 @@ export type BaseFormField = {
 };
 
 export type SingleSelectFormFieldId = FieldIds.SORT | FieldIds.ACCOUNT | FieldIds.CATEGORY | FieldIds.CURRENCY | FieldIds.GENDER | FieldIds.SUBJECT;
-export const isSingleSelectFormFieldId = (id: string): id is SingleSelectFormFieldId =>
-  FieldIds.SORT === id || FieldIds.ACCOUNT === id || FieldIds.CATEGORY === id || FieldIds.CURRENCY === id || FieldIds.GENDER === id || FieldIds.SUBJECT === id;
-export type SingleSelectFormField = BaseFormField & {
-  id: SingleSelectFormFieldId;
+export type SingleSelectFormField<T extends SingleSelectValue = SingleSelectValue, S extends SingleSelectFormFieldId = SingleSelectFormFieldId> = BaseFormField & {
+  id: S;
   type: FieldTypes.SELECT;
-  value: SingleSelectValue;
-  options: SelectOption<SingleSelectValue>[];
+  value: T;
+  options: SelectOption<T>[];
   options_prefix?: string;
   showSearch?: boolean;
   multiple?: boolean;
 };
 
 export type MultiSelectFormFieldId = FieldIds.ACCOUNTS | FieldIds.CATEGORIES;
-export const isMultiSelectFormFieldId = (id: string): id is MultiSelectFormFieldId => FieldIds.ACCOUNTS === id || FieldIds.CATEGORIES === id;
 export type MultiSelectFormField = BaseFormField & {
   id: MultiSelectFormFieldId;
   type: FieldTypes.MULTISELECT;
@@ -40,8 +37,7 @@ export type MultiSelectFormField = BaseFormField & {
   multiple?: boolean;
 };
 
-type RadioButtonsFormFieldId = FieldIds.PERIOD;
-export const isRadioButtonsFormFieldId = (id: string): id is RadioButtonsFormFieldId => FieldIds.PERIOD === id;
+export type RadioButtonsFormFieldId = FieldIds.PERIOD;
 export type RadioButtonsFormField = BaseFormField & {
   id: RadioButtonsFormFieldId;
   type: FieldTypes.RADIO_BUTTONS;
@@ -49,8 +45,7 @@ export type RadioButtonsFormField = BaseFormField & {
   options: Array<{ label?: string; label_translation: FieldTranslationRadioButtonOption; value: string }>;
 };
 
-type FileFormFieldId = FieldIds.FILES;
-export const isFileFormFieldId = (id: string): id is FileFormFieldId => FieldIds.FILES === id;
+export type FileFormFieldId = FieldIds.FILES;
 export type FileFormField = BaseFormField & {
   id: FileFormFieldId;
   type: FieldTypes.FILE;
@@ -61,38 +56,35 @@ export type FileFormField = BaseFormField & {
   maxSize?: number;
 };
 
-type DateFormFieldId = FieldIds.DATE | FieldIds.BIRTHDATE;
-export const isDateFormFieldId = (id: string): id is DateFormFieldId => FieldIds.DATE === id || FieldIds.BIRTHDATE === id;
+export type DateFormFieldId = FieldIds.DATE | FieldIds.BIRTHDATE;
 export type DateFormField = BaseFormField & {
   id: DateFormFieldId;
   type: FieldTypes.DATE;
   picker: PickerPeriod;
-  value?: Dayjs;
+  value: Dayjs | null;
   disabledDate?: (current: Dayjs) => boolean;
 };
 
 export type DatesPeriodFormFieldId = FieldIds.PERIOD;
-export const isDatesPeriodFormFieldId = (id: string): id is DatesPeriodFormFieldId => FieldIds.PERIOD === id;
 export type DatesPeriodFormField = BaseFormField & {
   id: DatesPeriodFormFieldId;
   type: FieldTypes.DATES_PERIOD;
   value: DatesStrings;
 };
 
-type TextFormFieldId = FieldIds.NAME | FieldIds.FULL_NAME | FieldIds.EMAIL | FieldIds.MESSAGE | FieldIds.PASSWORD;
-export const isTextFormFieldId = (id: string): id is TextFormFieldId =>
-  FieldIds.NAME === id || FieldIds.FULL_NAME === id || FieldIds.EMAIL === id || FieldIds.MESSAGE === id || FieldIds.PASSWORD === id;
-export type TextFormField = BaseFormField & {
-  id: TextFormFieldId;
-  type: FieldTypes.TEXT | FieldTypes.PASSWORD | FieldTypes.EMAIL | FieldTypes.TEXTAREA;
+export type TextFormFieldId = FieldIds.NAME | FieldIds.FULL_NAME | FieldIds.EMAIL | FieldIds.MESSAGE | FieldIds.PASSWORD;
+export type TextFormFieldType = FieldTypes.TEXT | FieldTypes.PASSWORD | FieldTypes.EMAIL | FieldTypes.TEXTAREA;
+export type TextFormField<I extends TextFormFieldId = TextFormFieldId, T extends TextFormFieldType = TextFormFieldType> = BaseFormField & {
+  id: I;
+  type: T;
   value: string;
   maxLength?: number;
 };
 
-type NumberFormFieldId = FieldIds.AMOUNT | FieldIds.BALANCE;
-export const isNumberFormFieldId = (id: string): id is NumberFormFieldId => FieldIds.AMOUNT === id || FieldIds.BALANCE === id;
-export type NumberFormField = BaseFormField & {
-  id: NumberFormFieldId;
+export type NumberFormFieldId = FieldIds.AMOUNT | FieldIds.BALANCE;
+// todo check value type
+export type NumberFormField<I extends NumberFormFieldId = NumberFormFieldId> = BaseFormField & {
+  id: I;
   type: FieldTypes.NUMBER;
   value: number | string;
 };
@@ -109,15 +101,24 @@ export type ChangedField =
   | Pick<RadioButtonsFormField, "id" | "type" | "value">
   | Pick<NumberFormField, "id" | "type" | "value">;
 
-export type FormValue = FormField["value"] | (RcFile | undefined)[];
+export type FormValue = Exclude<FormField["value"], null> | RcFile[];
 
-export type FormValues = Record<string, FormValue>;
+export type FormValues = Record<FieldId, FormValue>;
+
+export interface DefaultFormSaveHandler {
+  (formValues: FormValues): Promise<void>;
+}
 
 export interface DefaultFormProps {
   fields: FormField[];
-  onSaveForm: (formValues: Record<string, FormValue>) => Promise<void>;
+  onSaveForm: DefaultFormSaveHandler;
   isResetAfterSave?: boolean;
   isVisible?: boolean;
   onResetForm?: () => void;
   onChange?: () => void;
+}
+
+// notice: createRef type with target component inner functions and variables
+export interface DefaultFormRef {
+  handleChangeFieldValue: (field: ChangedField) => void;
 }

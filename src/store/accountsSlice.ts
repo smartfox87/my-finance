@@ -1,6 +1,6 @@
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import { createAccountItemApi, getAccountsListApi, updateAccountItemApi, deleteAccountItemApi, getAccountItemApi, createInitialAccountsApi } from "@/api/accounts";
-import { handleRejected } from "@/helpers/processExtraReducersCases";
+import { handleRejectedReducerAction } from "@/helpers/errors";
 import { createAccountTypeApi, updateAccountTypeApi } from "@/api/references";
 import { RootState, rootReducer } from "@/store";
 import type { AccountItem, AccountItemData, AccountItemBalanceData, AccountsSliceState } from "@/types/accounts";
@@ -31,7 +31,7 @@ export const accountsSlice = createAppSlice({
         return data;
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
         fulfilled: (state, { payload }) => {
           state.accountsList = payload;
         },
@@ -48,7 +48,7 @@ export const accountsSlice = createAppSlice({
         return data;
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
       },
     ),
     getAccountItemThunk: create.asyncThunk<AccountItem, string, { rejectValue: string }>(
@@ -58,7 +58,7 @@ export const accountsSlice = createAppSlice({
         return data;
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
         fulfilled: (state, { payload }) => {
           state.accountItem = payload;
         },
@@ -76,7 +76,7 @@ export const accountsSlice = createAppSlice({
         return data;
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
         fulfilled: (state, { payload }) => {
           if (Array.isArray(state.accountsList)) state.accountsList = state.accountsList.map((account) => (account.id === payload.id ? payload : account));
         },
@@ -91,7 +91,7 @@ export const accountsSlice = createAppSlice({
         return data;
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
         fulfilled: (state, { payload }) => {
           if (Array.isArray(state.accountsList)) state.accountsList = state.accountsList.map((account) => (account.id === payload.id ? payload : account));
         },
@@ -108,7 +108,7 @@ export const accountsSlice = createAppSlice({
         if (toError) throw thunkApi.rejectWithValue(toError.message);
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
       },
     ),
     deleteAccountItemThunk: create.asyncThunk<AccountItem | null, number, { rejectValue: string }>(
@@ -118,7 +118,7 @@ export const accountsSlice = createAppSlice({
         return data;
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
         fulfilled: (state) => {
           state.accountItem = null;
         },

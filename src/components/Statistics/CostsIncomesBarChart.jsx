@@ -39,8 +39,7 @@ const CustomTooltip = ({ active, payload }) => {
 };
 
 export const CostsIncomesBarChart = ({ items }) => {
-  const { viewport } = useViewport();
-  const isMobile = ["xs", "xxs"].includes(viewport);
+  const { isMobile } = useViewport();
 
   return (
     <div className={`w-full ${isMobile ? "h-[480px]" : "h-[max(400px,calc(100vh_/_3))]"}`}>

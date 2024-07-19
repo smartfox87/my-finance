@@ -1,6 +1,6 @@
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import { getUserSession, handleAuthStateChange, loginDemoUserApi, loginUserApi, loginUserByProviderApi, logoutUserApi, registerUserApi } from "@/api/auth";
-import { handleRejected } from "@/helpers/processExtraReducersCases";
+import { handleRejectedReducerAction } from "@/helpers/errors";
 import { RegisterData, UserPayload, LoginData, SessionPayload } from "@/types/auth";
 import { rootReducer } from "@/store";
 import { Provider, User } from "@supabase/auth-js";
@@ -38,7 +38,7 @@ export const authSlice = createAppSlice({
         return data;
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
         fulfilled: (state, { payload: { user } }) => setUserData(state, user),
       },
     ),
@@ -50,7 +50,7 @@ export const authSlice = createAppSlice({
         return data;
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
         fulfilled: (state, { payload: { user } }) => setUserData(state, user),
       },
     ),
@@ -62,7 +62,7 @@ export const authSlice = createAppSlice({
         return data;
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
         fulfilled: (state, { payload: { user } }) => setUserData(state, user),
       },
     ),
@@ -72,7 +72,7 @@ export const authSlice = createAppSlice({
         if (error) throw rejectWithValue(error.message);
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
         fulfilled: clearUserData,
       },
     ),
@@ -82,7 +82,7 @@ export const authSlice = createAppSlice({
         if (error) throw rejectWithValue(error.message);
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
       },
     ),
     getUserSessionThunk: create.asyncThunk<SessionPayload, void, { rejectValue: string }>(
@@ -92,7 +92,7 @@ export const authSlice = createAppSlice({
         return data;
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
         fulfilled: (state, { payload: { session } }) => {
           if (session?.user) setUserData(state, session.user);
           else clearUserData(state);

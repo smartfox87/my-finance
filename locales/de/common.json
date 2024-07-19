@@ -142,8 +142,7 @@
     "add_income": "Neues Einkommen hinzufügen",
     "transfer_money": "Geld zwischen Konten überweisen",
     "amount_calculator": "Betrag-Rechner",
-    "total": "Gesamt",
-    "error": "Etwas ist schief gelaufen!"
+    "total": "Gesamt"
   },
   "titles": {
     "authorisation": "Autorisierung",
@@ -182,14 +181,16 @@
       "delete": "Das Einkommen wurde erfolgreich gelöscht."
     },
     "contact": {
-      "success": "Die Nachricht wurde erfolgreich gesendet.",
-      "error": "Beim Senden der Nachricht ist ein Fehler aufgetreten."
+      "success": "Die Nachricht wurde erfolgreich gesendet."
     },
     "profile": {
       "update": "Das Benutzerprofil wurde erfolgreich aktualisiert."
     },
     "settings": {
       "update": "Die Einstellungen wurden erfolgreich aktualisiert."
+    },
+    "error": {
+      "common": "Etwas ist schief gelaufen, bitte versuchen Sie es erneut."
     }
   },
   "detail": {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useSelector } from "react-redux";
-import { selectUser } from "@/store/selectors/auth.js";
+import { selectUser } from "@/store/selectors/auth";
 import { useTranslation } from "react-i18next";
 import { DemoUserAuth } from "@/components/Auth/DemoUserAuth.jsx";
 import { useMemo } from "react";

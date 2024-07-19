@@ -6,24 +6,22 @@ import { getFileSizeWithUnit } from "@/helpers/file";
 import { cutDecimals, handleFilterSelectOptions, handleKeyDownDecimalsValidation, handleKeyUpCutDecimals } from "@/helpers/fields";
 import dynamic from "next/dynamic";
 import { showErrorMessage } from "@/helpers/message";
-import { isMultiSelectValues, isUploadFileArray } from "@/types/predicates";
-import {
-  ChangedField,
-  DefaultFormProps,
-  FormItemRule,
-  FormValues,
-  isDateFormFieldId,
-  isDatesPeriodFormFieldId,
-  isFileFormFieldId,
-  isNumberFormFieldId,
-  isRadioButtonsFormFieldId,
-  isMultiSelectFormFieldId,
-  isSingleSelectFormFieldId,
-  isTextFormFieldId,
-} from "@/types/form";
+import { ChangedField, DefaultFormProps, FormItemRule, FormValues } from "@/types/form";
 import { Button, type DatePickerProps, Form, FormProps, Input, InputRef, SelectProps, type UploadFile } from "antd";
 import dayjs, { isDayjs } from "dayjs";
 import { FieldTranslationError, FieldType, FieldTypes, FieldValues, SelectComponentProps } from "@/types/field";
+import { isFieldId, isMultiSelectValue, isUploadFileArray } from "@/predicates/field";
+import {
+  isDateFormFieldId,
+  isDatesPeriodFormFieldId,
+  isFileFormFieldId,
+  isMultiSelectFormFieldId,
+  isNumberFormFieldId,
+  isRadioButtonsFormFieldId,
+  isSingleSelectFormFieldId,
+  isTextFormFieldId,
+} from "@/predicates/form";
+import { isTruthy } from "@/predicates/common";
 
 const PeriodComponent = dynamic(() => import("@/components/Form/PeriodField").then((mod) => mod.PeriodField));
 const DatePickerComponent = dynamic<DatePickerProps>(() => import("antd/es/date-picker"));
@@ -37,13 +35,12 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
   const [form] = Form.useForm<FormValues>();
 
   const propsFieldsValues = useMemo(
-    () =>
-      fields.reduce(
-        (acc, { id, type, value }) => ({
-          ...acc,
-          [id]: type === FieldTypes.DATE && value ? dayjs(value) : value,
-        }),
+    (): FormValues =>
+      Object.assign(
         {},
+        ...fields.map(({ id, type, value }) => ({
+          [id]: type === FieldTypes.DATE && value ? dayjs(value) : value,
+        })),
       ),
     [fields],
   );
@@ -64,7 +61,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
   const handleChangeFieldValue = useCallback(
     ({ id, value, type }: ChangedField): void => {
       const currentFieldValue = currentFieldsValues[id];
-      if (type === FieldTypes.MULTISELECT && isMultiSelectValues(value) && isMultiSelectValues(currentFieldValue)) {
+      if (type === FieldTypes.MULTISELECT && isMultiSelectValue(value) && isMultiSelectValue(currentFieldValue)) {
         if (!value?.length || (!currentFieldValue.includes(FieldValues.ALL) && value.includes(FieldValues.ALL))) form.setFieldsValue({ [id]: [FieldValues.ALL] });
         else form.setFieldsValue({ [id]: value.filter((val) => val !== FieldValues.ALL) });
       } else form.setFieldsValue({ [id]: value });
@@ -76,22 +73,26 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
   useImperativeHandle(ref, () => ({ handleChangeFieldValue }));
 
   const isChangedFieldsValues = useMemo(
-    () => Object.entries(propsFieldsValues).some(([key, value]) => (value || currentFieldsValues[key]) && JSON.stringify(value) !== JSON.stringify(currentFieldsValues[key])),
+    (): boolean =>
+      Object.entries(propsFieldsValues).some(([key, value]) => isFieldId(key) && (value || currentFieldsValues[key]) && JSON.stringify(value) !== JSON.stringify(currentFieldsValues[key])),
     [propsFieldsValues, currentFieldsValues],
   );
 
   const [isLoading, setIsLoading] = useLoading(false);
-  const handleSubmitForm: FormProps["onFinish"] = async () => {
+  const handleSubmitForm: FormProps["onFinish"] = async (): Promise<void> => {
     try {
       const values = await form.validateFields();
       setIsLoading(true);
-      const processedValues = Object.entries(values).reduce((acc: FormValues, [key, value]) => {
-        if (isUploadFileArray(value)) acc[key] = value.map(({ originFileObj }) => originFileObj);
-        else if (isDayjs(value)) acc[key] = value.format("YYYY-MM-DD");
-        else if (isMultiSelectValues(value)) acc[key] = value.filter((val) => val !== FieldValues.ALL);
-        else acc[key] = value;
-        return acc;
-      }, {});
+      const processedValues: FormValues = Object.assign(
+        {},
+        ...Object.entries(values).map(([key, value]) => {
+          if (isUploadFileArray(value)) return { [key]: value.map(({ originFileObj }) => originFileObj).filter(isTruthy) };
+          // todo optimize date format for single function
+          else if (isDayjs(value)) return { [key]: value.format("YYYY-MM-DD") };
+          else if (isMultiSelectValue(value)) return { [key]: value.filter((val) => val !== FieldValues.ALL) };
+          else return { [key]: value };
+        }),
+      );
       await onSaveForm(processedValues);
       if (isResetAfterSave) form.resetFields();
     } catch (errorInfo) {
@@ -101,17 +102,17 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
     }
   };
 
-  const handleCancelForm = () => {
+  const handleCancelForm = (): void => {
     if (onResetForm) onResetForm();
     form.setFieldsValue(propsFieldsValues);
   };
 
-  const normFile = (e: { fileList: UploadFile[] }) => (Array.isArray(e) ? e : e?.fileList);
-  const handleRemoveFile = (file: UploadFile) =>
+  const normFile = (e: { fileList: UploadFile[] }): UploadFile[] => (Array.isArray(e) ? e : e?.fileList);
+  const handleRemoveFile = (file: UploadFile): void =>
     form.setFieldsValue({
       [file.uid]: form.getFieldValue(file.uid).filter(({ uid }: { uid: string }) => uid !== file.uid),
     });
-  const handleAddFile = async (file: UploadFile, { maxSize }: { maxSize: number }) => {
+  const handleAddFile = async (file: UploadFile, { maxSize }: { maxSize: number }): Promise<boolean | string> => {
     if (file.size && file.size <= maxSize) {
       form.setFieldsValue({
         [file.uid]: form.getFieldValue(file.uid).concat([file]),

@@ -3,8 +3,8 @@ import { type DatesPeriod, DatesPeriods, DatesStrings } from "@/types/date";
 import { periods } from "@/constants/date";
 import dayjs from "dayjs";
 import quarterOfYear from "dayjs/plugin/quarterOfYear";
-import { isDatesPeriod } from "@/types/predicates";
 import { ComplexFieldNames, FieldTranslationRadioButtonOption } from "@/types/field";
+import { isDatesPeriod } from "@/predicates/field";
 dayjs.extend(quarterOfYear);
 
 export const toggleDayjsLocale = async (locale: Locale): Promise<void> => {
@@ -40,7 +40,7 @@ export const getDatesPeriod = (initialDate: string | undefined, period: DatesPer
   return [date.startOf(period).format("YYYY-MM-DD"), date.endOf(period).format("YYYY-MM-DD")];
 };
 
-export const isStringADate = (str: any) => {
+export const isStringValidDate = (str: any): boolean => {
   if (typeof str !== "string" || str.length < 10) return false;
   const date = Date.parse(str);
   return !isNaN(date);

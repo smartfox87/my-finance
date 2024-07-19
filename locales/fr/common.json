@@ -142,8 +142,7 @@
     "add_income": "Ajouter un nouveau revenu",
     "transfer_money": "Transférer entre les comptes",
     "amount_calculator": "Calculateur de montant",
-    "total": "Total",
-    "error": "Une erreur s'est produite!"
+    "total": "Total"
   },
   "titles": {
     "authorisation": "Autorisation",
@@ -182,14 +181,16 @@
       "delete": "Le revenu a été supprimé avec succès."
     },
     "contact": {
-      "success": "Le message a été envoyé avec succès.",
-      "error": "Une erreur s'est produite lors de l'envoi du message."
+      "success": "Le message a été envoyé avec succès."
     },
     "profile": {
       "update": "Le profil a été mis à jour avec succès."
     },
     "settings": {
       "update": "Les paramètres ont été mis à jour avec succès."
+    },
+    "error": {
+      "common": "Quelque chose s'est mal passé, veuillez réessayer."
     }
   },
   "detail": {

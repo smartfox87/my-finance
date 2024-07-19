@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
+import { ReactNode } from "react";
 
-export const FoundNothing = ({ clearFilter }) => {
+export const FoundNothing = ({ clearFilter }: { clearFilter?: ReactNode }) => {
   const { t } = useTranslation();
 
   return (

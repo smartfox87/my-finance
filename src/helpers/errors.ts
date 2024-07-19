@@ -8,10 +8,14 @@ import { StatisticsSliceState } from "@/store/statisticsSlice";
 import { showErrorMessage } from "@/helpers/message";
 import { AccountsSliceState } from "@/types/accounts";
 import { ProfileSliceState } from "@/types/profile";
+import { showNotification } from "@/helpers/modals";
+import { i18nRef } from "@/i18n";
 
 type State = IncomesSliceState | AccountsSliceState | BudgetsSliceState | AuthSliceState | ProfileSliceState | ReferencesSliceState | CostsSliceState | StatisticsSliceState;
 
-export const handleRejected = (state: State, { payload, error }: { payload?: string; error: SerializedError }) => {
+export const handleRejectedReducerAction = (state: State, { payload, error }: { payload?: string; error: SerializedError }) => {
   const errorText = payload || error.message;
   if (errorText) showErrorMessage(errorText, 8);
 };
+
+export const showCommonError = () => i18nRef.t && showNotification({ title: i18nRef.t("notifications.error.common"), type: "error" });

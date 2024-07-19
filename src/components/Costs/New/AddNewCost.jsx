@@ -1,5 +1,5 @@
 import { Button } from "antd";
-import { SideModal } from "@/components/Modals/SideModal.jsx";
+import { SideModal } from "@/components/Modals/SideModal";
 import { DefaultForm } from "@/components/Form/DefaultForm.tsx";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCostFields } from "@/store/selectors/costs";
@@ -14,7 +14,7 @@ import { useViewport } from "@/hooks/viewport";
 export const AddNewCost = memo(function AddNewCost({ isAdaptive, onSave }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { viewport } = useViewport();
+  const { isMobile } = useViewport();
 
   const [isOpen, setIsOpen] = useState(false);
   const handleToggleVisibility = () => setIsOpen((prevState) => !prevState);
@@ -36,7 +36,7 @@ export const AddNewCost = memo(function AddNewCost({ isAdaptive, onSave }) {
     <>
       <Button size="large" data-cy="add-expense-modal-btm" className="!flex items-center justify-center gap-2" onClick={handleToggleVisibility}>
         <SvgNewExpense className="h-7 w-7" />
-        {(!isAdaptive || !["xs", "xxs"].includes(viewport)) && t("buttons.add_expense")}
+        {(!isAdaptive || !isMobile) && t("buttons.add_expense")}
       </Button>
       <SideModal
         title={t("titles.add_expense")}

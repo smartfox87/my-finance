@@ -4,7 +4,7 @@ import { memo, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { selectAccountsList } from "@/store/selectors/accounts";
 import { transferAccountsBalanceThunk } from "@/store/accountsSlice";
 import { showNotification } from "@/helpers/modals.js";
-import { SideModal } from "@/components/Modals/SideModal.jsx";
+import { SideModal } from "@/components/Modals/SideModal";
 import { useLoading } from "@/hooks/loading.js";
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
 import { handleFilterSelectOptions } from "@/helpers/fields";
@@ -16,7 +16,7 @@ import { useAppDispatch } from "@/hooks/redux";
 export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ onSave }) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const { viewport } = useViewport();
+  const { isMobile } = useViewport();
 
   const [isLoading, setIsLoading] = useLoading(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -65,7 +65,7 @@ export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ o
     <>
       <Button size="large" data-cy="transfer-between-accounts-btn" className="!flex items-center justify-center gap-2" onClick={handleToggleVisibility}>
         <SvgTransfer className="h-7 w-7 shrink-0" />
-        {!["xs", "xxs"].includes(viewport) && t("common.transfer_money")}
+        {!isMobile && t("common.transfer_money")}
       </Button>
       <SideModal
         title={t("common.transfer_money")}

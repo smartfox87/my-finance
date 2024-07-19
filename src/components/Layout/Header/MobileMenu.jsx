@@ -1,15 +1,15 @@
 import { memo, Suspense } from "react";
 import SvgMenu from "@/assets/sprite/menu.svg";
 import { useTranslation } from "react-i18next";
-import { SideModal } from "@/components/Modals/SideModal.jsx";
+import { SideModal } from "@/components/Modals/SideModal";
 import { ProfileMenu } from "@/components/Profile/ProfileMenu.jsx";
 import { Auth } from "@/components/Auth/Auth.jsx";
 import { LanguageToggle } from "@/components/Layout/Header/LanguageToggle.jsx";
 import { useSelector } from "react-redux";
-import { selectUser } from "@/store/selectors/auth.js";
+import { selectUser } from "@/store/selectors/auth";
 import { MainNav } from "@/components/Layout/MainNav";
-import { useAntd } from "@/hooks/antd.js";
-import { useModalState } from "@/hooks/providers/modalState.js";
+import { useAntd } from "@/hooks/providers/antd.ts";
+import { useModalState } from "@/hooks/providers/modalState";
 
 export const MobileMenu = memo(function MobileMenu() {
   const { t } = useTranslation();

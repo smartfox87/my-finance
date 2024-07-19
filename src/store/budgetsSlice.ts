@@ -1,19 +1,20 @@
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import { createBudgetItemApi, getBudgetsListApi, updateBudgetItemApi, deleteBudgetItemApi, getBudgetItemApi } from "@/api/budgets";
-import { handleRejected } from "@/helpers/processExtraReducersCases";
+import { handleRejectedReducerAction } from "@/helpers/errors";
 import { setFilterValue } from "@/helpers/filters";
-import { getPeriodDates } from "@/helpers/date";
 import { rootReducer } from "@/store";
 import { BudgetItem, BudgetItemData, ProcessedBudgetItem } from "@/types/budgets";
 import { FilterItem, FilterPeriodStateItem, FilterState } from "@/types/filter";
 import { FieldIds } from "@/types/field";
-import { isDatesStrings } from "@/types/date";
 import { processBudgetItem } from "@/helpers/budgets";
+import { isDatesStrings } from "@/predicates/date";
+import { da } from "@faker-js/faker";
 
 const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
 });
 
+// todo move slice types to special files
 export interface BudgetsSliceState {
   budgetsFilterValues: FilterState | null;
   budgetsList: ProcessedBudgetItem[] | null;
@@ -39,7 +40,7 @@ export const budgetsSlice = createAppSlice({
         return data;
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
         fulfilled: (state, { payload }) => {
           state.budgetsList = payload.map(processBudgetItem);
         },
@@ -52,7 +53,7 @@ export const budgetsSlice = createAppSlice({
         return data;
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
       },
     ),
     getBudgetItemThunk: create.asyncThunk<BudgetItem, string, { rejectValue: string }>(
@@ -62,7 +63,7 @@ export const budgetsSlice = createAppSlice({
         return data;
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
         fulfilled: (state, { payload }) => {
           state.budgetItem = processBudgetItem(payload);
         },
@@ -75,7 +76,7 @@ export const budgetsSlice = createAppSlice({
         return data;
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
       },
     ),
     deleteBudgetItemThunk: create.asyncThunk<BudgetItem, number, { rejectValue: string }>(
@@ -85,7 +86,7 @@ export const budgetsSlice = createAppSlice({
         return data;
       },
       {
-        rejected: handleRejected,
+        rejected: handleRejectedReducerAction,
         fulfilled: (state) => {
           state.budgetItem = null;
         },

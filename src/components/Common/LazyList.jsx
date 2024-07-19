@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { Preloader } from "@/components/Layout/Preloader.jsx";
 import { useViewport } from "@/hooks/viewport";
+import { Viewports } from "@/types/viewport";
 
 let blankArray = new Array(3).fill(null);
 
 export const LazyList = ({ items = [], Item }) => {
-  const { viewport } = useViewport();
-  const loadItemsQuantity = ["xs", "xxs"].includes(viewport) ? 12 : ["md", "sm"].includes(viewport) ? 18 : 24;
+  const { viewport, isMobile } = useViewport();
+  const loadItemsQuantity = isMobile ? 12 : [Viewports.MD, Viewports.SM].includes(viewport) ? 18 : 24;
   const [lazyItems, setLazyItems] = useState(items.slice(0, loadItemsQuantity));
   const observer = useRef(null);
   const triggerRef = useRef(null);

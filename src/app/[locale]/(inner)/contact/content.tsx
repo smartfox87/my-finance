@@ -1,25 +1,24 @@
 "use client";
 
 import { useTranslation } from "react-i18next";
-import { Preloader } from "@/components/Layout/Preloader";
 import { DefaultForm } from "@/components/Form/DefaultForm";
 import { showNotification } from "@/helpers/modals";
-import { useEffect } from "react";
-import { useRecaptcha } from "@/hooks/recaptcha";
+import { useRecaptcha } from "@/hooks/providers/recaptcha";
 import { selectContactFields } from "@/store/selectors/contact";
 import { useSelector } from "react-redux";
-import { useAntd } from "@/hooks/antd.js";
 import { Organization, WithContext } from "schema-dts";
 import { languages } from "@/constants/router";
 import { FormValues } from "@/types/form";
-import { isRcFileArray, isStringNumber } from "@/types/predicates";
+import { isRcFileArray } from "@/predicates/field";
+import { isStringNumber } from "@/predicates/common";
+import { showCommonError } from "@/helpers/errors";
 
 export default function ContactContent() {
   const { t } = useTranslation();
   const contactFields = useSelector(selectContactFields);
   const { initCaptcha, isLoadedCaptcha, getScore } = useRecaptcha();
 
-  const handleFieldChange = () => {
+  const handleFieldChange = (): void => {
     if (!isLoadedCaptcha) initCaptcha();
   };
 
@@ -28,23 +27,21 @@ export default function ContactContent() {
       const score = await getScore();
       if (score < 0.5) return showNotification({ title: t("notifications.recaptcha_invalid") });
       const formData = new FormData();
-      Object.entries(contactData)
-        .filter(([key, value]) => !!value)
-        .forEach(([key, value]) => {
-          if (isRcFileArray(value)) value.forEach((value) => formData.append(key, value));
-          else if (isStringNumber(value)) formData.append(key, value.toString());
-        });
+      Object.entries(contactData).forEach(([key, value]) => {
+        if (isRcFileArray(value)) value.forEach((value) => formData.append(key, value));
+        else if (isStringNumber(value)) formData.append(key, value.toString());
+      });
       const { success, error } = await fetch("/api/contact", { method: "POST", body: formData }).then((res) => res.json());
       if (success) {
         showNotification({ title: t("notifications.contact.success") });
       } else {
         console.error(error);
-        showNotification({ title: t("notifications.contact.error") });
+        showCommonError();
       }
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.error(error);
-        showNotification({ title: error.message || t("notifications.contact.error") });
+        showNotification({ title: error.message || t("notifications.error.common") });
       }
     }
   };

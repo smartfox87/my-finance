@@ -9,15 +9,17 @@ const viewports: { name: Viewport; query: string }[] = [
   { name: Viewports.XS, query: `(min-width: ${Breakpoints["2XS-MIN"]}px) and (max-width: ${Breakpoints["XS-MAX"]}px)` },
   { name: Viewports.XXS, query: `(max-width: ${Breakpoints["3XS-MAX"]}px)` },
 ];
+const tabletViewports: Viewport[] = [Viewports.XXS, Viewports.XS, Viewports.SM];
+const mobileViewports: Viewport[] = [Viewports.XXS, Viewports.XS];
 
 const getTrueValueIndex = (mediaQueryLists: MediaQueryList[]): number => mediaQueryLists.map((list) => list.matches).findIndex(Boolean);
 
 const getViewportByIndex = (index: number): Viewport => viewports[index].name;
 
-export const useViewport = (): { viewport: Viewport; isTouchDevice: Boolean; isMobile: Boolean } => {
+export const useViewport = (): { viewport: Viewport; isTouchDevice: Boolean; isTablet: Boolean; isMobile: boolean } => {
   const [viewport, setViewport] = useState<Viewport>(getViewportByIndex(4));
   const [isTouchDevice, setIsTouchDevice] = useState(false);
-  const mobileViewports: Viewport[] = [Viewports.XXS, Viewports.XS, Viewports.SM];
+  const isTablet = useMemo(() => tabletViewports.includes(viewport), [viewport]);
   const isMobile = useMemo(() => mobileViewports.includes(viewport), [viewport]);
 
   useEffect(() => {
@@ -37,5 +39,5 @@ export const useViewport = (): { viewport: Viewport; isTouchDevice: Boolean; isM
     return () => mediaQueryLists.forEach((list) => list.removeEventListener("change", handleMatchMediaChange));
   }, []);
 
-  return { viewport, isTouchDevice, isMobile };
+  return { viewport, isTouchDevice, isTablet, isMobile };
 };

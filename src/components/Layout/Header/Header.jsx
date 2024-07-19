@@ -6,19 +6,19 @@ import { ProfileMenu } from "@/components/Profile/ProfileMenu.jsx";
 import { LanguageToggle } from "@/components/Layout/Header/LanguageToggle.jsx";
 import { Logo } from "@/components/Layout/Header/Logo.jsx";
 import { memo, Suspense } from "react";
-import { selectUser } from "@/store/selectors/auth.js";
+import { selectUser } from "@/store/selectors/auth";
 import { MobileMenu } from "@/components/Layout/Header/MobileMenu.jsx";
 import { useViewport } from "@/hooks/viewport";
 
 export const Header = memo(function Header() {
-  const { viewport } = useViewport();
+  const { isTablet } = useViewport();
   const user = useSelector(selectUser);
 
   return (
     <header className="sticky top-0 z-50 border-b border-b-gray-300 bg-white py-4 dark:bg-dark">
       <div className="container flex items-center justify-between">
         <Logo />
-        {["sm", "xs", "xxs"].includes(viewport) ? (
+        {isTablet ? (
           <Suspense fallback={<div />}>
             <MobileMenu />
           </Suspense>

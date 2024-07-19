@@ -12,13 +12,12 @@ export const MainNav = memo(function MainNav({ className = "" }: { className?: s
     i18n: { language },
   } = useTranslation();
   const pathname = usePathname().replace(`/${language}`, "") || "/";
-  const { viewport } = useViewport();
+  const { isTablet } = useViewport();
 
   const getNavLinkClassName = (url: string) => (url === pathname ? "!text-blue-600 dark:!text-blue-400" : "!text-black dark:!text-white");
-  const isMobile = useMemo(() => ["sm", "xs", "xxs"].includes(viewport), [viewport]);
 
   const { setIsOpenMenuModal } = useModalState();
-  const handleNavClick = () => isMobile && setIsOpenMenuModal(false);
+  const handleNavClick = () => isTablet && setIsOpenMenuModal(false);
 
   return (
     <nav className={`shrink-0 border-gray-300 lg:border-r ${className}`} aria-label="desktop navigation">

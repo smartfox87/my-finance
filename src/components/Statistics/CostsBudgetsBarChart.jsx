@@ -5,6 +5,7 @@ import { selectCurrency } from "@/store/selectors/profile";
 import { useViewport } from "@/hooks/viewport";
 import { useTranslation } from "react-i18next";
 import { uppercaseFirstLetter } from "@/helpers/strings.js";
+import { Viewports } from "@/types/viewport";
 
 const CustomTooltip = ({ active, payload }) => {
   const currency = useSelector(selectCurrency);
@@ -45,9 +46,8 @@ const CustomTooltip = ({ active, payload }) => {
 };
 
 export const CostsBudgetsBarChart = ({ items }) => {
-  const { viewport } = useViewport();
-  const isMobile = ["xs", "xxs"].includes(viewport);
-  const coords = ["xxs"].includes(viewport) ? { x: 0 } : undefined;
+  const { viewport, isMobile } = useViewport();
+  const coords = [Viewports.XXS].includes(viewport) ? { x: 0 } : undefined;
 
   return (
     <div className={`w-full ${isMobile ? "h-[480px]" : "h-[max(400px,calc(100vh_/_3))]"}`}>

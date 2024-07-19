@@ -142,8 +142,7 @@
     "add_income": "Aggiungi nuovo reddito",
     "transfer_money": "Trasferisci tra conti",
     "amount_calculator": "Calcolatore di importo",
-    "total": "Totale",
-    "error": "Si è verificato un errore!"
+    "total": "Totale"
   },
   "titles": {
     "authorisation": "Autorizzazione",
@@ -182,14 +181,16 @@
       "delete": "Il reddito è stato cancellato con successo."
     },
     "contact": {
-      "success": "Il messaggio è stato inviato con successo.",
-      "error": "Si è verificato un errore durante l'invio del messaggio."
+      "success": "Il messaggio è stato inviato con successo."
     },
     "profile": {
       "update": "Il profilo è stato aggiornato con successo."
     },
     "settings": {
       "update": "Le impostazioni sono state aggiornate con successo."
+    },
+    "error": {
+      "common": "Qualcosa è andato storto, per favore riprova."
     }
   },
   "detail": {

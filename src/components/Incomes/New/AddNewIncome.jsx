@@ -1,5 +1,5 @@
 import { Button } from "antd";
-import { SideModal } from "@/components/Modals/SideModal.jsx";
+import { SideModal } from "@/components/Modals/SideModal";
 import { DefaultForm } from "@/components/Form/DefaultForm.tsx";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIncomeFields } from "@/store/selectors/incomes";
@@ -14,7 +14,7 @@ import SvgNewIncome from "@/assets/sprite/new-income.svg";
 export const AddNewIncome = memo(function AddNewIncome({ isAdaptive, onSave }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { viewport } = useViewport();
+  const { isMobile } = useViewport();
 
   const [isOpen, setIsOpen] = useState(false);
   const handleToggleVisibility = () => setIsOpen((prevState) => !prevState);
@@ -36,7 +36,7 @@ export const AddNewIncome = memo(function AddNewIncome({ isAdaptive, onSave }) {
     <>
       <Button size="large" data-cy="add-income-modal-btm" className="!flex items-center justify-center gap-3" onClick={handleToggleVisibility}>
         <SvgNewIncome className="h-5 w-5 shrink-0" />
-        {(!isAdaptive || !["xs", "xxs"].includes(viewport)) && t("common.add_income")}
+        {(!isAdaptive || !isMobile) && t("common.add_income")}
       </Button>
       <SideModal
         title={t("common.add_income")}
