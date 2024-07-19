@@ -1,19 +1,21 @@
-import { FieldTypes } from "@/types/field";
 import { Select } from "antd";
 import { handleFilterSelectOptions, renderSelectOption } from "@/helpers/fields";
 import { PeriodField } from "@/components/Form/PeriodField";
-import { FilterState, HandleChangeFilterFieldValue } from "@/types/filter";
-import { ProcessedFilterField } from "@/types/selectors";
-import type { BaseSelectRef } from "rc-select";
 import { MutableRefObject } from "react";
 import { useTranslation } from "react-i18next";
+import { FieldTypes } from "@/types/field";
+import type { FilterState, HandleChangeFilterFieldValue } from "@/types/filter";
+import type { ProcessedFilterField } from "@/types/selectors";
+import type { BaseSelectRef } from "rc-select";
 
 export const FilterFields = ({
+  name,
   items,
   filterValues,
   fieldRef,
   onChangeFieldValue,
 }: {
+  name: string;
   items: ProcessedFilterField[];
   filterValues: FilterState;
   fieldRef: MutableRefObject<BaseSelectRef | null>;
@@ -22,7 +24,7 @@ export const FilterFields = ({
   const { t } = useTranslation();
 
   return (
-    <ul data-cy="expenses-filter-form" className="flex w-full flex-col gap-4">
+    <ul data-cy={`${name}-filter-form`} className="flex w-full flex-col gap-4">
       {items.map((field, index) => (
         <li key={field.id} className="flex flex-col gap-4">
           {field.type === FieldTypes.MULTISELECT && (

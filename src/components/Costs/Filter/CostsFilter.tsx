@@ -56,7 +56,7 @@ export const CostsFilter = memo(function CostsFilter({ onSave }: { onSave: () =>
         {!isMobile && t("buttons.set_filters")}
       </Button>
       <SideModal title={t("titles.set_filters")} isOpen={isOpen} footer={submitBtn} onClose={handleToggleVisibility} onInit={setIsInitialized}>
-        <FilterFields items={costsFilterFields} filterValues={filterValues} fieldRef={fieldRef} onChangeFieldValue={handleChangeFieldValue} />
+        <FilterFields name="expenses" items={costsFilterFields} filterValues={filterValues} fieldRef={fieldRef} onChangeFieldValue={handleChangeFieldValue} />
       </SideModal>
     </>
   );

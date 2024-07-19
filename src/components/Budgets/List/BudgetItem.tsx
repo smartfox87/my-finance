@@ -57,13 +57,13 @@ export const BudgetItem = ({ id, created_at, name, amount, accounts, categories,
           )}
         </li>
         <li>
-          {t("detail.account")}:{" "}
+          {t("detail.accounts")}:{" "}
           <span data-cy="item-accounts" className="font-bold">
             {accountsValue}
           </span>
         </li>
         <li>
-          {t("detail.category")}:{" "}
+          {t("detail.categories")}:{" "}
           <span data-cy="item-categories" className="font-bold">
             {categoriesValue}
           </span>
