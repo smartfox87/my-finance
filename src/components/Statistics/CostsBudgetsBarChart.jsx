@@ -5,7 +5,7 @@ import { selectCurrency } from "@/store/selectors/profile";
 import { useViewport } from "@/hooks/viewport";
 import { useTranslation } from "react-i18next";
 import { uppercaseFirstLetter } from "@/helpers/strings.js";
-import { Viewports } from "@/types/viewport.js";
+import { Viewports } from "@/types/viewport";
 
 const CustomTooltip = ({ active, payload }) => {
   const currency = useSelector(selectCurrency);

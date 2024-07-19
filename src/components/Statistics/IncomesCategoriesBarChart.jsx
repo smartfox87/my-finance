@@ -3,7 +3,7 @@ import formatPrice from "@/helpers/formatPrice.js";
 import { useSelector } from "react-redux";
 import { selectCurrency } from "@/store/selectors/profile";
 import { useViewport } from "@/hooks/viewport";
-import { Viewports } from "@/types/viewport.js";
+import { Viewports } from "@/types/viewport";
 
 const CustomTooltip = ({ active, payload }) => {
   const currency = useSelector(selectCurrency);
