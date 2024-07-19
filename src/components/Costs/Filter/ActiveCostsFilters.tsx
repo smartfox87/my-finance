@@ -3,9 +3,9 @@ import { selectCostsFilterFields, selectCostsFilterValues } from "@/store/select
 import { setCostsFilterValues } from "@/store/costsSlice";
 import { memo, useMemo } from "react";
 import { checkIsClearableFilter, getActiveFilters } from "@/helpers/filters";
-import { ActiveFilterItemValue, HandleClearActiveFilterItem } from "@/types/filter";
+import { HandleClearActiveFilterItem } from "@/types/filter";
 import { FieldIds } from "@/types/field";
-import { ActiveFiltersList } from "@/components/Common/ActiveFiltersList";
+import { ActiveFiltersList } from "@/components/Common/Filter/ActiveFiltersList";
 
 export const ActiveCostsFilters = memo(function ActiveCostsFilters() {
   const dispatch = useDispatch();

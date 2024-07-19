@@ -67,3 +67,7 @@ export type setFilterStateValues = ActionCreatorWithPayload<FilterItem[], "budge
 export interface HandleClearActiveFilterItem {
   (data: ActiveFilterItemValue): void;
 }
+
+export interface HandleChangeFilterFieldValue {
+  (data: FilterItem): void;
+}

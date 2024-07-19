@@ -5,7 +5,7 @@ import { memo, useMemo } from "react";
 import { checkIsClearableFilter, getActiveFilters } from "@/helpers/filters";
 import { FieldIds } from "@/types/field";
 import { ActiveFilterItemValue } from "@/types/filter";
-import { ActiveFiltersList } from "@/components/Common/ActiveFiltersList";
+import { ActiveFiltersList } from "@/components/Common/Filter/ActiveFiltersList";
 
 export const ActiveBudgetsFilters = memo(function ActiveBudgetsFilters() {
   const dispatch = useDispatch();
