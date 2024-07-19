@@ -4,7 +4,7 @@ import { memo, useEffect, useRef, useState } from "react";
 import { selectIncomeFields, selectIncomeItem } from "@/store/selectors/incomes";
 import { deleteIncomeItemThunk, getIncomeItemThunk, setIncomeItem, updateIncomeItemThunk } from "@/store/incomesSlice";
 import { DefaultForm } from "@/components/Form/DefaultForm.tsx";
-import { getOnlyValuesFromData } from "@/helpers/processData.js";
+import { getOnlyValuesFromData } from "@/helpers/processData";
 import { showNotification } from "@/helpers/modals.js";
 import { SideModal } from "@/components/Modals/SideModal";
 import { useLoading } from "@/hooks/loading.js";
