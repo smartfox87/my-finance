@@ -11,12 +11,11 @@ export const MobileNav = memo(function MobileNav() {
     i18n: { language },
   } = useTranslation();
   const pathname = usePathname().replace(`/${language}`, "");
-  const { viewport } = useViewport();
+  const { viewport, isTablet } = useViewport();
 
   const getNavLinkClassName = (url: string) => (url === pathname ? "text-blue-600 dark:text-blue-400" : "");
 
-  const isMobile = useMemo(() => ["sm", "xs", "xxs"].includes(viewport), [viewport]);
-  const filteredList = useMemo(() => INIT_NAV_LIST.filter(({ mobile_nav }) => !isMobile || (isMobile && mobile_nav)), [isMobile]);
+  const filteredList = useMemo(() => INIT_NAV_LIST.filter(({ mobile_nav }) => !isTablet || (isTablet && mobile_nav)), [isTablet]);
 
   return (
     <nav className="shrink-0 border-t border-gray-300 lg:hidden" aria-label="mobile navigation">

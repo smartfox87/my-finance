@@ -11,19 +11,19 @@ export const ModalStateProvider = ({ children }: { children: ReactNode }) => {
   const [isOpenSignUpModal, setIsOpenSignUpModal] = useState(false);
   const [isLoadedAuthModal, setIsLoadedAuthModal] = useState(false);
 
-  const { isMobile } = useViewport();
+  const { isTablet } = useViewport();
 
   const toggleSignInModalVisibility = useCallback((): void => {
-    if (isMobile && isOpenMenuModal && isOpenSignInModal) setIsOpenMenuModal(false);
+    if (isTablet && isOpenMenuModal && isOpenSignInModal) setIsOpenMenuModal(false);
     if (!isLoadedAuthModal && !isOpenSignInModal) setIsLoadedAuthModal(true);
     setIsOpenSignInModal((prev) => !prev);
-  }, [isMobile, isOpenMenuModal, isOpenSignInModal]);
+  }, [isTablet, isOpenMenuModal, isOpenSignInModal]);
 
   const toggleSignUpModalVisibility = useCallback((): void => {
-    if (isMobile && isOpenMenuModal && isOpenSignUpModal) setIsOpenMenuModal(false);
+    if (isTablet && isOpenMenuModal && isOpenSignUpModal) setIsOpenMenuModal(false);
     if (!isLoadedAuthModal && !isOpenSignInModal) setIsLoadedAuthModal(true);
     setIsOpenSignUpModal((prev) => !prev);
-  }, [isMobile, isOpenMenuModal, isOpenSignUpModal]);
+  }, [isTablet, isOpenMenuModal, isOpenSignUpModal]);
 
   const contextValue = useMemo(
     () => ({

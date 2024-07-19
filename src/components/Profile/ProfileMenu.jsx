@@ -7,11 +7,10 @@ import { useMemo } from "react";
 import { useModalState } from "@/hooks/providers/modalState";
 
 export const ProfileMenu = () => {
-  const { viewport } = useViewport();
-  const isMobile = useMemo(() => ["sm", "xs", "xxs"].includes(viewport), [viewport]);
+  const { isTablet } = useViewport();
 
   const { setIsOpenMenuModal } = useModalState();
-  const handleLinkClick = () => isMobile && setIsOpenMenuModal(false);
+  const handleLinkClick = () => isTablet && setIsOpenMenuModal(false);
 
   const profile = useSelector(selectProfile);
   if (!profile) return null;
