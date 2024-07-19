@@ -3,7 +3,9 @@ import type { RcFile, UploadFile } from "antd/es/upload/interface";
 import { isNumber } from "@/predicates/common";
 import { DatesPeriod, DatesPeriods } from "@/types/date";
 
-export const isMultiSelectValue = (value: any): value is MultiSelectValue => Array.isArray(value) && value.every((item) => isNumber(item) || item === FieldValues.ALL);
+export const isSelectAllValue = (value: any): value is FieldValues.ALL => value === FieldValues.ALL;
+
+export const isMultiSelectValue = (value: any): value is MultiSelectValue => Array.isArray(value) && value.every((item) => isNumber(item) || isSelectAllValue(item));
 
 export const isUploadFile = (value: any): value is UploadFile => ["uid", "name"].every((key) => value[key] !== undefined);
 

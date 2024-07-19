@@ -61,7 +61,7 @@ export type DateFormField = BaseFormField & {
   id: DateFormFieldId;
   type: FieldTypes.DATE;
   picker: PickerPeriod;
-  value?: Dayjs;
+  value: Dayjs | null;
   disabledDate?: (current: Dayjs) => boolean;
 };
 
@@ -73,16 +73,18 @@ export type DatesPeriodFormField = BaseFormField & {
 };
 
 export type TextFormFieldId = FieldIds.NAME | FieldIds.FULL_NAME | FieldIds.EMAIL | FieldIds.MESSAGE | FieldIds.PASSWORD;
-export type TextFormField = BaseFormField & {
-  id: TextFormFieldId;
-  type: FieldTypes.TEXT | FieldTypes.PASSWORD | FieldTypes.EMAIL | FieldTypes.TEXTAREA;
+export type TextFormFieldType = FieldTypes.TEXT | FieldTypes.PASSWORD | FieldTypes.EMAIL | FieldTypes.TEXTAREA;
+export type TextFormField<I extends TextFormFieldId = TextFormFieldId, T extends TextFormFieldType = TextFormFieldType> = BaseFormField & {
+  id: I;
+  type: T;
   value: string;
   maxLength?: number;
 };
 
 export type NumberFormFieldId = FieldIds.AMOUNT | FieldIds.BALANCE;
-export type NumberFormField = BaseFormField & {
-  id: NumberFormFieldId;
+// todo check value type
+export type NumberFormField<I extends NumberFormFieldId = NumberFormFieldId> = BaseFormField & {
+  id: I;
   type: FieldTypes.NUMBER;
   value: number | string;
 };
@@ -99,7 +101,7 @@ export type ChangedField =
   | Pick<RadioButtonsFormField, "id" | "type" | "value">
   | Pick<NumberFormField, "id" | "type" | "value">;
 
-export type FormValue = FormField["value"] | RcFile[];
+export type FormValue = Exclude<FormField["value"], null> | RcFile[];
 
 export type FormValues = Record<FieldId, FormValue>;
 

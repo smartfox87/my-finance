@@ -5,6 +5,7 @@ import { ModalStateContextType } from "@/types/providers/modalStateProvider";
 export const ModalStateContext = createContext<ModalStateContextType | undefined>(undefined);
 
 export const ModalStateProvider = ({ children }: { children: ReactNode }) => {
+  const [isInitializedModal, setIsInitializedModal] = useState(false);
   const [isOpenMenuModal, setIsOpenMenuModal] = useState(false);
   const [isOpenSignInModal, setIsOpenSignInModal] = useState(false);
   const [isOpenSignUpModal, setIsOpenSignUpModal] = useState(false);
@@ -25,8 +26,18 @@ export const ModalStateProvider = ({ children }: { children: ReactNode }) => {
   }, [isMobile, isOpenMenuModal, isOpenSignUpModal]);
 
   const contextValue = useMemo(
-    () => ({ isOpenMenuModal, setIsOpenMenuModal, isOpenSignInModal, toggleSignInModalVisibility, isOpenSignUpModal, toggleSignUpModalVisibility, isLoadedAuthModal }),
-    [isOpenMenuModal, isOpenSignInModal, isOpenSignUpModal, isLoadedAuthModal, toggleSignInModalVisibility, toggleSignUpModalVisibility],
+    () => ({
+      isInitializedModal,
+      setIsInitializedModal,
+      isOpenMenuModal,
+      setIsOpenMenuModal,
+      isOpenSignInModal,
+      toggleSignInModalVisibility,
+      isOpenSignUpModal,
+      toggleSignUpModalVisibility,
+      isLoadedAuthModal,
+    }),
+    [isInitializedModal, isOpenMenuModal, isOpenSignInModal, isOpenSignUpModal, isLoadedAuthModal, toggleSignInModalVisibility, toggleSignUpModalVisibility],
   );
 
   return <ModalStateContext.Provider value={contextValue}>{children}</ModalStateContext.Provider>;

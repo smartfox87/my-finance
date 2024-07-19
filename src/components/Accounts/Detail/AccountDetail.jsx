@@ -6,7 +6,7 @@ import { deleteAccountItemThunk, getAccountItemThunk, setAccountItem, updateAcco
 import { DefaultForm } from "@/components/Form/DefaultForm.tsx";
 import { getOnlyValuesFromData } from "@/helpers/processData.js";
 import { showNotification } from "@/helpers/modals.js";
-import { SideModal } from "@/components/Modals/SideModal.jsx";
+import { SideModal } from "@/components/Modals/SideModal";
 import { useLoading } from "@/hooks/loading.js";
 import SvgDelete from "@/assets/sprite/delete.svg";
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";

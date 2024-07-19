@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { Button } from "antd";
-import { SideModal } from "@/components/Modals/SideModal.jsx";
+import { SideModal } from "@/components/Modals/SideModal";
 import { Calculator } from "@/components/Calculator/Calculator.jsx";
 import SvgCalculator from "@/assets/sprite/calculator.svg";
 import SvgPassPrice from "@/assets/sprite/pass-price.svg";

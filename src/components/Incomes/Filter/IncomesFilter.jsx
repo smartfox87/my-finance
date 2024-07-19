@@ -4,7 +4,7 @@ import { selectIncomesFilterFields, selectIncomesFilterValues } from "@/store/se
 import { useTranslation } from "react-i18next";
 import { Select, Button } from "antd";
 import { handleFilterSelectOptions, renderSelectOption } from "@/helpers/fields";
-import { SideModal } from "@/components/Modals/SideModal.jsx";
+import { SideModal } from "@/components/Modals/SideModal";
 import { memo, useEffect, useState } from "react";
 import SvgFilter from "@/assets/sprite/filter.svg";
 import { useViewport } from "@/hooks/viewport";

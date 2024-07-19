@@ -1,9 +1,10 @@
 import { FieldIds, FieldTypes, FieldValues } from "@/types/field";
-import { ActiveFilterItem, ActiveFilterItemValue, FilterItem, FilterState } from "@/types/filter";
+import { ActiveFilterItem, ActiveFilterItemValue, FilterItem, FilterState, FilterStateValue } from "@/types/filter";
 import { ProcessedFilterField } from "@/types/selectors";
 import { i18nRef } from "@/i18n";
 import { isMultiSelectValue } from "@/predicates/field";
 import { isTruthy } from "@/predicates/common";
+import { isFilterMultiItem, isFilterPeriodItem, isFilterSortItem } from "@/predicates/filter";
 
 export const getActiveFilters = (processedFilterFields: ProcessedFilterField[], filterValues: FilterState | null): ActiveFilterItem[] =>
   processedFilterFields
@@ -52,3 +53,11 @@ export const setFilterValue = (filterValues: FilterState | null, { id, value }: 
   }
   return state;
 };
+
+export const prepareObjectValuesForFilterStateValues = (objectValues: Record<string, FilterStateValue>) =>
+  Object.entries(objectValues)
+    .map(([key, value]) => {
+      const filterItem = { id: key, value };
+      if (isFilterPeriodItem(filterItem) || isFilterSortItem(filterItem) || isFilterMultiItem(filterItem)) return filterItem;
+    })
+    .filter(isTruthy);

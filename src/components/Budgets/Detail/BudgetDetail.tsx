@@ -1,22 +1,26 @@
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { memo, useEffect, useRef, useState } from "react";
 import { selectBudgetFields, selectBudgetItem } from "@/store/selectors/budgets";
 import { deleteBudgetItemThunk, getBudgetItemThunk, setBudgetItem, updateBudgetItemThunk } from "@/store/budgetsSlice";
-import { DefaultForm } from "@/components/Form/DefaultForm.tsx";
-import { getOnlyValuesFromData } from "@/helpers/processData.js";
+import { DefaultForm } from "@/components/Form/DefaultForm";
 import { showNotification } from "@/helpers/modals.js";
-import { SideModal } from "@/components/Modals/SideModal.jsx";
+import { SideModal } from "@/components/Modals/SideModal";
 import { useLoading } from "@/hooks/loading.js";
-import { checkIsNumber } from "@/helpers/numbers.js";
 import SvgDelete from "@/assets/sprite/delete.svg";
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
 import { Button } from "antd";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useAppDispatch } from "@/hooks/redux";
+import { showCommonError } from "@/helpers/errors";
+import { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
+import { FieldIds, FieldTypes } from "@/types/field";
+import { BudgetItemField } from "@/types/budgets";
+import { isBudgetItemData } from "@/predicates/budget";
 
 export const BudgetDetail = memo(function BudgetDetail({ onSave }: { onSave: () => Promise<void> }) {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const searchParams = useSearchParams();
   const budgetId = searchParams.get("budgetId");
@@ -25,7 +29,7 @@ export const BudgetDetail = memo(function BudgetDetail({ onSave }: { onSave: () 
   const [isBtnLoading, setIsBtnLoading] = useLoading(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleCloseModal = () => {
+  const handleCloseModal = (): void => {
     setIsOpen(false);
     router.push("/budgets");
     dispatch(setBudgetItem(null));
@@ -40,35 +44,42 @@ export const BudgetDetail = memo(function BudgetDetail({ onSave }: { onSave: () 
   }, [budgetId]);
 
   const budgetItem = useSelector(selectBudgetItem);
-  const budgetValues = budgetItem ? getOnlyValuesFromData(budgetItem) : {};
-  const budgetFields = useSelector(selectBudgetFields).map((field) => ({
-    ...field,
-    value: checkIsNumber(budgetValues[field.id]) || budgetValues[field.id]?.length ? budgetValues[field.id] : field.value,
-  }));
+  const budgetFields = useSelector(selectBudgetFields).map((field): BudgetItemField => {
+    if (!budgetItem) return field;
+    const filledField: BudgetItemField = { ...field };
+    filledField.value = budgetItem[field.id] ?? filledField.value;
+    return filledField;
+  });
 
-  const handleUpdateBudget = async (fieldsValues) => {
-    const { error } = await dispatch(updateBudgetItemThunk({ budgetId: budgetItem.id, budgetData: fieldsValues }));
-    setIsLoading(false);
-    if (!error) {
-      onSave();
+  const handleUpdateBudget: DefaultFormSaveHandler = async (fieldsValues) => {
+    try {
+      if (!(budgetItem && isBudgetItemData(fieldsValues))) return;
+      await dispatch(updateBudgetItemThunk({ budgetId: budgetItem.id, budgetData: fieldsValues })).unwrap();
+      setIsLoading(false);
+      await onSave();
       handleCloseModal();
       showNotification({ title: t("notifications.budget.update") });
+    } catch (error) {
+      showCommonError();
     }
   };
 
-  const handleDeleteBudget = async () => {
-    setIsBtnLoading(true);
-    const { error } = await dispatch(deleteBudgetItemThunk(budgetItem.id));
-    setIsBtnLoading(false);
-    if (!error) {
-      onSave();
+  const handleDeleteBudget = async (): Promise<void> => {
+    try {
+      if (!budgetItem) return;
+      setIsBtnLoading(true);
+      await dispatch(deleteBudgetItemThunk(budgetItem.id)).unwrap();
+      setIsBtnLoading(false);
+      await onSave();
       handleCloseModal();
       showNotification({ title: t("notifications.budget.delete") });
+    } catch (error) {
+      showCommonError();
     }
   };
 
-  const formRef = useRef();
-  const handleSetCalculatedAmount = (value) => formRef.current.handleChangeFieldValue({ id: "amount", value });
+  const formRef = useRef<DefaultFormRef>(null);
+  const handleSetCalculatedAmount = (value: number): void => formRef.current?.handleChangeFieldValue({ id: FieldIds.AMOUNT, type: FieldTypes.NUMBER, value });
 
   const footer = (
     <div className="flex flex-col gap-4">

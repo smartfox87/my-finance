@@ -40,7 +40,7 @@ export const getDatesPeriod = (initialDate: string | undefined, period: DatesPer
   return [date.startOf(period).format("YYYY-MM-DD"), date.endOf(period).format("YYYY-MM-DD")];
 };
 
-export const isStringADate = (str: any) => {
+export const isStringValidDate = (str: any): boolean => {
   if (typeof str !== "string" || str.length < 10) return false;
   const date = Date.parse(str);
   return !isNaN(date);

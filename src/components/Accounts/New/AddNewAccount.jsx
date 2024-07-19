@@ -1,5 +1,5 @@
 import { Button } from "antd";
-import { SideModal } from "@/components/Modals/SideModal.jsx";
+import { SideModal } from "@/components/Modals/SideModal";
 import { DefaultForm } from "@/components/Form/DefaultForm.tsx";
 import { useSelector } from "react-redux";
 import { selectAccountFields } from "@/store/selectors/accounts";

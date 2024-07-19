@@ -1,25 +1,43 @@
 import { useViewport } from "@/hooks/viewport";
 import { Preloader } from "@/components/Layout/Preloader.jsx";
-import { lazy, useEffect, useState } from "react";
+import { lazy, ReactNode, useEffect, useState } from "react";
+import { useModalState } from "@/hooks/providers/modalState";
+import dynamic from "next/dynamic";
 
-export const SideModal = ({ title, isOpen, isLoading = false, children, footer, onClose, onInit = () => null }) => {
+const Modal = dynamic(() => import("antd/es/drawer"));
+
+export const SideModal = ({
+  title,
+  isOpen,
+  isLoading = false,
+  children,
+  footer,
+  onClose,
+  onInit,
+}: {
+  title: string;
+  isOpen: boolean;
+  children: ReactNode;
+  onClose: () => void;
+  footer?: ReactNode;
+  isLoading?: boolean;
+  onInit?: (isInit: boolean) => void;
+}) => {
   const { viewport } = useViewport();
   const placement = ["xs", "xxs"].includes(viewport) ? "bottom" : "right";
+  const { isInitializedModal, setIsInitializedModal } = useModalState();
+  const handleInit = () => onInit && onInit(true);
 
-  const [Modal, setModal] = useState();
   useEffect(() => {
     if (isOpen) {
-      if (Modal) onInit(true);
-      else {
-        setModal(lazy(() => import("antd/es/drawer")));
-        onInit(true);
-      }
+      if (!isInitializedModal) setIsInitializedModal(true);
+      handleInit();
     }
   }, [isOpen, Modal]);
 
   return (
     <>
-      {Modal && (
+      {isInitializedModal && (
         <Modal title={title} placement={placement} open={isOpen} height="100%" width={550} destroyOnClose={true} classNames={{ body: "flex flex-col" }} onClose={onClose}>
           <Preloader isLoading={isLoading}>
             {children}

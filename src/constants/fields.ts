@@ -68,9 +68,17 @@ export const DATES_PERIOD_FIELD: DatesPeriodFormField = {
   value: getDatesPeriod(undefined, getPeriod()),
 };
 
-export const NAME_FIELD: TextFormField = { id: FieldIds.NAME, type: FieldTypes.TEXTAREA, label: `simple.${SimpleFieldNames.NAME}`, value: "", maxLength: 1000, required: true, focus: true };
+export const NAME_FIELD: TextFormField<FieldIds.NAME, FieldTypes.TEXTAREA> = {
+  id: FieldIds.NAME,
+  type: FieldTypes.TEXTAREA,
+  label: `simple.${SimpleFieldNames.NAME}`,
+  value: "",
+  maxLength: 1000,
+  required: true,
+  focus: true,
+};
 
-export const AMOUNT_FIELD: NumberFormField = { id: FieldIds.AMOUNT, type: FieldTypes.NUMBER, label: `simple.${SimpleFieldNames.AMOUNT}`, label_suffix: "", value: "", required: true };
+export const AMOUNT_FIELD: NumberFormField<FieldIds.AMOUNT> = { id: FieldIds.AMOUNT, type: FieldTypes.NUMBER, label: `simple.${SimpleFieldNames.AMOUNT}`, label_suffix: "", value: "", required: true };
 
 export const BALANCE_FIELD: NumberFormField = { id: FieldIds.BALANCE, type: FieldTypes.NUMBER, label: `simple.${SimpleFieldNames.BALANCE}`, value: "", required: true };
 
@@ -78,7 +86,7 @@ export const DATE_FIELD: DateFormField = {
   id: FieldIds.DATE,
   type: FieldTypes.DATE,
   label: `simple.${SimpleFieldNames.DATE}`,
-  value: undefined,
+  value: null,
   picker: PickerPeriods.DATE,
   required: true,
   placeholder: "YYYY-MM-DD",
@@ -125,6 +133,7 @@ export const BIRTHDATE_FIELD: DateFormField = {
   type: FieldTypes.DATE,
   label: `simple.${SimpleFieldNames.BIRTHDATE}`,
   picker: PickerPeriods.DATE,
+  value: null,
 };
 
 export const GENDER_FIELD: SingleSelectFormField = {

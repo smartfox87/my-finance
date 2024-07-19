@@ -1,21 +1,23 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { setBudgetsFilterValues } from "@/store/budgetsSlice";
 import { selectBudgetsFilterFields, selectBudgetsFilterValues } from "@/store/selectors/budgets";
 import { useTranslation } from "react-i18next";
 import { Select, Button } from "antd";
 import { handleFilterSelectOptions, renderSelectOption } from "@/helpers/fields";
-import { SideModal } from "@/components/Modals/SideModal.jsx";
+import { SideModal } from "@/components/Modals/SideModal";
 import { memo, useEffect, useState } from "react";
 import SvgFilter from "@/assets/sprite/filter.svg";
 import { useViewport } from "@/hooks/viewport";
 import { PeriodField } from "@/components/Form/PeriodField";
 import { useFilterFocus } from "@/hooks/filterFocus";
-import { setFilterValue } from "@/helpers/filters";
-import { FieldTypes } from "@/types/field";
+import { prepareObjectValuesForFilterStateValues, setFilterValue } from "@/helpers/filters";
+import { FieldIds, FieldTypes } from "@/types/field";
+import { useAppDispatch } from "@/hooks/redux";
+import { FilterItem, FilterState } from "@/types/filter";
 
 export const BudgetsFilter = memo(function BudgetsFilter({ onSave }: { onSave: () => Promise<void> }) {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { viewport } = useViewport();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -26,18 +28,19 @@ export const BudgetsFilter = memo(function BudgetsFilter({ onSave }: { onSave: (
 
   const budgetsFilterFields = useSelector(selectBudgetsFilterFields);
   const budgetsFilterValues = useSelector(selectBudgetsFilterValues);
-  const [filterValues, setFilterValues] = useState({});
+  const [filterValues, setFilterValues] = useState<FilterState>({});
 
   useEffect(() => {
     setFilterValues(JSON.parse(JSON.stringify(budgetsFilterValues)));
   }, [budgetsFilterValues]);
 
-  const handleChangeFieldValue = (field) => setFilterValues((prevState) => setFilterValue(prevState, field));
+  const handleChangeFieldValue = (field: FilterItem) => setFilterValues((prevState) => setFilterValue(prevState, field));
   const [isLoading, setIsLoading] = useState(false);
-  const handleApplyFilters = async () => {
+  const handleApplyFilters = async (): Promise<void> => {
+    if (!budgetsFilterValues) return;
     setIsLoading(true);
-    dispatch(setBudgetsFilterValues(Object.entries(filterValues).map(([id, value]) => ({ id, value }))));
-    if (JSON.stringify(budgetsFilterValues.period) !== JSON.stringify(filterValues.period)) await onSave();
+    dispatch(setBudgetsFilterValues(prepareObjectValuesForFilterStateValues(filterValues)));
+    if (FieldIds.PERIOD in filterValues && JSON.stringify(budgetsFilterValues[FieldIds.PERIOD]) !== JSON.stringify(filterValues[FieldIds.PERIOD])) await onSave();
     handleToggleVisibility();
     setIsLoading(false);
   };
@@ -55,29 +58,48 @@ export const BudgetsFilter = memo(function BudgetsFilter({ onSave }: { onSave: (
       </Button>
       <SideModal title={t("titles.set_filters")} isOpen={isOpen} footer={submitBtn} onClose={handleToggleVisibility} onInit={setIsInitialized}>
         <ul data-cy="budgets-filter-form" className="flex w-full flex-col gap-4">
-          {budgetsFilterFields.map(({ id, type, label, label_translation, options, options_prefix, showSearch, multiple }, index) => (
-            <li key={id} className="flex flex-col gap-4">
-              {(type === FieldTypes.MULTISELECT || type === FieldTypes.SELECT) && (
+          {budgetsFilterFields.map((field, index) => (
+            <li key={field.id} className="flex flex-col gap-4">
+              {field.type === FieldTypes.MULTISELECT && (
                 <Select
-                  ref={!index ? fieldRef : null}
-                  id={id}
+                  autoFocus={!index}
+                  id={field.id}
                   className="w-full"
                   size="large"
-                  mode={multiple ? "multiple" : ""}
-                  label={label_translation ? t(`fields.${label_translation}`) : label}
-                  value={filterValues[id]}
-                  options={options?.map(({ option, label, label_translation, value }) => ({
-                    label: option || (label_translation ? `${options_prefix ? `${t(`fields.${options_prefix}`)} ` : ""}${t(`fields.${label_translation}`)}` : label || value),
+                  mode="multiple"
+                  value={filterValues[field.id]}
+                  options={field.options?.map(({ option, label, label_translation, value }) => ({
+                    label: option || (label_translation ? `${field.options_prefix ? `${t(`fields.${field.options_prefix}`)} ` : ""}${t(`fields.${label_translation}`)}` : label || value),
                     value,
                   }))}
                   optionRender={renderSelectOption}
                   getPopupContainer={(triggerNode) => triggerNode.parentElement}
-                  showSearch={showSearch}
-                  filterOption={showSearch ? handleFilterSelectOptions : null}
-                  onChange={(value) => handleChangeFieldValue({ id, value })}
+                  showSearch={field.showSearch}
+                  filterOption={field.showSearch ? handleFilterSelectOptions : undefined}
+                  onChange={(value) => handleChangeFieldValue({ id: field.id, value })}
                 />
               )}
-              {type === FieldTypes.DATES_PERIOD && <PeriodField id={id} value={filterValues[id]} onChange={(value) => handleChangeFieldValue({ id, value })} />}
+              {field.type === FieldTypes.SELECT && (
+                <Select
+                  autoFocus={!index}
+                  id={field.id}
+                  className="w-full"
+                  size="large"
+                  value={filterValues[field.id]}
+                  options={field.options?.map(({ option, label, label_translation, value }) => ({
+                    label: option || (label_translation ? `${field.options_prefix ? `${t(`fields.${field.options_prefix}`)} ` : ""}${t(`fields.${label_translation}`)}` : label || value),
+                    value,
+                  }))}
+                  optionRender={renderSelectOption}
+                  getPopupContainer={(triggerNode) => triggerNode.parentElement}
+                  showSearch={field.showSearch}
+                  filterOption={field.showSearch ? handleFilterSelectOptions : undefined}
+                  onChange={(value) => handleChangeFieldValue({ id: field.id, value })}
+                />
+              )}
+              {field.type === FieldTypes.DATES_PERIOD && filterValues[field.id] && (
+                <PeriodField id={field.id} value={filterValues[field.id]!} onChange={(value) => handleChangeFieldValue({ id: field.id, value })} />
+              )}
             </li>
           ))}
         </ul>

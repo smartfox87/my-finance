@@ -1,19 +1,22 @@
 import { useEffect, useMemo } from "react";
-import { getIntegerIfPossible } from "@/helpers/numbers.js";
-import { useDispatch } from "react-redux";
-import { isStringADate } from "@/helpers/date";
+import { getIntegerFromString } from "@/helpers/numbers";
+import { isStringValidDate } from "@/helpers/date";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import queryString from "query-string";
-import { FilterState, setFilterStateValues } from "@/types/filter";
+import { FilterState, FilterStateValue, setFilterStateValues } from "@/types/filter";
+import { useAppDispatch } from "@/hooks/redux";
+import { isFilterStateKey } from "@/predicates/filter";
+import { isMultiSelectValue, isSelectAllValue } from "@/predicates/field";
+import { prepareObjectValuesForFilterStateValues } from "@/helpers/filters";
 
 export const useFilterSearchParams = (filterValues: FilterState | null, setFilterValues: setFilterStateValues) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
   const searchParamsArray = Array.from(searchParams.entries());
   const sortedFilterValues = useMemo(
-    () =>
+    (): FilterState =>
       filterValues
         ? Object.assign(
             {},
@@ -28,34 +31,45 @@ export const useFilterSearchParams = (filterValues: FilterState | null, setFilte
     [filterValues],
   );
 
-  const isFilterValuesFilled = useMemo(() => !!filterValues && !!Object.keys(filterValues).length, [filterValues]);
+  const isFilterValuesFilled = useMemo((): boolean => !!filterValues && !!Object.keys(filterValues).length, [filterValues]);
 
-  const paramsObject = useMemo(() => {
-    if (searchParamsArray.length && filterValues)
-      return searchParamsArray.reduce((acc, [key, value]) => {
-        const newValue = isStringADate(value) ? value : getIntegerIfPossible(value);
-        return {
-          ...acc,
-          [key]: acc[key] ? [...acc[key], newValue] : Array.isArray(filterValues[key]) ? [newValue] : newValue,
-        };
-      }, {});
-  }, [searchParamsArray, filterValues]);
+  const paramsObject = useMemo(
+    () =>
+      searchParamsArray.length && filterValues
+        ? searchParamsArray.reduce(
+            (acc, [key, value]) => {
+              let newValue: FilterStateValue;
+              if (isFilterStateKey(key) && Array.isArray(filterValues[key]) && !acc[key]) {
+                if (isStringValidDate(value)) newValue = [value, value];
+                else newValue = [isSelectAllValue(value) ? value : getIntegerFromString(value)];
+              } else if (Array.isArray(acc[key])) {
+                const accValue = acc[key];
+                if (isMultiSelectValue(accValue)) newValue = accValue.concat(isSelectAllValue(value) ? value : getIntegerFromString(value));
+                else newValue = [accValue[0], value];
+              } else {
+                newValue = value;
+              }
+              return { ...acc, [key]: newValue };
+            },
+            {} as Record<string, FilterStateValue>,
+          )
+        : null,
+    [searchParamsArray, filterValues],
+  );
 
   const isNotEqualParamsToFilters = useMemo(
-    () => (!searchParamsArray.length && !filterValues) || JSON.stringify(paramsObject) !== JSON.stringify(sortedFilterValues),
+    (): boolean => (!searchParamsArray.length && !filterValues) || JSON.stringify(paramsObject) !== JSON.stringify(sortedFilterValues),
     [paramsObject, sortedFilterValues],
   );
 
   useEffect(() => {
-    if (isFilterValuesFilled) {
-      if (searchParamsArray.length && isNotEqualParamsToFilters) {
-        dispatch(setFilterValues(Object.keys(paramsObject).map((key) => ({ id: key, value: paramsObject[key] }))));
-      }
+    if (paramsObject && isFilterValuesFilled && searchParamsArray.length && isNotEqualParamsToFilters) {
+      dispatch(setFilterValues(prepareObjectValuesForFilterStateValues(paramsObject)));
     }
   }, [isFilterValuesFilled]);
 
   useEffect(() => {
-    if (isFilterValuesFilled && isNotEqualParamsToFilters) router.push(`${pathname}?${queryString.stringify(filterValues)}`);
+    if (filterValues && isFilterValuesFilled && isNotEqualParamsToFilters) router.push(`${pathname}?${queryString.stringify(filterValues)}`);
   }, [isFilterValuesFilled, filterValues, isNotEqualParamsToFilters]);
 
   return [isNotEqualParamsToFilters, isFilterValuesFilled];
