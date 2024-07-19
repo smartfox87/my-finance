@@ -3,6 +3,7 @@ import formatPrice from "@/helpers/formatPrice.js";
 import { useSelector } from "react-redux";
 import { selectCurrency } from "@/store/selectors/profile";
 import { useViewport } from "@/hooks/viewport";
+import { Viewports } from "@/types/viewport.js";
 
 const CustomTooltip = ({ active, payload }) => {
   const currency = useSelector(selectCurrency);
@@ -33,7 +34,7 @@ const CustomTooltip = ({ active, payload }) => {
 
 export const IncomesCategoriesBarChart = ({ items }) => {
   const { viewport, isMobile } = useViewport();
-  const coords = ["xxs"].includes(viewport) ? { x: 0 } : undefined;
+  const coords = [Viewports.XXS].includes(viewport) ? { x: 0 } : undefined;
 
   return (
     <div style={{ width: "100%", height: items.length * 40 + 45 }}>
