@@ -1,7 +1,6 @@
 import { supabaseClient } from "./supabase";
 import { FilteredMultiPropsItems, FilteredSinglePropItems, FilterPropValues, Locale, SelectedOptionsData, SortItem, SortOrder, SortProp } from "./types";
 import { compareMultiPropsItemsToFilterPropValues, compareSinglePropItemsToFilterPropValues, sortItems } from "./utils";
-import { locales } from "@/constants/router";
 
 Cypress.Commands.add("deleteE2EUser", () => {
   supabaseClient
@@ -198,7 +197,7 @@ Cypress.Commands.add("checkItemsSort", ({ items, prop, order } = {}) => {
     .map((_, el) => {
       const item = Cypress.$(el);
       const propItem = item.find(`[data-cy="item-${prop}"]`);
-      const propValue = prop === SortProp.DATE ? propItem.attr("datetime") ?? "" : propItem.text() ?? "";
+      const propValue = prop === SortProp.DATE ? (propItem.attr("datetime") ?? "") : (propItem.text() ?? "");
       if (prop === SortProp.AMOUNT) return { created: String(item.data("created") ?? ""), amount: propValue };
       if (prop === SortProp.DATE) return { created: String(item.data("created") ?? ""), date: propValue };
       else return { created: String(item.data("created") ?? ""), name: propValue };
