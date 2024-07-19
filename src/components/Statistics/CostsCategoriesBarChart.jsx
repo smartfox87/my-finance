@@ -32,8 +32,7 @@ const CustomTooltip = ({ active, payload }) => {
 };
 
 export const CostsCategoriesBarChart = ({ items }) => {
-  const { viewport } = useViewport();
-  const isMobile = ["xs", "xxs"].includes(viewport);
+  const { viewport, isMobile } = useViewport();
   const coords = ["xxs"].includes(viewport) ? { x: 0 } : undefined;
 
   return (

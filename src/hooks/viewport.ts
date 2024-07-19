@@ -10,15 +10,17 @@ const viewports: { name: Viewport; query: string }[] = [
   { name: Viewports.XXS, query: `(max-width: ${Breakpoints["3XS-MAX"]}px)` },
 ];
 const tabletViewports: Viewport[] = [Viewports.XXS, Viewports.XS, Viewports.SM];
+const mobileViewports: Viewport[] = [Viewports.XXS, Viewports.XS];
 
 const getTrueValueIndex = (mediaQueryLists: MediaQueryList[]): number => mediaQueryLists.map((list) => list.matches).findIndex(Boolean);
 
 const getViewportByIndex = (index: number): Viewport => viewports[index].name;
 
-export const useViewport = (): { viewport: Viewport; isTouchDevice: Boolean; isTablet: Boolean } => {
+export const useViewport = (): { viewport: Viewport; isTouchDevice: Boolean; isTablet: Boolean; isMobile: boolean } => {
   const [viewport, setViewport] = useState<Viewport>(getViewportByIndex(4));
   const [isTouchDevice, setIsTouchDevice] = useState(false);
   const isTablet = useMemo(() => tabletViewports.includes(viewport), [viewport]);
+  const isMobile = useMemo(() => mobileViewports.includes(viewport), [viewport]);
 
   useEffect(() => {
     const mediaQueryLists: MediaQueryList[] = viewports.map(({ query }) => matchMedia(query));
@@ -37,5 +39,5 @@ export const useViewport = (): { viewport: Viewport; isTouchDevice: Boolean; isT
     return () => mediaQueryLists.forEach((list) => list.removeEventListener("change", handleMatchMediaChange));
   }, []);
 
-  return { viewport, isTouchDevice, isTablet };
+  return { viewport, isTouchDevice, isTablet, isMobile };
 };
