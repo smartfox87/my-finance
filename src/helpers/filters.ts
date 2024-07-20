@@ -3,8 +3,9 @@ import { ActiveFilterItem, ActiveFilterItemValue, FilterItem, FilterState, Filte
 import { ProcessedFilterField } from "@/types/selectors";
 import { i18nRef } from "@/i18n";
 import { isMultiSelectValue } from "@/predicates/field";
-import { isTruthy } from "@/predicates/common";
+import { isNumber, isTruthy } from "@/predicates/common";
 import { isFilterMultiItem, isFilterPeriodItem, isFilterSortItem } from "@/predicates/filter";
+import { isMultiSelectFormFieldId } from "@/predicates/form";
 
 export const getActiveFilters = (processedFilterFields: ProcessedFilterField[], filterValues: FilterState | null): ActiveFilterItem[] =>
   processedFilterFields
@@ -36,7 +37,7 @@ export const getActiveFilters = (processedFilterFields: ProcessedFilterField[], 
     .flat(1)
     .filter(isTruthy);
 
-export const checkIsClearableFilter = ({ id, value }: ActiveFilterItemValue) => (FieldIds.CATEGORIES === id || FieldIds.ACCOUNTS === id) && value && value !== FieldValues.ALL;
+export const checkIsClearableFilter = ({ id, value }: ActiveFilterItemValue): boolean => isMultiSelectFormFieldId(id) && isNumber(value);
 
 export const setFilterValue = (filterValues: FilterState | null, { id, value }: FilterItem) => {
   const state: FilterState = filterValues ? { ...filterValues } : {};

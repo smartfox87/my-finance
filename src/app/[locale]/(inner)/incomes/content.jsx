@@ -15,7 +15,7 @@ import { AddNewIncome } from "@/components/Incomes/New/AddNewIncome";
 import { IncomesFilter } from "@/components/Incomes/Filter/IncomesFilter";
 import { ActiveIncomesFilters } from "@/components/Incomes/Filter/ActiveIncomesFilters";
 import { LazyList } from "@/components/Common/LazyList";
-import { IncomeListItem } from "@/components/Incomes/List/IncomeListItem.js";
+import { IncomeListItem } from "@/components/Incomes/List/IncomeListItem";
 import { IncomeDetail } from "@/components/Incomes/Detail/IncomeDetail";
 import { EmptyIncomes } from "@/components/Incomes/List/EmptyIncomes";
 import { FoundNothing } from "@/components/Common/FoundNothing";

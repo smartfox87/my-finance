@@ -1,24 +1,28 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectBudgetsFilterFields, selectBudgetsFilterValues } from "@/store/selectors/budgets";
 import { setBudgetsFilterValues } from "@/store/budgetsSlice";
 import { memo, useMemo } from "react";
-import { checkIsClearableFilter, getActiveFilters } from "@/helpers/filters";
-import { FieldIds } from "@/types/field";
+import { getActiveFilters } from "@/helpers/filters";
 import { ActiveFilterItemValue } from "@/types/filter";
 import { ActiveFiltersList } from "@/components/Common/Filter/ActiveFiltersList";
+import { isMultiSelectFormFieldId } from "@/predicates/form";
+import { isNumber } from "@/predicates/common";
+import { isMultiSelectValue } from "@/predicates/field";
+import { useAppDispatch } from "@/hooks/redux";
 
 export const ActiveBudgetsFilters = memo(function ActiveBudgetsFilters() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const budgetsFilterFields = useSelector(selectBudgetsFilterFields);
   const budgetsFilterValues = useSelector(selectBudgetsFilterValues);
 
   const activeFilters = useMemo(() => getActiveFilters(budgetsFilterFields, budgetsFilterValues), [budgetsFilterFields, budgetsFilterValues]);
 
-  const handleClearFilter = ({ id, value }: ActiveFilterItemValue) =>
-    checkIsClearableFilter({ id, value }) && id !== FieldIds.SORT && id !== FieldIds.PERIOD && Array.isArray(budgetsFilterValues?.[id])
-      ? dispatch(setBudgetsFilterValues([{ id, value: budgetsFilterValues?.[id]?.filter((val) => val !== value) }]))
-      : null;
+  const handleClearFilter = ({ id, value }: ActiveFilterItemValue) => {
+    const filterStateItemValue = budgetsFilterValues?.[id];
+    if (isMultiSelectFormFieldId(id) && isNumber(value) && isMultiSelectValue(filterStateItemValue))
+      dispatch(setBudgetsFilterValues([{ id, value: filterStateItemValue.filter((val) => val !== value) }]));
+  };
 
   return <ActiveFiltersList items={activeFilters} onClearFilter={handleClearFilter} />;
 });

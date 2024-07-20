@@ -1,14 +1,17 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectIncomesFilterFields, selectIncomesFilterValues } from "@/store/selectors/incomes";
 import { memo, useMemo } from "react";
-import { checkIsClearableFilter, getActiveFilters } from "@/helpers/filters";
+import { getActiveFilters } from "@/helpers/filters";
 import { ActiveFiltersList } from "@/components/Common/Filter/ActiveFiltersList";
 import { ClearActiveFilterItemHandler } from "@/types/filter";
-import { FieldIds } from "@/types/field";
-import { setCostsFilterValues } from "@/store/costsSlice";
+import { isMultiSelectFormFieldId } from "@/predicates/form";
+import { isNumber } from "@/predicates/common";
+import { isMultiSelectValue } from "@/predicates/field";
+import { setIncomesFilterValues } from "@/store/incomesSlice";
+import { useAppDispatch } from "@/hooks/redux";
 
 export const ActiveIncomesFilters = memo(function ActiveIncomesFilters() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const incomesFilterFields = useSelector(selectIncomesFilterFields);
   const incomesFilterValues = useSelector(selectIncomesFilterValues);
@@ -16,8 +19,9 @@ export const ActiveIncomesFilters = memo(function ActiveIncomesFilters() {
   const activeFilters = useMemo(() => getActiveFilters(incomesFilterFields, incomesFilterValues), [incomesFilterFields, incomesFilterValues]);
 
   const handleClearFilter: ClearActiveFilterItemHandler = ({ id, value }) => {
-    if (checkIsClearableFilter({ id, value }) && id !== FieldIds.SORT && id !== FieldIds.PERIOD && Array.isArray(incomesFilterValues?.[id]))
-      dispatch(setCostsFilterValues([{ id, value: incomesFilterValues?.[id]?.filter((val) => val !== value) }]));
+    const filterStateItemValue = incomesFilterValues?.[id];
+    if (isMultiSelectFormFieldId(id) && isNumber(value) && isMultiSelectValue(filterStateItemValue))
+      dispatch(setIncomesFilterValues([{ id, value: filterStateItemValue.filter((val) => val !== value) }]));
   };
 
   return <ActiveFiltersList items={activeFilters} onClearFilter={handleClearFilter} />;

@@ -18,7 +18,7 @@ import { getCostsListThunk, setCostsFilterValues } from "@/store/costsSlice";
 import { INITIAL_COSTS_FILTER_FIELDS } from "@/constants/costs";
 import { getUserId } from "@/helpers/localStorage";
 import { selectCurrency } from "@/store/selectors/profile";
-import { CostListItem } from "@/components/Costs/List/CostListItem.js";
+import { CostListItem } from "@/components/Costs/List/CostListItem";
 import formatPrice from "@/helpers/formatPrice";
 import { InnerHeaderActionsPortal } from "@/components/Layout/Inner/InnerHeaderActionsPortal";
 
