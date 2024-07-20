@@ -1,7 +1,7 @@
 import { Button } from "antd";
 import { SideModal } from "@/components/Modals/SideModal";
-import { DefaultForm } from "@/components/Form/DefaultForm.tsx";
-import { useDispatch, useSelector } from "react-redux";
+import { DefaultForm } from "@/components/Form/DefaultForm";
+import { useSelector } from "react-redux";
 import { selectIncomeFields } from "@/store/selectors/incomes";
 import { createIncomeItemThunk } from "@/store/incomesSlice";
 import { useTranslation } from "react-i18next";
@@ -10,27 +10,36 @@ import { memo, useRef, useState } from "react";
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
 import { useViewport } from "@/hooks/viewport";
 import SvgNewIncome from "@/assets/sprite/new-income.svg";
+import { useAppDispatch } from "@/hooks/redux";
+import { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
+import { showCommonError } from "@/helpers/errors";
+import { isIncomeItemData } from "@/predicates/incomes";
+import { FieldIds, FieldTypes } from "@/types/field";
 
-export const AddNewIncome = memo(function AddNewIncome({ isAdaptive, onSave }) {
+export const AddNewIncome = memo(function AddNewIncome({ isAdaptive, onSave }: { isAdaptive?: boolean; onSave: () => Promise<void> }) {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { isMobile } = useViewport();
 
   const [isOpen, setIsOpen] = useState(false);
-  const handleToggleVisibility = () => setIsOpen((prevState) => !prevState);
+  const handleToggleVisibility = (): void => setIsOpen((prevState) => !prevState);
 
   const newIncomeFields = useSelector(selectIncomeFields);
 
-  const handleSaveNewIncome = async (fieldsValues) => {
-    const { error } = await dispatch(createIncomeItemThunk(fieldsValues));
-    if (error) return;
-    await onSave();
-    setIsOpen(false);
-    showNotification({ title: t("notifications.income.create") });
+  const handleSaveNewIncome: DefaultFormSaveHandler = async (fieldsValues) => {
+    try {
+      if (!isIncomeItemData(fieldsValues)) return;
+      await dispatch(createIncomeItemThunk(fieldsValues)).unwrap();
+      await onSave();
+      setIsOpen(false);
+      showNotification({ title: t("notifications.income.create") });
+    } catch (error) {
+      showCommonError();
+    }
   };
 
-  const formRef = useRef();
-  const handleSetCalculatedAmount = (value) => formRef.current.handleChangeFieldValue({ id: "amount", value });
+  const formRef = useRef<DefaultFormRef>();
+  const handleSetCalculatedAmount = (value: number): void => formRef.current?.handleChangeFieldValue({ id: FieldIds.AMOUNT, type: FieldTypes.NUMBER, value });
 
   return (
     <>
