@@ -11,7 +11,7 @@ import { useFilterFocus } from "@/hooks/filterFocus";
 import { prepareObjectValuesForFilterStateValues, setFilterValue } from "@/helpers/filters";
 import { FieldIds } from "@/types/field";
 import type { BaseSelectRef } from "rc-select";
-import { FilterState, HandleChangeFilterFieldValue } from "@/types/filter";
+import { FilterState, ChangeFilterFieldValueHandler } from "@/types/filter";
 import { FilterFields } from "@/components/Common/Filter/FilterFields";
 
 export const CostsFilter = memo(function CostsFilter({ onSave }: { onSave: () => Promise<void> }) {
@@ -33,7 +33,7 @@ export const CostsFilter = memo(function CostsFilter({ onSave }: { onSave: () =>
     setFilterValues(JSON.parse(JSON.stringify(costsFilterValues)));
   }, [costsFilterValues]);
 
-  const handleChangeFieldValue: HandleChangeFilterFieldValue = (field) => setFilterValues((prevState) => setFilterValue(prevState, field));
+  const handleChangeFieldValue: ChangeFilterFieldValueHandler = (field) => setFilterValues((prevState) => setFilterValue(prevState, field));
   const [isLoading, setIsLoading] = useState(false);
   const handleApplyFilters = async (): Promise<void> => {
     if (!costsFilterValues) return;

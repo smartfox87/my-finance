@@ -64,10 +64,10 @@ export type ActiveFilterItemValue = Pick<ActiveFilterItem, "value" | "id">;
 
 export type setFilterStateValues = ActionCreatorWithPayload<FilterItem[], "budgets/setBudgetsFilterValues">;
 
-export interface HandleClearActiveFilterItem {
+export interface ClearActiveFilterItemHandler {
   (data: ActiveFilterItemValue): void;
 }
 
-export interface HandleChangeFilterFieldValue {
+export interface ChangeFilterFieldValueHandler {
   (data: FilterItem): void;
 }

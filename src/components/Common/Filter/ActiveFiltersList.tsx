@@ -1,9 +1,9 @@
 import { Button } from "antd";
 import { checkIsClearableFilter } from "@/helpers/filters";
 import SvgCrossBold from "@/assets/sprite/cross-bold.svg";
-import { ActiveFilterItem, HandleClearActiveFilterItem } from "@/types/filter";
+import { ActiveFilterItem, ClearActiveFilterItemHandler } from "@/types/filter";
 
-export const ActiveFiltersList = ({ items, onClearFilter }: { items: ActiveFilterItem[]; onClearFilter: HandleClearActiveFilterItem }) => {
+export const ActiveFiltersList = ({ items, onClearFilter }: { items: ActiveFilterItem[]; onClearFilter: ClearActiveFilterItemHandler }) => {
   return (
     <ul className="flex flex-wrap gap-2">
       {items.map(({ id, label, value, ...field }) => (

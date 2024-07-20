@@ -11,7 +11,7 @@ import { useFilterFocus } from "@/hooks/filterFocus";
 import { prepareObjectValuesForFilterStateValues, setFilterValue } from "@/helpers/filters";
 import { FieldIds } from "@/types/field";
 import { useAppDispatch } from "@/hooks/redux";
-import { FilterItem, FilterState, HandleChangeFilterFieldValue } from "@/types/filter";
+import { FilterItem, FilterState, ChangeFilterFieldValueHandler } from "@/types/filter";
 import { BaseSelectRef } from "rc-select";
 import { FilterFields } from "@/components/Common/Filter/FilterFields";
 
@@ -34,7 +34,7 @@ export const BudgetsFilter = memo(function BudgetsFilter({ onSave }: { onSave: (
     setFilterValues(JSON.parse(JSON.stringify(budgetsFilterValues)));
   }, [budgetsFilterValues]);
 
-  const handleChangeFieldValue: HandleChangeFilterFieldValue = (field) => setFilterValues((prevState) => setFilterValue(prevState, field));
+  const handleChangeFieldValue: ChangeFilterFieldValueHandler = (field) => setFilterValues((prevState) => setFilterValue(prevState, field));
   const [isLoading, setIsLoading] = useState(false);
   const handleApplyFilters = async (): Promise<void> => {
     if (!budgetsFilterValues) return;
