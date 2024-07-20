@@ -44,12 +44,7 @@ export const CostDetail = memo(function CostDetail({ onSave }: { onSave: () => P
   }, [costId]);
 
   const costItem = useSelector(selectCostItem);
-  const costFields = useSelector(selectCostFields).map((field): CostItemField => {
-    if (!costItem) return field;
-    const filledField: CostItemField = { ...field };
-    filledField.value = costItem[field.id] ?? filledField.value;
-    return filledField;
-  });
+  const costFields = useSelector(selectCostFields);
 
   const handleUpdateCost: DefaultFormSaveHandler = async (fieldsValues) => {
     try {
