@@ -11,7 +11,6 @@ import SvgDelete from "@/assets/sprite/delete.svg";
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
 import { Button } from "antd";
 import { useSearchParams, useRouter } from "next/navigation";
-import { CostItemField } from "@/types/costs";
 import { isCostItemData } from "@/predicates/costs";
 import { showCommonError } from "@/helpers/errors";
 import { useAppDispatch } from "@/hooks/redux";
