@@ -1,4 +1,4 @@
-import { BudgetDate } from "./BudgetDate.jsx";
+import { BudgetDate } from "./BudgetDate";
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "antd";
 import formatPrice from "@/helpers/formatPrice.js";
@@ -11,8 +11,9 @@ import { isTextClamped } from "@/helpers/isTextClamped.js";
 import { useViewport } from "@/hooks/viewport";
 import { selectAccountsObject } from "@/store/selectors/accounts";
 import Link from "next/link";
+import { ProcessedBudgetItem } from "@/types/budgets";
 
-export const BudgetItem = ({ id, created_at, name, amount, accounts, categories, period: [start_date, end_date] }) => {
+export const BudgetItem = ({ id, created_at, name, amount, accounts, categories, period: [start_date, end_date] }: ProcessedBudgetItem) => {
   const { t } = useTranslation();
   const { isTouchDevice } = useViewport();
   const currency = useSelector(selectCurrency);
@@ -56,13 +57,13 @@ export const BudgetItem = ({ id, created_at, name, amount, accounts, categories,
           )}
         </li>
         <li>
-          {t("detail.account")}:{" "}
+          {t("detail.accounts")}:{" "}
           <span data-cy="item-accounts" className="font-bold">
             {accountsValue}
           </span>
         </li>
         <li>
-          {t("detail.category")}:{" "}
+          {t("detail.categories")}:{" "}
           <span data-cy="item-categories" className="font-bold">
             {categoriesValue}
           </span>

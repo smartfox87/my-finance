@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
+import { ReactNode } from "react";
 
-export const EmptyBudgets = ({ addNew }) => {
+export const EmptyBudgets = ({ addNew }: { addNew: ReactNode }) => {
   const { t } = useTranslation();
 
   return (

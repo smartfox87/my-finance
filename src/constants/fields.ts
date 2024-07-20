@@ -4,7 +4,7 @@ import { PickerPeriods } from "@/types/date";
 import { ComplexFieldNames, SelectFieldOptions, FieldTypes, SimpleFieldNames, SortFieldOptions, GenderFieldOptions, SubjectFieldOptions, FieldValues } from "@/types/field";
 import { FieldIds } from "@/types/field";
 
-export const SORT_FIELD: SingleSelectFormField<string, FieldIds.SORT> = {
+export const SORT_FIELD: SingleSelectFormField<FieldIds.SORT, string> = {
   id: FieldIds.SORT,
   type: FieldTypes.SELECT,
   label: `complex.${ComplexFieldNames.SORT}.label`,
@@ -21,7 +21,7 @@ export const SORT_FIELD: SingleSelectFormField<string, FieldIds.SORT> = {
   focus: true,
 };
 
-export const ACCOUNT_FIELD: SingleSelectFormField = {
+export const ACCOUNT_FIELD: SingleSelectFormField<FieldIds.ACCOUNT> = {
   id: FieldIds.ACCOUNT,
   type: FieldTypes.SELECT,
   label: `complex.${ComplexFieldNames.ACCOUNT}.label`,
@@ -41,7 +41,7 @@ export const ACCOUNTS_FIELD: MultiSelectFormField = {
   multiple: true,
 };
 
-export const CATEGORY_FIELD: SingleSelectFormField = {
+export const CATEGORY_FIELD: SingleSelectFormField<FieldIds.CATEGORY> = {
   id: FieldIds.CATEGORY,
   type: FieldTypes.SELECT,
   label: `complex.${ComplexFieldNames.CATEGORY}.label`,
@@ -82,7 +82,7 @@ export const AMOUNT_FIELD: NumberFormField<FieldIds.AMOUNT> = { id: FieldIds.AMO
 
 export const BALANCE_FIELD: NumberFormField = { id: FieldIds.BALANCE, type: FieldTypes.NUMBER, label: `simple.${SimpleFieldNames.BALANCE}`, value: "", required: true };
 
-export const DATE_FIELD: DateFormField = {
+export const DATE_FIELD: DateFormField<FieldIds.DATE> = {
   id: FieldIds.DATE,
   type: FieldTypes.DATE,
   label: `simple.${SimpleFieldNames.DATE}`,

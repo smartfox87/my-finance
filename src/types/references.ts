@@ -11,10 +11,10 @@ export interface AccountType {
 }
 
 export interface AccountTypesObject {
-  id: number;
-  user_id: string;
-  name: string;
-  general_name?: string;
+  [key: string]: {
+    name: string;
+    user_id: string;
+  };
 }
 
 export interface AccountTypeData {

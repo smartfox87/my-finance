@@ -21,6 +21,7 @@ export const SideModal = ({
   onClose: () => void;
   footer?: ReactNode;
   isLoading?: boolean;
+  // todo delete onInit
   onInit?: (isInit: boolean) => void;
 }) => {
   const { isMobile } = useViewport();
@@ -33,7 +34,7 @@ export const SideModal = ({
       if (!isInitializedModal) setIsInitializedModal(true);
       handleInit();
     }
-  }, [isOpen, Modal]);
+  }, [isOpen]);
 
   return (
     <>

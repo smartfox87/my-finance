@@ -7,15 +7,15 @@ import { AccountItem, ProcessedAccountItem } from "@/types/accounts";
 
 export const selectAccounts = ({ accounts }: LazyLoadedSlices): AccountItem[] | null => accounts?.accountsList || null;
 
-export const selectAccountsList = createSelector(
-  [selectAccounts, selectAccountTypesObject],
-  (accounts, accountTypesObject) =>
-    accounts
-      ?.filter(({ account_type_id }) => accountTypesObject?.[account_type_id])
-      .map(({ id, account_type_id, balance, updated_at }): ProcessedAccountItem => {
-        const { name, general_name, user_id } = accountTypesObject[account_type_id];
-        return { id, name: name || general_name, updated_at, balance, disabled: !user_id };
-      }) || null,
+export const selectAccountsList = createSelector([selectAccounts, selectAccountTypesObject], (accounts, accountTypesObject) =>
+  accounts && accountTypesObject
+    ? accounts
+        .filter(({ account_type_id }) => accountTypesObject?.[account_type_id])
+        .map(({ id, account_type_id, balance, updated_at }): ProcessedAccountItem => {
+          const { name, user_id } = accountTypesObject[account_type_id];
+          return { id, name, updated_at, balance, disabled: !user_id };
+        })
+    : null,
 );
 
 export const selectAccountsObject = createSelector([selectAccountsList], (accountsList) => (accountsList ? Object.assign({}, ...accountsList.map(({ id, name }) => ({ [id]: name }))) : null));
@@ -23,8 +23,8 @@ export const selectAccountsObject = createSelector([selectAccountsList], (accoun
 export const selectAccountItem = createSelector([({ accounts }) => accounts?.accountItem, selectAccountTypesObject], (accountItem, accountTypesObject) => {
   if (!accountItem || !accountTypesObject) return null;
   const { id, account_type_id, balance, created_at, updated_at } = accountItem;
-  const { name, general_name, user_id } = accountTypesObject[account_type_id];
-  return { id, name: name || general_name, updated_at, balance, created_at, disabled: !user_id };
+  const { name, user_id } = accountTypesObject[account_type_id];
+  return { id, name, updated_at, balance, created_at, disabled: !user_id };
 });
 
 export const selectAccountFields = createSelector([selectCurrency], (currency) =>
