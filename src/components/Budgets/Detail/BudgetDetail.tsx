@@ -44,12 +44,7 @@ export const BudgetDetail = memo(function BudgetDetail({ onSave }: { onSave: () 
   }, [budgetId]);
 
   const budgetItem = useSelector(selectBudgetItem);
-  const budgetFields = useSelector(selectBudgetFields).map((field): BudgetItemField => {
-    if (!budgetItem) return field;
-    const filledField: BudgetItemField = { ...field };
-    filledField.value = budgetItem[field.id] ?? filledField.value;
-    return filledField;
-  });
+  const budgetFields = useSelector(selectBudgetFields);
 
   const handleUpdateBudget: DefaultFormSaveHandler = async (fieldsValues) => {
     try {
