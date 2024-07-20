@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { setCostsFilterValues } from "@/store/costsSlice";
 import { selectCostsFilterFields, selectCostsFilterValues } from "@/store/selectors/costs";
 import { useTranslation } from "react-i18next";
@@ -13,10 +13,11 @@ import { FieldIds } from "@/types/field";
 import type { BaseSelectRef } from "rc-select";
 import { FilterState, ChangeFilterFieldValueHandler } from "@/types/filter";
 import { FilterFields } from "@/components/Common/Filter/FilterFields";
+import { useAppDispatch } from "@/hooks/redux";
 
 export const CostsFilter = memo(function CostsFilter({ onSave }: { onSave: () => Promise<void> }) {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { isMobile } = useViewport();
 
   const [isOpen, setIsOpen] = useState(false);

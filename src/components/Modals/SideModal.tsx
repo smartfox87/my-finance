@@ -1,6 +1,6 @@
 import { useViewport } from "@/hooks/viewport";
 import { Preloader } from "@/components/Layout/Preloader.jsx";
-import { lazy, ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect } from "react";
 import { useModalState } from "@/hooks/providers/modalState";
 import dynamic from "next/dynamic";
 
@@ -13,7 +13,6 @@ export const SideModal = ({
   children,
   footer,
   onClose,
-  onInit,
 }: {
   title: string;
   isOpen: boolean;
@@ -21,19 +20,13 @@ export const SideModal = ({
   onClose: () => void;
   footer?: ReactNode;
   isLoading?: boolean;
-  // todo delete onInit
-  onInit?: (isInit: boolean) => void;
 }) => {
   const { isMobile } = useViewport();
   const placement = isMobile ? "bottom" : "right";
   const { isInitializedModal, setIsInitializedModal } = useModalState();
-  const handleInit = () => onInit && onInit(true);
 
   useEffect(() => {
-    if (isOpen) {
-      if (!isInitializedModal) setIsInitializedModal(true);
-      handleInit();
-    }
+    if (isOpen && !isInitializedModal) setIsInitializedModal(true);
   }, [isOpen]);
 
   return (
