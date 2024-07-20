@@ -1,13 +1,14 @@
-import { MutableRefObject, useEffect, useRef } from "react";
+import { MutableRefObject, SetStateAction, useEffect, useRef, useState } from "react";
 import { BaseSelectRef } from "rc-select";
 
-export const useFilterFocus = <T extends BaseSelectRef | HTMLInputElement>(isOpen: boolean, isInitialized: boolean): [MutableRefObject<T | null>] => {
+export const useFilterFocus = <T extends BaseSelectRef | HTMLInputElement>(): [MutableRefObject<T | null>, (value: SetStateAction<boolean>) => void] => {
   const fieldRef = useRef<T | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
   useEffect(() => {
-    if (isOpen && isInitialized) {
+    if (isMounted) {
       const timeout = setTimeout(() => fieldRef.current?.focus());
       return () => clearTimeout(timeout);
     }
-  }, [isOpen, isInitialized]);
-  return [fieldRef];
+  }, [isMounted]);
+  return [fieldRef, setIsMounted];
 };
