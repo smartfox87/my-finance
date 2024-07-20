@@ -39,7 +39,7 @@ export const AddNewBudget = memo(function AddNewBudget({ isAdaptive, onSave }: {
   };
 
   const formRef = useRef<DefaultFormRef>(null);
-  const handleSetCalculatedAmount = (value: number) => formRef.current?.handleChangeFieldValue({ id: FieldIds.AMOUNT, type: FieldTypes.NUMBER, value });
+  const handleSetCalculatedAmount = (value: number): void => formRef.current?.handleChangeFieldValue({ id: FieldIds.AMOUNT, type: FieldTypes.NUMBER, value });
 
   return (
     <>
