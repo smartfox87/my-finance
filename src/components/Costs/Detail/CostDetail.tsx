@@ -11,7 +11,6 @@ import SvgDelete from "@/assets/sprite/delete.svg";
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
 import { Button } from "antd";
 import { useSearchParams, useRouter } from "next/navigation";
-import { CostItemField } from "@/types/costs";
 import { isCostItemData } from "@/predicates/costs";
 import { showCommonError } from "@/helpers/errors";
 import { useAppDispatch } from "@/hooks/redux";
@@ -44,12 +43,7 @@ export const CostDetail = memo(function CostDetail({ onSave }: { onSave: () => P
   }, [costId]);
 
   const costItem = useSelector(selectCostItem);
-  const costFields = useSelector(selectCostFields).map((field): CostItemField => {
-    if (!costItem) return field;
-    const filledField: CostItemField = { ...field };
-    filledField.value = costItem[field.id] ?? filledField.value;
-    return filledField;
-  });
+  const costFields = useSelector(selectCostFields);
 
   const handleUpdateCost: DefaultFormSaveHandler = async (fieldsValues) => {
     try {

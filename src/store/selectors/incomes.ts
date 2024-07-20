@@ -4,7 +4,10 @@ import { selectIncomeCategories } from "@/store/selectors/references";
 import { selectCurrency } from "@/store/selectors/profile";
 import { selectAccountsList } from "@/store/selectors/accounts";
 import { LazyLoadedSlices } from "@/store";
-import { sortItemsList, filterSingleItemsList, processFilterFields } from "@/helpers/selectors";
+import { filterSingleItemsList, processFilterFields, sortItemsList } from "@/helpers/selectors";
+import { FieldIds, FieldTypes } from "@/types/field";
+import { IncomeItemField } from "@/types/incomes";
+import dayjs from "dayjs";
 
 export const selectIncomesList = ({ incomes }: LazyLoadedSlices) => incomes?.incomesList || null;
 
@@ -20,11 +23,18 @@ export const selectIncomesFilterFields = createSelector([selectIncomeCategories,
   processFilterFields(INITIAL_INCOMES_FILTER_FIELDS, incomeCategories, accountsList),
 );
 
-export const selectIncomeFields = createSelector([selectIncomeCategories, selectAccountsList, selectCurrency], (incomeCategories, accountsList, currency) =>
-  INITIAL_INCOME_FIELDS.map((field) => {
-    if (field.id === "category") return { ...field, options: field.options.concat(incomeCategories?.map(({ id, name }) => ({ value: id, label: name })) || []) };
-    else if (field.id === "account") return { ...field, options: field.options.concat(accountsList?.map(({ id, name }) => ({ value: id, label: name })) || []) };
-    else if (field.id === "amount") return { ...field, label_suffix: currency };
-    else return field;
+export const selectIncomeFields = createSelector([selectIncomeCategories, selectAccountsList, selectCurrency, selectIncomeItem], (incomeCategories, accountsList, currency, incomeItem) =>
+  INITIAL_INCOME_FIELDS.map((field): IncomeItemField => {
+    if (field.type === FieldTypes.SELECT) {
+      const value = incomeItem?.[field.id] ? incomeItem[field.id] : field.value;
+      if (field.id === FieldIds.CATEGORY) return { ...field, value, options: field.options.concat(incomeCategories?.map(({ id, name }) => ({ value: id, label: name })) || []) };
+      else return { ...field, value, options: field.options.concat(accountsList?.map(({ id, name }) => ({ value: id, label: name })) || []) };
+    } else if (field.id === FieldIds.AMOUNT) {
+      return { ...field, value: incomeItem?.[field.id] ? incomeItem[field.id] : field.value, label_suffix: currency };
+    } else if (field.id === FieldIds.DATE) {
+      return { ...field, value: incomeItem?.[field.id] ? dayjs(incomeItem[field.id]) : field.value };
+    } else {
+      return { ...field, value: incomeItem?.[field.id] ? incomeItem[field.id] : field.value };
+    }
   }),
 );

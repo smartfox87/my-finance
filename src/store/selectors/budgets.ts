@@ -25,13 +25,10 @@ export const selectBudgetsFilterFields = createSelector([selectCostCategories, s
 export const selectBudgetFields = createSelector([selectAccountsList, selectCostCategories, selectCurrency, selectBudgetItem], (accountsList, costCategories, currency, budgetItem) =>
   INITIAL_BUDGET_FIELDS.map((field): BudgetItemField => {
     if (field.type === FieldTypes.MULTISELECT) {
-      if (field.id === FieldIds.CATEGORIES) {
-        const value = budgetItem?.[field.id] ? budgetItem[field.id] : field.value;
+      const value = budgetItem?.[field.id] ? budgetItem[field.id] : field.value;
+      if (field.id === FieldIds.CATEGORIES)
         return { ...field, value: Array.isArray(value) && value.length ? value : field.value, options: field.options.concat(getOptionsFromItemsList(costCategories || []) || []) };
-      } else {
-        const value = budgetItem?.[field.id] ? budgetItem[field.id] : field.value;
-        return { ...field, value: Array.isArray(value) && value.length ? value : field.value, options: field.options.concat(getOptionsFromItemsList(accountsList || []) || []) };
-      }
+      else return { ...field, value: Array.isArray(value) && value.length ? value : field.value, options: field.options.concat(getOptionsFromItemsList(accountsList || []) || []) };
     } else if (field.id === FieldIds.AMOUNT) {
       return { ...field, value: budgetItem?.[field.id] ? budgetItem[field.id] : field.value, label_suffix: currency };
     } else if (field.id === FieldIds.PERIOD) {

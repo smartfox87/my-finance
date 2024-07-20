@@ -4,7 +4,7 @@ import { PeriodField } from "@/components/Form/PeriodField";
 import { MutableRefObject, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { FieldTypes } from "@/types/field";
-import type { FilterState, HandleChangeFilterFieldValue } from "@/types/filter";
+import type { FilterState, ChangeFilterFieldValueHandler } from "@/types/filter";
 import type { ProcessedFilterField } from "@/types/selectors";
 import type { BaseSelectRef } from "rc-select";
 
@@ -20,7 +20,7 @@ export const FilterFields = ({
   items: ProcessedFilterField[];
   filterValues: FilterState;
   fieldRef: MutableRefObject<BaseSelectRef | null>;
-  onChangeFieldValue: HandleChangeFilterFieldValue;
+  onChangeFieldValue: ChangeFilterFieldValueHandler;
   onInit: (isInit: boolean) => void;
 }) => {
   const { t } = useTranslation();

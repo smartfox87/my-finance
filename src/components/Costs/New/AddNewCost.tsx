@@ -1,7 +1,7 @@
 import { Button } from "antd";
 import { SideModal } from "@/components/Modals/SideModal";
-import { DefaultForm } from "@/components/Form/DefaultForm.tsx";
-import { useDispatch, useSelector } from "react-redux";
+import { DefaultForm } from "@/components/Form/DefaultForm";
+import { useSelector } from "react-redux";
 import { selectCostFields } from "@/store/selectors/costs";
 import { createCostItemThunk } from "@/store/costsSlice";
 import { useTranslation } from "react-i18next";
@@ -10,10 +10,15 @@ import { memo, useRef, useState } from "react";
 import SvgNewExpense from "@/assets/sprite/new-expense.svg";
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
 import { useViewport } from "@/hooks/viewport";
+import { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
+import { FieldIds, FieldTypes } from "@/types/field";
+import { isCostItemData } from "@/predicates/costs";
+import { showCommonError } from "@/helpers/errors";
+import { useAppDispatch } from "@/hooks/redux";
 
-export const AddNewCost = memo(function AddNewCost({ isAdaptive, onSave }) {
+export const AddNewCost = memo(function AddNewCost({ isAdaptive, onSave }: { isAdaptive?: boolean; onSave: () => Promise<void> }) {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { isMobile } = useViewport();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -21,16 +26,20 @@ export const AddNewCost = memo(function AddNewCost({ isAdaptive, onSave }) {
 
   const newCostFields = useSelector(selectCostFields);
 
-  const handleSaveNewCost = async (fieldsValues) => {
-    const { error } = await dispatch(createCostItemThunk(fieldsValues));
-    if (error) return;
-    await onSave();
-    setIsOpen(false);
-    showNotification({ title: t("notifications.expense.create") });
+  const handleSaveNewCost: DefaultFormSaveHandler = async (fieldsValues) => {
+    try {
+      if (!isCostItemData(fieldsValues)) return;
+      await dispatch(createCostItemThunk(fieldsValues)).unwrap();
+      await onSave();
+      setIsOpen(false);
+      showNotification({ title: t("notifications.expense.create") });
+    } catch (error) {
+      showCommonError();
+    }
   };
 
-  const formRef = useRef();
-  const handleSetCalculatedAmount = (value) => formRef.current.handleChangeFieldValue({ id: "amount", value });
+  const formRef = useRef<DefaultFormRef>();
+  const handleSetCalculatedAmount = (value: number): void => formRef.current?.handleChangeFieldValue({ id: FieldIds.AMOUNT, type: FieldTypes.NUMBER, value });
 
   return (
     <>

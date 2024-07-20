@@ -18,7 +18,7 @@ import { getCostsListThunk, setCostsFilterValues } from "@/store/costsSlice";
 import { INITIAL_COSTS_FILTER_FIELDS } from "@/constants/costs";
 import { getUserId } from "@/helpers/localStorage";
 import { selectCurrency } from "@/store/selectors/profile";
-import { CostItem } from "@/components/Costs/List/CostItem";
+import { CostListItem } from "@/components/Costs/List/CostListItem";
 import formatPrice from "@/helpers/formatPrice";
 import { InnerHeaderActionsPortal } from "@/components/Layout/Inner/InnerHeaderActionsPortal";
 
@@ -78,7 +78,7 @@ export default function ExpensesContent() {
           </div>
           <ActiveCostsFilters />
         </div>
-        <LazyList items={filteredSortedCosts} Item={CostItem} />
+        <LazyList items={filteredSortedCosts} Item={CostListItem} />
         <Suspense fallback={<div />}>
           <CostDetail onSave={handleGetData} />
         </Suspense>

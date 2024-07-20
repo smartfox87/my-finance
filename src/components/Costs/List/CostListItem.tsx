@@ -11,8 +11,9 @@ import { isTextClamped } from "@/helpers/isTextClamped.js";
 import { useViewport } from "@/hooks/viewport";
 import { selectAccountsObject } from "@/store/selectors/accounts";
 import Link from "next/link";
+import { CostItem } from "@/types/costs";
 
-export const CostItem = ({ id, created_at, name, amount, date, category, account }) => {
+export const CostListItem = ({ id, created_at, name, amount, date, category, account }: CostItem) => {
   const { t } = useTranslation();
   const { isTouchDevice } = useViewport();
   const currency = useSelector(selectCurrency);

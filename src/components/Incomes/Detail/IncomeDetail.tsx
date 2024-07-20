@@ -1,10 +1,9 @@
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { memo, useEffect, useRef, useState } from "react";
 import { selectIncomeFields, selectIncomeItem } from "@/store/selectors/incomes";
 import { deleteIncomeItemThunk, getIncomeItemThunk, setIncomeItem, updateIncomeItemThunk } from "@/store/incomesSlice";
-import { DefaultForm } from "@/components/Form/DefaultForm.tsx";
-import { getOnlyValuesFromData } from "@/helpers/processData";
+import { DefaultForm } from "@/components/Form/DefaultForm";
 import { showNotification } from "@/helpers/modals.js";
 import { SideModal } from "@/components/Modals/SideModal";
 import { useLoading } from "@/hooks/loading.js";
@@ -12,10 +11,15 @@ import SvgDelete from "@/assets/sprite/delete.svg";
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
 import { Button } from "antd";
 import { useSearchParams, useRouter } from "next/navigation";
+import { useAppDispatch } from "@/hooks/redux";
+import { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
+import { showCommonError } from "@/helpers/errors";
+import { isIncomeItemData } from "@/predicates/incomes";
+import { FieldIds, FieldTypes } from "@/types/field";
 
-export const IncomeDetail = memo(function IncomeDetail({ onSave }) {
+export const IncomeDetail = memo(function IncomeDetail({ onSave }: { onSave: () => Promise<void> }) {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const searchParams = useSearchParams();
   const router = useRouter();
   const incomeId = searchParams.get("incomeId");
@@ -24,7 +28,7 @@ export const IncomeDetail = memo(function IncomeDetail({ onSave }) {
   const [isBtnLoading, setIsBtnLoading] = useLoading(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleCloseModal = () => {
+  const handleCloseModal = (): void => {
     setIsOpen(false);
     router.push("/incomes");
     dispatch(setIncomeItem(null));
@@ -39,32 +43,37 @@ export const IncomeDetail = memo(function IncomeDetail({ onSave }) {
   }, [incomeId]);
 
   const incomeItem = useSelector(selectIncomeItem);
-  const incomeValues = incomeItem ? getOnlyValuesFromData(incomeItem) : {};
-  const incomeFields = useSelector(selectIncomeFields).map((field) => ({ ...field, value: incomeValues[field.id] }));
+  const incomeFields = useSelector(selectIncomeFields);
 
-  const handleUpdateIncome = async (fieldsValues) => {
-    const { error } = await dispatch(updateIncomeItemThunk({ incomeId: incomeItem.id, incomeData: fieldsValues }));
-    setIsLoading(false);
-    if (!error) {
+  const handleUpdateIncome: DefaultFormSaveHandler = async (fieldsValues) => {
+    try {
+      if (!(incomeItem && isIncomeItemData(fieldsValues))) return;
+      await dispatch(updateIncomeItemThunk({ incomeId: incomeItem.id, incomeData: fieldsValues })).unwrap();
+      setIsLoading(false);
       await onSave();
       handleCloseModal();
       showNotification({ title: t("notifications.income.update") });
+    } catch (error) {
+      showCommonError();
     }
   };
 
-  const handleDeleteIncome = async () => {
-    setIsBtnLoading(true);
-    const { error } = await dispatch(deleteIncomeItemThunk(incomeItem.id));
-    setIsBtnLoading(false);
-    if (!error) {
+  const handleDeleteIncome = async (): Promise<void> => {
+    try {
+      if (!incomeItem) return;
+      setIsBtnLoading(true);
+      await dispatch(deleteIncomeItemThunk(incomeItem.id)).unwrap();
+      setIsBtnLoading(false);
       await onSave();
       handleCloseModal();
       showNotification({ title: t("notifications.income.delete") });
+    } catch (error) {
+      showCommonError();
     }
   };
 
-  const formRef = useRef();
-  const handleSetCalculatedAmount = (value) => formRef.current.handleChangeFieldValue({ id: "amount", value });
+  const formRef = useRef<DefaultFormRef>(null);
+  const handleSetCalculatedAmount = (value: number): void => formRef.current?.handleChangeFieldValue({ id: FieldIds.AMOUNT, type: FieldTypes.NUMBER, value });
 
   const footer = (
     <div className="flex flex-col gap-4">

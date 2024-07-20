@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { setCostsFilterValues } from "@/store/costsSlice";
 import { selectCostsFilterFields, selectCostsFilterValues } from "@/store/selectors/costs";
 import { useTranslation } from "react-i18next";
@@ -11,19 +11,19 @@ import { useFilterFocus } from "@/hooks/filterFocus";
 import { prepareObjectValuesForFilterStateValues, setFilterValue } from "@/helpers/filters";
 import { FieldIds } from "@/types/field";
 import type { BaseSelectRef } from "rc-select";
-import { FilterState, HandleChangeFilterFieldValue } from "@/types/filter";
+import { FilterState, ChangeFilterFieldValueHandler } from "@/types/filter";
 import { FilterFields } from "@/components/Common/Filter/FilterFields";
+import { useAppDispatch } from "@/hooks/redux";
 
 export const CostsFilter = memo(function CostsFilter({ onSave }: { onSave: () => Promise<void> }) {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { isMobile } = useViewport();
 
   const [isOpen, setIsOpen] = useState(false);
   const handleToggleVisibility = () => setIsOpen((prevState) => !prevState);
 
-  const [isMounted, setIsMounted] = useState(false);
-  const [fieldRef] = useFilterFocus<BaseSelectRef>(isOpen, isMounted);
+  const [fieldRef, onMountField] = useFilterFocus<BaseSelectRef>();
 
   const costsFilterFields = useSelector(selectCostsFilterFields);
   const costsFilterValues = useSelector(selectCostsFilterValues);
@@ -33,7 +33,7 @@ export const CostsFilter = memo(function CostsFilter({ onSave }: { onSave: () =>
     setFilterValues(JSON.parse(JSON.stringify(costsFilterValues)));
   }, [costsFilterValues]);
 
-  const handleChangeFieldValue: HandleChangeFilterFieldValue = (field) => setFilterValues((prevState) => setFilterValue(prevState, field));
+  const handleChangeFieldValue: ChangeFilterFieldValueHandler = (field) => setFilterValues((prevState) => setFilterValue(prevState, field));
   const [isLoading, setIsLoading] = useState(false);
   const handleApplyFilters = async (): Promise<void> => {
     if (!costsFilterValues) return;
@@ -56,7 +56,7 @@ export const CostsFilter = memo(function CostsFilter({ onSave }: { onSave: () =>
         {!isMobile && t("buttons.set_filters")}
       </Button>
       <SideModal title={t("titles.set_filters")} isOpen={isOpen} footer={submitBtn} onClose={handleToggleVisibility}>
-        <FilterFields name="expenses" items={costsFilterFields} filterValues={filterValues} fieldRef={fieldRef} onChangeFieldValue={handleChangeFieldValue} onInit={setIsMounted} />
+        <FilterFields name="expenses" items={costsFilterFields} filterValues={filterValues} fieldRef={fieldRef} onChangeFieldValue={handleChangeFieldValue} onInit={onMountField} />
       </SideModal>
     </>
   );
