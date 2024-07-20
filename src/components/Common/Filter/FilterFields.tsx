@@ -1,7 +1,7 @@
 import { Select } from "antd";
 import { handleFilterSelectOptions, renderSelectOption } from "@/helpers/fields";
 import { PeriodField } from "@/components/Form/PeriodField";
-import { MutableRefObject } from "react";
+import { MutableRefObject, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { FieldTypes } from "@/types/field";
 import type { FilterState, HandleChangeFilterFieldValue } from "@/types/filter";
@@ -14,14 +14,20 @@ export const FilterFields = ({
   filterValues,
   fieldRef,
   onChangeFieldValue,
+  onInit,
 }: {
   name: string;
   items: ProcessedFilterField[];
   filterValues: FilterState;
   fieldRef: MutableRefObject<BaseSelectRef | null>;
   onChangeFieldValue: HandleChangeFilterFieldValue;
+  onInit: (isInit: boolean) => void;
 }) => {
   const { t } = useTranslation();
+
+  useEffect(() => {
+    onInit(true);
+  }, []);
 
   return (
     <ul data-cy={`${name}-filter-form`} className="flex w-full flex-col gap-4">

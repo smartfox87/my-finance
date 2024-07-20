@@ -33,7 +33,7 @@ export const SideModal = ({
       if (!isInitializedModal) setIsInitializedModal(true);
       handleInit();
     }
-  }, [isOpen, Modal]);
+  }, [isOpen]);
 
   return (
     <>

@@ -23,8 +23,8 @@ export const BudgetsFilter = memo(function BudgetsFilter({ onSave }: { onSave: (
   const [isOpen, setIsOpen] = useState(false);
   const handleToggleVisibility = () => setIsOpen((prevState) => !prevState);
 
-  const [isInitialized, setIsInitialized] = useState(false);
-  const [fieldRef] = useFilterFocus<BaseSelectRef>(isOpen, isInitialized);
+  const [isMounted, setIsMounted] = useState(false);
+  const [fieldRef] = useFilterFocus<BaseSelectRef>(isOpen, isMounted);
 
   const budgetsFilterFields = useSelector(selectBudgetsFilterFields);
   const budgetsFilterValues = useSelector(selectBudgetsFilterValues);
@@ -56,8 +56,8 @@ export const BudgetsFilter = memo(function BudgetsFilter({ onSave }: { onSave: (
         <SvgFilter className="h-5 w-5" />
         {!isMobile && t("buttons.set_filters")}
       </Button>
-      <SideModal title={t("titles.set_filters")} isOpen={isOpen} footer={submitBtn} onClose={handleToggleVisibility} onInit={setIsInitialized}>
-        <FilterFields name="budgets" items={budgetsFilterFields} filterValues={filterValues} fieldRef={fieldRef} onChangeFieldValue={handleChangeFieldValue} />
+      <SideModal title={t("titles.set_filters")} isOpen={isOpen} footer={submitBtn} onClose={handleToggleVisibility}>
+        <FilterFields name="budgets" items={budgetsFilterFields} filterValues={filterValues} fieldRef={fieldRef} onChangeFieldValue={handleChangeFieldValue} onInit={setIsMounted} />
       </SideModal>
     </>
   );
