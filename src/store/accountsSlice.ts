@@ -67,7 +67,7 @@ export const accountsSlice = createAppSlice({
     updateAccountItemThunk: create.asyncThunk<AccountItem, { accountId: number; accountData: AccountItemUpdateData }, { rejectValue: string }>(
       async ({ accountId, accountData: { name, balance } }, thunkApi) => {
         const { accountItem } = (thunkApi.getState() as RootState).accounts as AccountsSliceState;
-        if (accountItem && accountItem.name !== name) {
+        if (accountItem && name && accountItem.name !== name) {
           const { error } = await updateAccountTypeApi({ accountTypeId: accountItem.account_type_id, accountTypeData: { general_name: name } });
           if (error) throw thunkApi.rejectWithValue(error.message);
         }
