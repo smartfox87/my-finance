@@ -23,7 +23,7 @@ export const CostsFilter = memo(function CostsFilter({ onSave }: { onSave: () =>
   const [isOpen, setIsOpen] = useState(false);
   const handleToggleVisibility = () => setIsOpen((prevState) => !prevState);
 
-  const [fieldRef, onMountField] = useFieldFocus<BaseSelectRef>();
+  const [fieldRef, mountField] = useFieldFocus<BaseSelectRef>();
 
   const costsFilterFields = useSelector(selectCostsFilterFields);
   const costsFilterValues = useSelector(selectCostsFilterValues);
@@ -56,7 +56,7 @@ export const CostsFilter = memo(function CostsFilter({ onSave }: { onSave: () =>
         {!isMobile && t("buttons.set_filters")}
       </Button>
       <SideModal title={t("titles.set_filters")} isOpen={isOpen} footer={submitBtn} onClose={handleToggleVisibility}>
-        <FilterFields name="expenses" items={costsFilterFields} filterValues={filterValues} fieldRef={fieldRef} onChangeFieldValue={handleChangeFieldValue} onInit={onMountField} />
+        <FilterFields name="expenses" items={costsFilterFields} filterValues={filterValues} fieldRef={fieldRef} onChangeFieldValue={handleChangeFieldValue} onInit={mountField} />
       </SideModal>
     </>
   );

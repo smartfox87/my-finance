@@ -23,7 +23,7 @@ export const StatisticsFilter = memo(function StatisticsFilter({ onSave }: { onS
   const [isOpen, setIsOpen] = useState(false);
   const handleToggleVisibility = () => setIsOpen((prevState) => !prevState);
 
-  const [fieldRef, onMountField] = useFieldFocus<BaseSelectRef>();
+  const [fieldRef, mountField] = useFieldFocus<BaseSelectRef>();
 
   const statisticsFilterFields = useSelector(selectStatisticsFilterFields);
   const statisticsFilterValues = useSelector(selectStatisticsFilterValues);
@@ -53,7 +53,7 @@ export const StatisticsFilter = memo(function StatisticsFilter({ onSave }: { onS
         {!isMobile && t("buttons.set_filters")}
       </Button>
       <SideModal title={t("titles.set_filters")} isOpen={isOpen} footer={submitBtn} onClose={handleToggleVisibility}>
-        <FilterFields name="statistics" items={statisticsFilterFields} filterValues={filterValues} fieldRef={fieldRef} onChangeFieldValue={handleChangeFieldValue} onInit={onMountField} />
+        <FilterFields name="statistics" items={statisticsFilterFields} filterValues={filterValues} fieldRef={fieldRef} onChangeFieldValue={handleChangeFieldValue} onInit={mountField} />
       </SideModal>
     </>
   );

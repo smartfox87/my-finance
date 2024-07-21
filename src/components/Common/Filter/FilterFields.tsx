@@ -21,12 +21,12 @@ export const FilterFields = ({
   filterValues: FilterState;
   fieldRef: MutableRefObject<BaseSelectRef | null>;
   onChangeFieldValue: ChangeFilterFieldValueHandler;
-  onInit: (isInit: boolean) => void;
+  onInit: () => void;
 }) => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    onInit(true);
+    onInit();
   }, []);
 
   return (

@@ -24,9 +24,9 @@ export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ o
   const [isOpen, setIsOpen] = useState(false);
   const handleToggleVisibility = () => setIsOpen((prevState) => !prevState);
 
-  const [fieldRef, onMountField] = useFieldFocus<BaseSelectRef>();
+  const [fieldRef, mountField] = useFieldFocus<BaseSelectRef>();
   useLayoutEffect(() => {
-    if (isOpen) onMountField(true);
+    if (isOpen) mountField();
   }, [isOpen]);
 
   const accountsList = useSelector(selectAccountsList);
