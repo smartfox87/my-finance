@@ -8,7 +8,7 @@ import { memo, useEffect, useState } from "react";
 import SvgFilter from "@/assets/sprite/filter.svg";
 import { useViewport } from "@/hooks/viewport";
 import { prepareObjectValuesForFilterStateValues, setFilterValue } from "@/helpers/filters";
-import { useFilterFocus } from "@/hooks/filterFocus";
+import { useFieldFocus } from "@/hooks/fieldFocus";
 import { FilterFields } from "@/components/Common/Filter/FilterFields";
 import type { BaseSelectRef } from "rc-select";
 import { ChangeFilterFieldValueHandler } from "@/types/filter";
@@ -22,7 +22,7 @@ export const IncomesFilter = memo(function IncomesFilter({ onSave }: { onSave: (
   const [isOpen, setIsOpen] = useState(false);
   const handleToggleVisibility = () => setIsOpen((prevState) => !prevState);
 
-  const [fieldRef, onMountField] = useFilterFocus<BaseSelectRef>();
+  const [fieldRef, onMountField] = useFieldFocus<BaseSelectRef>();
 
   const incomesFilterFields = useSelector(selectIncomesFilterFields);
   const incomesFilterValues = useSelector(selectIncomesFilterValues);

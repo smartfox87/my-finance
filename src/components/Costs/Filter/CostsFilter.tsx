@@ -7,7 +7,7 @@ import { SideModal } from "@/components/Modals/SideModal";
 import { memo, useEffect, useState } from "react";
 import SvgFilter from "@/assets/sprite/filter.svg";
 import { useViewport } from "@/hooks/viewport";
-import { useFilterFocus } from "@/hooks/filterFocus";
+import { useFieldFocus } from "@/hooks/fieldFocus";
 import { prepareObjectValuesForFilterStateValues, setFilterValue } from "@/helpers/filters";
 import { FieldIds } from "@/types/field";
 import type { BaseSelectRef } from "rc-select";
@@ -23,7 +23,7 @@ export const CostsFilter = memo(function CostsFilter({ onSave }: { onSave: () =>
   const [isOpen, setIsOpen] = useState(false);
   const handleToggleVisibility = () => setIsOpen((prevState) => !prevState);
 
-  const [fieldRef, onMountField] = useFilterFocus<BaseSelectRef>();
+  const [fieldRef, onMountField] = useFieldFocus<BaseSelectRef>();
 
   const costsFilterFields = useSelector(selectCostsFilterFields);
   const costsFilterValues = useSelector(selectCostsFilterValues);

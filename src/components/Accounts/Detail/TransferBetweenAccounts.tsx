@@ -12,6 +12,8 @@ import { Button, Form, InputNumber, Select } from "antd";
 import { useViewport } from "@/hooks/viewport";
 import SvgTransfer from "@/assets/sprite/transfer.svg";
 import { useAppDispatch } from "@/hooks/redux";
+import { useFieldFocus } from "@/hooks/fieldFocus";
+import type { BaseSelectRef } from "rc-select";
 
 export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ onSave }: { onSave: (props?: { types: boolean }) => Promise<void> }) {
   const { t } = useTranslation();
@@ -22,11 +24,10 @@ export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ o
   const [isOpen, setIsOpen] = useState(false);
   const handleToggleVisibility = () => setIsOpen((prevState) => !prevState);
 
-  const focusInputRef = useRef();
-  const [isInitialized, setIsInitialized] = useState(false);
+  const [fieldRef, onMountField] = useFieldFocus<BaseSelectRef>();
   useLayoutEffect(() => {
-    if (isOpen && isInitialized) setTimeout(() => focusInputRef.current?.focus());
-  }, [isOpen, isInitialized]);
+    if (isOpen) onMountField(true);
+  }, [isOpen]);
 
   const accountsList = useSelector(selectAccountsList);
   const initialFieldsValues = { from: null, to: null, amount: null };
@@ -79,7 +80,7 @@ export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ o
           <Form layout="vertical" form={form} fields={formFieldsValues} data-cy="transfer-between-accounts-form" className="flex w-full flex-col" onFinish={handleSubmitForm}>
             <Form.Item label={t(`fields.simple.from`)} name="from" rules={[{ required: true, message: t("fields.errors.required") }]}>
               <Select
-                ref={focusInputRef}
+                ref={fieldRef}
                 size="large"
                 getPopupContainer={(triggerNode) => triggerNode.parentElement}
                 options={accountsList?.filter(({ id }) => id !== fieldsValues.to).map(({ id, name }) => ({ label: name, value: id }))}
