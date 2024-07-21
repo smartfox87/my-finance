@@ -15,7 +15,6 @@ import { useAppDispatch } from "@/hooks/redux";
 import { showCommonError } from "@/helpers/errors";
 import { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 import { FieldIds, FieldTypes } from "@/types/field";
-import { BudgetItemField } from "@/types/budgets";
 import { isBudgetItemData } from "@/predicates/budget";
 
 export const BudgetDetail = memo(function BudgetDetail({ onSave }: { onSave: () => Promise<void> }) {

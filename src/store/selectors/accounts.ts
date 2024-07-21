@@ -3,7 +3,8 @@ import { selectCurrency } from "@/store/selectors/profile";
 import { INITIAL_ACCOUNT_FIELDS } from "@/constants/accounts";
 import { selectAccountTypesObject } from "@/store/selectors/references";
 import { LazyLoadedSlices } from "@/store";
-import { AccountItem, ProcessedAccountItem } from "@/types/accounts";
+import { AccountItem, AccountItemField, ProcessedAccountItem } from "@/types/accounts";
+import { FieldIds } from "@/types/field";
 
 export const selectAccounts = ({ accounts }: LazyLoadedSlices): AccountItem[] | null => accounts?.accountsList || null;
 
@@ -27,9 +28,9 @@ export const selectAccountItem = createSelector([({ accounts }) => accounts?.acc
   return { id, name, updated_at, balance, created_at, disabled: !user_id };
 });
 
-export const selectAccountFields = createSelector([selectCurrency], (currency) =>
-  INITIAL_ACCOUNT_FIELDS.map((field) => {
-    if (field.id === "balance") return { ...field, label_suffix: currency };
-    else return field;
+export const selectAccountFields = createSelector([selectCurrency, selectAccountItem], (currency, accountItem) =>
+  INITIAL_ACCOUNT_FIELDS.map((field): AccountItemField => {
+    if (field.id === FieldIds.BALANCE) return { ...field, label_suffix: currency, focus: true, value: accountItem?.[field.id] ?? field.value };
+    else return { ...field, disabled: !!accountItem?.disabled, value: accountItem?.[field.id] ?? field.value };
   }),
 );

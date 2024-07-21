@@ -80,7 +80,7 @@ export const NAME_FIELD: TextFormField<FieldIds.NAME, FieldTypes.TEXTAREA> = {
 
 export const AMOUNT_FIELD: NumberFormField<FieldIds.AMOUNT> = { id: FieldIds.AMOUNT, type: FieldTypes.NUMBER, label: `simple.${SimpleFieldNames.AMOUNT}`, label_suffix: "", value: "", required: true };
 
-export const BALANCE_FIELD: NumberFormField = { id: FieldIds.BALANCE, type: FieldTypes.NUMBER, label: `simple.${SimpleFieldNames.BALANCE}`, value: "", required: true };
+export const BALANCE_FIELD: NumberFormField<FieldIds.BALANCE> = { id: FieldIds.BALANCE, type: FieldTypes.NUMBER, label: `simple.${SimpleFieldNames.BALANCE}`, value: "", required: true };
 
 export const DATE_FIELD: DateFormField<FieldIds.DATE> = {
   id: FieldIds.DATE,

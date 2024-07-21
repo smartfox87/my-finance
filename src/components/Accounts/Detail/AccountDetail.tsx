@@ -3,8 +3,7 @@ import { useSelector } from "react-redux";
 import { memo, useEffect, useRef, useState } from "react";
 import { selectAccountFields, selectAccountItem } from "@/store/selectors/accounts";
 import { deleteAccountItemThunk, getAccountItemThunk, setAccountItem, updateAccountItemThunk } from "@/store/accountsSlice";
-import { DefaultForm } from "@/components/Form/DefaultForm.tsx";
-import { getOnlyValuesFromData } from "@/helpers/processData";
+import { DefaultForm } from "@/components/Form/DefaultForm";
 import { showNotification } from "@/helpers/modals.js";
 import { SideModal } from "@/components/Modals/SideModal";
 import { useLoading } from "@/hooks/loading.js";
@@ -13,8 +12,12 @@ import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
 import { Button } from "antd";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAppDispatch } from "@/hooks/redux";
+import { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
+import { showCommonError } from "@/helpers/errors";
+import { FieldIds, FieldTypes } from "@/types/field";
+import { isAccountItemUpdateData } from "@/predicates/account";
 
-export const AccountDetail = memo(function AccountDetail({ onSave }) {
+export const AccountDetail = memo(function AccountDetail({ onSave }: { onSave: () => Promise<void> }) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -25,7 +28,7 @@ export const AccountDetail = memo(function AccountDetail({ onSave }) {
   const [isBtnLoading, setIsBtnLoading] = useLoading(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleCloseModal = () => {
+  const handleCloseModal = (): void => {
     setIsOpen(false);
     router.push("/accounts");
     dispatch(setAccountItem(null));
@@ -40,35 +43,41 @@ export const AccountDetail = memo(function AccountDetail({ onSave }) {
   }, [accountId]);
 
   const accountItem = useSelector(selectAccountItem);
-  const accountValues = accountItem ? getOnlyValuesFromData(accountItem) : {};
-  const accountEmptyFields = useSelector(selectAccountFields);
-  const accountFields = accountEmptyFields.map((field) => ({ ...field, focus: field.id === "balance", disabled: field.id === "name" && accountItem?.disabled, value: accountValues[field.id] }));
+  const accountFields = useSelector(selectAccountFields);
 
-  const handleUpdateAccount = async (fieldsValues) => {
-    const accountData = { ...fieldsValues };
-    if (accountItem?.disabled) delete accountData.name;
-    const { error } = await dispatch(updateAccountItemThunk({ accountId: accountItem.id, accountData }));
-    setIsLoading(false);
-    if (!error) {
+  const handleUpdateAccount: DefaultFormSaveHandler = async (fieldsValues) => {
+    try {
+      if (!accountItem) return;
+      const accountData = accountItem.disabled
+        ? { [FieldIds.BALANCE]: fieldsValues[FieldIds.BALANCE] }
+        : { [FieldIds.BALANCE]: fieldsValues[FieldIds.BALANCE], [FieldIds.NAME]: fieldsValues[FieldIds.NAME] };
+      if (!isAccountItemUpdateData(accountData)) return;
+      await dispatch(updateAccountItemThunk({ accountId: accountItem.id, accountData })).unwrap();
+      setIsLoading(false);
       await onSave();
       handleCloseModal();
       showNotification({ title: t("notifications.account.update") });
+    } catch (error) {
+      showCommonError();
     }
   };
 
-  const handleDeleteAccount = async () => {
-    setIsBtnLoading(true);
-    const { error } = await dispatch(deleteAccountItemThunk(accountItem.id));
-    setIsBtnLoading(false);
-    if (!error) {
+  const handleDeleteAccount = async (): Promise<void> => {
+    try {
+      if (!accountItem) return;
+      setIsBtnLoading(true);
+      await dispatch(deleteAccountItemThunk(accountItem.id)).unwrap();
+      setIsBtnLoading(false);
       await onSave();
       handleCloseModal();
       showNotification({ title: t("notifications.account.delete") });
+    } catch (error) {
+      showCommonError();
     }
   };
 
-  const formRef = useRef();
-  const handleSetCalculatedBalance = (value) => formRef.current.handleChangeFieldValue({ id: "balance", value });
+  const formRef = useRef<DefaultFormRef>(null);
+  const handleSetCalculatedBalance = (value: number): void => formRef.current?.handleChangeFieldValue({ id: FieldIds.BALANCE, type: FieldTypes.NUMBER, value });
 
   const footer = (
     <div className="flex flex-col gap-4">
