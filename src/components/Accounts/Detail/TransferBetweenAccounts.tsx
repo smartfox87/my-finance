@@ -13,7 +13,7 @@ import { useViewport } from "@/hooks/viewport";
 import SvgTransfer from "@/assets/sprite/transfer.svg";
 import { useAppDispatch } from "@/hooks/redux";
 
-export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ onSave }) {
+export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ onSave }: { onSave: (props?: { types: boolean }) => Promise<void> }) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { isMobile } = useViewport();

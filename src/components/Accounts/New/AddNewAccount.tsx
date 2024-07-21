@@ -1,6 +1,6 @@
 import { Button } from "antd";
 import { SideModal } from "@/components/Modals/SideModal";
-import { DefaultForm } from "@/components/Form/DefaultForm.tsx";
+import { DefaultForm } from "@/components/Form/DefaultForm";
 import { useSelector } from "react-redux";
 import { selectAccountFields } from "@/store/selectors/accounts";
 import { createAccountItemThunk } from "@/store/accountsSlice";
@@ -11,8 +11,12 @@ import SvgNewAccount from "@/assets/sprite/new-account.svg";
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
 import { useViewport } from "@/hooks/viewport";
 import { useAppDispatch } from "@/hooks/redux";
+import { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
+import { showCommonError } from "@/helpers/errors";
+import { isAccountItemCreateData } from "@/predicates/account";
+import { FieldIds, FieldTypes } from "@/types/field";
 
-export const AddNewAccount = memo(function AddNewAccount({ onSave }) {
+export const AddNewAccount = memo(function AddNewAccount({ onSave }: { onSave: (props?: { types: boolean }) => Promise<void> }) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { isMobile } = useViewport();
@@ -22,16 +26,20 @@ export const AddNewAccount = memo(function AddNewAccount({ onSave }) {
 
   const newAccountFields = useSelector(selectAccountFields).map((field) => ({ ...field, focus: field.id === "name" }));
 
-  const handleSaveNewAccount = async (fieldsValues) => {
-    const { error } = await dispatch(createAccountItemThunk(fieldsValues));
-    if (error) return;
-    await onSave({ types: true });
-    setIsOpen(false);
-    showNotification({ title: t("notifications.account.create") });
+  const handleSaveNewAccount: DefaultFormSaveHandler = async (fieldsValues) => {
+    try {
+      if (!isAccountItemCreateData(fieldsValues)) return;
+      await dispatch(createAccountItemThunk(fieldsValues)).unwrap();
+      await onSave({ types: true });
+      setIsOpen(false);
+      showNotification({ title: t("notifications.account.create") });
+    } catch (error) {
+      showCommonError();
+    }
   };
 
-  const formRef = useRef();
-  const handleSetCalculatedAmount = (value) => formRef.current.handleChangeFieldValue({ id: "balance", value });
+  const formRef = useRef<DefaultFormRef>(null);
+  const handleSetCalculatedBalance = (value: number): void => formRef.current?.handleChangeFieldValue({ id: FieldIds.BALANCE, type: FieldTypes.NUMBER, value });
 
   return (
     <>
@@ -42,7 +50,7 @@ export const AddNewAccount = memo(function AddNewAccount({ onSave }) {
       <SideModal
         title={t("common.add_account")}
         isOpen={isOpen}
-        footer={<CalculatorModal title={t("common.balance_calculator")} buttonOpen={t("common.balance_calculator")} buttonSave={t("buttons.save_balance")} onSave={handleSetCalculatedAmount} />}
+        footer={<CalculatorModal title={t("common.balance_calculator")} buttonOpen={t("common.balance_calculator")} buttonSave={t("buttons.save_balance")} onSave={handleSetCalculatedBalance} />}
         onClose={handleToggleVisibility}
       >
         <DefaultForm ref={formRef} fields={newAccountFields} data-cy="add-account-form" isResetAfterSave onSaveForm={handleSaveNewAccount} />

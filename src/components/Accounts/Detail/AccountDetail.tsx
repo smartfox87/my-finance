@@ -17,7 +17,7 @@ import { showCommonError } from "@/helpers/errors";
 import { FieldIds, FieldTypes } from "@/types/field";
 import { isAccountItemUpdateData } from "@/predicates/account";
 
-export const AccountDetail = memo(function AccountDetail({ onSave }: { onSave: () => Promise<void> }) {
+export const AccountDetail = memo(function AccountDetail({ onSave }: { onSave: (props?: { types: boolean }) => Promise<void> }) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const router = useRouter();
