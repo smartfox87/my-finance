@@ -21,6 +21,8 @@ export enum FieldIds {
   MESSAGE = "message",
   FILES = "files",
   PASSWORD = "password",
+  FROM = "from",
+  TO = "to",
 }
 
 export type FieldId = `${FieldIds}`;
@@ -47,7 +49,7 @@ export type MultiSelectOptionValue = number | FieldValues.ALL;
 
 export type MultiSelectValue = MultiSelectOptionValue[];
 
-export type SingleSelectValue = number | string;
+export type SingleSelectValue = number | string | null;
 
 export interface SelectOption<T> {
   value: T;
@@ -75,6 +77,8 @@ export enum SimpleFieldNames {
   PASSWORD = "password",
   MESSAGE = "message",
   ATTACHMENTS = "attachments",
+  FROM = "from",
+  TO = "to",
 }
 
 export enum ComplexFieldNames {

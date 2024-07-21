@@ -1,9 +1,9 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { selectCurrency } from "@/store/selectors/profile";
-import { INITIAL_ACCOUNT_FIELDS } from "@/constants/accounts";
+import { INITIAL_ACCOUNT_FIELDS, INITIAL_ACCOUNT_TRANSFER_FIELDS } from "@/constants/accounts";
 import { selectAccountTypesObject } from "@/store/selectors/references";
 import { LazyLoadedSlices } from "@/store";
-import { AccountItem, AccountItemField, ProcessedAccountItem } from "@/types/accounts";
+import { AccountItem, AccountItemField, AccountTransferField, ProcessedAccountItem } from "@/types/accounts";
 import { FieldIds } from "@/types/field";
 
 export const selectAccounts = ({ accounts }: LazyLoadedSlices): AccountItem[] | null => accounts?.accountsList || null;
@@ -32,5 +32,12 @@ export const selectAccountFields = createSelector([selectCurrency, selectAccount
   INITIAL_ACCOUNT_FIELDS.map((field): AccountItemField => {
     if (field.id === FieldIds.BALANCE) return { ...field, label_suffix: currency, focus: true, value: accountItem?.[field.id] ?? field.value };
     else return { ...field, disabled: !!accountItem?.disabled, value: accountItem?.[field.id] ?? field.value };
+  }),
+);
+
+export const selectAccountTransferFields = createSelector([selectCurrency, selectAccountsList], (currency, accountList) =>
+  INITIAL_ACCOUNT_TRANSFER_FIELDS.map((field): AccountTransferField => {
+    if (field.id === FieldIds.AMOUNT) return { ...field, label_suffix: currency };
+    else return { ...field, options: accountList?.map(({ id, name }) => ({ value: id, label: name })) ?? field.options };
   }),
 );

@@ -1,5 +1,5 @@
 import { FieldIds, FieldTypes } from "@/types/field";
-import { NumberFormField, TextFormField } from "@/types/form";
+import { NumberFormField, SingleSelectFormField, TextFormField } from "@/types/form";
 
 export interface AccountItemBalanceData {
   accountId: number;
@@ -41,3 +41,7 @@ export interface AccountsSliceState {
 }
 
 export type AccountItemField = TextFormField<FieldIds.NAME, FieldTypes.TEXTAREA> | NumberFormField<FieldIds.BALANCE>;
+
+export type AccountTransferField = SingleSelectFormField<FieldIds.FROM> | SingleSelectFormField<FieldIds.TO> | NumberFormField<FieldIds.AMOUNT>;
+
+export type AccountTransferValues = { [FieldIds.FROM]: null | number; [FieldIds.TO]: null | number; [FieldIds.AMOUNT]: number };

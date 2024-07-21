@@ -229,7 +229,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 onKeyDown={handleKeyDownDecimalsValidation}
                 onKeyUp={handleKeyUpCutDecimals}
                 min={0}
-                max={999999999999999}
+                max={Number.MAX_SAFE_INTEGER}
                 style={{ width: "100%" }}
                 onChange={(value) => handleChangeFieldValue({ id, type: field.type, value: cutDecimals(value) })}
               />

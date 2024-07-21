@@ -31,6 +31,26 @@ export const ACCOUNT_FIELD: SingleSelectFormField<FieldIds.ACCOUNT> = {
   showSearch: true,
 };
 
+export const FROM_ACCOUNT_FIELD: SingleSelectFormField<FieldIds.FROM, number | null> = {
+  id: FieldIds.FROM,
+  type: FieldTypes.SELECT,
+  label: `complex.${ComplexFieldNames.ACCOUNT}.label`,
+  value: null,
+  options: [],
+  required: true,
+  showSearch: true,
+};
+
+export const TO_ACCOUNT_FIELD: SingleSelectFormField<FieldIds.TO, number | null> = {
+  id: FieldIds.TO,
+  type: FieldTypes.SELECT,
+  label: `complex.${ComplexFieldNames.ACCOUNT}.label`,
+  value: null,
+  options: [],
+  required: true,
+  showSearch: true,
+};
+
 export const ACCOUNTS_FIELD: MultiSelectFormField = {
   id: FieldIds.ACCOUNTS,
   type: FieldTypes.MULTISELECT,

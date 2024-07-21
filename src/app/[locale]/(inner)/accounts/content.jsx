@@ -9,7 +9,7 @@ import { getAccountsListThunk } from "@/store/accountsSlice";
 import { Preloader } from "@/components/Layout/Preloader";
 import { AddNewAccount } from "@/components/Accounts/New/AddNewAccount";
 import { TransferBetweenAccounts } from "@/components/Accounts/Detail/TransferBetweenAccounts";
-import { AccountListItem } from "@/components/Accounts/List/AccountListItem.js";
+import { AccountListItem } from "@/components/Accounts/List/AccountListItem";
 import { AccountDetail } from "@/components/Accounts/Detail/AccountDetail";
 import formatPrice from "@/helpers/formatPrice";
 import { getAccountTypesThunk } from "@/store/referencesSlice";

@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { memo, useLayoutEffect, useMemo, useRef, useState } from "react";
-import { selectAccountsList } from "@/store/selectors/accounts";
+import { memo, ReactNode, useEffect, useMemo, useState } from "react";
+import { selectAccountsList, selectAccountTransferFields } from "@/store/selectors/accounts";
 import { transferAccountsBalanceThunk } from "@/store/accountsSlice";
 import { showNotification } from "@/helpers/modals.js";
 import { SideModal } from "@/components/Modals/SideModal";
@@ -14,6 +14,10 @@ import SvgTransfer from "@/assets/sprite/transfer.svg";
 import { useAppDispatch } from "@/hooks/redux";
 import { useFieldFocus } from "@/hooks/fieldFocus";
 import type { BaseSelectRef } from "rc-select";
+import { FieldIds } from "@/types/field";
+import { showCommonError } from "@/helpers/errors";
+import { INITIAL_ACCOUNT_TRANSFER_VALUES } from "@/constants/accounts";
+import { AccountTransferField, AccountTransferValues } from "@/types/accounts";
 
 export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ onSave }: { onSave: (props?: { types: boolean }) => Promise<void> }) {
   const { t } = useTranslation();
@@ -25,42 +29,44 @@ export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ o
   const handleToggleVisibility = () => setIsOpen((prevState) => !prevState);
 
   const [fieldRef, mountField] = useFieldFocus<BaseSelectRef>();
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (isOpen) mountField();
   }, [isOpen]);
 
   const accountsList = useSelector(selectAccountsList);
-  const initialFieldsValues = { from: null, to: null, amount: null };
-  const [fieldsValues, setFieldsValues] = useState({ ...initialFieldsValues });
-  const formFieldsValues = Object.entries(fieldsValues).map(([id, value]) => ({ name: id, value }));
-  const isChangedFieldsData = Object.values(fieldsValues).some((value) => value);
-  const maxAmount = useMemo(() => accountsList?.find(({ id }) => id === fieldsValues.from)?.balance, [accountsList, fieldsValues.from]);
+  const formFields = useSelector(selectAccountTransferFields);
+  const [currentFieldsValues, setCurrentFieldsValues] = useState<AccountTransferValues>({ ...INITIAL_ACCOUNT_TRANSFER_VALUES });
+  const isChangedFieldsData = Object.values(currentFieldsValues).some((value) => value);
+  const maxAmount = useMemo(() => accountsList?.find(({ id }) => id === currentFieldsValues.from)?.balance, [accountsList, currentFieldsValues.from]);
 
-  const handleChangeFieldValue = ({ id, value }) => {
-    setFieldsValues((oldFieldsValues) => ({ ...oldFieldsValues, [id]: value }));
-    if (id === "from" && fieldsValues.amount) form.validateFields(["amount"]);
+  const handleChangeFieldValue = ({ id, value }: Pick<AccountTransferField, "id" | "value">) => {
+    setCurrentFieldsValues((oldFieldsValues) => ({ ...oldFieldsValues, [id]: value }));
   };
 
   const [form] = Form.useForm();
-  const handleSubmitForm = async () => {
-    const values = await form.validateFields(["from", "to", "amount"]);
-    setIsLoading(true);
-    const { error } = await dispatch(transferAccountsBalanceThunk(values));
-    if (!error) {
+  const handleSubmitForm = async (): Promise<void> => {
+    try {
+      const values = await form.validateFields();
+      setIsLoading(true);
+      await dispatch(transferAccountsBalanceThunk(values)).unwrap();
       await onSave();
       handleToggleVisibility();
       showNotification({ title: t("notifications.account.money_transfer") });
-      setFieldsValues({ ...initialFieldsValues });
+      form.resetFields();
+    } catch (error) {
+      showCommonError();
+      //   todo do the same everywhere
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
-  const handleCancelForm = () => {
-    setFieldsValues({ ...initialFieldsValues });
+  const handleCancelForm = (): void => {
+    form.resetFields();
     handleToggleVisibility();
   };
 
-  const handleSetCalculatedBalance = (value) => handleChangeFieldValue({ id: "amount", value });
+  const handleSetCalculatedBalance = (value: number) => handleChangeFieldValue({ id: FieldIds.AMOUNT, value });
 
   return (
     <>
@@ -74,46 +80,66 @@ export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ o
         isLoading={isLoading}
         footer={<CalculatorModal title={t("common.amount_calculator")} buttonOpen={t("common.amount_calculator")} buttonSave={t("buttons.save_amount")} onSave={handleSetCalculatedBalance} />}
         onClose={handleToggleVisibility}
-        onInit={setIsInitialized}
+        onOpen={mountField}
       >
         <div className="flex flex-col gap-4">
-          <Form layout="vertical" form={form} fields={formFieldsValues} data-cy="transfer-between-accounts-form" className="flex w-full flex-col" onFinish={handleSubmitForm}>
-            <Form.Item label={t(`fields.simple.from`)} name="from" rules={[{ required: true, message: t("fields.errors.required") }]}>
-              <Select
-                ref={fieldRef}
-                size="large"
-                getPopupContainer={(triggerNode) => triggerNode.parentElement}
-                options={accountsList?.filter(({ id }) => id !== fieldsValues.to).map(({ id, name }) => ({ label: name, value: id }))}
-                showSearch
-                filterOption={handleFilterSelectOptions}
-                onChange={(value) => handleChangeFieldValue({ id: "from", value })}
-              />
-            </Form.Item>
-            <Form.Item label={t(`fields.simple.to`)} name="to" rules={[{ required: true, message: t("fields.errors.required") }]}>
-              <Select
-                size="large"
-                getPopupContainer={(triggerNode) => triggerNode.parentElement}
-                options={accountsList?.filter(({ id }) => id !== fieldsValues.from).map(({ id, name }) => ({ label: name, value: id }))}
-                showSearch
-                filterOption={handleFilterSelectOptions}
-                onChange={(value) => handleChangeFieldValue({ id: "to", value })}
-              />
-            </Form.Item>
-            <Form.Item
-              label={t(`fields.simple.amount`)}
-              name="amount"
-              rules={[
-                { validator: (_, value) => (value > maxAmount ? Promise.reject(new Error(t("fields.errors.balance_exceeded"))) : Promise.resolve()) },
-                { required: true, message: t("fields.errors.required") },
-              ]}
-            >
-              <InputNumber size="large" disabled={!fieldsValues.from} min={1} max={999999999999999} style={{ width: "100%" }} onChange={(value) => handleChangeFieldValue({ id: "amount", value })} />
-            </Form.Item>
+          <Form layout="vertical" form={form} data-cy="transfer-between-accounts-form" className="flex w-full flex-col" onFinish={handleSubmitForm}>
+            {formFields.map((field): ReactNode => {
+              if (field.id === FieldIds.FROM) {
+                return (
+                  <Form.Item key={field.id} label={t(`fields.simple.${field.id}`)} name={field.id} rules={[{ required: true, message: t("fields.errors.required") }]}>
+                    <Select
+                      ref={fieldRef}
+                      size="large"
+                      getPopupContainer={(triggerNode) => triggerNode.parentElement}
+                      options={field.options.filter(({ value }) => value !== currentFieldsValues.to)}
+                      showSearch
+                      filterOption={handleFilterSelectOptions}
+                      onChange={(value) => handleChangeFieldValue({ id: field.id, value })}
+                    />
+                  </Form.Item>
+                );
+              } else if (field.id === FieldIds.TO) {
+                return (
+                  <Form.Item key={field.id} label={t(`fields.simple.${field.id}`)} name={field.id} rules={[{ required: true, message: t("fields.errors.required") }]}>
+                    <Select
+                      size="large"
+                      getPopupContainer={(triggerNode) => triggerNode.parentElement}
+                      options={field.options.filter(({ value }) => value !== currentFieldsValues.from)}
+                      showSearch
+                      filterOption={handleFilterSelectOptions}
+                      onChange={(value) => handleChangeFieldValue({ id: field.id, value })}
+                    />
+                  </Form.Item>
+                );
+              } else {
+                return (
+                  <Form.Item
+                    key={field.id}
+                    label={t(`fields.simple.${field.id}`)}
+                    name={field.id}
+                    rules={[
+                      { validator: (_, value) => (maxAmount && value > maxAmount ? Promise.reject(new Error(t("fields.errors.balance_exceeded"))) : Promise.resolve()) },
+                      { required: true, message: t("fields.errors.required") },
+                    ]}
+                  >
+                    <InputNumber
+                      size="large"
+                      disabled={!currentFieldsValues.from}
+                      min={1}
+                      max={Number.MAX_SAFE_INTEGER}
+                      style={{ width: "100%" }}
+                      onChange={(value) => handleChangeFieldValue({ id: field.id, value })}
+                    />
+                  </Form.Item>
+                );
+              }
+            })}
             <div className="mt-2 flex gap-4">
               <Button size="large" type="primary" htmlType="submit" loading={isLoading} className="w-1/3 grow" disabled={!isChangedFieldsData}>
                 {t("buttons.submit")}
               </Button>
-              <Button size="large" variant="bordered" className="w-1/3 grow" disabled={!isChangedFieldsData} onClick={handleCancelForm}>
+              <Button size="large" className="w-1/3 grow" disabled={!isChangedFieldsData} onClick={handleCancelForm}>
                 {t("buttons.cancel")}
               </Button>
             </div>
