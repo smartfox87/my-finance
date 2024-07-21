@@ -9,7 +9,7 @@ import { getAccountsListThunk } from "@/store/accountsSlice";
 import { Preloader } from "@/components/Layout/Preloader";
 import { AddNewAccount } from "@/components/Accounts/New/AddNewAccount";
 import { TransferBetweenAccounts } from "@/components/Accounts/Detail/TransferBetweenAccounts";
-import { AccountItem } from "@/components/Accounts/List/AccountItem";
+import { AccountListItem } from "@/components/Accounts/List/AccountListItem.js";
 import { AccountDetail } from "@/components/Accounts/Detail/AccountDetail";
 import formatPrice from "@/helpers/formatPrice";
 import { getAccountTypesThunk } from "@/store/referencesSlice";
@@ -51,7 +51,7 @@ export default function AccountsContent() {
         <ul className="flex flex-col gap-4">
           {accountsList?.map((account) => (
             <li key={account.id}>
-              <AccountItem {...account} />
+              <AccountListItem {...account} />
             </li>
           ))}
         </ul>
