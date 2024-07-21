@@ -1,10 +1,10 @@
-import { MutableRefObject, useEffect, useRef, useState } from "react";
+import { MutableRefObject, SetStateAction, useEffect, useRef, useState } from "react";
 import { BaseSelectRef } from "rc-select";
+import { InputRef } from "antd";
 
-export const useFieldFocus = <T extends BaseSelectRef | HTMLInputElement>(): [MutableRefObject<T | null>, () => void] => {
+export const useFieldFocus = <T extends BaseSelectRef | InputRef>(): [MutableRefObject<T | null>, (value: SetStateAction<boolean>) => void] => {
   const fieldRef = useRef<T | null>(null);
   const [isMounted, setIsMounted] = useState(false);
-  const mountField = (): void => setIsMounted(true);
 
   useEffect(() => {
     if (isMounted) {
@@ -12,5 +12,6 @@ export const useFieldFocus = <T extends BaseSelectRef | HTMLInputElement>(): [Mu
       return () => clearTimeout(timeout);
     }
   }, [isMounted]);
-  return [fieldRef, mountField];
+
+  return [fieldRef, setIsMounted];
 };

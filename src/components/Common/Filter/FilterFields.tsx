@@ -1,7 +1,7 @@
 import { Select } from "antd";
 import { handleFilterSelectOptions, renderSelectOption } from "@/helpers/fields";
 import { PeriodField } from "@/components/Form/PeriodField";
-import { MutableRefObject, useEffect } from "react";
+import { MutableRefObject, SetStateAction, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { FieldTypes } from "@/types/field";
 import type { FilterState, ChangeFilterFieldValueHandler } from "@/types/filter";
@@ -12,21 +12,22 @@ export const FilterFields = ({
   name,
   items,
   filterValues,
-  fieldRef,
+  focusFieldRef,
   onChangeFieldValue,
-  onInit,
+  onMount,
 }: {
   name: string;
   items: ProcessedFilterField[];
   filterValues: FilterState;
-  fieldRef: MutableRefObject<BaseSelectRef | null>;
+  focusFieldRef: MutableRefObject<BaseSelectRef | null>;
   onChangeFieldValue: ChangeFilterFieldValueHandler;
-  onInit: () => void;
+  onMount: (value: SetStateAction<boolean>) => void;
 }) => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    onInit();
+    onMount(true);
+    return () => onMount(false);
   }, []);
 
   return (
@@ -35,7 +36,7 @@ export const FilterFields = ({
         <li key={field.id} className="flex flex-col gap-4">
           {field.type === FieldTypes.MULTISELECT && (
             <Select
-              ref={!index ? fieldRef : undefined}
+              ref={!index ? focusFieldRef : undefined}
               id={field.id}
               className="w-full"
               size="large"
@@ -54,7 +55,7 @@ export const FilterFields = ({
           )}
           {field.type === FieldTypes.SELECT && (
             <Select
-              ref={!index ? fieldRef : undefined}
+              ref={!index ? focusFieldRef : undefined}
               id={field.id}
               className="w-full"
               size="large"

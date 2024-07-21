@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { memo, ReactNode, useEffect, useMemo, useState } from "react";
+import { memo, ReactNode, useMemo, useState } from "react";
 import { selectAccountsList, selectAccountTransferFields } from "@/store/selectors/accounts";
 import { transferAccountsBalanceThunk } from "@/store/accountsSlice";
 import { showNotification } from "@/helpers/modals.js";
@@ -28,10 +28,7 @@ export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ o
   const [isOpen, setIsOpen] = useState(false);
   const handleToggleVisibility = () => setIsOpen((prevState) => !prevState);
 
-  const [fieldRef, mountField] = useFieldFocus<BaseSelectRef>();
-  useEffect(() => {
-    if (isOpen) mountField();
-  }, [isOpen]);
+  const [focusFieldRef, mountFocusField] = useFieldFocus<BaseSelectRef>();
 
   const accountsList = useSelector(selectAccountsList);
   const formFields = useSelector(selectAccountTransferFields);
@@ -80,7 +77,7 @@ export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ o
         isLoading={isLoading}
         footer={<CalculatorModal title={t("common.amount_calculator")} buttonOpen={t("common.amount_calculator")} buttonSave={t("buttons.save_amount")} onSave={handleSetCalculatedBalance} />}
         onClose={handleToggleVisibility}
-        onOpen={mountField}
+        onMountContent={mountFocusField}
       >
         <div className="flex flex-col gap-4">
           <Form layout="vertical" form={form} data-cy="transfer-between-accounts-form" className="flex w-full flex-col" onFinish={handleSubmitForm}>
@@ -89,7 +86,7 @@ export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ o
                 return (
                   <Form.Item key={field.id} label={t(`fields.simple.${field.id}`)} name={field.id} rules={[{ required: true, message: t("fields.errors.required") }]}>
                     <Select
-                      ref={fieldRef}
+                      ref={focusFieldRef}
                       size="large"
                       getPopupContainer={(triggerNode) => triggerNode.parentElement}
                       options={field.options.filter(({ value }) => value !== currentFieldsValues.to)}

@@ -1,6 +1,6 @@
 import { useViewport } from "@/hooks/viewport";
 import { Preloader } from "@/components/Layout/Preloader.jsx";
-import { ReactNode, useEffect } from "react";
+import { ReactNode, SetStateAction, useEffect } from "react";
 import { useModalState } from "@/hooks/providers/modalState";
 import dynamic from "next/dynamic";
 
@@ -13,7 +13,7 @@ export const SideModal = ({
   children,
   footer,
   onClose,
-  onOpen,
+  onMountContent,
 }: {
   title: string;
   isOpen: boolean;
@@ -21,7 +21,7 @@ export const SideModal = ({
   onClose: () => void;
   footer?: ReactNode;
   isLoading?: boolean;
-  onOpen?: () => void;
+  onMountContent?: (value: SetStateAction<boolean>) => void;
 }) => {
   const { isMobile } = useViewport();
   const placement = isMobile ? "bottom" : "right";
@@ -32,8 +32,7 @@ export const SideModal = ({
   }, [isOpen, isInitializedModal]);
 
   const handleOpenChange = (visible: boolean): void => {
-    console.log("1111111111111111111111111111", visible, onOpen);
-    if (visible && onOpen) onOpen();
+    if (onMountContent) onMountContent(visible);
   };
 
   return (

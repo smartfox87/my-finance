@@ -113,7 +113,6 @@ export interface DefaultFormProps {
   fields: FormField[];
   onSaveForm: DefaultFormSaveHandler;
   isResetAfterSave?: boolean;
-  isVisible?: boolean;
   onResetForm?: () => void;
   onChange?: () => void;
 }

@@ -22,7 +22,7 @@ export const IncomesFilter = memo(function IncomesFilter({ onSave }: { onSave: (
   const [isOpen, setIsOpen] = useState(false);
   const handleToggleVisibility = () => setIsOpen((prevState) => !prevState);
 
-  const [fieldRef, mountField] = useFieldFocus<BaseSelectRef>();
+  const [focusFieldRef, mountFocusField] = useFieldFocus<BaseSelectRef>();
 
   const incomesFilterFields = useSelector(selectIncomesFilterFields);
   const incomesFilterValues = useSelector(selectIncomesFilterValues);
@@ -55,7 +55,7 @@ export const IncomesFilter = memo(function IncomesFilter({ onSave }: { onSave: (
         {!isMobile && t("buttons.set_filters")}
       </Button>
       <SideModal title={t("titles.set_filters")} isOpen={isOpen} footer={submitBtn} onClose={handleToggleVisibility}>
-        <FilterFields name="incomes" items={incomesFilterFields} filterValues={filterValues} fieldRef={fieldRef} onChangeFieldValue={handleChangeFieldValue} onInit={mountField} />
+        <FilterFields name="incomes" items={incomesFilterFields} filterValues={filterValues} focusFieldRef={focusFieldRef} onChangeFieldValue={handleChangeFieldValue} onMount={mountFocusField} />
       </SideModal>
     </>
   );

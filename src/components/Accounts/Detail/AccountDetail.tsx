@@ -91,7 +91,7 @@ export const AccountDetail = memo(function AccountDetail({ onSave }: { onSave: (
 
   return (
     <SideModal title={t("titles.detail_account")} isOpen={isOpen} isLoading={isLoading} footer={footer} onClose={handleCloseModal}>
-      <DefaultForm ref={formRef} fields={accountFields} isVisible={isOpen} data-cy="edit-account-form" onSaveForm={handleUpdateAccount} />
+      <DefaultForm ref={formRef} fields={accountFields} data-cy="edit-account-form" onSaveForm={handleUpdateAccount} />
     </SideModal>
   );
 });
