@@ -1,9 +1,11 @@
-import { forwardRef, useImperativeHandle, useState } from "react";
-import { CalculatorResult } from "@/components/Calculator/CalculatorResult.jsx";
-import { CalculatorKeyPad } from "@/components/Calculator/CalculatorKeyPad.jsx";
+import { forwardRef, SetStateAction, useImperativeHandle, useState } from "react";
+import { CalculatorResult } from "@/components/Calculator/CalculatorResult";
+import { CalculatorKeyPad } from "@/components/Calculator/CalculatorKeyPad";
 import { decimalsKeys, integerKeys, mathOperatorsKeys, navigationKeys } from "@/constants/input";
+import { ButtonClickHandler, ResultChangeHandler, ResultKeyDownHandler } from "@/types/calculator";
 
-export const Calculator = forwardRef(function Calculator({ onCalculate }, ref) {
+// notice: setState type
+export const Calculator = forwardRef(function Calculator({ onCalculate }: { onCalculate: (result: SetStateAction<number>) => void }, ref) {
   const [result, setResult] = useState("");
 
   const clear = () => setResult("");
@@ -22,7 +24,7 @@ export const Calculator = forwardRef(function Calculator({ onCalculate }, ref) {
     }
   };
 
-  const handleClick = (event) => {
+  const handleClick: ButtonClickHandler = (event) => {
     const button = event.currentTarget.name;
     if (button === "=") calculate();
     else if (button === "clear") clear();
@@ -30,13 +32,13 @@ export const Calculator = forwardRef(function Calculator({ onCalculate }, ref) {
     else setResult(result + button);
   };
 
-  const allowedKeys = [...integerKeys, ...decimalsKeys, ...navigationKeys, ...mathOperatorsKeys];
-  const handleKeyDown = (event) => {
+  const allowedKeys: string[] = [...integerKeys, ...decimalsKeys, ...navigationKeys, ...mathOperatorsKeys];
+  const handleKeyDown: ResultKeyDownHandler = (event) => {
     if (!allowedKeys.includes(event.key)) event.preventDefault();
     else if (event.key === "Enter") calculate();
   };
 
-  const handleChange = (event) => setResult(event.target.value);
+  const handleChange: ResultChangeHandler = (event) => setResult(event.target.value);
 
   useImperativeHandle(ref, () => ({ clear }));
 

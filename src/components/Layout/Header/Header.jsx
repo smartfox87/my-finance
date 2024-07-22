@@ -1,6 +1,6 @@
 "use client";
 
-import { Auth } from "../../Auth/Auth.jsx";
+import { Auth } from "../../Auth/Auth";
 import { useSelector } from "react-redux";
 import { ProfileMenu } from "@/components/Profile/ProfileMenu.jsx";
 import { LanguageToggle } from "@/components/Layout/Header/LanguageToggle.jsx";

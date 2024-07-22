@@ -8,7 +8,7 @@ import { showNotification } from "@/helpers/modals.js";
 import { SideModal } from "@/components/Modals/SideModal";
 import { useLoading } from "@/hooks/loading.js";
 import SvgDelete from "@/assets/sprite/delete.svg";
-import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
+import { CalculatorModal } from "@/components/Calculator/CalculatorModal";
 import { Button } from "antd";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useAppDispatch } from "@/hooks/redux";
@@ -16,6 +16,7 @@ import { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 import { showCommonError } from "@/helpers/errors";
 import { isIncomeItemData } from "@/predicates/incomes";
 import { FieldIds, FieldTypes } from "@/types/field";
+import { CalculatorSaveHandler } from "@/types/calculator";
 
 export const IncomeDetail = memo(function IncomeDetail({ onSave }: { onSave: () => Promise<void> }) {
   const { t } = useTranslation();
@@ -73,7 +74,7 @@ export const IncomeDetail = memo(function IncomeDetail({ onSave }: { onSave: () 
   };
 
   const formRef = useRef<DefaultFormRef>(null);
-  const handleSetCalculatedAmount = (value: number): void => formRef.current?.handleChangeFieldValue({ id: FieldIds.AMOUNT, type: FieldTypes.NUMBER, value });
+  const handleSetCalculatedAmount: CalculatorSaveHandler = (value) => formRef.current?.handleChangeFieldValue({ id: FieldIds.AMOUNT, type: FieldTypes.NUMBER, value });
 
   const footer = (
     <div className="flex flex-col gap-4">

@@ -1,20 +1,21 @@
-import { useRef, useState } from "react";
+import { ReactNode, useRef, useState } from "react";
 import { Button } from "antd";
 import { SideModal } from "@/components/Modals/SideModal";
-import { Calculator } from "@/components/Calculator/Calculator.jsx";
+import { Calculator } from "@/components/Calculator/Calculator";
 import SvgCalculator from "@/assets/sprite/calculator.svg";
 import SvgPassPrice from "@/assets/sprite/pass-price.svg";
+import { CalculatorRef, CalculatorSaveHandler } from "@/types/calculator";
 
-export const CalculatorModal = ({ title, buttonOpen, buttonSave, onSave }) => {
+export const CalculatorModal = ({ title, buttonOpen, buttonSave, onSave }: { title: string; buttonOpen: ReactNode; buttonSave: ReactNode; onSave: CalculatorSaveHandler }) => {
   const [isOpen, setIsOpen] = useState(false);
   const handleToggleVisibility = () => setIsOpen((prevState) => !prevState);
 
-  const calculatorRef = useRef();
-  const [value, setValue] = useState();
-  const handleSaveResult = () => {
+  const calculatorRef = useRef<CalculatorRef>(null);
+  const [value, setValue] = useState(0);
+  const handleSaveResult = (): void => {
     onSave(value);
     setIsOpen(false);
-    calculatorRef.current.clear();
+    calculatorRef.current?.clear();
   };
 
   const saveBtn = (

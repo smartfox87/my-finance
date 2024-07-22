@@ -132,7 +132,7 @@ export const PERIOD_FIELD: RadioButtonsFormField = {
   required: true,
 };
 
-export const FULL_NAME_FIELD: TextFormField = {
+export const FULL_NAME_FIELD: TextFormField<FieldIds.FULL_NAME, FieldTypes.TEXT> = {
   id: FieldIds.FULL_NAME,
   type: FieldTypes.TEXT,
   label: `simple.${SimpleFieldNames.FULL_NAME}`,
@@ -140,7 +140,7 @@ export const FULL_NAME_FIELD: TextFormField = {
   focus: true,
 };
 
-export const EMAIL_FIELD: TextFormField = {
+export const EMAIL_FIELD: TextFormField<FieldIds.EMAIL, FieldTypes.EMAIL> = {
   id: FieldIds.EMAIL,
   type: FieldTypes.EMAIL,
   label: `simple.${SimpleFieldNames.EMAIL}`,
@@ -202,7 +202,7 @@ export const FILES_FIELD: FileFormField = {
   maxSize: 5 * 1024 * 1024,
 };
 
-export const PASSWORD_FIELD: TextFormField = {
+export const PASSWORD_FIELD: TextFormField<FieldIds.PASSWORD, FieldTypes.PASSWORD> = {
   id: FieldIds.PASSWORD,
   type: FieldTypes.PASSWORD,
   label: `simple.${SimpleFieldNames.PASSWORD}`,

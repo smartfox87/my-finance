@@ -118,6 +118,6 @@ export interface DefaultFormProps {
 }
 
 // notice: createRef type with target component inner functions and variables
-export interface DefaultFormRef {
+export type DefaultFormRef = {
   handleChangeFieldValue: (field: ChangedField) => void;
-}
+};

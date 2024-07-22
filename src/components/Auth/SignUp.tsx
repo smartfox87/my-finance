@@ -1,18 +1,21 @@
 import { INITIAL_SIGN_UP_FIELDS } from "@/constants/auth";
-import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { useViewport } from "@/hooks/viewport";
-import { useRecaptcha } from "@/hooks/providers/recaptcha.ts";
+import { useRecaptcha } from "@/hooks/providers/recaptcha";
 import SvgSignUp from "@/assets/sprite/sign-up.svg";
 import { SimpleButton } from "@/components/Form/SimpleButton";
-import { useAntd } from "@/hooks/providers/antd.ts";
+import { useAntd } from "@/hooks/providers/antd";
 import { useModalState } from "@/hooks/providers/modalState";
 import dynamic from "next/dynamic";
+import { useAppDispatch } from "@/hooks/redux";
+import { isRegisterData } from "@/predicates/auth";
+import { showCommonError } from "@/helpers/errors";
+import { DefaultFormSaveHandler } from "@/types/form";
 
-const AuthModal = dynamic(() => import("@/components/Auth/AuthModal.jsx").then(({ AuthModal }) => ({ default: AuthModal })));
+const AuthModal = dynamic(() => import("@/components/Auth/AuthModal").then(({ AuthModal }) => ({ default: AuthModal })));
 
 export const SignUp = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { isMobile } = useViewport();
   const { t } = useTranslation();
   const { initCaptcha, isLoadedCaptcha, getScore } = useRecaptcha();
@@ -21,19 +24,24 @@ export const SignUp = () => {
   const { initAntd, isLoadedAntd, isLoadingAntd } = useAntd();
   const isLoading = isOpenSignUpModal && (!isLoadedCaptcha || !isLoadedAuthModal);
 
-  const handleToggleVisibility = () => {
+  const handleToggleVisibility = (): void => {
     toggleSignUpModalVisibility();
     if (!isLoadedAntd) initAntd();
     if (!isLoadedCaptcha) initCaptcha();
   };
 
-  const handleSubmitForm = async (fieldsValues) => {
-    const score = await getScore();
-    await import("@/store/authSlice");
-    if (score < 0.5) return import("@/helpers/modals.js").then(({ showNotification }) => showNotification({ title: t("notifications.recaptcha_invalid") }));
-    const { registerUserThunk } = await import("@/store/authSlice");
-    await dispatch(registerUserThunk({ ...fieldsValues, score }));
-    handleToggleVisibility();
+  const handleSubmitForm: DefaultFormSaveHandler = async (fieldsValues): Promise<void> => {
+    try {
+      const score = await getScore();
+      const registerData = { ...fieldsValues, score };
+      if (!isRegisterData(registerData)) return;
+      if (score < 0.5) return import("@/helpers/modals.js").then(({ showNotification }) => showNotification({ title: t("notifications.recaptcha_invalid") }));
+      const { registerUserThunk } = await import("@/store/authSlice");
+      await dispatch(registerUserThunk(registerData)).unwrap();
+      handleToggleVisibility();
+    } catch (error) {
+      showCommonError();
+    }
   };
 
   return (

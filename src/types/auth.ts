@@ -1,13 +1,15 @@
 import { Session, User } from "@supabase/auth-js";
+import { FieldIds, FieldTypes } from "@/types/field";
+import { TextFormField } from "@/types/form";
 
 export type LoginData = {
-  email: string;
-  password: string;
+  [FieldIds.EMAIL]: string;
+  [FieldIds.PASSWORD]: string;
 };
 
 export type RegisterData = LoginData & {
   score: number;
-  full_name?: string;
+  [FieldIds.FULL_NAME]: string;
 };
 
 export interface UserPayload {
@@ -17,3 +19,7 @@ export interface UserPayload {
 export interface SessionPayload {
   session: Session | null;
 }
+
+export type LoginField = TextFormField<FieldIds.EMAIL, FieldTypes.EMAIL> | TextFormField<FieldIds.PASSWORD, FieldTypes.PASSWORD>;
+
+export type RegisterField = LoginField | TextFormField<FieldIds.FULL_NAME, FieldTypes.TEXT>;

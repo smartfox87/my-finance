@@ -1,14 +1,14 @@
-import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { SimpleButton } from "@/components/Form/SimpleButton";
+import { useAppDispatch } from "@/hooks/redux";
 
 export const GoogleAuth = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(false);
-  const handleAuthorize = async () => {
+  const handleAuthorize = async (): Promise<void> => {
     setIsLoading(true);
     const { loginByProviderUserThunk } = await import("@/store/authSlice");
     dispatch(loginByProviderUserThunk("google"));
