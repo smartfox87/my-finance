@@ -9,7 +9,7 @@ export type LoginData = {
 
 export type RegisterData = LoginData & {
   score: number;
-  [FieldIds.FULL_NAME]?: string;
+  [FieldIds.FULL_NAME]: string;
 };
 
 export interface UserPayload {
