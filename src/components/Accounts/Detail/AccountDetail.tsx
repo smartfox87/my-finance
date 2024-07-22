@@ -8,7 +8,7 @@ import { showNotification } from "@/helpers/modals.js";
 import { SideModal } from "@/components/Modals/SideModal";
 import { useLoading } from "@/hooks/loading.js";
 import SvgDelete from "@/assets/sprite/delete.svg";
-import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
+import { CalculatorModal } from "@/components/Calculator/CalculatorModal";
 import { Button } from "antd";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAppDispatch } from "@/hooks/redux";
@@ -16,6 +16,7 @@ import { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 import { showCommonError } from "@/helpers/errors";
 import { FieldIds, FieldTypes } from "@/types/field";
 import { isAccountItemUpdateData } from "@/predicates/account";
+import { CalculatorSaveHandler } from "@/types/calculator";
 
 export const AccountDetail = memo(function AccountDetail({ onSave }: { onSave: (props?: { types: boolean }) => Promise<void> }) {
   const { t } = useTranslation();
@@ -77,7 +78,7 @@ export const AccountDetail = memo(function AccountDetail({ onSave }: { onSave: (
   };
 
   const formRef = useRef<DefaultFormRef>(null);
-  const handleSetCalculatedBalance = (value: number): void => formRef.current?.handleChangeFieldValue({ id: FieldIds.BALANCE, type: FieldTypes.NUMBER, value });
+  const handleSetCalculatedBalance: CalculatorSaveHandler = (value) => formRef.current?.handleChangeFieldValue({ id: FieldIds.BALANCE, type: FieldTypes.NUMBER, value });
 
   const footer = (
     <div className="flex flex-col gap-4">

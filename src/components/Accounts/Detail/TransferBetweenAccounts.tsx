@@ -6,7 +6,7 @@ import { transferAccountsBalanceThunk } from "@/store/accountsSlice";
 import { showNotification } from "@/helpers/modals.js";
 import { SideModal } from "@/components/Modals/SideModal";
 import { useLoading } from "@/hooks/loading.js";
-import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
+import { CalculatorModal } from "@/components/Calculator/CalculatorModal";
 import { handleFilterSelectOptions } from "@/helpers/fields";
 import { Button, Form, InputNumber, Select } from "antd";
 import { useViewport } from "@/hooks/viewport";

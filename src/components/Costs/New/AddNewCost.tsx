@@ -8,13 +8,14 @@ import { useTranslation } from "react-i18next";
 import { showNotification } from "@/helpers/modals.js";
 import { memo, useRef, useState } from "react";
 import SvgNewExpense from "@/assets/sprite/new-expense.svg";
-import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
+import { CalculatorModal } from "@/components/Calculator/CalculatorModal";
 import { useViewport } from "@/hooks/viewport";
 import { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 import { FieldIds, FieldTypes } from "@/types/field";
 import { isCostItemData } from "@/predicates/costs";
 import { showCommonError } from "@/helpers/errors";
 import { useAppDispatch } from "@/hooks/redux";
+import { CalculatorSaveHandler } from "@/types/calculator";
 
 export const AddNewCost = memo(function AddNewCost({ isAdaptive, onSave }: { isAdaptive?: boolean; onSave: () => Promise<void> }) {
   const { t } = useTranslation();
@@ -39,7 +40,7 @@ export const AddNewCost = memo(function AddNewCost({ isAdaptive, onSave }: { isA
   };
 
   const formRef = useRef<DefaultFormRef>();
-  const handleSetCalculatedAmount = (value: number): void => formRef.current?.handleChangeFieldValue({ id: FieldIds.AMOUNT, type: FieldTypes.NUMBER, value });
+  const handleSetCalculatedAmount: CalculatorSaveHandler = (value) => formRef.current?.handleChangeFieldValue({ id: FieldIds.AMOUNT, type: FieldTypes.NUMBER, value });
 
   return (
     <>

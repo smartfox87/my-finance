@@ -1,9 +1,10 @@
-import { CalculatorButton } from "@/components/Calculator/CalculatorButton.jsx";
+import { CalculatorButton } from "@/components/Calculator/CalculatorButton";
 import SvgDelete from "@/assets/sprite/delete.svg";
 import SvgBackspace from "@/assets/sprite/backspace.svg";
 import { useTranslation } from "react-i18next";
+import { ButtonClickHandler } from "@/types/calculator";
 
-export const CalculatorKeyPad = ({ onClick }) => {
+export const CalculatorKeyPad = ({ onClick }: { onClick: ButtonClickHandler }) => {
   const { t } = useTranslation();
   return (
     <div className="flex flex-wrap gap-0.5 text-2xl font-bold">

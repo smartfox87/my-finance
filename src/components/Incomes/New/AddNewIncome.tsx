@@ -7,7 +7,7 @@ import { createIncomeItemThunk } from "@/store/incomesSlice";
 import { useTranslation } from "react-i18next";
 import { showNotification } from "@/helpers/modals.js";
 import { memo, useRef, useState } from "react";
-import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
+import { CalculatorModal } from "@/components/Calculator/CalculatorModal";
 import { useViewport } from "@/hooks/viewport";
 import SvgNewIncome from "@/assets/sprite/new-income.svg";
 import { useAppDispatch } from "@/hooks/redux";
@@ -15,6 +15,7 @@ import { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 import { showCommonError } from "@/helpers/errors";
 import { isIncomeItemData } from "@/predicates/incomes";
 import { FieldIds, FieldTypes } from "@/types/field";
+import { CalculatorSaveHandler } from "@/types/calculator";
 
 export const AddNewIncome = memo(function AddNewIncome({ isAdaptive, onSave }: { isAdaptive?: boolean; onSave: () => Promise<void> }) {
   const { t } = useTranslation();
@@ -39,7 +40,7 @@ export const AddNewIncome = memo(function AddNewIncome({ isAdaptive, onSave }: {
   };
 
   const formRef = useRef<DefaultFormRef>();
-  const handleSetCalculatedAmount = (value: number): void => formRef.current?.handleChangeFieldValue({ id: FieldIds.AMOUNT, type: FieldTypes.NUMBER, value });
+  const handleSetCalculatedAmount: CalculatorSaveHandler = (value) => formRef.current?.handleChangeFieldValue({ id: FieldIds.AMOUNT, type: FieldTypes.NUMBER, value });
 
   return (
     <>

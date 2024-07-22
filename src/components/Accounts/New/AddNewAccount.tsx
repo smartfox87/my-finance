@@ -8,13 +8,14 @@ import { useTranslation } from "react-i18next";
 import { showNotification } from "@/helpers/modals.js";
 import { memo, useRef, useState } from "react";
 import SvgNewAccount from "@/assets/sprite/new-account.svg";
-import { CalculatorModal } from "@/components/Calculator/CalculatorModal.jsx";
+import { CalculatorModal } from "@/components/Calculator/CalculatorModal";
 import { useViewport } from "@/hooks/viewport";
 import { useAppDispatch } from "@/hooks/redux";
 import { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 import { showCommonError } from "@/helpers/errors";
 import { isAccountItemCreateData } from "@/predicates/account";
 import { FieldIds, FieldTypes } from "@/types/field";
+import { CalculatorSaveHandler } from "@/types/calculator";
 
 export const AddNewAccount = memo(function AddNewAccount({ onSave }: { onSave: (props?: { types: boolean }) => Promise<void> }) {
   const { t } = useTranslation();
@@ -39,7 +40,7 @@ export const AddNewAccount = memo(function AddNewAccount({ onSave }: { onSave: (
   };
 
   const formRef = useRef<DefaultFormRef>(null);
-  const handleSetCalculatedBalance = (value: number): void => formRef.current?.handleChangeFieldValue({ id: FieldIds.BALANCE, type: FieldTypes.NUMBER, value });
+  const handleSetCalculatedBalance: CalculatorSaveHandler = (value) => formRef.current?.handleChangeFieldValue({ id: FieldIds.BALANCE, type: FieldTypes.NUMBER, value });
 
   return (
     <>
