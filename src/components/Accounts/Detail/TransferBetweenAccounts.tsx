@@ -63,7 +63,10 @@ export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ o
     handleToggleVisibility();
   };
 
-  const handleSetCalculatedBalance = (value: number) => handleChangeFieldValue({ id: FieldIds.AMOUNT, value });
+  const handleSetCalculatedAmount = (value: number) => {
+    handleChangeFieldValue({ id: FieldIds.AMOUNT, value });
+    form.setFieldsValue({ [FieldIds.AMOUNT]: value });
+  };
 
   return (
     <>
@@ -75,7 +78,7 @@ export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ o
         title={t("common.transfer_money")}
         isOpen={isOpen}
         isLoading={isLoading}
-        footer={<CalculatorModal title={t("common.amount_calculator")} buttonOpen={t("common.amount_calculator")} buttonSave={t("buttons.save_amount")} onSave={handleSetCalculatedBalance} />}
+        footer={<CalculatorModal title={t("common.amount_calculator")} buttonOpen={t("common.amount_calculator")} buttonSave={t("buttons.save_amount")} onSave={handleSetCalculatedAmount} />}
         onClose={handleToggleVisibility}
         onMountContent={mountFocusField}
       >
