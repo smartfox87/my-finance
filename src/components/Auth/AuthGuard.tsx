@@ -3,10 +3,10 @@
 import { useSelector } from "react-redux";
 import { selectUser } from "@/store/selectors/auth";
 import { useTranslation } from "react-i18next";
-import { DemoUserAuth } from "@/components/Auth/DemoUserAuth.jsx";
-import { useMemo } from "react";
+import { DemoUserAuth } from "@/components/Auth/DemoUserAuth";
+import { ReactNode, useMemo } from "react";
 
-export const AuthGuard = ({ children }) => {
+export const AuthGuard = ({ children }: { children: ReactNode }) => {
   const user = useSelector(selectUser);
   const { t } = useTranslation();
 

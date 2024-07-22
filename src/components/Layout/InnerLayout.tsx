@@ -1,6 +1,6 @@
 "use client";
 
-import { AuthGuard } from "@/components/Auth/AuthGuard.jsx";
+import { AuthGuard } from "@/components/Auth/AuthGuard";
 import { ReactNode, Suspense } from "react";
 import { Breadcrumbs } from "@/components/Common/Breadcrumbs";
 import { LinkItem } from "@/types/breadcrumbs";
