@@ -32,11 +32,12 @@ export const SignUp = () => {
 
   const handleSubmitForm: DefaultFormSaveHandler = async (fieldsValues): Promise<void> => {
     try {
-      if (!isRegisterData(fieldsValues)) return;
       const score = await getScore();
+      const registerData = { ...fieldsValues, score };
+      if (!isRegisterData(registerData)) return;
       if (score < 0.5) return import("@/helpers/modals.js").then(({ showNotification }) => showNotification({ title: t("notifications.recaptcha_invalid") }));
       const { registerUserThunk } = await import("@/store/authSlice");
-      await dispatch(registerUserThunk({ ...fieldsValues, score })).unwrap();
+      await dispatch(registerUserThunk(registerData)).unwrap();
       handleToggleVisibility();
     } catch (error) {
       showCommonError();
