@@ -9,8 +9,9 @@ import { isTextClamped } from "@/helpers/isTextClamped.js";
 import { useViewport } from "@/hooks/viewport";
 import { getFullDate } from "@/helpers/date";
 import Link from "next/link";
+import { AccountItem } from "@/types/accounts";
 
-export const AccountItem = ({ id, name, balance, updated_at }) => {
+export const AccountListItem = ({ id, name, balance, updated_at }: AccountItem) => {
   const { t } = useTranslation();
   const { isTouchDevice } = useViewport();
   const currency = useSelector(selectCurrency);

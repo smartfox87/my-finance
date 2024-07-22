@@ -22,6 +22,8 @@ import {
   isTextFormFieldId,
 } from "@/predicates/form";
 import { isTruthy } from "@/predicates/common";
+import { useFieldFocus } from "@/hooks/fieldFocus";
+import type { BaseSelectRef } from "rc-select";
 
 const PeriodComponent = dynamic(() => import("@/components/Form/PeriodField").then((mod) => mod.PeriodField));
 const DatePickerComponent = dynamic<DatePickerProps>(() => import("antd/es/date-picker"));
@@ -30,7 +32,7 @@ const InputNumberComponent = dynamic(() => import("antd/es/input-number"));
 const RadioGroupComponent = dynamic(() => import("antd/es/radio").then((mod) => mod.Group));
 const UploadComponent = dynamic(() => import("antd/es/upload"));
 
-export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfterSave, isVisible = true, onSaveForm, onResetForm, onChange, ...props }: DefaultFormProps, ref) {
+export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfterSave, onSaveForm, onResetForm, onChange, ...props }: DefaultFormProps, ref) {
   const { t } = useTranslation();
   const [form] = Form.useForm<FormValues>();
 
@@ -51,12 +53,11 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
     setCurrentFieldsValues(form.getFieldsValue(true));
   }, [propsFieldsValues]);
 
-  // todo check importance focusInputRef
-  const focusInputRef = useRef<HTMLInputElement | InputRef>(null);
-  // todo check importance isVisible
+  const [focusFieldRef, mountFocusField] = useFieldFocus<BaseSelectRef | InputRef>();
   useLayoutEffect(() => {
-    if (isVisible) setTimeout(() => focusInputRef.current?.focus());
-  }, [isVisible]);
+    mountFocusField(true);
+    return () => mountFocusField(false);
+  }, []);
 
   const handleChangeFieldValue = useCallback(
     ({ id, value, type }: ChangedField): void => {
@@ -147,7 +148,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
             {(field.type === FieldTypes.TEXT || field.type === FieldTypes.EMAIL) && isTextFormFieldId(id) && (
               <Input
                 size="large"
-                ref={focus ? (focusInputRef as LegacyRef<InputRef>) : undefined}
+                ref={focus ? (focusFieldRef as LegacyRef<InputRef>) : undefined}
                 type={field.type}
                 maxLength={field.maxLength}
                 disabled={disabled}
@@ -156,7 +157,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
             )}
             {field.type === FieldTypes.PASSWORD && isTextFormFieldId(id) && (
               <Input.Password
-                ref={focus ? (focusInputRef as LegacyRef<InputRef>) : undefined}
+                ref={focus ? (focusFieldRef as LegacyRef<InputRef>) : undefined}
                 size="large"
                 maxLength={field.maxLength}
                 disabled={disabled}
@@ -165,7 +166,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
             )}
             {field.type === FieldTypes.TEXTAREA && isTextFormFieldId(id) && (
               <Input.TextArea
-                ref={focus ? focusInputRef : undefined}
+                ref={focus ? focusFieldRef : undefined}
                 rows={5}
                 maxLength={field.maxLength}
                 showCount={!!field.maxLength}
@@ -229,7 +230,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 onKeyDown={handleKeyDownDecimalsValidation}
                 onKeyUp={handleKeyUpCutDecimals}
                 min={0}
-                max={999999999999999}
+                max={Number.MAX_SAFE_INTEGER}
                 style={{ width: "100%" }}
                 onChange={(value) => handleChangeFieldValue({ id, type: field.type, value: cutDecimals(value) })}
               />

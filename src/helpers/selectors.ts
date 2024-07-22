@@ -10,6 +10,7 @@ import { ProcessedBudgetItem } from "@/types/budgets";
 import { FilterField } from "@/types/filter";
 import { ProcessedStatisticsBudgetItem, StatisticsCostItem, StatisticsIncomeItem } from "@/types/statistics";
 import { OptionsObject, ProcessedFilterField } from "@/types/selectors";
+import { isTruthy } from "@/predicates/common";
 
 export const checkSingleItemCondition = (filterItem: MultiSelectValue | undefined, itemId: number): boolean =>
   filterItem !== undefined && (filterItem.includes(itemId) || filterItem.includes(FieldValues.ALL));
@@ -54,8 +55,12 @@ export const sortItemsList = <T extends CostItem | IncomeItem | ProcessedBudgetI
 export const getOptionsFromItemsList = <T extends ProcessedAccountItem | CostCategory>(itemsList: T[]) =>
   itemsList?.map(({ id, name }): SelectOption<MultiSelectOptionValue> => ({ value: id, label: name }));
 
+// todo try importance of Object.assign everywhere
 export const getOptionsObjectFromOptions = <T extends SingleSelectValue | MultiSelectOptionValue>(options: SelectOption<T>[]): OptionsObject =>
-  Object.assign({}, ...options.map(({ value, label, label_translation }) => ({ [value]: label_translation && i18nRef.t ? i18nRef.t(`fields.${label_translation}`) : label }), {}));
+  Object.assign(
+    {},
+    ...options.map(({ value, label, label_translation }) => value && { [value]: label_translation && i18nRef.t ? i18nRef.t(`fields.${label_translation}`) : label }, {}).filter(isTruthy),
+  );
 
 export const processFilterFields = <T extends IncomeCategory | CostCategory>(initialFieldsData: FilterField[], categoriesList: T[] | null, accountsList: ProcessedAccountItem[] | null) =>
   initialFieldsData.map((field): ProcessedFilterField => {

@@ -8,7 +8,7 @@ import { memo, useEffect, useState } from "react";
 import SvgFilter from "@/assets/sprite/filter.svg";
 import { useViewport } from "@/hooks/viewport";
 import { prepareObjectValuesForFilterStateValues, setFilterValue } from "@/helpers/filters";
-import { useFilterFocus } from "@/hooks/filterFocus";
+import { useFieldFocus } from "@/hooks/fieldFocus";
 import { FieldIds } from "@/types/field";
 import { useAppDispatch } from "@/hooks/redux";
 import { FilterFields } from "@/components/Common/Filter/FilterFields";
@@ -23,7 +23,7 @@ export const StatisticsFilter = memo(function StatisticsFilter({ onSave }: { onS
   const [isOpen, setIsOpen] = useState(false);
   const handleToggleVisibility = () => setIsOpen((prevState) => !prevState);
 
-  const [fieldRef, onMountField] = useFilterFocus<BaseSelectRef>();
+  const [focusFieldRef, mountFocusField] = useFieldFocus<BaseSelectRef>();
 
   const statisticsFilterFields = useSelector(selectStatisticsFilterFields);
   const statisticsFilterValues = useSelector(selectStatisticsFilterValues);
@@ -53,7 +53,14 @@ export const StatisticsFilter = memo(function StatisticsFilter({ onSave }: { onS
         {!isMobile && t("buttons.set_filters")}
       </Button>
       <SideModal title={t("titles.set_filters")} isOpen={isOpen} footer={submitBtn} onClose={handleToggleVisibility}>
-        <FilterFields name="statistics" items={statisticsFilterFields} filterValues={filterValues} fieldRef={fieldRef} onChangeFieldValue={handleChangeFieldValue} onInit={onMountField} />
+        <FilterFields
+          name="statistics"
+          items={statisticsFilterFields}
+          filterValues={filterValues}
+          focusFieldRef={focusFieldRef}
+          onChangeFieldValue={handleChangeFieldValue}
+          onMount={mountFocusField}
+        />
       </SideModal>
     </>
   );

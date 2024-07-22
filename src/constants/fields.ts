@@ -31,6 +31,26 @@ export const ACCOUNT_FIELD: SingleSelectFormField<FieldIds.ACCOUNT> = {
   showSearch: true,
 };
 
+export const FROM_ACCOUNT_FIELD: SingleSelectFormField<FieldIds.FROM, number | null> = {
+  id: FieldIds.FROM,
+  type: FieldTypes.SELECT,
+  label: `complex.${ComplexFieldNames.ACCOUNT}.label`,
+  value: null,
+  options: [],
+  required: true,
+  showSearch: true,
+};
+
+export const TO_ACCOUNT_FIELD: SingleSelectFormField<FieldIds.TO, number | null> = {
+  id: FieldIds.TO,
+  type: FieldTypes.SELECT,
+  label: `complex.${ComplexFieldNames.ACCOUNT}.label`,
+  value: null,
+  options: [],
+  required: true,
+  showSearch: true,
+};
+
 export const ACCOUNTS_FIELD: MultiSelectFormField = {
   id: FieldIds.ACCOUNTS,
   type: FieldTypes.MULTISELECT,
@@ -80,7 +100,7 @@ export const NAME_FIELD: TextFormField<FieldIds.NAME, FieldTypes.TEXTAREA> = {
 
 export const AMOUNT_FIELD: NumberFormField<FieldIds.AMOUNT> = { id: FieldIds.AMOUNT, type: FieldTypes.NUMBER, label: `simple.${SimpleFieldNames.AMOUNT}`, label_suffix: "", value: "", required: true };
 
-export const BALANCE_FIELD: NumberFormField = { id: FieldIds.BALANCE, type: FieldTypes.NUMBER, label: `simple.${SimpleFieldNames.BALANCE}`, value: "", required: true };
+export const BALANCE_FIELD: NumberFormField<FieldIds.BALANCE> = { id: FieldIds.BALANCE, type: FieldTypes.NUMBER, label: `simple.${SimpleFieldNames.BALANCE}`, value: "", required: true };
 
 export const DATE_FIELD: DateFormField<FieldIds.DATE> = {
   id: FieldIds.DATE,

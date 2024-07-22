@@ -7,7 +7,7 @@ import { SideModal } from "@/components/Modals/SideModal";
 import { memo, useEffect, useState } from "react";
 import SvgFilter from "@/assets/sprite/filter.svg";
 import { useViewport } from "@/hooks/viewport";
-import { useFilterFocus } from "@/hooks/filterFocus";
+import { useFieldFocus } from "@/hooks/fieldFocus";
 import { prepareObjectValuesForFilterStateValues, setFilterValue } from "@/helpers/filters";
 import { FieldIds } from "@/types/field";
 import { useAppDispatch } from "@/hooks/redux";
@@ -23,7 +23,7 @@ export const BudgetsFilter = memo(function BudgetsFilter({ onSave }: { onSave: (
   const [isOpen, setIsOpen] = useState(false);
   const handleToggleVisibility = () => setIsOpen((prevState) => !prevState);
 
-  const [fieldRef, onMountField] = useFilterFocus<BaseSelectRef>();
+  const [focusFieldRef, mountFocusField] = useFieldFocus<BaseSelectRef>();
 
   const budgetsFilterFields = useSelector(selectBudgetsFilterFields);
   const budgetsFilterValues = useSelector(selectBudgetsFilterValues);
@@ -56,7 +56,7 @@ export const BudgetsFilter = memo(function BudgetsFilter({ onSave }: { onSave: (
         {!isMobile && t("buttons.set_filters")}
       </Button>
       <SideModal title={t("titles.set_filters")} isOpen={isOpen} footer={submitBtn} onClose={handleToggleVisibility}>
-        <FilterFields name="budgets" items={budgetsFilterFields} filterValues={filterValues} fieldRef={fieldRef} onChangeFieldValue={handleChangeFieldValue} onInit={onMountField} />
+        <FilterFields name="budgets" items={budgetsFilterFields} filterValues={filterValues} focusFieldRef={focusFieldRef} onChangeFieldValue={handleChangeFieldValue} onMount={mountFocusField} />
       </SideModal>
     </>
   );

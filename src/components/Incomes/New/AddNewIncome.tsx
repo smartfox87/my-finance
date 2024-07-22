@@ -53,7 +53,7 @@ export const AddNewIncome = memo(function AddNewIncome({ isAdaptive, onSave }: {
         footer={<CalculatorModal title={t("common.amount_calculator")} buttonOpen={t("common.amount_calculator")} buttonSave={t("buttons.save_amount")} onSave={handleSetCalculatedAmount} />}
         onClose={handleToggleVisibility}
       >
-        <DefaultForm ref={formRef} fields={newIncomeFields} isResetAfterSave isVisible={isOpen} data-cy="add-income-form" onSaveForm={handleSaveNewIncome} />
+        <DefaultForm ref={formRef} fields={newIncomeFields} isResetAfterSave data-cy="add-income-form" onSaveForm={handleSaveNewIncome} />
       </SideModal>
     </>
   );

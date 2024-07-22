@@ -15,7 +15,7 @@ export type BaseFormField = {
   disabled?: boolean;
 };
 
-export type SingleSelectFormFieldId = FieldIds.SORT | FieldIds.ACCOUNT | FieldIds.CATEGORY | FieldIds.CURRENCY | FieldIds.GENDER | FieldIds.SUBJECT;
+export type SingleSelectFormFieldId = FieldIds.FROM | FieldIds.TO | FieldIds.SORT | FieldIds.ACCOUNT | FieldIds.CATEGORY | FieldIds.CURRENCY | FieldIds.GENDER | FieldIds.SUBJECT;
 export type SingleSelectFormField<I extends SingleSelectFormFieldId = SingleSelectFormFieldId, V extends SingleSelectValue = SingleSelectValue> = BaseFormField & {
   id: I;
   type: FieldTypes.SELECT;
@@ -83,7 +83,7 @@ export type TextFormField<I extends TextFormFieldId = TextFormFieldId, T extends
 
 export type NumberFormFieldId = FieldIds.AMOUNT | FieldIds.BALANCE;
 // todo check value type
-export type NumberFormField<I extends NumberFormFieldId = NumberFormFieldId, V extends number | string = number | string> = BaseFormField & {
+export type NumberFormField<I extends NumberFormFieldId = NumberFormFieldId, V extends SingleSelectValue = Exclude<SingleSelectValue, null>> = BaseFormField & {
   id: I;
   type: FieldTypes.NUMBER;
   value: V;
@@ -113,7 +113,6 @@ export interface DefaultFormProps {
   fields: FormField[];
   onSaveForm: DefaultFormSaveHandler;
   isResetAfterSave?: boolean;
-  isVisible?: boolean;
   onResetForm?: () => void;
   onChange?: () => void;
 }
