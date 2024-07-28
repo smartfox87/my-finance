@@ -15,10 +15,10 @@ export const SideModal = ({
   onClose,
   onMountContent,
 }: {
-  title: string;
   isOpen: boolean;
   children: ReactNode;
   onClose: () => void;
+  title?: string;
   footer?: ReactNode;
   isLoading?: boolean;
   onMountContent?: (value: SetStateAction<boolean>) => void;

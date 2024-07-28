@@ -8,7 +8,7 @@ import { LanguageToggle } from "@/components/Layout/Header/LanguageToggle.jsx";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/store/selectors/auth";
 import { MainNav } from "@/components/Layout/MainNav";
-import { useAntd } from "@/hooks/providers/antd.ts";
+import { useAntd } from "@/hooks/providers/antd";
 import { useModalState } from "@/hooks/providers/modalState";
 
 export const MobileMenu = memo(function MobileMenu() {
