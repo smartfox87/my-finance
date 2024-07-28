@@ -2,15 +2,19 @@ import { useEffect, useRef, useState } from "react";
 import { Preloader } from "@/components/Layout/Preloader.jsx";
 import { useViewport } from "@/hooks/viewport";
 import { Viewports } from "@/types/viewport";
+import { ReactComponentLike } from "prop-types";
+import { ProcessedBudgetItem } from "@/types/budgets";
+import { IncomeItem } from "@/types/incomes";
+import { CostItem } from "@/types/costs";
 
 let blankArray = new Array(3).fill(null);
 
-export const LazyList = ({ items = [], Item }) => {
+export const LazyList = ({ items, Item }: { items: (ProcessedBudgetItem | IncomeItem | CostItem)[]; Item: ReactComponentLike }) => {
   const { viewport, isMobile } = useViewport();
-  const loadItemsQuantity = isMobile ? 12 : [Viewports.MD, Viewports.SM].includes(viewport) ? 18 : 24;
+  const loadItemsQuantity = isMobile ? 12 : Viewports.MD === viewport || Viewports.SM === viewport ? 18 : 24;
   const [lazyItems, setLazyItems] = useState(items.slice(0, loadItemsQuantity));
-  const observer = useRef(null);
-  const triggerRef = useRef(null);
+  const observer = useRef<IntersectionObserver | null>(null);
+  const triggerRef = useRef<HTMLDivElement | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -26,8 +30,8 @@ export const LazyList = ({ items = [], Item }) => {
         }
       });
     });
-    observer.current.observe(triggerRef.current);
-    return () => observer.current.disconnect();
+    if (triggerRef.current) observer.current.observe(triggerRef.current);
+    return () => observer.current?.disconnect();
   }, [lazyItems, items]);
 
   useEffect(() => {
@@ -44,7 +48,7 @@ export const LazyList = ({ items = [], Item }) => {
                 <Item {...item} />
               </li>
             ))}
-            {blankArray.map((item, index) => (
+            {blankArray.map((_, index) => (
               <li key={index} className="w-[250px] min-w-[200px] max-w-[500px] grow"></li>
             ))}
           </ul>

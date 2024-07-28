@@ -77,7 +77,7 @@ export const AccountDetail = memo(function AccountDetail({ onSave }: { onSave: (
     }
   };
 
-  const formRef = useRef<DefaultFormRef>(null);
+  const formRef = useRef<DefaultFormRef | null>(null);
   const handleSetCalculatedBalance: CalculatorSaveHandler = (value) => formRef.current?.handleChangeFieldValue({ id: FieldIds.BALANCE, type: FieldTypes.NUMBER, value });
 
   const footer = (

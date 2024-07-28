@@ -73,7 +73,7 @@ export const BudgetDetail = memo(function BudgetDetail({ onSave }: { onSave: () 
     }
   };
 
-  const formRef = useRef<DefaultFormRef>(null);
+  const formRef = useRef<DefaultFormRef | null>(null);
   const handleSetCalculatedAmount: CalculatorSaveHandler = (value) => formRef.current?.handleChangeFieldValue({ id: FieldIds.AMOUNT, type: FieldTypes.NUMBER, value });
 
   const footer = (
