@@ -1,8 +1,9 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { useViewport } from "@/hooks/viewport";
-import { CostsIncomesChartTooltip } from "@/components/Statistics/CostsIncomes/CostsIncomesChartTooltip.js";
+import { CostsIncomesChartTooltip } from "@/components/Statistics/CostsIncomes/CostsIncomesChartTooltip";
+import { CostIncomeStatisticsItem } from "@/types/statistics";
 
-export const CostsIncomesBarChart = ({ items }) => {
+export const CostsIncomesBarChart = ({ items }: { items: CostIncomeStatisticsItem[] }) => {
   const { isMobile } = useViewport();
 
   return (

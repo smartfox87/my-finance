@@ -52,6 +52,15 @@ export type CostIncomeStatisticsItem = {
   incomesList: Record<string, number>;
 };
 
+export type CostsIncomesStatisticsTooltipProps = {
+  active?: boolean;
+  payload?: {
+    value: number;
+    name: StatisticsTypes.COSTS | StatisticsTypes.INCOMES;
+    payload: CostIncomeStatisticsItem;
+  }[];
+};
+
 export type BudgetsListStatisticsItem = {
   amount: number;
   costs: number;

@@ -79,7 +79,7 @@ export const selectCostsByMonths = createSelector([selectCostCategoriesObject, s
 });
 
 export const selectCostsIncomesChartItems = createSelector(
-  [selectCostsByMonths, selectIncomeCategoriesObject, selectCostsListForChartsByFilter],
+  [selectCostsByMonths, selectIncomeCategoriesObject, selectIncomesListForChartsByFilter],
   (costsByMonths, incomeCategoriesObject, incomesListForCharts): CostIncomeStatisticsItem[] => {
     const months = getLocalisedMonths();
     return costsByMonths && incomeCategoriesObject && incomesListForCharts
