@@ -4,12 +4,10 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import {
   selectBudgetsListForChartsByFilter,
-  selectCostsBudgetsChartItems,
   selectCostsCategoriesChartItems,
   selectCostsIncomesChartItems,
   selectCostsListForCharts,
   selectCostsListForChartsByFilter,
-  selectIncomesCategoriesChartItems,
   selectIncomesListForChartsByFilter,
   selectIsStatisticsFilterValuesChanged,
   selectStatisticsFilterValues,
@@ -21,8 +19,7 @@ import { useCallback, useEffect, useState } from "react";
 import { INITIAL_STATISTICS_FILTER_FIELDS } from "@/constants/statistics";
 import { getUserId } from "@/helpers/localStorage";
 import { CostsIncomesBarChart } from "@/components/Statistics/CostsIncomesBarChart";
-import { IncomesCategoriesBarChart } from "@/components/Statistics/IncomesCategoriesBarChart";
-import { CostsCategoriesBarChart } from "@/components/Statistics/CostsCategoriesBarChart";
+import { CostsCategoriesBarChart } from "@/components/Statistics/CostsCategories/CostsCategoriesBarChart";
 import { EmptyCosts } from "@/components/Costs/List/EmptyCosts";
 import { StatisticsFilter } from "@/components/Statistics/Filter/StatisticsFilter";
 import { ActiveStatisticsFilters } from "@/components/Statistics/Filter/ActiveStatisticsFilters";
@@ -32,6 +29,7 @@ import { useAppDispatch } from "@/hooks/redux";
 import { getFilterItemsFromFields } from "@/helpers/filters";
 import { TotalStatistics } from "@/components/Statistics/TotalStatistics";
 import { CostsBudgetsStatistics } from "@/components/Statistics/CostsBudgets/CostsBudgetsStatistics";
+import { CostsCategoriesStatistics } from "@/components/Statistics/CostsCategories/CostsCategoriesStatistics";
 
 export default function StatisticsContent() {
   const { t } = useTranslation();
@@ -73,7 +71,6 @@ export default function StatisticsContent() {
 
   const costsIncomesChartItems = useSelector(selectCostsIncomesChartItems);
   const costsCategoriesChartItems = useSelector(selectCostsCategoriesChartItems);
-  const incomesCategoriesChartItems = useSelector(selectIncomesCategoriesChartItems);
 
   const charts = (
     <>
@@ -87,12 +84,7 @@ export default function StatisticsContent() {
           <CostsIncomesBarChart items={costsIncomesChartItems} />
         </section>
       )}
-      {!!incomesCategoriesChartItems.length && (
-        <section className="flex flex-col gap-2">
-          <h2 className="text-center text-xl font-bold">{t("statistics.incomes_by_categories")}</h2>
-          <IncomesCategoriesBarChart items={incomesCategoriesChartItems} />
-        </section>
-      )}
+      <CostsCategoriesStatistics />
       {!!costsCategoriesChartItems.length && (
         <section className="flex flex-col gap-2">
           <h2 className="text-center text-xl font-bold">{t("statistics.expenses_by_categories")}</h2>
