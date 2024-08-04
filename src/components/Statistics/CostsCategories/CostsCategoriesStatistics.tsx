@@ -1,4 +1,4 @@
-import { IncomesCategoriesBarChart } from "@/components/Statistics/IncomesCategoriesBarChart";
+import { IncomesCategoriesBarChart } from "@/components/Statistics/IncomesCategories/IncomesCategoriesBarChart";
 import { useSelector } from "react-redux";
 import { selectIncomesCategoriesChartItems } from "@/store/selectors/statistics";
 import { useTranslation } from "react-i18next";

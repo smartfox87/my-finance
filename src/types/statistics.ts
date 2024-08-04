@@ -52,15 +52,6 @@ export type CostIncomeStatisticsItem = {
   incomesList: Record<string, number>;
 };
 
-export type CostsIncomesStatisticsTooltipProps = {
-  active?: boolean;
-  payload?: {
-    value: number;
-    name: StatisticsTypes.COSTS | StatisticsTypes.INCOMES;
-    payload: CostIncomeStatisticsItem;
-  }[];
-};
-
 export type BudgetsListStatisticsItem = {
   amount: number;
   costs: number;
@@ -75,15 +66,6 @@ export type CostsBudgetsStatisticsItem = {
   budgetsList: BudgetsListStatistics;
 };
 
-export type CostsBudgetsStatisticsTooltipProps = {
-  active?: boolean;
-  payload?: {
-    value: number;
-    name: StatisticsTypes.COSTS | StatisticsTypes.BUDGETS;
-    payload: CostsBudgetsStatisticsItem;
-  }[];
-};
-
 export type IncomesCategoriesStatisticsItem = {
   name: string;
   value: number;
@@ -96,11 +78,22 @@ export type CostsCategoriesStatisticsItem = {
   accounts: Record<string, number>;
 };
 
-export type CostsCategoriesStatisticsTooltipProps = {
+export type ChartTooltipProps<
+  N extends StatisticsTypes.COSTS | StatisticsTypes.INCOMES | StatisticsTypes.BUDGETS,
+  P extends CostIncomeStatisticsItem | IncomesCategoriesStatisticsItem | CostsBudgetsStatisticsItem | CostsCategoriesStatisticsItem,
+> = {
   active?: boolean;
   payload?: {
     value: number;
-    name: string;
-    payload: CostsCategoriesStatisticsItem;
+    name: N;
+    payload: P;
   }[];
 };
+
+export type CostsIncomesStatisticsTooltipProps = ChartTooltipProps<StatisticsTypes.COSTS | StatisticsTypes.INCOMES, CostIncomeStatisticsItem>;
+
+export type IncomesCategoriesStatisticsTooltipProps = ChartTooltipProps<StatisticsTypes.INCOMES, IncomesCategoriesStatisticsItem>;
+
+export type CostsBudgetsStatisticsTooltipProps = ChartTooltipProps<StatisticsTypes.COSTS | StatisticsTypes.BUDGETS, CostsBudgetsStatisticsItem>;
+
+export type CostsCategoriesStatisticsTooltipProps = ChartTooltipProps<StatisticsTypes.COSTS, CostsCategoriesStatisticsItem>;

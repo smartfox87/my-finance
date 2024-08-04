@@ -29,9 +29,9 @@ import { TotalStatistics } from "@/components/Statistics/TotalStatistics";
 import { CostsBudgetsStatistics } from "@/components/Statistics/CostsBudgets/CostsBudgetsStatistics";
 import { CostsCategoriesStatistics } from "@/components/Statistics/CostsCategories/CostsCategoriesStatistics";
 import { CostsIncomesStatistics } from "@/components/Statistics/CostsIncomes/CostsIncomesStatistics";
+import { IncomesCategoriesStatistics } from "@/components/Statistics/IncomesCategories/IncomesCategoriesStatistics";
 
 export default function StatisticsContent() {
-  const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
   const statisticsFilterValues = useSelector(selectStatisticsFilterValues);
@@ -68,20 +68,13 @@ export default function StatisticsContent() {
     if (getUserId()) injectAndLoadData();
   }, [handleGetData]);
 
-  const costsCategoriesChartItems = useSelector(selectCostsCategoriesChartItems);
-
   const charts = (
     <>
       <TotalStatistics />
       <CostsBudgetsStatistics />
       <CostsIncomesStatistics />
       <CostsCategoriesStatistics />
-      {!!costsCategoriesChartItems.length && (
-        <section className="flex flex-col gap-2">
-          <h2 className="text-center text-xl font-bold">{t("statistics.expenses_by_categories")}</h2>
-          <CostsCategoriesBarChart items={costsCategoriesChartItems} />
-        </section>
-      )}
+      <IncomesCategoriesStatistics />
     </>
   );
   let content = <EmptyCosts />;
