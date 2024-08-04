@@ -1,10 +1,8 @@
 "use client";
 
-import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import {
   selectBudgetsListForChartsByFilter,
-  selectCostsCategoriesChartItems,
   selectCostsListForCharts,
   selectCostsListForChartsByFilter,
   selectIncomesListForChartsByFilter,
@@ -17,7 +15,6 @@ import { selectCostCategories, selectIncomeCategories } from "@/store/selectors/
 import { useCallback, useEffect, useState } from "react";
 import { INITIAL_STATISTICS_FILTER_FIELDS } from "@/constants/statistics";
 import { getUserId } from "@/helpers/localStorage";
-import { CostsCategoriesBarChart } from "@/components/Statistics/CostsCategories/CostsCategoriesBarChart";
 import { EmptyCosts } from "@/components/Costs/List/EmptyCosts";
 import { StatisticsFilter } from "@/components/Statistics/Filter/StatisticsFilter";
 import { ActiveStatisticsFilters } from "@/components/Statistics/Filter/ActiveStatisticsFilters";
