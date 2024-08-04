@@ -20,7 +20,6 @@ import { selectCostCategories, selectIncomeCategories } from "@/store/selectors/
 import { useCallback, useEffect, useState } from "react";
 import { INITIAL_STATISTICS_FILTER_FIELDS } from "@/constants/statistics";
 import { getUserId } from "@/helpers/localStorage";
-import { CostsBudgetsBarChart } from "@/components/Statistics/CostsBudgetsBarChart";
 import { CostsIncomesBarChart } from "@/components/Statistics/CostsIncomesBarChart";
 import { IncomesCategoriesBarChart } from "@/components/Statistics/IncomesCategoriesBarChart";
 import { CostsCategoriesBarChart } from "@/components/Statistics/CostsCategoriesBarChart";
@@ -32,6 +31,7 @@ import { FoundNothing } from "@/components/Common/FoundNothing";
 import { useAppDispatch } from "@/hooks/redux";
 import { getFilterItemsFromFields } from "@/helpers/filters";
 import { TotalStatistics } from "@/components/Statistics/TotalStatistics";
+import { CostsBudgetsStatistics } from "@/components/Statistics/CostsBudgets/CostsBudgetsStatistics";
 
 export default function StatisticsContent() {
   const { t } = useTranslation();
@@ -72,21 +72,13 @@ export default function StatisticsContent() {
   }, [handleGetData]);
 
   const costsIncomesChartItems = useSelector(selectCostsIncomesChartItems);
-  const costsBudgetsChartItems = useSelector(selectCostsBudgetsChartItems);
   const costsCategoriesChartItems = useSelector(selectCostsCategoriesChartItems);
   const incomesCategoriesChartItems = useSelector(selectIncomesCategoriesChartItems);
 
   const charts = (
     <>
       <TotalStatistics />
-      {!!costsBudgetsChartItems.length && (
-        <section className="flex flex-col gap-2">
-          <h2 className="text-center text-xl font-bold">
-            {t("statistics.budgets")} & {t("statistics.costs")}
-          </h2>
-          <CostsBudgetsBarChart items={costsBudgetsChartItems} />
-        </section>
-      )}
+      <CostsBudgetsStatistics />
       {!!costsIncomesChartItems.length && (
         <section className="flex flex-col gap-2">
           <h2 className="text-center text-xl font-bold">
