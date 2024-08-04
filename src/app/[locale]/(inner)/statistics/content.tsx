@@ -30,7 +30,7 @@ import { Preloader } from "@/components/Layout/Preloader";
 import { FoundNothing } from "@/components/Common/FoundNothing";
 import { useAppDispatch } from "@/hooks/redux";
 import { getFilterItemsFromFields } from "@/helpers/filters";
-import { BudgetsListStatistics, CostIncomeStatisticsItem, CostsBudgetsStatisticsItem, CostsCategoriesStatisticsItem, CostsStatisticsByMonths, IncomesCategoriesStatistics } from "@/types/statistics";
+import { BudgetsListStatistics, CostIncomeStatisticsItem, CostsBudgetsStatisticsItem, CostsCategoriesStatisticsItem, CostsByMonthsStatistics, IncomesCategoriesStatistics } from "@/types/statistics";
 
 export default function StatisticsContent() {
   const { t } = useTranslation();
@@ -100,7 +100,7 @@ export default function StatisticsContent() {
             );
           acc[monthName] = { costsAmount, costsList };
           return acc;
-        }, {} as CostsStatisticsByMonths)
+        }, {} as CostsByMonthsStatistics)
       : null;
 
   const costsIncomesChartItems: CostIncomeStatisticsItem[] =

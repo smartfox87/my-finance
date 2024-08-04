@@ -37,12 +37,12 @@ export interface ProcessedStatisticsBudgetItem {
   accounts: number[];
 }
 
-export type CostsStatisticsByMonths = {
-  [key: string]: {
-    costsAmount: number;
-    costsList: Record<string, number>;
-  };
+export type CostsByMonthsStatisticsItem = {
+  costsAmount: number;
+  costsList: Record<string, number>;
 };
+
+export type CostsByMonthsStatistics = Record<string, CostsByMonthsStatisticsItem>;
 
 export type CostIncomeStatisticsItem = {
   monthName: string;
@@ -52,12 +52,12 @@ export type CostIncomeStatisticsItem = {
   incomesList: Record<string, number>;
 };
 
-export type BudgetsListStatistics = {
-  [key: string]: {
-    amount: number;
-    costs: number;
-  };
+export type BudgetsListStatisticsItem = {
+  amount: number;
+  costs: number;
 };
+
+export type BudgetsListStatistics = Record<string, BudgetsListStatisticsItem>;
 
 export type CostsBudgetsStatisticsItem = {
   name: string;
@@ -75,13 +75,13 @@ export type CostsBudgetsStatisticsTooltipProps = {
   }[];
 };
 
-export type IncomesCategoriesStatistics = {
-  [key: string]: {
-    name: string;
-    value: number;
-    accounts: Record<string, number>;
-  };
+export type IncomesCategoriesStatisticsItem = {
+  name: string;
+  value: number;
+  accounts: Record<string, number>;
 };
+
+export type IncomesCategoriesStatistics = Record<string, IncomesCategoriesStatisticsItem>;
 
 export type CostsCategoriesStatisticsItem = {
   name: string;
