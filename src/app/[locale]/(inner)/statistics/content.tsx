@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import {
   selectBudgetsListForChartsByFilter,
   selectCostsCategoriesChartItems,
-  selectCostsIncomesChartItems,
   selectCostsListForCharts,
   selectCostsListForChartsByFilter,
   selectIncomesListForChartsByFilter,
@@ -18,7 +17,6 @@ import { selectCostCategories, selectIncomeCategories } from "@/store/selectors/
 import { useCallback, useEffect, useState } from "react";
 import { INITIAL_STATISTICS_FILTER_FIELDS } from "@/constants/statistics";
 import { getUserId } from "@/helpers/localStorage";
-import { CostsIncomesBarChart } from "@/components/Statistics/CostsIncomesBarChart";
 import { CostsCategoriesBarChart } from "@/components/Statistics/CostsCategories/CostsCategoriesBarChart";
 import { EmptyCosts } from "@/components/Costs/List/EmptyCosts";
 import { StatisticsFilter } from "@/components/Statistics/Filter/StatisticsFilter";
@@ -30,6 +28,7 @@ import { getFilterItemsFromFields } from "@/helpers/filters";
 import { TotalStatistics } from "@/components/Statistics/TotalStatistics";
 import { CostsBudgetsStatistics } from "@/components/Statistics/CostsBudgets/CostsBudgetsStatistics";
 import { CostsCategoriesStatistics } from "@/components/Statistics/CostsCategories/CostsCategoriesStatistics";
+import { CostsIncomesStatistics } from "@/components/Statistics/CostsIncomes/CostsIncomesStatistics";
 
 export default function StatisticsContent() {
   const { t } = useTranslation();
@@ -69,21 +68,13 @@ export default function StatisticsContent() {
     if (getUserId()) injectAndLoadData();
   }, [handleGetData]);
 
-  const costsIncomesChartItems = useSelector(selectCostsIncomesChartItems);
   const costsCategoriesChartItems = useSelector(selectCostsCategoriesChartItems);
 
   const charts = (
     <>
       <TotalStatistics />
       <CostsBudgetsStatistics />
-      {!!costsIncomesChartItems.length && (
-        <section className="flex flex-col gap-2">
-          <h2 className="text-center text-xl font-bold">
-            {t("statistics.incomes")} & {t("statistics.costs")}
-          </h2>
-          <CostsIncomesBarChart items={costsIncomesChartItems} />
-        </section>
-      )}
+      <CostsIncomesStatistics />
       <CostsCategoriesStatistics />
       {!!costsCategoriesChartItems.length && (
         <section className="flex flex-col gap-2">
