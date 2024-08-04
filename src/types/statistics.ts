@@ -81,8 +81,6 @@ export type IncomesCategoriesStatisticsItem = {
   accounts: Record<string, number>;
 };
 
-export type IncomesCategoriesStatistics = Record<string, IncomesCategoriesStatisticsItem>;
-
 export type CostsCategoriesStatisticsItem = {
   name: string;
   value: number;
