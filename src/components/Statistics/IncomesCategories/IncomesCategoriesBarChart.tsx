@@ -1,7 +1,7 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { useViewport } from "@/hooks/viewport";
 import { Viewports } from "@/types/viewport";
-import { IncomesCategoriesChartTooltip } from "@/components/Statistics/IncomesCategories/IncomesCategoriesChartTooltip.js";
+import { IncomesCategoriesChartTooltip } from "@/components/Statistics/IncomesCategories/IncomesCategoriesChartTooltip";
 import { CostsCategoriesStatisticsItem } from "@/types/statistics";
 
 export const IncomesCategoriesBarChart = ({ items }: { items: CostsCategoriesStatisticsItem[] }) => {
