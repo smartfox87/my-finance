@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   selectBudgetsListForChartsByFilter,
   selectCostsListForCharts,
@@ -28,10 +28,13 @@ import { StatisticsFilter } from "@/components/Statistics/Filter/StatisticsFilte
 import { ActiveStatisticsFilters } from "@/components/Statistics/Filter/ActiveStatisticsFilters";
 import { Preloader } from "@/components/Layout/Preloader";
 import { FoundNothing } from "@/components/Common/FoundNothing";
+import { useAppDispatch } from "@/hooks/redux";
+import { getFilterItemsFromFields } from "@/helpers/filters";
+import { BudgetsListStatistics, CostIncomeStatisticsItem, CostsBudgetsStatisticsItem, CostsCategoriesStatisticsItem, CostsStatisticsByMonths, IncomesCategoriesStatistics } from "@/types/statistics";
 
 export default function StatisticsContent() {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const statisticsFilterValues = useSelector(selectStatisticsFilterValues);
   const [isNotEqualParamsToFilters, isFilterValuesFilled] = useFilterSearchParams(statisticsFilterValues, setStatisticsFilterValues);
@@ -67,7 +70,7 @@ export default function StatisticsContent() {
     const injectAndLoadData = async () => {
       if (!statisticsFilterValues) {
         await import("@/store/statisticsSlice");
-        dispatch(setStatisticsFilterValues(INITIAL_STATISTICS_FILTER_FIELDS.map(({ id, value }) => ({ id, value }))));
+        dispatch(setStatisticsFilterValues(getFilterItemsFromFields(INITIAL_STATISTICS_FILTER_FIELDS)));
       }
       if (!costsList) await handleGetData();
     };
@@ -86,18 +89,21 @@ export default function StatisticsContent() {
           let costsAmount = 0;
           const costsList = costsListForCharts
             .filter(({ date }) => date.substring(5, 7) === monthIndex)
-            .reduce((acc, { amount, category }) => {
-              acc[costCategoriesObject[category]] = (acc[costCategoriesObject[category]] || 0) + amount;
-              costsTotalAmount += amount;
-              costsAmount += amount;
-              return acc;
-            }, {});
+            .reduce(
+              (acc, { amount, category }) => {
+                acc[costCategoriesObject[category]] = (acc[costCategoriesObject[category]] || 0) + amount;
+                costsTotalAmount += amount;
+                costsAmount += amount;
+                return acc;
+              },
+              {} as Record<string, number>,
+            );
           acc[monthName] = { costsAmount, costsList };
           return acc;
-        }, {})
+        }, {} as CostsStatisticsByMonths)
       : null;
 
-  const costsIncomesChartItems =
+  const costsIncomesChartItems: CostIncomeStatisticsItem[] =
     costsByMonths && incomeCategoriesObject && incomesListForCharts && !isNotEqualParamsToFilters
       ? months.map((monthName, index) => {
           const monthIndex = (index + 1).toString().padStart(2, "0");
@@ -105,17 +111,20 @@ export default function StatisticsContent() {
           let incomes = 0;
           const incomesList = incomesListForCharts
             .filter(({ date }) => date.substring(5, 7) === monthIndex)
-            .reduce((acc, { amount, category }) => {
-              acc[incomeCategoriesObject[category]] = (acc[incomeCategoriesObject[category]] || 0) + amount;
-              incomesTotalAmount += amount;
-              incomes += amount;
-              return acc;
-            }, {});
+            .reduce(
+              (acc, { amount, category }) => {
+                acc[incomeCategoriesObject[category]] = (acc[incomeCategoriesObject[category]] || 0) + amount;
+                incomesTotalAmount += amount;
+                incomes += amount;
+                return acc;
+              },
+              {} as Record<string, number>,
+            );
           return { monthName, costs: costsAmount, costsList, incomes, incomesList };
         })
       : [];
 
-  const costsBudgetsChartItems =
+  const costsBudgetsChartItems: CostsBudgetsStatisticsItem[] =
     costCategoriesObject && costsByMonths && budgetsListForCharts && !isNotEqualParamsToFilters
       ? months.map((monthName, index) => {
           const monthIndex = (index + 1).toString().padStart(2, "0");
@@ -124,12 +133,12 @@ export default function StatisticsContent() {
           const budgetsList = budgetsListForCharts
             .filter(({ period: [from, to] }) => from.substring(5, 7) <= monthIndex && to.substring(5, 7) >= monthIndex)
             .reduce((acc, { name, amount, categories }) => {
-              acc[name] = { amount };
-              acc[name].costs = categories.length ? categories.reduce((acc, categoryId) => acc + (costsList[costCategoriesObject[categoryId]] || 0), 0) : costsAmount;
+              const costs = categories.length ? categories.reduce((acc, categoryId) => acc + (costsList[costCategoriesObject[categoryId]] || 0), 0) : costsAmount;
+              acc[name] = { amount, costs };
               budgets += amount;
               budgetsTotalAmount += amount;
               return acc;
-            }, {});
+            }, {} as BudgetsListStatistics);
           return { name: monthName, costs: costsAmount, budgets, budgetsList };
         })
       : [];
@@ -137,14 +146,20 @@ export default function StatisticsContent() {
   const costsCategoriesChartItems =
     costCategoriesObject && costsListForCharts && accountTypesObject
       ? Object.values(
-          costsListForCharts.reduce((acc, { amount, category, account }) => {
-            if (!acc[costCategoriesObject[category]]) acc[costCategoriesObject[category]] = { name: costCategoriesObject[category], value: 0, accounts: {} };
-            acc[costCategoriesObject[category]].value += amount;
-            const accountName = accountTypesObject[account].name;
-            if (!acc[costCategoriesObject[category]].accounts[accountName]) acc[costCategoriesObject[category]].accounts[accountName] = 0;
-            acc[costCategoriesObject[category]].accounts[accountName] += amount;
-            return acc;
-          }, {}),
+          costsListForCharts.reduce(
+            (acc, { amount, category, account }) => {
+              const costCategoryName = costCategoriesObject[category];
+              if (!acc[costCategoryName]) acc[costCategoryName] = { name: costCategoryName, value: 0, accounts: {} };
+              acc[costCategoryName].value += amount;
+
+              const accountName = accountTypesObject[account].name;
+              if (!acc[costCategoryName].accounts[accountName]) acc[costCategoryName].accounts[accountName] = 0;
+              acc[costCategoryName].accounts[accountName] += amount;
+
+              return acc;
+            },
+            {} as Record<string, CostsCategoriesStatisticsItem>,
+          ),
         ).sort((a, b) => b.value - a.value)
       : [];
 
@@ -158,7 +173,7 @@ export default function StatisticsContent() {
             if (!acc[incomeCategoriesObject[category]].accounts[accountName]) acc[incomeCategoriesObject[category]].accounts[accountName] = 0;
             acc[incomeCategoriesObject[category]].accounts[accountName] += amount;
             return acc;
-          }, {}),
+          }, {} as IncomesCategoriesStatistics),
         ).sort((a, b) => b.value - a.value)
       : [];
 

@@ -2,12 +2,12 @@
 
 import { Auth } from "../../Auth/Auth";
 import { useSelector } from "react-redux";
-import { ProfileMenu } from "@/components/Profile/ProfileMenu.jsx";
-import { LanguageToggle } from "@/components/Layout/Header/LanguageToggle.jsx";
-import { Logo } from "@/components/Layout/Header/Logo.jsx";
+import { ProfileMenu } from "@/components/Profile/ProfileMenu";
+import { LanguageToggle } from "@/components/Layout/Header/LanguageToggle";
+import { Logo } from "@/components/Layout/Header/Logo";
 import { memo, Suspense } from "react";
 import { selectUser } from "@/store/selectors/auth";
-import { MobileMenu } from "@/components/Layout/Header/MobileMenu.jsx";
+import { MobileMenu } from "@/components/Layout/Header/MobileMenu";
 import { useViewport } from "@/hooks/viewport";
 
 export const Header = memo(function Header() {

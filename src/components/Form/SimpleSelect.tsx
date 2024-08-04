@@ -26,6 +26,7 @@ export const SimpleSelect = ({
   };
 
   const optionsRef = useRef<HTMLButtonElement[]>([]);
+  // notice: limit items ref list after update
   useEffect(() => {
     optionsRef.current = optionsRef.current.slice(0, options.length);
   }, [options]);

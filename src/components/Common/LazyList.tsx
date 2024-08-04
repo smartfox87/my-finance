@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Preloader } from "@/components/Layout/Preloader.jsx";
+import { Preloader } from "@/components/Layout/Preloader";
 import { useViewport } from "@/hooks/viewport";
 import { Viewports } from "@/types/viewport";
 import { ReactComponentLike } from "prop-types";

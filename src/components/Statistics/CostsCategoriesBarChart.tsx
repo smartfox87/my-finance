@@ -4,11 +4,13 @@ import { useSelector } from "react-redux";
 import { selectCurrency } from "@/store/selectors/profile";
 import { useViewport } from "@/hooks/viewport";
 import { Viewports } from "@/types/viewport";
+import { CostsCategoriesStatisticsItem, CostsCategoriesStatisticsTooltipProps } from "@/types/statistics";
 
-const CustomTooltip = ({ active, payload }) => {
+const CustomTooltip = ({ active, payload }: CostsCategoriesStatisticsTooltipProps) => {
   const currency = useSelector(selectCurrency);
+  console.log(payload);
 
-  if (active && payload && payload.length) {
+  if (active && payload?.length) {
     return (
       <ul className="flex max-w-[calc(100vw_-_30px)] flex-col gap-1 border border-gray-300 bg-white p-3 xs:ml-0 dark:bg-dark">
         {payload.map(({ payload: { value, name, accounts } }) => (
@@ -32,9 +34,9 @@ const CustomTooltip = ({ active, payload }) => {
   return null;
 };
 
-export const CostsCategoriesBarChart = ({ items }) => {
+export const CostsCategoriesBarChart = ({ items }: { items: CostsCategoriesStatisticsItem[] }) => {
   const { viewport, isMobile } = useViewport();
-  const coords = [Viewports.XXS].includes(viewport) ? { x: 0 } : undefined;
+  const coords = Viewports.XXS === viewport ? { x: 0 } : undefined;
 
   return (
     <div style={{ width: "100%", height: items.length * 40 + 45 }}>

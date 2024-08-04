@@ -1,6 +1,6 @@
 "use client";
 
-import { Header } from "@/components/Layout/Header/Header.jsx";
+import { Header } from "@/components/Layout/Header/Header";
 import { MainNav } from "@/components/Layout/MainNav";
 import { useViewport } from "@/hooks/viewport";
 import { ReactNode, useEffect } from "react";

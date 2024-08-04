@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useMemo } from "react";
-import { SimpleSelect } from "@/components/Form/SimpleSelect.jsx";
+import { SimpleSelect } from "@/components/Form/SimpleSelect";
 import { useLocale } from "@/hooks/providers/locale";
 import { locales } from "@/constants/router";
 import { SimpleSelectValue } from "@/types/select";

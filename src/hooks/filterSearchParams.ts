@@ -3,13 +3,13 @@ import { getIntegerFromString } from "@/helpers/numbers";
 import { isStringValidDate } from "@/helpers/date";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import queryString from "query-string";
-import { FilterState, FilterStateValue, setFilterStateValues } from "@/types/filter";
+import { FilterState, FilterStateValue, SetFilterStateValuesHandler } from "@/types/filter";
 import { useAppDispatch } from "@/hooks/redux";
 import { isFilterStateKey } from "@/predicates/filter";
 import { isMultiSelectValue, isSelectAllValue } from "@/predicates/field";
 import { prepareObjectValuesForFilterStateValues } from "@/helpers/filters";
 
-export const useFilterSearchParams = (filterValues: FilterState | null, setFilterValues: setFilterStateValues) => {
+export const useFilterSearchParams = (filterValues: FilterState | null, setFilterValues: SetFilterStateValuesHandler) => {
   const dispatch = useAppDispatch();
   const searchParams = useSearchParams();
   const router = useRouter();

@@ -53,6 +53,7 @@
 		"@types/react": "^18.3.3",
 		"@types/react-dom": "^18",
 		"@types/react-google-recaptcha": "^2.1.9",
+		"@types/recharts": "^1.8.29",
 		"autoprefixer": "^10.4.19",
 		"cheerio": "^1.0.0-rc.12",
 		"cypress": "^13.13.1",
