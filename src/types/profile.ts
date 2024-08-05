@@ -1,12 +1,17 @@
 import { type DatesPeriod } from "@/types/date";
-import { FieldIds } from "@/types/field";
+import { FieldIds, FieldTypes } from "@/types/field";
+import { DateFormField, RadioButtonsFormField, SingleSelectFormField, TextFormField } from "@/types/form";
 
 export type ProfileKey = FieldIds.EMAIL | FieldIds.FULL_NAME | FieldIds.BIRTHDATE | FieldIds.GENDER | FieldIds.PERIOD | FieldIds.CURRENCY;
 
 export interface ProfileData {
-  [FieldIds.FULL_NAME]: string | null;
+  [FieldIds.FULL_NAME]: string;
+  [FieldIds.EMAIL]: string;
   [FieldIds.BIRTHDATE]: string | null;
   [FieldIds.GENDER]: string | null;
+}
+
+export interface SettingsData {
   [FieldIds.PERIOD]: DatesPeriod | null;
   [FieldIds.CURRENCY]: number | null;
 }
@@ -32,3 +37,11 @@ export interface Profile {
 export interface ProfileSliceState {
   profile: Profile | null;
 }
+
+export type SettingsField = SingleSelectFormField<FieldIds.CURRENCY, string> | RadioButtonsFormField;
+
+export type ProfileField =
+  | TextFormField<FieldIds.FULL_NAME, FieldTypes.TEXT>
+  | TextFormField<FieldIds.EMAIL, FieldTypes.EMAIL>
+  | DateFormField<FieldIds.BIRTHDATE>
+  | SingleSelectFormField<FieldIds.GENDER>;

@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectProfile, selectProfileFields } from "@/store/selectors/profile";
 import { getFullDate } from "@/helpers/date";
 import { useState } from "react";
@@ -13,18 +13,25 @@ import { clearProfile, getProfileThunk, updateProfileThunk } from "@/store/profi
 import { logoutUserThunk } from "@/store/authSlice";
 import { showNotification } from "@/helpers/modals.js";
 import { InnerHeaderActionsPortal } from "@/components/Layout/Inner/InnerHeaderActionsPortal";
+import { useAppDispatch } from "@/hooks/redux";
+import { showCommonError } from "@/helpers/errors";
+import { FormValues } from "@/types/form";
+import { isProfileData } from "@/predicates/profile";
 
 export default function ProfileContent() {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const profile = useSelector(selectProfile);
   const profileFields = useSelector(selectProfileFields);
 
-  const handleSaveProfile = async (profileData) => {
-    const { error } = await dispatch(updateProfileThunk(profileData));
-    if (!error) {
+  const handleSaveProfile = async (profileData: FormValues): Promise<void> => {
+    try {
+      if (!(profile && isProfileData(profileData))) return;
+      await dispatch(updateProfileThunk(profileData)).unwrap();
       await dispatch(getProfileThunk());
       showNotification({ title: t("notifications.profile.update") });
+    } catch (error) {
+      showCommonError();
     }
   };
 
@@ -33,7 +40,7 @@ export default function ProfileContent() {
     { prop: t("common.updated_at"), value: getFullDate(profile?.updated_at, "YYYY MMMM DD, HH:MM") },
   ];
 
-  const [isLogoutLoading, setIsLogoutLoading] = useState();
+  const [isLogoutLoading, setIsLogoutLoading] = useState(false);
   const handleLogout = async () => {
     setIsLogoutLoading(true);
     await Promise.all([dispatch(logoutUserThunk()), dispatch(clearProfile())]);

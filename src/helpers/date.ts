@@ -30,7 +30,7 @@ export const getPeriod = (): DatesPeriod => {
 
 export const getCurrentDate = () => new Date().toISOString();
 
-export const getFullDate = (date: string, format = "YYYY MMMM DD") => {
+export const getFullDate = (date?: string, format: string = "YYYY MMMM DD") => {
   if (!date) return "";
   return dayjs(date).format(format);
 };

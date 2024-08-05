@@ -2,7 +2,7 @@ import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/to
 import { getProfileApi, updateProfileApi } from "@/api/profile";
 import { handleRejectedReducerAction } from "@/helpers/errors";
 import { rootReducer } from "@/store";
-import { Profile, ProfileData, ProfileSliceState } from "@/types/profile";
+import { Profile, ProfileData, ProfileSliceState, SettingsData } from "@/types/profile";
 
 const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
@@ -32,7 +32,7 @@ export const profileSlice = createAppSlice({
         },
       },
     ),
-    updateProfileThunk: create.asyncThunk<Profile, ProfileData, { rejectValue: string }>(
+    updateProfileThunk: create.asyncThunk<Profile, Partial<ProfileData | SettingsData>, { rejectValue: string }>(
       async (profileData, { rejectWithValue }) => {
         const { data, error } = await updateProfileApi(profileData);
         if (error) throw rejectWithValue(error.message);
