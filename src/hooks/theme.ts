@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 
 export const useDarkTheme = () => {
   const [darkTheme, setDarkTheme] = useState(false);
-  const handleThemeChange = useCallback((e) => setDarkTheme(e.matches), []);
+  const handleThemeChange = useCallback((event: MediaQueryListEvent) => setDarkTheme(event.matches), []);
 
   useEffect(() => {
     const mediaQuery = matchMedia("(prefers-color-scheme: dark)");
