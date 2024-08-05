@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectIncomesByFilter, selectIncomesFilterValues, selectIncomesList } from "@/store/selectors/incomes";
 import { useFilterSearchParams } from "@/hooks/filterSearchParams";
 import { getIncomesListThunk, setIncomesFilterValues } from "@/store/incomesSlice";
@@ -21,10 +21,12 @@ import { EmptyIncomes } from "@/components/Incomes/List/EmptyIncomes";
 import { FoundNothing } from "@/components/Common/FoundNothing";
 import { Preloader } from "@/components/Layout/Preloader";
 import { InnerHeaderActionsPortal } from "@/components/Layout/Inner/InnerHeaderActionsPortal";
+import { useAppDispatch } from "@/hooks/redux";
+import { getFilterItemsFromFields } from "@/helpers/filters";
 
 export default function IncomesContent() {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const incomesFilterValues = useSelector(selectIncomesFilterValues);
   const [isNotEqualParamsToFilters] = useFilterSearchParams(incomesFilterValues, setIncomesFilterValues);
@@ -43,7 +45,7 @@ export default function IncomesContent() {
     const injectAndLoadData = async () => {
       if (!incomesFilterValues) {
         await import("@/store/incomesSlice");
-        await dispatch(setIncomesFilterValues(INITIAL_INCOMES_FILTER_FIELDS.map(({ id, value }) => ({ id, value }))));
+        await dispatch(setIncomesFilterValues(getFilterItemsFromFields(INITIAL_INCOMES_FILTER_FIELDS)));
       }
       if (!incomesList) await handleGetData();
     };
