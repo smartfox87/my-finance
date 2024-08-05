@@ -19,7 +19,7 @@ export const selectAccountsList = createSelector([selectAccounts, selectAccountT
     : null,
 );
 
-export const selectAccountsObject = createSelector([selectAccountsList], (accountsList): Record<string, ProcessedAccountItem> | null =>
+export const selectAccountsObject = createSelector([selectAccountsList], (accountsList): Record<string, string> | null =>
   accountsList ? Object.assign({}, ...accountsList.map(({ id, name }) => ({ [id]: name }))) : null,
 );
 
