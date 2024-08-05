@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { AddNewCost } from "@/components/Costs/New/AddNewCost";
 import { CostsFilter } from "@/components/Costs/Filter/CostsFilter";
 import { ActiveCostsFilters } from "@/components/Costs/Filter/ActiveCostsFilters";
@@ -21,10 +21,12 @@ import { selectCurrency } from "@/store/selectors/profile";
 import { CostListItem } from "@/components/Costs/List/CostListItem";
 import formatPrice from "@/helpers/formatPrice";
 import { InnerHeaderActionsPortal } from "@/components/Layout/Inner/InnerHeaderActionsPortal";
+import { useAppDispatch } from "@/hooks/redux";
+import { getFilterItemsFromFields } from "@/helpers/filters";
 
 export default function ExpensesContent() {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const costsFilterValues = useSelector(selectCostsFilterValues);
   const [isNotEqualParamsToFilters] = useFilterSearchParams(costsFilterValues, setCostsFilterValues);
@@ -43,7 +45,7 @@ export default function ExpensesContent() {
     const injectAndLoadData = async () => {
       if (!costsFilterValues) {
         await import("@/store/costsSlice");
-        await dispatch(setCostsFilterValues(INITIAL_COSTS_FILTER_FIELDS.map(({ id, value }) => ({ id, value }))));
+        await dispatch(setCostsFilterValues(getFilterItemsFromFields(INITIAL_COSTS_FILTER_FIELDS)));
       }
       if (!costsList) await handleGetData();
     };
