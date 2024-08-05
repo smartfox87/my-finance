@@ -8,7 +8,7 @@ import { FieldIds } from "@/types/field";
 
 export const selectAccounts = ({ accounts }: LazyLoadedSlices): AccountItem[] | null => accounts?.accountsList || null;
 
-export const selectAccountsList = createSelector([selectAccounts, selectAccountTypesObject], (accounts, accountTypesObject) =>
+export const selectAccountsList = createSelector([selectAccounts, selectAccountTypesObject], (accounts, accountTypesObject): ProcessedAccountItem[] | null =>
   accounts && accountTypesObject
     ? accounts
         .filter(({ account_type_id }) => accountTypesObject?.[account_type_id])
@@ -19,7 +19,9 @@ export const selectAccountsList = createSelector([selectAccounts, selectAccountT
     : null,
 );
 
-export const selectAccountsObject = createSelector([selectAccountsList], (accountsList) => (accountsList ? Object.assign({}, ...accountsList.map(({ id, name }) => ({ [id]: name }))) : null));
+export const selectAccountsObject = createSelector([selectAccountsList], (accountsList): Record<string, ProcessedAccountItem> | null =>
+  accountsList ? Object.assign({}, ...accountsList.map(({ id, name }) => ({ [id]: name }))) : null,
+);
 
 export const selectAccountItem = createSelector([({ accounts }) => accounts?.accountItem, selectAccountTypesObject], (accountItem, accountTypesObject) => {
   if (!accountItem || !accountTypesObject) return null;

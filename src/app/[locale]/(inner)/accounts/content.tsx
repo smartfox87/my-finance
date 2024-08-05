@@ -1,6 +1,7 @@
 "use client";
+
 import { selectCurrency } from "@/store/selectors/profile";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { useLoading } from "@/hooks/loading";
 import { selectAccountsList } from "@/store/selectors/accounts";
@@ -14,10 +15,11 @@ import { AccountDetail } from "@/components/Accounts/Detail/AccountDetail";
 import formatPrice from "@/helpers/formatPrice";
 import { getAccountTypesThunk } from "@/store/referencesSlice";
 import { InnerHeaderActionsPortal } from "@/components/Layout/Inner/InnerHeaderActionsPortal";
+import { useAppDispatch } from "@/hooks/redux";
 
 export default function AccountsContent() {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [isLoading, setIsLoading] = useLoading(false);
   const accountsList = useSelector(selectAccountsList);
