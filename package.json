@@ -50,6 +50,7 @@
 		"@svgr/webpack": "^8.1.0",
 		"@types/fs-extra": "^11.0.4",
 		"@types/node": "^20",
+		"@types/nodemailer": "^6.4.15",
 		"@types/react": "^18.3.3",
 		"@types/react-dom": "^18",
 		"@types/react-google-recaptcha": "^2.1.9",
