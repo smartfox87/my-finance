@@ -32,7 +32,7 @@ export const profileSlice = createAppSlice({
         },
       },
     ),
-    updateProfileThunk: create.asyncThunk<Profile, Partial<ProfileData | SettingsData>, { rejectValue: string }>(
+    updateProfileThunk: create.asyncThunk<Profile, ProfileData | SettingsData, { rejectValue: string }>(
       async (profileData, { rejectWithValue }) => {
         const { data, error } = await updateProfileApi(profileData);
         if (error) throw rejectWithValue(error.message);

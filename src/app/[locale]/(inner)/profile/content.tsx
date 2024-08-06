@@ -15,7 +15,7 @@ import { showNotification } from "@/helpers/modals.js";
 import { InnerHeaderActionsPortal } from "@/components/Layout/Inner/InnerHeaderActionsPortal";
 import { useAppDispatch } from "@/hooks/redux";
 import { showCommonError } from "@/helpers/errors";
-import { FormValues } from "@/types/form";
+import { DefaultFormSaveHandler } from "@/types/form";
 import { isProfileData } from "@/predicates/profile";
 
 export default function ProfileContent() {
@@ -24,9 +24,9 @@ export default function ProfileContent() {
   const profile = useSelector(selectProfile);
   const profileFields = useSelector(selectProfileFields);
 
-  const handleSaveProfile = async (profileData: FormValues): Promise<void> => {
+  const handleSaveProfile: DefaultFormSaveHandler = async (profileData) => {
     try {
-      if (!(profile && isProfileData(profileData))) return;
+      if (!isProfileData(profileData)) return;
       await dispatch(updateProfileThunk(profileData)).unwrap();
       await dispatch(getProfileThunk());
       showNotification({ title: t("notifications.profile.update") });
