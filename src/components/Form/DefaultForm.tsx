@@ -1,4 +1,4 @@
-import { forwardRef, LegacyRef, useCallback, useEffect, useImperativeHandle, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { forwardRef, LegacyRef, useCallback, useEffect, useImperativeHandle, useLayoutEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLoading } from "@/hooks/loading";
 import SvgUpload from "@/assets/sprite/upload.svg";
@@ -6,21 +6,11 @@ import { getFileSizeWithUnit } from "@/helpers/file";
 import { cutDecimals, handleFilterSelectOptions, handleKeyDownDecimalsValidation, handleKeyUpCutDecimals } from "@/helpers/fields";
 import dynamic from "next/dynamic";
 import { showErrorMessage } from "@/helpers/message";
-import { ChangedField, DefaultFormProps, FormItemRule, FormValues } from "@/types/form";
+import { ChangedField, DefaultFormProps, FileFormFieldId, FormItemRule, FormValues } from "@/types/form";
 import { Button, type DatePickerProps, Form, FormProps, Input, InputRef, SelectProps, type UploadFile } from "antd";
 import dayjs, { isDayjs } from "dayjs";
 import { FieldTranslationError, FieldType, FieldTypes, FieldValues, SelectComponentProps } from "@/types/field";
 import { isFieldId, isMultiSelectValue, isUploadFileArray } from "@/predicates/field";
-import {
-  isDateFormFieldId,
-  isDatesPeriodFormFieldId,
-  isFileFormFieldId,
-  isMultiSelectFormFieldId,
-  isNumberFormFieldId,
-  isRadioButtonsFormFieldId,
-  isSingleSelectFormFieldId,
-  isTextFormFieldId,
-} from "@/predicates/form";
 import { isTruthy } from "@/predicates/common";
 import { useFieldFocus } from "@/hooks/fieldFocus";
 import type { BaseSelectRef } from "rc-select";
@@ -113,10 +103,10 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
     form.setFieldsValue({
       [file.uid]: form.getFieldValue(file.uid).filter(({ uid }: { uid: string }) => uid !== file.uid),
     });
-  const handleAddFile = async (file: UploadFile, { maxSize }: { maxSize: number }): Promise<boolean | string> => {
-    if (file.size && file.size <= maxSize) {
+  const handleAddFile = async ({ id, value, maxSize = 20 * 1024 * 1024 }: { id: FileFormFieldId; value: UploadFile; maxSize?: number }): Promise<boolean | string> => {
+    if (value.size && value.size <= maxSize) {
       form.setFieldsValue({
-        [file.uid]: form.getFieldValue(file.uid).concat([file]),
+        [id]: [...form.getFieldValue(id), value],
       });
       return true;
     }
@@ -135,46 +125,46 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
 
   return (
     <Form layout="vertical" form={form} className="flex w-full flex-col" {...props} onFinish={handleSubmitForm}>
-      {fields.map(({ id, label, label_suffix, required, focus, disabled, placeholder, ...field }) => {
+      {fields.map(({ label, label_suffix, required, focus, disabled, placeholder, ...field }) => {
         return (
           <Form.Item
             label={`${t(`fields.${label}`)} ${label_suffix ? label_suffix : ""}`}
-            name={id}
-            key={id}
+            name={field.id}
+            key={field.id}
             rules={getFieldRules({ required, type: field.type })}
             valuePropName={field.type === FieldTypes.FILE ? "fileList" : "value"}
             getValueFromEvent={field.type === FieldTypes.FILE ? normFile : (e) => e}
           >
-            {(field.type === FieldTypes.TEXT || field.type === FieldTypes.EMAIL) && isTextFormFieldId(id) && (
+            {(field.type === FieldTypes.TEXT || field.type === FieldTypes.EMAIL) && (
               <Input
                 size="large"
                 ref={focus ? (focusFieldRef as LegacyRef<InputRef>) : undefined}
                 type={field.type}
                 maxLength={field.maxLength}
                 disabled={disabled}
-                onChange={(event) => handleChangeFieldValue({ id, type: field.type, value: event.target.value })}
+                onChange={(event) => handleChangeFieldValue({ id: field.id, type: field.type, value: event.target.value })}
               />
             )}
-            {field.type === FieldTypes.PASSWORD && isTextFormFieldId(id) && (
+            {field.type === FieldTypes.PASSWORD && (
               <Input.Password
                 ref={focus ? (focusFieldRef as LegacyRef<InputRef>) : undefined}
                 size="large"
                 maxLength={field.maxLength}
                 disabled={disabled}
-                onChange={(event) => handleChangeFieldValue({ id, type: field.type, value: event.target.value })}
+                onChange={(event) => handleChangeFieldValue({ id: field.id, type: field.type, value: event.target.value })}
               />
             )}
-            {field.type === FieldTypes.TEXTAREA && isTextFormFieldId(id) && (
+            {field.type === FieldTypes.TEXTAREA && (
               <Input.TextArea
                 ref={focus ? focusFieldRef : undefined}
                 rows={5}
                 maxLength={field.maxLength}
                 showCount={!!field.maxLength}
                 disabled={disabled}
-                onChange={(event) => handleChangeFieldValue({ id, type: field.type, value: event.target.value })}
+                onChange={(event) => handleChangeFieldValue({ id: field.id, type: field.type, value: event.target.value })}
               />
             )}
-            {field.type === FieldTypes.SELECT && isSingleSelectFormFieldId(id) && (
+            {field.type === FieldTypes.SELECT && (
               <SelectComponent
                 size="large"
                 autoFocus={!!focus}
@@ -186,10 +176,10 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 showSearch={field.showSearch}
                 filterOption={field.showSearch ? handleFilterSelectOptions : undefined}
                 getPopupContainer={(triggerNode) => triggerNode.parentElement}
-                onChange={(value) => handleChangeFieldValue({ id, type: field.type, value })}
+                onChange={(value) => handleChangeFieldValue({ id: field.id, type: field.type, value })}
               />
             )}
-            {field.type === FieldTypes.MULTISELECT && isMultiSelectFormFieldId(id) && (
+            {field.type === FieldTypes.MULTISELECT && (
               <SelectComponent
                 size="large"
                 autoFocus={!!focus}
@@ -202,10 +192,10 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 showSearch={field.showSearch}
                 filterOption={field.showSearch ? handleFilterSelectOptions : undefined}
                 getPopupContainer={(triggerNode) => triggerNode.parentElement}
-                onChange={(value) => handleChangeFieldValue({ id, type: field.type, value })}
+                onChange={(value) => handleChangeFieldValue({ id: field.id, type: field.type, value })}
               />
             )}
-            {field.type === FieldTypes.DATE && isDateFormFieldId(id) && (
+            {field.type === FieldTypes.DATE && (
               <DatePickerComponent
                 size="large"
                 autoFocus={!!focus}
@@ -219,10 +209,10 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                   type: "mask",
                 }}
                 style={{ width: "100%" }}
-                onChange={(value) => handleChangeFieldValue({ id, type: field.type, value })}
+                onChange={(value) => handleChangeFieldValue({ id: field.id, type: field.type, value })}
               />
             )}
-            {field.type === FieldTypes.NUMBER && isNumberFormFieldId(id) && (
+            {field.type === FieldTypes.NUMBER && (
               <InputNumberComponent
                 size="large"
                 autoFocus={!!focus}
@@ -232,29 +222,27 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 min={0}
                 max={Number.MAX_SAFE_INTEGER}
                 style={{ width: "100%" }}
-                onChange={(value) => handleChangeFieldValue({ id, type: field.type, value: cutDecimals(value) })}
+                onChange={(value) => handleChangeFieldValue({ id: field.id, type: field.type, value: cutDecimals(value) })}
               />
             )}
-            {field.type === FieldTypes.DATES_PERIOD && isDatesPeriodFormFieldId(id) && (
-              <PeriodComponent id={id} value={field.value} onChange={(value) => handleChangeFieldValue({ id, type: field.type, value })} />
-            )}
-            {field.type === FieldTypes.RADIO_BUTTONS && isRadioButtonsFormFieldId(id) && (
+            {field.type === FieldTypes.DATES_PERIOD && <PeriodComponent id={field.id} value={field.value} onChange={(value) => handleChangeFieldValue({ id: field.id, type: field.type, value })} />}
+            {field.type === FieldTypes.RADIO_BUTTONS && (
               <RadioGroupComponent
                 className="w-full"
                 size="large"
                 optionType="button"
                 buttonStyle="solid"
                 options={field.options?.map(({ label, label_translation, value }) => ({ label: label ? label : t(`fields.${label_translation}`), value }))}
-                onChange={(event) => handleChangeFieldValue({ id, type: field.type, value: event.target.value })}
+                onChange={(event) => handleChangeFieldValue({ id: field.id, type: field.type, value: event.target.value })}
               />
             )}
-            {field.type === FieldTypes.FILE && isFileFormFieldId(id) && (
+            {field.type === FieldTypes.FILE && (
               <UploadComponent
                 listType="picture"
                 multiple={!!field.multiple}
                 maxCount={field.maxCount}
                 accept={field.accept}
-                beforeUpload={(file) => handleAddFile(file, { maxSize: field.maxSize || 20 * 1024 * 1024 })}
+                beforeUpload={(value) => handleAddFile({ id: field.id, value, maxSize: field.maxSize })}
                 onRemove={handleRemoveFile}
               >
                 <Button icon={<SvgUpload className="h-4 w-4" />} size="large">
