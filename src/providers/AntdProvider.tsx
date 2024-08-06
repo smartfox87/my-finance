@@ -1,4 +1,4 @@
-import { useDarkTheme } from "@/hooks/theme.js";
+import { useDarkTheme } from "@/hooks/theme";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/store/selectors/auth";
 import { createContext, ReactNode, useCallback, useEffect, useMemo, useState } from "react";

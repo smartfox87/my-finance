@@ -1,4 +1,4 @@
-import { CommonDate } from "../../Common/CommonDate.jsx";
+import { CommonDate } from "../../Common/CommonDate";
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "antd";
 import formatPrice from "@/helpers/formatPrice.js";

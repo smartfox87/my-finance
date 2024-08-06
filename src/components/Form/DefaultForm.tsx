@@ -1,6 +1,6 @@
 import { forwardRef, LegacyRef, useCallback, useEffect, useImperativeHandle, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useLoading } from "@/hooks/loading.js";
+import { useLoading } from "@/hooks/loading";
 import SvgUpload from "@/assets/sprite/upload.svg";
 import { getFileSizeWithUnit } from "@/helpers/file";
 import { cutDecimals, handleFilterSelectOptions, handleKeyDownDecimalsValidation, handleKeyUpCutDecimals } from "@/helpers/fields";

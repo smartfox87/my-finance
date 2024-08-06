@@ -5,7 +5,7 @@ import { selectAccountsList, selectAccountTransferFields } from "@/store/selecto
 import { transferAccountsBalanceThunk } from "@/store/accountsSlice";
 import { showNotification } from "@/helpers/modals.js";
 import { SideModal } from "@/components/Modals/SideModal";
-import { useLoading } from "@/hooks/loading.js";
+import { useLoading } from "@/hooks/loading";
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal";
 import { handleFilterSelectOptions } from "@/helpers/fields";
 import { Button, Form, InputNumber, Select } from "antd";

@@ -6,7 +6,7 @@ import { deleteCostItemThunk, getCostItemThunk, setCostItem, updateCostItemThunk
 import { DefaultForm } from "@/components/Form/DefaultForm";
 import { showNotification } from "@/helpers/modals.js";
 import { SideModal } from "@/components/Modals/SideModal";
-import { useLoading } from "@/hooks/loading.js";
+import { useLoading } from "@/hooks/loading";
 import SvgDelete from "@/assets/sprite/delete.svg";
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal";
 import { Button } from "antd";
