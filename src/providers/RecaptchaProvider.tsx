@@ -34,14 +34,8 @@ export const RecaptchaProvider = ({ children }: { children: ReactNode }) => {
     try {
       if (!recaptchaRef.current) throw new Error("Recaptcha is not initialized");
       const value = await recaptchaRef.current.executeAsync();
-      const body = {
-        event: {
-          token: value,
-          expectedAction: action,
-          siteKey: siteKey,
-        },
-      };
-      const { score } = await fetch("/api/recaptcha", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }).then((res) => res.json());
+      const body = { token: value, expectedAction: action, siteKey: siteKey };
+      const { score, error } = await fetch("/api/recaptcha", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }).then((res) => res.json());
       return score;
     } catch (error) {
       if (process.env.NODE_ENV === "production") Sentry.captureException(error);

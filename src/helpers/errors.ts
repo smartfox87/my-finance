@@ -18,4 +18,7 @@ export const handleRejectedReducerAction = (state: State, { payload, error }: { 
   if (errorText) showErrorMessage(errorText, 8);
 };
 
-export const showCommonError = () => i18nRef.t && showNotification({ title: i18nRef.t("notifications.error.common"), type: "error" });
+export const showCommonError = (title: string): void => {
+  if (title) showNotification({ title, type: "error" });
+  else if (i18nRef.t) showNotification({ title: i18nRef.t("notifications.error.common"), type: "error" });
+};

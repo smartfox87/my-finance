@@ -6,7 +6,7 @@ export const isNumber = (value: any): value is number => typeof value === "numbe
 
 export const isStringNumber = (value: any): value is string | number => isString(value) || isNumber(value);
 
-export const isObject = (value: any): value is Record<string, any> => isTruthy(value) && !Array.isArray(value) && typeof value === "object";
+export const isObject = (value: any): value is Record<string, any> => !!value && !Array.isArray(value) && typeof value === "object";
 
 export const isFile = (value: any): value is File => isObject(value) && ["name", "size", "type"].every((key) => key in value);
 
