@@ -11,3 +11,5 @@ export const isObject = (value: any): value is Record<string, any> => !!value &&
 export const isFile = (value: any): value is File => isObject(value) && ["name", "size", "type"].every((key) => key in value);
 
 export const isFilesArray = (value: any): value is File[] => Array.isArray(value) && value.every((val) => isFile(val));
+
+export const isError = (value: any): value is Error => isObject(value) && value instanceof Error;

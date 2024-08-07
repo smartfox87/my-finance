@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 import { NextRequest, NextResponse } from "next/server";
-import { isFilesArray, isString } from "@/predicates/common";
+import { isError, isFilesArray, isString } from "@/predicates/common";
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -59,6 +59,6 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       return NextResponse.json({ success: false, error: "Error sending email" }, { status: 500 });
     }
   } catch (error) {
-    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+    return NextResponse.json({ success: false, error: isError(error) ? error.message : "Server error" }, { status: 500 });
   }
 }

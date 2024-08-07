@@ -10,7 +10,7 @@ import { Organization, WithContext } from "schema-dts";
 import { languages } from "@/constants/router";
 import { FormValues } from "@/types/form";
 import { isRcFileArray } from "@/predicates/field";
-import { isStringNumber } from "@/predicates/common";
+import { isError, isStringNumber } from "@/predicates/common";
 import { showCommonError } from "@/helpers/errors";
 
 export default function ContactContent() {
@@ -35,7 +35,7 @@ export default function ContactContent() {
       if (success) showNotification({ title: t("notifications.contact.success") });
       else showCommonError(error);
     } catch (error) {
-      showCommonError(error.message);
+      showCommonError(isError(error) ? error.message : "");
     }
   };
 

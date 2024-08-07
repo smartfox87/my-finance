@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import { isString } from "@/predicates/common";
+import { isError, isString } from "@/predicates/common";
 
-export async function POST(request): Promise<NextResponse> {
+export async function POST(request: Request): Promise<NextResponse> {
   try {
     const body = await request.json();
     const { token, expectedAction, siteKey } = body;
@@ -23,6 +23,6 @@ export async function POST(request): Promise<NextResponse> {
     const data = await res.json();
     return NextResponse.json({ score: data?.riskAnalysis?.score });
   } catch (error) {
-    return NextResponse.json({ score: 0, error: error.message }, { status: 500 });
+    return NextResponse.json({ score: 0, error: isError(error) ? error.message : "Server error" }, { status: 500 });
   }
 }
