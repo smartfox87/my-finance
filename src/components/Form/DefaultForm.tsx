@@ -99,9 +99,9 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
   };
 
   const normFile = (e: { fileList: UploadFile[] }): UploadFile[] => (Array.isArray(e) ? e : e?.fileList);
-  const handleRemoveFile = (file: UploadFile): void =>
+  const handleRemoveFile = ({ id, value }: { id: FileFormFieldId; value: UploadFile }): void =>
     form.setFieldsValue({
-      [file.uid]: form.getFieldValue(file.uid).filter(({ uid }: { uid: string }) => uid !== file.uid),
+      [id]: form.getFieldValue(id).filter(({ uid }: { uid: string }) => uid !== value.uid),
     });
   const handleAddFile = async ({ id, value, maxSize = 20 * 1024 * 1024 }: { id: FileFormFieldId; value: UploadFile; maxSize?: number }): Promise<boolean | string> => {
     if (value.size && value.size <= maxSize) {
@@ -243,7 +243,7 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 maxCount={field.maxCount}
                 accept={field.accept}
                 beforeUpload={(value) => handleAddFile({ id: field.id, value, maxSize: field.maxSize })}
-                onRemove={handleRemoveFile}
+                onRemove={(value) => handleRemoveFile({ id: field.id, value })}
               >
                 <Button icon={<SvgUpload className="h-4 w-4" />} size="large">
                   {t("buttons.upload")}
