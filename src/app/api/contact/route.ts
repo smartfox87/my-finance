@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
 import { NextRequest, NextResponse } from "next/server";
+import { isFilesArray, isString } from "@/predicates/common";
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -11,14 +12,14 @@ const transporter = nodemailer.createTransport({
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   const formData = await request.formData();
-  const full_name = formData.get("full_name") as string | null;
-  const message = formData.get("message") as string | null;
-  const email = formData.get("email") as string | null;
-  const subject = formData.get("subject") as string | null;
-  const files = formData.getAll("files") as File[] | null;
+  const full_name = formData.get("full_name");
+  const message = formData.get("message");
+  const email = formData.get("email");
+  const subject = formData.get("subject");
+  const files = formData.getAll("files");
 
-  if (!message || !email || !subject) {
-    return NextResponse.json({ success: false, error: "Missing fields" }, { status: 400 });
+  if (!isString(message) || !isString(email) || !isString(subject) || !isFilesArray(files) || !isString(full_name)) {
+    return NextResponse.json({ success: false, error: "Invalid fields values" }, { status: 400 });
   }
 
   const attachments = await Promise.all(
