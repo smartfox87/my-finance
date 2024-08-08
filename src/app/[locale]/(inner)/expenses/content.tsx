@@ -14,7 +14,7 @@ import { selectCostsByFilter, selectCostsFilterValues, selectCostsList } from "@
 import { useFilterSearchParams } from "@/hooks/filterSearchParams";
 import { useLoading } from "@/hooks/loading";
 import { Suspense, useCallback, useEffect } from "react";
-import { getCostsListThunk, setCostsFilterValues } from "@/store/costsSlice";
+import { getCostsListThunk, setCostsFilterValues } from "@/store/slices/costsSlice";
 import { INITIAL_COSTS_FILTER_FIELDS } from "@/constants/costs";
 import { getUserId } from "@/helpers/localStorage";
 import { selectCurrency } from "@/store/selectors/profile";
@@ -44,7 +44,7 @@ export default function ExpensesContent() {
   useEffect(() => {
     const injectAndLoadData = async () => {
       if (!costsFilterValues) {
-        await import("@/store/costsSlice");
+        await import("@/store/slices/costsSlice");
         await dispatch(setCostsFilterValues(getFilterItemsFromFields(INITIAL_COSTS_FILTER_FIELDS)));
       }
       if (!costsList) await handleGetData();

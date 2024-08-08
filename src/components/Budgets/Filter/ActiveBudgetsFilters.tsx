@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { selectBudgetsFilterFields, selectBudgetsFilterValues } from "@/store/selectors/budgets";
-import { setBudgetsFilterValues } from "@/store/budgetsSlice";
+import { setBudgetsFilterValues } from "@/store/slices/budgetsSlice";
 import { memo, useMemo } from "react";
 import { getActiveFilters } from "@/helpers/filters";
 import { ActiveFilterItemValue } from "@/types/filter";

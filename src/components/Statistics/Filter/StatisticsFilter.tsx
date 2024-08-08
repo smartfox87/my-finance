@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { setStatisticsFilterValues } from "@/store/statisticsSlice";
+import { setStatisticsFilterValues } from "@/store/slices/statisticsSlice";
 import { selectStatisticsFilterFields, selectStatisticsFilterValues } from "@/store/selectors/statistics";
 import { useTranslation } from "react-i18next";
 import { Button } from "antd";

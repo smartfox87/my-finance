@@ -10,7 +10,7 @@ import {
   selectStatisticsFilterValues,
 } from "@/store/selectors/statistics";
 import { useFilterSearchParams } from "@/hooks/filterSearchParams";
-import { getBudgetsListForChartsThunk, getCostsListForChartsThunk, getIncomesListForChartsThunk, setStatisticsFilterValues } from "@/store/statisticsSlice";
+import { getBudgetsListForChartsThunk, getCostsListForChartsThunk, getIncomesListForChartsThunk, setStatisticsFilterValues } from "@/store/slices/statisticsSlice";
 import { selectCostCategories, selectIncomeCategories } from "@/store/selectors/references";
 import { useCallback, useEffect, useState } from "react";
 import { INITIAL_STATISTICS_FILTER_FIELDS } from "@/constants/statistics";
@@ -56,7 +56,7 @@ export default function StatisticsContent() {
   useEffect(() => {
     const injectAndLoadData = async () => {
       if (!statisticsFilterValues) {
-        await import("@/store/statisticsSlice");
+        await import("@/store/slices/statisticsSlice");
         dispatch(setStatisticsFilterValues(getFilterItemsFromFields(INITIAL_STATISTICS_FILTER_FIELDS)));
       }
       if (!costsList) await handleGetData();

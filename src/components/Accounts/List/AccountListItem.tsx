@@ -1,11 +1,11 @@
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "antd";
-import formatPrice from "@/helpers/formatPrice.js";
+import formatPrice from "@/helpers/formatPrice";
 import { useSelector } from "react-redux";
 import { selectCurrency } from "@/store/selectors/profile";
-import { uppercaseFirstLetter } from "@/helpers/strings.js";
+import { uppercaseFirstLetter } from "@/helpers/strings";
 import { useEffect, useRef, useState } from "react";
-import { isTextClamped } from "@/helpers/isTextClamped.js";
+import { isTextClamped } from "@/helpers/isTextClamped";
 import { useViewport } from "@/hooks/viewport";
 import { getFullDate } from "@/helpers/date";
 import Link from "next/link";

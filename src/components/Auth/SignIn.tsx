@@ -30,7 +30,7 @@ export const SignIn = () => {
   const handleSubmitForm: DefaultFormSaveHandler = async (fieldsValues): Promise<void> => {
     try {
       if (!isLoginData(fieldsValues)) return;
-      const { loginUserThunk } = await import("@/store/authSlice");
+      const { loginUserThunk } = await import("@/store/slices/authSlice");
       // todo unwrap all dispatches
       await dispatch(loginUserThunk(fieldsValues)).unwrap();
       handleToggleVisibility();

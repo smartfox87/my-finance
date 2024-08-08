@@ -10,7 +10,7 @@ export const DemoUserAuth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const handleAuthorize = async (): Promise<void> => {
     setIsLoading(true);
-    const { loginDemoUserThunk } = await import("@/store/authSlice");
+    const { loginDemoUserThunk } = await import("@/store/slices/authSlice");
     dispatch(loginDemoUserThunk());
   };
 

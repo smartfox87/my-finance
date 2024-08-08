@@ -6,14 +6,14 @@ import { useTranslation } from "react-i18next";
 import { useLoading } from "@/hooks/loading";
 import { selectAccountsList } from "@/store/selectors/accounts";
 import { Suspense, useCallback } from "react";
-import { getAccountsListThunk } from "@/store/accountsSlice";
+import { getAccountsListThunk } from "@/store/slices/accountsSlice";
 import { Preloader } from "@/components/Layout/Preloader";
 import { AddNewAccount } from "@/components/Accounts/New/AddNewAccount";
 import { TransferBetweenAccounts } from "@/components/Accounts/Detail/TransferBetweenAccounts";
 import { AccountListItem } from "@/components/Accounts/List/AccountListItem";
 import { AccountDetail } from "@/components/Accounts/Detail/AccountDetail";
 import formatPrice from "@/helpers/formatPrice";
-import { getAccountTypesThunk } from "@/store/referencesSlice";
+import { getAccountTypesThunk } from "@/store/slices/referencesSlice";
 import { InnerHeaderActionsPortal } from "@/components/Layout/Inner/InnerHeaderActionsPortal";
 import { useAppDispatch } from "@/hooks/redux";
 

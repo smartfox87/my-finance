@@ -9,7 +9,7 @@ import { Preloader } from "@/components/Layout/Preloader";
 import formatPrice from "@/helpers/formatPrice";
 import { selectBudgetsByFilter, selectBudgetsFilterValues, selectBudgetsList } from "@/store/selectors/budgets";
 import { useFilterSearchParams } from "@/hooks/filterSearchParams";
-import { getBudgetsListThunk, setBudgetsFilterValues } from "@/store/budgetsSlice";
+import { getBudgetsListThunk, setBudgetsFilterValues } from "@/store/slices/budgetsSlice";
 import { INITIAL_BUDGETS_FILTER_FIELDS } from "@/constants/budgets";
 import { getUserId } from "@/helpers/localStorage";
 import { AddNewBudget } from "@/components/Budgets/New/AddNewBudget";
@@ -44,7 +44,7 @@ export default function BudgetsContent() {
   useEffect(() => {
     const injectAndLoadData = async () => {
       if (!budgetsFilterValues) {
-        await import("@/store/budgetsSlice");
+        await import("@/store/slices/budgetsSlice");
         dispatch(setBudgetsFilterValues(getFilterItemsFromFields(INITIAL_BUDGETS_FILTER_FIELDS)));
       }
       if (!budgetsList?.length) await handleGetData();

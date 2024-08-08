@@ -1,7 +1,7 @@
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import { createIncomeItemApi, getIncomesListApi, updateIncomeItemApi, deleteIncomeItemApi, getIncomeItemApi } from "@/api/incomes";
 import { handleRejectedReducerAction } from "@/helpers/errors";
-import { updateAccountBalanceThunk } from "@/store/accountsSlice";
+import { updateAccountBalanceThunk } from "@/store/slices/accountsSlice";
 import { setFilterValue } from "@/helpers/filters";
 import { rootReducer } from "@/store";
 import { IncomeItem, IncomeItemData } from "@/types/incomes";

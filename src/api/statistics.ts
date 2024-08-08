@@ -1,5 +1,5 @@
 import { supabase } from "@/api/supabase";
-import { getUserId } from "@/helpers/localStorage.js";
+import { getUserId } from "@/helpers/localStorage";
 import { getFromPeriodDatesForApi, getToPeriodDatesForApi } from "@/helpers/date";
 import { FilterPeriodStateItem } from "@/types/filter";
 import { FieldIds } from "@/types/field";

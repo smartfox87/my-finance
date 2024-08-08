@@ -3,8 +3,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { selectSettingsFields } from "@/store/selectors/profile";
 import { DefaultForm } from "@/components/Form/DefaultForm";
-import { getProfileThunk, updateProfileThunk } from "@/store/profileSlice";
-import { showNotification } from "@/helpers/modals.js";
+import { getProfileThunk, updateProfileThunk } from "@/store/slices/profileSlice";
+import { showNotification } from "@/helpers/modals";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch } from "@/hooks/redux";
 import { showCommonError } from "@/helpers/errors";

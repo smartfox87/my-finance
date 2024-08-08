@@ -1,5 +1,5 @@
 import { supabase } from "@/api/supabase";
-import { getUserId } from "@/helpers/localStorage.js";
+import { getUserId } from "@/helpers/localStorage";
 import { getCurrentDate } from "@/helpers/date";
 import { ProfileData, SettingsData } from "@/types/profile";
 

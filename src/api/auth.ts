@@ -3,7 +3,7 @@ import { getPublicUrl } from "@/helpers/url";
 import { LoginData, RegisterData } from "@/types/auth";
 import { Provider } from "@supabase/auth-js";
 import { store } from "@/store";
-import { clearUserReducer, setUserReducer } from "@/store/authSlice";
+import { clearUserReducer, setUserReducer } from "@/store/slices/authSlice";
 
 let isAuthStateChangeHandlerSet = false;
 export const handleAuthStateChange = () => {

@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { selectStatisticsFilterFields, selectStatisticsFilterValues } from "@/store/selectors/statistics";
-import { setStatisticsFilterValues } from "@/store/statisticsSlice";
+import { setStatisticsFilterValues } from "@/store/slices/statisticsSlice";
 import { memo, useMemo } from "react";
 import { getActiveFilters } from "@/helpers/filters";
 import { ActiveFiltersList } from "@/components/Common/Filter/ActiveFiltersList";

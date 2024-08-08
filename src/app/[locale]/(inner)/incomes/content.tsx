@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { selectIncomesByFilter, selectIncomesFilterValues, selectIncomesList } from "@/store/selectors/incomes";
 import { useFilterSearchParams } from "@/hooks/filterSearchParams";
-import { getIncomesListThunk, setIncomesFilterValues } from "@/store/incomesSlice";
+import { getIncomesListThunk, setIncomesFilterValues } from "@/store/slices/incomesSlice";
 import { useLoading } from "@/hooks/loading";
 import { Suspense, useCallback, useEffect } from "react";
 import { INITIAL_INCOMES_FILTER_FIELDS } from "@/constants/incomes";
@@ -44,7 +44,7 @@ export default function IncomesContent() {
   useEffect(() => {
     const injectAndLoadData = async () => {
       if (!incomesFilterValues) {
-        await import("@/store/incomesSlice");
+        await import("@/store/slices/incomesSlice");
         await dispatch(setIncomesFilterValues(getFilterItemsFromFields(INITIAL_INCOMES_FILTER_FIELDS)));
       }
       if (!incomesList) await handleGetData();

@@ -3,7 +3,7 @@ import { handleRejectedReducerAction } from "@/helpers/errors";
 import { getBudgetsListForChartsApi, getCostsListForChartsApi, getIncomesListForChartsApi } from "@/api/statistics";
 import { setFilterValue } from "@/helpers/filters";
 import { getPeriodDates } from "@/helpers/date";
-import { rootReducer } from "@/store/index";
+import { rootReducer } from "@/store";
 import { ProcessedStatisticsBudgetItem, StatisticsBudgetItem, StatisticsCostItem, StatisticsIncomeItem } from "@/types/statistics";
 import { FilterItem, FilterPeriodStateItem, FilterState } from "@/types/filter";
 import { FieldIds } from "@/types/field";

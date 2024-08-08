@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { selectUser } from "@/store/selectors/auth";
 import { createContext, ReactNode, useCallback, useEffect, useMemo, useState } from "react";
 import { useLocale } from "@/hooks/providers/locale";
-import { getUserId } from "@/helpers/localStorage.js";
+import { getUserId } from "@/helpers/localStorage";
 import dynamic from "next/dynamic";
 import { Preloader } from "@/components/Layout/Preloader";
 import { usePathname } from "next/navigation";
