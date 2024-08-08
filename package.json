@@ -9,7 +9,7 @@
 		"locales": "node --loader ts-node/esm ./scripts/locales.ts",
 		"dev": "npx kill-port 3020 && npm run locales && next dev -p 3020",
 		"build": "npm run locales && next build && npm run css",
-		"start": "next start -p 3020",
+		"start": "npx kill-port 3020 && next start -p 3020",
 		"size": "npx cross-env ANALYZE=true npm run build",
 		"typescript": "tsc --noEmit",
 		"lint": "eslint \"**/*.{js,jsx,ts,tsx}\"",
