@@ -10,6 +10,7 @@ import { AccountsSliceState } from "@/types/accounts";
 import { ProfileSliceState } from "@/types/profile";
 import { showNotification } from "@/helpers/modals";
 import { i18nRef } from "@/i18n";
+import { NotificationTypes } from "@/types/modals";
 
 type State = IncomesSliceState | AccountsSliceState | BudgetsSliceState | AuthSliceState | ProfileSliceState | ReferencesSliceState | CostsSliceState | StatisticsSliceState;
 
@@ -19,6 +20,6 @@ export const handleRejectedReducerAction = (state: State, { payload, error }: { 
 };
 
 export const showCommonError = (title?: string): void => {
-  if (title) showNotification({ title, type: "error" });
-  else if (i18nRef.t) showNotification({ title: i18nRef.t("notifications.error.common"), type: "error" });
+  if (title) showNotification({ title, type: NotificationTypes.ERROR });
+  else if (i18nRef.t) showNotification({ title: i18nRef.t("notifications.error.common"), type: NotificationTypes.ERROR });
 };
