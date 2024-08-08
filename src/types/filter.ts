@@ -62,7 +62,10 @@ export type ActiveFilterItem = ActiveMultiSelectFilterItem | ActiveSortSelectFil
 
 export type ActiveFilterItemValue = Pick<ActiveFilterItem, "value" | "id">;
 
-export type setFilterStateValues = ActionCreatorWithPayload<FilterItem[], "budgets/setBudgetsFilterValues">;
+export type SetFilterStateValuesHandler = ActionCreatorWithPayload<
+  FilterItem[],
+  "budgets/setBudgetsFilterValues" | "statistics/setStatisticsFilterValues" | "costs/setCostsFilterValues" | "incomes/setIncomesFilterValues"
+>;
 
 export interface ClearActiveFilterItemHandler {
   (data: ActiveFilterItemValue): void;

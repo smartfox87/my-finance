@@ -1,13 +1,13 @@
 "use client";
 
-import { Header } from "@/components/Layout/Header/Header.jsx";
+import { Header } from "@/components/Layout/Header/Header";
 import { MainNav } from "@/components/Layout/MainNav";
 import { useViewport } from "@/hooks/viewport";
 import { ReactNode, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/store/selectors/auth";
 import { useTranslation } from "react-i18next";
-import { getUserId } from "@/helpers/localStorage.js";
+import { getUserId } from "@/helpers/localStorage";
 import { MobileNav } from "@/components/Layout/MobileNav";
 import { useAppDispatch } from "@/hooks/redux";
 
@@ -23,14 +23,14 @@ export default function MainLayout({ children }: { children: ReactNode }) {
   const initProfile = async () => {
     if (getUserId()) import("@/api/auth").then(({ handleAuthStateChange }) => handleAuthStateChange());
     if (getUserId() && !user) {
-      const { getUserSessionThunk } = await import("@/store/authSlice");
+      const { getUserSessionThunk } = await import("@/store/slices/authSlice");
       await dispatch(getUserSessionThunk());
     }
     if (!user) return;
     const [{ getAccountsListThunk }, { getProfileThunk }, { getCurrenciesThunk }] = await Promise.all([
-      import("@/store/accountsSlice"),
-      import("@/store/profileSlice"),
-      import("@/store/referencesSlice"),
+      import("@/store/slices/accountsSlice"),
+      import("@/store/slices/profileSlice"),
+      import("@/store/slices/referencesSlice"),
     ]);
     await Promise.all([dispatch(getCurrenciesThunk()), dispatch(getProfileThunk()), dispatch(getAccountsListThunk())]);
   };
@@ -40,7 +40,7 @@ export default function MainLayout({ children }: { children: ReactNode }) {
 
   const initReferences = async () => {
     if (!user) return;
-    const { getAccountTypesThunk, getCostCategoriesThunk, getIncomeCategoriesThunk } = await import("@/store/referencesSlice");
+    const { getAccountTypesThunk, getCostCategoriesThunk, getIncomeCategoriesThunk } = await import("@/store/slices/referencesSlice");
     await Promise.all([dispatch(getAccountTypesThunk()), dispatch(getCostCategoriesThunk()), dispatch(getIncomeCategoriesThunk())]);
   };
   useEffect(() => {

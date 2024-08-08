@@ -61,7 +61,7 @@ export type DateFormField<I extends DateFormFieldId = DateFormFieldId> = BaseFor
   id: I;
   type: FieldTypes.DATE;
   picker: PickerPeriod;
-  value: Dayjs | null;
+  value: Dayjs | string | null;
   disabledDate?: (current: Dayjs) => boolean;
 };
 

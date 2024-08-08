@@ -2,11 +2,11 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { memo, useEffect, useRef, useState } from "react";
 import { selectBudgetFields, selectBudgetItem } from "@/store/selectors/budgets";
-import { deleteBudgetItemThunk, getBudgetItemThunk, setBudgetItem, updateBudgetItemThunk } from "@/store/budgetsSlice";
+import { deleteBudgetItemThunk, getBudgetItemThunk, setBudgetItem, updateBudgetItemThunk } from "@/store/slices/budgetsSlice";
 import { DefaultForm } from "@/components/Form/DefaultForm";
-import { showNotification } from "@/helpers/modals.js";
+import { showNotification } from "@/helpers/modals";
 import { SideModal } from "@/components/Modals/SideModal";
-import { useLoading } from "@/hooks/loading.js";
+import { useLoading } from "@/hooks/loading";
 import SvgDelete from "@/assets/sprite/delete.svg";
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal";
 import { Button } from "antd";
@@ -73,7 +73,7 @@ export const BudgetDetail = memo(function BudgetDetail({ onSave }: { onSave: () 
     }
   };
 
-  const formRef = useRef<DefaultFormRef>(null);
+  const formRef = useRef<DefaultFormRef | null>(null);
   const handleSetCalculatedAmount: CalculatorSaveHandler = (value) => formRef.current?.handleChangeFieldValue({ id: FieldIds.AMOUNT, type: FieldTypes.NUMBER, value });
 
   const footer = (

@@ -9,7 +9,7 @@ import { Preloader } from "@/components/Layout/Preloader";
 import formatPrice from "@/helpers/formatPrice";
 import { selectBudgetsByFilter, selectBudgetsFilterValues, selectBudgetsList } from "@/store/selectors/budgets";
 import { useFilterSearchParams } from "@/hooks/filterSearchParams";
-import { getBudgetsListThunk, setBudgetsFilterValues } from "@/store/budgetsSlice";
+import { getBudgetsListThunk, setBudgetsFilterValues } from "@/store/slices/budgetsSlice";
 import { INITIAL_BUDGETS_FILTER_FIELDS } from "@/constants/budgets";
 import { getUserId } from "@/helpers/localStorage";
 import { AddNewBudget } from "@/components/Budgets/New/AddNewBudget";
@@ -22,9 +22,7 @@ import { EmptyBudgets } from "@/components/Budgets/List/EmptyBudgets";
 import { FoundNothing } from "@/components/Common/FoundNothing";
 import { useAppDispatch } from "@/hooks/redux";
 import { InnerHeaderActionsPortal } from "@/components/Layout/Inner/InnerHeaderActionsPortal";
-import { FilterItem } from "@/types/filter";
-import { isTruthy } from "@/predicates/common";
-import { isFilterMultiItem, isFilterPeriodItem, isFilterSortItem } from "@/predicates/filter";
+import { getFilterItemsFromFields } from "@/helpers/filters";
 
 export default function BudgetsContent() {
   const { t } = useTranslation();
@@ -46,15 +44,8 @@ export default function BudgetsContent() {
   useEffect(() => {
     const injectAndLoadData = async () => {
       if (!budgetsFilterValues) {
-        await import("@/store/budgetsSlice");
-        dispatch(
-          setBudgetsFilterValues(
-            INITIAL_BUDGETS_FILTER_FIELDS.map((item): FilterItem | undefined => {
-              const filterItem = { id: item.id, value: item.value };
-              if (isFilterPeriodItem(filterItem) || isFilterSortItem(filterItem) || isFilterMultiItem(filterItem)) return filterItem;
-            }).filter(isTruthy),
-          ),
-        );
+        await import("@/store/slices/budgetsSlice");
+        dispatch(setBudgetsFilterValues(getFilterItemsFromFields(INITIAL_BUDGETS_FILTER_FIELDS)));
       }
       if (!budgetsList?.length) await handleGetData();
     };

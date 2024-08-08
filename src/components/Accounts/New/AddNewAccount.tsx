@@ -3,9 +3,9 @@ import { SideModal } from "@/components/Modals/SideModal";
 import { DefaultForm } from "@/components/Form/DefaultForm";
 import { useSelector } from "react-redux";
 import { selectAccountFields } from "@/store/selectors/accounts";
-import { createAccountItemThunk } from "@/store/accountsSlice";
+import { createAccountItemThunk } from "@/store/slices/accountsSlice";
 import { useTranslation } from "react-i18next";
-import { showNotification } from "@/helpers/modals.js";
+import { showNotification } from "@/helpers/modals";
 import { memo, useRef, useState } from "react";
 import SvgNewAccount from "@/assets/sprite/new-account.svg";
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal";
@@ -39,7 +39,7 @@ export const AddNewAccount = memo(function AddNewAccount({ onSave }: { onSave: (
     }
   };
 
-  const formRef = useRef<DefaultFormRef>(null);
+  const formRef = useRef<DefaultFormRef | null>(null);
   const handleSetCalculatedBalance: CalculatorSaveHandler = (value) => formRef.current?.handleChangeFieldValue({ id: FieldIds.BALANCE, type: FieldTypes.NUMBER, value });
 
   return (

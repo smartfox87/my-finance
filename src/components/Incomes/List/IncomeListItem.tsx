@@ -1,13 +1,13 @@
-import { CommonDate } from "../../Common/CommonDate.jsx";
+import { CommonDate } from "../../Common/CommonDate";
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "antd";
-import formatPrice from "@/helpers/formatPrice.js";
+import formatPrice from "@/helpers/formatPrice";
 import { useSelector } from "react-redux";
 import { selectCurrency } from "@/store/selectors/profile";
-import { uppercaseFirstLetter } from "@/helpers/strings.js";
+import { uppercaseFirstLetter } from "@/helpers/strings";
 import { selectIncomeCategoriesObject } from "@/store/selectors/references";
 import { useEffect, useRef, useState } from "react";
-import { isTextClamped } from "@/helpers/isTextClamped.js";
+import { isTextClamped } from "@/helpers/isTextClamped";
 import { useViewport } from "@/hooks/viewport";
 import { selectAccountsObject } from "@/store/selectors/accounts";
 import Link from "next/link";
@@ -35,7 +35,7 @@ export const IncomeListItem = ({ id, created_at, name, amount, date, category, a
       data-created={created_at}
       className="focus-appearance flex w-full flex-col gap-3 rounded-xl border border-gray-300 p-4 shadow-[0_3px_7px_0_#ddd] duration-300 hover:-translate-y-1 hover:shadow-[0_7px_7px_0_#ddd]"
     >
-      <CommonDate date={date} data-cy="item-date" />
+      <CommonDate date={date} />
       <ul className="flex grow flex-col gap-1">
         {capitalizedName?.length && (
           <li ref={nameRef} className="line-clamp-2 md:line-clamp-3">

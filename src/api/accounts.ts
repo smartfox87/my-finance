@@ -1,5 +1,5 @@
 import { supabase } from "@/api/supabase";
-import { getUserId } from "@/helpers/localStorage.js";
+import { getUserId } from "@/helpers/localStorage";
 import { deleteAccountTypeApi } from "@/api/references";
 import { getCurrentDate } from "@/helpers/date";
 import { AccountItemBalance } from "@/types/accounts";

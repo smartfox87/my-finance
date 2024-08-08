@@ -1,17 +1,17 @@
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "antd";
-import formatPrice from "@/helpers/formatPrice.js";
+import formatPrice from "@/helpers/formatPrice";
 import { useSelector } from "react-redux";
 import { selectCurrency } from "@/store/selectors/profile";
-import { uppercaseFirstLetter } from "@/helpers/strings.js";
+import { uppercaseFirstLetter } from "@/helpers/strings";
 import { useEffect, useRef, useState } from "react";
-import { isTextClamped } from "@/helpers/isTextClamped.js";
+import { isTextClamped } from "@/helpers/isTextClamped";
 import { useViewport } from "@/hooks/viewport";
 import { getFullDate } from "@/helpers/date";
 import Link from "next/link";
-import { AccountItem } from "@/types/accounts";
+import { ProcessedAccountItem } from "@/types/accounts";
 
-export const AccountListItem = ({ id, name, balance, updated_at }: AccountItem) => {
+export const AccountListItem = ({ id, name, balance, updated_at }: ProcessedAccountItem) => {
   const { t } = useTranslation();
   const { isTouchDevice } = useViewport();
   const currency = useSelector(selectCurrency);

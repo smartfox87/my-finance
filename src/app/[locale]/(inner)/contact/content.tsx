@@ -10,7 +10,7 @@ import { Organization, WithContext } from "schema-dts";
 import { languages } from "@/constants/router";
 import { FormValues } from "@/types/form";
 import { isRcFileArray } from "@/predicates/field";
-import { isStringNumber } from "@/predicates/common";
+import { isError, isStringNumber } from "@/predicates/common";
 import { showCommonError } from "@/helpers/errors";
 
 export default function ContactContent() {
@@ -25,24 +25,17 @@ export default function ContactContent() {
   const handleSendMessage = async (contactData: FormValues): Promise<void> => {
     try {
       const score = await getScore();
-      if (score < 0.5) return showNotification({ title: t("notifications.recaptcha_invalid") });
+      if (score < 0.5) return showCommonError(t("notifications.recaptcha_invalid"));
       const formData = new FormData();
       Object.entries(contactData).forEach(([key, value]) => {
         if (isRcFileArray(value)) value.forEach((value) => formData.append(key, value));
         else if (isStringNumber(value)) formData.append(key, value.toString());
       });
       const { success, error } = await fetch("/api/contact", { method: "POST", body: formData }).then((res) => res.json());
-      if (success) {
-        showNotification({ title: t("notifications.contact.success") });
-      } else {
-        console.error(error);
-        showCommonError();
-      }
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.error(error);
-        showNotification({ title: error.message || t("notifications.error.common") });
-      }
+      if (success) showNotification({ title: t("notifications.contact.success") });
+      else showCommonError(error);
+    } catch (error) {
+      showCommonError(isError(error) ? error.message : "");
     }
   };
 

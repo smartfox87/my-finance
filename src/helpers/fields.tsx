@@ -1,4 +1,4 @@
-import { isValidElement, ReactElement } from "react";
+import { type KeyboardEvent, isValidElement, ReactElement } from "react";
 import { decimalsKeys, integerKeys, navigationKeys } from "@/constants/input";
 import type { BaseOptionType } from "rc-select/es/Select";
 import type { FlattenOptionData } from "rc-select/es/interface";
@@ -17,11 +17,11 @@ export const cutDecimals = (value: number | string | null, decimals: number = 2)
 };
 
 const allowedInputNumberKeys = [...integerKeys, ...decimalsKeys, ...navigationKeys];
-export const handleKeyDownDecimalsValidation = (event: React.KeyboardEvent<HTMLInputElement>): void => {
+export const handleKeyDownDecimalsValidation = (event: KeyboardEvent<HTMLInputElement>): void => {
   if (!allowedInputNumberKeys.includes(event.key) || (decimalsKeys.includes(event.key) && event.currentTarget.value.includes(event.key))) event.preventDefault();
 };
 
-export const handleKeyUpCutDecimals = (event: React.KeyboardEvent<HTMLInputElement>): void => {
+export const handleKeyUpCutDecimals = (event: KeyboardEvent<HTMLInputElement>): void => {
   event.currentTarget.value = cutDecimals(event.currentTarget.value);
 };
 

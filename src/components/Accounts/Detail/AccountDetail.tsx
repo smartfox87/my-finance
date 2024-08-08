@@ -2,11 +2,11 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { memo, useEffect, useRef, useState } from "react";
 import { selectAccountFields, selectAccountItem } from "@/store/selectors/accounts";
-import { deleteAccountItemThunk, getAccountItemThunk, setAccountItem, updateAccountItemThunk } from "@/store/accountsSlice";
+import { deleteAccountItemThunk, getAccountItemThunk, setAccountItem, updateAccountItemThunk } from "@/store/slices/accountsSlice";
 import { DefaultForm } from "@/components/Form/DefaultForm";
-import { showNotification } from "@/helpers/modals.js";
+import { showNotification } from "@/helpers/modals";
 import { SideModal } from "@/components/Modals/SideModal";
-import { useLoading } from "@/hooks/loading.js";
+import { useLoading } from "@/hooks/loading";
 import SvgDelete from "@/assets/sprite/delete.svg";
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal";
 import { Button } from "antd";
@@ -77,7 +77,7 @@ export const AccountDetail = memo(function AccountDetail({ onSave }: { onSave: (
     }
   };
 
-  const formRef = useRef<DefaultFormRef>(null);
+  const formRef = useRef<DefaultFormRef | null>(null);
   const handleSetCalculatedBalance: CalculatorSaveHandler = (value) => formRef.current?.handleChangeFieldValue({ id: FieldIds.BALANCE, type: FieldTypes.NUMBER, value });
 
   const footer = (

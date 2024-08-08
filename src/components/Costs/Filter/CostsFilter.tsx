@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { setCostsFilterValues } from "@/store/costsSlice";
+import { setCostsFilterValues } from "@/store/slices/costsSlice";
 import { selectCostsFilterFields, selectCostsFilterValues } from "@/store/selectors/costs";
 import { useTranslation } from "react-i18next";
 import { Button } from "antd";

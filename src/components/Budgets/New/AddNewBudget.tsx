@@ -3,9 +3,9 @@ import { SideModal } from "@/components/Modals/SideModal";
 import { DefaultForm } from "@/components/Form/DefaultForm";
 import { useSelector } from "react-redux";
 import { selectBudgetFields } from "@/store/selectors/budgets";
-import { createBudgetItemThunk } from "@/store/budgetsSlice";
+import { createBudgetItemThunk } from "@/store/slices/budgetsSlice";
 import { useTranslation } from "react-i18next";
-import { showNotification } from "@/helpers/modals.js";
+import { showNotification } from "@/helpers/modals";
 import { memo, useRef, useState } from "react";
 import SvgNewBudget from "@/assets/sprite/new-budget.svg";
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal";
@@ -39,7 +39,7 @@ export const AddNewBudget = memo(function AddNewBudget({ isAdaptive, onSave }: {
     }
   };
 
-  const formRef = useRef<DefaultFormRef>(null);
+  const formRef = useRef<DefaultFormRef | null>(null);
   const handleSetCalculatedAmount: CalculatorSaveHandler = (value) => formRef.current?.handleChangeFieldValue({ id: FieldIds.AMOUNT, type: FieldTypes.NUMBER, value });
 
   return (

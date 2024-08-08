@@ -10,7 +10,7 @@ export const CalculatorModal = ({ title, buttonOpen, buttonSave, onSave }: { tit
   const [isOpen, setIsOpen] = useState(false);
   const handleToggleVisibility = () => setIsOpen((prevState) => !prevState);
 
-  const calculatorRef = useRef<CalculatorRef>(null);
+  const calculatorRef = useRef<CalculatorRef | null>(null);
   const [value, setValue] = useState(0);
   const handleSaveResult = (): void => {
     onSave(value);

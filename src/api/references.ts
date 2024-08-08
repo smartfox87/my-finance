@@ -1,5 +1,5 @@
 import { supabase } from "@/api/supabase";
-import { getLanguage, getUserId } from "@/helpers/localStorage.js";
+import { getLanguage, getUserId } from "@/helpers/localStorage";
 import { AccountTypeData, IncomeCategoryData } from "@/types/references";
 
 export const getCostCategoriesApi = () =>

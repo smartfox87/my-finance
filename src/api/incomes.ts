@@ -1,5 +1,5 @@
 import { supabase } from "@/api/supabase";
-import { getUserId } from "@/helpers/localStorage.js";
+import { getUserId } from "@/helpers/localStorage";
 import { getCurrentDate } from "@/helpers/date";
 import type { IncomeItemData } from "@/types/incomes";
 import { FilterPeriodStateItem } from "@/types/filter";

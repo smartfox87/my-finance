@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { ReactNode } from "react";
 
-export const EmptyCosts = ({ addNew }: { addNew: ReactNode }) => {
+export const EmptyCosts = ({ addNew }: { addNew?: ReactNode }) => {
   const { t } = useTranslation();
 
   return (

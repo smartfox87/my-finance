@@ -1,5 +1,5 @@
 import { FieldIds, FieldTypes, FieldValues } from "@/types/field";
-import { ActiveFilterItem, ActiveFilterItemValue, FilterItem, FilterState, FilterStateValue } from "@/types/filter";
+import { ActiveFilterItem, ActiveFilterItemValue, FilterField, FilterItem, FilterState, FilterStateValue } from "@/types/filter";
 import { ProcessedFilterField } from "@/types/selectors";
 import { i18nRef } from "@/i18n";
 import { isMultiSelectValue } from "@/predicates/field";
@@ -59,6 +59,14 @@ export const prepareObjectValuesForFilterStateValues = (objectValues: Record<str
   Object.entries(objectValues)
     .map(([key, value]) => {
       const filterItem = { id: key, value };
+      if (isFilterPeriodItem(filterItem) || isFilterSortItem(filterItem) || isFilterMultiItem(filterItem)) return filterItem;
+    })
+    .filter(isTruthy);
+
+export const getFilterItemsFromFields = (fields: FilterField[]): FilterItem[] =>
+  fields
+    .map((item): FilterItem | undefined => {
+      const filterItem = { id: item.id, value: item.value };
       if (isFilterPeriodItem(filterItem) || isFilterSortItem(filterItem) || isFilterMultiItem(filterItem)) return filterItem;
     })
     .filter(isTruthy);

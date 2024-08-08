@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { setBudgetsFilterValues } from "@/store/budgetsSlice";
+import { setBudgetsFilterValues } from "@/store/slices/budgetsSlice";
 import { selectBudgetsFilterFields, selectBudgetsFilterValues } from "@/store/selectors/budgets";
 import { useTranslation } from "react-i18next";
 import { Button } from "antd";

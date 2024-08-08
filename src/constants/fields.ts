@@ -112,11 +112,11 @@ export const DATE_FIELD: DateFormField<FieldIds.DATE> = {
   placeholder: "YYYY-MM-DD",
 };
 
-export const CURRENCY_FIELD: SingleSelectFormField = {
+export const CURRENCY_FIELD: SingleSelectFormField<FieldIds.CURRENCY, number | null> = {
   id: FieldIds.CURRENCY,
   type: FieldTypes.SELECT,
   label: `simple.${SimpleFieldNames.CURRENCY}`,
-  value: "",
+  value: null,
   options: [],
   required: true,
   showSearch: true,
@@ -148,7 +148,7 @@ export const EMAIL_FIELD: TextFormField<FieldIds.EMAIL, FieldTypes.EMAIL> = {
   required: true,
 };
 
-export const BIRTHDATE_FIELD: DateFormField = {
+export const BIRTHDATE_FIELD: DateFormField<FieldIds.BIRTHDATE> = {
   id: FieldIds.BIRTHDATE,
   type: FieldTypes.DATE,
   label: `simple.${SimpleFieldNames.BIRTHDATE}`,
@@ -156,7 +156,7 @@ export const BIRTHDATE_FIELD: DateFormField = {
   value: null,
 };
 
-export const GENDER_FIELD: SingleSelectFormField = {
+export const GENDER_FIELD: SingleSelectFormField<FieldIds.GENDER, string> = {
   id: FieldIds.GENDER,
   type: FieldTypes.SELECT,
   label: `complex.${ComplexFieldNames.GENDER}.label`,
