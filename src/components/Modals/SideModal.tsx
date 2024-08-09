@@ -36,25 +36,23 @@ export const SideModal = ({
   };
 
   return (
-    <>
-      {isInitializedModal && (
-        <Modal
-          title={title}
-          placement={placement}
-          open={isOpen}
-          height="100%"
-          width={550}
-          destroyOnClose={true}
-          classNames={{ body: "flex flex-col" }}
-          onClose={onClose}
-          afterOpenChange={handleOpenChange}
-        >
-          <Preloader isLoading={isLoading}>
-            {children}
-            {footer && <div className="sticky -bottom-6 z-20 -mb-6 mt-auto flex flex-col gap-4 bg-white pb-6 pt-4 dark:bg-dark-modal">{footer}</div>}
-          </Preloader>
-        </Modal>
-      )}
-    </>
+    isInitializedModal && (
+      <Modal
+        title={title}
+        placement={placement}
+        open={isOpen}
+        height="100%"
+        width={550}
+        destroyOnClose={true}
+        classNames={{ body: "flex flex-col" }}
+        onClose={onClose}
+        afterOpenChange={handleOpenChange}
+      >
+        <Preloader isLoading={isLoading}>
+          {children}
+          {footer && <div className="sticky -bottom-6 z-20 -mb-6 mt-auto flex flex-col gap-4 bg-white pb-6 pt-4 dark:bg-dark-modal">{footer}</div>}
+        </Preloader>
+      </Modal>
+    )
   );
 };

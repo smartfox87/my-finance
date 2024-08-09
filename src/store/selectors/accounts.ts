@@ -19,6 +19,8 @@ export const selectAccountsList = createSelector([selectAccounts, selectAccountT
     : null,
 );
 
+export const selectAccountsBalance = createSelector([selectAccountsList], (accountsList): number => accountsList?.reduce((acc, { balance }) => acc + balance, 0) || 0);
+
 export const selectAccountsObject = createSelector([selectAccountsList], (accountsList): Record<string, string> | null =>
   accountsList ? Object.assign({}, ...accountsList.map(({ id, name }) => ({ [id]: name }))) : null,
 );

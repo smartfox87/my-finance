@@ -18,6 +18,8 @@ export const selectBudgetsByFilter = createSelector([selectBudgetsList, selectBu
   allBudgets && budgetsFilterValues ? sortItemsList(budgetsFilterValues, filterMultiItemsList(budgetsFilterValues, allBudgets)) : null,
 );
 
+export const selectBudgetsAmount = createSelector([selectBudgetsByFilter], (filteredSortedBudgets) => filteredSortedBudgets?.reduce((acc, { amount }) => acc + amount, 0) || 0);
+
 export const selectBudgetsFilterFields = createSelector([selectCostCategories, selectAccountsList], (costCategories, accountsList) =>
   processFilterFields(INITIAL_BUDGETS_FILTER_FIELDS, costCategories, accountsList),
 );
