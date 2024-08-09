@@ -2,7 +2,7 @@ import { memo, Suspense } from "react";
 import SvgMenu from "@/assets/sprite/menu.svg";
 import { useTranslation } from "react-i18next";
 import { SideModal } from "@/components/Modals/SideModal";
-import { ProfileMenu } from "@/components/Profile/ProfileMenu";
+import { ProfileMenu } from "@/components/Profile/menu/ProfileMenu";
 import { Auth } from "@/components/Auth/Auth";
 import { LanguageToggle } from "@/components/Layout/Header/LanguageToggle";
 import { useSelector } from "react-redux";
