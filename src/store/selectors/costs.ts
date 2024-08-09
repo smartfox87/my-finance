@@ -19,6 +19,8 @@ export const selectCostsByFilter = createSelector([selectCostsList, selectCostsF
   costsFilterValues && allCosts ? sortItemsList(costsFilterValues, filterSingleItemsList(costsFilterValues, allCosts)) : null,
 );
 
+export const selectExpensesTotal = createSelector([selectCostsByFilter], (filteredSortedCosts) => filteredSortedCosts?.reduce((acc, { amount }) => acc + amount, 0) || 0);
+
 export const selectCostsFilterFields = createSelector([selectCostCategories, selectAccountsList], (costCategories, accountsList) =>
   processFilterFields(INITIAL_COSTS_FILTER_FIELDS, costCategories, accountsList),
 );

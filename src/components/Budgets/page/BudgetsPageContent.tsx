@@ -9,8 +9,9 @@ import { BudgetItem } from "@/components/Budgets/List/BudgetItem";
 import { BudgetDetail } from "@/components/Budgets/Detail/BudgetDetail";
 import { EmptyBudgets } from "@/components/Budgets/List/EmptyBudgets";
 import { FoundNothing } from "@/components/Common/FoundNothing";
+import type { PageContentProps } from "@/types/common";
 
-export default function BudgetsPageContent({ onGetData }: { onGetData: () => Promise<void> }) {
+export default function BudgetsPageContent({ onGetData }: PageContentProps) {
   const budgetsList = useSelector(selectBudgetsList);
   const filteredSortedBudgets = useSelector(selectBudgetsByFilter);
 
