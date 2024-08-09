@@ -19,6 +19,8 @@ export const selectIncomesByFilter = createSelector([selectIncomesList, selectIn
   allIncomes && incomesFilterValues ? sortItemsList(incomesFilterValues, filterSingleItemsList(incomesFilterValues, allIncomes)) : null,
 );
 
+export const selectIncomesAmount = createSelector([selectIncomesByFilter], (incomes) => incomes?.reduce((acc, { amount }) => acc + amount, 0) || 0);
+
 export const selectIncomesFilterFields = createSelector([selectIncomeCategories, selectAccountsList], (incomeCategories, accountsList) =>
   processFilterFields(INITIAL_INCOMES_FILTER_FIELDS, incomeCategories, accountsList),
 );
