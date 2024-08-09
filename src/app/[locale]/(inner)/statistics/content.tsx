@@ -21,7 +21,7 @@ export default function StatisticsContent() {
   const costsList = useSelector(selectCostsListForCharts);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleGetData = useCallback(async () => {
+  const handleGetData = useCallback(async (): Promise<void> => {
     if (!statisticsFilterValues?.period || isNotEqualParamsToFilters) return;
     setIsLoading(true);
     await Promise.all([
@@ -31,7 +31,7 @@ export default function StatisticsContent() {
     ]).finally(() => setIsLoading(false));
   }, [statisticsFilterValues?.period, isNotEqualParamsToFilters]);
 
-  useEffect(() => {
+  useEffect((): void => {
     const injectAndLoadData = async () => {
       if (!statisticsFilterValues) {
         await import("@/store/slices/statisticsSlice");
