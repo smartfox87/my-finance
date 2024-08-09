@@ -22,14 +22,15 @@ export default function ExpensesContent() {
 
   const [isLoading, setIsLoading] = useLoading(false);
   const costsList = useSelector(selectCostsList);
-  const handleGetData = useCallback(async () => {
+
+  const handleGetData = useCallback(async (): Promise<void> => {
     if (!costsFilterValues?.period || isNotEqualParamsToFilters) return;
     setIsLoading(true);
     await dispatch(getCostsListThunk(costsFilterValues));
     setIsLoading(false);
   }, [costsFilterValues?.period, isNotEqualParamsToFilters]);
 
-  useEffect(() => {
+  useEffect((): void => {
     const injectAndLoadData = async () => {
       if (!costsFilterValues) {
         await import("@/store/slices/costsSlice");
