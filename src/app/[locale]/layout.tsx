@@ -5,7 +5,7 @@ import { Providers } from "./providers";
 import { initTranslations } from "@/i18n";
 import type { Metadata, Viewport } from "next";
 import { type Locale } from "@/types/locales";
-import { ReactNode } from "react";
+import { type ReactNode } from "react";
 // todo speed-insights
 // import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -79,7 +79,6 @@ export default async function LocaleLayout({ children, params: { locale } }: { c
     <html lang={locale} dir={dir(locale)} className="flex min-h-screen flex-col">
       <body className="flex w-full grow flex-col dark:bg-dark">
         {/*<SpeedInsights />*/}
-        {/*<Providers>{children}</Providers>*/}
         <Providers i18nResources={resources}>{children}</Providers>
       </body>
     </html>
