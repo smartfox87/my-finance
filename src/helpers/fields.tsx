@@ -2,9 +2,10 @@ import { type KeyboardEvent, isValidElement, ReactElement } from "react";
 import { decimalsKeys, integerKeys, navigationKeys } from "@/constants/input";
 import type { BaseOptionType } from "rc-select/es/Select";
 import type { FlattenOptionData } from "rc-select/es/interface";
+import type { SelectOption } from "@/types/field";
 
-export const handleFilterSelectOptions = (inputValue: string, option: any): boolean => {
-  if (isValidElement(option.label)) return (option.label as ReactElement).props["data-text"]?.toLowerCase().includes(inputValue.toLowerCase());
+export const handleFilterSelectOptions = (inputValue: string, option: SelectOption & { label: string | ReactElement }): boolean => {
+  if (isValidElement(option.label)) return option.label.props["data-text"]?.toLowerCase().includes(inputValue.toLowerCase());
   else return ((option.label as string) ?? "").toLowerCase().includes(inputValue.toLowerCase());
 };
 

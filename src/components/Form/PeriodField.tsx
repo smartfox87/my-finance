@@ -1,9 +1,9 @@
-import dayjs, { type Dayjs } from "dayjs";
 import { Button, DatePicker, Radio, type RadioChangeEvent } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { findMatchingPeriod, getDatesPeriod, periodOptions } from "@/helpers/date";
-import { DatesPeriod, DatesStrings } from "@/types/date";
+import dayjs, { type Dayjs } from "dayjs";
+import type { DatesPeriod, DatesStrings } from "@/types/date";
 
 const processDates = (dates: DatesStrings): [Dayjs, Dayjs] => {
   const [from, to] = dates;
@@ -20,7 +20,7 @@ export const PeriodField = ({ id = "", value, onChange }: { id: string; value: D
     setPeriodValue(findMatchingPeriod(value));
   }, [value]);
 
-  const handleChangeFieldValue = (_: any, value: DatesStrings): void => {
+  const handleChangeFieldValue = (_: [Dayjs | null, Dayjs | null] | null, value: DatesStrings): void => {
     const newPeriod = findMatchingPeriod(value);
     if (newPeriod) setPeriodValue(newPeriod);
     setDatesValue(processDates(value));

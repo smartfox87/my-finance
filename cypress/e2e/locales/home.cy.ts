@@ -1,6 +1,4 @@
-import { Dictionary, Locales, Page, Pages } from "../../support/types";
-
-const pages: Page[] = Object.values(Pages).filter((page) => page !== Pages.HOME && page !== Pages.CONTACT);
+import { Dictionary, Locales } from "../../support/types";
 
 describe("Unauthorized pages", () => {
   context("1920x1080 resolution", () => {

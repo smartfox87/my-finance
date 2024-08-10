@@ -9,7 +9,7 @@ export const selectContactFields = createSelector([selectProfile], (profile): Fo
   INITIAL_CONTACT_FIELDS.map((field) => {
     if ((field.id === FieldIds.EMAIL || field.id === FieldIds.FULL_NAME) && isTruthy(profile)) {
       // notice: type for nested object prop
-      let value = profile[field.id];
+      const value = profile[field.id];
       if (isString(value)) return { ...field, value };
     }
     return field;

@@ -22,10 +22,7 @@ export const useFilterSearchParams = (filterValues: FilterState | null, setFilte
             {},
             ...Object.entries(filterValues)
               .sort((a, b) => a[0].localeCompare(b[0]))
-              .map(([id, value]) => {
-                const item = { [id]: value };
-                return item;
-              }),
+              .map(([id, value]) => ({ [id]: value })),
           )
         : null,
     [filterValues],

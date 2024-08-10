@@ -36,6 +36,7 @@ export const RecaptchaProvider = ({ children }: { children: ReactNode }) => {
       const value = await recaptchaRef.current.executeAsync();
       const body = { token: value, expectedAction: action, siteKey: siteKey };
       const { score, error } = await fetch("/api/recaptcha", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }).then((res) => res.json());
+      if (!score && error) throw new Error(error);
       return score;
     } catch (error) {
       if (process.env.NODE_ENV === "production") Sentry.captureException(error);

@@ -51,7 +51,7 @@ export type MultiSelectValue = MultiSelectOptionValue[];
 
 export type SingleSelectValue = number | string | null;
 
-export interface SelectOption<T> {
+export interface SelectOption<T extends MultiSelectOptionValue | string = MultiSelectOptionValue | string> {
   value: T;
   label?: string;
   label_translation?: FieldTranslationSelectOption;

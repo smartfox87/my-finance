@@ -7,7 +7,7 @@ import { ProcessedBudgetItem } from "@/types/budgets";
 import { IncomeItem } from "@/types/incomes";
 import { CostItem } from "@/types/costs";
 
-let blankArray = new Array(3).fill(null);
+const blankArray = new Array(3).fill(null);
 
 export const LazyList = ({ items, Item }: { items: (ProcessedBudgetItem | IncomeItem | CostItem)[]; Item: ReactComponentLike }) => {
   const { viewport, isMobile } = useViewport();
