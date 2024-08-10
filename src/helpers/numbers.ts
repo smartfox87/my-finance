@@ -8,5 +8,3 @@ export const getIntegerFromString = (value: string): number => {
   }
   return parsedValue;
 };
-
-export const checkIsPossibleNumber = (value: any): boolean => typeof value === "number" && !isNaN(value);

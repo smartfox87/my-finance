@@ -5,7 +5,7 @@ import AccountsModule from "@/app/[locale]/(inner)/accounts/content-module";
 import { getJsonLdBreadcrumbs, getJsonLdWebsite } from "@/helpers/jsonLd";
 import type { LinkItem } from "@/types/breadcrumbs";
 import { Pages } from "@/types/router";
-import { type Locale } from "@/types/locales";
+import type { Locale } from "@/types/locales";
 import { ReactElement } from "react";
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: Locale } }): Promise<Metadata> {

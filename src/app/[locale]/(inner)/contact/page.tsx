@@ -5,7 +5,7 @@ import ContactModule from "@/app/[locale]/(inner)/contact/content-module";
 import { getJsonLdBreadcrumbs, getJsonLdWebsite } from "@/helpers/jsonLd";
 import { LinkItem } from "@/types/breadcrumbs";
 import { Pages } from "@/types/router";
-import { type Locale } from "@/types/locales";
+import type { Locale } from "@/types/locales";
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: Locale } }): Promise<Metadata> {
   const { t } = await initTranslations({ locale });

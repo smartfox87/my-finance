@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 export const useLoading = (state: boolean): [boolean, (state: boolean) => void] => {
-  let loadingTimeStart = useRef(0);
-  let timeout = useRef<NodeJS.Timeout | null>(null);
+  const loadingTimeStart = useRef(0);
+  const timeout = useRef<NodeJS.Timeout | null>(null);
 
   const [isLoading, setIsLoading] = useState<boolean>(state);
 

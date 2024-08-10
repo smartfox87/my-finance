@@ -5,7 +5,6 @@ import { ReactNode, Suspense } from "react";
 import { Breadcrumbs } from "@/components/Common/Breadcrumbs";
 import { LinkItem } from "@/types/breadcrumbs";
 import { type Page } from "@/types/router";
-import { type Locale } from "@/types/locales";
 import { Spinner } from "@/components/Layout/Spinner";
 import { useTranslation } from "react-i18next";
 
