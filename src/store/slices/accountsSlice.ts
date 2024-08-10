@@ -2,9 +2,10 @@ import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/to
 import { createAccountItemApi, getAccountsListApi, updateAccountItemApi, deleteAccountItemApi, getAccountItemApi, createInitialAccountsApi } from "@/api/accounts";
 import { handleRejectedReducerAction } from "@/helpers/errors";
 import { createAccountTypeApi, updateAccountTypeApi } from "@/api/references";
-import { RootState, rootReducer } from "@/store";
+import { rootReducer } from "@/store";
 import { AccountItem, AccountItemUpdateData, AccountItemBalanceData, AccountsSliceState, AccountItemCreateData } from "@/types/accounts";
 import type { AccountTypeData } from "@/types/references";
+import type { RootState } from "@/types/store";
 
 const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
@@ -130,7 +131,7 @@ export const accountsSlice = createAppSlice({
   }),
 });
 
-declare module "@/store" {
+declare module "@/types/store" {
   export interface LazyLoadedSlices extends WithSlice<typeof accountsSlice> {}
 }
 

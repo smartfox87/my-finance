@@ -3,7 +3,7 @@ import { INITIAL_INCOME_FIELDS, INITIAL_INCOMES_FILTER_FIELDS } from "@/constant
 import { selectIncomeCategories } from "@/store/selectors/references";
 import { selectCurrency } from "@/store/selectors/profile";
 import { selectAccountsList } from "@/store/selectors/accounts";
-import { LazyLoadedSlices } from "@/store";
+import { LazyLoadedSlices } from "@/types/store";
 import { filterSingleItemsList, processFilterFields, sortItemsList } from "@/helpers/selectors";
 import { FieldIds, FieldTypes } from "@/types/field";
 import { IncomeItemField } from "@/types/incomes";

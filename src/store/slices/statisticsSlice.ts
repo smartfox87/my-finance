@@ -82,7 +82,7 @@ export const statisticsSlice = createAppSlice({
   }),
 });
 
-declare module "@/store" {
+declare module "@/types/store" {
   export interface LazyLoadedSlices extends WithSlice<typeof statisticsSlice> {}
 }
 

@@ -1,5 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { LazyLoadedSlices } from "@/store";
+import { LazyLoadedSlices } from "@/types/store";
 import { AccountTypesObject } from "@/types/references";
 
 export const selectCostCategories = ({ references }: LazyLoadedSlices) => references?.costCategories || null;

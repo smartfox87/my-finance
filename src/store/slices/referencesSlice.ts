@@ -81,7 +81,7 @@ export const referencesSlice = createAppSlice({
   }),
 });
 
-declare module "@/store" {
+declare module "@/types/store" {
   export interface LazyLoadedSlices extends WithSlice<typeof referencesSlice> {}
 }
 

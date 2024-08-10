@@ -52,7 +52,7 @@ export const profileSlice = createAppSlice({
   }),
 });
 
-declare module "@/store" {
+declare module "@/types/store" {
   export interface LazyLoadedSlices extends WithSlice<typeof profileSlice> {}
 }
 

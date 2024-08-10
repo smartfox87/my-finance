@@ -4,7 +4,7 @@ import { selectCostCategories } from "@/store/selectors/references";
 import { selectCurrency } from "@/store/selectors/profile";
 import { selectAccountsList } from "@/store/selectors/accounts";
 import { FieldIds, FieldTypes } from "@/types/field";
-import { LazyLoadedSlices } from "@/store";
+import { LazyLoadedSlices } from "@/types/store";
 import { filterSingleItemsList, getOptionsFromItemsList, processFilterFields, sortItemsList } from "@/helpers/selectors";
 import { CostItemField } from "@/types/costs";
 import dayjs from "dayjs";
