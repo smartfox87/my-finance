@@ -108,6 +108,6 @@ declare module "@/types/store" {
   export interface LazyLoadedSlices extends WithSlice<typeof authSlice> {}
 }
 
-const injectedReducers = rootReducer.inject(authSlice);
+rootReducer.inject(authSlice);
 
 export const { registerUserThunk, loginUserThunk, loginDemoUserThunk, logoutUserThunk, loginByProviderUserThunk, getUserSessionThunk, setUserReducer, clearUserReducer } = authSlice.actions;

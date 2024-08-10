@@ -128,6 +128,6 @@ declare module "@/types/store" {
   export interface LazyLoadedSlices extends WithSlice<typeof incomesSlice> {}
 }
 
-const injectedReducers = rootReducer.inject(incomesSlice);
+rootReducer.inject(incomesSlice);
 
 export const { setIncomeItem, setIncomesFilterValues, getIncomesListThunk, createIncomeItemThunk, getIncomeItemThunk, updateIncomeItemThunk, deleteIncomeItemThunk } = incomesSlice.actions;
