@@ -1,9 +1,9 @@
 import { Select } from "antd";
 import { handleFilterSelectOptions, renderSelectOption } from "@/helpers/fields";
 import { PeriodField } from "@/components/Form/PeriodField";
-import { MutableRefObject, SetStateAction, useEffect } from "react";
+import { MutableRefObject, ReactElement, SetStateAction, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { FieldTypes } from "@/types/field";
+import { FieldTypes, SingleSelectValue } from "@/types/field";
 import type { FilterState, ChangeFilterFieldValueHandler } from "@/types/filter";
 import type { ProcessedFilterField } from "@/types/selectors";
 import type { BaseSelectRef } from "rc-select";
@@ -49,7 +49,7 @@ export const FilterFields = ({
               optionRender={renderSelectOption}
               getPopupContainer={(triggerNode) => triggerNode.parentElement}
               showSearch={field.showSearch}
-              filterOption={field.showSearch ? handleFilterSelectOptions : undefined}
+              filterOption={field.showSearch ? handleFilterSelectOptions<SingleSelectValue, { label?: string | ReactElement }> : undefined}
               onChange={(value) => onChangeFieldValue({ id: field.id, value })}
             />
           )}
@@ -67,7 +67,7 @@ export const FilterFields = ({
               optionRender={renderSelectOption}
               getPopupContainer={(triggerNode) => triggerNode.parentElement}
               showSearch={field.showSearch}
-              filterOption={field.showSearch ? handleFilterSelectOptions : undefined}
+              filterOption={field.showSearch ? handleFilterSelectOptions<SingleSelectValue, { label?: string | ReactElement }> : undefined}
               onChange={(value) => onChangeFieldValue({ id: field.id, value })}
             />
           )}

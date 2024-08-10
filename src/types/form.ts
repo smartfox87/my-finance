@@ -19,8 +19,8 @@ export type SingleSelectFormFieldId = FieldIds.FROM | FieldIds.TO | FieldIds.SOR
 export type SingleSelectFormField<I extends SingleSelectFormFieldId = SingleSelectFormFieldId, V extends SingleSelectValue = SingleSelectValue> = BaseFormField & {
   id: I;
   type: FieldTypes.SELECT;
-  value: V;
   options: SelectOption<V>[];
+  value?: V;
   options_prefix?: string;
   showSearch?: boolean;
   multiple?: boolean;
@@ -30,8 +30,8 @@ export type MultiSelectFormFieldId = FieldIds.ACCOUNTS | FieldIds.CATEGORIES;
 export type MultiSelectFormField = BaseFormField & {
   id: MultiSelectFormFieldId;
   type: FieldTypes.MULTISELECT;
-  value: MultiSelectValue;
   options: SelectOption<MultiSelectOptionValue>[];
+  value: MultiSelectValue;
   options_prefix?: string;
   showSearch?: boolean;
   multiple?: boolean;
@@ -41,15 +41,15 @@ export type RadioButtonsFormFieldId = FieldIds.PERIOD;
 export type RadioButtonsFormField = BaseFormField & {
   id: RadioButtonsFormFieldId;
   type: FieldTypes.RADIO_BUTTONS;
-  value: string;
   options: Array<{ label?: string; label_translation: FieldTranslationRadioButtonOption; value: string }>;
+  value?: string;
 };
 
 export type FileFormFieldId = FieldIds.FILES;
 export type FileFormField = BaseFormField & {
   id: FileFormFieldId;
   type: FieldTypes.FILE;
-  value: UploadFile[];
+  value?: UploadFile[];
   multiple?: boolean;
   maxCount?: number;
   accept?: string;
@@ -61,7 +61,7 @@ export type DateFormField<I extends DateFormFieldId = DateFormFieldId> = BaseFor
   id: I;
   type: FieldTypes.DATE;
   picker: PickerPeriod;
-  value: Dayjs | string | null;
+  value?: Dayjs | string;
   disabledDate?: (current: Dayjs) => boolean;
 };
 
@@ -77,16 +77,16 @@ export type TextFormFieldType = FieldTypes.TEXT | FieldTypes.PASSWORD | FieldTyp
 export type TextFormField<I extends TextFormFieldId = TextFormFieldId, T extends TextFormFieldType = TextFormFieldType> = BaseFormField & {
   id: I;
   type: T;
-  value: string;
+  value?: string;
   maxLength?: number;
 };
 
 export type NumberFormFieldId = FieldIds.AMOUNT | FieldIds.BALANCE;
 // todo check value type
-export type NumberFormField<I extends NumberFormFieldId = NumberFormFieldId, V extends SingleSelectValue = Exclude<SingleSelectValue, null>> = BaseFormField & {
+export type NumberFormField<I extends NumberFormFieldId = NumberFormFieldId> = BaseFormField & {
   id: I;
   type: FieldTypes.NUMBER;
-  value: V;
+  value?: number | string;
 };
 
 export type FormField = DatesPeriodFormField | TextFormField | SingleSelectFormField | MultiSelectFormField | DateFormField | FileFormField | RadioButtonsFormField | NumberFormField;
@@ -101,7 +101,7 @@ export type ChangedField =
   | Pick<RadioButtonsFormField, "id" | "type" | "value">
   | Pick<NumberFormField, "id" | "type" | "value">;
 
-export type FormValue = Exclude<FormField["value"], null> | RcFile[];
+export type FormValue = FormField["value"] | RcFile[];
 
 export type FormValues = Record<FieldId, FormValue>;
 

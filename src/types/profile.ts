@@ -36,7 +36,7 @@ export interface ProfileSliceState {
   profile: Profile | null;
 }
 
-export type SettingsField = SingleSelectFormField<FieldIds.CURRENCY, number | null> | RadioButtonsFormField;
+export type SettingsField = SingleSelectFormField<FieldIds.CURRENCY, number> | RadioButtonsFormField;
 
 export type ProfileField =
   | TextFormField<FieldIds.FULL_NAME, FieldTypes.TEXT>
