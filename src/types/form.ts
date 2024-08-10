@@ -86,7 +86,7 @@ export type NumberFormFieldId = FieldIds.AMOUNT | FieldIds.BALANCE;
 export type NumberFormField<I extends NumberFormFieldId = NumberFormFieldId> = BaseFormField & {
   id: I;
   type: FieldTypes.NUMBER;
-  value?: number | string;
+  value?: number | string | null;
 };
 
 export type FormField = DatesPeriodFormField | TextFormField | SingleSelectFormField | MultiSelectFormField | DateFormField | FileFormField | RadioButtonsFormField | NumberFormField;
