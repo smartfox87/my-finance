@@ -42,8 +42,8 @@ export const FilterFields = ({
               size="large"
               mode="multiple"
               value={filterValues[field.id]}
-              options={field.options?.map(({ option, label, label_translation, value }) => ({
-                label: option || (label_translation ? `${field.options_prefix ? `${t(`fields.${field.options_prefix}`)} ` : ""}${t(`fields.${label_translation}`)}` : label || value),
+              options={field.options?.map(({ label, label_translation, value }) => ({
+                label: label_translation ? t(`fields.${label_translation}`) : label,
                 value,
               }))}
               optionRender={renderSelectOption}
@@ -60,8 +60,8 @@ export const FilterFields = ({
               className="w-full"
               size="large"
               value={filterValues[field.id]}
-              options={field.options?.map(({ option, label, label_translation, value }) => ({
-                label: option || (label_translation ? `${field.options_prefix ? `${t(`fields.${field.options_prefix}`)} ` : ""}${t(`fields.${label_translation}`)}` : label || value),
+              options={field.options?.map(({ label, label_translation, value }) => ({
+                label: label_translation ? t(`fields.${label_translation}`) : label,
                 value,
               }))}
               optionRender={renderSelectOption}

@@ -1,5 +1,5 @@
 import { DatesPeriods } from "@/types/date";
-import { ReactElement, ReactNode } from "react";
+import { ReactElement } from "react";
 
 export enum FieldIds {
   SORT = "sort",
@@ -55,7 +55,6 @@ export interface SelectOption<V extends MultiSelectOptionValue | SingleSelectVal
   value?: V;
   label?: string;
   label_translation?: FieldTranslationSelectOption;
-  option?: ReactNode;
 }
 
 export type FilterSelectOptionsHandler = <V extends string | number | undefined, O extends { label?: string | ReactElement } = { label?: string | ReactElement }>(

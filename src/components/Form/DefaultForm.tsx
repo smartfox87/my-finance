@@ -169,8 +169,8 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 size="large"
                 autoFocus={!!focus}
                 disabled={disabled}
-                options={field.options?.map(({ option, label, label_translation, value }) => ({
-                  label: option || (label_translation ? t(`fields.${label_translation}`) : label || value),
+                options={field.options?.map(({ label, label_translation, value }) => ({
+                  label: label_translation ? t(`fields.${label_translation}`) : label || value,
                   value,
                 }))}
                 showSearch={field.showSearch}
@@ -185,8 +185,8 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 autoFocus={!!focus}
                 mode="multiple"
                 disabled={disabled}
-                options={field.options?.map(({ option, label, label_translation, value }) => ({
-                  label: option || (label_translation ? t(`fields.${label_translation}`) : label || value),
+                options={field.options?.map(({ label, label_translation, value }) => ({
+                  label: label_translation ? t(`fields.${label_translation}`) : label || value,
                   value,
                 }))}
                 showSearch={field.showSearch}
