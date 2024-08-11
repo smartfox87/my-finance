@@ -56,12 +56,10 @@ export const getOptionsFromItemsList = <T extends ProcessedAccountItem | CostCat
   itemsList.map(({ id, name }) => ({ value: id, label: name }));
 
 export const getOptionsTranslations = <V extends MultiSelectOptionValue>(options: SelectOption<V>[]): SelectOption<MultiSelectOptionValue>[] =>
-  options
-    .map(({ label, label_translation, value }) => {
-      const labelString = i18nRef.t && label_translation ? i18nRef.t(`fields.${label_translation}`) : label;
-      return labelString && value ? { label: labelString, value } : false;
-    })
-    .filter((item) => isTruthy(item));
+  options.map(({ label, label_translation, value }) => {
+    const labelString = i18nRef.t && label_translation ? i18nRef.t(`fields.${label_translation}`) : label;
+    return { label: labelString, value };
+  });
 
 // todo try importance of Object.assign everywhere
 export const getOptionsObjectFromOptions = <T extends SingleSelectValue | MultiSelectOptionValue>(options: SelectOption<T>[]): Record<string, string> =>
