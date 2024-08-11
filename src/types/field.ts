@@ -1,5 +1,4 @@
 import { DatesPeriods } from "@/types/date";
-import { ReactElement } from "react";
 
 export enum FieldIds {
   SORT = "sort",
@@ -57,14 +56,9 @@ export interface SelectOption<V extends MultiSelectOptionValue | SingleSelectVal
   label_translation?: FieldTranslationSelectOption;
 }
 
-export type FilterSelectOptionsHandler = <V extends string | number | undefined, O extends { label?: string | ReactElement } = { label?: string | ReactElement }>(
-  inputValue: string,
-  option?: SelectOption<V> & O,
-) => boolean;
-
 type ConditionalSelectValue<T> = T extends { mode: "multiple" } ? MultiSelectValue : SingleSelectValue;
 
-export type SelectComponentProps<T> = T & { value?: ConditionalSelectValue<T>; filterOption?: FilterSelectOptionsHandler };
+export type SelectComponentProps<T> = T & { value?: ConditionalSelectValue<T> };
 
 export type FieldType = `${FieldTypes}`;
 

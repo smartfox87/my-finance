@@ -1,12 +1,11 @@
 import { decimalsKeys, integerKeys, navigationKeys } from "@/constants/input";
 import { type KeyboardEvent, isValidElement, ReactElement } from "react";
-import type { BaseOptionType } from "rc-select/es/Select";
+import type { BaseOptionType, DefaultOptionType, FilterFunc } from "rc-select/es/Select";
 import type { FlattenOptionData } from "rc-select/es/interface";
-import type { FilterSelectOptionsHandler } from "@/types/field";
 
-export const handleFilterSelectOptions: FilterSelectOptionsHandler = (inputValue, option) => {
+export const handleFilterSelectOptions: FilterFunc<DefaultOptionType> = (inputValue, option) => {
   if (isValidElement(option?.label)) return option.label.props["data-text"]?.toLowerCase().includes(inputValue.toLowerCase());
-  else return (option?.label ?? "").toLowerCase().includes(inputValue.toLowerCase());
+  else return (option?.label ?? "").toString().toLowerCase().includes(inputValue.toLowerCase());
 };
 
 // todo fix internationalization
