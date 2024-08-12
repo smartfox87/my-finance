@@ -9,9 +9,10 @@ import { useTranslation } from "react-i18next";
 import { getUserId } from "@/helpers/localStorage";
 import { MobileNav } from "@/components/layout/navigation/MobileNav";
 import { useAppDispatch } from "@/hooks/redux";
-import { type ReactNode, useEffect } from "react";
+import { useEffect } from "react";
+import type { ComponentChildrenProps } from "@/types/common";
 
-export default function MainLayout({ children }: { children: ReactNode }) {
+export default function MainLayout({ children }: ComponentChildrenProps) {
   const dispatch = useAppDispatch();
   const { isTablet } = useViewport();
   const {

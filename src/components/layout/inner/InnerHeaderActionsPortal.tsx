@@ -1,7 +1,8 @@
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
+import type { ComponentChildrenProps } from "@/types/common";
 
-export const InnerHeaderActionsPortal = ({ children }: { children: ReactNode }) => {
+export const InnerHeaderActionsPortal = ({ children }: ComponentChildrenProps) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {

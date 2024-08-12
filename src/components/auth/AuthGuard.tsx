@@ -4,9 +4,10 @@ import { useSelector } from "react-redux";
 import { selectUser } from "@/store/selectors/auth";
 import { useTranslation } from "react-i18next";
 import { DemoUserAuth } from "@/components/auth/DemoUserAuth";
-import { ReactNode, useMemo } from "react";
+import { useMemo } from "react";
+import type { ComponentChildrenProps } from "@/types/common";
 
-export const AuthGuard = ({ children }: { children: ReactNode }) => {
+export const AuthGuard = ({ children }: ComponentChildrenProps) => {
   const user = useSelector(selectUser);
   const { t } = useTranslation();
 

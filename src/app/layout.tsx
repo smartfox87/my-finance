@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
+import type { ComponentChildrenProps } from "@/types/common";
 
-export default async function RootLayout({ children }: { children: ReactNode }) {
+export default async function RootLayout({ children }: ComponentChildrenProps) {
   return <>{children}</>;
 }

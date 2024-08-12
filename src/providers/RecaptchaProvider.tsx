@@ -1,8 +1,9 @@
-import { createContext, createRef, forwardRef, ReactNode, useCallback, useEffect, useMemo, useState } from "react";
+import { createContext, createRef, forwardRef, useCallback, useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import * as Sentry from "@sentry/nextjs";
 import ReCAPTCHA, { type ReCAPTCHAProps } from "react-google-recaptcha";
 import { RecaptchaContextType } from "@/types/providers/recaptchaProvider";
+import type { ComponentChildrenProps } from "@/types/common";
 
 const siteKey = process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY;
 
@@ -20,7 +21,7 @@ const GoogleRecaptcha = dynamic(
 
 export const RecaptchaContext = createContext<RecaptchaContextType | undefined>(undefined);
 
-export const RecaptchaProvider = ({ children }: { children: ReactNode }) => {
+export const RecaptchaProvider = ({ children }: ComponentChildrenProps) => {
   if (!siteKey) throw new Error("RECAPTCHA_SITE_KEY is not defined in .env");
   const recaptchaRef = createRef<ReCAPTCHA>();
 

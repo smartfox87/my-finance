@@ -1,7 +1,7 @@
 import { useDarkTheme } from "@/hooks/theme";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/store/selectors/auth";
-import { createContext, ReactNode, useCallback, useEffect, useMemo, useState } from "react";
+import { createContext, useCallback, useEffect, useMemo, useState } from "react";
 import { useLocale } from "@/hooks/providers/locale";
 import { getUserId } from "@/helpers/localStorage";
 import dynamic from "next/dynamic";
@@ -9,6 +9,7 @@ import { Preloader } from "@/components/layout/preloader/Preloader";
 import { usePathname } from "next/navigation";
 import { Pages } from "@/types/router";
 import { AntdContextType, Theme } from "@/types/providers/antdProvider";
+import type { ComponentChildrenProps } from "@/types/common";
 
 const StyleProvider = dynamic(() => import("@ant-design/cssinjs/es/StyleContext").then(({ StyleProvider }) => StyleProvider));
 const ConfigProvider = dynamic(() => import("antd/es/config-provider"));
@@ -16,7 +17,7 @@ const AntdRegistry = dynamic(() => import("@ant-design/nextjs-registry").then(({
 
 export const AntdContext = createContext<AntdContextType | undefined>(undefined);
 
-export const AntdProvider = ({ children }: { children: ReactNode }) => {
+export const AntdProvider = ({ children }: ComponentChildrenProps) => {
   const darkTheme = useDarkTheme();
   const { antdLocale } = useLocale();
   const user = useSelector(selectUser);
