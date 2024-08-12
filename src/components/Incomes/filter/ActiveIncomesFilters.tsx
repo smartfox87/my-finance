@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { selectIncomesFilterFields, selectIncomesFilterValues } from "@/store/selectors/incomes";
 import { memo, useMemo } from "react";
 import { getActiveFilters } from "@/helpers/filters";
-import { ActiveFiltersList } from "@/components/Common/Filter/ActiveFiltersList";
+import { ActiveFiltersList } from "@/components/common/filter/ActiveFiltersList";
 import { ClearActiveFilterItemHandler } from "@/types/filter";
 import { isMultiSelectFormFieldId } from "@/predicates/form";
 import { isNumber } from "@/predicates/common";

@@ -7,10 +7,10 @@ import { getBudgetsListForChartsThunk, getCostsListForChartsThunk, getIncomesLis
 import { useCallback, useEffect, useState } from "react";
 import { INITIAL_STATISTICS_FILTER_FIELDS } from "@/constants/statistics";
 import { getUserId } from "@/helpers/localStorage";
-import { Preloader } from "@/components/Layout/preloader/Preloader";
+import { Preloader } from "@/components/layout/preloader/Preloader";
 import { useAppDispatch } from "@/hooks/redux";
 import { getFilterItemsFromFields } from "@/helpers/filters";
-import { StatisticsPageContent } from "@/components/Statistics/page/StatisticsPageContent";
+import { StatisticsPageContent } from "@/components/statistics/page/StatisticsPageContent";
 
 export default function StatisticsContent() {
   const dispatch = useAppDispatch();

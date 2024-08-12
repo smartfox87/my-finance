@@ -1,7 +1,7 @@
 "use client";
 
 import { useSelector } from "react-redux";
-import { Preloader } from "@/components/Layout/preloader/Preloader";
+import { Preloader } from "@/components/layout/preloader/Preloader";
 import { selectCostsFilterValues, selectCostsList } from "@/store/selectors/costs";
 import { useFilterSearchParams } from "@/hooks/filterSearchParams";
 import { useLoading } from "@/hooks/loading";
@@ -11,8 +11,8 @@ import { INITIAL_COSTS_FILTER_FIELDS } from "@/constants/costs";
 import { getUserId } from "@/helpers/localStorage";
 import { useAppDispatch } from "@/hooks/redux";
 import { getFilterItemsFromFields } from "@/helpers/filters";
-import { ExpensesPageActions } from "@/components/Costs/page/ExpensesPageActions";
-import { ExpensesPageContent } from "@/components/Costs/page/ExpensesPageContent";
+import { ExpensesPageActions } from "@/components/costs/page/ExpensesPageActions";
+import { ExpensesPageContent } from "@/components/costs/page/ExpensesPageContent";
 
 export default function ExpensesContent() {
   const dispatch = useAppDispatch();

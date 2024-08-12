@@ -3,7 +3,7 @@
 import { useSelector } from "react-redux";
 import { useLoading } from "@/hooks/loading";
 import { useCallback, useEffect } from "react";
-import { Preloader } from "@/components/Layout/preloader/Preloader";
+import { Preloader } from "@/components/layout/preloader/Preloader";
 import { selectBudgetsFilterValues, selectBudgetsList } from "@/store/selectors/budgets";
 import { useFilterSearchParams } from "@/hooks/filterSearchParams";
 import { getBudgetsListThunk, setBudgetsFilterValues } from "@/store/slices/budgetsSlice";
@@ -11,8 +11,8 @@ import { INITIAL_BUDGETS_FILTER_FIELDS } from "@/constants/budgets";
 import { getUserId } from "@/helpers/localStorage";
 import { useAppDispatch } from "@/hooks/redux";
 import { getFilterItemsFromFields } from "@/helpers/filters";
-import BudgetsPageContent from "@/components/Budgets/page/BudgetsPageContent";
-import { BudgetsPageActions } from "@/components/Budgets/page/BudgetsPageActions";
+import BudgetsPageContent from "@/components/budgets/page/BudgetsPageContent";
+import { BudgetsPageActions } from "@/components/budgets/page/BudgetsPageActions";
 
 export default function BudgetsContent() {
   const dispatch = useAppDispatch();

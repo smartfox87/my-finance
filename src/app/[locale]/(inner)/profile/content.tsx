@@ -9,8 +9,8 @@ import { showNotification } from "@/helpers/modals";
 import { useAppDispatch } from "@/hooks/redux";
 import { showCommonError } from "@/helpers/errors";
 import { isProfileData } from "@/predicates/profile";
-import { ProfilePageActions } from "@/components/Profile/page/ProfilePageActions";
-import { ProfileDates } from "@/components/Profile/page/ProfileDates";
+import { ProfilePageActions } from "@/components/profile/page/ProfilePageActions";
+import { ProfileDates } from "@/components/profile/page/ProfileDates";
 import type { DefaultFormSaveHandler } from "@/types/form";
 
 export default function ProfileContent() {

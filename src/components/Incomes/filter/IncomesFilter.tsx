@@ -9,7 +9,7 @@ import SvgFilter from "@/assets/sprite/filter.svg";
 import { useViewport } from "@/hooks/viewport";
 import { prepareObjectValuesForFilterStateValues, setFilterValue } from "@/helpers/filters";
 import { useFieldFocus } from "@/hooks/fieldFocus";
-import { FilterFields } from "@/components/Common/Filter/FilterFields";
+import { FilterFields } from "@/components/common/filter/FilterFields";
 import type { BaseSelectRef } from "rc-select";
 import { ChangeFilterFieldValueHandler } from "@/types/filter";
 import { FieldIds } from "@/types/field";
