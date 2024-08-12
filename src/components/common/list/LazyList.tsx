@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { Preloader } from "@/components/layout/preloader/Preloader";
 import { useViewport } from "@/hooks/viewport";
 import { Viewports } from "@/types/viewport";
-import { ReactComponentLike } from "prop-types";
-import { ProcessedBudgetItem } from "@/types/budgets";
-import { IncomeItem } from "@/types/incomes";
-import { CostItem } from "@/types/costs";
+import type { ReactComponentLike } from "prop-types";
+import type { ProcessedBudgetItem } from "@/types/budgets";
+import type { IncomeItem } from "@/types/incomes";
+import type { CostItem } from "@/types/costs";
 
 const blankArray = new Array(3).fill(null);
 
@@ -17,11 +17,11 @@ export const LazyList = ({ items, Item }: { items: (ProcessedBudgetItem | Income
   const triggerRef = useRef<HTMLDivElement | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
+  useEffect((): void => {
     setLazyItems(items.slice(0, loadItemsQuantity));
   }, [items]);
 
-  useEffect(() => {
+  useEffect((): (() => void) => {
     observer.current = new IntersectionObserver((entries) => {
       entries.forEach(({ isIntersecting }) => {
         if (isIntersecting && lazyItems.length < items.length) {
@@ -34,7 +34,7 @@ export const LazyList = ({ items, Item }: { items: (ProcessedBudgetItem | Income
     return () => observer.current?.disconnect();
   }, [lazyItems, items]);
 
-  useEffect(() => {
+  useEffect((): void => {
     setIsLoading(false);
   }, [isLoading]);
 

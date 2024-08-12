@@ -1,7 +1,7 @@
 import { Button } from "antd";
 import { checkIsClearableFilter } from "@/helpers/filters";
 import SvgCrossBold from "@/assets/sprite/cross-bold.svg";
-import { ActiveFilterItem, ClearActiveFilterItemHandler } from "@/types/filter";
+import type { ActiveFilterItem, ClearActiveFilterItemHandler } from "@/types/filter";
 
 export const ActiveFiltersList = ({ items, onClearFilter }: { items: ActiveFilterItem[]; onClearFilter: ClearActiveFilterItemHandler }) => {
   return (

@@ -25,7 +25,7 @@ export const FilterFields = ({
 }) => {
   const { t } = useTranslation();
 
-  useEffect(() => {
+  useEffect((): (() => void) => {
     onMount(true);
     return () => onMount(false);
   }, []);
