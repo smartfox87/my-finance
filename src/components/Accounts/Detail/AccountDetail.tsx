@@ -12,11 +12,11 @@ import { CalculatorModal } from "@/components/Calculator/CalculatorModal";
 import { Button } from "antd";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAppDispatch } from "@/hooks/redux";
-import { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 import { showCommonError } from "@/helpers/errors";
-import { FieldIds, FieldTypes } from "@/types/field";
 import { isAccountItemUpdateData } from "@/predicates/account";
-import { CalculatorSaveHandler } from "@/types/calculator";
+import { FieldIds, FieldTypes } from "@/types/field";
+import type { CalculatorSaveHandler } from "@/types/calculator";
+import type { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 
 export const AccountDetail = memo(function AccountDetail({ onSave }: { onSave: (props?: { types: boolean }) => Promise<void> }) {
   const { t } = useTranslation();
@@ -35,7 +35,7 @@ export const AccountDetail = memo(function AccountDetail({ onSave }: { onSave: (
     dispatch(setAccountItem(null));
   };
 
-  useEffect(() => {
+  useEffect((): void => {
     if (accountId) {
       setIsOpen(true);
       setIsLoading(true);
@@ -54,12 +54,13 @@ export const AccountDetail = memo(function AccountDetail({ onSave }: { onSave: (
         : { [FieldIds.BALANCE]: fieldsValues[FieldIds.BALANCE], [FieldIds.NAME]: fieldsValues[FieldIds.NAME] };
       if (!isAccountItemUpdateData(accountData)) return;
       await dispatch(updateAccountItemThunk({ accountId: accountItem.id, accountData })).unwrap();
-      setIsLoading(false);
       await onSave();
       handleCloseModal();
       showNotification({ title: t("notifications.account.update") });
     } catch (error) {
       showCommonError();
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -68,12 +69,13 @@ export const AccountDetail = memo(function AccountDetail({ onSave }: { onSave: (
       if (!accountItem) return;
       setIsBtnLoading(true);
       await dispatch(deleteAccountItemThunk(accountItem.id)).unwrap();
-      setIsBtnLoading(false);
       await onSave();
       handleCloseModal();
       showNotification({ title: t("notifications.account.delete") });
     } catch (error) {
       showCommonError();
+    } finally {
+      setIsBtnLoading(false);
     }
   };
 

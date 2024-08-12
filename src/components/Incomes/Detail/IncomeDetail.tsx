@@ -50,12 +50,13 @@ export const IncomeDetail = memo(function IncomeDetail({ onSave }: { onSave: () 
     try {
       if (!(incomeItem && isIncomeItemData(fieldsValues))) return;
       await dispatch(updateIncomeItemThunk({ incomeId: incomeItem.id, incomeData: fieldsValues })).unwrap();
-      setIsLoading(false);
       await onSave();
       handleCloseModal();
       showNotification({ title: t("notifications.income.update") });
     } catch (error) {
       showCommonError();
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -64,12 +65,13 @@ export const IncomeDetail = memo(function IncomeDetail({ onSave }: { onSave: () 
       if (!incomeItem) return;
       setIsBtnLoading(true);
       await dispatch(deleteIncomeItemThunk(incomeItem.id)).unwrap();
-      setIsBtnLoading(false);
       await onSave();
       handleCloseModal();
       showNotification({ title: t("notifications.income.delete") });
     } catch (error) {
       showCommonError();
+    } finally {
+      setIsBtnLoading(false);
     }
   };
 

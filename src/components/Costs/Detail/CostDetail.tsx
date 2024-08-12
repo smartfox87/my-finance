@@ -50,12 +50,13 @@ export const CostDetail = memo(function CostDetail({ onSave }: { onSave: () => P
     try {
       if (!(costItem && isCostItemData(fieldsValues))) return;
       await dispatch(updateCostItemThunk({ costId: costItem.id, costData: fieldsValues })).unwrap();
-      setIsLoading(false);
       await onSave();
       handleCloseModal();
       showNotification({ title: t("notifications.expense.update") });
     } catch (error) {
       showCommonError();
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -64,12 +65,13 @@ export const CostDetail = memo(function CostDetail({ onSave }: { onSave: () => P
       if (!costItem) return;
       setIsBtnLoading(true);
       await dispatch(deleteCostItemThunk(costItem.id)).unwrap();
-      setIsBtnLoading(false);
       await onSave();
       handleCloseModal();
       showNotification({ title: t("notifications.expense.delete") });
     } catch (error) {
       showCommonError();
+    } finally {
+      setIsBtnLoading(false);
     }
   };
 

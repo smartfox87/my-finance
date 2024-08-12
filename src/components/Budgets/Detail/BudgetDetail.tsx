@@ -50,12 +50,13 @@ export const BudgetDetail = memo(function BudgetDetail({ onSave }: { onSave: () 
     try {
       if (!(budgetItem && isBudgetItemData(fieldsValues))) return;
       await dispatch(updateBudgetItemThunk({ budgetId: budgetItem.id, budgetData: fieldsValues })).unwrap();
-      setIsLoading(false);
       await onSave();
       handleCloseModal();
       showNotification({ title: t("notifications.budget.update") });
     } catch (error) {
       showCommonError();
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -64,12 +65,13 @@ export const BudgetDetail = memo(function BudgetDetail({ onSave }: { onSave: () 
       if (!budgetItem) return;
       setIsBtnLoading(true);
       await dispatch(deleteBudgetItemThunk(budgetItem.id)).unwrap();
-      setIsBtnLoading(false);
       await onSave();
       handleCloseModal();
       showNotification({ title: t("notifications.budget.delete") });
     } catch (error) {
       showCommonError();
+    } finally {
+      setIsBtnLoading(false);
     }
   };
 
