@@ -2,7 +2,7 @@ import { GoogleAuth } from "@/components/auth/GoogleAuth";
 import { DemoUserAuth } from "@/components/auth/DemoUserAuth";
 import { SideModal } from "@/components/modals/SideModal";
 import { DefaultForm } from "@/components/form/DefaultForm";
-import { DefaultFormSaveHandler, FormField } from "@/types/form";
+import type { DefaultFormSaveHandler, FormField } from "@/types/form";
 
 export const AuthModal = ({
   type,

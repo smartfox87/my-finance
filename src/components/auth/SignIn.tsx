@@ -7,9 +7,9 @@ import { useAntd } from "@/hooks/providers/antd";
 import { useModalState } from "@/hooks/providers/modalState";
 import dynamic from "next/dynamic";
 import { useAppDispatch } from "@/hooks/redux";
-import { DefaultFormSaveHandler } from "@/types/form";
 import { isLoginData } from "@/predicates/auth";
 import { showCommonError } from "@/helpers/errors";
+import type { DefaultFormSaveHandler } from "@/types/form";
 
 const AuthModal = dynamic(() => import("@/components/auth/AuthModal").then(({ AuthModal }) => ({ default: AuthModal })));
 
@@ -27,7 +27,7 @@ export const SignIn = () => {
     if (!isLoadedAntd) initAntd();
   };
 
-  const handleSubmitForm: DefaultFormSaveHandler = async (fieldsValues): Promise<void> => {
+  const handleSubmitForm: DefaultFormSaveHandler = async (fieldsValues) => {
     try {
       if (!isLoginData(fieldsValues)) return;
       const { loginUserThunk } = await import("@/store/slices/authSlice");

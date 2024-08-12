@@ -10,7 +10,7 @@ import dynamic from "next/dynamic";
 import { useAppDispatch } from "@/hooks/redux";
 import { isRegisterData } from "@/predicates/auth";
 import { showCommonError } from "@/helpers/errors";
-import { DefaultFormSaveHandler } from "@/types/form";
+import type { DefaultFormSaveHandler } from "@/types/form";
 
 const AuthModal = dynamic(() => import("@/components/auth/AuthModal").then(({ AuthModal }) => ({ default: AuthModal })));
 
@@ -30,7 +30,7 @@ export const SignUp = () => {
     if (!isLoadedCaptcha) initCaptcha();
   };
 
-  const handleSubmitForm: DefaultFormSaveHandler = async (fieldsValues): Promise<void> => {
+  const handleSubmitForm: DefaultFormSaveHandler = async (fieldsValues) => {
     try {
       const score = await getScore();
       const registerData = { ...fieldsValues, score };
