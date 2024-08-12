@@ -2,17 +2,17 @@ import { forwardRef, SetStateAction, useImperativeHandle, useState } from "react
 import { CalculatorResult } from "@/components/calculator/CalculatorResult";
 import { CalculatorKeyPad } from "@/components/calculator/CalculatorKeyPad";
 import { decimalsKeys, integerKeys, mathOperatorsKeys, navigationKeys } from "@/constants/input";
-import { ButtonClickHandler, ResultChangeHandler, ResultKeyDownHandler } from "@/types/calculator";
+import type { ButtonClickHandler, ResultChangeHandler, ResultKeyDownHandler } from "@/types/calculator";
 
 // notice: setState type
 export const Calculator = forwardRef(function Calculator({ onCalculate }: { onCalculate: (result: SetStateAction<number>) => void }, ref) {
   const [result, setResult] = useState("");
 
-  const clear = () => setResult("");
+  const clear = (): void => setResult("");
 
-  const backspace = () => setResult((prevResult) => prevResult.toString().slice(0, -1));
+  const backspace = (): void => setResult((prevResult) => prevResult.toString().slice(0, -1));
 
-  const calculate = () => {
+  const calculate = (): void => {
     const checkResult = result.includes("--") ? result.replace("--", "+") : result;
 
     try {

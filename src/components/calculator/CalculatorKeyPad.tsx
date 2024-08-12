@@ -2,7 +2,7 @@ import { CalculatorButton } from "@/components/calculator/CalculatorButton";
 import SvgDelete from "@/assets/sprite/delete.svg";
 import SvgBackspace from "@/assets/sprite/backspace.svg";
 import { useTranslation } from "react-i18next";
-import { ButtonClickHandler } from "@/types/calculator";
+import type { ButtonClickHandler } from "@/types/calculator";
 
 export const CalculatorKeyPad = ({ onClick }: { onClick: ButtonClickHandler }) => {
   const { t } = useTranslation();

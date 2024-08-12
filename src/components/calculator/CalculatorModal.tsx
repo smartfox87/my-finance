@@ -1,14 +1,14 @@
-import { ReactNode, useRef, useState } from "react";
 import { Button } from "antd";
 import { SideModal } from "@/components/modals/SideModal";
 import { Calculator } from "@/components/calculator/Calculator";
 import SvgCalculator from "@/assets/sprite/calculator.svg";
 import SvgPassPrice from "@/assets/sprite/pass-price.svg";
-import { CalculatorRef, CalculatorSaveHandler } from "@/types/calculator";
+import { type ReactNode, useRef, useState } from "react";
+import type { CalculatorRef, CalculatorSaveHandler } from "@/types/calculator";
 
 export const CalculatorModal = ({ title, buttonOpen, buttonSave, onSave }: { title: string; buttonOpen: ReactNode; buttonSave: ReactNode; onSave: CalculatorSaveHandler }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const handleToggleVisibility = () => setIsOpen((prevState) => !prevState);
+  const handleToggleVisibility = (): void => setIsOpen((prevState) => !prevState);
 
   const calculatorRef = useRef<CalculatorRef | null>(null);
   const [value, setValue] = useState(0);
