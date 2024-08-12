@@ -14,8 +14,9 @@ import { useAppDispatch } from "@/hooks/redux";
 import { FilterFields } from "@/components/common/filter/FilterFields";
 import type { BaseSelectRef } from "rc-select";
 import { ChangeFilterFieldValueHandler } from "@/types/filter";
+import type { ComponentOnSaveProps } from "@/types/common";
 
-export const StatisticsFilter = memo(function StatisticsFilter({ onSave }: { onSave: () => Promise<void> }) {
+export const StatisticsFilter = memo(function StatisticsFilter({ onSave }: ComponentOnSaveProps) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { isMobile } = useViewport();

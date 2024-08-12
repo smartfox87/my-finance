@@ -9,13 +9,14 @@ import SvgFilter from "@/assets/sprite/filter.svg";
 import { useViewport } from "@/hooks/viewport";
 import { useFieldFocus } from "@/hooks/fieldFocus";
 import { prepareObjectValuesForFilterStateValues, setFilterValue } from "@/helpers/filters";
-import { FieldIds } from "@/types/field";
 import { useAppDispatch } from "@/hooks/redux";
-import { FilterState, ChangeFilterFieldValueHandler } from "@/types/filter";
-import { BaseSelectRef } from "rc-select";
 import { FilterFields } from "@/components/common/filter/FilterFields";
+import { FieldIds } from "@/types/field";
+import type { BaseSelectRef } from "rc-select";
+import type { FilterState, ChangeFilterFieldValueHandler } from "@/types/filter";
+import type { ComponentOnSaveProps } from "@/types/common";
 
-export const BudgetsFilter = memo(function BudgetsFilter({ onSave }: { onSave: () => Promise<void> }) {
+export const BudgetsFilter = memo(function BudgetsFilter({ onSave }: ComponentOnSaveProps) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { isMobile } = useViewport();

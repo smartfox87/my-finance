@@ -3,12 +3,12 @@ import { selectBudgetsFilterFields, selectBudgetsFilterValues } from "@/store/se
 import { setBudgetsFilterValues } from "@/store/slices/budgetsSlice";
 import { memo, useMemo } from "react";
 import { getActiveFilters } from "@/helpers/filters";
-import { ActiveFilterItemValue } from "@/types/filter";
 import { ActiveFiltersList } from "@/components/common/filter/ActiveFiltersList";
 import { isMultiSelectFormFieldId } from "@/predicates/form";
 import { isNumber } from "@/predicates/common";
 import { isMultiSelectValue } from "@/predicates/field";
 import { useAppDispatch } from "@/hooks/redux";
+import type { ActiveFilterItemValue } from "@/types/filter";
 
 export const ActiveBudgetsFilters = memo(function ActiveBudgetsFilters() {
   const dispatch = useAppDispatch();
@@ -18,7 +18,7 @@ export const ActiveBudgetsFilters = memo(function ActiveBudgetsFilters() {
 
   const activeFilters = useMemo(() => getActiveFilters(budgetsFilterFields, budgetsFilterValues), [budgetsFilterFields, budgetsFilterValues]);
 
-  const handleClearFilter = ({ id, value }: ActiveFilterItemValue) => {
+  const handleClearFilter = ({ id, value }: ActiveFilterItemValue): void => {
     const filterStateItemValue = budgetsFilterValues?.[id];
     if (isMultiSelectFormFieldId(id) && isNumber(value) && isMultiSelectValue(filterStateItemValue))
       dispatch(setBudgetsFilterValues([{ id, value: filterStateItemValue.filter((val) => val !== value) }]));

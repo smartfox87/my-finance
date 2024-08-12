@@ -17,8 +17,9 @@ import { showCommonError } from "@/helpers/errors";
 import { isIncomeItemData } from "@/predicates/incomes";
 import { FieldIds, FieldTypes } from "@/types/field";
 import { CalculatorSaveHandler } from "@/types/calculator";
+import type { ComponentOnSaveProps } from "@/types/common";
 
-export const IncomeDetail = memo(function IncomeDetail({ onSave }: { onSave: () => Promise<void> }) {
+export const IncomeDetail = memo(function IncomeDetail({ onSave }: ComponentOnSaveProps) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const searchParams = useSearchParams();

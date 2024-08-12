@@ -13,8 +13,9 @@ import { FilterFields } from "@/components/common/filter/FilterFields";
 import type { BaseSelectRef } from "rc-select";
 import { ChangeFilterFieldValueHandler } from "@/types/filter";
 import { FieldIds } from "@/types/field";
+import type { ComponentOnSaveProps } from "@/types/common";
 
-export const IncomesFilter = memo(function IncomesFilter({ onSave }: { onSave: () => Promise<void> }) {
+export const IncomesFilter = memo(function IncomesFilter({ onSave }: ComponentOnSaveProps) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { isMobile } = useViewport();

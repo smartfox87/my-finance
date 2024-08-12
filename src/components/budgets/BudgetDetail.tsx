@@ -17,8 +17,9 @@ import { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 import { FieldIds, FieldTypes } from "@/types/field";
 import { isBudgetItemData } from "@/predicates/budget";
 import { CalculatorSaveHandler } from "@/types/calculator";
+import type { ComponentOnSaveProps } from "@/types/common";
 
-export const BudgetDetail = memo(function BudgetDetail({ onSave }: { onSave: () => Promise<void> }) {
+export const BudgetDetail = memo(function BudgetDetail({ onSave }: ComponentOnSaveProps) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const router = useRouter();

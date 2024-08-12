@@ -17,8 +17,9 @@ import { useAppDispatch } from "@/hooks/redux";
 import { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 import { FieldIds, FieldTypes } from "@/types/field";
 import { CalculatorSaveHandler } from "@/types/calculator";
+import type { ComponentOnSaveProps } from "@/types/common";
 
-export const CostDetail = memo(function CostDetail({ onSave }: { onSave: () => Promise<void> }) {
+export const CostDetail = memo(function CostDetail({ onSave }: ComponentOnSaveProps) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const searchParams = useSearchParams();

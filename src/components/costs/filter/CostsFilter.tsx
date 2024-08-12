@@ -14,8 +14,9 @@ import type { BaseSelectRef } from "rc-select";
 import { FilterState, ChangeFilterFieldValueHandler } from "@/types/filter";
 import { FilterFields } from "@/components/common/filter/FilterFields";
 import { useAppDispatch } from "@/hooks/redux";
+import type { ComponentOnSaveProps } from "@/types/common";
 
-export const CostsFilter = memo(function CostsFilter({ onSave }: { onSave: () => Promise<void> }) {
+export const CostsFilter = memo(function CostsFilter({ onSave }: ComponentOnSaveProps) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { isMobile } = useViewport();
