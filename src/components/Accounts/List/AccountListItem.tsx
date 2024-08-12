@@ -9,7 +9,7 @@ import { isTextClamped } from "@/helpers/isTextClamped";
 import { useViewport } from "@/hooks/viewport";
 import { getFullDate } from "@/helpers/date";
 import Link from "next/link";
-import { ProcessedAccountItem } from "@/types/accounts";
+import type { ProcessedAccountItem } from "@/types/accounts";
 
 export const AccountListItem = ({ id, name, balance, updated_at }: ProcessedAccountItem) => {
   const { t } = useTranslation();
@@ -19,7 +19,7 @@ export const AccountListItem = ({ id, name, balance, updated_at }: ProcessedAcco
   const [isTooltipName, setIsTooltipName] = useState(false);
   const capitalizedName = uppercaseFirstLetter(name);
 
-  useEffect(() => {
+  useEffect((): void => {
     if (isTouchDevice) return;
     if (nameRef.current) setIsTooltipName(isTextClamped(nameRef.current));
   }, [name, isTouchDevice]);

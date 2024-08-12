@@ -11,11 +11,11 @@ import SvgNewAccount from "@/assets/sprite/new-account.svg";
 import { CalculatorModal } from "@/components/Calculator/CalculatorModal";
 import { useViewport } from "@/hooks/viewport";
 import { useAppDispatch } from "@/hooks/redux";
-import { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 import { showCommonError } from "@/helpers/errors";
 import { isAccountItemCreateData } from "@/predicates/account";
 import { FieldIds, FieldTypes } from "@/types/field";
-import { CalculatorSaveHandler } from "@/types/calculator";
+import type { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
+import type { CalculatorSaveHandler } from "@/types/calculator";
 
 export const AddNewAccount = memo(function AddNewAccount({ onSave }: { onSave: (props?: { types: boolean }) => Promise<void> }) {
   const { t } = useTranslation();
@@ -23,9 +23,9 @@ export const AddNewAccount = memo(function AddNewAccount({ onSave }: { onSave: (
   const { isMobile } = useViewport();
 
   const [isOpen, setIsOpen] = useState(false);
-  const handleToggleVisibility = () => setIsOpen((prevState) => !prevState);
+  const handleToggleVisibility = (): void => setIsOpen((prevState) => !prevState);
 
-  const newAccountFields = useSelector(selectAccountFields).map((field) => ({ ...field, focus: field.id === "name" }));
+  const newAccountFields = useSelector(selectAccountFields);
 
   const handleSaveNewAccount: DefaultFormSaveHandler = async (fieldsValues) => {
     try {
