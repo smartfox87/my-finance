@@ -1,4 +1,4 @@
-import { AccountListItem } from "@/components/Accounts/List/AccountListItem";
+import { AccountListItem } from "@/components/Accounts/AccountListItem";
 import { useSelector } from "react-redux";
 import { selectAccountsList } from "@/store/selectors/accounts";
 

@@ -1,11 +1,11 @@
-import { AddNewCost } from "@/components/Costs/New/AddNewCost";
-import { CostsFilter } from "@/components/Costs/Filter/CostsFilter";
-import { ActiveCostsFilters } from "@/components/Costs/Filter/ActiveCostsFilters";
+import { AddNewCost } from "@/components/Costs/AddNewCost";
+import { CostsFilter } from "@/components/Costs/filter/CostsFilter";
+import { ActiveCostsFilters } from "@/components/Costs/filter/ActiveCostsFilters";
 import { LazyList } from "@/components/Common/LazyList";
-import { CostListItem } from "@/components/Costs/List/CostListItem";
+import { CostListItem } from "@/components/Costs/list/CostListItem";
 import { Suspense } from "react";
-import { CostDetail } from "@/components/Costs/Detail/CostDetail";
-import { EmptyCosts } from "@/components/Costs/List/EmptyCosts";
+import { CostDetail } from "@/components/Costs/CostDetail";
+import { EmptyCosts } from "@/components/Costs/list/EmptyCosts";
 import { FoundNothing } from "@/components/Common/FoundNothing";
 import { useSelector } from "react-redux";
 import { selectCostsByFilter, selectCostsList } from "@/store/selectors/costs";

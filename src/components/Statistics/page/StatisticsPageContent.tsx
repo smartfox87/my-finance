@@ -1,11 +1,11 @@
 import { TotalStatistics } from "@/components/Statistics/page/TotalStatistics";
-import { CostsBudgetsStatistics } from "@/components/Statistics/CostsBudgets/CostsBudgetsStatistics";
-import { CostsIncomesStatistics } from "@/components/Statistics/CostsIncomes/CostsIncomesStatistics";
-import { CostsCategoriesStatistics } from "@/components/Statistics/CostsCategories/CostsCategoriesStatistics";
-import { IncomesCategoriesStatistics } from "@/components/Statistics/IncomesCategories/IncomesCategoriesStatistics";
-import { EmptyCosts } from "@/components/Costs/List/EmptyCosts";
-import { StatisticsFilter } from "@/components/Statistics/Filter/StatisticsFilter";
-import { ActiveStatisticsFilters } from "@/components/Statistics/Filter/ActiveStatisticsFilters";
+import { CostsBudgetsStatistics } from "@/components/Statistics/costsBudgets/CostsBudgetsStatistics";
+import { CostsIncomesStatistics } from "@/components/Statistics/costsIncomes/CostsIncomesStatistics";
+import { CostsCategoriesStatistics } from "@/components/Statistics/costsCategories/CostsCategoriesStatistics";
+import { IncomesCategoriesStatistics } from "@/components/Statistics/incomesCategories/IncomesCategoriesStatistics";
+import { EmptyCosts } from "@/components/Costs/list/EmptyCosts";
+import { StatisticsFilter } from "@/components/Statistics/filter/StatisticsFilter";
+import { ActiveStatisticsFilters } from "@/components/Statistics/filter/ActiveStatisticsFilters";
 import { FoundNothing } from "@/components/Common/FoundNothing";
 import { useSelector } from "react-redux";
 import { selectCostCategories, selectIncomeCategories } from "@/store/selectors/references";

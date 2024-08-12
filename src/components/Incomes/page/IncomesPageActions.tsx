@@ -1,4 +1,4 @@
-import { InnerHeaderActionsPortal } from "@/components/Layout/Inner/InnerHeaderActionsPortal";
+import { InnerHeaderActionsPortal } from "@/components/Layout/inner/InnerHeaderActionsPortal";
 import { useSelector } from "react-redux";
 import { selectCurrency } from "@/store/selectors/profile";
 import formatPrice from "@/helpers/formatPrice";

@@ -5,7 +5,7 @@ import { createContext, ReactNode, useCallback, useEffect, useMemo, useState } f
 import { useLocale } from "@/hooks/providers/locale";
 import { getUserId } from "@/helpers/localStorage";
 import dynamic from "next/dynamic";
-import { Preloader } from "@/components/Layout/Preloader";
+import { Preloader } from "@/components/Layout/preloader/Preloader";
 import { usePathname } from "next/navigation";
 import { Pages } from "@/types/router";
 import { AntdContextType, Theme } from "@/types/providers/antdProvider";

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { SimpleButton } from "@/components/Form/SimpleButton";
+import { SimpleButton } from "@/components/form/SimpleButton";
 import * as Sentry from "@sentry/nextjs";
 import { useRouter } from "next/navigation";
 

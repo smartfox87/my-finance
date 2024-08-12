@@ -3,10 +3,10 @@
 import { useLoading } from "@/hooks/loading";
 import { useCallback } from "react";
 import { getAccountsListThunk } from "@/store/slices/accountsSlice";
-import { Preloader } from "@/components/Layout/Preloader";
-import { AddNewAccount } from "@/components/Accounts/New/AddNewAccount";
-import { TransferBetweenAccounts } from "@/components/Accounts/transfer/TransferBetweenAccounts";
-import { AccountDetail } from "@/components/Accounts/Detail/AccountDetail";
+import { Preloader } from "@/components/Layout/preloader/Preloader";
+import { AddNewAccount } from "@/components/Accounts/AddNewAccount";
+import { TransferBetweenAccounts } from "@/components/Accounts/TransferBetweenAccounts";
+import { AccountDetail } from "@/components/Accounts/AccountDetail";
 import { getAccountTypesThunk } from "@/store/slices/referencesSlice";
 import { useAppDispatch } from "@/hooks/redux";
 import { AccountsList } from "@/components/Accounts/page/AccountsList";

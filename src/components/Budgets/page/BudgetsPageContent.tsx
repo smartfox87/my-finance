@@ -1,13 +1,13 @@
 import { useSelector } from "react-redux";
 import { Suspense } from "react";
 import { selectBudgetsByFilter, selectBudgetsList } from "@/store/selectors/budgets";
-import { AddNewBudget } from "@/components/Budgets/New/AddNewBudget";
-import { BudgetsFilter } from "@/components/Budgets/Filter/BudgetsFilter";
-import { ActiveBudgetsFilters } from "@/components/Budgets/Filter/ActiveBudgetsFilters";
+import { AddNewBudget } from "@/components/Budgets/AddNewBudget";
+import { BudgetsFilter } from "@/components/Budgets/filter/BudgetsFilter";
+import { ActiveBudgetsFilters } from "@/components/Budgets/filter/ActiveBudgetsFilters";
 import { LazyList } from "@/components/Common/LazyList";
-import { BudgetItem } from "@/components/Budgets/List/BudgetItem";
-import { BudgetDetail } from "@/components/Budgets/Detail/BudgetDetail";
-import { EmptyBudgets } from "@/components/Budgets/List/EmptyBudgets";
+import { BudgetItem } from "@/components/Budgets/list/BudgetItem";
+import { BudgetDetail } from "@/components/Budgets/BudgetDetail";
+import { EmptyBudgets } from "@/components/Budgets/list/EmptyBudgets";
 import { FoundNothing } from "@/components/Common/FoundNothing";
 import type { PageContentProps } from "@/types/common";
 

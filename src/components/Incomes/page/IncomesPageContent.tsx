@@ -1,11 +1,11 @@
-import { AddNewIncome } from "@/components/Incomes/New/AddNewIncome";
-import { IncomesFilter } from "@/components/Incomes/Filter/IncomesFilter";
-import { ActiveIncomesFilters } from "@/components/Incomes/Filter/ActiveIncomesFilters";
+import { AddNewIncome } from "@/components/Incomes/AddNewIncome";
+import { IncomesFilter } from "@/components/Incomes/filter/IncomesFilter";
+import { ActiveIncomesFilters } from "@/components/Incomes/filter/ActiveIncomesFilters";
 import { LazyList } from "@/components/Common/LazyList";
-import { IncomeListItem } from "@/components/Incomes/List/IncomeListItem";
+import { IncomeListItem } from "@/components/Incomes/list/IncomeListItem";
 import { Suspense } from "react";
-import { IncomeDetail } from "@/components/Incomes/Detail/IncomeDetail";
-import { EmptyIncomes } from "@/components/Incomes/List/EmptyIncomes";
+import { IncomeDetail } from "@/components/Incomes/IncomeDetail";
+import { EmptyIncomes } from "@/components/Incomes/list/EmptyIncomes";
 import { FoundNothing } from "@/components/Common/FoundNothing";
 import { useSelector } from "react-redux";
 import { selectIncomesByFilter, selectIncomesList } from "@/store/selectors/incomes";

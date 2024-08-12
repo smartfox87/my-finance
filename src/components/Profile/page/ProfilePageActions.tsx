@@ -1,4 +1,4 @@
-import { InnerHeaderActionsPortal } from "@/components/Layout/Inner/InnerHeaderActionsPortal";
+import { InnerHeaderActionsPortal } from "@/components/Layout/inner/InnerHeaderActionsPortal";
 import { Button } from "antd";
 import SvgLogout from "@/assets/sprite/logout.svg";
 import { useState } from "react";

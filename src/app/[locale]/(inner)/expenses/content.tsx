@@ -1,7 +1,7 @@
 "use client";
 
 import { useSelector } from "react-redux";
-import { Preloader } from "@/components/Layout/Preloader";
+import { Preloader } from "@/components/Layout/preloader/Preloader";
 import { selectCostsFilterValues, selectCostsList } from "@/store/selectors/costs";
 import { useFilterSearchParams } from "@/hooks/filterSearchParams";
 import { useLoading } from "@/hooks/loading";

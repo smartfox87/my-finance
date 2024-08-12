@@ -8,7 +8,7 @@ import { useLoading } from "@/hooks/loading";
 import { useCallback, useEffect } from "react";
 import { INITIAL_INCOMES_FILTER_FIELDS } from "@/constants/incomes";
 import { getUserId } from "@/helpers/localStorage";
-import { Preloader } from "@/components/Layout/Preloader";
+import { Preloader } from "@/components/Layout/preloader/Preloader";
 import { useAppDispatch } from "@/hooks/redux";
 import { getFilterItemsFromFields } from "@/helpers/filters";
 import { IncomesPageActions } from "@/components/Incomes/page/IncomesPageActions";

@@ -3,7 +3,7 @@
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { selectProfileFields } from "@/store/selectors/profile";
-import { DefaultForm } from "@/components/Form/DefaultForm";
+import { DefaultForm } from "@/components/form/DefaultForm";
 import { getProfileThunk, updateProfileThunk } from "@/store/slices/profileSlice";
 import { showNotification } from "@/helpers/modals";
 import { useAppDispatch } from "@/hooks/redux";

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { initTranslations } from "@/i18n";
 import StatisticsModule from "@/app/[locale]/(inner)/statistics/content-module";
-import { InnerLayout } from "@/components/Layout/InnerLayout";
+import { InnerLayout } from "@/components/Layout/inner/InnerLayout";
 import { getJsonLdBreadcrumbs, getJsonLdWebsite } from "@/helpers/jsonLd";
 import { LinkItem } from "@/types/breadcrumbs";
 import { Pages } from "@/types/router";

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { selectBudgetsAmount, selectBudgetsByFilter } from "@/store/selectors/budgets";
 import { selectCurrency } from "@/store/selectors/profile";
 import formatPrice from "@/helpers/formatPrice";
-import { InnerHeaderActionsPortal } from "@/components/Layout/Inner/InnerHeaderActionsPortal";
+import { InnerHeaderActionsPortal } from "@/components/Layout/inner/InnerHeaderActionsPortal";
 
 export const BudgetsPageActions = () => {
   const { t } = useTranslation();
