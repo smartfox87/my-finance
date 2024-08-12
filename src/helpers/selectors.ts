@@ -9,7 +9,7 @@ import { IncomeItem } from "@/types/incomes";
 import { ProcessedBudgetItem } from "@/types/budgets";
 import { FilterField } from "@/types/filter";
 import { ProcessedStatisticsBudgetItem, StatisticsCostItem, StatisticsIncomeItem } from "@/types/statistics";
-import { OptionsObject, ProcessedFilterField } from "@/types/selectors";
+import { ProcessedFilterField } from "@/types/selectors";
 import { isTruthy } from "@/predicates/common";
 
 export const checkSingleItemCondition = (filterItem: MultiSelectValue | undefined, itemId: number): boolean =>
@@ -52,35 +52,44 @@ export const sortItemsList = <T extends CostItem | IncomeItem | ProcessedBudgetI
     return difference === 0 ? first.created_at.localeCompare(second.created_at) : difference;
   });
 
-export const getOptionsFromItemsList = <T extends ProcessedAccountItem | CostCategory>(itemsList: T[]) =>
-  itemsList?.map(({ id, name }): SelectOption<MultiSelectOptionValue> => ({ value: id, label: name }));
+export const getOptionsFromItemsList = <T extends ProcessedAccountItem | CostCategory>(itemsList: T[]): SelectOption<MultiSelectOptionValue>[] =>
+  itemsList.map(({ id, name }) => ({ value: id, label: name }));
+
+export const getOptionsTranslations = <V extends MultiSelectOptionValue>(options: SelectOption<V>[]): SelectOption<MultiSelectOptionValue>[] =>
+  options.map(({ label, label_translation, value }) => {
+    const labelString = i18nRef.t && label_translation ? i18nRef.t(`fields.${label_translation}`) : label;
+    return { label: labelString, value };
+  });
 
 // todo try importance of Object.assign everywhere
-export const getOptionsObjectFromOptions = <T extends SingleSelectValue | MultiSelectOptionValue>(options: SelectOption<T>[]): OptionsObject =>
+export const getOptionsObjectFromOptions = <T extends SingleSelectValue | MultiSelectOptionValue>(options: SelectOption<T>[]): Record<string, string> =>
   Object.assign(
     {},
     ...options.map(({ value, label, label_translation }) => value && { [value]: label_translation && i18nRef.t ? i18nRef.t(`fields.${label_translation}`) : label }, {}).filter(isTruthy),
   );
 
-export const processFilterFields = <T extends IncomeCategory | CostCategory>(initialFieldsData: FilterField[], categoriesList: T[] | null, accountsList: ProcessedAccountItem[] | null) =>
-  initialFieldsData.map((field): ProcessedFilterField => {
-    if (field.type === FieldTypes.MULTISELECT) {
-      if (field.id === FieldIds.CATEGORIES && categoriesList?.length) {
-        const options = field.options.concat(getOptionsFromItemsList(categoriesList));
-        const optionsObject = getOptionsObjectFromOptions(options);
-        return { ...field, optionsObject, options };
-      } else if (field.id === FieldIds.ACCOUNTS && accountsList?.length) {
-        const options = field.options.concat(getOptionsFromItemsList(accountsList));
-        const optionsObject = getOptionsObjectFromOptions(options);
-        return { ...field, optionsObject, options };
-      } else {
+export const processFilterFields = <T extends IncomeCategory | CostCategory>(
+  initialFieldsData: FilterField[],
+  categoriesList: T[] | null,
+  accountsList: ProcessedAccountItem[] | null,
+): ProcessedFilterField[] =>
+  initialFieldsData
+    .map((field) => {
+      if (field.type === FieldTypes.MULTISELECT) {
+        if (field.id === FieldIds.CATEGORIES && categoriesList?.length) {
+          const options = getOptionsTranslations<MultiSelectOptionValue>(field.options).concat(getOptionsFromItemsList(categoriesList ?? []));
+          const optionsObject = getOptionsObjectFromOptions(options);
+          return { ...field, optionsObject, options };
+        } else if (field.id === FieldIds.ACCOUNTS && accountsList?.length) {
+          const options = getOptionsTranslations<MultiSelectOptionValue>(field.options).concat(getOptionsFromItemsList(accountsList ?? []));
+          const optionsObject = getOptionsObjectFromOptions(options);
+          return { ...field, optionsObject, options };
+        }
+      } else if (field.type === FieldTypes.SELECT) {
         const optionsObject = getOptionsObjectFromOptions(field.options);
         return { ...field, optionsObject };
+      } else {
+        return field;
       }
-    } else if (field.type === FieldTypes.SELECT) {
-      const optionsObject = getOptionsObjectFromOptions(field.options);
-      return { ...field, optionsObject };
-    } else {
-      return field;
-    }
-  });
+    })
+    .filter(isTruthy);

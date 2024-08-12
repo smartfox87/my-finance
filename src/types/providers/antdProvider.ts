@@ -1,6 +1,8 @@
+import type { MappingAlgorithm } from "antd";
+
 export interface Theme {
-  defaultAlgorithm: any;
-  darkAlgorithm: any;
+  defaultAlgorithm: MappingAlgorithm | MappingAlgorithm[] | undefined;
+  darkAlgorithm: MappingAlgorithm | MappingAlgorithm[] | undefined;
 }
 
 export interface AntdContextType {

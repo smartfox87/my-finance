@@ -1,4 +1,4 @@
-import type { ManipulateType, Dayjs } from "dayjs";
+import type { ManipulateType } from "dayjs";
 
 declare module "dayjs" {
   interface Dayjs {

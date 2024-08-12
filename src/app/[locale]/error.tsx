@@ -10,8 +10,7 @@ export default function Error({ error }: { error: Error & { digest?: string } })
   const { t } = useTranslation();
   const router = useRouter();
 
-  useEffect(() => {
-    console.error("inner error:", error);
+  useEffect((): void => {
     if (process.env.NODE_ENV === "production") Sentry.captureException(error);
   }, [error]);
 

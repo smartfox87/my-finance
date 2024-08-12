@@ -18,6 +18,8 @@ export enum Locales {
   RU = "ru",
 }
 
+export type Locale = `${Locales}`;
+
 export const AntdLocales = {
   [Locales.EN]: "en_US",
   [Locales.DE]: "de_DE",
@@ -33,8 +35,6 @@ export const AntdLocales = {
 export type AntdLocales = typeof AntdLocales;
 
 export type AntdLocale = typeof en;
-
-export type Locale = `${Locales}`;
 
 export const Languages = {
   [Locales.EN]: "english",

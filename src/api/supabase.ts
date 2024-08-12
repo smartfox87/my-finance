@@ -10,3 +10,4 @@ if (!supabaseUrl || !supabaseKey) {
 export const supabase = createClient(supabaseUrl, supabaseKey, {
   global: { headers: { Prefer: "return=representation" } },
 });
+//todo rename file to index.ts

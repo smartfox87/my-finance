@@ -4,65 +4,16 @@ import { dir } from "i18next";
 import { Providers } from "./providers";
 import { initTranslations } from "@/i18n";
 import type { Metadata, Viewport } from "next";
-import { type Locale } from "@/types/locales";
-import { ReactNode } from "react";
+import type { Locale } from "@/types/locales";
+import { type ReactNode } from "react";
+import { getAppMetadata } from "@/helpers/metadata";
 // todo speed-insights
 // import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: Locale } }): Promise<Metadata> {
   const { t } = await initTranslations({ locale });
-  const APP_NAME = t("seo.app_name");
-  const APP_TITLE_TEMPLATE = `%s - ${APP_NAME}`;
-  const APP_DEFAULT_TITLE = t("pages.home.title");
-  const APP_DESCRIPTION = t("pages.home.description");
 
-  return {
-    applicationName: APP_NAME,
-    manifest: "/manifest.json",
-    title: {
-      default: APP_DEFAULT_TITLE,
-      template: APP_TITLE_TEMPLATE,
-    },
-    description: APP_DESCRIPTION,
-    appleWebApp: {
-      capable: true,
-      statusBarStyle: "default",
-      title: APP_DEFAULT_TITLE,
-      // startUpImage: [],
-    },
-    formatDetection: {
-      telephone: false,
-    },
-    openGraph: {
-      type: "website",
-      siteName: APP_NAME,
-      title: {
-        default: APP_DEFAULT_TITLE,
-        template: APP_TITLE_TEMPLATE,
-      },
-      description: APP_DESCRIPTION,
-      images: [
-        {
-          url: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/assets/images/open-graph.jpg`,
-          width: 1200,
-          height: 630,
-          alt: APP_DEFAULT_TITLE,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary",
-      title: {
-        default: APP_DEFAULT_TITLE,
-        template: APP_TITLE_TEMPLATE,
-      },
-      description: APP_DESCRIPTION,
-    },
-    icons: {
-      icon: "/assets/favicon/favicon.ico",
-      apple: "/assets/favicon/apple-touch-icon-180x180.png",
-    },
-  };
+  return getAppMetadata({ t });
 }
 
 export const viewport: Viewport = {
@@ -79,7 +30,6 @@ export default async function LocaleLayout({ children, params: { locale } }: { c
     <html lang={locale} dir={dir(locale)} className="flex min-h-screen flex-col">
       <body className="flex w-full grow flex-col dark:bg-dark">
         {/*<SpeedInsights />*/}
-        {/*<Providers>{children}</Providers>*/}
         <Providers i18nResources={resources}>{children}</Providers>
       </body>
     </html>

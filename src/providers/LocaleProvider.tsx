@@ -43,7 +43,7 @@ export const LocaleProvider = ({ children }: { children: ReactNode }) => {
   );
 
   useEffect(() => {
-    if (locale && isStringLocale(locale) && languageCode !== i18nConfig.defaultLocale && locales.includes(locale)) changeLocale(locale);
+    if (locale && !Array.isArray(locale) && isStringLocale(locale) && languageCode !== i18nConfig.defaultLocale && locales.includes(locale)) changeLocale(locale);
   }, []);
 
   const contextValue = useMemo(() => ({ antdLocale, changeLocale }), [antdLocale, changeLocale]);

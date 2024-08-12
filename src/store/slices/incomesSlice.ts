@@ -5,7 +5,7 @@ import { updateAccountBalanceThunk } from "@/store/slices/accountsSlice";
 import { setFilterValue } from "@/helpers/filters";
 import { rootReducer } from "@/store";
 import { IncomeItem, IncomeItemData } from "@/types/incomes";
-import { AppDispatch, RootState } from "@/store";
+import { AppDispatch, RootState } from "@/types/store";
 import { AccountItemBalanceData } from "@/types/accounts";
 import { FilterItem, FilterPeriodStateItem, FilterState } from "@/types/filter";
 import { FieldIds } from "@/types/field";
@@ -124,10 +124,10 @@ export const incomesSlice = createAppSlice({
   }),
 });
 
-declare module "@/store" {
+declare module "@/types/store" {
   export interface LazyLoadedSlices extends WithSlice<typeof incomesSlice> {}
 }
 
-const injectedReducers = rootReducer.inject(incomesSlice);
+rootReducer.inject(incomesSlice);
 
 export const { setIncomeItem, setIncomesFilterValues, getIncomesListThunk, createIncomeItemThunk, getIncomeItemThunk, updateIncomeItemThunk, deleteIncomeItemThunk } = incomesSlice.actions;

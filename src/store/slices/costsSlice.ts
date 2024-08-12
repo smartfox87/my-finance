@@ -3,12 +3,13 @@ import { createCostItemApi, getCostsListApi, updateCostItemApi, deleteCostItemAp
 import { handleRejectedReducerAction } from "@/helpers/errors";
 import { updateAccountBalanceThunk } from "@/store/slices/accountsSlice";
 import { setFilterValue } from "@/helpers/filters";
-import type { WithSlice } from "@reduxjs/toolkit";
-import { AppDispatch, rootReducer, RootState } from "@/store";
-import { CostItem, CostItemData } from "@/types/costs";
-import { FilterItem, FilterPeriodStateItem, FilterState } from "@/types/filter";
-import { FieldIds } from "@/types/field";
+import { rootReducer } from "@/store";
 import { isDatesStrings } from "@/predicates/date";
+import { FieldIds } from "@/types/field";
+import type { CostItem, CostItemData } from "@/types/costs";
+import type { FilterItem, FilterPeriodStateItem, FilterState } from "@/types/filter";
+import type { WithSlice } from "@reduxjs/toolkit";
+import type { AppDispatch, RootState } from "@/types/store";
 
 const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
@@ -117,10 +118,10 @@ export const costsSlice = createAppSlice({
   }),
 });
 
-declare module "@/store" {
+declare module "@/types/store" {
   export interface LazyLoadedSlices extends WithSlice<typeof costsSlice> {}
 }
 
-const injectedReducers = rootReducer.inject(costsSlice);
+rootReducer.inject(costsSlice);
 
 export const { setCostsFilterValues, setCostItem, getCostsListThunk, createCostItemThunk, getCostItemThunk, updateCostItemThunk, deleteCostItemThunk } = costsSlice.actions;

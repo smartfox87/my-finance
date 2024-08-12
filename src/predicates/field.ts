@@ -1,20 +1,20 @@
-import { FieldId, FieldIds, FieldValues, MultiSelectValue, SingleSelectValue } from "@/types/field";
+import { FieldId, FieldIds, FieldValues, MultiSelectValue } from "@/types/field";
 import type { RcFile, UploadFile } from "antd/es/upload/interface";
-import { isNumber } from "@/predicates/common";
+import { isNumber, isObject } from "@/predicates/common";
 import { DatesPeriod, DatesPeriods } from "@/types/date";
 
-export const isSelectAllValue = (value: any): value is FieldValues.ALL => value === FieldValues.ALL;
+export const isSelectAllValue = (value: unknown): value is FieldValues.ALL => value === FieldValues.ALL;
 
-export const isMultiSelectValue = (value: any): value is MultiSelectValue => Array.isArray(value) && value.every((item) => isNumber(item) || isSelectAllValue(item));
+export const isMultiSelectValue = (value: unknown): value is MultiSelectValue => Array.isArray(value) && value.every((item) => isNumber(item) || isSelectAllValue(item));
 
-export const isUploadFile = (value: any): value is UploadFile => ["uid", "name", "size", "type"].every((key) => value[key] !== undefined);
+export const isUploadFile = (value: unknown): value is UploadFile => isObject(value) && ["uid", "name", "size", "type"].every((key) => value[key] !== undefined);
 
-export const isUploadFileArray = (value: any): value is UploadFile[] => Array.isArray(value) && value.every((item) => isUploadFile(item));
+export const isUploadFileArray = (value: unknown): value is UploadFile[] => Array.isArray(value) && value.every((item) => isUploadFile(item));
 
-export const isRcFile = (value: any): value is RcFile => ["uid", "name", "size", "type"].every((key) => value[key] !== undefined);
+export const isRcFile = (value: unknown): value is RcFile => isObject(value) && ["uid", "name", "size", "type"].every((key) => value[key] !== undefined);
 
-export const isRcFileArray = (value: any): value is RcFile[] => Array.isArray(value) && value.every((item) => isRcFile(item));
+export const isRcFileArray = (value: unknown): value is RcFile[] => Array.isArray(value) && value.every((item) => isRcFile(item));
 
-export const isDatesPeriod = (value: any): value is DatesPeriod => Object.values(DatesPeriods).includes(value);
+export const isDatesPeriod = (value: unknown): value is DatesPeriod => !!Object.values(DatesPeriods).find((period) => period === value);
 
-export const isFieldId = (value: any): value is FieldId => Object.values(FieldIds).includes(value);
+export const isFieldId = (value: unknown): value is FieldId => !!Object.values(FieldIds).find((id) => id === value);

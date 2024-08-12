@@ -3,13 +3,13 @@
 import { Header } from "@/components/Layout/Header/Header";
 import { MainNav } from "@/components/Layout/MainNav";
 import { useViewport } from "@/hooks/viewport";
-import { ReactNode, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/store/selectors/auth";
 import { useTranslation } from "react-i18next";
 import { getUserId } from "@/helpers/localStorage";
 import { MobileNav } from "@/components/Layout/MobileNav";
 import { useAppDispatch } from "@/hooks/redux";
+import { type ReactNode, useEffect } from "react";
 
 export default function MainLayout({ children }: { children: ReactNode }) {
   const dispatch = useAppDispatch();
@@ -20,7 +20,7 @@ export default function MainLayout({ children }: { children: ReactNode }) {
 
   const user = useSelector(selectUser);
 
-  const initProfile = async () => {
+  const initProfile = async (): Promise<void> => {
     if (getUserId()) import("@/api/auth").then(({ handleAuthStateChange }) => handleAuthStateChange());
     if (getUserId() && !user) {
       const { getUserSessionThunk } = await import("@/store/slices/authSlice");
@@ -34,16 +34,18 @@ export default function MainLayout({ children }: { children: ReactNode }) {
     ]);
     await Promise.all([dispatch(getCurrenciesThunk()), dispatch(getProfileThunk()), dispatch(getAccountsListThunk())]);
   };
-  useEffect(() => {
+
+  useEffect((): void => {
     initProfile();
   }, [user]);
 
-  const initReferences = async () => {
+  const initReferences = async (): Promise<void> => {
     if (!user) return;
     const { getAccountTypesThunk, getCostCategoriesThunk, getIncomeCategoriesThunk } = await import("@/store/slices/referencesSlice");
     await Promise.all([dispatch(getAccountTypesThunk()), dispatch(getCostCategoriesThunk()), dispatch(getIncomeCategoriesThunk())]);
   };
-  useEffect(() => {
+
+  useEffect((): void => {
     initReferences();
   }, [language, user]);
 

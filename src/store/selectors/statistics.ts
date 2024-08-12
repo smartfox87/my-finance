@@ -2,7 +2,7 @@ import { createSelector } from "@reduxjs/toolkit";
 import { selectAccountTypesObject, selectCostCategories, selectCostCategoriesObject, selectIncomeCategoriesObject } from "@/store/selectors/references";
 import { selectAccountsList } from "@/store/selectors/accounts";
 import { INITIAL_STATISTICS_FILTER_FIELDS } from "@/constants/statistics";
-import { LazyLoadedSlices } from "@/store";
+import { LazyLoadedSlices } from "@/types/store";
 import { processFilterFields, filterSingleItemsList, filterMultiItemsList } from "@/helpers/selectors";
 import { isFilterStateKey } from "@/predicates/filter";
 import {

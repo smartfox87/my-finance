@@ -2,7 +2,7 @@ import { createSelector } from "@reduxjs/toolkit";
 import { selectCurrency } from "@/store/selectors/profile";
 import { INITIAL_ACCOUNT_FIELDS, INITIAL_ACCOUNT_TRANSFER_FIELDS } from "@/constants/accounts";
 import { selectAccountTypesObject } from "@/store/selectors/references";
-import { LazyLoadedSlices } from "@/store";
+import { LazyLoadedSlices } from "@/types/store";
 import { AccountItem, AccountItemField, AccountTransferField, ProcessedAccountItem } from "@/types/accounts";
 import { FieldIds } from "@/types/field";
 
@@ -18,6 +18,8 @@ export const selectAccountsList = createSelector([selectAccounts, selectAccountT
         })
     : null,
 );
+
+export const selectAccountsBalance = createSelector([selectAccountsList], (accountsList): number => accountsList?.reduce((acc, { balance }) => acc + balance, 0) || 0);
 
 export const selectAccountsObject = createSelector([selectAccountsList], (accountsList): Record<string, string> | null =>
   accountsList ? Object.assign({}, ...accountsList.map(({ id, name }) => ({ [id]: name }))) : null,

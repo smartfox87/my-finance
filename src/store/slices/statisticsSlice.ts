@@ -82,10 +82,10 @@ export const statisticsSlice = createAppSlice({
   }),
 });
 
-declare module "@/store" {
+declare module "@/types/store" {
   export interface LazyLoadedSlices extends WithSlice<typeof statisticsSlice> {}
 }
 
-const injectedReducers = rootReducer.inject(statisticsSlice);
+rootReducer.inject(statisticsSlice);
 
 export const { setStatisticsFilterValues, getCostsListForChartsThunk, getIncomesListForChartsThunk, getBudgetsListForChartsThunk } = statisticsSlice.actions;

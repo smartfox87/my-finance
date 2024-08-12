@@ -8,7 +8,6 @@ import { FilterItem, FilterPeriodStateItem, FilterState } from "@/types/filter";
 import { FieldIds } from "@/types/field";
 import { processBudgetItem } from "@/helpers/budgets";
 import { isDatesStrings } from "@/predicates/date";
-import { da } from "@faker-js/faker";
 
 const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
@@ -101,10 +100,10 @@ export const budgetsSlice = createAppSlice({
   }),
 });
 
-declare module "@/store" {
+declare module "@/types/store" {
   export interface LazyLoadedSlices extends WithSlice<typeof budgetsSlice> {}
 }
 
-const injectedReducers = rootReducer.inject(budgetsSlice);
+rootReducer.inject(budgetsSlice);
 
 export const { setBudgetsFilterValues, setBudgetItem, getBudgetsListThunk, createBudgetItemThunk, getBudgetItemThunk, updateBudgetItemThunk, deleteBudgetItemThunk } = budgetsSlice.actions;

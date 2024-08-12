@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { SimpleButton } from "@/components/Form/SimpleButton";
 import { useRouter } from "next/navigation";
 
-export default function NotFoundPage({ params }: { params: { lang: string } }) {
+export default function NotFoundPage() {
   const { t } = useTranslation();
   const router = useRouter();
 

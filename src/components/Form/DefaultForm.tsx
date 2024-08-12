@@ -9,7 +9,7 @@ import { showErrorMessage } from "@/helpers/message";
 import { ChangedField, DefaultFormProps, FileFormFieldId, FormItemRule, FormValues } from "@/types/form";
 import { Button, type DatePickerProps, Form, FormProps, Input, InputRef, SelectProps, type UploadFile } from "antd";
 import dayjs, { isDayjs } from "dayjs";
-import { FieldTranslationError, FieldType, FieldTypes, FieldValues, SelectComponentProps } from "@/types/field";
+import { FieldTranslationError, FieldType, FieldTypes, FieldValues, MultiSelectValue, SelectComponentProps, SingleSelectValue } from "@/types/field";
 import { isFieldId, isMultiSelectValue, isUploadFileArray } from "@/predicates/field";
 import { isTruthy } from "@/predicates/common";
 import { useFieldFocus } from "@/hooks/fieldFocus";
@@ -169,14 +169,14 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 size="large"
                 autoFocus={!!focus}
                 disabled={disabled}
-                options={field.options?.map(({ option, label, label_translation, value }) => ({
-                  label: option || (label_translation ? t(`fields.${label_translation}`) : label || value),
+                options={field.options?.map(({ label, label_translation, value }) => ({
+                  label: label_translation ? t(`fields.${label_translation}`) : label || value,
                   value,
                 }))}
                 showSearch={field.showSearch}
                 filterOption={field.showSearch ? handleFilterSelectOptions : undefined}
                 getPopupContainer={(triggerNode) => triggerNode.parentElement}
-                onChange={(value) => handleChangeFieldValue({ id: field.id, type: field.type, value })}
+                onChange={(value: SingleSelectValue) => handleChangeFieldValue({ id: field.id, type: field.type, value })}
               />
             )}
             {field.type === FieldTypes.MULTISELECT && (
@@ -185,14 +185,14 @@ export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfte
                 autoFocus={!!focus}
                 mode="multiple"
                 disabled={disabled}
-                options={field.options?.map(({ option, label, label_translation, value }) => ({
-                  label: option || (label_translation ? t(`fields.${label_translation}`) : label || value),
+                options={field.options?.map(({ label, label_translation, value }) => ({
+                  label: label_translation ? t(`fields.${label_translation}`) : label || value,
                   value,
                 }))}
                 showSearch={field.showSearch}
                 filterOption={field.showSearch ? handleFilterSelectOptions : undefined}
                 getPopupContainer={(triggerNode) => triggerNode.parentElement}
-                onChange={(value) => handleChangeFieldValue({ id: field.id, type: field.type, value })}
+                onChange={(value: MultiSelectValue) => handleChangeFieldValue({ id: field.id, type: field.type, value })}
               />
             )}
             {field.type === FieldTypes.DATE && (

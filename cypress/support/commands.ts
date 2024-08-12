@@ -1,5 +1,5 @@
 import { supabaseClient } from "./supabase";
-import { FilteredMultiPropsItems, FilteredSinglePropItems, FilterPropValues, Locale, SelectedOptionsData, SortItem, SortOrder, SortProp } from "./types";
+import { Locale, SelectedOptionsData, SortItem, SortProp } from "./types";
 import { compareMultiPropsItemsToFilterPropValues, compareSinglePropItemsToFilterPropValues, sortItems } from "./utils";
 
 Cypress.Commands.add("deleteE2EUser", () => {
@@ -217,26 +217,3 @@ Cypress.Commands.add("checkMultiPropsItemsFilter", ({ items, filterPropValues } 
   if (!items?.length || !filterPropValues?.length) throw new Error("No check filter params found.");
   cy.wrap(compareMultiPropsItemsToFilterPropValues({ items, filterPropValues }));
 });
-
-declare global {
-  namespace Cypress {
-    interface Chainable {
-      deleteE2EUser(): Chainable<void>;
-      login(): Chainable<void>;
-      loginDemo(): Chainable<void>;
-      getLang(): Chainable<string>;
-      getDictionary(locale?: Locale): Chainable<any>;
-      pickSelect(selector: string, options?: { index?: number; returnValue?: boolean }): Chainable<string>;
-      pickMultiSelect(selector: string, options?: { indexes?: number[]; indexesCount?: number; minIndex?: number; returnValue?: boolean; allSelectable?: boolean }): Chainable<void>;
-      pickDate(selector: string): Chainable<void>;
-      pickPeriod(selector: string): Chainable<void>;
-      pickRadioButton(selector: string): Chainable<void>;
-      pickCalculator(expression: string): Chainable<void>;
-      pickFile(selector: string): Chainable<void>;
-      pickSiteLocale(locale: Locale): Chainable<void>;
-      checkItemsSort(props: { items: JQuery<HTMLElement>; prop: SortProp; order: SortOrder }): Chainable<Boolean>;
-      checkSinglePropItemsFilter(props: { items: FilteredSinglePropItems; filterPropValues: FilterPropValues }): Chainable<Boolean>;
-      checkMultiPropsItemsFilter(props: { items: FilteredMultiPropsItems; filterPropValues: FilterPropValues }): Chainable<Boolean>;
-    }
-  }
-}

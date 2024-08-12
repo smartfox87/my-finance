@@ -2,7 +2,7 @@
 
 import { Auth } from "../../Auth/Auth";
 import { useSelector } from "react-redux";
-import { ProfileMenu } from "@/components/Profile/ProfileMenu";
+import { ProfileMenu } from "@/components/Profile/menu/ProfileMenu";
 import { LanguageToggle } from "@/components/Layout/Header/LanguageToggle";
 import { Logo } from "@/components/Layout/Header/Logo";
 import { memo, Suspense } from "react";

@@ -4,7 +4,7 @@ import { selectCostCategories } from "@/store/selectors/references";
 import { selectCurrency } from "@/store/selectors/profile";
 import { selectAccountsList } from "@/store/selectors/accounts";
 import { filterMultiItemsList, getOptionsFromItemsList, processFilterFields, sortItemsList } from "@/helpers/selectors";
-import { LazyLoadedSlices } from "@/store";
+import { LazyLoadedSlices } from "@/types/store";
 import { FieldIds, FieldTypes } from "@/types/field";
 import { BudgetItemField } from "@/types/budgets";
 
@@ -17,6 +17,8 @@ export const selectBudgetsFilterValues = ({ budgets }: LazyLoadedSlices) => budg
 export const selectBudgetsByFilter = createSelector([selectBudgetsList, selectBudgetsFilterValues], (allBudgets, budgetsFilterValues) =>
   allBudgets && budgetsFilterValues ? sortItemsList(budgetsFilterValues, filterMultiItemsList(budgetsFilterValues, allBudgets)) : null,
 );
+
+export const selectBudgetsAmount = createSelector([selectBudgetsByFilter], (filteredSortedBudgets) => filteredSortedBudgets?.reduce((acc, { amount }) => acc + amount, 0) || 0);
 
 export const selectBudgetsFilterFields = createSelector([selectCostCategories, selectAccountsList], (costCategories, accountsList) =>
   processFilterFields(INITIAL_BUDGETS_FILTER_FIELDS, costCategories, accountsList),

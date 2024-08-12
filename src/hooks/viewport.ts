@@ -16,7 +16,7 @@ const getTrueValueIndex = (mediaQueryLists: MediaQueryList[]): number => mediaQu
 
 const getViewportByIndex = (index: number): Viewport => viewports[index].name;
 
-export const useViewport = (): { viewport: Viewport; isTouchDevice: Boolean; isTablet: Boolean; isMobile: boolean } => {
+export const useViewport = (): { viewport: Viewport; isTouchDevice: boolean; isTablet: boolean; isMobile: boolean } => {
   const [viewport, setViewport] = useState<Viewport>(getViewportByIndex(4));
   const [isTouchDevice, setIsTouchDevice] = useState(false);
   const isTablet = useMemo(() => tabletViewports.includes(viewport), [viewport]);

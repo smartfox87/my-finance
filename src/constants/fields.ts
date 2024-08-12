@@ -25,27 +25,24 @@ export const ACCOUNT_FIELD: SingleSelectFormField<FieldIds.ACCOUNT> = {
   id: FieldIds.ACCOUNT,
   type: FieldTypes.SELECT,
   label: `complex.${ComplexFieldNames.ACCOUNT}.label`,
-  value: "",
   options: [],
   required: true,
   showSearch: true,
 };
 
-export const FROM_ACCOUNT_FIELD: SingleSelectFormField<FieldIds.FROM, number | null> = {
+export const FROM_ACCOUNT_FIELD: SingleSelectFormField<FieldIds.FROM, number> = {
   id: FieldIds.FROM,
   type: FieldTypes.SELECT,
   label: `complex.${ComplexFieldNames.ACCOUNT}.label`,
-  value: null,
   options: [],
   required: true,
   showSearch: true,
 };
 
-export const TO_ACCOUNT_FIELD: SingleSelectFormField<FieldIds.TO, number | null> = {
+export const TO_ACCOUNT_FIELD: SingleSelectFormField<FieldIds.TO, number> = {
   id: FieldIds.TO,
   type: FieldTypes.SELECT,
   label: `complex.${ComplexFieldNames.ACCOUNT}.label`,
-  value: null,
   options: [],
   required: true,
   showSearch: true,
@@ -65,7 +62,6 @@ export const CATEGORY_FIELD: SingleSelectFormField<FieldIds.CATEGORY> = {
   id: FieldIds.CATEGORY,
   type: FieldTypes.SELECT,
   label: `complex.${ComplexFieldNames.CATEGORY}.label`,
-  value: "",
   options: [],
   required: true,
   showSearch: true,
@@ -92,7 +88,6 @@ export const NAME_FIELD: TextFormField<FieldIds.NAME, FieldTypes.TEXTAREA> = {
   id: FieldIds.NAME,
   type: FieldTypes.TEXTAREA,
   label: `simple.${SimpleFieldNames.NAME}`,
-  value: "",
   maxLength: 1000,
   required: true,
   focus: true,
@@ -106,17 +101,15 @@ export const DATE_FIELD: DateFormField<FieldIds.DATE> = {
   id: FieldIds.DATE,
   type: FieldTypes.DATE,
   label: `simple.${SimpleFieldNames.DATE}`,
-  value: null,
   picker: PickerPeriods.DATE,
   required: true,
   placeholder: "YYYY-MM-DD",
 };
 
-export const CURRENCY_FIELD: SingleSelectFormField<FieldIds.CURRENCY, number | null> = {
+export const CURRENCY_FIELD: SingleSelectFormField<FieldIds.CURRENCY, number> = {
   id: FieldIds.CURRENCY,
   type: FieldTypes.SELECT,
   label: `simple.${SimpleFieldNames.CURRENCY}`,
-  value: null,
   options: [],
   required: true,
   showSearch: true,
@@ -127,7 +120,6 @@ export const PERIOD_FIELD: RadioButtonsFormField = {
   id: FieldIds.PERIOD,
   type: FieldTypes.RADIO_BUTTONS,
   label: `simple.${SimpleFieldNames.PERIOD}`,
-  value: "",
   options: periodOptions,
   required: true,
 };
@@ -136,7 +128,6 @@ export const FULL_NAME_FIELD: TextFormField<FieldIds.FULL_NAME, FieldTypes.TEXT>
   id: FieldIds.FULL_NAME,
   type: FieldTypes.TEXT,
   label: `simple.${SimpleFieldNames.FULL_NAME}`,
-  value: "",
   focus: true,
 };
 
@@ -144,7 +135,6 @@ export const EMAIL_FIELD: TextFormField<FieldIds.EMAIL, FieldTypes.EMAIL> = {
   id: FieldIds.EMAIL,
   type: FieldTypes.EMAIL,
   label: `simple.${SimpleFieldNames.EMAIL}`,
-  value: "",
   required: true,
 };
 
@@ -153,14 +143,12 @@ export const BIRTHDATE_FIELD: DateFormField<FieldIds.BIRTHDATE> = {
   type: FieldTypes.DATE,
   label: `simple.${SimpleFieldNames.BIRTHDATE}`,
   picker: PickerPeriods.DATE,
-  value: null,
 };
 
 export const GENDER_FIELD: SingleSelectFormField<FieldIds.GENDER, string> = {
   id: FieldIds.GENDER,
   type: FieldTypes.SELECT,
   label: `complex.${ComplexFieldNames.GENDER}.label`,
-  value: "",
   options: [
     { label_translation: `complex.${ComplexFieldNames.GENDER}.options.${GenderFieldOptions.FEMALE}`, value: "female" },
     { label_translation: `complex.${ComplexFieldNames.GENDER}.options.${GenderFieldOptions.MALE}`, value: "male" },
@@ -171,7 +159,6 @@ export const SUBJECT_FIELD: SingleSelectFormField = {
   id: FieldIds.SUBJECT,
   type: FieldTypes.SELECT,
   label: `complex.${ComplexFieldNames.SUBJECT}.label`,
-  value: "",
   options: [
     { label_translation: `complex.${ComplexFieldNames.SUBJECT}.options.${SubjectFieldOptions.FEEDBACK}`, value: "feedback" },
     { label_translation: `complex.${ComplexFieldNames.SUBJECT}.options.${SubjectFieldOptions.BUG}`, value: "bug" },
@@ -187,7 +174,6 @@ export const MESSAGE_FIELD: TextFormField = {
   id: FieldIds.MESSAGE,
   type: FieldTypes.TEXTAREA,
   label: `simple.${SimpleFieldNames.MESSAGE}`,
-  value: "",
   required: true,
 };
 
@@ -206,6 +192,5 @@ export const PASSWORD_FIELD: TextFormField<FieldIds.PASSWORD, FieldTypes.PASSWOR
   id: FieldIds.PASSWORD,
   type: FieldTypes.PASSWORD,
   label: `simple.${SimpleFieldNames.PASSWORD}`,
-  value: "",
   required: true,
 };

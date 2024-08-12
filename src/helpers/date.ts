@@ -40,8 +40,8 @@ export const getDatesPeriod = (initialDate: string | undefined, period: DatesPer
   return [date.startOf(period).format("YYYY-MM-DD"), date.endOf(period).format("YYYY-MM-DD")];
 };
 
-export const isStringValidDate = (str: any): boolean => {
-  if (typeof str !== "string" || str.length < 10) return false;
+export const isStringValidDate = (str: string): boolean => {
+  if (str.length < 10) return false;
   const date = Date.parse(str);
   return !isNaN(date);
 };
@@ -49,7 +49,7 @@ export const isStringValidDate = (str: any): boolean => {
 export const findMatchingPeriod = (datesArray: DatesStrings): null | DatesPeriod => {
   if (datesArray.length !== 2) return null;
   const date = dayjs(datesArray[0]);
-  for (let period of periods) {
+  for (const period of periods) {
     const startOfPeriod = date.startOf(period).format("YYYY-MM-DD");
     const endOfPeriod = date.endOf(period).format("YYYY-MM-DD");
     if (startOfPeriod === datesArray[0] && endOfPeriod === datesArray[1]) return period;

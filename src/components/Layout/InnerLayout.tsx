@@ -5,19 +5,17 @@ import { ReactNode, Suspense } from "react";
 import { Breadcrumbs } from "@/components/Common/Breadcrumbs";
 import { LinkItem } from "@/types/breadcrumbs";
 import { type Page } from "@/types/router";
-import { type Locale } from "@/types/locales";
 import { Spinner } from "@/components/Layout/Spinner";
 import { useTranslation } from "react-i18next";
 
 interface Props {
-  locale: Locale;
   page: Page;
-  isAuth?: Boolean;
+  isAuth?: boolean;
   breadcrumbs?: LinkItem[];
   children: ReactNode;
 }
 
-export const InnerLayout = ({ locale, page, isAuth = true, breadcrumbs, children }: Props) => {
+export const InnerLayout = ({ page, isAuth = true, breadcrumbs, children }: Props) => {
   const { t } = useTranslation();
   const title = t(`pages.${page}.title`);
   const description = t(`pages.${page}.description`);

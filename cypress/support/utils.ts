@@ -1,8 +1,8 @@
 import { type FilteredMultiPropsItems, type FilteredSinglePropItems, type FilterPropValues, type SortItem, SortOrder, SortProp } from "./types";
 
-const isSortProp = (value: any): value is SortProp => Object.values(SortProp).includes(value);
+const isSortProp = (value: string): value is SortProp => !!Object.values(SortProp).find((prop) => prop === value);
 
-const isSortOrder = (value: any): value is SortOrder => Object.values(SortOrder).includes(value);
+const isSortOrder = (value: string): value is SortOrder => !!Object.values(SortOrder).find((prop) => prop === value);
 
 export const getPropAndOrder = (selectedValue: JQuery<HTMLElement>): { prop: SortProp | null; order: SortOrder | null } => {
   if (!("value" in selectedValue) || typeof selectedValue.value !== "string") return { prop: null, order: null };

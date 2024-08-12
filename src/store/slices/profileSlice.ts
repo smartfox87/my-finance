@@ -52,10 +52,10 @@ export const profileSlice = createAppSlice({
   }),
 });
 
-declare module "@/store" {
+declare module "@/types/store" {
   export interface LazyLoadedSlices extends WithSlice<typeof profileSlice> {}
 }
 
-const injectedReducers = rootReducer.inject(profileSlice);
+rootReducer.inject(profileSlice);
 
 export const { clearProfile, getProfileThunk, updateProfileThunk } = profileSlice.actions;

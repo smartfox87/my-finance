@@ -5,7 +5,7 @@ import AccountsModule from "@/app/[locale]/(inner)/accounts/content-module";
 import { getJsonLdBreadcrumbs, getJsonLdWebsite } from "@/helpers/jsonLd";
 import type { LinkItem } from "@/types/breadcrumbs";
 import { Pages } from "@/types/router";
-import { type Locale } from "@/types/locales";
+import type { Locale } from "@/types/locales";
 import { ReactElement } from "react";
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: Locale } }): Promise<Metadata> {
@@ -29,7 +29,7 @@ export default async function Accounts({ params: { locale } }: { params: { local
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(getJsonLdBreadcrumbs(breadcrumbList)) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(getJsonLdWebsite(t("seo.app_name"))) }} />
-      <InnerLayout locale={locale} page={Pages.ACCOUNTS} breadcrumbs={breadcrumbList}>
+      <InnerLayout page={Pages.ACCOUNTS} breadcrumbs={breadcrumbList}>
         <AccountsModule />
       </InnerLayout>
     </>
