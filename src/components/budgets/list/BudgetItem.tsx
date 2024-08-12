@@ -1,4 +1,4 @@
-import { BudgetDate } from "./BudgetDate";
+import { BudgetDate } from "@/components/budgets/list/BudgetDate";
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "antd";
 import formatPrice from "@/helpers/formatPrice";
@@ -11,7 +11,7 @@ import { isTextClamped } from "@/helpers/isTextClamped";
 import { useViewport } from "@/hooks/viewport";
 import { selectAccountsObject } from "@/store/selectors/accounts";
 import Link from "next/link";
-import { ProcessedBudgetItem } from "@/types/budgets";
+import type { ProcessedBudgetItem } from "@/types/budgets";
 
 export const BudgetItem = ({ id, created_at, name, amount, accounts, categories, period: [start_date, end_date] }: ProcessedBudgetItem) => {
   const { t } = useTranslation();
@@ -25,7 +25,7 @@ export const BudgetItem = ({ id, created_at, name, amount, accounts, categories,
   const [isTooltipName, setIsTooltipName] = useState(false);
   const capitalizedName = uppercaseFirstLetter(name);
 
-  useEffect(() => {
+  useEffect((): void => {
     if (isTouchDevice) return;
     if (nameRef.current) setIsTooltipName(isTextClamped(nameRef.current));
   }, [isTouchDevice, name]);

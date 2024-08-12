@@ -13,11 +13,11 @@ import { Button } from "antd";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAppDispatch } from "@/hooks/redux";
 import { showCommonError } from "@/helpers/errors";
-import { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
-import { FieldIds, FieldTypes } from "@/types/field";
 import { isBudgetItemData } from "@/predicates/budget";
-import { CalculatorSaveHandler } from "@/types/calculator";
+import { FieldIds, FieldTypes } from "@/types/field";
+import type { CalculatorSaveHandler } from "@/types/calculator";
 import type { ComponentOnSaveProps } from "@/types/common";
+import type { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 
 export const BudgetDetail = memo(function BudgetDetail({ onSave }: ComponentOnSaveProps) {
   const { t } = useTranslation();
@@ -36,7 +36,7 @@ export const BudgetDetail = memo(function BudgetDetail({ onSave }: ComponentOnSa
     dispatch(setBudgetItem(null));
   };
 
-  useEffect(() => {
+  useEffect((): void => {
     if (budgetId) {
       setIsOpen(true);
       setIsLoading(true);

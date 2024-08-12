@@ -22,7 +22,7 @@ export const BudgetsFilter = memo(function BudgetsFilter({ onSave }: ComponentOn
   const { isMobile } = useViewport();
 
   const [isOpen, setIsOpen] = useState(false);
-  const handleToggleVisibility = () => setIsOpen((prevState) => !prevState);
+  const handleToggleVisibility = (): void => setIsOpen((prevState) => !prevState);
 
   const [focusFieldRef, mountFocusField] = useFieldFocus<BaseSelectRef>();
 
@@ -30,7 +30,7 @@ export const BudgetsFilter = memo(function BudgetsFilter({ onSave }: ComponentOn
   const budgetsFilterValues = useSelector(selectBudgetsFilterValues);
   const [filterValues, setFilterValues] = useState<FilterState>({});
 
-  useEffect(() => {
+  useEffect((): void => {
     setFilterValues(JSON.parse(JSON.stringify(budgetsFilterValues)));
   }, [budgetsFilterValues]);
 

@@ -10,12 +10,12 @@ import { memo, useRef, useState } from "react";
 import SvgNewBudget from "@/assets/sprite/new-budget.svg";
 import { CalculatorModal } from "@/components/calculator/CalculatorModal";
 import { useViewport } from "@/hooks/viewport";
-import { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
-import { FieldIds, FieldTypes } from "@/types/field";
 import { useAppDispatch } from "@/hooks/redux";
 import { isBudgetItemData } from "@/predicates/budget";
 import { showCommonError } from "@/helpers/errors";
-import { CalculatorSaveHandler } from "@/types/calculator";
+import { FieldIds, FieldTypes } from "@/types/field";
+import type { CalculatorSaveHandler } from "@/types/calculator";
+import type { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 
 export const AddNewBudget = memo(function AddNewBudget({ isAdaptive, onSave }: { isAdaptive?: boolean; onSave: () => Promise<void> }) {
   const { t } = useTranslation();
@@ -23,7 +23,7 @@ export const AddNewBudget = memo(function AddNewBudget({ isAdaptive, onSave }: {
   const { isMobile } = useViewport();
 
   const [isOpen, setIsOpen] = useState(false);
-  const handleToggleVisibility = () => setIsOpen((prevState) => !prevState);
+  const handleToggleVisibility = (): void => setIsOpen((prevState) => !prevState);
 
   const newBudgetFields = useSelector(selectBudgetFields);
 
