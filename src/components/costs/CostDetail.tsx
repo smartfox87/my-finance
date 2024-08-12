@@ -14,10 +14,10 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { isCostItemData } from "@/predicates/costs";
 import { showCommonError } from "@/helpers/errors";
 import { useAppDispatch } from "@/hooks/redux";
-import { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 import { FieldIds, FieldTypes } from "@/types/field";
-import { CalculatorSaveHandler } from "@/types/calculator";
+import type { CalculatorSaveHandler } from "@/types/calculator";
 import type { ComponentOnSaveProps } from "@/types/common";
+import type { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 
 export const CostDetail = memo(function CostDetail({ onSave }: ComponentOnSaveProps) {
   const { t } = useTranslation();
@@ -30,13 +30,13 @@ export const CostDetail = memo(function CostDetail({ onSave }: ComponentOnSavePr
   const [isBtnLoading, setIsBtnLoading] = useLoading(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleCloseModal = () => {
+  const handleCloseModal = (): void => {
     setIsOpen(false);
     router.push("/expenses");
     dispatch(setCostItem(null));
   };
 
-  useEffect(() => {
+  useEffect((): void => {
     if (costId) {
       setIsOpen(true);
       setIsLoading(true);

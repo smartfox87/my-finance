@@ -9,12 +9,12 @@ import SvgFilter from "@/assets/sprite/filter.svg";
 import { useViewport } from "@/hooks/viewport";
 import { useFieldFocus } from "@/hooks/fieldFocus";
 import { prepareObjectValuesForFilterStateValues, setFilterValue } from "@/helpers/filters";
-import { FieldIds } from "@/types/field";
-import type { BaseSelectRef } from "rc-select";
-import { FilterState, ChangeFilterFieldValueHandler } from "@/types/filter";
 import { FilterFields } from "@/components/common/filter/FilterFields";
 import { useAppDispatch } from "@/hooks/redux";
+import { FieldIds } from "@/types/field";
+import type { BaseSelectRef } from "rc-select";
 import type { ComponentOnSaveProps } from "@/types/common";
+import type { FilterState, ChangeFilterFieldValueHandler } from "@/types/filter";
 
 export const CostsFilter = memo(function CostsFilter({ onSave }: ComponentOnSaveProps) {
   const { t } = useTranslation();
@@ -22,7 +22,7 @@ export const CostsFilter = memo(function CostsFilter({ onSave }: ComponentOnSave
   const { isMobile } = useViewport();
 
   const [isOpen, setIsOpen] = useState(false);
-  const handleToggleVisibility = () => setIsOpen((prevState) => !prevState);
+  const handleToggleVisibility = (): void => setIsOpen((prevState) => !prevState);
 
   const [focusFieldRef, mountFocusField] = useFieldFocus<BaseSelectRef>();
 
@@ -30,7 +30,7 @@ export const CostsFilter = memo(function CostsFilter({ onSave }: ComponentOnSave
   const costsFilterValues = useSelector(selectCostsFilterValues);
   const [filterValues, setFilterValues] = useState<FilterState>({});
 
-  useEffect(() => {
+  useEffect((): void => {
     setFilterValues(JSON.parse(JSON.stringify(costsFilterValues)));
   }, [costsFilterValues]);
 

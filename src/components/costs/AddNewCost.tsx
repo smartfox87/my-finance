@@ -10,20 +10,21 @@ import { memo, useRef, useState } from "react";
 import SvgNewExpense from "@/assets/sprite/new-expense.svg";
 import { CalculatorModal } from "@/components/calculator/CalculatorModal";
 import { useViewport } from "@/hooks/viewport";
-import { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
-import { FieldIds, FieldTypes } from "@/types/field";
 import { isCostItemData } from "@/predicates/costs";
 import { showCommonError } from "@/helpers/errors";
 import { useAppDispatch } from "@/hooks/redux";
-import { CalculatorSaveHandler } from "@/types/calculator";
+import { FieldIds, FieldTypes } from "@/types/field";
+import type { CalculatorSaveHandler } from "@/types/calculator";
+import type { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
+import { ComponentOnSaveProps } from "@/types/common";
 
-export const AddNewCost = memo(function AddNewCost({ isAdaptive, onSave }: { isAdaptive?: boolean; onSave: () => Promise<void> }) {
+export const AddNewCost = memo(function AddNewCost({ isAdaptive, onSave }: ComponentOnSaveProps & { isAdaptive?: boolean }) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { isMobile } = useViewport();
 
   const [isOpen, setIsOpen] = useState(false);
-  const handleToggleVisibility = () => setIsOpen((prevState) => !prevState);
+  const handleToggleVisibility = (): void => setIsOpen((prevState) => !prevState);
 
   const newCostFields = useSelector(selectCostFields);
 
