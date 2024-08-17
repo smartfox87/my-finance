@@ -11,6 +11,7 @@ import { useFieldFocus } from "@/hooks/fieldFocus";
 import { prepareObjectValuesForFilterStateValues, setFilterValue } from "@/helpers/filters";
 import { FilterFields } from "@/components/common/filter/FilterFields";
 import { useAppDispatch } from "@/hooks/redux";
+import cloneDeep from "lodash/cloneDeep";
 import { FieldIds } from "@/types/field";
 import type { BaseSelectRef } from "rc-select";
 import type { ComponentOnSaveProps } from "@/types/common";
@@ -31,7 +32,7 @@ export const CostsFilter = memo(function CostsFilter({ onSave }: ComponentOnSave
   const [filterValues, setFilterValues] = useState<FilterState>({});
 
   useEffect((): void => {
-    setFilterValues(JSON.parse(JSON.stringify(costsFilterValues)));
+    if (costsFilterValues) setFilterValues(cloneDeep(costsFilterValues));
   }, [costsFilterValues]);
 
   const handleChangeFieldValue: ChangeFilterFieldValueHandler = (field) => setFilterValues((prevState) => setFilterValue(prevState, field));

@@ -10,9 +10,10 @@ import { useViewport } from "@/hooks/viewport";
 import { prepareObjectValuesForFilterStateValues, setFilterValue } from "@/helpers/filters";
 import { useFieldFocus } from "@/hooks/fieldFocus";
 import { FilterFields } from "@/components/common/filter/FilterFields";
-import type { BaseSelectRef } from "rc-select";
-import { ChangeFilterFieldValueHandler } from "@/types/filter";
+import cloneDeep from "lodash/cloneDeep";
 import { FieldIds } from "@/types/field";
+import type { ChangeFilterFieldValueHandler, FilterState } from "@/types/filter";
+import type { BaseSelectRef } from "rc-select";
 import type { ComponentOnSaveProps } from "@/types/common";
 
 export const IncomesFilter = memo(function IncomesFilter({ onSave }: ComponentOnSaveProps) {
@@ -21,16 +22,16 @@ export const IncomesFilter = memo(function IncomesFilter({ onSave }: ComponentOn
   const { isMobile } = useViewport();
 
   const [isOpen, setIsOpen] = useState(false);
-  const handleToggleVisibility = () => setIsOpen((prevState) => !prevState);
+  const handleToggleVisibility = (): void => setIsOpen((prevState) => !prevState);
 
   const [focusFieldRef, mountFocusField] = useFieldFocus<BaseSelectRef>();
 
   const incomesFilterFields = useSelector(selectIncomesFilterFields);
   const incomesFilterValues = useSelector(selectIncomesFilterValues);
-  const [filterValues, setFilterValues] = useState({});
+  const [filterValues, setFilterValues] = useState<FilterState>({});
 
-  useEffect(() => {
-    setFilterValues(JSON.parse(JSON.stringify(incomesFilterValues)));
+  useEffect((): void => {
+    if (incomesFilterValues) setFilterValues(cloneDeep(incomesFilterValues));
   }, [incomesFilterValues]);
 
   const handleChangeFieldValue: ChangeFilterFieldValueHandler = (field) => setFilterValues((prevState) => setFilterValue(prevState, field));

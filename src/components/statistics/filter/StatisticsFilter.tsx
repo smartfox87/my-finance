@@ -9,11 +9,12 @@ import SvgFilter from "@/assets/sprite/filter.svg";
 import { useViewport } from "@/hooks/viewport";
 import { prepareObjectValuesForFilterStateValues, setFilterValue } from "@/helpers/filters";
 import { useFieldFocus } from "@/hooks/fieldFocus";
-import { FieldIds } from "@/types/field";
 import { useAppDispatch } from "@/hooks/redux";
+import cloneDeep from "lodash/cloneDeep";
+import { FieldIds } from "@/types/field";
 import { FilterFields } from "@/components/common/filter/FilterFields";
 import type { BaseSelectRef } from "rc-select";
-import { ChangeFilterFieldValueHandler } from "@/types/filter";
+import type { ChangeFilterFieldValueHandler, FilterState } from "@/types/filter";
 import type { ComponentOnSaveProps } from "@/types/common";
 
 export const StatisticsFilter = memo(function StatisticsFilter({ onSave }: ComponentOnSaveProps) {
@@ -28,10 +29,10 @@ export const StatisticsFilter = memo(function StatisticsFilter({ onSave }: Compo
 
   const statisticsFilterFields = useSelector(selectStatisticsFilterFields);
   const statisticsFilterValues = useSelector(selectStatisticsFilterValues);
-  const [filterValues, setFilterValues] = useState({});
+  const [filterValues, setFilterValues] = useState<FilterState>({});
 
   useEffect(() => {
-    setFilterValues(JSON.parse(JSON.stringify(statisticsFilterValues)));
+    if (statisticsFilterValues) setFilterValues(cloneDeep(statisticsFilterValues));
   }, [statisticsFilterValues]);
 
   const handleChangeFieldValue: ChangeFilterFieldValueHandler = (field) => setFilterValues((prevState) => setFilterValue(prevState, field));

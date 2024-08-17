@@ -3,12 +3,12 @@ import { selectIncomesFilterFields, selectIncomesFilterValues } from "@/store/se
 import { memo, useMemo } from "react";
 import { getActiveFilters } from "@/helpers/filters";
 import { ActiveFiltersList } from "@/components/common/filter/ActiveFiltersList";
-import { ClearActiveFilterItemHandler } from "@/types/filter";
 import { isMultiSelectFormFieldId } from "@/predicates/form";
 import { isNumber } from "@/predicates/common";
 import { isMultiSelectValue } from "@/predicates/field";
 import { setIncomesFilterValues } from "@/store/slices/incomesSlice";
 import { useAppDispatch } from "@/hooks/redux";
+import type { ClearActiveFilterItemHandler } from "@/types/filter";
 
 export const ActiveIncomesFilters = memo(function ActiveIncomesFilters() {
   const dispatch = useAppDispatch();
