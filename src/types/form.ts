@@ -109,8 +109,15 @@ export interface DefaultFormSaveHandler {
   (formValues: FormValues): Promise<void>;
 }
 
+export type FormFieldProps<F extends FormField> = {
+  field: F;
+  onChange(field: ChangedField): void;
+  value?: FormValue;
+};
+
 export interface DefaultFormProps {
   fields: FormField[];
+  "data-cy"?: string;
   onSaveForm: DefaultFormSaveHandler;
   isResetAfterSave?: boolean;
   onResetForm?: () => void;
