@@ -10,6 +10,7 @@ describe("Contact form", () => {
     });
 
     it("should send contact message", () => {
+      cy.wait(1000);
       cy.get("form").within(() => {
         cy.get('button[type="submit"]').as("submit-btn").should("be.disabled");
         cy.get("#full_name").type(faker.person.fullName());
