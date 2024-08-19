@@ -5,7 +5,7 @@ import type { ComponentChildrenProps } from "@/types/common";
 export const InnerHeaderActionsPortal = ({ children }: ComponentChildrenProps) => {
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
+  useEffect((): (() => void) => {
     setMounted(true);
     return () => setMounted(false);
   }, []);

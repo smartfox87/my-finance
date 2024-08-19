@@ -1,7 +1,7 @@
-import { type KeyboardEvent, type MouseEvent, useCallback, useEffect, useRef, useState } from "react";
 import SvgArrowSelect from "@/assets/sprite/arrow-select.svg";
 import { useOuterClick } from "@/hooks/outerClick";
-import { SimpleSelectOption, SimpleSelectValue } from "@/types/select";
+import { type KeyboardEvent, type MouseEvent, useCallback, useEffect, useRef, useState } from "react";
+import type { SimpleSelectOption, SimpleSelectValue } from "@/types/select";
 
 export const SimpleSelect = ({
   value,
@@ -42,14 +42,14 @@ export const SimpleSelect = ({
       setFocusedOptionIndex(focusedOptionIndex > 0 ? focusedOptionIndex - 1 : options.length - 1);
     }
   };
-  useEffect(() => {
+  useEffect((): void => {
     if (!isOpen || !optionsRef.current?.length) return;
     optionsRef.current[focusedOptionIndex].focus();
   }, [isOpen, focusedOptionIndex]);
 
   // notice: type for addEventListener
-  useEffect(() => {
-    const handleEscape: EventListener = (event: KeyboardEventInit) => {
+  useEffect((): (() => void) => {
+    const handleEscape: EventListener = (event: KeyboardEventInit): void => {
       if (event.key === "Escape") closeSelect();
     };
     document.addEventListener("keydown", handleEscape);

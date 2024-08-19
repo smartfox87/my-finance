@@ -3,10 +3,10 @@
 import { AuthGuard } from "@/components/auth/AuthGuard";
 import { ReactNode, Suspense } from "react";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
-import { LinkItem } from "@/types/breadcrumbs";
-import { type Page } from "@/types/router";
 import { Spinner } from "@/components/layout/preloader/Spinner";
 import { useTranslation } from "react-i18next";
+import type { LinkItem } from "@/types/breadcrumbs";
+import type { Page } from "@/types/router";
 
 interface Props {
   page: Page;

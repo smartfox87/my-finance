@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 export const EmptyIncomes = ({ addNew }: { addNew: ReactNode }) => {
   const { t } = useTranslation();

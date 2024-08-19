@@ -3,9 +3,9 @@ import { useMemo } from "react";
 import { SimpleSelect } from "@/components/form/SimpleSelect";
 import { useLocale } from "@/hooks/providers/locale";
 import { locales } from "@/constants/router";
-import { SimpleSelectValue } from "@/types/select";
 import { isLocale } from "@/predicates/locales";
 import { isString } from "@/predicates/common";
+import type { SimpleSelectValue } from "@/types/select";
 
 export const LanguageToggle = () => {
   const {
@@ -16,7 +16,7 @@ export const LanguageToggle = () => {
   const { changeLocale } = useLocale();
   const options = useMemo(() => Object.values(locales)?.map((locale) => ({ label: locale, value: locale })), []);
 
-  const handleLocaleChange = (value: SimpleSelectValue) => {
+  const handleLocaleChange = (value: SimpleSelectValue): void => {
     if (isString(value) && isLocale(value)) changeLocale(value);
   };
 

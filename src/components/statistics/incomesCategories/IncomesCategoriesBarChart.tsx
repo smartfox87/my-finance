@@ -2,7 +2,7 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } fro
 import { useViewport } from "@/hooks/viewport";
 import { Viewports } from "@/types/viewport";
 import { IncomesCategoriesChartTooltip } from "@/components/statistics/incomesCategories/IncomesCategoriesChartTooltip";
-import { CostsCategoriesStatisticsItem } from "@/types/statistics";
+import type { CostsCategoriesStatisticsItem } from "@/types/statistics";
 
 export const IncomesCategoriesBarChart = ({ items }: { items: CostsCategoriesStatisticsItem[] }) => {
   const { viewport, isMobile } = useViewport();

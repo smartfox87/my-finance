@@ -1,8 +1,8 @@
 import { useViewport } from "@/hooks/viewport";
 import { Preloader } from "@/components/layout/preloader/Preloader";
-import { ReactNode, SetStateAction, useEffect } from "react";
 import { useModalState } from "@/hooks/providers/modalState";
 import dynamic from "next/dynamic";
+import { type ReactNode, type SetStateAction, useEffect } from "react";
 
 const Modal = dynamic(() => import("antd/es/drawer"));
 
@@ -27,7 +27,7 @@ export const SideModal = ({
   const placement = isMobile ? "bottom" : "right";
   const { isInitializedModal, setIsInitializedModal } = useModalState();
 
-  useEffect(() => {
+  useEffect((): void => {
     if (isOpen && !isInitializedModal) setIsInitializedModal(true);
   }, [isOpen, isInitializedModal]);
 

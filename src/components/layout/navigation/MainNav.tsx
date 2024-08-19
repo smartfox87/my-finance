@@ -14,7 +14,7 @@ export const MainNav = memo(function MainNav({ className = "" }: { className?: s
   const pathname = usePathname().replace(`/${language}`, "") || "/";
   const { isTablet } = useViewport();
 
-  const getNavLinkClassName = (url: string) => (url === pathname ? "!text-blue-600 dark:!text-blue-400" : "!text-black dark:!text-white");
+  const getNavLinkClassName = (url: string): string => (url === pathname ? "!text-blue-600 dark:!text-blue-400" : "!text-black dark:!text-white");
 
   const { setIsOpenMenuModal } = useModalState();
   const handleNavClick = () => isTablet && setIsOpenMenuModal(false);

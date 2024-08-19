@@ -2,7 +2,7 @@
 
 import { Watch } from "react-loader-spinner";
 
-export const Spinner = ({ isVisible = false, className = "" }) => {
+export const Spinner = ({ isVisible = false, className = "" }: { isVisible: boolean; className?: string }) => {
   return (
     <Watch
       height="80"

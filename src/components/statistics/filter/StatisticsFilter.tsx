@@ -31,7 +31,7 @@ export const StatisticsFilter = memo(function StatisticsFilter({ onSave }: Compo
   const statisticsFilterValues = useSelector(selectStatisticsFilterValues);
   const [filterValues, setFilterValues] = useState<FilterState>({});
 
-  useEffect(() => {
+  useEffect((): void => {
     if (statisticsFilterValues) setFilterValues(cloneDeep(statisticsFilterValues));
   }, [statisticsFilterValues]);
 

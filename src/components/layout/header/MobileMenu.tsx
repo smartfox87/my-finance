@@ -17,7 +17,7 @@ export const MobileMenu = memo(function MobileMenu() {
   const { isOpenMenuModal, setIsOpenMenuModal } = useModalState();
   const user = useSelector(selectUser);
 
-  const handleToggleVisibility = async () => {
+  const handleToggleVisibility = async (): Promise<void> => {
     if (!isLoadedAntd) await initAntd();
     setIsOpenMenuModal((prevState) => !prevState);
   };

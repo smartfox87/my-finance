@@ -11,7 +11,7 @@ import { isTextClamped } from "@/helpers/isTextClamped";
 import { useViewport } from "@/hooks/viewport";
 import { selectAccountsObject } from "@/store/selectors/accounts";
 import Link from "next/link";
-import { IncomeItem } from "@/types/incomes";
+import type { IncomeItem } from "@/types/incomes";
 
 export const IncomeListItem = ({ id, created_at, name, amount, date, category, account }: IncomeItem) => {
   const { t } = useTranslation();
@@ -23,7 +23,7 @@ export const IncomeListItem = ({ id, created_at, name, amount, date, category, a
   const [isTooltipName, setIsTooltipName] = useState(false);
   const capitalizedName = uppercaseFirstLetter(name);
 
-  useEffect(() => {
+  useEffect((): void => {
     if (isTouchDevice) return;
     if (nameRef.current) setIsTooltipName(isTextClamped(nameRef.current));
   }, [name, isTouchDevice]);

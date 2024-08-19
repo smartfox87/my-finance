@@ -1,5 +1,5 @@
 import SvgLoadingBtn from "@/assets/sprite/loading-btn.svg";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 interface Props {
   size?: "large";

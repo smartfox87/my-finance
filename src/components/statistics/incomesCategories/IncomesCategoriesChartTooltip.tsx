@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { selectCurrency } from "@/store/selectors/profile";
 import formatPrice from "@/helpers/formatPrice";
-import { IncomesCategoriesStatisticsTooltipProps } from "@/types/statistics";
+import type { IncomesCategoriesStatisticsTooltipProps } from "@/types/statistics";
 
 export const IncomesCategoriesChartTooltip = ({ active, payload }: IncomesCategoriesStatisticsTooltipProps) => {
   const currency = useSelector(selectCurrency);

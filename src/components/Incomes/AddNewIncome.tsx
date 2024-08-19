@@ -11,11 +11,11 @@ import { CalculatorModal } from "@/components/calculator/CalculatorModal";
 import { useViewport } from "@/hooks/viewport";
 import SvgNewIncome from "@/assets/sprite/new-income.svg";
 import { useAppDispatch } from "@/hooks/redux";
-import { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 import { showCommonError } from "@/helpers/errors";
 import { isIncomeItemData } from "@/predicates/incomes";
 import { FieldIds, FieldTypes } from "@/types/field";
-import { CalculatorSaveHandler } from "@/types/calculator";
+import type { CalculatorSaveHandler } from "@/types/calculator";
+import type { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 
 export const AddNewIncome = memo(function AddNewIncome({ isAdaptive, onSave }: { isAdaptive?: boolean; onSave: () => Promise<void> }) {
   const { t } = useTranslation();
@@ -39,7 +39,7 @@ export const AddNewIncome = memo(function AddNewIncome({ isAdaptive, onSave }: {
     }
   };
 
-  const formRef = useRef<DefaultFormRef>();
+  const formRef = useRef<DefaultFormRef | null>(null);
   const handleSetCalculatedAmount: CalculatorSaveHandler = (value) => formRef.current?.handleChangeFieldValue({ id: FieldIds.AMOUNT, type: FieldTypes.NUMBER, value });
 
   return (

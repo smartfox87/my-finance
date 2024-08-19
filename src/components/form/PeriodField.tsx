@@ -15,7 +15,7 @@ export const PeriodField = ({ id = "", value, onChange }: { id: string; value: D
   const [datesValue, setDatesValue] = useState(processDates(value));
   const [periodValue, setPeriodValue] = useState<DatesPeriod | null>(findMatchingPeriod(value));
 
-  useEffect(() => {
+  useEffect((): void => {
     setDatesValue(processDates(value));
     setPeriodValue(findMatchingPeriod(value));
   }, [value]);

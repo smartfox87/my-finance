@@ -12,12 +12,12 @@ import { CalculatorModal } from "@/components/calculator/CalculatorModal";
 import { Button } from "antd";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useAppDispatch } from "@/hooks/redux";
-import { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 import { showCommonError } from "@/helpers/errors";
 import { isIncomeItemData } from "@/predicates/incomes";
 import { FieldIds, FieldTypes } from "@/types/field";
-import { CalculatorSaveHandler } from "@/types/calculator";
+import type { CalculatorSaveHandler } from "@/types/calculator";
 import type { ComponentOnSaveProps } from "@/types/common";
+import type { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 
 export const IncomeDetail = memo(function IncomeDetail({ onSave }: ComponentOnSaveProps) {
   const { t } = useTranslation();
@@ -36,7 +36,7 @@ export const IncomeDetail = memo(function IncomeDetail({ onSave }: ComponentOnSa
     dispatch(setIncomeItem(null));
   };
 
-  useEffect(() => {
+  useEffect((): void => {
     if (incomeId) {
       setIsOpen(true);
       setIsLoading(true);

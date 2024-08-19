@@ -40,7 +40,7 @@ export const AddNewCost = memo(function AddNewCost({ isAdaptive, onSave }: Compo
     }
   };
 
-  const formRef = useRef<DefaultFormRef>();
+  const formRef = useRef<DefaultFormRef | null>(null);
   const handleSetCalculatedAmount: CalculatorSaveHandler = (value) => formRef.current?.handleChangeFieldValue({ id: FieldIds.AMOUNT, type: FieldTypes.NUMBER, value });
 
   return (

@@ -13,7 +13,7 @@ export const MobileNav = memo(function MobileNav() {
   const pathname = usePathname().replace(`/${language}`, "");
   const { isMobile, isTablet } = useViewport();
 
-  const getNavLinkClassName = (url: string) => (url === pathname ? "text-blue-600 dark:text-blue-400" : "");
+  const getNavLinkClassName = (url: string): string => (url === pathname ? "text-blue-600 dark:text-blue-400" : "");
 
   const filteredList = useMemo(() => INIT_NAV_LIST.filter(({ mobile_nav }) => !isTablet || (isTablet && mobile_nav)), [isTablet]);
 
