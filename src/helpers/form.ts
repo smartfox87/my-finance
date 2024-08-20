@@ -24,8 +24,7 @@ export const processFormValues = (values: FormValues): FormValues =>
     {},
     ...Object.entries(values).map(([key, value]) => {
       if (isUploadFileArray(value)) return { [key]: value.map(({ originFileObj }) => originFileObj).filter(isTruthy) };
-      // todo optimize date format for single function
-      else if (isDayjs(value)) return { [key]: value.format("YYYY-MM-DD") };
+      else if (isDayjs(value)) return { [key]: value.toISOString() };
       else if (isMultiSelectValue(value)) return { [key]: value.filter((val) => val !== FieldValues.ALL) };
       else return { [key]: value };
     }),
