@@ -1,5 +1,5 @@
-import { DatesStrings } from "@/types/date";
-import { FilterState } from "@/types/filter";
+import type { DatesStrings } from "@/types/date";
+import type { FilterState } from "@/types/filter";
 
 export enum StatisticsTypes {
   ACCOUNTS = "accounts",

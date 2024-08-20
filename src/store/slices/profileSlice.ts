@@ -1,8 +1,8 @@
-import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import { getProfileApi, updateProfileApi } from "@/api/profile";
 import { handleRejectedReducerAction } from "@/helpers/errors";
 import { rootReducer } from "@/store";
-import { Profile, ProfileData, ProfileSliceState, SettingsData } from "@/types/profile";
+import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
+import type { Profile, ProfileData, ProfileSliceState, SettingsData } from "@/types/profile";
 
 const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },

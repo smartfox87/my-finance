@@ -1,4 +1,4 @@
-import { AntdLocale, Locale } from "@/types/locales";
+import type { AntdLocale, Locale } from "@/types/locales";
 
 export interface LocaleContextType {
   antdLocale: AntdLocale | undefined;

@@ -1,8 +1,9 @@
+import { FieldIds, FieldTypes } from "@/types/field";
 import type { Dayjs } from "dayjs";
 import type { UploadFile } from "antd";
-import { DatesStrings, PickerPeriod } from "@/types/date";
+import type { DatesStrings, PickerPeriod } from "@/types/date";
 import type { RcFile } from "antd/es/upload";
-import { FieldId, FieldIds, FieldTranslationLabel, FieldTranslationRadioButtonOption, FieldTypes, MultiSelectOptionValue, MultiSelectValue, SelectOption, SingleSelectValue } from "@/types/field";
+import type { FieldId, FieldTranslationLabel, FieldTranslationRadioButtonOption, MultiSelectOptionValue, MultiSelectValue, SelectOption, SingleSelectValue } from "@/types/field";
 
 export type FormItemRule = FieldTypes.NUMBER | FieldTypes.EMAIL;
 

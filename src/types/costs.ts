@@ -1,5 +1,6 @@
-import { DateFormField, NumberFormField, SingleSelectFormField, TextFormField } from "@/types/form";
 import { FieldIds, FieldTypes } from "@/types/field";
+import type { FilterState } from "@/types/filter";
+import type { DateFormField, NumberFormField, SingleSelectFormField, TextFormField } from "@/types/form";
 
 export interface CostItem {
   id: number;
@@ -24,3 +25,9 @@ export type CostItemField =
   | NumberFormField<FieldIds.AMOUNT>
   | DateFormField<FieldIds.DATE>
   | SingleSelectFormField<FieldIds.ACCOUNT | FieldIds.CATEGORY>;
+
+export interface CostsSliceState {
+  costsFilterValues: FilterState | null;
+  costsList: CostItem[] | null;
+  costItem: CostItem | null;
+}

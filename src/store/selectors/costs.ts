@@ -3,29 +3,31 @@ import { INITIAL_COST_FIELDS, INITIAL_COSTS_FILTER_FIELDS } from "@/constants/co
 import { selectCostCategories } from "@/store/selectors/references";
 import { selectCurrency } from "@/store/selectors/profile";
 import { selectAccountsList } from "@/store/selectors/accounts";
-import { FieldIds, FieldTypes } from "@/types/field";
-import { LazyLoadedSlices } from "@/types/store";
 import { filterSingleItemsList, getOptionsFromItemsList, processFilterFields, sortItemsList } from "@/helpers/selectors";
-import { CostItemField } from "@/types/costs";
 import dayjs from "dayjs";
+import { FieldIds, FieldTypes } from "@/types/field";
+import type { CostItem, CostItemField } from "@/types/costs";
+import type { LazyLoadedSlices } from "@/types/store";
+import type { FilterState } from "@/types/filter";
+import type { ProcessedFilterField } from "@/types/selectors";
 
-export const selectCostsList = ({ costs }: LazyLoadedSlices) => costs?.costsList || null;
+export const selectCostsList = ({ costs }: LazyLoadedSlices): CostItem[] | null => costs?.costsList || null;
 
-export const selectCostItem = ({ costs }: LazyLoadedSlices) => costs?.costItem || null;
+export const selectCostItem = ({ costs }: LazyLoadedSlices): CostItem | null => costs?.costItem || null;
 
-export const selectCostsFilterValues = ({ costs }: LazyLoadedSlices) => costs?.costsFilterValues || null;
+export const selectCostsFilterValues = ({ costs }: LazyLoadedSlices): FilterState | null => costs?.costsFilterValues || null;
 
 export const selectCostsByFilter = createSelector([selectCostsList, selectCostsFilterValues], (allCosts, costsFilterValues) =>
   costsFilterValues && allCosts ? sortItemsList(costsFilterValues, filterSingleItemsList(costsFilterValues, allCosts)) : null,
 );
 
-export const selectExpensesTotal = createSelector([selectCostsByFilter], (filteredSortedCosts) => filteredSortedCosts?.reduce((acc, { amount }) => acc + amount, 0) || 0);
+export const selectExpensesTotal = createSelector([selectCostsByFilter], (filteredSortedCosts): number => filteredSortedCosts?.reduce((acc, { amount }) => acc + amount, 0) || 0);
 
-export const selectCostsFilterFields = createSelector([selectCostCategories, selectAccountsList], (costCategories, accountsList) =>
+export const selectCostsFilterFields = createSelector([selectCostCategories, selectAccountsList], (costCategories, accountsList): ProcessedFilterField[] =>
   processFilterFields(INITIAL_COSTS_FILTER_FIELDS, costCategories, accountsList),
 );
 
-export const selectCostFields = createSelector([selectCostCategories, selectAccountsList, selectCurrency, selectCostItem], (costCategories, accountsList, currency, costItem) =>
+export const selectCostFields = createSelector([selectCostCategories, selectAccountsList, selectCurrency, selectCostItem], (costCategories, accountsList, currency, costItem): CostItemField[] =>
   INITIAL_COST_FIELDS.map((field): CostItemField => {
     if (field.type === FieldTypes.SELECT) {
       const value = costItem?.[field.id] ? costItem[field.id] : field.value;

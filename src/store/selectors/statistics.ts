@@ -2,52 +2,61 @@ import { createSelector } from "@reduxjs/toolkit";
 import { selectAccountTypesObject, selectCostCategories, selectCostCategoriesObject, selectIncomeCategoriesObject } from "@/store/selectors/references";
 import { selectAccountsList } from "@/store/selectors/accounts";
 import { INITIAL_STATISTICS_FILTER_FIELDS } from "@/constants/statistics";
-import { LazyLoadedSlices } from "@/types/store";
 import { processFilterFields, filterSingleItemsList, filterMultiItemsList } from "@/helpers/selectors";
 import { isFilterStateKey } from "@/predicates/filter";
-import {
+import { getLocalisedMonths } from "@/helpers/months";
+import type { LazyLoadedSlices } from "@/types/store";
+import type { FilterState } from "@/types/filter";
+import type { ProcessedFilterField } from "@/types/selectors";
+import type {
   BudgetsListStatistics,
   CostIncomeStatisticsItem,
   CostsBudgetsStatisticsItem,
   CostsByMonthsStatistics,
   CostsCategoriesStatisticsItem,
   IncomesCategoriesStatisticsItem,
+  ProcessedStatisticsBudgetItem,
+  StatisticsCostItem,
+  StatisticsIncomeItem,
 } from "@/types/statistics";
-import { getLocalisedMonths } from "@/helpers/months";
 
-export const selectCostsListForCharts = ({ statistics }: LazyLoadedSlices) => statistics?.costsListForCharts || null;
+export const selectCostsListForCharts = ({ statistics }: LazyLoadedSlices): StatisticsCostItem[] | null => statistics?.costsListForCharts || null;
 
-export const selectBudgetsListForCharts = ({ statistics }: LazyLoadedSlices) => statistics?.budgetsListForCharts || null;
+export const selectBudgetsListForCharts = ({ statistics }: LazyLoadedSlices): ProcessedStatisticsBudgetItem[] | null => statistics?.budgetsListForCharts || null;
 
-export const selectIncomesListForCharts = ({ statistics }: LazyLoadedSlices) => statistics?.incomesListForCharts || null;
+export const selectIncomesListForCharts = ({ statistics }: LazyLoadedSlices): StatisticsIncomeItem[] | null => statistics?.incomesListForCharts || null;
 
-export const selectStatisticsFilterValues = ({ statistics }: LazyLoadedSlices) => statistics?.statisticsFilterValues || null;
+export const selectStatisticsFilterValues = ({ statistics }: LazyLoadedSlices): FilterState | null => statistics?.statisticsFilterValues || null;
 
-export const selectCostsListForChartsByFilter = createSelector([selectCostsListForCharts, selectStatisticsFilterValues], (costs, statisticsFilterValues) =>
+export const selectCostsListForChartsByFilter = createSelector([selectCostsListForCharts, selectStatisticsFilterValues], (costs, statisticsFilterValues): StatisticsCostItem[] | null =>
   costs && statisticsFilterValues ? filterSingleItemsList(statisticsFilterValues, costs) : null,
 );
 
-export const selectIncomesListForChartsByFilter = createSelector([selectIncomesListForCharts, selectStatisticsFilterValues], (incomes, statisticsFilterValues) =>
+export const selectIncomesListForChartsByFilter = createSelector([selectIncomesListForCharts, selectStatisticsFilterValues], (incomes, statisticsFilterValues): StatisticsIncomeItem[] | null =>
   incomes && statisticsFilterValues ? filterSingleItemsList(statisticsFilterValues, incomes) : null,
 );
 
-export const selectBudgetsListForChartsByFilter = createSelector([selectBudgetsListForCharts, selectStatisticsFilterValues], (budgets, statisticsFilterValues) =>
-  budgets && statisticsFilterValues
-    ? filterMultiItemsList(statisticsFilterValues, budgets)?.map((budget) => ({
-        ...budget,
-        amount: budget.amount / (parseInt(budget.period[1].substring(5, 7)) - parseInt(budget.period[0].substring(5, 7)) + 1),
-      }))
-    : null,
+export const selectBudgetsListForChartsByFilter = createSelector(
+  [selectBudgetsListForCharts, selectStatisticsFilterValues],
+  (budgets, statisticsFilterValues): ProcessedStatisticsBudgetItem[] | null =>
+    budgets && statisticsFilterValues
+      ? filterMultiItemsList(statisticsFilterValues, budgets)?.map((budget) => ({
+          ...budget,
+          amount: budget.amount / (parseInt(budget.period[1].substring(5, 7)) - parseInt(budget.period[0].substring(5, 7)) + 1),
+        }))
+      : null,
 );
 
-export const selectStatisticsFilterFields = createSelector([selectCostCategories, selectAccountsList], (costCategories, accountsList) =>
+export const selectStatisticsFilterFields = createSelector([selectCostCategories, selectAccountsList], (costCategories, accountsList): ProcessedFilterField[] =>
   processFilterFields(INITIAL_STATISTICS_FILTER_FIELDS, costCategories, accountsList),
 );
 
 export const selectIsStatisticsFilterValuesChanged = createSelector(
   [selectStatisticsFilterValues],
-  (filterValues) =>
-    filterValues && Object.keys(filterValues).length && INITIAL_STATISTICS_FILTER_FIELDS.some(({ id, value }): boolean => isFilterStateKey(id) && filterValues[id]?.toString() !== value?.toString()),
+  (filterValues): boolean =>
+    !!filterValues &&
+    !!Object.keys(filterValues).length &&
+    INITIAL_STATISTICS_FILTER_FIELDS.some(({ id, value }): boolean => isFilterStateKey(id) && filterValues[id]?.toString() !== value?.toString()),
 );
 
 export const selectCostsAmount = createSelector([selectCostsListForChartsByFilter], (costsListForCharts): number => costsListForCharts?.reduce((acc, { amount }) => acc + amount, 0) || 0);
@@ -56,7 +65,7 @@ export const selectIncomesAmount = createSelector([selectCostsListForChartsByFil
 
 export const selectBudgetsAmount = createSelector([selectBudgetsListForChartsByFilter], (budgetsListForCharts): number => budgetsListForCharts?.reduce((acc, { amount }) => (acc += amount), 0) || 0);
 
-export const selectCostsByMonths = createSelector([selectCostCategoriesObject, selectCostsListForChartsByFilter], (costCategoriesObject, costsListForCharts) => {
+export const selectCostsByMonths = createSelector([selectCostCategoriesObject, selectCostsListForChartsByFilter], (costCategoriesObject, costsListForCharts): CostsByMonthsStatistics | null => {
   const months = getLocalisedMonths();
   return costCategoriesObject && costsListForCharts
     ? months.reduce((acc, monthName, index) => {
