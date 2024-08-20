@@ -1,6 +1,6 @@
 import { ACCOUNT_FIELD, ACCOUNTS_FIELD, AMOUNT_FIELD, CATEGORIES_FIELD, CATEGORY_FIELD, DATE_FIELD, DATES_PERIOD_FIELD, NAME_FIELD, SORT_FIELD } from "@/constants/fields";
-import { FilterField } from "@/types/filter";
-import { CostItemField } from "@/types/costs";
+import type { FilterField } from "@/types/filter";
+import type { CostItemField } from "@/types/costs";
 
 export const INITIAL_COSTS_FILTER_FIELDS: FilterField[] = [SORT_FIELD, ACCOUNTS_FIELD, CATEGORIES_FIELD, DATES_PERIOD_FIELD];
 

@@ -1,6 +1,6 @@
 import { ACCOUNT_FIELD, ACCOUNTS_FIELD, AMOUNT_FIELD, CATEGORIES_FIELD, CATEGORY_FIELD, DATE_FIELD, DATES_PERIOD_FIELD, NAME_FIELD, SORT_FIELD } from "@/constants/fields";
-import { FilterField } from "@/types/filter";
-import { IncomeItemField } from "@/types/incomes";
+import type { FilterField } from "@/types/filter";
+import type { IncomeItemField } from "@/types/incomes";
 
 export const INITIAL_INCOMES_FILTER_FIELDS: FilterField[] = [SORT_FIELD, ACCOUNTS_FIELD, CATEGORIES_FIELD, DATES_PERIOD_FIELD];
 

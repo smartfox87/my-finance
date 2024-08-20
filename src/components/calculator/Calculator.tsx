@@ -1,7 +1,7 @@
 import { forwardRef, SetStateAction, useImperativeHandle, useState } from "react";
 import { CalculatorResult } from "@/components/calculator/CalculatorResult";
 import { CalculatorKeyPad } from "@/components/calculator/CalculatorKeyPad";
-import { decimalsKeys, integerKeys, mathOperatorsKeys, navigationKeys } from "@/constants/input";
+import { DECIMAL_KEYS, INTEGER_KEYS, MATH_OPERATORS_KEYS, NAVIGATION_KEYS } from "@/constants/input";
 import type { ButtonClickHandler, ResultChangeHandler, ResultKeyDownHandler } from "@/types/calculator";
 
 // notice: setState type
@@ -32,7 +32,7 @@ export const Calculator = forwardRef(function Calculator({ onCalculate }: { onCa
     else setResult(result + button);
   };
 
-  const allowedKeys: string[] = [...integerKeys, ...decimalsKeys, ...navigationKeys, ...mathOperatorsKeys];
+  const allowedKeys: string[] = [...INTEGER_KEYS, ...DECIMAL_KEYS, ...NAVIGATION_KEYS, ...MATH_OPERATORS_KEYS];
   const handleKeyDown: ResultKeyDownHandler = (event) => {
     if (!allowedKeys.includes(event.key)) event.preventDefault();
     else if (event.key === "Enter") calculate();

@@ -1,4 +1,4 @@
-import { locales, pages } from "../src/constants/router";
+import { LOCALES, PAGES } from "../src/constants/router";
 import fs from "fs";
 import path from "path";
 import * as cheerio from "cheerio";
@@ -14,8 +14,8 @@ const cssPaths = getCssPaths(".next/static/css");
 
 // const clearCssFiles = () => cssPaths.forEach((cssPath) => fs.writeFileSync(cssPath, ""));
 
-const htmlPaths = pages.reduce((acc: string[], page: CeoPage): string[] => {
-  const langPages = locales.map((locale: Locale): string => ".next/server/app/" + (page.length ? `${locale}/${page}.html` : `${locale}.html`));
+const htmlPaths = PAGES.reduce((acc: string[], page: CeoPage): string[] => {
+  const langPages = LOCALES.map((locale: Locale): string => ".next/server/app/" + (page.length ? `${locale}/${page}.html` : `${locale}.html`));
   return acc.concat(langPages);
 }, []);
 

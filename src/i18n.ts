@@ -2,7 +2,7 @@ import { createInstance, i18n, Resource, TFunction } from "i18next";
 import { initReactI18next } from "react-i18next/initReactI18next";
 import resourcesToBackend from "i18next-resources-to-backend";
 import { i18nConfig } from "../i18nConfig";
-import { allI18nNamespaces } from "@/constants/locales";
+import { ALL_I18N_NAMESPACES } from "@/constants/locales";
 import { I18nNamespace, Locale } from "@/types/locales";
 
 interface I18nRef {
@@ -25,7 +25,7 @@ interface Result {
 
 export const i18nRef: I18nRef = {};
 
-export async function initTranslations({ locale, namespaces = allI18nNamespaces, i18nInstance, resources }: Props): Promise<Result> {
+export async function initTranslations({ locale, namespaces = ALL_I18N_NAMESPACES, i18nInstance, resources }: Props): Promise<Result> {
   const instance = i18nInstance || createInstance();
   instance.use(initReactI18next);
 

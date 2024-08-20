@@ -7,7 +7,7 @@ import SvgAccounts from "@/assets/sprite/accounts.svg";
 import SvgIncomes from "@/assets/sprite/incomes.svg";
 import SvgSettings from "@/assets/sprite/settings.svg";
 import SvgContact from "@/assets/sprite/contact.svg";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 export const INIT_NAV_LIST: { icon: ReactNode; url: string; full_name: string; short_name?: string; mobile_nav?: boolean }[] = [
   {

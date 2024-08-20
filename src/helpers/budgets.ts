@@ -1,5 +1,5 @@
-import { BudgetItem, ProcessedBudgetItem } from "@/types/budgets";
 import { getPeriodDates } from "@/helpers/date";
+import type { BudgetItem, ProcessedBudgetItem } from "@/types/budgets";
 
 export const processBudgetItem = (budgetItem: BudgetItem): ProcessedBudgetItem => ({
   ...budgetItem,

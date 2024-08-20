@@ -37,3 +37,10 @@ export interface Currency {
   code: string;
   symbol: string;
 }
+
+export interface ReferencesSliceState {
+  costCategories: CostCategory[] | null;
+  accountTypes: AccountType[] | null;
+  incomeCategories: IncomeCategory[] | null;
+  currencies: Currency[] | null;
+}

@@ -1,9 +1,9 @@
 import { createContext, createRef, forwardRef, useCallback, useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
-import * as Sentry from "@sentry/nextjs";
+import { captureException } from "@sentry/nextjs";
 import ReCAPTCHA, { type ReCAPTCHAProps } from "react-google-recaptcha";
-import { RecaptchaContextType } from "@/types/providers/recaptchaProvider";
 import type { ComponentChildrenProps } from "@/types/common";
+import type { RecaptchaContextType } from "@/types/providers/recaptchaProvider";
 
 const siteKey = process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY;
 
@@ -40,15 +40,16 @@ export const RecaptchaProvider = ({ children }: ComponentChildrenProps) => {
       if (!score && error) throw new Error(error);
       return score;
     } catch (error) {
-      if (process.env.NODE_ENV === "production") Sentry.captureException(error);
+      if (process.env.NODE_ENV === "production") captureException(error);
       return 0.999;
     }
   }, []);
 
-  useEffect(() => {
+  useEffect((): void => {
     if ("recaptchaOptions" in window) window.recaptchaOptions = { enterprise: true };
   }, []);
 
+  // todo add ts types
   const contextValue = useMemo(() => ({ initCaptcha, isLoadedCaptcha, getScore }), [initCaptcha, isLoadedCaptcha, getScore]);
 
   return (

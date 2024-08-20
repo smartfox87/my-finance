@@ -8,7 +8,7 @@ import dynamic from "next/dynamic";
 import { Preloader } from "@/components/layout/preloader/Preloader";
 import { usePathname } from "next/navigation";
 import { Pages } from "@/types/router";
-import { AntdContextType, Theme } from "@/types/providers/antdProvider";
+import type { AntdContextType, Theme } from "@/types/providers/antdProvider";
 import type { ComponentChildrenProps } from "@/types/common";
 
 const StyleProvider = dynamic(() => import("@ant-design/cssinjs/es/StyleContext").then(({ StyleProvider }) => StyleProvider));
@@ -36,7 +36,7 @@ export const AntdProvider = ({ children }: ComponentChildrenProps) => {
     import("antd/es/theme").then(({ default: theme }) => setTheme(theme));
   }, [isLoadedAntd]);
 
-  useEffect(() => {
+  useEffect((): void => {
     if ((!theme && isLoadedInitState) || (!isLoadedAntd && (getUserId() || user))) initAntd();
   }, [user, isLoadedInitState]);
 

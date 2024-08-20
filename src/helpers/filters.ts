@@ -1,11 +1,11 @@
-import { FieldIds, FieldTypes, FieldValues } from "@/types/field";
-import { ActiveFilterItem, ActiveFilterItemValue, FilterField, FilterItem, FilterState, FilterStateValue } from "@/types/filter";
-import { ProcessedFilterField } from "@/types/selectors";
 import { i18nRef } from "@/i18n";
 import { isMultiSelectValue } from "@/predicates/field";
 import { isNumber, isTruthy } from "@/predicates/common";
 import { isFilterMultiItem, isFilterPeriodItem, isFilterSortItem } from "@/predicates/filter";
 import { isMultiSelectFormFieldId } from "@/predicates/form";
+import { FieldIds, FieldTypes, FieldValues } from "@/types/field";
+import type { ProcessedFilterField } from "@/types/selectors";
+import type { ActiveFilterItem, ActiveFilterItemValue, FilterField, FilterItem, FilterState, FilterStateValue } from "@/types/filter";
 
 export const getActiveFilters = (processedFilterFields: ProcessedFilterField[], filterValues: FilterState | null): ActiveFilterItem[] =>
   processedFilterFields
@@ -55,7 +55,7 @@ export const setFilterValue = (filterValues: FilterState | null, { id, value }: 
   return state;
 };
 
-export const prepareObjectValuesForFilterStateValues = (objectValues: Record<string, FilterStateValue>) =>
+export const prepareObjectValuesForFilterStateValues = (objectValues: Record<string, FilterStateValue>): FilterItem[] =>
   Object.entries(objectValues)
     .map(([key, value]) => {
       const filterItem = { id: key, value };

@@ -4,7 +4,7 @@ export const useDarkTheme = () => {
   const [darkTheme, setDarkTheme] = useState(false);
   const handleThemeChange = useCallback((event: MediaQueryListEvent) => setDarkTheme(event.matches), []);
 
-  useEffect(() => {
+  useEffect((): (() => void) => {
     const mediaQuery = matchMedia("(prefers-color-scheme: dark)");
     setDarkTheme(mediaQuery.matches);
     mediaQuery.addEventListener("change", handleThemeChange);

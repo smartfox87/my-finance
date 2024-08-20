@@ -1,5 +1,5 @@
 import { AMOUNT_FIELD, BALANCE_FIELD, FROM_ACCOUNT_FIELD, NAME_FIELD, TO_ACCOUNT_FIELD } from "@/constants/fields";
-import { AccountItemField, AccountTransferField, AccountTransferValues } from "@/types/accounts";
+import type { AccountItemField, AccountTransferField, AccountTransferValues } from "@/types/accounts";
 
 export const INITIAL_ACCOUNT_FIELDS: AccountItemField[] = [{ ...NAME_FIELD, maxLength: 200, focus: true }, BALANCE_FIELD];
 

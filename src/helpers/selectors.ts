@@ -1,16 +1,16 @@
-import { FieldIds, FieldTypes, FieldValues, MultiSelectOptionValue, MultiSelectValue, SelectOption, SingleSelectValue } from "@/types/field";
-import { DatesStrings } from "@/types/date";
-import { ProcessedAccountItem } from "@/types/accounts";
-import { CostCategory, IncomeCategory } from "@/types/references";
 import { i18nRef } from "@/i18n";
-import { FilterState } from "@/types/filter";
-import { CostItem } from "@/types/costs";
-import { IncomeItem } from "@/types/incomes";
-import { ProcessedBudgetItem } from "@/types/budgets";
-import { FilterField } from "@/types/filter";
-import { ProcessedStatisticsBudgetItem, StatisticsCostItem, StatisticsIncomeItem } from "@/types/statistics";
-import { ProcessedFilterField } from "@/types/selectors";
 import { isTruthy } from "@/predicates/common";
+import { FieldIds, FieldTypes, FieldValues, type MultiSelectOptionValue, type MultiSelectValue, type SelectOption, type SingleSelectValue } from "@/types/field";
+import type { DatesStrings } from "@/types/date";
+import type { ProcessedAccountItem } from "@/types/accounts";
+import type { CostCategory, IncomeCategory } from "@/types/references";
+import type { FilterState } from "@/types/filter";
+import type { CostItem } from "@/types/costs";
+import type { IncomeItem } from "@/types/incomes";
+import type { ProcessedBudgetItem } from "@/types/budgets";
+import type { FilterField } from "@/types/filter";
+import type { ProcessedFilterField } from "@/types/selectors";
+import type { ProcessedStatisticsBudgetItem, StatisticsCostItem, StatisticsIncomeItem } from "@/types/statistics";
 
 export const checkSingleItemCondition = (filterItem: MultiSelectValue | undefined, itemId: number): boolean =>
   filterItem !== undefined && (filterItem.includes(itemId) || filterItem.includes(FieldValues.ALL));
@@ -22,7 +22,7 @@ export const checkPeriodCondition = (dates: DatesStrings | undefined, date: stri
 
 export const checkPeriodsCondition = (dates: DatesStrings | undefined, [itemFrom, itemTo]: DatesStrings) => dates !== undefined && itemFrom >= dates[0] && itemTo <= dates[1];
 
-export const filterSingleItemsList = <T extends CostItem | IncomeItem | StatisticsCostItem | StatisticsIncomeItem>(filterValues: FilterState, itemsList: T[]) =>
+export const filterSingleItemsList = <T extends CostItem | IncomeItem | StatisticsCostItem | StatisticsIncomeItem>(filterValues: FilterState, itemsList: T[]): T[] =>
   itemsList.filter(
     ({ date, category, account }) =>
       checkSingleItemCondition(filterValues[FieldIds.CATEGORIES], category) &&
@@ -30,7 +30,7 @@ export const filterSingleItemsList = <T extends CostItem | IncomeItem | Statisti
       checkSingleItemCondition(filterValues[FieldIds.ACCOUNTS], account),
   );
 
-export const filterMultiItemsList = <T extends ProcessedBudgetItem | ProcessedStatisticsBudgetItem>(filterValues: FilterState, itemsList: T[]) =>
+export const filterMultiItemsList = <T extends ProcessedBudgetItem | ProcessedStatisticsBudgetItem>(filterValues: FilterState, itemsList: T[]): T[] =>
   itemsList.filter(
     ({ period, categories, accounts }) =>
       checkMultiItemCondition(filterValues[FieldIds.CATEGORIES], categories) &&
@@ -38,7 +38,7 @@ export const filterMultiItemsList = <T extends ProcessedBudgetItem | ProcessedSt
       checkMultiItemCondition(filterValues[FieldIds.ACCOUNTS], accounts),
   );
 
-export const sortItemsList = <T extends CostItem | IncomeItem | ProcessedBudgetItem>(filterValues: FilterState, itemsList: T[]) =>
+export const sortItemsList = <T extends CostItem | IncomeItem | ProcessedBudgetItem>(filterValues: FilterState, itemsList: T[]): T[] =>
   itemsList.sort((a, b) => {
     if (!filterValues[FieldIds.SORT]) return a.created_at.localeCompare(b.created_at);
     const [prop, order] = filterValues[FieldIds.SORT].split("_");

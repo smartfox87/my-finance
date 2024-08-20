@@ -1,5 +1,6 @@
 import { DateFormField, NumberFormField, SingleSelectFormField, TextFormField } from "@/types/form";
 import { FieldIds, FieldTypes } from "@/types/field";
+import { FilterState } from "@/types/filter";
 
 export interface IncomeItem {
   id: number;
@@ -24,3 +25,9 @@ export type IncomeItemField =
   | NumberFormField<FieldIds.AMOUNT>
   | DateFormField<FieldIds.DATE>
   | SingleSelectFormField<FieldIds.ACCOUNT | FieldIds.CATEGORY>;
+
+export interface IncomesSliceState {
+  incomesFilterValues: FilterState | null;
+  incomesList: IncomeItem[] | null;
+  incomeItem: IncomeItem | null;
+}

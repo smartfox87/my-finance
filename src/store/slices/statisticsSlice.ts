@@ -1,24 +1,17 @@
-import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import { handleRejectedReducerAction } from "@/helpers/errors";
 import { getBudgetsListForChartsApi, getCostsListForChartsApi, getIncomesListForChartsApi } from "@/api/statistics";
 import { setFilterValue } from "@/helpers/filters";
 import { getPeriodDates } from "@/helpers/date";
 import { rootReducer } from "@/store";
-import { ProcessedStatisticsBudgetItem, StatisticsBudgetItem, StatisticsCostItem, StatisticsIncomeItem } from "@/types/statistics";
-import { FilterItem, FilterPeriodStateItem, FilterState } from "@/types/filter";
-import { FieldIds } from "@/types/field";
 import { isDatesStrings } from "@/predicates/date";
+import { FieldIds } from "@/types/field";
+import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
+import type { FilterItem, FilterPeriodStateItem, FilterState } from "@/types/filter";
+import type { StatisticsBudgetItem, StatisticsCostItem, StatisticsIncomeItem, StatisticsSliceState } from "@/types/statistics";
 
 const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
 });
-
-export interface StatisticsSliceState {
-  statisticsFilterValues: FilterState | null;
-  costsListForCharts: StatisticsCostItem[] | null;
-  incomesListForCharts: StatisticsIncomeItem[] | null;
-  budgetsListForCharts: ProcessedStatisticsBudgetItem[] | null;
-}
 
 const initialState: StatisticsSliceState = {
   statisticsFilterValues: null,

@@ -1,16 +1,16 @@
 import { SerializedError } from "@reduxjs/toolkit";
-import { IncomesSliceState } from "@/store/slices/incomesSlice";
-import { BudgetsSliceState } from "@/store/slices/budgetsSlice";
-import { AuthSliceState } from "@/store/slices/authSlice";
-import { ReferencesSliceState } from "@/store/slices/referencesSlice";
-import { CostsSliceState } from "@/store/slices/costsSlice";
-import { StatisticsSliceState } from "@/store/slices/statisticsSlice";
-import { showErrorMessage } from "@/helpers/message";
-import { AccountsSliceState } from "@/types/accounts";
-import { ProfileSliceState } from "@/types/profile";
-import { showNotification } from "@/helpers/modals";
 import { i18nRef } from "@/i18n";
+import { showErrorMessage } from "@/helpers/message";
+import { showNotification } from "@/helpers/modals";
 import { NotificationTypes } from "@/types/modals";
+import type { AuthSliceState } from "@/store/slices/authSlice";
+import type { CostsSliceState } from "@/store/slices/costsSlice";
+import type { AccountsSliceState } from "@/types/accounts";
+import type { ProfileSliceState } from "@/types/profile";
+import type { IncomesSliceState } from "@/types/incomes";
+import type { BudgetsSliceState } from "@/types/budgets";
+import type { ReferencesSliceState } from "@/types/references";
+import type { StatisticsSliceState } from "@/types/statistics";
 
 type State = IncomesSliceState | AccountsSliceState | BudgetsSliceState | AuthSliceState | ProfileSliceState | ReferencesSliceState | CostsSliceState | StatisticsSliceState;
 
