@@ -31,7 +31,6 @@ export const SignIn = () => {
     try {
       if (!isLoginData(fieldsValues)) return;
       const { loginUserThunk } = await import("@/store/slices/authSlice");
-      // todo unwrap all dispatches
       await dispatch(loginUserThunk(fieldsValues)).unwrap();
       handleToggleVisibility();
     } catch (error) {

@@ -7,7 +7,6 @@ if (!supabaseUrl || !supabaseKey) {
   throw new Error("Supabase URL and Key must be provided.");
 }
 
-export const supabase = createClient(supabaseUrl, supabaseKey, {
+export const supabaseClient = createClient(supabaseUrl, supabaseKey, {
   global: { headers: { Prefer: "return=representation" } },
 });
-//todo rename file to index.ts

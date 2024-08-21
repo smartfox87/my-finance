@@ -3,13 +3,12 @@ import { handleRejectedReducerAction } from "@/helpers/errors";
 import { updateAccountBalanceThunk } from "@/store/slices/accountsSlice";
 import { setFilterValue } from "@/helpers/filters";
 import { rootReducer } from "@/store";
-import { isDatesStrings } from "@/predicates/date";
-import { FieldIds } from "@/types/field";
+import { isFilterPeriodStateItem } from "@/predicates/filter";
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import type { AccountItemBalanceData } from "@/types/accounts";
 import type { AppDispatch, RootState } from "@/types/store";
 import type { IncomeItem, IncomeItemData, IncomesSliceState } from "@/types/incomes";
-import type { FilterItem, FilterPeriodStateItem, FilterState } from "@/types/filter";
+import type { FilterItem, FilterState } from "@/types/filter";
 
 const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
@@ -27,9 +26,8 @@ export const incomesSlice = createAppSlice({
   reducers: (create) => ({
     getIncomesListThunk: create.asyncThunk<IncomeItem[], FilterState, { rejectValue: string }>(
       async (params, { rejectWithValue }) => {
-        if (!params[FieldIds.PERIOD] || !isDatesStrings(params[FieldIds.PERIOD])) throw rejectWithValue("Period is required");
-        const filter: FilterPeriodStateItem = { [FieldIds.PERIOD]: params[FieldIds.PERIOD] };
-        const { data, error } = await getIncomesListApi(filter);
+        if (!isFilterPeriodStateItem(params)) throw rejectWithValue("Period is required");
+        const { data, error } = await getIncomesListApi(params);
         if (error) throw rejectWithValue(error.message);
         return data;
       },
