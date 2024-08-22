@@ -65,7 +65,7 @@
 		"cypress-terminal-report": "^6.1.2",
 		"dotenv": "^16.4.5",
 		"eslint": "^8",
-		"eslint-config-next": "14.2.5",
+		"eslint-config-next": "14.2.6",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-prettier": "^5.2.1",
 		"i18nexus-cli": "^3.5.0",
