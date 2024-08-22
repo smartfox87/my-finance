@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import { captureException } from "@sentry/nextjs";
 import ReCAPTCHA, { type ReCAPTCHAProps } from "react-google-recaptcha";
 import type { ComponentChildrenProps } from "@/types/common";
-import type { RecaptchaContextType } from "@/types/providers/recaptchaProvider";
+import type { GetScore, RecaptchaContextType } from "@/types/providers/recaptchaProvider";
 
 const siteKey = process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY;
 
@@ -31,7 +31,7 @@ export const RecaptchaProvider = ({ children }: ComponentChildrenProps) => {
   const initCaptcha = useCallback((): void => setIsInjectedCaptcha(true), []);
   const handleAsyncScriptLoad = useCallback((): void => setIsLoadedCaptcha(true), []);
 
-  const getScore = useCallback(async ({ action = "signup" }: { action?: string } = {}): Promise<number> => {
+  const getScore: GetScore = useCallback(async ({ action = "signup" } = {}) => {
     try {
       if (!recaptchaRef.current) throw new Error("Recaptcha is not initialized");
       const value = await recaptchaRef.current.executeAsync();
@@ -49,8 +49,7 @@ export const RecaptchaProvider = ({ children }: ComponentChildrenProps) => {
     if ("recaptchaOptions" in window) window.recaptchaOptions = { enterprise: true };
   }, []);
 
-  // todo add ts types
-  const contextValue = useMemo(() => ({ initCaptcha, isLoadedCaptcha, getScore }), [initCaptcha, isLoadedCaptcha, getScore]);
+  const contextValue = useMemo((): RecaptchaContextType => ({ initCaptcha, isLoadedCaptcha, getScore }), [initCaptcha, isLoadedCaptcha, getScore]);
 
   return (
     <RecaptchaContext.Provider value={contextValue}>
