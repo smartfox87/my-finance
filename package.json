@@ -47,7 +47,7 @@
 	"devDependencies": {
 		"@cypress/webpack-preprocessor": "^6.0.2",
 		"@faker-js/faker": "^8.4.1",
-		"@next/bundle-analyzer": "^14.2.5",
+		"@next/bundle-analyzer": "^14.2.6",
 		"@svgr/webpack": "^8.1.0",
 		"@types/fs-extra": "^11.0.4",
 		"@types/lodash": "^4.17.7",
