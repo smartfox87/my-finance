@@ -1,10 +1,11 @@
-import { createContext, ReactNode, useCallback, useMemo, useState } from "react";
+import { createContext, useCallback, useMemo, useState } from "react";
 import { useViewport } from "@/hooks/viewport";
-import { ModalStateContextType } from "@/types/providers/modalStateProvider";
+import type { ModalStateContextType } from "@/types/providers/modalStateProvider";
+import type { ComponentChildrenProps } from "@/types/common";
 
 export const ModalStateContext = createContext<ModalStateContextType | undefined>(undefined);
 
-export const ModalStateProvider = ({ children }: { children: ReactNode }) => {
+export const ModalStateProvider = ({ children }: ComponentChildrenProps) => {
   const [isInitializedModal, setIsInitializedModal] = useState(false);
   const [isOpenMenuModal, setIsOpenMenuModal] = useState(false);
   const [isOpenSignInModal, setIsOpenSignInModal] = useState(false);

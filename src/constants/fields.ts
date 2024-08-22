@@ -1,8 +1,8 @@
-import { DateFormField, DatesPeriodFormField, FileFormField, NumberFormField, RadioButtonsFormField, MultiSelectFormField, SingleSelectFormField, TextFormField } from "@/types/form";
 import { getDatesPeriod, getPeriod, periodOptions } from "@/helpers/date";
-import { PickerPeriods } from "@/types/date";
 import { ComplexFieldNames, SelectFieldOptions, FieldTypes, SimpleFieldNames, SortFieldOptions, GenderFieldOptions, SubjectFieldOptions, FieldValues } from "@/types/field";
 import { FieldIds } from "@/types/field";
+import { PickerPeriods } from "@/types/date";
+import type { DateFormField, DatesPeriodFormField, FileFormField, NumberFormField, RadioButtonsFormField, MultiSelectFormField, SingleSelectFormField, TextFormField } from "@/types/form";
 
 export const SORT_FIELD: SingleSelectFormField<FieldIds.SORT, string> = {
   id: FieldIds.SORT,
@@ -155,7 +155,7 @@ export const GENDER_FIELD: SingleSelectFormField<FieldIds.GENDER, string> = {
   ],
 };
 
-export const SUBJECT_FIELD: SingleSelectFormField = {
+export const SUBJECT_FIELD: SingleSelectFormField<FieldIds.SUBJECT, string> = {
   id: FieldIds.SUBJECT,
   type: FieldTypes.SELECT,
   label: `complex.${ComplexFieldNames.SUBJECT}.label`,
@@ -170,7 +170,7 @@ export const SUBJECT_FIELD: SingleSelectFormField = {
   required: true,
 };
 
-export const MESSAGE_FIELD: TextFormField = {
+export const MESSAGE_FIELD: TextFormField<FieldIds.MESSAGE, FieldTypes.TEXTAREA> = {
   id: FieldIds.MESSAGE,
   type: FieldTypes.TEXTAREA,
   label: `simple.${SimpleFieldNames.MESSAGE}`,

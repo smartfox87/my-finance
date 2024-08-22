@@ -1,8 +1,4 @@
-interface ErrorMessage {
-  (text: string, duration?: number): void;
-}
-
-let errorMessage: ErrorMessage;
+let errorMessage: (text: string, duration?: number) => void;
 
 export const showErrorMessage = (text: string, duration?: number) => {
   if (errorMessage) errorMessage(text, duration);

@@ -1,6 +1,6 @@
 "use client";
 
-import { DefaultForm } from "@/components/Form/DefaultForm";
+import { DefaultForm } from "@/components/form/DefaultForm";
 import { showNotification } from "@/helpers/modals";
 import { useRecaptcha } from "@/hooks/providers/recaptcha";
 import { selectContactFields } from "@/store/selectors/contact";

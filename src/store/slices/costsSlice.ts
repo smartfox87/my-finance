@@ -6,7 +6,7 @@ import { setFilterValue } from "@/helpers/filters";
 import { rootReducer } from "@/store";
 import { isDatesStrings } from "@/predicates/date";
 import { FieldIds } from "@/types/field";
-import type { CostItem, CostItemData } from "@/types/costs";
+import type { CostItem, CostItemData, CostsSliceState } from "@/types/costs";
 import type { FilterItem, FilterPeriodStateItem, FilterState } from "@/types/filter";
 import type { WithSlice } from "@reduxjs/toolkit";
 import type { AppDispatch, RootState } from "@/types/store";
@@ -14,12 +14,6 @@ import type { AppDispatch, RootState } from "@/types/store";
 const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
 });
-
-export interface CostsSliceState {
-  costsFilterValues: FilterState | null;
-  costsList: CostItem[] | null;
-  costItem: CostItem | null;
-}
 
 const initialState: CostsSliceState = {
   costsFilterValues: null,

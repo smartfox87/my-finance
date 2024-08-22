@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Breakpoints, Viewport, Viewports } from "@/types/viewport";
+import { Breakpoints, type Viewport, Viewports } from "@/types/viewport";
 
 const viewports: { name: Viewport; query: string }[] = [
   { name: Viewports.XL, query: `(min-width: ${Breakpoints["XL-MIN"]}px)` },
@@ -22,7 +22,7 @@ export const useViewport = (): { viewport: Viewport; isTouchDevice: boolean; isT
   const isTablet = useMemo(() => tabletViewports.includes(viewport), [viewport]);
   const isMobile = useMemo(() => mobileViewports.includes(viewport), [viewport]);
 
-  useEffect(() => {
+  useEffect((): (() => void) => {
     const mediaQueryLists: MediaQueryList[] = viewports.map(({ query }) => matchMedia(query));
     setViewport(getViewportByIndex(getTrueValueIndex(mediaQueryLists)));
 
@@ -36,7 +36,9 @@ export const useViewport = (): { viewport: Viewport; isTouchDevice: boolean; isT
     };
 
     mediaQueryLists.forEach((list) => list.addEventListener("change", handleMatchMediaChange));
-    return () => mediaQueryLists.forEach((list) => list.removeEventListener("change", handleMatchMediaChange));
+    return (): void => {
+      mediaQueryLists.forEach((list) => list.removeEventListener("change", handleMatchMediaChange));
+    };
   }, []);
 
   return { viewport, isTouchDevice, isTablet, isMobile };

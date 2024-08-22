@@ -2,7 +2,7 @@ import "dotenv/config";
 import { writeFileSync } from "fs";
 import { SitemapStream, streamToPromise } from "sitemap";
 import { Readable } from "stream";
-import { locales, pages } from "../src/constants/router";
+import { LOCALES, PAGES } from "../src/constants/router";
 import { type Locale, Locales } from "../src/types/locales";
 
 type Link = {
@@ -11,11 +11,11 @@ type Link = {
 };
 
 const hostname = process.env.NEXT_PUBLIC_PRODUCTION_URL;
-const links = pages.map((url): { url: string; changefreq: string; priority: number; links: Link[] } => ({
+const links = PAGES.map((url): { url: string; changefreq: string; priority: number; links: Link[] } => ({
   url: `${hostname}/${url}`,
   changefreq: "daily",
   priority: 0.8,
-  links: locales.map((lang): Link => ({ lang, url: `${hostname}${lang === Locales.EN ? "" : `/${lang}`}/${url}` })),
+  links: LOCALES.map((lang): Link => ({ lang, url: `${hostname}${lang === Locales.EN ? "" : `/${lang}`}/${url}` })),
 }));
 
 const stream = new SitemapStream({

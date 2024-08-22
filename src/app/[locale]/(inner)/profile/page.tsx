@@ -1,5 +1,5 @@
 import { initTranslations } from "@/i18n";
-import { InnerLayout } from "@/components/Layout/InnerLayout";
+import { InnerLayout } from "@/components/layout/inner/InnerLayout";
 import ProfileModule from "@/app/[locale]/(inner)/profile/content-module";
 import { Pages } from "@/types/router";
 import type { Metadata } from "next";

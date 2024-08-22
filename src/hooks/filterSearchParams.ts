@@ -3,13 +3,13 @@ import { getIntegerFromString } from "@/helpers/numbers";
 import { isStringValidDate } from "@/helpers/date";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import queryString from "query-string";
-import { FilterState, FilterStateValue, SetFilterStateValuesHandler } from "@/types/filter";
 import { useAppDispatch } from "@/hooks/redux";
 import { isFilterStateKey } from "@/predicates/filter";
 import { isMultiSelectValue, isSelectAllValue } from "@/predicates/field";
 import { prepareObjectValuesForFilterStateValues } from "@/helpers/filters";
+import type { FilterState, FilterStateValue, SetFilterStateValuesHandler } from "@/types/filter";
 
-export const useFilterSearchParams = (filterValues: FilterState | null, setFilterValues: SetFilterStateValuesHandler) => {
+export const useFilterSearchParams = (filterValues: FilterState | null, setFilterValues: SetFilterStateValuesHandler): [boolean, boolean] => {
   const dispatch = useAppDispatch();
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -31,7 +31,7 @@ export const useFilterSearchParams = (filterValues: FilterState | null, setFilte
   const isFilterValuesFilled = useMemo((): boolean => !!filterValues && !!Object.keys(filterValues).length, [filterValues]);
 
   const paramsObject = useMemo(
-    () =>
+    (): Record<string, FilterStateValue> | null =>
       searchParamsArray.length && filterValues
         ? searchParamsArray.reduce(
             (acc, [key, value]) => {
@@ -59,13 +59,13 @@ export const useFilterSearchParams = (filterValues: FilterState | null, setFilte
     [paramsObject, sortedFilterValues],
   );
 
-  useEffect(() => {
+  useEffect((): void => {
     if (paramsObject && isFilterValuesFilled && searchParamsArray.length && isNotEqualParamsToFilters) {
       dispatch(setFilterValues(prepareObjectValuesForFilterStateValues(paramsObject)));
     }
   }, [isFilterValuesFilled]);
 
-  useEffect(() => {
+  useEffect((): void => {
     if (filterValues && isFilterValuesFilled && isNotEqualParamsToFilters) router.push(`${pathname}?${queryString.stringify(filterValues)}`);
   }, [isFilterValuesFilled, filterValues, isNotEqualParamsToFilters]);
 

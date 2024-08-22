@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { initTranslations } from "@/i18n";
-import { InnerLayout } from "@/components/Layout/InnerLayout";
+import { InnerLayout } from "@/components/layout/inner/InnerLayout";
 import AccountsModule from "@/app/[locale]/(inner)/accounts/content-module";
 import { getJsonLdBreadcrumbs, getJsonLdWebsite } from "@/helpers/jsonLd";
 import type { LinkItem } from "@/types/breadcrumbs";

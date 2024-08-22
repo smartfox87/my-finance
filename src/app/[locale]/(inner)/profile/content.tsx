@@ -3,14 +3,14 @@
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { selectProfileFields } from "@/store/selectors/profile";
-import { DefaultForm } from "@/components/Form/DefaultForm";
+import { DefaultForm } from "@/components/form/DefaultForm";
 import { getProfileThunk, updateProfileThunk } from "@/store/slices/profileSlice";
 import { showNotification } from "@/helpers/modals";
 import { useAppDispatch } from "@/hooks/redux";
 import { showCommonError } from "@/helpers/errors";
 import { isProfileData } from "@/predicates/profile";
-import { ProfilePageActions } from "@/components/Profile/page/ProfilePageActions";
-import { ProfileDates } from "@/components/Profile/page/ProfileDates";
+import { ProfilePageActions } from "@/components/profile/page/ProfilePageActions";
+import { ProfileDates } from "@/components/profile/page/ProfileDates";
 import type { DefaultFormSaveHandler } from "@/types/form";
 
 export default function ProfileContent() {

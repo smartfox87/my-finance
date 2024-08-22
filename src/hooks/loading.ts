@@ -16,7 +16,7 @@ export const useLoading = (state: boolean): [boolean, (state: boolean) => void] 
   }, []);
 
   useEffect(
-    () => () => {
+    () => (): void => {
       if (timeout.current) clearTimeout(timeout.current);
     },
     [],

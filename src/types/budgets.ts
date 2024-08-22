@@ -1,6 +1,7 @@
-import { DatesStrings } from "@/types/date";
 import { FieldIds, FieldTypes } from "@/types/field";
-import { DatesPeriodFormField, MultiSelectFormField, NumberFormField, TextFormField } from "@/types/form";
+import type { DatesStrings } from "@/types/date";
+import type { DatesPeriodFormField, MultiSelectFormField, NumberFormField, TextFormField } from "@/types/form";
+import type { FilterState } from "@/types/filter";
 
 export interface BudgetItemData {
   [FieldIds.NAME]: string;
@@ -31,3 +32,9 @@ export type ProcessedBudgetItem = {
 };
 
 export type BudgetItemField = TextFormField<FieldIds.NAME, FieldTypes.TEXTAREA> | NumberFormField<FieldIds.AMOUNT> | DatesPeriodFormField | MultiSelectFormField;
+
+export interface BudgetsSliceState {
+  budgetsFilterValues: FilterState | null;
+  budgetsList: ProcessedBudgetItem[] | null;
+  budgetItem: ProcessedBudgetItem | null;
+}

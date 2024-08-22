@@ -1,9 +1,9 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { selectCurrencies } from "@/store/selectors/references";
 import { INITIAL_PROFILE_FIELDS, INITIAL_SETTINGS_FIELDS } from "@/constants/profile";
-import { LazyLoadedSlices } from "@/types/store";
-import { Profile, ProfileField, SettingsField } from "@/types/profile";
 import { FieldIds } from "@/types/field";
+import type { LazyLoadedSlices } from "@/types/store";
+import type { Profile, ProfileField, SettingsField } from "@/types/profile";
 
 export const selectProfile = ({ profile }: LazyLoadedSlices): Profile | null => profile?.profile || null;
 

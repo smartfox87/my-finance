@@ -1,24 +1,17 @@
-import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import { createBudgetItemApi, getBudgetsListApi, updateBudgetItemApi, deleteBudgetItemApi, getBudgetItemApi } from "@/api/budgets";
 import { handleRejectedReducerAction } from "@/helpers/errors";
 import { setFilterValue } from "@/helpers/filters";
 import { rootReducer } from "@/store";
-import { BudgetItem, BudgetItemData, ProcessedBudgetItem } from "@/types/budgets";
-import { FilterItem, FilterPeriodStateItem, FilterState } from "@/types/filter";
-import { FieldIds } from "@/types/field";
 import { processBudgetItem } from "@/helpers/budgets";
 import { isDatesStrings } from "@/predicates/date";
+import { FieldIds } from "@/types/field";
+import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
+import type { BudgetItem, BudgetItemData, BudgetsSliceState, ProcessedBudgetItem } from "@/types/budgets";
+import type { FilterItem, FilterPeriodStateItem, FilterState } from "@/types/filter";
 
 const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
 });
-
-// todo move slice types to special files
-export interface BudgetsSliceState {
-  budgetsFilterValues: FilterState | null;
-  budgetsList: ProcessedBudgetItem[] | null;
-  budgetItem: ProcessedBudgetItem | null;
-}
 
 const initialState: BudgetsSliceState = {
   budgetsFilterValues: null,

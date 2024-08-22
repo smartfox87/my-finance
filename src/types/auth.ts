@@ -1,6 +1,6 @@
-import { Session, User } from "@supabase/auth-js";
 import { FieldIds, FieldTypes } from "@/types/field";
-import { TextFormField } from "@/types/form";
+import type { Session, User } from "@supabase/auth-js";
+import type { TextFormField } from "@/types/form";
 
 export type LoginData = {
   [FieldIds.EMAIL]: string;
@@ -23,3 +23,7 @@ export interface SessionPayload {
 export type LoginField = TextFormField<FieldIds.EMAIL, FieldTypes.EMAIL> | TextFormField<FieldIds.PASSWORD, FieldTypes.PASSWORD>;
 
 export type RegisterField = LoginField | TextFormField<FieldIds.FULL_NAME, FieldTypes.TEXT>;
+
+export interface AuthSliceState {
+  user: User | null;
+}

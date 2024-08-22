@@ -1,5 +1,5 @@
-import { DatesPeriodFormField, MultiSelectFormField, SingleSelectFormField } from "@/types/form";
 import { FieldIds } from "@/types/field";
+import type { DatesPeriodFormField, MultiSelectFormField, SingleSelectFormField } from "@/types/form";
 
 export type BasedFilterField = {
   label: string;

@@ -1,10 +1,10 @@
-import { type Locale, Locales } from "@/types/locales";
-import { type DatesPeriod, DatesPeriods, DatesStrings } from "@/types/date";
-import { periods } from "@/constants/date";
+import { PERIODS } from "@/constants/date";
 import dayjs from "dayjs";
 import quarterOfYear from "dayjs/plugin/quarterOfYear";
-import { ComplexFieldNames, FieldTranslationRadioButtonOption } from "@/types/field";
 import { isDatesPeriod } from "@/predicates/field";
+import { type Locale, Locales } from "@/types/locales";
+import { ComplexFieldNames, type FieldTranslationRadioButtonOption } from "@/types/field";
+import { type DatesPeriod, DatesPeriods, DatesStrings } from "@/types/date";
 dayjs.extend(quarterOfYear);
 
 export const toggleDayjsLocale = async (locale: Locale): Promise<void> => {
@@ -17,7 +17,7 @@ export const toggleDayjsLocale = async (locale: Locale): Promise<void> => {
   }
 };
 
-export const periodOptions = periods.map((period): { label_translation: FieldTranslationRadioButtonOption; value: DatesPeriod } => ({
+export const periodOptions = PERIODS.map((period): { label_translation: FieldTranslationRadioButtonOption; value: DatesPeriod } => ({
   label_translation: `complex.${ComplexFieldNames.PERIOD}.options.${period}`,
   value: period,
 }));
@@ -28,9 +28,9 @@ export const getPeriod = (): DatesPeriod => {
   return isDatesPeriod(period) ? period : DatesPeriods.YEAR;
 };
 
-export const getCurrentDate = () => new Date().toISOString();
+export const getCurrentDate = (): string => new Date().toISOString();
 
-export const getFullDate = (date?: string, format: string = "YYYY MMMM DD") => {
+export const getFullDate = (date?: string, format: string = "YYYY MMMM DD"): string => {
   if (!date) return "";
   return dayjs(date).format(format);
 };
@@ -49,7 +49,7 @@ export const isStringValidDate = (str: string): boolean => {
 export const findMatchingPeriod = (datesArray: DatesStrings): null | DatesPeriod => {
   if (datesArray.length !== 2) return null;
   const date = dayjs(datesArray[0]);
-  for (const period of periods) {
+  for (const period of PERIODS) {
     const startOfPeriod = date.startOf(period).format("YYYY-MM-DD");
     const endOfPeriod = date.endOf(period).format("YYYY-MM-DD");
     if (startOfPeriod === datesArray[0] && endOfPeriod === datesArray[1]) return period;
@@ -57,7 +57,7 @@ export const findMatchingPeriod = (datesArray: DatesStrings): null | DatesPeriod
   return null;
 };
 
-export const getPeriodDates = (dates: string) => JSON.parse(dates).map((date: string) => date.substring(0, 10));
+export const getPeriodDates = (dates: string): DatesStrings => JSON.parse(dates).map((date: string) => date.substring(0, 10));
 
-export const getFromPeriodDatesForApi = ([from, to]: string[]) => `[${from + " 00:00:00"},${to + " 00:00:00"})`;
-export const getToPeriodDatesForApi = ([from, to]: string[]) => `[${from + " 00:00:00"},${to + " 00:00:01"})`;
+export const getFromPeriodDatesForApi = ([from, to]: string[]): string => `[${from + " 00:00:00"},${to + " 00:00:00"})`;
+export const getToPeriodDatesForApi = ([from, to]: string[]): string => `[${from + " 00:00:00"},${to + " 00:00:01"})`;

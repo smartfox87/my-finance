@@ -1,4 +1,4 @@
-import { ChangeEvent, KeyboardEvent, MouseEvent } from "react";
+import type { ChangeEvent, KeyboardEvent, MouseEvent } from "react";
 
 export type CalculatorSaveHandler = (value: number) => void;
 

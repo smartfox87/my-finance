@@ -2,7 +2,7 @@
 
 import { selectProfile } from "@/store/selectors/profile";
 import { useSelector } from "react-redux";
-import { DemoUserAuth } from "@/components/Auth/DemoUserAuth";
+import { DemoUserAuth } from "@/components/auth/DemoUserAuth";
 import { useTranslation } from "react-i18next";
 
 export default function HomeContent() {

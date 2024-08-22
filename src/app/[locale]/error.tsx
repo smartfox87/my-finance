@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { SimpleButton } from "@/components/Form/SimpleButton";
+import { SimpleButton } from "@/components/form/SimpleButton";
 import * as Sentry from "@sentry/nextjs";
 import { useRouter } from "next/navigation";
 

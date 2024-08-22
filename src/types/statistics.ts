@@ -1,4 +1,5 @@
-import { DatesStrings } from "@/types/date";
+import type { DatesStrings } from "@/types/date";
+import type { FilterState } from "@/types/filter";
 
 export enum StatisticsTypes {
   ACCOUNTS = "accounts",
@@ -97,3 +98,10 @@ export type IncomesCategoriesStatisticsTooltipProps = ChartTooltipProps<Statisti
 export type CostsBudgetsStatisticsTooltipProps = ChartTooltipProps<StatisticsTypes.COSTS | StatisticsTypes.BUDGETS, CostsBudgetsStatisticsItem>;
 
 export type CostsCategoriesStatisticsTooltipProps = ChartTooltipProps<StatisticsTypes.COSTS, CostsCategoriesStatisticsItem>;
+
+export interface StatisticsSliceState {
+  statisticsFilterValues: FilterState | null;
+  costsListForCharts: StatisticsCostItem[] | null;
+  incomesListForCharts: StatisticsIncomeItem[] | null;
+  budgetsListForCharts: ProcessedStatisticsBudgetItem[] | null;
+}

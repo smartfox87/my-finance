@@ -1,17 +1,18 @@
 "use client";
 
-import { Header } from "@/components/Layout/Header/Header";
-import { MainNav } from "@/components/Layout/MainNav";
+import { Header } from "@/components/layout/header/Header";
+import { MainNav } from "@/components/layout/navigation/MainNav";
 import { useViewport } from "@/hooks/viewport";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/store/selectors/auth";
 import { useTranslation } from "react-i18next";
 import { getUserId } from "@/helpers/localStorage";
-import { MobileNav } from "@/components/Layout/MobileNav";
+import { MobileNav } from "@/components/layout/navigation/MobileNav";
 import { useAppDispatch } from "@/hooks/redux";
-import { type ReactNode, useEffect } from "react";
+import { useEffect } from "react";
+import type { ComponentChildrenProps } from "@/types/common";
 
-export default function MainLayout({ children }: { children: ReactNode }) {
+export default function MainLayout({ children }: ComponentChildrenProps) {
   const dispatch = useAppDispatch();
   const { isTablet } = useViewport();
   const {

@@ -1,0 +1,24 @@
+import { useTranslation } from "react-i18next";
+import { useMemo } from "react";
+import { SimpleSelect } from "@/components/form/SimpleSelect";
+import { useLocale } from "@/hooks/providers/locale";
+import { LOCALES } from "@/constants/router";
+import { isLocale } from "@/predicates/locales";
+import { isString } from "@/predicates/common";
+import type { SimpleSelectValue } from "@/types/select";
+
+export const LanguageToggle = () => {
+  const {
+    i18n: { language },
+  } = useTranslation();
+  const languageCode = language.substring(0, 2);
+
+  const { changeLocale } = useLocale();
+  const options = useMemo(() => Object.values(LOCALES)?.map((locale) => ({ label: locale, value: locale })), []);
+
+  const handleLocaleChange = (value: SimpleSelectValue): void => {
+    if (isString(value) && isLocale(value)) changeLocale(value);
+  };
+
+  return <SimpleSelect value={languageCode} options={options} className="w-[58px]" dataCy="locale-toggle" onChange={handleLocaleChange} />;
+};

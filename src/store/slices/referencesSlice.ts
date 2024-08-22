@@ -1,19 +1,12 @@
-import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import { handleRejectedReducerAction } from "@/helpers/errors";
 import { getAccountTypesApi, getCostCategoriesApi, getCurrenciesApi, getIncomeCategoriesApi } from "@/api/references";
 import { rootReducer } from "@/store";
-import { AccountType, CostCategory, Currency, IncomeCategory } from "@/types/references";
+import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
+import type { AccountType, CostCategory, Currency, IncomeCategory, ReferencesSliceState } from "@/types/references";
 
 const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
 });
-
-export interface ReferencesSliceState {
-  costCategories: CostCategory[] | null;
-  accountTypes: AccountType[] | null;
-  incomeCategories: IncomeCategory[] | null;
-  currencies: Currency[] | null;
-}
 
 const initialState: ReferencesSliceState = {
   costCategories: null,

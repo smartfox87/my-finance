@@ -1,18 +1,19 @@
-import { createContext, ReactNode, useCallback, useEffect, useMemo, useState } from "react";
+import { createContext, useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toggleDayjsLocale } from "@/helpers/date";
-import { AntdLocale, AntdLocales, Locale } from "@/types/locales";
 import { i18nConfig } from "../../i18nConfig";
-import { locales } from "@/constants/router";
+import { LOCALES } from "@/constants/router";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { isStringLocale } from "@/predicates/locale";
-import { LocaleContextType } from "@/types/providers/localeProvider";
+import { type AntdLocale, AntdLocales, type Locale } from "@/types/locales";
+import type { LocaleContextType } from "@/types/providers/localeProvider";
+import type { ComponentChildrenProps } from "@/types/common";
 
 const getAntdLocale = (lang: Locale): Promise<AntdLocale> => import(`antd/lib/locale/${AntdLocales[lang]}`).then((module) => module.default);
 
 export const LocaleContext = createContext<LocaleContextType | undefined>(undefined);
 
-export const LocaleProvider = ({ children }: { children: ReactNode }) => {
+export const LocaleProvider = ({ children }: ComponentChildrenProps) => {
   const {
     i18n: { language, changeLanguage },
   } = useTranslation();
@@ -24,7 +25,7 @@ export const LocaleProvider = ({ children }: { children: ReactNode }) => {
   const [antdLocale, setAntdLocale] = useState<AntdLocale | undefined>();
   const changeLocale = useCallback(
     async (lang: Locale): Promise<void> => {
-      if (!isStringLocale(languageCode) || (isStringLocale(languageCode) && !locales.includes(languageCode))) return;
+      if (!isStringLocale(languageCode) || (isStringLocale(languageCode) && !LOCALES.includes(languageCode))) return;
 
       await changeLanguage(lang);
       setAntdLocale(await getAntdLocale(lang));
@@ -42,8 +43,8 @@ export const LocaleProvider = ({ children }: { children: ReactNode }) => {
     [language, locale, pathname],
   );
 
-  useEffect(() => {
-    if (locale && !Array.isArray(locale) && isStringLocale(locale) && languageCode !== i18nConfig.defaultLocale && locales.includes(locale)) changeLocale(locale);
+  useEffect((): void => {
+    if (locale && !Array.isArray(locale) && isStringLocale(locale) && languageCode !== i18nConfig.defaultLocale && LOCALES.includes(locale)) changeLocale(locale);
   }, []);
 
   const contextValue = useMemo(() => ({ antdLocale, changeLocale }), [antdLocale, changeLocale]);

@@ -1,6 +1,6 @@
-import type { Organization, WithContext } from "schema-dts";
-import { languages } from "@/constants/router";
+import { LANGUAGES } from "@/constants/router";
 import { useTranslation } from "react-i18next";
+import type { Organization, WithContext } from "schema-dts";
 
 export const ContactsOrganizationJsonLd = () => {
   const { t } = useTranslation();
@@ -30,7 +30,7 @@ export const ContactsOrganizationJsonLd = () => {
         "@type": "ContactPoint",
         email: "contact@myfinance.day",
         contactType: "customer service",
-        availableLanguage: languages,
+        availableLanguage: LANGUAGES,
         areaServed: "PL",
       },
     ],
