@@ -9,7 +9,7 @@ import { useFilterSearchParams } from "@/hooks/filterSearchParams";
 import { getBudgetsListThunk, setBudgetsFilterValues } from "@/store/slices/budgetsSlice";
 import { INITIAL_BUDGETS_FILTER_FIELDS } from "@/constants/budgets";
 import { getUserId } from "@/helpers/localStorage";
-import { useAppDispatch } from "@/hooks/redux";
+import { useAppDispatch } from "@/types/store";
 import { getFilterItemsFromFields } from "@/helpers/filters";
 import BudgetsPageContent from "@/components/budgets/page/BudgetsPageContent";
 import { BudgetsPageActions } from "@/components/budgets/page/BudgetsPageActions";

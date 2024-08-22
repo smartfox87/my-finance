@@ -9,7 +9,7 @@ import { useCallback, useEffect } from "react";
 import { INITIAL_INCOMES_FILTER_FIELDS } from "@/constants/incomes";
 import { getUserId } from "@/helpers/localStorage";
 import { Preloader } from "@/components/layout/preloader/Preloader";
-import { useAppDispatch } from "@/hooks/redux";
+import { useAppDispatch } from "@/types/store";
 import { getFilterItemsFromFields } from "@/helpers/filters";
 import { IncomesPageActions } from "@/components/Incomes/page/IncomesPageActions";
 import { IncomesPageContent } from "@/components/Incomes/page/IncomesPageContent";

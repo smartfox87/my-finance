@@ -10,7 +10,7 @@ import { memo, useRef, useState } from "react";
 import SvgNewAccount from "@/assets/sprite/new-account.svg";
 import { CalculatorModal } from "@/components/calculator/CalculatorModal";
 import { useViewport } from "@/hooks/viewport";
-import { useAppDispatch } from "@/hooks/redux";
+import { useAppDispatch } from "@/types/store";
 import { showCommonError } from "@/helpers/errors";
 import { isAccountItemCreateData } from "@/predicates/account";
 import { FieldIds, FieldTypes } from "@/types/field";

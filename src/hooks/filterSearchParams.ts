@@ -3,7 +3,7 @@ import { getIntegerFromString } from "@/helpers/numbers";
 import { isStringValidDate } from "@/helpers/date";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import queryString from "query-string";
-import { useAppDispatch } from "@/hooks/redux";
+import { useAppDispatch } from "@/types/store";
 import { isFilterStateKey } from "@/predicates/filter";
 import { isMultiSelectValue, isSelectAllValue } from "@/predicates/field";
 import { prepareObjectValuesForFilterStateValues } from "@/helpers/filters";

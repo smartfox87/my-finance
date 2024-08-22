@@ -6,7 +6,7 @@ import { DefaultForm } from "@/components/form/DefaultForm";
 import { getProfileThunk, updateProfileThunk } from "@/store/slices/profileSlice";
 import { showNotification } from "@/helpers/modals";
 import { useTranslation } from "react-i18next";
-import { useAppDispatch } from "@/hooks/redux";
+import { useAppDispatch } from "@/types/store";
 import { showCommonError } from "@/helpers/errors";
 import { DefaultFormSaveHandler } from "@/types/form";
 import { isSettingsData } from "@/predicates/profile";

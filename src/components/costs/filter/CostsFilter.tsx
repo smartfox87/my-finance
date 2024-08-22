@@ -10,7 +10,7 @@ import { useViewport } from "@/hooks/viewport";
 import { useFieldFocus } from "@/hooks/fieldFocus";
 import { prepareObjectValuesForFilterStateValues, setFilterValue } from "@/helpers/filters";
 import { FilterFields } from "@/components/common/filter/FilterFields";
-import { useAppDispatch } from "@/hooks/redux";
+import { useAppDispatch } from "@/types/store";
 import cloneDeep from "lodash/cloneDeep";
 import { FieldIds } from "@/types/field";
 import type { BaseSelectRef } from "rc-select";

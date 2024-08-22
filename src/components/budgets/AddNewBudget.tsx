@@ -10,7 +10,7 @@ import { memo, useRef, useState } from "react";
 import SvgNewBudget from "@/assets/sprite/new-budget.svg";
 import { CalculatorModal } from "@/components/calculator/CalculatorModal";
 import { useViewport } from "@/hooks/viewport";
-import { useAppDispatch } from "@/hooks/redux";
+import { useAppDispatch } from "@/types/store";
 import { isBudgetItemData } from "@/predicates/budget";
 import { showCommonError } from "@/helpers/errors";
 import { FieldIds, FieldTypes } from "@/types/field";

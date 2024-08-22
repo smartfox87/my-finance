@@ -8,7 +8,7 @@ import { useCallback, useEffect, useState } from "react";
 import { INITIAL_STATISTICS_FILTER_FIELDS } from "@/constants/statistics";
 import { getUserId } from "@/helpers/localStorage";
 import { Preloader } from "@/components/layout/preloader/Preloader";
-import { useAppDispatch } from "@/hooks/redux";
+import { useAppDispatch } from "@/types/store";
 import { getFilterItemsFromFields } from "@/helpers/filters";
 import { StatisticsPageContent } from "@/components/statistics/page/StatisticsPageContent";
 

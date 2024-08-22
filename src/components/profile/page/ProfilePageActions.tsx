@@ -5,7 +5,7 @@ import { useState } from "react";
 import { logoutUserThunk } from "@/store/slices/authSlice";
 import { clearProfile } from "@/store/slices/profileSlice";
 import { useTranslation } from "react-i18next";
-import { useAppDispatch } from "@/hooks/redux";
+import { useAppDispatch } from "@/types/store";
 
 export const ProfilePageActions = () => {
   const { t } = useTranslation();

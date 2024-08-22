@@ -7,7 +7,7 @@ import { isMultiSelectFormFieldId } from "@/predicates/form";
 import { isNumber } from "@/predicates/common";
 import { isMultiSelectValue } from "@/predicates/field";
 import { setIncomesFilterValues } from "@/store/slices/incomesSlice";
-import { useAppDispatch } from "@/hooks/redux";
+import { useAppDispatch } from "@/types/store";
 import type { ClearActiveFilterItemHandler } from "@/types/filter";
 
 export const ActiveIncomesFilters = memo(function ActiveIncomesFilters() {

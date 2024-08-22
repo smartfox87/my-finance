@@ -10,7 +10,7 @@ import { handleFilterSelectOptions } from "@/helpers/fields";
 import { Button, Form, InputNumber, Select } from "antd";
 import { useViewport } from "@/hooks/viewport";
 import SvgTransfer from "@/assets/sprite/transfer.svg";
-import { useAppDispatch } from "@/hooks/redux";
+import { useAppDispatch } from "@/types/store";
 import { useFieldFocus } from "@/hooks/fieldFocus";
 import { showCommonError } from "@/helpers/errors";
 import { INITIAL_ACCOUNT_TRANSFER_VALUES } from "@/constants/accounts";

@@ -7,7 +7,7 @@ import { ActiveFiltersList } from "@/components/common/filter/ActiveFiltersList"
 import { isMultiSelectFormFieldId } from "@/predicates/form";
 import { isNumber } from "@/predicates/common";
 import { isMultiSelectValue } from "@/predicates/field";
-import { useAppDispatch } from "@/hooks/redux";
+import { useAppDispatch } from "@/types/store";
 import type { ActiveFilterItemValue } from "@/types/filter";
 
 export const ActiveBudgetsFilters = memo(function ActiveBudgetsFilters() {

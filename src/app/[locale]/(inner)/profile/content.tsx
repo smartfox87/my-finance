@@ -6,7 +6,7 @@ import { selectProfileFields } from "@/store/selectors/profile";
 import { DefaultForm } from "@/components/form/DefaultForm";
 import { getProfileThunk, updateProfileThunk } from "@/store/slices/profileSlice";
 import { showNotification } from "@/helpers/modals";
-import { useAppDispatch } from "@/hooks/redux";
+import { useAppDispatch } from "@/types/store";
 import { showCommonError } from "@/helpers/errors";
 import { isProfileData } from "@/predicates/profile";
 import { ProfilePageActions } from "@/components/profile/page/ProfilePageActions";

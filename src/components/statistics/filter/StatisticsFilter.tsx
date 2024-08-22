@@ -9,7 +9,7 @@ import SvgFilter from "@/assets/sprite/filter.svg";
 import { useViewport } from "@/hooks/viewport";
 import { prepareObjectValuesForFilterStateValues, setFilterValue } from "@/helpers/filters";
 import { useFieldFocus } from "@/hooks/fieldFocus";
-import { useAppDispatch } from "@/hooks/redux";
+import { useAppDispatch } from "@/types/store";
 import cloneDeep from "lodash/cloneDeep";
 import { FieldIds } from "@/types/field";
 import { FilterFields } from "@/components/common/filter/FilterFields";

@@ -9,7 +9,7 @@ import { useCallback, useEffect } from "react";
 import { getCostsListThunk, setCostsFilterValues } from "@/store/slices/costsSlice";
 import { INITIAL_COSTS_FILTER_FIELDS } from "@/constants/costs";
 import { getUserId } from "@/helpers/localStorage";
-import { useAppDispatch } from "@/hooks/redux";
+import { useAppDispatch } from "@/types/store";
 import { getFilterItemsFromFields } from "@/helpers/filters";
 import { ExpensesPageActions } from "@/components/costs/page/ExpensesPageActions";
 import { ExpensesPageContent } from "@/components/costs/page/ExpensesPageContent";
