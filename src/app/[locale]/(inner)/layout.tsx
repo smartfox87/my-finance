@@ -3,13 +3,12 @@
 import { Header } from "@/components/layout/header/Header";
 import { MainNav } from "@/components/layout/navigation/MainNav";
 import { useViewport } from "@/hooks/viewport";
-import { useSelector } from "react-redux";
 import { selectUser } from "@/store/selectors/auth";
 import { useTranslation } from "react-i18next";
 import { getUserId } from "@/helpers/localStorage";
 import { MobileNav } from "@/components/layout/navigation/MobileNav";
-import { useAppDispatch } from "@/types/store";
 import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import type { ComponentChildrenProps } from "@/types/common";
 
 export default function MainLayout({ children }: ComponentChildrenProps) {
@@ -19,7 +18,7 @@ export default function MainLayout({ children }: ComponentChildrenProps) {
     i18n: { language },
   } = useTranslation();
 
-  const user = useSelector(selectUser);
+  const user = useAppSelector(selectUser);
 
   const initProfile = async (): Promise<void> => {
     if (getUserId()) import("@/api/auth").then(({ handleAuthStateChange }) => handleAuthStateChange());

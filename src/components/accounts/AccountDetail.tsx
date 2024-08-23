@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import { memo, useEffect, useRef, useState } from "react";
 import { selectAccountFields, selectAccountItem } from "@/store/selectors/accounts";
 import { deleteAccountItemThunk, getAccountItemThunk, setAccountItem, updateAccountItemThunk } from "@/store/slices/accountsSlice";
@@ -11,9 +10,9 @@ import SvgDelete from "@/assets/sprite/delete.svg";
 import { CalculatorModal } from "@/components/calculator/CalculatorModal";
 import { Button } from "antd";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useAppDispatch } from "@/types/store";
 import { showCommonError } from "@/helpers/errors";
 import { isAccountItemUpdateData } from "@/predicates/account";
+import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { FieldIds, FieldTypes } from "@/types/field";
 import type { CalculatorSaveHandler } from "@/types/calculator";
 import type { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
@@ -43,8 +42,8 @@ export const AccountDetail = memo(function AccountDetail({ onSave }: { onSave: (
     }
   }, [accountId]);
 
-  const accountItem = useSelector(selectAccountItem);
-  const accountFields = useSelector(selectAccountFields);
+  const accountItem = useAppSelector(selectAccountItem);
+  const accountFields = useAppSelector(selectAccountFields);
 
   const handleUpdateAccount: DefaultFormSaveHandler = async (fieldsValues) => {
     try {

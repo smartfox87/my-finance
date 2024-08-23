@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import { setCostsFilterValues } from "@/store/slices/costsSlice";
 import { selectCostsFilterFields, selectCostsFilterValues } from "@/store/selectors/costs";
 import { useTranslation } from "react-i18next";
@@ -10,8 +9,8 @@ import { useViewport } from "@/hooks/viewport";
 import { useFieldFocus } from "@/hooks/fieldFocus";
 import { prepareObjectValuesForFilterStateValues, setFilterValue } from "@/helpers/filters";
 import { FilterFields } from "@/components/common/filter/FilterFields";
-import { useAppDispatch } from "@/types/store";
 import cloneDeep from "lodash/cloneDeep";
+import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { FieldIds } from "@/types/field";
 import type { BaseSelectRef } from "rc-select";
 import type { ComponentOnSaveProps } from "@/types/common";
@@ -27,8 +26,8 @@ export const CostsFilter = memo(function CostsFilter({ onSave }: ComponentOnSave
 
   const [focusFieldRef, mountFocusField] = useFieldFocus<BaseSelectRef>();
 
-  const costsFilterFields = useSelector(selectCostsFilterFields);
-  const costsFilterValues = useSelector(selectCostsFilterValues);
+  const costsFilterFields = useAppSelector(selectCostsFilterFields);
+  const costsFilterValues = useAppSelector(selectCostsFilterValues);
   const [filterValues, setFilterValues] = useState<FilterState>({});
 
   useEffect((): void => {

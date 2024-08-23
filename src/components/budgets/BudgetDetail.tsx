@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import { memo, useEffect, useRef, useState } from "react";
 import { selectBudgetFields, selectBudgetItem } from "@/store/selectors/budgets";
 import { deleteBudgetItemThunk, getBudgetItemThunk, setBudgetItem, updateBudgetItemThunk } from "@/store/slices/budgetsSlice";
@@ -11,9 +10,9 @@ import SvgDelete from "@/assets/sprite/delete.svg";
 import { CalculatorModal } from "@/components/calculator/CalculatorModal";
 import { Button } from "antd";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useAppDispatch } from "@/types/store";
 import { showCommonError } from "@/helpers/errors";
 import { isBudgetItemData } from "@/predicates/budget";
+import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { FieldIds, FieldTypes } from "@/types/field";
 import type { CalculatorSaveHandler } from "@/types/calculator";
 import type { ComponentOnSaveProps } from "@/types/common";
@@ -44,8 +43,8 @@ export const BudgetDetail = memo(function BudgetDetail({ onSave }: ComponentOnSa
     }
   }, [budgetId]);
 
-  const budgetItem = useSelector(selectBudgetItem);
-  const budgetFields = useSelector(selectBudgetFields);
+  const budgetItem = useAppSelector(selectBudgetItem);
+  const budgetFields = useAppSelector(selectBudgetFields);
 
   const handleUpdateBudget: DefaultFormSaveHandler = async (fieldsValues) => {
     try {

@@ -1,7 +1,6 @@
 import { Button } from "antd";
 import { SideModal } from "@/components/modals/SideModal";
 import { DefaultForm } from "@/components/form/DefaultForm";
-import { useSelector } from "react-redux";
 import { selectCostFields } from "@/store/selectors/costs";
 import { createCostItemThunk } from "@/store/slices/costsSlice";
 import { useTranslation } from "react-i18next";
@@ -12,7 +11,7 @@ import { CalculatorModal } from "@/components/calculator/CalculatorModal";
 import { useViewport } from "@/hooks/viewport";
 import { isCostItemData } from "@/predicates/costs";
 import { showCommonError } from "@/helpers/errors";
-import { useAppDispatch } from "@/types/store";
+import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { FieldIds, FieldTypes } from "@/types/field";
 import type { CalculatorSaveHandler } from "@/types/calculator";
 import type { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
@@ -26,7 +25,7 @@ export const AddNewCost = memo(function AddNewCost({ isAdaptive, onSave }: Compo
   const [isOpen, setIsOpen] = useState(false);
   const handleToggleVisibility = (): void => setIsOpen((prevState) => !prevState);
 
-  const newCostFields = useSelector(selectCostFields);
+  const newCostFields = useAppSelector(selectCostFields);
 
   const handleSaveNewCost: DefaultFormSaveHandler = async (fieldsValues) => {
     try {

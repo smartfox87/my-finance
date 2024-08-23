@@ -4,7 +4,6 @@ import { DefaultForm } from "@/components/form/DefaultForm";
 import { showNotification } from "@/helpers/modals";
 import { useRecaptcha } from "@/hooks/providers/recaptcha";
 import { selectContactFields } from "@/store/selectors/contact";
-import { useSelector } from "react-redux";
 import { isRcFileArray } from "@/predicates/field";
 import { isError, isStringNumber } from "@/predicates/common";
 import { showCommonError } from "@/helpers/errors";
@@ -12,12 +11,13 @@ import { ContactsInfo } from "@/components/contact/ContactsInfo";
 import { useTranslation } from "react-i18next";
 import { useCallback } from "react";
 import { ContactsOrganizationJsonLd } from "@/components/contact/ContactsOrganizationJsonLd";
+import { useAppSelector } from "@/hooks/store";
 import type { FormValues } from "@/types/form";
 
 export default function ContactContent() {
   const { t } = useTranslation();
   const { initCaptcha, isLoadedCaptcha, getScore } = useRecaptcha();
-  const contactFields = useSelector(selectContactFields);
+  const contactFields = useAppSelector(selectContactFields);
 
   const handleFieldChange = useCallback((): void => {
     if (!isLoadedCaptcha) initCaptcha();

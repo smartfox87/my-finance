@@ -6,7 +6,7 @@ import { SimpleButton } from "@/components/form/SimpleButton";
 import { useAntd } from "@/hooks/providers/antd";
 import { useModalState } from "@/hooks/providers/modalState";
 import dynamic from "next/dynamic";
-import { useAppDispatch } from "@/types/store";
+import { useAppDispatch } from "@/hooks/store";
 import { isLoginData } from "@/predicates/auth";
 import { showCommonError } from "@/helpers/errors";
 import type { DefaultFormSaveHandler } from "@/types/form";

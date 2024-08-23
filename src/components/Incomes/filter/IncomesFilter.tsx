@@ -1,4 +1,3 @@
-import { useDispatch, useSelector } from "react-redux";
 import { setIncomesFilterValues } from "@/store/slices/incomesSlice";
 import { selectIncomesFilterFields, selectIncomesFilterValues } from "@/store/selectors/incomes";
 import { useTranslation } from "react-i18next";
@@ -11,6 +10,7 @@ import { prepareObjectValuesForFilterStateValues, setFilterValue } from "@/helpe
 import { useFieldFocus } from "@/hooks/fieldFocus";
 import { FilterFields } from "@/components/common/filter/FilterFields";
 import cloneDeep from "lodash/cloneDeep";
+import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { FieldIds } from "@/types/field";
 import type { ChangeFilterFieldValueHandler, FilterState } from "@/types/filter";
 import type { BaseSelectRef } from "rc-select";
@@ -18,7 +18,7 @@ import type { ComponentOnSaveProps } from "@/types/common";
 
 export const IncomesFilter = memo(function IncomesFilter({ onSave }: ComponentOnSaveProps) {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { isMobile } = useViewport();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -26,8 +26,8 @@ export const IncomesFilter = memo(function IncomesFilter({ onSave }: ComponentOn
 
   const [focusFieldRef, mountFocusField] = useFieldFocus<BaseSelectRef>();
 
-  const incomesFilterFields = useSelector(selectIncomesFilterFields);
-  const incomesFilterValues = useSelector(selectIncomesFilterValues);
+  const incomesFilterFields = useAppSelector(selectIncomesFilterFields);
+  const incomesFilterValues = useAppSelector(selectIncomesFilterValues);
   const [filterValues, setFilterValues] = useState<FilterState>({});
 
   useEffect((): void => {

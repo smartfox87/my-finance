@@ -2,7 +2,6 @@ import { CommonDate } from "@/components/common/CommonDate";
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "antd";
 import formatPrice from "@/helpers/formatPrice";
-import { useSelector } from "react-redux";
 import { selectCurrency } from "@/store/selectors/profile";
 import { uppercaseFirstLetter } from "@/helpers/strings";
 import { selectIncomeCategoriesObject } from "@/store/selectors/references";
@@ -11,14 +10,15 @@ import { isTextClamped } from "@/helpers/isTextClamped";
 import { useViewport } from "@/hooks/viewport";
 import { selectAccountsObject } from "@/store/selectors/accounts";
 import Link from "next/link";
+import { useAppSelector } from "@/hooks/store";
 import type { IncomeItem } from "@/types/incomes";
 
 export const IncomeListItem = ({ id, created_at, name, amount, date, category, account }: IncomeItem) => {
   const { t } = useTranslation();
   const { isTouchDevice } = useViewport();
-  const currency = useSelector(selectCurrency);
-  const incomeCategoriesObject = useSelector(selectIncomeCategoriesObject);
-  const accountsObject = useSelector(selectAccountsObject);
+  const currency = useAppSelector(selectCurrency);
+  const incomeCategoriesObject = useAppSelector(selectIncomeCategoriesObject);
+  const accountsObject = useAppSelector(selectAccountsObject);
   const nameRef = useRef(null);
   const [isTooltipName, setIsTooltipName] = useState(false);
   const capitalizedName = uppercaseFirstLetter(name);

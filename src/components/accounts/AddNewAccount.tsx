@@ -1,7 +1,6 @@
 import { Button } from "antd";
 import { SideModal } from "@/components/modals/SideModal";
 import { DefaultForm } from "@/components/form/DefaultForm";
-import { useSelector } from "react-redux";
 import { selectAccountFields } from "@/store/selectors/accounts";
 import { createAccountItemThunk } from "@/store/slices/accountsSlice";
 import { useTranslation } from "react-i18next";
@@ -10,9 +9,9 @@ import { memo, useRef, useState } from "react";
 import SvgNewAccount from "@/assets/sprite/new-account.svg";
 import { CalculatorModal } from "@/components/calculator/CalculatorModal";
 import { useViewport } from "@/hooks/viewport";
-import { useAppDispatch } from "@/types/store";
 import { showCommonError } from "@/helpers/errors";
 import { isAccountItemCreateData } from "@/predicates/account";
+import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { FieldIds, FieldTypes } from "@/types/field";
 import type { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 import type { CalculatorSaveHandler } from "@/types/calculator";
@@ -25,7 +24,7 @@ export const AddNewAccount = memo(function AddNewAccount({ onSave }: { onSave: (
   const [isOpen, setIsOpen] = useState(false);
   const handleToggleVisibility = (): void => setIsOpen((prevState) => !prevState);
 
-  const newAccountFields = useSelector(selectAccountFields);
+  const newAccountFields = useAppSelector(selectAccountFields);
 
   const handleSaveNewAccount: DefaultFormSaveHandler = async (fieldsValues) => {
     try {

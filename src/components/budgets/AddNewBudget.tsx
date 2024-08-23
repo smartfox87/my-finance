@@ -1,7 +1,6 @@
 import { Button } from "antd";
 import { SideModal } from "@/components/modals/SideModal";
 import { DefaultForm } from "@/components/form/DefaultForm";
-import { useSelector } from "react-redux";
 import { selectBudgetFields } from "@/store/selectors/budgets";
 import { createBudgetItemThunk } from "@/store/slices/budgetsSlice";
 import { useTranslation } from "react-i18next";
@@ -10,9 +9,9 @@ import { memo, useRef, useState } from "react";
 import SvgNewBudget from "@/assets/sprite/new-budget.svg";
 import { CalculatorModal } from "@/components/calculator/CalculatorModal";
 import { useViewport } from "@/hooks/viewport";
-import { useAppDispatch } from "@/types/store";
 import { isBudgetItemData } from "@/predicates/budget";
 import { showCommonError } from "@/helpers/errors";
+import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { FieldIds, FieldTypes } from "@/types/field";
 import type { CalculatorSaveHandler } from "@/types/calculator";
 import type { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
@@ -25,7 +24,7 @@ export const AddNewBudget = memo(function AddNewBudget({ isAdaptive, onSave }: {
   const [isOpen, setIsOpen] = useState(false);
   const handleToggleVisibility = (): void => setIsOpen((prevState) => !prevState);
 
-  const newBudgetFields = useSelector(selectBudgetFields);
+  const newBudgetFields = useAppSelector(selectBudgetFields);
 
   const onSaveNewBudget: DefaultFormSaveHandler = async (fieldsValues) => {
     try {

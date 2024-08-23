@@ -1,11 +1,11 @@
 import { CostsIncomesBarChart } from "@/components/statistics/costsIncomes/CostsIncomesBarChart";
-import { useSelector } from "react-redux";
 import { selectCostsIncomesChartItems } from "@/store/selectors/statistics";
 import { useTranslation } from "react-i18next";
+import { useAppSelector } from "@/hooks/store";
 
 export const CostsIncomesStatistics = () => {
   const { t } = useTranslation();
-  const costsIncomesChartItems = useSelector(selectCostsIncomesChartItems);
+  const costsIncomesChartItems = useAppSelector(selectCostsIncomesChartItems);
 
   return (
     !!costsIncomesChartItems.length && (

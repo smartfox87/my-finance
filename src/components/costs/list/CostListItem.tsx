@@ -2,7 +2,6 @@ import { CommonDate } from "@/components/common/CommonDate";
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "antd";
 import formatPrice from "@/helpers/formatPrice";
-import { useSelector } from "react-redux";
 import { selectCurrency } from "@/store/selectors/profile";
 import { uppercaseFirstLetter } from "@/helpers/strings";
 import { selectCostCategoriesObject } from "@/store/selectors/references";
@@ -11,14 +10,15 @@ import { isTextClamped } from "@/helpers/isTextClamped";
 import { useViewport } from "@/hooks/viewport";
 import { selectAccountsObject } from "@/store/selectors/accounts";
 import Link from "next/link";
+import { useAppSelector } from "@/hooks/store";
 import type { CostItem } from "@/types/costs";
 
 export const CostListItem = ({ id, created_at, name, amount, date, category, account }: CostItem) => {
   const { t } = useTranslation();
   const { isTouchDevice } = useViewport();
-  const currency = useSelector(selectCurrency);
-  const costCategoriesObject = useSelector(selectCostCategoriesObject);
-  const accountsObject = useSelector(selectAccountsObject);
+  const currency = useAppSelector(selectCurrency);
+  const costCategoriesObject = useAppSelector(selectCostCategoriesObject);
+  const accountsObject = useAppSelector(selectAccountsObject);
   const nameRef = useRef(null);
   const [isTooltipName, setIsTooltipName] = useState(false);
   const capitalizedName = uppercaseFirstLetter(name);

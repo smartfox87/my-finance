@@ -1,15 +1,15 @@
 import { InnerHeaderActionsPortal } from "@/components/layout/inner/InnerHeaderActionsPortal";
-import { useSelector } from "react-redux";
 import { selectCurrency } from "@/store/selectors/profile";
 import formatPrice from "@/helpers/formatPrice";
 import { useTranslation } from "react-i18next";
 import { selectCostsByFilter, selectExpensesTotal } from "@/store/selectors/costs";
+import { useAppSelector } from "@/hooks/store";
 
 export const ExpensesPageActions = () => {
   const { t } = useTranslation();
-  const currency = useSelector(selectCurrency);
-  const totalAmount = useSelector(selectExpensesTotal);
-  const filteredSortedCosts = useSelector(selectCostsByFilter);
+  const currency = useAppSelector(selectCurrency);
+  const totalAmount = useAppSelector(selectExpensesTotal);
+  const filteredSortedCosts = useAppSelector(selectCostsByFilter);
 
   const headerActions = Array.isArray(filteredSortedCosts) && (
     <>

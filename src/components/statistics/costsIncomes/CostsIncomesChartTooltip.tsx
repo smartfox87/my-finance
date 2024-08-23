@@ -1,11 +1,11 @@
-import { useSelector } from "react-redux";
 import { selectCurrency } from "@/store/selectors/profile";
 import { useTranslation } from "react-i18next";
 import formatPrice from "@/helpers/formatPrice";
 import { CostsIncomesStatisticsTooltipProps, StatisticsTypes } from "@/types/statistics";
+import { useAppSelector } from "@/hooks/store";
 
 export const CostsIncomesChartTooltip = ({ active, payload }: CostsIncomesStatisticsTooltipProps) => {
-  const currency = useSelector(selectCurrency);
+  const currency = useAppSelector(selectCurrency);
   const { t } = useTranslation();
   const costsStatistics = payload?.find(({ name }) => name === StatisticsTypes.COSTS);
   const incomesStatistics = payload?.find(({ name }) => name === StatisticsTypes.INCOMES);

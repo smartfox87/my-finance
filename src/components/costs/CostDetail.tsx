@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import { memo, useEffect, useRef, useState } from "react";
 import { selectCostFields, selectCostItem } from "@/store/selectors/costs";
 import { deleteCostItemThunk, getCostItemThunk, setCostItem, updateCostItemThunk } from "@/store/slices/costsSlice";
@@ -13,7 +12,7 @@ import { Button } from "antd";
 import { useSearchParams, useRouter } from "next/navigation";
 import { isCostItemData } from "@/predicates/costs";
 import { showCommonError } from "@/helpers/errors";
-import { useAppDispatch } from "@/types/store";
+import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { FieldIds, FieldTypes } from "@/types/field";
 import type { CalculatorSaveHandler } from "@/types/calculator";
 import type { ComponentOnSaveProps } from "@/types/common";
@@ -44,8 +43,8 @@ export const CostDetail = memo(function CostDetail({ onSave }: ComponentOnSavePr
     }
   }, [costId]);
 
-  const costItem = useSelector(selectCostItem);
-  const costFields = useSelector(selectCostFields);
+  const costItem = useAppSelector(selectCostItem);
+  const costFields = useAppSelector(selectCostFields);
 
   const handleUpdateCost: DefaultFormSaveHandler = async (fieldsValues) => {
     try {

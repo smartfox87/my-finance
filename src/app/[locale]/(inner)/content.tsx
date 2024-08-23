@@ -1,13 +1,13 @@
 "use client";
 
 import { selectProfile } from "@/store/selectors/profile";
-import { useSelector } from "react-redux";
 import { DemoUserAuth } from "@/components/auth/DemoUserAuth";
 import { useTranslation } from "react-i18next";
+import { useAppSelector } from "@/hooks/store";
 
 export default function HomeContent() {
   const { t } = useTranslation();
-  const profile = useSelector(selectProfile);
+  const profile = useAppSelector(selectProfile);
 
   return (
     <section className="flex grow flex-col items-center justify-center gap-4 text-center">

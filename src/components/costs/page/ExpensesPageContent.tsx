@@ -7,13 +7,13 @@ import { Suspense } from "react";
 import { CostDetail } from "@/components/costs/CostDetail";
 import { EmptyCosts } from "@/components/costs/list/EmptyCosts";
 import { FoundNothing } from "@/components/common/list/FoundNothing";
-import { useSelector } from "react-redux";
 import { selectCostsByFilter, selectCostsList } from "@/store/selectors/costs";
+import { useAppSelector } from "@/hooks/store";
 import type { PageContentProps } from "@/types/common";
 
 export const ExpensesPageContent = ({ onGetData }: PageContentProps) => {
-  const costsList = useSelector(selectCostsList);
-  const filteredSortedCosts = useSelector(selectCostsByFilter);
+  const costsList = useAppSelector(selectCostsList);
+  const filteredSortedCosts = useAppSelector(selectCostsByFilter);
 
   let content;
   if (filteredSortedCosts?.length)

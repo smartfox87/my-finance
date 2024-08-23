@@ -1,10 +1,10 @@
-import { useSelector } from "react-redux";
 import { selectCurrency } from "@/store/selectors/profile";
 import formatPrice from "@/helpers/formatPrice";
+import { useAppSelector } from "@/hooks/store";
 import type { IncomesCategoriesStatisticsTooltipProps } from "@/types/statistics";
 
 export const IncomesCategoriesChartTooltip = ({ active, payload }: IncomesCategoriesStatisticsTooltipProps) => {
-  const currency = useSelector(selectCurrency);
+  const currency = useAppSelector(selectCurrency);
 
   if (active && payload?.length) {
     return (

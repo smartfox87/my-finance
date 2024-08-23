@@ -1,9 +1,9 @@
 import { AccountListItem } from "@/components/accounts/AccountListItem";
-import { useSelector } from "react-redux";
 import { selectAccountsList } from "@/store/selectors/accounts";
+import { useAppSelector } from "@/hooks/store";
 
 export const AccountsList = () => {
-  const accountsList = useSelector(selectAccountsList);
+  const accountsList = useAppSelector(selectAccountsList);
 
   return (
     <ul className="flex flex-col gap-4">

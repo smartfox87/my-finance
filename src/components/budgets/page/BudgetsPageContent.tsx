@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import { Suspense } from "react";
 import { selectBudgetsByFilter, selectBudgetsList } from "@/store/selectors/budgets";
 import { AddNewBudget } from "@/components/budgets/AddNewBudget";
@@ -9,11 +8,12 @@ import { BudgetItem } from "@/components/budgets/list/BudgetItem";
 import { BudgetDetail } from "@/components/budgets/BudgetDetail";
 import { EmptyBudgets } from "@/components/budgets/list/EmptyBudgets";
 import { FoundNothing } from "@/components/common/list/FoundNothing";
+import { useAppSelector } from "@/hooks/store";
 import type { PageContentProps } from "@/types/common";
 
 export default function BudgetsPageContent({ onGetData }: PageContentProps) {
-  const budgetsList = useSelector(selectBudgetsList);
-  const filteredSortedBudgets = useSelector(selectBudgetsByFilter);
+  const budgetsList = useAppSelector(selectBudgetsList);
+  const filteredSortedBudgets = useAppSelector(selectBudgetsByFilter);
 
   let content = null;
   if (filteredSortedBudgets?.length)

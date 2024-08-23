@@ -1,5 +1,4 @@
 import { useDarkTheme } from "@/hooks/theme";
-import { useSelector } from "react-redux";
 import { selectUser } from "@/store/selectors/auth";
 import { createContext, useCallback, useEffect, useMemo, useState } from "react";
 import { useLocale } from "@/hooks/providers/locale";
@@ -7,6 +6,7 @@ import { getUserId } from "@/helpers/localStorage";
 import dynamic from "next/dynamic";
 import { Preloader } from "@/components/layout/preloader/Preloader";
 import { usePathname } from "next/navigation";
+import { useAppSelector } from "@/hooks/store";
 import { Pages } from "@/types/router";
 import type { AntdContextType, Theme } from "@/types/providers/antdProvider";
 import type { ComponentChildrenProps } from "@/types/common";
@@ -20,7 +20,7 @@ export const AntdContext = createContext<AntdContextType | undefined>(undefined)
 export const AntdProvider = ({ children }: ComponentChildrenProps) => {
   const darkTheme = useDarkTheme();
   const { antdLocale } = useLocale();
-  const user = useSelector(selectUser);
+  const user = useAppSelector(selectUser);
   const pathname = usePathname();
 
   const isLoadedInitState = pathname.includes(Pages.CONTACT);
