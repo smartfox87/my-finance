@@ -27,7 +27,7 @@ export function generateStaticParams() {
 export default async function LocaleLayout({ children, params: { locale } }: { children: ReactNode; params: { locale: Locale } }) {
   const { resources } = await initTranslations({ locale });
   return (
-    <html lang={locale} dir={dir(locale)} className="flex min-h-screen flex-col">
+    <html lang={locale} dir={dir(locale)} className="flex h-[calc(100_*_var(--vh))] w-[calc(100_*_var(--vw))] flex-col">
       <body className="flex w-full grow flex-col dark:bg-dark">
         {/*<SpeedInsights />*/}
         <AppProviders i18nResources={resources}>{children}</AppProviders>

@@ -10,6 +10,7 @@ import { MobileNav } from "@/components/layout/navigation/MobileNav";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import type { ComponentChildrenProps } from "@/types/common";
+import { setCSSVariables } from "@/helpers/cssVariables";
 
 export default function MainLayout({ children }: ComponentChildrenProps) {
   const dispatch = useAppDispatch();
@@ -48,6 +49,10 @@ export default function MainLayout({ children }: ComponentChildrenProps) {
   useEffect((): void => {
     initReferences();
   }, [language, user]);
+
+  useEffect((): void => {
+    setCSSVariables();
+  }, []);
 
   return (
     <>
