@@ -10,7 +10,7 @@ import { ModalStateProvider } from "@/providers/ModalStateProvider";
 import { ReactNode } from "react";
 import { Resource } from "i18next";
 
-export function Providers({ children, i18nResources }: { children: ReactNode; i18nResources: Resource }) {
+export function AppProviders({ children, i18nResources }: { children: ReactNode; i18nResources: Resource }) {
   return (
     <Provider store={store}>
       <RecaptchaProvider>

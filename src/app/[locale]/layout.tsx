@@ -1,12 +1,12 @@
 import "@/assets/styles/globals.css";
 import { i18nConfig } from "../../../i18nConfig";
 import { dir } from "i18next";
-import { Providers } from "./providers";
+import { AppProviders } from "@/providers/AppProviders";
 import { initTranslations } from "@/i18n";
+import { getAppMetadata } from "@/helpers/metadata";
 import type { Metadata, Viewport } from "next";
 import type { Locale } from "@/types/locales";
-import { type ReactNode } from "react";
-import { getAppMetadata } from "@/helpers/metadata";
+import type { ReactNode } from "react";
 // todo speed-insights
 // import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -30,7 +30,7 @@ export default async function LocaleLayout({ children, params: { locale } }: { c
     <html lang={locale} dir={dir(locale)} className="flex min-h-screen flex-col">
       <body className="flex w-full grow flex-col dark:bg-dark">
         {/*<SpeedInsights />*/}
-        <Providers i18nResources={resources}>{children}</Providers>
+        <AppProviders i18nResources={resources}>{children}</AppProviders>
       </body>
     </html>
   );
