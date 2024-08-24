@@ -12,6 +12,13 @@
 	],
 	"rules": {
 		"prettier/prettier": "error",
-		"react-hooks/exhaustive-deps": "off"
+		"react-hooks/exhaustive-deps": "off",
+		"no-restricted-imports": [
+			"error",
+			{
+				"patterns": ["@/features/*/*"]
+			}
+		],
+		"import/no-cycle": "error"
 	}
 }
