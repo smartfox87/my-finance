@@ -14,7 +14,7 @@
 		"typescript": "tsc --noEmit",
 		"eslint": "eslint \"**/*.{js,jsx,ts,tsx}\"",
 		"eslint:fix": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix",
-		"stylelint": "stylelint \"**/*.{css,scss,less,styl,html}\"",
+		"stylelint": "stylelint \"**/*.{css,scss,less,styl}\"",
 		"cypress:open": "cypress open",
 		"e2e": "cypress open --e2e",
 		"e2e:headless": "cypress run --e2e",
