@@ -1,7 +1,7 @@
 import "@/assets/styles/globals.css";
 import { i18nConfig } from "../../../i18nConfig";
 import { dir } from "i18next";
-import { AppProviders } from "@/providers/AppProviders";
+import { AppProvider } from "@/providers/app";
 import { initTranslations } from "@/i18n";
 import { getAppMetadata } from "@/helpers/metadata";
 import type { Metadata, Viewport } from "next";
@@ -30,7 +30,7 @@ export default async function LocaleLayout({ children, params: { locale } }: { c
     <html lang={locale} dir={dir(locale)} className="flex h-[calc(100_*_var(--vh))] w-[calc(100_*_var(--vw))] flex-col">
       <body className="flex w-full grow flex-col dark:bg-dark">
         {/*<SpeedInsights />*/}
-        <AppProviders i18nResources={resources}>{children}</AppProviders>
+        <AppProvider i18nResources={resources}>{children}</AppProvider>
       </body>
     </html>
   );

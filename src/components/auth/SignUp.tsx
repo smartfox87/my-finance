@@ -40,7 +40,7 @@ export const SignUp = () => {
       await dispatch(registerUserThunk(registerData)).unwrap();
       handleToggleVisibility();
     } catch (error) {
-      showCommonError();
+      showCommonError({ error });
     }
   };
 

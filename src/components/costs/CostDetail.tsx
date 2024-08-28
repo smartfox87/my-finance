@@ -54,7 +54,7 @@ export const CostDetail = memo(function CostDetail({ onSave }: ComponentOnSavePr
       handleCloseModal();
       showNotification({ title: t("notifications.expense.update") });
     } catch (error) {
-      showCommonError();
+      showCommonError({ error });
     } finally {
       setIsLoading(false);
     }
@@ -69,7 +69,7 @@ export const CostDetail = memo(function CostDetail({ onSave }: ComponentOnSavePr
       handleCloseModal();
       showNotification({ title: t("notifications.expense.delete") });
     } catch (error) {
-      showCommonError();
+      showCommonError({ error });
     } finally {
       setIsBtnLoading(false);
     }

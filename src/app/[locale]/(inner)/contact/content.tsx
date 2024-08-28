@@ -27,7 +27,7 @@ export default function ContactContent() {
     async (contactData: FormValues): Promise<void> => {
       try {
         const score = await getScore();
-        if (score < 0.5) return showCommonError(t("notifications.recaptcha_invalid"));
+        if (score < 0.5) return showCommonError({ title: t("notifications.recaptcha_invalid") });
 
         const formData = new FormData();
         Object.entries(contactData).forEach(([key, value]) => {
@@ -37,9 +37,9 @@ export default function ContactContent() {
 
         const { success, error } = await fetch("/api/contact", { method: "POST", body: formData }).then((res) => res.json());
         if (success) showNotification({ title: t("notifications.contact.success") });
-        else showCommonError(error);
+        else showCommonError({ error });
       } catch (error) {
-        showCommonError(isError(error) ? error.message : "");
+        showCommonError({ title: isError(error) ? error.message : "" });
       }
     },
     [getScore],

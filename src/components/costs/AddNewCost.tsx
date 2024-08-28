@@ -35,7 +35,7 @@ export const AddNewCost = memo(function AddNewCost({ isAdaptive, onSave }: Compo
       setIsOpen(false);
       showNotification({ title: t("notifications.expense.create") });
     } catch (error) {
-      showCommonError();
+      showCommonError({ error });
     }
   };
 

@@ -57,7 +57,7 @@ export const AccountDetail = memo(function AccountDetail({ onSave }: { onSave: (
       handleCloseModal();
       showNotification({ title: t("notifications.account.update") });
     } catch (error) {
-      showCommonError();
+      showCommonError({ error });
     } finally {
       setIsLoading(false);
     }
@@ -72,7 +72,7 @@ export const AccountDetail = memo(function AccountDetail({ onSave }: { onSave: (
       handleCloseModal();
       showNotification({ title: t("notifications.account.delete") });
     } catch (error) {
-      showCommonError();
+      showCommonError({ error });
     } finally {
       setIsBtnLoading(false);
     }

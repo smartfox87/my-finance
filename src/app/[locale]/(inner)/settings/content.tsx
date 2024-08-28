@@ -22,7 +22,7 @@ export default function SettingsContent() {
       await dispatch(getProfileThunk());
       showNotification({ title: t("notifications.settings.update") });
     } catch (error) {
-      showCommonError();
+      showCommonError({ error });
     }
   };
 

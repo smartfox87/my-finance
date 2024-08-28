@@ -24,7 +24,7 @@ export default function ProfileContent() {
       await dispatch(getProfileThunk());
       showNotification({ title: t("notifications.profile.update") });
     } catch (error) {
-      showCommonError();
+      showCommonError({ error });
     }
   };
 

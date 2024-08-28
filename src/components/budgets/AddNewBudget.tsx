@@ -34,7 +34,7 @@ export const AddNewBudget = memo(function AddNewBudget({ isAdaptive, onSave }: {
       setIsOpen(false);
       showNotification({ title: t("notifications.budget.create") });
     } catch (error) {
-      showCommonError();
+      showCommonError({ error });
     }
   };
 

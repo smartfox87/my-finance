@@ -50,7 +50,7 @@ export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ o
       showNotification({ title: t("notifications.account.money_transfer") });
       form.resetFields();
     } catch (error) {
-      showCommonError();
+      showCommonError({ error });
     } finally {
       setIsLoading(false);
     }

@@ -34,7 +34,7 @@ export const AddNewAccount = memo(function AddNewAccount({ onSave }: { onSave: (
       setIsOpen(false);
       showNotification({ title: t("notifications.account.create") });
     } catch (error) {
-      showCommonError();
+      showCommonError({ error });
     }
   };
 

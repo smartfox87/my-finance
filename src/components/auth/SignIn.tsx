@@ -34,7 +34,7 @@ export const SignIn = () => {
       await dispatch(loginUserThunk(fieldsValues)).unwrap();
       handleToggleVisibility();
     } catch (error) {
-      showCommonError();
+      showCommonError({ error });
     }
   };
 

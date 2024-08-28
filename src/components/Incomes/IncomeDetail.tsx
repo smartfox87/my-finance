@@ -54,7 +54,7 @@ export const IncomeDetail = memo(function IncomeDetail({ onSave }: ComponentOnSa
       handleCloseModal();
       showNotification({ title: t("notifications.income.update") });
     } catch (error) {
-      showCommonError();
+      showCommonError({ error });
     } finally {
       setIsLoading(false);
     }
@@ -69,7 +69,7 @@ export const IncomeDetail = memo(function IncomeDetail({ onSave }: ComponentOnSa
       handleCloseModal();
       showNotification({ title: t("notifications.income.delete") });
     } catch (error) {
-      showCommonError();
+      showCommonError({ error });
     } finally {
       setIsBtnLoading(false);
     }

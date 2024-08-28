@@ -34,7 +34,7 @@ export const AddNewIncome = memo(function AddNewIncome({ isAdaptive, onSave }: {
       setIsOpen(false);
       showNotification({ title: t("notifications.income.create") });
     } catch (error) {
-      showCommonError();
+      showCommonError({ error });
     }
   };
 

@@ -22,7 +22,7 @@ export default function MainLayout({ children }: ComponentChildrenProps) {
   const user = useAppSelector(selectUser);
 
   const initProfile = async (): Promise<void> => {
-    if (getUserId()) import("@/api/auth").then(({ handleAuthStateChange }) => handleAuthStateChange());
+    if (getUserId()) import("@/helpers/auth").then(({ handleAuthStateChange }) => handleAuthStateChange());
     if (getUserId() && !user) {
       const { getUserSessionThunk } = await import("@/store/slices/authSlice");
       await dispatch(getUserSessionThunk());

@@ -1,4 +1,4 @@
-import { supabaseClient } from "@/api/supabaseClient";
+import { apiClient } from "@/lib/api-client";
 import { getUserId } from "@/helpers/localStorage";
 import { getCurrentDate } from "@/helpers/date";
 import type { IncomeItemData } from "@/types/incomes";
@@ -7,26 +7,26 @@ import { FieldIds } from "@/types/field";
 
 export const getIncomesListApi = (filter: FilterPeriodStateItem) => {
   const [from, to] = filter[FieldIds.PERIOD];
-  return supabaseClient.from("incomes").select("created_at, id, name, category, date, amount, account").or(`user_id.eq.${getUserId()}`).order("id").gte("date", from).lte("date", to);
+  return apiClient.from("incomes").select("created_at, id, name, category, date, amount, account").or(`user_id.eq.${getUserId()}`).order("id").gte("date", from).lte("date", to);
 };
 
 export const getIncomeItemApi = (incomeId: string) =>
-  supabaseClient.from("incomes").select("id, name, category, date, amount, account, created_at, updated_at").match({ user_id: getUserId(), id: incomeId }).single();
+  apiClient.from("incomes").select("id, name, category, date, amount, account, created_at, updated_at").match({ user_id: getUserId(), id: incomeId }).single();
 
 export const createIncomeItemApi = (incomeData: IncomeItemData) =>
-  supabaseClient
+  apiClient
     .from("incomes")
     .insert({ ...incomeData, user_id: getUserId() })
     .select()
     .single();
 
 export const deleteIncomeItemApi = async (incomeId: number) => {
-  const { data, error } = await supabaseClient.from("incomes").delete().match({ user_id: getUserId(), id: incomeId }).select("created_at, id, name, category, date, amount, account").single();
+  const { data, error } = await apiClient.from("incomes").delete().match({ user_id: getUserId(), id: incomeId }).select("created_at, id, name, category, date, amount, account").single();
   return { data, error };
 };
 
 export const updateIncomeItemApi = ({ incomeId, incomeData }: { incomeId: number; incomeData: IncomeItemData }) =>
-  supabaseClient
+  apiClient
     .from("incomes")
     .update({ ...incomeData, updated_at: getCurrentDate() })
     .match({ user_id: getUserId(), id: incomeId })
