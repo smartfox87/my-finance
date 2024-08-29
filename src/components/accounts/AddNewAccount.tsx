@@ -4,7 +4,6 @@ import { DefaultForm } from "@/components/form/DefaultForm";
 import { selectAccountFields } from "@/store/selectors/accounts";
 import { createAccountItemThunk } from "@/store/slices/accountsSlice";
 import { useTranslation } from "react-i18next";
-import { showNotification } from "@/helpers/modals";
 import { memo, useRef, useState } from "react";
 import SvgNewAccount from "@/assets/sprite/new-account.svg";
 import { CalculatorModal } from "@/components/calculator/CalculatorModal";
@@ -16,7 +15,7 @@ import { FieldIds, FieldTypes } from "@/types/field";
 import type { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 import type { CalculatorSaveHandler } from "@/types/calculator";
 
-export const AddNewAccount = memo(function AddNewAccount({ onSave }: { onSave: (props?: { types: boolean }) => Promise<void> }) {
+export const AddNewAccount = memo(function AddNewAccount() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { isMobile } = useViewport();
@@ -30,9 +29,7 @@ export const AddNewAccount = memo(function AddNewAccount({ onSave }: { onSave: (
     try {
       if (!isAccountItemCreateData(fieldsValues)) return;
       await dispatch(createAccountItemThunk(fieldsValues)).unwrap();
-      await onSave({ types: true });
       setIsOpen(false);
-      showNotification({ title: t("notifications.account.create") });
     } catch (error) {
       showCommonError({ error });
     }

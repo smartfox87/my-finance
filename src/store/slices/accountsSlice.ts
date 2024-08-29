@@ -6,6 +6,9 @@ import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/to
 import type { AccountTypeData } from "@/types/references";
 import type { RootState } from "@/types/store";
 import type { AccountItem, AccountItemUpdateData, AccountItemBalanceData, AccountsSliceState, AccountItemCreateData } from "@/types/accounts";
+import { getAccountTypesThunk } from "@/store/slices/referencesSlice";
+import { showNotification } from "@/helpers/modals";
+import { i18nRef } from "@/i18n";
 
 const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
@@ -39,17 +42,22 @@ export const accountsSlice = createAppSlice({
       },
     ),
     createAccountItemThunk: create.asyncThunk<AccountItem, AccountItemCreateData, { rejectValue: string }>(
-      async (accountData, { rejectWithValue }): Promise<AccountItem> => {
+      async (accountData, { rejectWithValue, dispatch }): Promise<AccountItem> => {
         const typeData: AccountTypeData = { general_name: accountData.name };
         const { data: newTypeData, error: newTypeError } = await createAccountTypeApi(typeData);
         if (newTypeError) throw rejectWithValue(newTypeError.message);
         const newAccountData = { account_type_id: newTypeData.id, balance: accountData.balance };
         const { data, error } = await createAccountItemApi(newAccountData);
         if (error) throw rejectWithValue(error.message);
+        await dispatch(getAccountsListThunk()).unwrap();
+        await dispatch(getAccountTypesThunk()).unwrap();
         return data;
       },
       {
         rejected: handleRejectedReducerAction,
+        fulfilled: () => {
+          showNotification({ title: i18nRef.t?.("notifications.account.create") });
+        },
       },
     ),
     getAccountItemThunk: create.asyncThunk<AccountItem, string, { rejectValue: string }>(
@@ -66,62 +74,72 @@ export const accountsSlice = createAppSlice({
       },
     ),
     updateAccountItemThunk: create.asyncThunk<AccountItem, { accountId: number; accountData: AccountItemUpdateData }, { rejectValue: string }>(
-      async ({ accountId, accountData: { name, balance } }, thunkApi) => {
-        const { accountItem } = (thunkApi.getState() as RootState).accounts as AccountsSliceState;
+      async ({ accountId, accountData: { name, balance } }, { rejectWithValue, getState, dispatch }) => {
+        const { accountItem } = (getState() as RootState).accounts as AccountsSliceState;
         if (accountItem && name && accountItem.name !== name) {
           const { error } = await updateAccountTypeApi({ accountTypeId: accountItem.account_type_id, accountTypeData: { general_name: name } });
-          if (error) throw thunkApi.rejectWithValue(error.message);
+          if (error) throw rejectWithValue(error.message);
         }
         const { data, error } = await updateAccountItemApi({ accountId, accountData: { balance } });
-        if (error) throw thunkApi.rejectWithValue(error.message);
+        if (error) throw rejectWithValue(error.message);
+        await dispatch(getAccountsListThunk()).unwrap();
+        await dispatch(getAccountTypesThunk()).unwrap();
         return data;
       },
       {
         rejected: handleRejectedReducerAction,
-        fulfilled: (state, { payload }) => {
-          if (Array.isArray(state.accountsList)) state.accountsList = state.accountsList.map((account) => (account.id === payload.id ? payload : account));
+        fulfilled: () => {
+          showNotification({ title: i18nRef.t?.("notifications.account.update") });
         },
       },
     ),
     updateAccountBalanceThunk: create.asyncThunk<AccountItem, AccountItemBalanceData, { rejectValue: string }>(
-      async ({ accountId, increase = 0, decrease = 0 }, thunkApi) => {
-        const accountItem = ((thunkApi.getState() as RootState).accounts as AccountsSliceState).accountsList?.find(({ id }) => id === accountId);
-        if (!accountItem) throw thunkApi.rejectWithValue("Account not found");
+      async ({ accountId, increase = 0, decrease = 0 }, { rejectWithValue, getState, dispatch }) => {
+        const accountItem = ((getState() as RootState).accounts as AccountsSliceState).accountsList?.find(({ id }) => id === accountId);
+        if (!accountItem) throw rejectWithValue("Account not found");
         const { data, error } = await updateAccountItemApi({ accountId, accountData: { balance: accountItem.balance + increase - decrease } });
-        if (error) throw thunkApi.rejectWithValue(error.message);
+        if (error) throw rejectWithValue(error.message);
+        await dispatch(getAccountsListThunk()).unwrap();
         return data;
       },
       {
         rejected: handleRejectedReducerAction,
-        fulfilled: (state, { payload }) => {
-          if (Array.isArray(state.accountsList)) state.accountsList = state.accountsList.map((account) => (account.id === payload.id ? payload : account));
+        fulfilled: () => {
+          showNotification({ title: i18nRef.t?.("notifications.account.update") });
         },
       },
     ),
     transferAccountsBalanceThunk: create.asyncThunk<void, { from: number; to: number; amount: number }, { rejectValue: string }>(
-      async ({ from, to, amount }, thunkApi) => {
-        const { accountsList } = (thunkApi.getState() as RootState).accounts as AccountsSliceState;
+      async ({ from, to, amount }, { rejectWithValue, getState, dispatch }) => {
+        const { accountsList } = (getState() as RootState).accounts as AccountsSliceState;
         const fromAccount = accountsList?.find(({ id }) => id === from) as AccountItem;
         const toAccount = accountsList?.find(({ id }) => id === to) as AccountItem;
         const { error: fromError } = await updateAccountItemApi({ accountId: from, accountData: { balance: fromAccount.balance - amount } });
-        if (fromError) throw thunkApi.rejectWithValue(fromError.message);
+        if (fromError) throw rejectWithValue(fromError.message);
         const { error: toError } = await updateAccountItemApi({ accountId: to, accountData: { balance: toAccount.balance + amount } });
-        if (toError) throw thunkApi.rejectWithValue(toError.message);
+        if (toError) throw rejectWithValue(toError.message);
+        await dispatch(getAccountsListThunk()).unwrap();
       },
       {
         rejected: handleRejectedReducerAction,
+        fulfilled: () => {
+          showNotification({ title: i18nRef.t?.("notifications.account.money_transfer") });
+        },
       },
     ),
     deleteAccountItemThunk: create.asyncThunk<AccountItem | null, number, { rejectValue: string }>(
-      async (accountId = 0, thunkApi) => {
+      async (accountId = 0, { rejectWithValue, dispatch }) => {
         const { data, error } = await deleteAccountItemApi(accountId);
-        if (error) throw thunkApi.rejectWithValue(error.message);
+        if (error) throw rejectWithValue(error.message);
+        await dispatch(getAccountsListThunk()).unwrap();
+        await dispatch(getAccountTypesThunk()).unwrap();
         return data;
       },
       {
         rejected: handleRejectedReducerAction,
         fulfilled: (state) => {
           state.accountItem = null;
+          showNotification({ title: i18nRef.t?.("notifications.account.delete") });
         },
       },
     ),

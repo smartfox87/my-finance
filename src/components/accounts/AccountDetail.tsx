@@ -3,7 +3,6 @@ import { memo, useEffect, useRef, useState } from "react";
 import { selectAccountFields, selectAccountItem } from "@/store/selectors/accounts";
 import { deleteAccountItemThunk, getAccountItemThunk, setAccountItem, updateAccountItemThunk } from "@/store/slices/accountsSlice";
 import { DefaultForm } from "@/components/form/DefaultForm";
-import { showNotification } from "@/helpers/modals";
 import { SideModal } from "@/components/modals/SideModal";
 import { useLoading } from "@/hooks/loading";
 import SvgDelete from "@/assets/sprite/delete.svg";
@@ -17,7 +16,7 @@ import { FieldIds, FieldTypes } from "@/types/field";
 import type { CalculatorSaveHandler } from "@/types/calculator";
 import type { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 
-export const AccountDetail = memo(function AccountDetail({ onSave }: { onSave: (props?: { types: boolean }) => Promise<void> }) {
+export const AccountDetail = memo(function AccountDetail() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -53,9 +52,7 @@ export const AccountDetail = memo(function AccountDetail({ onSave }: { onSave: (
         : { [FieldIds.BALANCE]: fieldsValues[FieldIds.BALANCE], [FieldIds.NAME]: fieldsValues[FieldIds.NAME] };
       if (!isAccountItemUpdateData(accountData)) return;
       await dispatch(updateAccountItemThunk({ accountId: accountItem.id, accountData })).unwrap();
-      await onSave();
       handleCloseModal();
-      showNotification({ title: t("notifications.account.update") });
     } catch (error) {
       showCommonError({ error });
     } finally {
@@ -68,9 +65,7 @@ export const AccountDetail = memo(function AccountDetail({ onSave }: { onSave: (
       if (!accountItem) return;
       setIsBtnLoading(true);
       await dispatch(deleteAccountItemThunk(accountItem.id)).unwrap();
-      await onSave();
       handleCloseModal();
-      showNotification({ title: t("notifications.account.delete") });
     } catch (error) {
       showCommonError({ error });
     } finally {

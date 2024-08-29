@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { selectAccountsList, selectAccountTransferFields } from "@/store/selectors/accounts";
 import { transferAccountsBalanceThunk } from "@/store/slices/accountsSlice";
-import { showNotification } from "@/helpers/modals";
 import { SideModal } from "@/components/modals/SideModal";
 import { useLoading } from "@/hooks/loading";
 import { CalculatorModal } from "@/components/calculator/CalculatorModal";
@@ -18,7 +17,7 @@ import { memo, type ReactNode, useMemo, useState } from "react";
 import type { BaseSelectRef } from "rc-select";
 import type { AccountTransferField, AccountTransferValues } from "@/types/accounts";
 
-export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ onSave }: { onSave: (props?: { types: boolean }) => Promise<void> }) {
+export const TransferBetweenAccounts = memo(function TransferBetweenAccounts() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { isMobile } = useViewport();
@@ -45,9 +44,7 @@ export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ o
       const values = await form.validateFields();
       setIsLoading(true);
       await dispatch(transferAccountsBalanceThunk(values)).unwrap();
-      await onSave();
       handleToggleVisibility();
-      showNotification({ title: t("notifications.account.money_transfer") });
       form.resetFields();
     } catch (error) {
       showCommonError({ error });
