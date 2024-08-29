@@ -1,5 +1,6 @@
 import { LANGUAGES } from "@/constants/router";
 import { useTranslation } from "react-i18next";
+import { PRODUCTION_URL } from "@/constants/config";
 import type { Organization, WithContext } from "schema-dts";
 
 export const ContactsOrganizationJsonLd = () => {
@@ -9,8 +10,8 @@ export const ContactsOrganizationJsonLd = () => {
     "@type": "Organization",
     name: `${t("seo.app_name")} & A.D.`,
     legalName: "Andrei Dyminski",
-    url: process.env.NEXT_PUBLIC_PRODUCTION_URL,
-    logo: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/assets/favicon/maskable-icon-512x512.png`,
+    url: PRODUCTION_URL,
+    logo: `${PRODUCTION_URL}/assets/favicon/maskable-icon-512x512.png`,
     foundingDate: "2023",
     founder: [
       {

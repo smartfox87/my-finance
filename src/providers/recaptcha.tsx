@@ -1,10 +1,10 @@
 import { createContext, createRef, forwardRef, useCallback, useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import { captureException } from "@sentry/nextjs";
+import { IS_PRODUCTION, RECAPTCHA_SITE_KEY } from "@/constants/config";
 import ReCAPTCHA, { type ReCAPTCHAProps } from "react-google-recaptcha";
 import type { ComponentChildrenProps } from "@/types/common";
 import type { GetScore, RecaptchaContextType } from "@/types/providers/recaptchaProvider";
-import { RECAPTCHA_SITE_KEY } from "@/constants/config";
 
 const GoogleRecaptcha = dynamic(
   () =>
@@ -21,7 +21,6 @@ const GoogleRecaptcha = dynamic(
 export const RecaptchaContext = createContext<RecaptchaContextType | undefined>(undefined);
 
 export const RecaptchaProvider = ({ children }: ComponentChildrenProps) => {
-  console.log("9999999999999999999999999999999999", RECAPTCHA_SITE_KEY, process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY, process.env.GOOGLE_RECAPTCHA_SITE_KEY);
   if (!RECAPTCHA_SITE_KEY) throw new Error("RECAPTCHA_SITE_KEY is not defined in .env");
   const recaptchaRef = createRef<ReCAPTCHA>();
 
@@ -40,7 +39,7 @@ export const RecaptchaProvider = ({ children }: ComponentChildrenProps) => {
       if (!score && error) throw new Error(error);
       return score;
     } catch (error) {
-      if (process.env.NODE_ENV === "production") captureException(error);
+      if (IS_PRODUCTION) captureException(error);
       return 0.999;
     }
   }, []);

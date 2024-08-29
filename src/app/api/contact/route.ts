@@ -1,12 +1,13 @@
 import nodemailer from "nodemailer";
 import { NextRequest, NextResponse } from "next/server";
 import { isError, isFilesArray, isString } from "@/predicates/common";
+import { GMAIL_LOGIN, GMAIL_PASSWORD } from "@/constants/config";
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: process.env.GMAIL_LOGIN,
-    pass: process.env.GMAIL_PASSWORD,
+    user: GMAIL_LOGIN,
+    pass: GMAIL_PASSWORD,
   },
 });
 
@@ -46,7 +47,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const nameText = full_name ? `Name: ${full_name}\n` : "";
     const mailOptions: nodemailer.SendMailOptions = {
       from: email,
-      to: process.env.GMAIL_LOGIN,
+      to: GMAIL_LOGIN,
       subject: subject,
       text: `${nameText}Email: ${email}\nMessage: ${message}`,
       attachments,

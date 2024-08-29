@@ -4,13 +4,14 @@ import { useEffect } from "react";
 import { SimpleButton } from "@/components/form/SimpleButton";
 import * as Sentry from "@sentry/nextjs";
 import { useRouter } from "next/navigation";
+import { IS_PRODUCTION } from "@/constants/config";
 
 export default function GlobalError({ error }: { error: Error & { digest?: string } }) {
   const router = useRouter();
 
   useEffect(() => {
     console.error("global error:", error);
-    if (process.env.NODE_ENV === "production") Sentry.captureException(error);
+    if (IS_PRODUCTION) Sentry.captureException(error);
   }, [error]);
 
   return (

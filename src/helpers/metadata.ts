@@ -1,3 +1,4 @@
+import { PRODUCTION_URL } from "@/constants/config";
 import type { Metadata } from "next";
 
 export const getAppMetadata = ({ t }: { t: (name: string) => string }): Metadata => {
@@ -33,7 +34,7 @@ export const getAppMetadata = ({ t }: { t: (name: string) => string }): Metadata
       description: APP_DESCRIPTION,
       images: [
         {
-          url: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/assets/images/open-graph.jpg`,
+          url: `${PRODUCTION_URL}/assets/images/open-graph.jpg`,
           width: 1200,
           height: 630,
           alt: APP_DEFAULT_TITLE,

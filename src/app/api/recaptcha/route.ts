@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { isError, isString } from "@/predicates/common";
+import { RECAPTCHA_API_KEY } from "@/constants/config";
 
 export async function POST(request: Request): Promise<NextResponse> {
   try {
@@ -10,7 +11,7 @@ export async function POST(request: Request): Promise<NextResponse> {
       return NextResponse.json({ success: false, error: "Invalid recaptcha values" }, { status: 400 });
     }
 
-    const res = await fetch(`https://recaptchaenterprise.googleapis.com/v1/projects/costs-diary-1702121776196/assessments?key=${process.env.GOOGLE_RECAPTCHA_API_KEY}`, {
+    const res = await fetch(`https://recaptchaenterprise.googleapis.com/v1/projects/costs-diary-1702121776196/assessments?key=${RECAPTCHA_API_KEY}`, {
       method: "POST",
       body: JSON.stringify({
         event: {
