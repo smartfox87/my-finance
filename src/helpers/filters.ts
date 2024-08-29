@@ -13,13 +13,13 @@ export const getActiveFilters = (processedFilterFields: ProcessedFilterField[], 
       if (field.type === FieldTypes.DATES_PERIOD) {
         return {
           id: field.id,
-          label: i18nRef.t && i18nRef.t(`fields.${field.label}`),
+          label: i18nRef.t?.(`fields.${field.label}`),
           value: filterValues?.[field.id]?.[0] === filterValues?.[field.id]?.[1] ? filterValues?.[field.id]?.[0] : filterValues?.[field.id]?.join(" - "),
         };
       } else if (field.type === FieldTypes.MULTISELECT) {
         return filterValues?.[field.id]?.map((value) => ({
           id: field.id,
-          label: i18nRef.t && i18nRef.t(`fields.${field.label}`),
+          label: i18nRef.t?.(`fields.${field.label}`),
           value,
           textValue: field.optionsObject?.[value],
         }));
@@ -28,7 +28,7 @@ export const getActiveFilters = (processedFilterFields: ProcessedFilterField[], 
         if (filterValue === undefined) return;
         return {
           id: field.id,
-          label: i18nRef.t && i18nRef.t(`fields.${field.label}`),
+          label: i18nRef.t?.(`fields.${field.label}`),
           value: filterValues?.[field.id],
           textValue: field.optionsObject?.[filterValue],
         };

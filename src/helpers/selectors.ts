@@ -57,16 +57,13 @@ export const getOptionsFromItemsList = <T extends ProcessedAccountItem | CostCat
 
 export const getOptionsTranslations = <V extends MultiSelectOptionValue>(options: SelectOption<V>[]): SelectOption<MultiSelectOptionValue>[] =>
   options.map(({ label, label_translation, value }) => {
-    const labelString = i18nRef.t && label_translation ? i18nRef.t(`fields.${label_translation}`) : label;
+    const labelString = label_translation ? i18nRef.t?.(`fields.${label_translation}`) : label;
     return { label: labelString, value };
   });
 
 // todo try importance of Object.assign everywhere
 export const getOptionsObjectFromOptions = <T extends SingleSelectValue | MultiSelectOptionValue>(options: SelectOption<T>[]): Record<string, string> =>
-  Object.assign(
-    {},
-    ...options.map(({ value, label, label_translation }) => value && { [value]: label_translation && i18nRef.t ? i18nRef.t(`fields.${label_translation}`) : label }, {}).filter(isTruthy),
-  );
+  Object.assign({}, ...options.map(({ value, label, label_translation }) => value && { [value]: label_translation ? i18nRef.t?.(`fields.${label_translation}`) : label }, {}).filter(isTruthy));
 
 export const processFilterFields = <T extends IncomeCategory | CostCategory>(
   initialFieldsData: FilterField[],
