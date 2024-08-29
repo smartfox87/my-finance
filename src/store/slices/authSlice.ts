@@ -1,6 +1,7 @@
-import { getUserSession, handleAuthStateChange, loginDemoUserApi, loginUserApi, loginUserByProviderApi, logoutUserApi, registerUserApi } from "@/api/auth";
+import { getUserSession, loginDemoUserApi, loginUserApi, loginUserByProviderApi, logoutUserApi, registerUserApi } from "@/api/auth";
 import { handleRejectedReducerAction } from "@/helpers/errors";
 import { rootReducer } from "@/store";
+import { handleAuthStateChange } from "@/helpers/auth";
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import type { Provider, User } from "@supabase/auth-js";
 import type { RegisterData, UserPayload, LoginData, SessionPayload, AuthSliceState } from "@/types/auth";
@@ -47,7 +48,10 @@ export const authSlice = createAppSlice({
       },
       {
         rejected: handleRejectedReducerAction,
-        fulfilled: (state, { payload: { user } }) => setUserData(state, user),
+        fulfilled: (state, options) => {
+          console.log(options);
+          // setUserData(state, user)
+        },
       },
     ),
     loginDemoUserThunk: create.asyncThunk<UserPayload, void, { rejectValue: string }>(

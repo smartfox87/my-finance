@@ -3,9 +3,8 @@ import dynamic from "next/dynamic";
 import { captureException } from "@sentry/nextjs";
 import ReCAPTCHA, { type ReCAPTCHAProps } from "react-google-recaptcha";
 import type { ComponentChildrenProps } from "@/types/common";
-import type { RecaptchaContextType } from "@/types/providers/recaptchaProvider";
-
-const siteKey = process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY;
+import type { GetScore, RecaptchaContextType } from "@/types/providers/recaptchaProvider";
+import { RECAPTCHA_SITE_KEY } from "@/constants/config";
 
 const GoogleRecaptcha = dynamic(
   () =>
@@ -22,7 +21,8 @@ const GoogleRecaptcha = dynamic(
 export const RecaptchaContext = createContext<RecaptchaContextType | undefined>(undefined);
 
 export const RecaptchaProvider = ({ children }: ComponentChildrenProps) => {
-  if (!siteKey) throw new Error("RECAPTCHA_SITE_KEY is not defined in .env");
+  console.log("9999999999999999999999999999999999", RECAPTCHA_SITE_KEY, process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY, process.env.GOOGLE_RECAPTCHA_SITE_KEY);
+  if (!RECAPTCHA_SITE_KEY) throw new Error("RECAPTCHA_SITE_KEY is not defined in .env");
   const recaptchaRef = createRef<ReCAPTCHA>();
 
   const [isInjectedCaptcha, setIsInjectedCaptcha] = useState(false);
@@ -31,11 +31,11 @@ export const RecaptchaProvider = ({ children }: ComponentChildrenProps) => {
   const initCaptcha = useCallback((): void => setIsInjectedCaptcha(true), []);
   const handleAsyncScriptLoad = useCallback((): void => setIsLoadedCaptcha(true), []);
 
-  const getScore = useCallback(async ({ action = "signup" }: { action?: string } = {}): Promise<number> => {
+  const getScore: GetScore = useCallback(async ({ action = "signup" } = {}) => {
     try {
       if (!recaptchaRef.current) throw new Error("Recaptcha is not initialized");
       const value = await recaptchaRef.current.executeAsync();
-      const body = { token: value, expectedAction: action, siteKey: siteKey };
+      const body = { token: value, expectedAction: action, siteKey: RECAPTCHA_SITE_KEY };
       const { score, error } = await fetch("/api/recaptcha", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }).then((res) => res.json());
       if (!score && error) throw new Error(error);
       return score;
@@ -49,13 +49,12 @@ export const RecaptchaProvider = ({ children }: ComponentChildrenProps) => {
     if ("recaptchaOptions" in window) window.recaptchaOptions = { enterprise: true };
   }, []);
 
-  // todo add ts types
-  const contextValue = useMemo(() => ({ initCaptcha, isLoadedCaptcha, getScore }), [initCaptcha, isLoadedCaptcha, getScore]);
+  const contextValue = useMemo((): RecaptchaContextType => ({ initCaptcha, isLoadedCaptcha, getScore }), [initCaptcha, isLoadedCaptcha, getScore]);
 
   return (
     <RecaptchaContext.Provider value={contextValue}>
       {children}
-      {isInjectedCaptcha && <GoogleRecaptcha ref={recaptchaRef} size="invisible" sitekey={siteKey} className="hidden" asyncScriptOnLoad={handleAsyncScriptLoad} />}
+      {isInjectedCaptcha && <GoogleRecaptcha ref={recaptchaRef} size="invisible" sitekey={RECAPTCHA_SITE_KEY} className="hidden" asyncScriptOnLoad={handleAsyncScriptLoad} />}
     </RecaptchaContext.Provider>
   );
 };

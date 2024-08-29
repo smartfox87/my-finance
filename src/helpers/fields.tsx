@@ -8,7 +8,6 @@ export const handleFilterSelectOptions: FilterFunc<DefaultOptionType> = (inputVa
   else return (option?.label ?? "").toString().toLowerCase().includes(inputValue.toLowerCase());
 };
 
-// todo fix internationalization
 export const cutDecimals = (value: number | string | null, decimals: number = 2): string => {
   if (!value) return "";
   const [integer, decimal] = value.toString().split(".");

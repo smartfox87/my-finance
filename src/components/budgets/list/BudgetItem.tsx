@@ -2,7 +2,6 @@ import { BudgetDate } from "@/components/budgets/list/BudgetDate";
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "antd";
 import formatPrice from "@/helpers/formatPrice";
-import { useSelector } from "react-redux";
 import { selectCurrency } from "@/store/selectors/profile";
 import { uppercaseFirstLetter } from "@/helpers/strings";
 import { selectCostCategoriesObject } from "@/store/selectors/references";
@@ -11,14 +10,15 @@ import { isTextClamped } from "@/helpers/isTextClamped";
 import { useViewport } from "@/hooks/viewport";
 import { selectAccountsObject } from "@/store/selectors/accounts";
 import Link from "next/link";
+import { useAppSelector } from "@/hooks/store";
 import type { ProcessedBudgetItem } from "@/types/budgets";
 
 export const BudgetItem = ({ id, created_at, name, amount, accounts, categories, period: [start_date, end_date] }: ProcessedBudgetItem) => {
   const { t } = useTranslation();
   const { isTouchDevice } = useViewport();
-  const currency = useSelector(selectCurrency);
-  const accountsObject = useSelector(selectAccountsObject);
-  const costCategoriesObject = useSelector(selectCostCategoriesObject);
+  const currency = useAppSelector(selectCurrency);
+  const accountsObject = useAppSelector(selectAccountsObject);
+  const costCategoriesObject = useAppSelector(selectCostCategoriesObject);
   const accountsValue = useMemo(() => accounts?.map((id) => accountsObject?.[id]).join(", ") || t("detail.all_accounts"), [accounts, accountsObject, t]);
   const categoriesValue = useMemo(() => categories?.map((id) => costCategoriesObject?.[id]).join(", ") || t("detail.all_categories"), [categories, costCategoriesObject, t]);
   const nameRef = useRef(null);

@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import { memo, useEffect, useRef, useState } from "react";
 import { selectIncomeFields, selectIncomeItem } from "@/store/selectors/incomes";
 import { deleteIncomeItemThunk, getIncomeItemThunk, setIncomeItem, updateIncomeItemThunk } from "@/store/slices/incomesSlice";
@@ -11,9 +10,9 @@ import SvgDelete from "@/assets/sprite/delete.svg";
 import { CalculatorModal } from "@/components/calculator/CalculatorModal";
 import { Button } from "antd";
 import { useSearchParams, useRouter } from "next/navigation";
-import { useAppDispatch } from "@/hooks/redux";
 import { showCommonError } from "@/helpers/errors";
 import { isIncomeItemData } from "@/predicates/incomes";
+import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { FieldIds, FieldTypes } from "@/types/field";
 import type { CalculatorSaveHandler } from "@/types/calculator";
 import type { ComponentOnSaveProps } from "@/types/common";
@@ -44,8 +43,8 @@ export const IncomeDetail = memo(function IncomeDetail({ onSave }: ComponentOnSa
     }
   }, [incomeId]);
 
-  const incomeItem = useSelector(selectIncomeItem);
-  const incomeFields = useSelector(selectIncomeFields);
+  const incomeItem = useAppSelector(selectIncomeItem);
+  const incomeFields = useAppSelector(selectIncomeFields);
 
   const handleUpdateIncome: DefaultFormSaveHandler = async (fieldsValues) => {
     try {
@@ -55,7 +54,7 @@ export const IncomeDetail = memo(function IncomeDetail({ onSave }: ComponentOnSa
       handleCloseModal();
       showNotification({ title: t("notifications.income.update") });
     } catch (error) {
-      showCommonError();
+      showCommonError({ error });
     } finally {
       setIsLoading(false);
     }
@@ -70,7 +69,7 @@ export const IncomeDetail = memo(function IncomeDetail({ onSave }: ComponentOnSa
       handleCloseModal();
       showNotification({ title: t("notifications.income.delete") });
     } catch (error) {
-      showCommonError();
+      showCommonError({ error });
     } finally {
       setIsBtnLoading(false);
     }

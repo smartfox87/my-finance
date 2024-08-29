@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import { setBudgetsFilterValues } from "@/store/slices/budgetsSlice";
 import { selectBudgetsFilterFields, selectBudgetsFilterValues } from "@/store/selectors/budgets";
 import { useTranslation } from "react-i18next";
@@ -9,9 +8,9 @@ import SvgFilter from "@/assets/sprite/filter.svg";
 import { useViewport } from "@/hooks/viewport";
 import { useFieldFocus } from "@/hooks/fieldFocus";
 import { prepareObjectValuesForFilterStateValues, setFilterValue } from "@/helpers/filters";
-import { useAppDispatch } from "@/hooks/redux";
 import { FilterFields } from "@/components/common/filter/FilterFields";
 import cloneDeep from "lodash/cloneDeep";
+import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { FieldIds } from "@/types/field";
 import type { BaseSelectRef } from "rc-select";
 import type { FilterState, ChangeFilterFieldValueHandler } from "@/types/filter";
@@ -27,8 +26,8 @@ export const BudgetsFilter = memo(function BudgetsFilter({ onSave }: ComponentOn
 
   const [focusFieldRef, mountFocusField] = useFieldFocus<BaseSelectRef>();
 
-  const budgetsFilterFields = useSelector(selectBudgetsFilterFields);
-  const budgetsFilterValues = useSelector(selectBudgetsFilterValues);
+  const budgetsFilterFields = useAppSelector(selectBudgetsFilterFields);
+  const budgetsFilterValues = useAppSelector(selectBudgetsFilterValues);
   const [filterValues, setFilterValues] = useState<FilterState>({});
 
   useEffect((): void => {

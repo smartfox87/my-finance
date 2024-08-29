@@ -1,9 +1,9 @@
-import { useSelector } from "react-redux";
 import { selectProfile } from "@/store/selectors/profile";
 import SvgUser from "@/assets/sprite/user.svg";
 import Link from "next/link";
 import { useViewport } from "@/hooks/viewport";
 import { useModalState } from "@/hooks/providers/modalState";
+import { useAppSelector } from "@/hooks/store";
 
 export const ProfileMenu = () => {
   const { isTablet } = useViewport();
@@ -11,7 +11,7 @@ export const ProfileMenu = () => {
   const { setIsOpenMenuModal } = useModalState();
   const handleLinkClick = () => isTablet && setIsOpenMenuModal(false);
 
-  const profile = useSelector(selectProfile);
+  const profile = useAppSelector(selectProfile);
   if (!profile) return null;
   const { full_name } = profile;
 

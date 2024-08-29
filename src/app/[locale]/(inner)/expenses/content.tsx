@@ -1,6 +1,5 @@
 "use client";
 
-import { useSelector } from "react-redux";
 import { Preloader } from "@/components/layout/preloader/Preloader";
 import { selectCostsFilterValues, selectCostsList } from "@/store/selectors/costs";
 import { useFilterSearchParams } from "@/hooks/filterSearchParams";
@@ -9,7 +8,7 @@ import { useCallback, useEffect } from "react";
 import { getCostsListThunk, setCostsFilterValues } from "@/store/slices/costsSlice";
 import { INITIAL_COSTS_FILTER_FIELDS } from "@/constants/costs";
 import { getUserId } from "@/helpers/localStorage";
-import { useAppDispatch } from "@/hooks/redux";
+import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { getFilterItemsFromFields } from "@/helpers/filters";
 import { ExpensesPageActions } from "@/components/costs/page/ExpensesPageActions";
 import { ExpensesPageContent } from "@/components/costs/page/ExpensesPageContent";
@@ -17,11 +16,11 @@ import { ExpensesPageContent } from "@/components/costs/page/ExpensesPageContent
 export default function ExpensesContent() {
   const dispatch = useAppDispatch();
 
-  const costsFilterValues = useSelector(selectCostsFilterValues);
+  const costsFilterValues = useAppSelector(selectCostsFilterValues);
   const [isNotEqualParamsToFilters] = useFilterSearchParams(costsFilterValues, setCostsFilterValues);
 
   const [isLoading, setIsLoading] = useLoading(false);
-  const costsList = useSelector(selectCostsList);
+  const costsList = useAppSelector(selectCostsList);
 
   const handleGetData = useCallback(async (): Promise<void> => {
     if (!costsFilterValues?.period || isNotEqualParamsToFilters) return;

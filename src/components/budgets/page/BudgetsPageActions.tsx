@@ -1,15 +1,15 @@
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import { selectBudgetsAmount, selectBudgetsByFilter } from "@/store/selectors/budgets";
 import { selectCurrency } from "@/store/selectors/profile";
 import formatPrice from "@/helpers/formatPrice";
 import { InnerHeaderActionsPortal } from "@/components/layout/inner/InnerHeaderActionsPortal";
+import { useAppSelector } from "@/hooks/store";
 
 export const BudgetsPageActions = () => {
   const { t } = useTranslation();
-  const filteredSortedBudgets = useSelector(selectBudgetsByFilter);
-  const totalAmount = useSelector(selectBudgetsAmount);
-  const currency = useSelector(selectCurrency);
+  const filteredSortedBudgets = useAppSelector(selectBudgetsByFilter);
+  const totalAmount = useAppSelector(selectBudgetsAmount);
+  const currency = useAppSelector(selectCurrency);
 
   const headerActions = Array.isArray(filteredSortedBudgets) && (
     <>

@@ -1,13 +1,13 @@
 "use client";
 
-import { useSelector } from "react-redux";
 import { selectUser } from "@/store/selectors/auth";
 import { useTranslation } from "react-i18next";
 import { DemoUserAuth } from "@/components/auth/DemoUserAuth";
+import { useAppSelector } from "@/hooks/store";
 import type { ComponentChildrenProps } from "@/types/common";
 
 export const AuthGuard = ({ children }: ComponentChildrenProps) => {
-  const user = useSelector(selectUser);
+  const user = useAppSelector(selectUser);
   const { t } = useTranslation();
 
   const authRequirement = (

@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "antd";
 import formatPrice from "@/helpers/formatPrice";
-import { useSelector } from "react-redux";
 import { selectCurrency } from "@/store/selectors/profile";
 import { uppercaseFirstLetter } from "@/helpers/strings";
 import { useEffect, useRef, useState } from "react";
@@ -9,12 +8,13 @@ import { isTextClamped } from "@/helpers/isTextClamped";
 import { useViewport } from "@/hooks/viewport";
 import { getFullDate } from "@/helpers/date";
 import Link from "next/link";
+import { useAppSelector } from "@/hooks/store";
 import type { ProcessedAccountItem } from "@/types/accounts";
 
 export const AccountListItem = ({ id, name, balance, updated_at }: ProcessedAccountItem) => {
   const { t } = useTranslation();
   const { isTouchDevice } = useViewport();
-  const currency = useSelector(selectCurrency);
+  const currency = useAppSelector(selectCurrency);
   const nameRef = useRef(null);
   const [isTooltipName, setIsTooltipName] = useState(false);
   const capitalizedName = uppercaseFirstLetter(name);

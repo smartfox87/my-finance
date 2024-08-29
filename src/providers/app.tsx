@@ -1,16 +1,16 @@
 "use client";
 
-import { RecaptchaProvider } from "@/providers/RecaptchaProvider";
+import { RecaptchaProvider } from "@/providers/recaptcha";
 import { Provider } from "react-redux";
 import { store } from "@/store";
-import { LocaleProvider } from "@/providers/LocaleProvider";
-import { AntdProvider } from "@/providers/AntdProvider";
-import { I18nProvider } from "@/providers/I18nProvider";
-import { ModalStateProvider } from "@/providers/ModalStateProvider";
+import { LocaleProvider } from "@/providers/locale";
+import { AntdProvider } from "@/providers/antd";
+import { I18nProvider } from "@/providers/i18n";
+import { ModalStateProvider } from "@/providers/modal-state";
 import { ReactNode } from "react";
 import { Resource } from "i18next";
 
-export function Providers({ children, i18nResources }: { children: ReactNode; i18nResources: Resource }) {
+export function AppProvider({ children, i18nResources }: { children: ReactNode; i18nResources: Resource }) {
   return (
     <Provider store={store}>
       <RecaptchaProvider>

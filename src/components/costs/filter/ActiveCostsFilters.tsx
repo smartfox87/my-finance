@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import { selectCostsFilterFields, selectCostsFilterValues } from "@/store/selectors/costs";
 import { setCostsFilterValues } from "@/store/slices/costsSlice";
 import { memo, useMemo } from "react";
@@ -7,14 +6,14 @@ import { ActiveFiltersList } from "@/components/common/filter/ActiveFiltersList"
 import { isMultiSelectFormFieldId } from "@/predicates/form";
 import { isMultiSelectValue } from "@/predicates/field";
 import { isNumber } from "@/predicates/common";
-import { useAppDispatch } from "@/hooks/redux";
+import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import type { ClearActiveFilterItemHandler } from "@/types/filter";
 
 export const ActiveCostsFilters = memo(function ActiveCostsFilters() {
   const dispatch = useAppDispatch();
 
-  const costsFilterFields = useSelector(selectCostsFilterFields);
-  const costsFilterValues = useSelector(selectCostsFilterValues);
+  const costsFilterFields = useAppSelector(selectCostsFilterFields);
+  const costsFilterValues = useAppSelector(selectCostsFilterValues);
 
   const activeFilters = useMemo(() => getActiveFilters(costsFilterFields, costsFilterValues), [costsFilterFields, costsFilterValues]);
 

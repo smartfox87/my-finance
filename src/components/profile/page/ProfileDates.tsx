@@ -1,12 +1,12 @@
 import { PropValueList } from "@/components/common/PropValueList";
 import { getFullDate } from "@/helpers/date";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import { selectProfile } from "@/store/selectors/profile";
+import { useAppSelector } from "@/hooks/store";
 
 export const ProfileDates = () => {
   const { t } = useTranslation();
-  const profile = useSelector(selectProfile);
+  const profile = useAppSelector(selectProfile);
 
   const datesList = [
     { prop: t("common.created_at"), value: getFullDate(profile?.created_at, "YYYY MMMM DD, HH:MM") },

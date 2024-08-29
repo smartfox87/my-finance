@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import { selectAccountsList, selectAccountTransferFields } from "@/store/selectors/accounts";
 import { transferAccountsBalanceThunk } from "@/store/slices/accountsSlice";
 import { showNotification } from "@/helpers/modals";
@@ -10,10 +9,10 @@ import { handleFilterSelectOptions } from "@/helpers/fields";
 import { Button, Form, InputNumber, Select } from "antd";
 import { useViewport } from "@/hooks/viewport";
 import SvgTransfer from "@/assets/sprite/transfer.svg";
-import { useAppDispatch } from "@/hooks/redux";
 import { useFieldFocus } from "@/hooks/fieldFocus";
 import { showCommonError } from "@/helpers/errors";
 import { INITIAL_ACCOUNT_TRANSFER_VALUES } from "@/constants/accounts";
+import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { FieldIds } from "@/types/field";
 import { memo, type ReactNode, useMemo, useState } from "react";
 import type { BaseSelectRef } from "rc-select";
@@ -30,8 +29,8 @@ export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ o
 
   const [focusFieldRef, mountFocusField] = useFieldFocus<BaseSelectRef>();
 
-  const accountsList = useSelector(selectAccountsList);
-  const formFields = useSelector(selectAccountTransferFields);
+  const accountsList = useAppSelector(selectAccountsList);
+  const formFields = useAppSelector(selectAccountTransferFields);
   const [currentFieldsValues, setCurrentFieldsValues] = useState<AccountTransferValues>({ ...INITIAL_ACCOUNT_TRANSFER_VALUES });
   const isChangedFieldsData = useMemo(() => Object.values(currentFieldsValues).some((value) => value), [currentFieldsValues]);
   const maxAmount = useMemo(() => accountsList?.find(({ id }) => id === currentFieldsValues.from)?.balance, [accountsList, currentFieldsValues.from]);
@@ -51,7 +50,7 @@ export const TransferBetweenAccounts = memo(function TransferBetweenAccounts({ o
       showNotification({ title: t("notifications.account.money_transfer") });
       form.resetFields();
     } catch (error) {
-      showCommonError();
+      showCommonError({ error });
     } finally {
       setIsLoading(false);
     }

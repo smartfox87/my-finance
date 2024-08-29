@@ -7,18 +7,18 @@ import { EmptyCosts } from "@/components/costs/list/EmptyCosts";
 import { StatisticsFilter } from "@/components/statistics/filter/StatisticsFilter";
 import { ActiveStatisticsFilters } from "@/components/statistics/filter/ActiveStatisticsFilters";
 import { FoundNothing } from "@/components/common/list/FoundNothing";
-import { useSelector } from "react-redux";
 import { selectCostCategories, selectIncomeCategories } from "@/store/selectors/references";
 import { selectBudgetsListForChartsByFilter, selectCostsListForChartsByFilter, selectIncomesListForChartsByFilter, selectIsStatisticsFilterValuesChanged } from "@/store/selectors/statistics";
+import { useAppSelector } from "@/hooks/store";
 import type { PageContentProps } from "@/types/common";
 
 export const StatisticsPageContent = ({ isFilterValuesFilled, onGetData }: PageContentProps & { isFilterValuesFilled: boolean }) => {
-  const costCategories = useSelector(selectCostCategories);
-  const incomeCategories = useSelector(selectIncomeCategories);
-  const costsListForCharts = useSelector(selectCostsListForChartsByFilter);
-  const budgetsListForCharts = useSelector(selectBudgetsListForChartsByFilter);
-  const incomesListForCharts = useSelector(selectIncomesListForChartsByFilter);
-  const isFilterValuesChanged = useSelector(selectIsStatisticsFilterValuesChanged);
+  const costCategories = useAppSelector(selectCostCategories);
+  const incomeCategories = useAppSelector(selectIncomeCategories);
+  const costsListForCharts = useAppSelector(selectCostsListForChartsByFilter);
+  const budgetsListForCharts = useAppSelector(selectBudgetsListForChartsByFilter);
+  const incomesListForCharts = useAppSelector(selectIncomesListForChartsByFilter);
+  const isFilterValuesChanged = useAppSelector(selectIsStatisticsFilterValuesChanged);
 
   const charts = (
     <>

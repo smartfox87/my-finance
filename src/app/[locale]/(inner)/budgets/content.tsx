@@ -1,6 +1,5 @@
 "use client";
 
-import { useSelector } from "react-redux";
 import { useLoading } from "@/hooks/loading";
 import { useCallback, useEffect } from "react";
 import { Preloader } from "@/components/layout/preloader/Preloader";
@@ -9,7 +8,7 @@ import { useFilterSearchParams } from "@/hooks/filterSearchParams";
 import { getBudgetsListThunk, setBudgetsFilterValues } from "@/store/slices/budgetsSlice";
 import { INITIAL_BUDGETS_FILTER_FIELDS } from "@/constants/budgets";
 import { getUserId } from "@/helpers/localStorage";
-import { useAppDispatch } from "@/hooks/redux";
+import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { getFilterItemsFromFields } from "@/helpers/filters";
 import BudgetsPageContent from "@/components/budgets/page/BudgetsPageContent";
 import { BudgetsPageActions } from "@/components/budgets/page/BudgetsPageActions";
@@ -17,11 +16,11 @@ import { BudgetsPageActions } from "@/components/budgets/page/BudgetsPageActions
 export default function BudgetsContent() {
   const dispatch = useAppDispatch();
 
-  const budgetsFilterValues = useSelector(selectBudgetsFilterValues);
+  const budgetsFilterValues = useAppSelector(selectBudgetsFilterValues);
   const [isNotEqualParamsToFilters] = useFilterSearchParams(budgetsFilterValues, setBudgetsFilterValues);
 
   const [isLoading, setIsLoading] = useLoading(false);
-  const budgetsList = useSelector(selectBudgetsList);
+  const budgetsList = useAppSelector(selectBudgetsList);
 
   const handleGetData = useCallback(async (): Promise<void> => {
     if (!budgetsFilterValues?.period || isNotEqualParamsToFilters) return;

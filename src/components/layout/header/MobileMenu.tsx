@@ -5,17 +5,17 @@ import { SideModal } from "@/components/modals/SideModal";
 import { ProfileMenu } from "@/components/profile/ProfileMenu";
 import { Auth } from "@/components/auth/Auth";
 import { LanguageToggle } from "@/components/layout/header/LanguageToggle";
-import { useSelector } from "react-redux";
 import { selectUser } from "@/store/selectors/auth";
 import { MainNav } from "@/components/layout/navigation/MainNav";
 import { useAntd } from "@/hooks/providers/antd";
 import { useModalState } from "@/hooks/providers/modalState";
+import { useAppSelector } from "@/hooks/store";
 
 export const MobileMenu = memo(function MobileMenu() {
   const { t } = useTranslation();
   const { initAntd, isLoadedAntd, isLoadingAntd } = useAntd();
   const { isOpenMenuModal, setIsOpenMenuModal } = useModalState();
-  const user = useSelector(selectUser);
+  const user = useAppSelector(selectUser);
 
   const handleToggleVisibility = async (): Promise<void> => {
     if (!isLoadedAntd) await initAntd();

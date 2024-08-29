@@ -1,22 +1,21 @@
 "use client";
 
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import { selectProfileFields } from "@/store/selectors/profile";
 import { DefaultForm } from "@/components/form/DefaultForm";
 import { getProfileThunk, updateProfileThunk } from "@/store/slices/profileSlice";
 import { showNotification } from "@/helpers/modals";
-import { useAppDispatch } from "@/hooks/redux";
 import { showCommonError } from "@/helpers/errors";
 import { isProfileData } from "@/predicates/profile";
 import { ProfilePageActions } from "@/components/profile/page/ProfilePageActions";
 import { ProfileDates } from "@/components/profile/page/ProfileDates";
+import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import type { DefaultFormSaveHandler } from "@/types/form";
 
 export default function ProfileContent() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const profileFields = useSelector(selectProfileFields);
+  const profileFields = useAppSelector(selectProfileFields);
 
   const handleSaveProfile: DefaultFormSaveHandler = async (profileData) => {
     try {
@@ -25,7 +24,7 @@ export default function ProfileContent() {
       await dispatch(getProfileThunk());
       showNotification({ title: t("notifications.profile.update") });
     } catch (error) {
-      showCommonError();
+      showCommonError({ error });
     }
   };
 

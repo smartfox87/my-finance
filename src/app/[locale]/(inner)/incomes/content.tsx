@@ -1,6 +1,5 @@
 "use client";
 
-import { useSelector } from "react-redux";
 import { selectIncomesFilterValues, selectIncomesList } from "@/store/selectors/incomes";
 import { useFilterSearchParams } from "@/hooks/filterSearchParams";
 import { getIncomesListThunk, setIncomesFilterValues } from "@/store/slices/incomesSlice";
@@ -9,7 +8,7 @@ import { useCallback, useEffect } from "react";
 import { INITIAL_INCOMES_FILTER_FIELDS } from "@/constants/incomes";
 import { getUserId } from "@/helpers/localStorage";
 import { Preloader } from "@/components/layout/preloader/Preloader";
-import { useAppDispatch } from "@/hooks/redux";
+import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { getFilterItemsFromFields } from "@/helpers/filters";
 import { IncomesPageActions } from "@/components/Incomes/page/IncomesPageActions";
 import { IncomesPageContent } from "@/components/Incomes/page/IncomesPageContent";
@@ -17,11 +16,11 @@ import { IncomesPageContent } from "@/components/Incomes/page/IncomesPageContent
 export default function IncomesContent() {
   const dispatch = useAppDispatch();
 
-  const incomesFilterValues = useSelector(selectIncomesFilterValues);
+  const incomesFilterValues = useAppSelector(selectIncomesFilterValues);
   const [isNotEqualParamsToFilters] = useFilterSearchParams(incomesFilterValues, setIncomesFilterValues);
 
   const [isLoading, setIsLoading] = useLoading(false);
-  const incomesList = useSelector(selectIncomesList);
+  const incomesList = useAppSelector(selectIncomesList);
 
   const handleGetData = useCallback(async (): Promise<void> => {
     if (!incomesFilterValues?.period || isNotEqualParamsToFilters) return;

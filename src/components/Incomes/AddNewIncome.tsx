@@ -1,7 +1,6 @@
 import { Button } from "antd";
 import { SideModal } from "@/components/modals/SideModal";
 import { DefaultForm } from "@/components/form/DefaultForm";
-import { useSelector } from "react-redux";
 import { selectIncomeFields } from "@/store/selectors/incomes";
 import { createIncomeItemThunk } from "@/store/slices/incomesSlice";
 import { useTranslation } from "react-i18next";
@@ -10,9 +9,9 @@ import { memo, useRef, useState } from "react";
 import { CalculatorModal } from "@/components/calculator/CalculatorModal";
 import { useViewport } from "@/hooks/viewport";
 import SvgNewIncome from "@/assets/sprite/new-income.svg";
-import { useAppDispatch } from "@/hooks/redux";
 import { showCommonError } from "@/helpers/errors";
 import { isIncomeItemData } from "@/predicates/incomes";
+import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { FieldIds, FieldTypes } from "@/types/field";
 import type { CalculatorSaveHandler } from "@/types/calculator";
 import type { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
@@ -25,7 +24,7 @@ export const AddNewIncome = memo(function AddNewIncome({ isAdaptive, onSave }: {
   const [isOpen, setIsOpen] = useState(false);
   const handleToggleVisibility = (): void => setIsOpen((prevState) => !prevState);
 
-  const newIncomeFields = useSelector(selectIncomeFields);
+  const newIncomeFields = useAppSelector(selectIncomeFields);
 
   const handleSaveNewIncome: DefaultFormSaveHandler = async (fieldsValues) => {
     try {
@@ -35,7 +34,7 @@ export const AddNewIncome = memo(function AddNewIncome({ isAdaptive, onSave }: {
       setIsOpen(false);
       showNotification({ title: t("notifications.income.create") });
     } catch (error) {
-      showCommonError();
+      showCommonError({ error });
     }
   };
 

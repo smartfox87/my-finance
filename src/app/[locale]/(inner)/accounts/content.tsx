@@ -8,7 +8,7 @@ import { AddNewAccount } from "@/components/accounts/AddNewAccount";
 import { TransferBetweenAccounts } from "@/components/accounts/TransferBetweenAccounts";
 import { AccountDetail } from "@/components/accounts/AccountDetail";
 import { getAccountTypesThunk } from "@/store/slices/referencesSlice";
-import { useAppDispatch } from "@/hooks/redux";
+import { useAppDispatch } from "@/hooks/store";
 import { AccountsList } from "@/components/accounts/page/AccountsList";
 import { AccountsPageActions } from "@/components/accounts/page/AccountsPageActions";
 

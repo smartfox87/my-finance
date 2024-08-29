@@ -4,10 +4,9 @@ import { handleRejectedReducerAction } from "@/helpers/errors";
 import { updateAccountBalanceThunk } from "@/store/slices/accountsSlice";
 import { setFilterValue } from "@/helpers/filters";
 import { rootReducer } from "@/store";
-import { isDatesStrings } from "@/predicates/date";
-import { FieldIds } from "@/types/field";
+import { isFilterPeriodStateItem } from "@/predicates/filter";
 import type { CostItem, CostItemData, CostsSliceState } from "@/types/costs";
-import type { FilterItem, FilterPeriodStateItem, FilterState } from "@/types/filter";
+import type { FilterItem, FilterState } from "@/types/filter";
 import type { WithSlice } from "@reduxjs/toolkit";
 import type { AppDispatch, RootState } from "@/types/store";
 
@@ -27,9 +26,8 @@ export const costsSlice = createAppSlice({
   reducers: (create) => ({
     getCostsListThunk: create.asyncThunk<CostItem[], FilterState, { rejectValue: string }>(
       async (params, { rejectWithValue }) => {
-        if (!params[FieldIds.PERIOD] || !isDatesStrings(params[FieldIds.PERIOD])) throw rejectWithValue("Period is required");
-        const filter: FilterPeriodStateItem = { [FieldIds.PERIOD]: params[FieldIds.PERIOD] };
-        const { data, error } = await getCostsListApi(filter);
+        if (!isFilterPeriodStateItem(params)) throw rejectWithValue("Period is required");
+        const { data, error } = await getCostsListApi(params);
         if (error) throw rejectWithValue(error.message);
         return data;
       },

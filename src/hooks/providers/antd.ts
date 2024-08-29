@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { AntdContext } from "@/providers/AntdProvider";
+import { AntdContext } from "@/providers/antd";
 import type { AntdContextType } from "@/types/providers/antdProvider";
 
 export const useAntd = (): AntdContextType => {

@@ -7,13 +7,13 @@ import { Suspense } from "react";
 import { IncomeDetail } from "@/components/Incomes/IncomeDetail";
 import { EmptyIncomes } from "@/components/Incomes/list/EmptyIncomes";
 import { FoundNothing } from "@/components/common/list/FoundNothing";
-import { useSelector } from "react-redux";
 import { selectIncomesByFilter, selectIncomesList } from "@/store/selectors/incomes";
+import { useAppSelector } from "@/hooks/store";
 import type { PageContentProps } from "@/types/common";
 
 export const IncomesPageContent = ({ onGetData }: PageContentProps) => {
-  const incomesList = useSelector(selectIncomesList);
-  const filteredSortedIncomes = useSelector(selectIncomesByFilter);
+  const incomesList = useAppSelector(selectIncomesList);
+  const filteredSortedIncomes = useAppSelector(selectIncomesByFilter);
 
   let content;
   if (filteredSortedIncomes?.length)
