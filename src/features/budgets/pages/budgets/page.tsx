@@ -10,8 +10,8 @@ import { INITIAL_BUDGETS_FILTER_FIELDS } from "../../constants";
 import { getUserId } from "@/helpers/localStorage";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { getFilterItemsFromFields } from "@/helpers/filters";
-import { PageContent } from "../../components/page-content";
-import { HeaderAside } from "../../components/header-aside";
+import { PageContent } from "../../components";
+import { HeaderAside } from "../../components";
 
 // todo check default import everywhere
 export default function Page() {
