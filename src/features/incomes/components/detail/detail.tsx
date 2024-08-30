@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { memo, useEffect, useRef, useState } from "react";
-import { selectIncomeFields, selectIncomeItem } from "@/store/selectors/incomes";
-import { deleteIncomeItemThunk, getIncomeItemThunk, setIncomeItem, updateIncomeItemThunk } from "@/store/slices/incomesSlice";
+import { selectIncomeFields, selectIncomeItem } from "../../selectors";
+import { deleteIncomeItemThunk, getIncomeItemThunk, setIncomeItem, updateIncomeItemThunk } from "../../store";
 import { DefaultForm } from "@/components/form/DefaultForm";
 import { showNotification } from "@/helpers/modals";
 import { SideModal } from "@/components/modals/SideModal";
@@ -11,14 +11,14 @@ import { CalculatorModal } from "@/components/calculator/CalculatorModal";
 import { Button } from "antd";
 import { useSearchParams, useRouter } from "next/navigation";
 import { showCommonError } from "@/helpers/errors";
-import { isIncomeItemData } from "@/predicates/incomes";
+import { isIncomeItemData } from "../../predicates";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { FieldIds, FieldTypes } from "@/types/field";
 import type { CalculatorSaveHandler } from "@/types/calculator";
 import type { ComponentOnSaveProps } from "@/types/common";
 import type { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 
-export const IncomeDetail = memo(function IncomeDetail({ onSave }: ComponentOnSaveProps) {
+export const Detail = memo(function IncomeDetail({ onSave }: ComponentOnSaveProps) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const searchParams = useSearchParams();

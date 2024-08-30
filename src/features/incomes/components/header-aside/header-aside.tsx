@@ -1,11 +1,11 @@
 import { InnerHeaderActionsPortal } from "@/components/layout/inner/InnerHeaderActionsPortal";
 import { selectCurrency } from "@/store/selectors/profile";
 import formatPrice from "@/helpers/formatPrice";
-import { selectIncomesAmount, selectIncomesByFilter } from "@/store/selectors/incomes";
+import { selectIncomesAmount, selectIncomesByFilter } from "../../selectors";
 import { useTranslation } from "react-i18next";
 import { useAppSelector } from "@/hooks/store";
 
-export const IncomesPageActions = () => {
+export const HeaderAside = () => {
   const { t } = useTranslation();
   const currency = useAppSelector(selectCurrency);
   const filteredSortedIncomes = useAppSelector(selectIncomesByFilter);

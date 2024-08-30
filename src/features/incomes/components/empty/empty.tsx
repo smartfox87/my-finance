@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import type { ReactNode } from "react";
 
-export const EmptyIncomes = ({ addNew }: { addNew: ReactNode }) => {
+export const Empty = ({ addNew }: { addNew: ReactNode }) => {
   const { t } = useTranslation();
 
   return (

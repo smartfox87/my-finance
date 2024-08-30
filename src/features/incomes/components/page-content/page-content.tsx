@@ -1,17 +1,17 @@
-import { AddNewIncome } from "@/components/Incomes/AddNewIncome";
-import { IncomesFilter } from "@/components/Incomes/filter/IncomesFilter";
-import { ActiveIncomesFilters } from "@/components/Incomes/filter/ActiveIncomesFilters";
+import { AddNew } from "../add-new";
+import { Filter } from "../filter";
+import { ActiveFilters } from "../active-filters";
 import { LazyList } from "@/components/common/list/LazyList";
-import { IncomeListItem } from "@/components/Incomes/list/IncomeListItem";
+import { Item } from "../item";
 import { Suspense } from "react";
-import { IncomeDetail } from "@/components/Incomes/IncomeDetail";
-import { EmptyIncomes } from "@/components/Incomes/list/EmptyIncomes";
+import { Detail } from "../detail";
+import { Empty } from "../empty";
 import { FoundNothing } from "@/components/common/list/FoundNothing";
-import { selectIncomesByFilter, selectIncomesList } from "@/store/selectors/incomes";
+import { selectIncomesByFilter, selectIncomesList } from "../../selectors";
 import { useAppSelector } from "@/hooks/store";
 import type { PageContentProps } from "@/types/common";
 
-export const IncomesPageContent = ({ onGetData }: PageContentProps) => {
+export const PageContent = ({ onGetData }: PageContentProps) => {
   const incomesList = useAppSelector(selectIncomesList);
   const filteredSortedIncomes = useAppSelector(selectIncomesByFilter);
 
@@ -21,27 +21,27 @@ export const IncomesPageContent = ({ onGetData }: PageContentProps) => {
       <>
         <div className="container-edge container sticky top-16 z-20 -my-4 flex flex-col gap-4 bg-white py-4 dark:bg-dark">
           <div className="grid grid-cols-2 gap-4">
-            <AddNewIncome isAdaptive onSave={onGetData} />
-            <IncomesFilter onSave={onGetData} />
+            <AddNew isAdaptive onSave={onGetData} />
+            <Filter onSave={onGetData} />
           </div>
-          <ActiveIncomesFilters />
+          <ActiveFilters />
         </div>
-        <LazyList items={filteredSortedIncomes} Item={IncomeListItem} />
+        <LazyList items={filteredSortedIncomes} Item={Item} />
         <Suspense fallback={<div />}>
-          <IncomeDetail onSave={onGetData} />
+          <Detail onSave={onGetData} />
         </Suspense>
       </>
     );
-  else if (!incomesList?.length) content = <EmptyIncomes addNew={<AddNewIncome onSave={onGetData} />} />;
+  else if (!incomesList?.length) content = <Empty addNew={<AddNew onSave={onGetData} />} />;
   else if (incomesList?.length && !filteredSortedIncomes?.length)
     content = content = (
       <>
         <div className="container-edge container sticky top-16 z-20 -my-4 flex flex-col gap-4 bg-white py-4 dark:bg-dark">
           <div className="grid grid-cols-2 gap-4">
-            <AddNewIncome isAdaptive onSave={onGetData} />
-            <IncomesFilter onSave={onGetData} />
+            <AddNew isAdaptive onSave={onGetData} />
+            <Filter onSave={onGetData} />
           </div>
-          <ActiveIncomesFilters />
+          <ActiveFilters />
         </div>
         <FoundNothing />
       </>

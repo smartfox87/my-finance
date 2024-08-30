@@ -11,9 +11,9 @@ import { useViewport } from "@/hooks/viewport";
 import { selectAccountsObject } from "@/features/accounts";
 import Link from "next/link";
 import { useAppSelector } from "@/hooks/store";
-import type { IncomeItem } from "@/types/incomes";
+import type { IncomeItem } from "../../types";
 
-export const IncomeListItem = ({ id, created_at, name, amount, date, category, account }: IncomeItem) => {
+export const Item = ({ id, created_at, name, amount, date, category, account }: IncomeItem) => {
   const { t } = useTranslation();
   const { isTouchDevice } = useViewport();
   const currency = useAppSelector(selectCurrency);

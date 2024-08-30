@@ -5,7 +5,7 @@ import { showNotification } from "@/helpers/modals";
 import { NotificationTypes } from "@/types/modals";
 import type { AccountsSliceState } from "@/features/accounts";
 import type { ProfileSliceState } from "@/types/profile";
-import type { IncomesSliceState } from "@/types/incomes";
+import type { IncomesSliceState } from "@/features/incomes";
 import type { BudgetsSliceState } from "@/types/budgets";
 import type { ReferencesSliceState } from "@/types/references";
 import type { StatisticsSliceState } from "@/types/statistics";

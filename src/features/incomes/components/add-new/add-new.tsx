@@ -1,8 +1,8 @@
 import { Button } from "antd";
 import { SideModal } from "@/components/modals/SideModal";
 import { DefaultForm } from "@/components/form/DefaultForm";
-import { selectIncomeFields } from "@/store/selectors/incomes";
-import { createIncomeItemThunk } from "@/store/slices/incomesSlice";
+import { selectIncomeFields } from "../../selectors";
+import { createIncomeItemThunk } from "../../store";
 import { useTranslation } from "react-i18next";
 import { showNotification } from "@/helpers/modals";
 import { memo, useRef, useState } from "react";
@@ -10,13 +10,13 @@ import { CalculatorModal } from "@/components/calculator/CalculatorModal";
 import { useViewport } from "@/hooks/viewport";
 import SvgNewIncome from "@/assets/sprite/new-income.svg";
 import { showCommonError } from "@/helpers/errors";
-import { isIncomeItemData } from "@/predicates/incomes";
+import { isIncomeItemData } from "../../predicates";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { FieldIds, FieldTypes } from "@/types/field";
 import type { CalculatorSaveHandler } from "@/types/calculator";
 import type { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 
-export const AddNewIncome = memo(function AddNewIncome({ isAdaptive, onSave }: { isAdaptive?: boolean; onSave: () => Promise<void> }) {
+export const AddNew = memo(function AddNewIncome({ isAdaptive, onSave }: { isAdaptive?: boolean; onSave: () => Promise<void> }) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { isMobile } = useViewport();

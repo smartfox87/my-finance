@@ -1,15 +1,15 @@
-import { selectIncomesFilterFields, selectIncomesFilterValues } from "@/store/selectors/incomes";
+import { selectIncomesFilterFields, selectIncomesFilterValues } from "../../selectors";
 import { memo, useMemo } from "react";
 import { getActiveFilters } from "@/helpers/filters";
 import { ActiveFiltersList } from "@/components/common/filter/ActiveFiltersList";
 import { isMultiSelectFormFieldId } from "@/predicates/form";
 import { isNumber } from "@/predicates/common";
 import { isMultiSelectValue } from "@/predicates/field";
-import { setIncomesFilterValues } from "@/store/slices/incomesSlice";
+import { setIncomesFilterValues } from "../../store";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import type { ClearActiveFilterItemHandler } from "@/types/filter";
 
-export const ActiveIncomesFilters = memo(function ActiveIncomesFilters() {
+export const ActiveFilters = memo(function ActiveIncomesFilters() {
   const dispatch = useAppDispatch();
 
   const incomesFilterFields = useAppSelector(selectIncomesFilterFields);

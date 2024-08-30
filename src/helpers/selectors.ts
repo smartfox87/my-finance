@@ -6,7 +6,7 @@ import type { ProcessedAccountItem } from "@/features/accounts";
 import type { CostCategory, IncomeCategory } from "@/types/references";
 import type { FilterState } from "@/types/filter";
 import type { CostItem } from "@/features/expenses";
-import type { IncomeItem } from "@/types/incomes";
+import type { IncomeItem } from "@/features/incomes";
 import type { ProcessedBudgetItem } from "@/types/budgets";
 import type { FilterField } from "@/types/filter";
 import type { ProcessedFilterField } from "@/types/selectors";

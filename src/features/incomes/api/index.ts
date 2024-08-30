@@ -1,9 +1,9 @@
 import { apiClient } from "@/lib/api-client";
 import { getUserId } from "@/helpers/localStorage";
 import { getCurrentDate } from "@/helpers/date";
-import type { IncomeItemData } from "@/types/incomes";
-import { FilterPeriodStateItem } from "@/types/filter";
 import { FieldIds } from "@/types/field";
+import type { IncomeItemData } from "../types";
+import type { FilterPeriodStateItem } from "@/types/filter";
 
 export const getIncomesListApi = (filter: FilterPeriodStateItem) => {
   const [from, to] = filter[FieldIds.PERIOD];

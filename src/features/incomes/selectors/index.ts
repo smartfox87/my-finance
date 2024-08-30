@@ -1,5 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { INITIAL_INCOME_FIELDS, INITIAL_INCOMES_FILTER_FIELDS } from "@/constants/incomes";
+import { INITIAL_INCOME_FIELDS, INITIAL_INCOMES_FILTER_FIELDS } from "../constants";
 import { selectIncomeCategories } from "@/store/selectors/references";
 import { selectCurrency } from "@/store/selectors/profile";
 import { selectAccountsList } from "@/features/accounts";
@@ -7,7 +7,7 @@ import { filterSingleItemsList, processFilterFields, sortItemsList } from "@/hel
 import dayjs from "dayjs";
 import { FieldIds, FieldTypes } from "@/types/field";
 import type { LazyLoadedSlices } from "@/types/store";
-import type { IncomeItem, IncomeItemField } from "@/types/incomes";
+import type { IncomeItem, IncomeItemField } from "../types";
 import type { FilterState } from "@/types/filter";
 import type { ProcessedFilterField } from "@/types/selectors";
 

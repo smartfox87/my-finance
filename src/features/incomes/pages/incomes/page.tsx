@@ -1,19 +1,19 @@
 "use client";
 
-import { selectIncomesFilterValues, selectIncomesList } from "@/store/selectors/incomes";
+import { selectIncomesFilterValues, selectIncomesList } from "../../selectors";
 import { useFilterSearchParams } from "@/hooks/filterSearchParams";
-import { getIncomesListThunk, setIncomesFilterValues } from "@/store/slices/incomesSlice";
+import { getIncomesListThunk, setIncomesFilterValues } from "../../store";
 import { useLoading } from "@/hooks/loading";
 import { useCallback, useEffect } from "react";
-import { INITIAL_INCOMES_FILTER_FIELDS } from "@/constants/incomes";
+import { INITIAL_INCOMES_FILTER_FIELDS } from "../../constants";
 import { getUserId } from "@/helpers/localStorage";
 import { Preloader } from "@/components/layout/preloader/Preloader";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { getFilterItemsFromFields } from "@/helpers/filters";
-import { IncomesPageActions } from "@/components/Incomes/page/IncomesPageActions";
-import { IncomesPageContent } from "@/components/Incomes/page/IncomesPageContent";
+import { HeaderAside } from "../../components/header-aside";
+import { PageContent } from "../../components/page-content";
 
-export default function IncomesContent() {
+export default function Page() {
   const dispatch = useAppDispatch();
 
   const incomesFilterValues = useAppSelector(selectIncomesFilterValues);
@@ -32,7 +32,7 @@ export default function IncomesContent() {
   useEffect((): void => {
     const injectAndLoadData = async () => {
       if (!incomesFilterValues) {
-        await import("@/store/slices/incomesSlice");
+        await import("../../store");
         dispatch(setIncomesFilterValues(getFilterItemsFromFields(INITIAL_INCOMES_FILTER_FIELDS)));
       }
       if (!incomesList) await handleGetData();
@@ -43,8 +43,8 @@ export default function IncomesContent() {
 
   return (
     <Preloader isLoading={isLoading}>
-      <IncomesPageActions />
-      <IncomesPageContent onGetData={handleGetData} />
+      <HeaderAside />
+      <PageContent onGetData={handleGetData} />
     </Preloader>
   );
 }

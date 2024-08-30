@@ -1,5 +1,5 @@
-import { setIncomesFilterValues } from "@/store/slices/incomesSlice";
-import { selectIncomesFilterFields, selectIncomesFilterValues } from "@/store/selectors/incomes";
+import { setIncomesFilterValues } from "../../store";
+import { selectIncomesFilterFields, selectIncomesFilterValues } from "../../selectors";
 import { useTranslation } from "react-i18next";
 import { Button } from "antd";
 import { SideModal } from "@/components/modals/SideModal";
@@ -16,7 +16,7 @@ import type { ChangeFilterFieldValueHandler, FilterState } from "@/types/filter"
 import type { BaseSelectRef } from "rc-select";
 import type { ComponentOnSaveProps } from "@/types/common";
 
-export const IncomesFilter = memo(function IncomesFilter({ onSave }: ComponentOnSaveProps) {
+export const Filter = memo(function IncomesFilter({ onSave }: ComponentOnSaveProps) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { isMobile } = useViewport();
