@@ -1,20 +1,15 @@
 "use client";
 
-import { Header } from "@/components/layout/header/Header";
-import { MainNav } from "@/components/layout/navigation/MainNav";
-import { useViewport } from "@/hooks/viewport";
 import { selectUser } from "@/store/selectors/auth";
 import { useTranslation } from "react-i18next";
 import { getUserId } from "@/helpers/localStorage";
-import { MobileNav } from "@/components/layout/navigation/MobileNav";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import type { ComponentChildrenProps } from "@/types/common";
 import { setCSSVariables } from "@/helpers/cssVariables";
+import type { ComponentChildrenProps } from "@/types/common";
 
-export default function MainLayout({ children }: ComponentChildrenProps) {
+export default function InitialData({ children }: ComponentChildrenProps) {
   const dispatch = useAppDispatch();
-  const { isTablet } = useViewport();
   const {
     i18n: { language },
   } = useTranslation();
@@ -54,14 +49,5 @@ export default function MainLayout({ children }: ComponentChildrenProps) {
     setCSSVariables();
   }, []);
 
-  return (
-    <>
-      <Header />
-      <main className="container flex grow">
-        <MainNav className="container hidden !w-auto !pl-0 lg:block" />
-        <div className="relative flex min-w-0 grow flex-col py-4 md:py-6 lg:ml-6">{children}</div>
-      </main>
-      <div className="sticky bottom-0 z-30 bg-white dark:bg-dark">{isTablet && <MobileNav />}</div>
-    </>
-  );
+  return <>{children}</>;
 }

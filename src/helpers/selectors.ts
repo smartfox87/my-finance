@@ -2,7 +2,7 @@ import { i18nRef } from "@/i18n";
 import { isTruthy } from "@/predicates/common";
 import { FieldIds, FieldTypes, FieldValues, type MultiSelectOptionValue, type MultiSelectValue, type SelectOption, type SingleSelectValue } from "@/types/field";
 import type { DatesStrings } from "@/types/date";
-import type { ProcessedAccountItem } from "@/types/accounts";
+import type { ProcessedAccountItem } from "@/features/accounts";
 import type { CostCategory, IncomeCategory } from "@/types/references";
 import type { FilterState } from "@/types/filter";
 import type { CostItem } from "@/types/costs";

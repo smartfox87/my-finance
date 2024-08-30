@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { memo, useEffect, useRef, useState } from "react";
-import { selectAccountFields, selectAccountItem } from "@/store/selectors/accounts";
-import { deleteAccountItemThunk, getAccountItemThunk, setAccountItem, updateAccountItemThunk } from "@/store/slices/accountsSlice";
+import { selectAccountFields, selectAccountItem } from "../../selectors";
+import { deleteAccountItemThunk, getAccountItemThunk, setAccountItem, updateAccountItemThunk } from "../../store";
 import { DefaultForm } from "@/components/form/DefaultForm";
 import { SideModal } from "@/components/modals/SideModal";
 import { useLoading } from "@/hooks/loading";
@@ -10,7 +10,7 @@ import { CalculatorModal } from "@/components/calculator/CalculatorModal";
 import { Button } from "antd";
 import { useRouter, useSearchParams } from "next/navigation";
 import { showCommonError } from "@/helpers/errors";
-import { isAccountItemUpdateData } from "@/predicates/account";
+import { isAccountItemUpdateData } from "../../predicates";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { FieldIds, FieldTypes } from "@/types/field";
 import type { CalculatorSaveHandler } from "@/types/calculator";

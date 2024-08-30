@@ -1,6 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { selectAccountTypesObject, selectCostCategories, selectCostCategoriesObject, selectIncomeCategoriesObject } from "@/store/selectors/references";
-import { selectAccountsList } from "@/store/selectors/accounts";
+import { selectAccountsList } from "@/features/accounts";
 import { INITIAL_STATISTICS_FILTER_FIELDS } from "@/constants/statistics";
 import { processFilterFields, filterSingleItemsList, filterMultiItemsList } from "@/helpers/selectors";
 import { isFilterStateKey } from "@/predicates/filter";

@@ -1,11 +1,11 @@
-import { createAccountItemApi, getAccountsListApi, updateAccountItemApi, deleteAccountItemApi, getAccountItemApi, createInitialAccountsApi } from "@/api/accounts";
+import { createAccountItemApi, getAccountsListApi, updateAccountItemApi, deleteAccountItemApi, getAccountItemApi, createInitialAccountsApi } from "../api";
 import { handleRejectedReducerAction } from "@/helpers/errors";
 import { createAccountTypeApi, updateAccountTypeApi } from "@/api/references";
 import { rootReducer } from "@/store";
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import type { AccountTypeData } from "@/types/references";
 import type { RootState } from "@/types/store";
-import type { AccountItem, AccountItemUpdateData, AccountItemBalanceData, AccountsSliceState, AccountItemCreateData } from "@/types/accounts";
+import type { AccountItem, AccountItemUpdateData, AccountItemBalanceData, AccountsSliceState, AccountItemCreateData } from "../types";
 import { getAccountTypesThunk } from "@/store/slices/referencesSlice";
 import { showNotification } from "@/helpers/modals";
 import { i18nRef } from "@/i18n";

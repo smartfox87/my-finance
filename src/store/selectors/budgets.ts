@@ -2,7 +2,7 @@ import { createSelector } from "@reduxjs/toolkit";
 import { INITIAL_BUDGET_FIELDS, INITIAL_BUDGETS_FILTER_FIELDS } from "@/constants/budgets";
 import { selectCostCategories } from "@/store/selectors/references";
 import { selectCurrency } from "@/store/selectors/profile";
-import { selectAccountsList } from "@/store/selectors/accounts";
+import { selectAccountsList } from "@/features/accounts";
 import { filterMultiItemsList, getOptionsFromItemsList, processFilterFields, sortItemsList } from "@/helpers/selectors";
 import { FieldIds, FieldTypes } from "@/types/field";
 import type { LazyLoadedSlices } from "@/types/store";

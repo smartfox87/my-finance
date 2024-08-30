@@ -1,7 +1,7 @@
 import { asyncThunkCreator, buildCreateSlice } from "@reduxjs/toolkit";
 import { createCostItemApi, getCostsListApi, updateCostItemApi, deleteCostItemApi, getCostItemApi } from "@/api/costs";
 import { handleRejectedReducerAction } from "@/helpers/errors";
-import { updateAccountBalanceThunk } from "@/store/slices/accountsSlice";
+import { updateAccountBalanceThunk } from "@/features/accounts";
 import { setFilterValue } from "@/helpers/filters";
 import { rootReducer } from "@/store";
 import { isFilterPeriodStateItem } from "@/predicates/filter";

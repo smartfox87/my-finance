@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
-import { selectAccountsList, selectAccountTransferFields } from "@/store/selectors/accounts";
-import { transferAccountsBalanceThunk } from "@/store/slices/accountsSlice";
+import { selectAccountsList, selectAccountTransferFields } from "../../selectors";
+import { transferAccountsBalanceThunk } from "../../store";
 import { SideModal } from "@/components/modals/SideModal";
 import { useLoading } from "@/hooks/loading";
 import { CalculatorModal } from "@/components/calculator/CalculatorModal";
@@ -10,12 +10,12 @@ import { useViewport } from "@/hooks/viewport";
 import SvgTransfer from "@/assets/sprite/transfer.svg";
 import { useFieldFocus } from "@/hooks/fieldFocus";
 import { showCommonError } from "@/helpers/errors";
-import { INITIAL_ACCOUNT_TRANSFER_VALUES } from "@/constants/accounts";
+import { INITIAL_ACCOUNT_TRANSFER_VALUES } from "../../constants";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { FieldIds } from "@/types/field";
 import { memo, type ReactNode, useMemo, useState } from "react";
 import type { BaseSelectRef } from "rc-select";
-import type { AccountTransferField, AccountTransferValues } from "@/types/accounts";
+import type { AccountTransferField, AccountTransferValues } from "../../types";
 
 export const TransferBetweenAccounts = memo(function TransferBetweenAccounts() {
   const { t } = useTranslation();

@@ -9,7 +9,7 @@ import { useViewport } from "@/hooks/viewport";
 import { getFullDate } from "@/helpers/date";
 import Link from "next/link";
 import { useAppSelector } from "@/hooks/store";
-import type { ProcessedAccountItem } from "@/types/accounts";
+import type { ProcessedAccountItem } from "../../types";
 
 export const AccountListItem = ({ id, name, balance, updated_at }: ProcessedAccountItem) => {
   const { t } = useTranslation();

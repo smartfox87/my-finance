@@ -8,7 +8,7 @@ import { selectCostCategoriesObject } from "@/store/selectors/references";
 import { useEffect, useRef, useState } from "react";
 import { isTextClamped } from "@/helpers/isTextClamped";
 import { useViewport } from "@/hooks/viewport";
-import { selectAccountsObject } from "@/store/selectors/accounts";
+import { selectAccountsObject } from "@/features/accounts";
 import Link from "next/link";
 import { useAppSelector } from "@/hooks/store";
 import type { CostItem } from "@/types/costs";

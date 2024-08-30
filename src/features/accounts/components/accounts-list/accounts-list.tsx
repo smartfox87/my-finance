@@ -1,5 +1,5 @@
-import { AccountListItem } from "@/components/accounts/AccountListItem";
-import { selectAccountsList } from "@/store/selectors/accounts";
+import { AccountListItem } from "../account-list-item";
+import { selectAccountsList } from "../../selectors";
 import { useAppSelector } from "@/hooks/store";
 
 export const AccountsList = () => {

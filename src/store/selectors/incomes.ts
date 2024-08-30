@@ -2,7 +2,7 @@ import { createSelector } from "@reduxjs/toolkit";
 import { INITIAL_INCOME_FIELDS, INITIAL_INCOMES_FILTER_FIELDS } from "@/constants/incomes";
 import { selectIncomeCategories } from "@/store/selectors/references";
 import { selectCurrency } from "@/store/selectors/profile";
-import { selectAccountsList } from "@/store/selectors/accounts";
+import { selectAccountsList } from "@/features/accounts";
 import { filterSingleItemsList, processFilterFields, sortItemsList } from "@/helpers/selectors";
 import dayjs from "dayjs";
 import { FieldIds, FieldTypes } from "@/types/field";

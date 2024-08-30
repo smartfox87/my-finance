@@ -3,7 +3,7 @@ import { i18nRef } from "@/i18n";
 import { showErrorMessage } from "@/helpers/message";
 import { showNotification } from "@/helpers/modals";
 import { NotificationTypes } from "@/types/modals";
-import type { AccountsSliceState } from "@/types/accounts";
+import type { AccountsSliceState } from "@/features/accounts";
 import type { ProfileSliceState } from "@/types/profile";
 import type { IncomesSliceState } from "@/types/incomes";
 import type { BudgetsSliceState } from "@/types/budgets";

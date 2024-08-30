@@ -1,11 +1,11 @@
 import { InnerHeaderActionsPortal } from "@/components/layout/inner/InnerHeaderActionsPortal";
 import formatPrice from "@/helpers/formatPrice";
 import { useTranslation } from "react-i18next";
-import { selectAccountsBalance } from "@/store/selectors/accounts";
+import { selectAccountsBalance } from "../../selectors";
 import { selectCurrency } from "@/store/selectors/profile";
 import { useAppSelector } from "@/hooks/store";
 
-export const AccountsPageActions = () => {
+export const AccountsHeaderAside = () => {
   const { t } = useTranslation();
   const totalBalance = useAppSelector(selectAccountsBalance);
   const currency = useAppSelector(selectCurrency);
