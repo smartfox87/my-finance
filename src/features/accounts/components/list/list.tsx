@@ -1,15 +1,15 @@
-import { AccountListItem } from "../account-list-item";
+import { Item } from "../item";
 import { selectAccountsList } from "../../selectors";
 import { useAppSelector } from "@/hooks/store";
 
-export const AccountsList = () => {
+export const List = () => {
   const accountsList = useAppSelector(selectAccountsList);
 
   return (
     <ul className="flex flex-col gap-4">
       {accountsList?.map((account) => (
         <li key={account.id}>
-          <AccountListItem {...account} />
+          <Item {...account} />
         </li>
       ))}
     </ul>

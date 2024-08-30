@@ -2,8 +2,8 @@
 
 import dynamic from "next/dynamic";
 
-const AccountsContent = dynamic(() => import("./content"));
+const Page = dynamic(() => import("./page"));
 
-export function AccountsModule() {
-  return <AccountsContent />;
+export function AccountsPageModule() {
+  return <Page />;
 }

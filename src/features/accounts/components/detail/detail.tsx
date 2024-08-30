@@ -16,7 +16,7 @@ import { FieldIds, FieldTypes } from "@/types/field";
 import type { CalculatorSaveHandler } from "@/types/calculator";
 import type { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 
-export const AccountDetail = memo(function AccountDetail() {
+export const Detail = memo(function AccountDetail() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const router = useRouter();

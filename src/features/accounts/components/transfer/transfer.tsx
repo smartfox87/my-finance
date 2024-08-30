@@ -17,7 +17,7 @@ import { memo, type ReactNode, useMemo, useState } from "react";
 import type { BaseSelectRef } from "rc-select";
 import type { AccountTransferField, AccountTransferValues } from "../../types";
 
-export const TransferBetweenAccounts = memo(function TransferBetweenAccounts() {
+export const Transfer = memo(function TransferBetweenAccounts() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { isMobile } = useViewport();

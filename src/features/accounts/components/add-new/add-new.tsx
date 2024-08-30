@@ -15,7 +15,7 @@ import { FieldIds, FieldTypes } from "@/types/field";
 import type { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 import type { CalculatorSaveHandler } from "@/types/calculator";
 
-export const AddNewAccount = memo(function AddNewAccount() {
+export const AddNew = memo(function AddNewAccount() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { isMobile } = useViewport();

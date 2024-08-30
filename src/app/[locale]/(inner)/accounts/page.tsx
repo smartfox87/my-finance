@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { initTranslations } from "@/i18n";
 import { InnerLayout } from "@/components/layout/inner/InnerLayout";
-import { AccountsModule } from "@/features/accounts/";
+import { AccountsPageModule } from "@/features/accounts/";
 import { getJsonLdBreadcrumbs, getJsonLdWebsite } from "@/helpers/jsonLd";
 import type { LinkItem } from "@/types/breadcrumbs";
 import { Pages } from "@/types/router";
@@ -30,7 +30,7 @@ export default async function Accounts({ params: { locale } }: { params: { local
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(getJsonLdBreadcrumbs(breadcrumbList)) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(getJsonLdWebsite(t("seo.app_name"))) }} />
       <InnerLayout page={Pages.ACCOUNTS} breadcrumbs={breadcrumbList}>
-        <AccountsModule />
+        <AccountsPageModule />
       </InnerLayout>
     </>
   );

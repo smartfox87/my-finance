@@ -5,7 +5,7 @@ import { selectAccountsBalance } from "../../selectors";
 import { selectCurrency } from "@/store/selectors/profile";
 import { useAppSelector } from "@/hooks/store";
 
-export const AccountsHeaderAside = () => {
+export const HeaderAside = () => {
   const { t } = useTranslation();
   const totalBalance = useAppSelector(selectAccountsBalance);
   const currency = useAppSelector(selectCurrency);

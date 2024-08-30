@@ -11,7 +11,7 @@ import Link from "next/link";
 import { useAppSelector } from "@/hooks/store";
 import type { ProcessedAccountItem } from "../../types";
 
-export const AccountListItem = ({ id, name, balance, updated_at }: ProcessedAccountItem) => {
+export const Item = ({ id, name, balance, updated_at }: ProcessedAccountItem) => {
   const { t } = useTranslation();
   const { isTouchDevice } = useViewport();
   const currency = useAppSelector(selectCurrency);
