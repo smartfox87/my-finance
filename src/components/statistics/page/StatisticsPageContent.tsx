@@ -3,13 +3,13 @@ import { CostsBudgetsStatistics } from "@/components/statistics/costsBudgets/Cos
 import { CostsIncomesStatistics } from "@/components/statistics/costsIncomes/CostsIncomesStatistics";
 import { CostsCategoriesStatistics } from "@/components/statistics/costsCategories/CostsCategoriesStatistics";
 import { IncomesCategoriesStatistics } from "@/components/statistics/incomesCategories/IncomesCategoriesStatistics";
-import { EmptyCosts } from "@/components/costs/list/EmptyCosts";
 import { StatisticsFilter } from "@/components/statistics/filter/StatisticsFilter";
 import { ActiveStatisticsFilters } from "@/components/statistics/filter/ActiveStatisticsFilters";
 import { FoundNothing } from "@/components/common/list/FoundNothing";
 import { selectCostCategories, selectIncomeCategories } from "@/store/selectors/references";
 import { selectBudgetsListForChartsByFilter, selectCostsListForChartsByFilter, selectIncomesListForChartsByFilter, selectIsStatisticsFilterValuesChanged } from "@/store/selectors/statistics";
 import { useAppSelector } from "@/hooks/store";
+import { Empty } from "@/components/statistics/Empty";
 import type { PageContentProps } from "@/types/common";
 
 export const StatisticsPageContent = ({ isFilterValuesFilled, onGetData }: PageContentProps & { isFilterValuesFilled: boolean }) => {
@@ -30,7 +30,7 @@ export const StatisticsPageContent = ({ isFilterValuesFilled, onGetData }: PageC
     </>
   );
 
-  let content = <EmptyCosts />;
+  let content = <Empty />;
   if (costCategories && incomeCategories) {
     content = (
       <>

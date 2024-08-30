@@ -1,5 +1,5 @@
-import { selectCostsFilterFields, selectCostsFilterValues } from "@/store/selectors/costs";
-import { setCostsFilterValues } from "@/store/slices/costsSlice";
+import { selectCostsFilterFields, selectCostsFilterValues } from "../../selectors";
+import { setCostsFilterValues } from "../../store";
 import { memo, useMemo } from "react";
 import { getActiveFilters } from "@/helpers/filters";
 import { ActiveFiltersList } from "@/components/common/filter/ActiveFiltersList";
@@ -9,7 +9,7 @@ import { isNumber } from "@/predicates/common";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import type { ClearActiveFilterItemHandler } from "@/types/filter";
 
-export const ActiveCostsFilters = memo(function ActiveCostsFilters() {
+export const ActiveFilters = memo(function ActiveCostsFilters() {
   const dispatch = useAppDispatch();
 
   const costsFilterFields = useAppSelector(selectCostsFilterFields);

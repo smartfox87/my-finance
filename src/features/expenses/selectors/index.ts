@@ -1,12 +1,12 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { INITIAL_COST_FIELDS, INITIAL_COSTS_FILTER_FIELDS } from "@/constants/costs";
+import { INITIAL_COST_FIELDS, INITIAL_COSTS_FILTER_FIELDS } from "../constants";
 import { selectCostCategories } from "@/store/selectors/references";
 import { selectCurrency } from "@/store/selectors/profile";
 import { selectAccountsList } from "@/features/accounts";
 import { filterSingleItemsList, getOptionsFromItemsList, processFilterFields, sortItemsList } from "@/helpers/selectors";
 import dayjs from "dayjs";
 import { FieldIds, FieldTypes } from "@/types/field";
-import type { CostItem, CostItemField } from "@/types/costs";
+import type { CostItem, CostItemField } from "../types";
 import type { LazyLoadedSlices } from "@/types/store";
 import type { FilterState } from "@/types/filter";
 import type { ProcessedFilterField } from "@/types/selectors";

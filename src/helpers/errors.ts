@@ -10,7 +10,7 @@ import type { BudgetsSliceState } from "@/types/budgets";
 import type { ReferencesSliceState } from "@/types/references";
 import type { StatisticsSliceState } from "@/types/statistics";
 import type { AuthSliceState } from "@/types/auth";
-import type { CostsSliceState } from "@/types/costs";
+import type { CostsSliceState } from "@/features/expenses";
 
 type State = IncomesSliceState | AccountsSliceState | BudgetsSliceState | AuthSliceState | ProfileSliceState | ReferencesSliceState | CostsSliceState | StatisticsSliceState;
 

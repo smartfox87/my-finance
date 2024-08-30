@@ -2,10 +2,10 @@ import { InnerHeaderActionsPortal } from "@/components/layout/inner/InnerHeaderA
 import { selectCurrency } from "@/store/selectors/profile";
 import formatPrice from "@/helpers/formatPrice";
 import { useTranslation } from "react-i18next";
-import { selectCostsByFilter, selectExpensesTotal } from "@/store/selectors/costs";
+import { selectCostsByFilter, selectExpensesTotal } from "../../selectors";
 import { useAppSelector } from "@/hooks/store";
 
-export const ExpensesPageActions = () => {
+export const HeaderAside = () => {
   const { t } = useTranslation();
   const currency = useAppSelector(selectCurrency);
   const totalAmount = useAppSelector(selectExpensesTotal);

@@ -1,9 +1,9 @@
 import { apiClient } from "@/lib/api-client";
 import { getUserId } from "@/helpers/localStorage";
 import { getCurrentDate } from "@/helpers/date";
-import type { CostItemData } from "@/types/costs";
 import { FieldIds } from "@/types/field";
-import { FilterPeriodStateItem } from "@/types/filter";
+import type { FilterPeriodStateItem } from "@/types/filter";
+import type { CostItemData } from "../types";
 
 export const getCostsListApi = (filter: FilterPeriodStateItem) => {
   const [from, to] = filter[FieldIds.PERIOD];

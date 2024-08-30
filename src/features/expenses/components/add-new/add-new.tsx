@@ -1,15 +1,15 @@
 import { Button } from "antd";
 import { SideModal } from "@/components/modals/SideModal";
 import { DefaultForm } from "@/components/form/DefaultForm";
-import { selectCostFields } from "@/store/selectors/costs";
-import { createCostItemThunk } from "@/store/slices/costsSlice";
+import { selectCostFields } from "../../selectors";
+import { createCostItemThunk } from "../../store";
 import { useTranslation } from "react-i18next";
 import { showNotification } from "@/helpers/modals";
 import { memo, useRef, useState } from "react";
 import SvgNewExpense from "@/assets/sprite/new-expense.svg";
 import { CalculatorModal } from "@/components/calculator/CalculatorModal";
 import { useViewport } from "@/hooks/viewport";
-import { isCostItemData } from "@/predicates/costs";
+import { isCostItemData } from "../../predicates";
 import { showCommonError } from "@/helpers/errors";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { FieldIds, FieldTypes } from "@/types/field";
@@ -17,7 +17,7 @@ import type { CalculatorSaveHandler } from "@/types/calculator";
 import type { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 import { ComponentOnSaveProps } from "@/types/common";
 
-export const AddNewCost = memo(function AddNewCost({ isAdaptive, onSave }: ComponentOnSaveProps & { isAdaptive?: boolean }) {
+export const AddNew = memo(function AddNewCost({ isAdaptive, onSave }: ComponentOnSaveProps & { isAdaptive?: boolean }) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { isMobile } = useViewport();

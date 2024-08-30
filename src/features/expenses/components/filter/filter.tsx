@@ -1,5 +1,5 @@
-import { setCostsFilterValues } from "@/store/slices/costsSlice";
-import { selectCostsFilterFields, selectCostsFilterValues } from "@/store/selectors/costs";
+import { setCostsFilterValues } from "../../store";
+import { selectCostsFilterFields, selectCostsFilterValues } from "../../selectors";
 import { useTranslation } from "react-i18next";
 import { Button } from "antd";
 import { SideModal } from "@/components/modals/SideModal";
@@ -16,7 +16,7 @@ import type { BaseSelectRef } from "rc-select";
 import type { ComponentOnSaveProps } from "@/types/common";
 import type { FilterState, ChangeFilterFieldValueHandler } from "@/types/filter";
 
-export const CostsFilter = memo(function CostsFilter({ onSave }: ComponentOnSaveProps) {
+export const Filter = memo(function CostsFilter({ onSave }: ComponentOnSaveProps) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { isMobile } = useViewport();

@@ -1,17 +1,17 @@
-import { AddNewCost } from "@/components/costs/AddNewCost";
-import { CostsFilter } from "@/components/costs/filter/CostsFilter";
-import { ActiveCostsFilters } from "@/components/costs/filter/ActiveCostsFilters";
+import { AddNew } from "../add-new";
+import { Filter } from "../filter";
+import { ActiveFilters } from "../active-filters";
 import { LazyList } from "@/components/common/list/LazyList";
-import { CostListItem } from "@/components/costs/list/CostListItem";
+import { Item } from "../item";
 import { Suspense } from "react";
-import { CostDetail } from "@/components/costs/CostDetail";
-import { EmptyCosts } from "@/components/costs/list/EmptyCosts";
+import { Detail } from "../detail";
+import { Empty } from "../empty";
 import { FoundNothing } from "@/components/common/list/FoundNothing";
-import { selectCostsByFilter, selectCostsList } from "@/store/selectors/costs";
+import { selectCostsByFilter, selectCostsList } from "../../selectors";
 import { useAppSelector } from "@/hooks/store";
 import type { PageContentProps } from "@/types/common";
 
-export const ExpensesPageContent = ({ onGetData }: PageContentProps) => {
+export const PageContent = ({ onGetData }: PageContentProps) => {
   const costsList = useAppSelector(selectCostsList);
   const filteredSortedCosts = useAppSelector(selectCostsByFilter);
 
@@ -21,27 +21,28 @@ export const ExpensesPageContent = ({ onGetData }: PageContentProps) => {
       <>
         <div className="container-edge container sticky top-16 z-20 -my-4 flex flex-col gap-4 bg-white py-4 dark:bg-dark">
           <div className="grid grid-cols-2 gap-4">
-            <AddNewCost isAdaptive onSave={onGetData} />
-            <CostsFilter onSave={onGetData} />
+            <AddNew isAdaptive onSave={onGetData} />
+            <Filter onSave={onGetData} />
           </div>
-          <ActiveCostsFilters />
+          <ActiveFilters />
         </div>
-        <LazyList items={filteredSortedCosts} Item={CostListItem} />
+        <LazyList items={filteredSortedCosts} Item={Item} />
+        {/*  todo check suspense*/}
         <Suspense fallback={<div />}>
-          <CostDetail onSave={onGetData} />
+          <Detail onSave={onGetData} />
         </Suspense>
       </>
     );
-  else if (!costsList?.length) content = <EmptyCosts addNew={<AddNewCost onSave={onGetData} />} />;
+  else if (!costsList?.length) content = <Empty addNew={<AddNew onSave={onGetData} />} />;
   else if (costsList?.length && !filteredSortedCosts?.length)
     content = content = (
       <>
         <div className="container-edge container sticky top-16 z-20 -my-4 flex flex-col gap-4 bg-white py-4 dark:bg-dark">
           <div className="grid grid-cols-2 gap-4">
-            <AddNewCost isAdaptive onSave={onGetData} />
-            <CostsFilter onSave={onGetData} />
+            <AddNew isAdaptive onSave={onGetData} />
+            <Filter onSave={onGetData} />
           </div>
-          <ActiveCostsFilters />
+          <ActiveFilters />
         </div>
         <FoundNothing />
       </>

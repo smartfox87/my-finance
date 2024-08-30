@@ -1,19 +1,19 @@
 "use client";
 
 import { Preloader } from "@/components/layout/preloader/Preloader";
-import { selectCostsFilterValues, selectCostsList } from "@/store/selectors/costs";
+import { selectCostsFilterValues, selectCostsList } from "../../selectors";
 import { useFilterSearchParams } from "@/hooks/filterSearchParams";
 import { useLoading } from "@/hooks/loading";
 import { useCallback, useEffect } from "react";
-import { getCostsListThunk, setCostsFilterValues } from "@/store/slices/costsSlice";
-import { INITIAL_COSTS_FILTER_FIELDS } from "@/constants/costs";
+import { getCostsListThunk, setCostsFilterValues } from "../../store";
+import { INITIAL_COSTS_FILTER_FIELDS } from "../../constants";
 import { getUserId } from "@/helpers/localStorage";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { getFilterItemsFromFields } from "@/helpers/filters";
-import { ExpensesPageActions } from "@/components/costs/page/ExpensesPageActions";
-import { ExpensesPageContent } from "@/components/costs/page/ExpensesPageContent";
+import { HeaderAside } from "../../components//header-aside";
+import { PageContent } from "../../components/page-content";
 
-export default function ExpensesContent() {
+export default function Page() {
   const dispatch = useAppDispatch();
 
   const costsFilterValues = useAppSelector(selectCostsFilterValues);
@@ -32,7 +32,7 @@ export default function ExpensesContent() {
   useEffect((): void => {
     const injectAndLoadData = async () => {
       if (!costsFilterValues) {
-        await import("@/store/slices/costsSlice");
+        await import("../../store");
         dispatch(setCostsFilterValues(getFilterItemsFromFields(INITIAL_COSTS_FILTER_FIELDS)));
       }
       if (!costsList) await handleGetData();
@@ -43,8 +43,8 @@ export default function ExpensesContent() {
 
   return (
     <Preloader isLoading={isLoading}>
-      <ExpensesPageActions />
-      <ExpensesPageContent onGetData={handleGetData} />
+      <HeaderAside />
+      <PageContent onGetData={handleGetData} />
     </Preloader>
   );
 }

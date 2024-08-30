@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { memo, useEffect, useRef, useState } from "react";
-import { selectCostFields, selectCostItem } from "@/store/selectors/costs";
-import { deleteCostItemThunk, getCostItemThunk, setCostItem, updateCostItemThunk } from "@/store/slices/costsSlice";
+import { selectCostFields, selectCostItem } from "../../selectors";
+import { deleteCostItemThunk, getCostItemThunk, setCostItem, updateCostItemThunk } from "../../store";
 import { DefaultForm } from "@/components/form/DefaultForm";
 import { showNotification } from "@/helpers/modals";
 import { SideModal } from "@/components/modals/SideModal";
@@ -10,7 +10,7 @@ import SvgDelete from "@/assets/sprite/delete.svg";
 import { CalculatorModal } from "@/components/calculator/CalculatorModal";
 import { Button } from "antd";
 import { useSearchParams, useRouter } from "next/navigation";
-import { isCostItemData } from "@/predicates/costs";
+import { isCostItemData } from "../../predicates";
 import { showCommonError } from "@/helpers/errors";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { FieldIds, FieldTypes } from "@/types/field";
@@ -18,7 +18,7 @@ import type { CalculatorSaveHandler } from "@/types/calculator";
 import type { ComponentOnSaveProps } from "@/types/common";
 import type { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 
-export const CostDetail = memo(function CostDetail({ onSave }: ComponentOnSaveProps) {
+export const Detail = memo(function CostDetail({ onSave }: ComponentOnSaveProps) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const searchParams = useSearchParams();

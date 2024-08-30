@@ -5,7 +5,7 @@ import type { DatesStrings } from "@/types/date";
 import type { ProcessedAccountItem } from "@/features/accounts";
 import type { CostCategory, IncomeCategory } from "@/types/references";
 import type { FilterState } from "@/types/filter";
-import type { CostItem } from "@/types/costs";
+import type { CostItem } from "@/features/expenses";
 import type { IncomeItem } from "@/types/incomes";
 import type { ProcessedBudgetItem } from "@/types/budgets";
 import type { FilterField } from "@/types/filter";
