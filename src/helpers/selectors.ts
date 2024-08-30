@@ -7,7 +7,7 @@ import type { CostCategory, IncomeCategory } from "@/types/references";
 import type { FilterState } from "@/types/filter";
 import type { CostItem } from "@/features/expenses";
 import type { IncomeItem } from "@/features/incomes";
-import type { ProcessedBudgetItem } from "@/types/budgets";
+import type { ProcessedBudgetItem } from "@/features/budgets";
 import type { FilterField } from "@/types/filter";
 import type { ProcessedFilterField } from "@/types/selectors";
 import type { ProcessedStatisticsBudgetItem, StatisticsCostItem, StatisticsIncomeItem } from "@/types/statistics";

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { initTranslations } from "@/i18n";
 import { InnerLayout } from "@/components/layout/inner/InnerLayout";
-import BudgetsModule from "@/app/[locale]/(inner)/budgets/content-module";
+import { BudgetsPageModule } from "@/features/budgets";
 import { getJsonLdBreadcrumbs, getJsonLdWebsite } from "@/helpers/jsonLd";
 import { LinkItem } from "@/types/breadcrumbs";
 import { Pages } from "@/types/router";
@@ -29,7 +29,7 @@ export default async function Budgets({ params: { locale } }: { params: { locale
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(getJsonLdBreadcrumbs(breadcrumbList)) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(getJsonLdWebsite(t("seo.app_name"))) }} />
       <InnerLayout page={Pages.BUDGETS} breadcrumbs={breadcrumbList}>
-        <BudgetsModule />
+        <BudgetsPageModule />
       </InnerLayout>
     </>
   );

@@ -3,7 +3,7 @@ import { Preloader } from "@/components/layout/preloader/Preloader";
 import { useViewport } from "@/hooks/viewport";
 import { Viewports } from "@/types/viewport";
 import type { ReactComponentLike } from "prop-types";
-import type { ProcessedBudgetItem } from "@/types/budgets";
+import type { ProcessedBudgetItem } from "@/features/budgets";
 import type { IncomeItem } from "@/features/incomes";
 import type { CostItem } from "@/features/expenses/";
 

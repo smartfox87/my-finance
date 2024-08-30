@@ -1,5 +1,5 @@
 import { PERIODS } from "@/constants/date";
-import dayjs from "dayjs";
+import dayjs, { type Dayjs } from "dayjs";
 import quarterOfYear from "dayjs/plugin/quarterOfYear";
 import { isDatesPeriod } from "@/predicates/field";
 import { type Locale, Locales } from "@/types/locales";
@@ -61,3 +61,8 @@ export const getPeriodDates = (dates: string): DatesStrings => JSON.parse(dates)
 
 export const getFromPeriodDatesForApi = ([from, to]: string[]): string => `[${from + " 00:00:00"},${to + " 00:00:00"})`;
 export const getToPeriodDatesForApi = ([from, to]: string[]): string => `[${from + " 00:00:00"},${to + " 00:00:01"})`;
+
+export const convertDatesToDayjs = (dates: DatesStrings): [Dayjs, Dayjs] => {
+  const [from, to] = dates;
+  return [dayjs(from), dayjs(to)];
+};
