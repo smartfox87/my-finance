@@ -1,10 +1,10 @@
-import { getUserSession, loginDemoUserApi, loginUserApi, loginUserByProviderApi, logoutUserApi, registerUserApi } from "@/api/auth";
+import { getUserSession, loginDemoUserApi, loginUserApi, loginUserByProviderApi, logoutUserApi, registerUserApi } from "../api";
 import { handleRejectedReducerAction } from "@/helpers/errors";
 import { rootReducer } from "@/store";
-import { handleAuthStateChange } from "@/helpers/auth";
+import { handleAuthStateChange } from "../utils";
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import type { Provider, User } from "@supabase/auth-js";
-import type { RegisterData, UserPayload, LoginData, SessionPayload, AuthSliceState } from "@/types/auth";
+import type { RegisterData, UserPayload, LoginData, SessionPayload, AuthSliceState } from "../types";
 
 const setUserData = (state: AuthSliceState, user: User | null) => {
   if (!user || state.user) return;

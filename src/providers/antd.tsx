@@ -1,5 +1,4 @@
 import { useDarkTheme } from "@/hooks/theme";
-import { selectUser } from "@/store/selectors/auth";
 import { createContext, useCallback, useEffect, useMemo, useState } from "react";
 import { useLocale } from "@/hooks/providers/locale";
 import { getUserId } from "@/helpers/localStorage";
@@ -7,6 +6,7 @@ import dynamic from "next/dynamic";
 import { Preloader } from "@/components/layout/preloader/Preloader";
 import { usePathname } from "next/navigation";
 import { useAppSelector } from "@/hooks/store";
+import { selectUser } from "@/store/selectors/auth";
 import { Pages } from "@/types/router";
 import type { AntdContextType, Theme } from "@/types/providers/antdProvider";
 import type { ComponentChildrenProps } from "@/types/common";

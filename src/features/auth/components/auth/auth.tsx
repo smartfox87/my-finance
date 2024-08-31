@@ -1,5 +1,5 @@
-import { SignUp } from "./SignUp";
-import { SignIn } from "./SignIn";
+import { SignUp } from "../sign-up";
+import { SignIn } from "../sign-in";
 
 export const Auth = () => {
   return (

@@ -1,5 +1,5 @@
 import { FieldIds } from "@/types/field";
-import type { LoginData, RegisterData } from "@/types/auth";
+import type { LoginData, RegisterData } from "../types";
 
 export const isLoginData = (data: Record<string, unknown>): data is LoginData => FieldIds.EMAIL in data && FieldIds.PASSWORD in data;
 

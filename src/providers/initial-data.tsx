@@ -17,9 +17,9 @@ export default function InitialData({ children }: ComponentChildrenProps) {
   const user = useAppSelector(selectUser);
 
   const initProfile = async (): Promise<void> => {
-    if (getUserId()) import("@/helpers/auth").then(({ handleAuthStateChange }) => handleAuthStateChange());
+    if (getUserId()) import("@/features/auth").then(({ handleAuthStateChange }) => handleAuthStateChange());
     if (getUserId() && !user) {
-      const { getUserSessionThunk } = await import("@/store/slices/authSlice");
+      const { getUserSessionThunk } = await import("@/features/auth");
       await dispatch(getUserSessionThunk());
     }
     if (!user) return;

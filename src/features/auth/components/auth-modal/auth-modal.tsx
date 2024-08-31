@@ -1,5 +1,5 @@
-import { GoogleAuth } from "@/components/auth/GoogleAuth";
-import { DemoUserAuth } from "@/components/auth/DemoUserAuth";
+import { GoogleAuth } from "../google-auth";
+import { DemoUserAuth } from "../demo-user-auth";
 import { SideModal } from "@/components/modals/SideModal";
 import { DefaultForm } from "@/components/form/DefaultForm";
 import type { DefaultFormSaveHandler, FormField } from "@/types/form";

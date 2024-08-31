@@ -1,6 +1,6 @@
 "use client";
 
-import { Auth } from "@/components/auth/Auth";
+import { Auth } from "@/features/auth";
 import { LanguageToggle } from "@/components/layout/header/LanguageToggle";
 import { Logo } from "@/components/layout/header/Logo";
 import { memo, Suspense } from "react";

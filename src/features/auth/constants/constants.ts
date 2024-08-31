@@ -1,5 +1,5 @@
 import { EMAIL_FIELD, FULL_NAME_FIELD, PASSWORD_FIELD } from "@/constants/fields";
-import type { LoginField, RegisterField } from "@/types/auth";
+import type { LoginField, RegisterField } from "../types";
 
 export const INITIAL_SIGN_UP_FIELDS: RegisterField[] = [FULL_NAME_FIELD, EMAIL_FIELD, PASSWORD_FIELD];
 

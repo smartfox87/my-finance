@@ -1,4 +1,4 @@
-import { INITIAL_SIGN_UP_FIELDS } from "@/constants/auth";
+import { INITIAL_SIGN_UP_FIELDS } from "../../constants";
 import { useTranslation } from "react-i18next";
 import { useViewport } from "@/hooks/viewport";
 import { useRecaptcha } from "@/hooks/providers/recaptcha";
@@ -8,11 +8,11 @@ import { useAntd } from "@/hooks/providers/antd";
 import { useModalState } from "@/hooks/providers/modalState";
 import dynamic from "next/dynamic";
 import { useAppDispatch } from "@/hooks/store";
-import { isRegisterData } from "@/predicates/auth";
+import { isRegisterData } from "../../predicates";
 import { showCommonError } from "@/helpers/errors";
 import type { DefaultFormSaveHandler } from "@/types/form";
 
-const AuthModal = dynamic(() => import("@/components/auth/AuthModal").then(({ AuthModal }) => ({ default: AuthModal })));
+const AuthModal = dynamic(() => import("../auth-modal").then(({ AuthModal }) => ({ default: AuthModal })));
 
 export const SignUp = () => {
   const dispatch = useAppDispatch();
@@ -36,7 +36,7 @@ export const SignUp = () => {
       const registerData = { ...fieldsValues, score };
       if (!isRegisterData(registerData)) return;
       if (score < 0.5) return import("@/helpers/modals").then(({ showNotification }) => showNotification({ title: t("notifications.recaptcha_invalid") }));
-      const { registerUserThunk } = await import("@/store/slices/authSlice");
+      const { registerUserThunk } = await import("../../store");
       await dispatch(registerUserThunk(registerData)).unwrap();
       handleToggleVisibility();
     } catch (error) {
