@@ -1,7 +1,7 @@
 "use client";
 
 import { selectCostsListForCharts, selectStatisticsFilterValues } from "../../selectors";
-import { useFilterSearchParams } from "@/hooks/filterSearchParams";
+import { useFilterSearchParams } from "@/hooks/filter-search-params";
 import { getBudgetsListForChartsThunk, getCostsListForChartsThunk, getIncomesListForChartsThunk, setStatisticsFilterValues } from "../../store";
 import { useCallback, useEffect, useState } from "react";
 import { INITIAL_STATISTICS_FILTER_FIELDS } from "../../constants";

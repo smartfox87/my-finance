@@ -7,7 +7,7 @@ import { LanguageToggle } from "../language-toggle";
 import { selectUser } from "@/store/selectors/auth";
 import { MainNav } from "../main-nav";
 import { useAntd } from "@/hooks/providers/antd";
-import { useModalState } from "@/hooks/providers/modalState";
+import { useModalState } from "@/hooks/providers/modal-state";
 import { useAppSelector } from "@/hooks/store";
 import { ProfileMenu } from "../profile-menu";
 

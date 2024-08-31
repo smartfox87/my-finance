@@ -8,7 +8,7 @@ import { handleFilterSelectOptions } from "@/utils/fields";
 import { Button, Form, InputNumber, Select } from "antd";
 import { useViewport } from "@/hooks/viewport";
 import SvgTransfer from "@/assets/sprite/transfer.svg";
-import { useFieldFocus } from "@/hooks/fieldFocus";
+import { useFieldFocus } from "@/hooks/field-focus";
 import { showCommonError } from "@/utils/errors";
 import { INITIAL_ACCOUNT_TRANSFER_VALUES } from "../../constants";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";

@@ -2,7 +2,7 @@ import { selectProfile } from "../../../profile/selectors";
 import SvgUser from "@/assets/sprite/user.svg";
 import Link from "next/link";
 import { useViewport } from "@/hooks/viewport";
-import { useModalState } from "@/hooks/providers/modalState";
+import { useModalState } from "@/hooks/providers/modal-state";
 import { useAppSelector } from "@/hooks/store";
 
 export const ProfileMenu = () => {

@@ -1,6 +1,6 @@
 import { useViewport } from "@/hooks/viewport";
 import { Preloader } from "../../loading/preloader";
-import { useModalState } from "@/hooks/providers/modalState";
+import { useModalState } from "@/hooks/providers/modal-state";
 import dynamic from "next/dynamic";
 import { type ReactNode, type SetStateAction, useEffect } from "react";
 

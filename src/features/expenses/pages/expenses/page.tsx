@@ -2,7 +2,7 @@
 
 import { Preloader } from "@/components/loading/preloader";
 import { selectCostsFilterValues, selectCostsList } from "../../selectors";
-import { useFilterSearchParams } from "@/hooks/filterSearchParams";
+import { useFilterSearchParams } from "@/hooks/filter-search-params";
 import { useLoading } from "@/hooks/loading";
 import { useCallback, useEffect } from "react";
 import { getCostsListThunk, setCostsFilterValues } from "../../store";

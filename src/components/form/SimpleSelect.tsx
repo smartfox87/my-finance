@@ -1,5 +1,5 @@
 import SvgArrowSelect from "@/assets/sprite/arrow-select.svg";
-import { useOuterClick } from "@/hooks/outerClick";
+import { useOuterClick } from "@/hooks/outer-click";
 import { type KeyboardEvent, type MouseEvent, useCallback, useEffect, useRef, useState } from "react";
 import type { SimpleSelectOption, SimpleSelectValue } from "@/types/select";
 

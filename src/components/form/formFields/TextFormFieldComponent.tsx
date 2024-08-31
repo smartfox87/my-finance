@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useFieldFocus } from "@/hooks/fieldFocus";
+import { useFieldFocus } from "@/hooks/field-focus";
 import { Form, Input, InputRef } from "antd";
 import { type LegacyRef, useLayoutEffect } from "react";
 import { type FieldTranslationError, type FieldType, FieldTypes } from "@/types/field";

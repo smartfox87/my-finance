@@ -1,7 +1,7 @@
 "use client";
 
 import { selectIncomesFilterValues, selectIncomesList } from "../../selectors";
-import { useFilterSearchParams } from "@/hooks/filterSearchParams";
+import { useFilterSearchParams } from "@/hooks/filter-search-params";
 import { getIncomesListThunk, setIncomesFilterValues } from "../../store";
 import { useLoading } from "@/hooks/loading";
 import { useCallback, useEffect } from "react";

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useViewport } from "@/hooks/viewport";
-import { useFieldFocus } from "@/hooks/fieldFocus";
+import { useFieldFocus } from "@/hooks/field-focus";
 import type { ResultChangeHandler, ResultKeyDownHandler } from "@/features/calculator";
 
 export const CalculatorResult = ({ value, onKeyDown, onChange }: { value: string; onKeyDown: ResultKeyDownHandler; onChange: ResultChangeHandler }) => {

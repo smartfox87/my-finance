@@ -4,7 +4,7 @@ import { useViewport } from "@/hooks/viewport";
 import SvgSignIn from "@/assets/sprite/sign-in.svg";
 import { SimpleButton } from "@/components/form/SimpleButton";
 import { useAntd } from "@/hooks/providers/antd";
-import { useModalState } from "@/hooks/providers/modalState";
+import { useModalState } from "@/hooks/providers/modal-state";
 import dynamic from "next/dynamic";
 import { useAppDispatch } from "@/hooks/store";
 import { isLoginData } from "../../predicates";

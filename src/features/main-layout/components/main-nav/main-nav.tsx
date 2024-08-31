@@ -4,7 +4,7 @@ import { memo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useViewport } from "@/hooks/viewport";
-import { useModalState } from "@/hooks/providers/modalState";
+import { useModalState } from "@/hooks/providers/modal-state";
 
 export const MainNav = memo(function MainNav({ className = "" }: { className?: string }) {
   const {
