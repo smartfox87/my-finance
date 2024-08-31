@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { initTranslations } from "@/i18n";
-import { InnerLayout } from "@/components/layout/inner/InnerLayout";
+import { InnerLayout } from "@/components/layout/inner-layout";
 import { BudgetsPageModule } from "@/features/budgets";
 import { getJsonLdBreadcrumbs, getJsonLdWebsite } from "@/helpers/jsonLd";
 import { LinkItem } from "@/types/breadcrumbs";

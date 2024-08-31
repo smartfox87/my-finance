@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
 import { initTranslations } from "@/i18n";
-import { InnerLayout } from "@/components/layout/inner/InnerLayout";
+import { InnerLayout } from "@/components/layout/inner-layout";
 import { AccountsPageModule } from "@/features/accounts/";
 import { getJsonLdBreadcrumbs, getJsonLdWebsite } from "@/helpers/jsonLd";
-import type { LinkItem } from "@/types/breadcrumbs";
 import { Pages } from "@/types/router";
+import type { LinkItem } from "@/types/breadcrumbs";
+import type { Metadata } from "next";
 import type { Locale } from "@/types/locales";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: Locale } }): Promise<Metadata> {
   const { t } = await initTranslations({ locale });

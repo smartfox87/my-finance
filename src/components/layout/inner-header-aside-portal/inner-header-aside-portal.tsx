@@ -2,12 +2,11 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import type { ComponentChildrenProps } from "@/types/common";
 
-export const InnerHeaderActionsPortal = ({ children }: ComponentChildrenProps) => {
+export const InnerHeaderAsidePortal = ({ children }: ComponentChildrenProps) => {
   const [mounted, setMounted] = useState(false);
 
-  useEffect((): (() => void) => {
+  useEffect((): void => {
     setMounted(true);
-    return () => setMounted(false);
   }, []);
 
   // notice: createPortal target element must be already mounted

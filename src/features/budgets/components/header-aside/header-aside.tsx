@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { selectBudgetsAmount, selectBudgetsByFilter } from "../../selectors";
 import { selectCurrency } from "@/features/profile";
 import formatPrice from "@/helpers/formatPrice";
-import { InnerHeaderActionsPortal } from "@/components/layout/inner/InnerHeaderActionsPortal";
+import { InnerHeaderAsidePortal } from "@/components/layout/inner-header-aside-portal/inner-header-aside-portal";
 import { useAppSelector } from "@/hooks/store";
 
 export const HeaderAside = () => {
@@ -24,5 +24,5 @@ export const HeaderAside = () => {
     </>
   );
 
-  return <InnerHeaderActionsPortal>{headerActions}</InnerHeaderActionsPortal>;
+  return <InnerHeaderAsidePortal>{headerActions}</InnerHeaderAsidePortal>;
 };

@@ -1,5 +1,5 @@
 import { Button } from "antd";
-import { SideModal } from "@/components/modals/SideModal";
+import { SideModal } from "@/components/modals/side-modal";
 import { Calculator } from "@/components/calculator/Calculator";
 import SvgCalculator from "@/assets/sprite/calculator.svg";
 import SvgPassPrice from "@/assets/sprite/pass-price.svg";

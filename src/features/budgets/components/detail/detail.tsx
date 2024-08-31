@@ -4,7 +4,7 @@ import { selectBudgetFields, selectBudgetItem } from "../../selectors";
 import { deleteBudgetItemThunk, getBudgetItemThunk, setBudgetItem, updateBudgetItemThunk } from "../../store";
 import { DefaultForm } from "@/components/form/DefaultForm";
 import { showNotification } from "@/helpers/modals";
-import { SideModal } from "@/components/modals/SideModal";
+import { SideModal } from "@/components/modals/side-modal";
 import { useLoading } from "@/hooks/loading";
 import SvgDelete from "@/assets/sprite/delete.svg";
 import { CalculatorModal } from "@/components/calculator/CalculatorModal";

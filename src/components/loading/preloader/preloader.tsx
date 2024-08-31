@@ -1,4 +1,4 @@
-import { Spinner } from "@/components/layout/preloader/Spinner";
+import { Spinner } from "@/components/loading/spinner";
 import type { ReactNode } from "react";
 
 export const Preloader = ({ isLoading = false, children, className = "" }: { isLoading: boolean; children: ReactNode; className?: string }) => {

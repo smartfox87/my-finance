@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { selectAccountsList, selectAccountTransferFields } from "../../selectors";
 import { transferAccountsBalanceThunk } from "../../store";
-import { SideModal } from "@/components/modals/SideModal";
+import { SideModal } from "@/components/modals/side-modal";
 import { useLoading } from "@/hooks/loading";
 import { CalculatorModal } from "@/components/calculator/CalculatorModal";
 import { handleFilterSelectOptions } from "@/helpers/fields";

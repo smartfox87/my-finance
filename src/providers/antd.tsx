@@ -3,7 +3,7 @@ import { createContext, useCallback, useEffect, useMemo, useState } from "react"
 import { useLocale } from "@/hooks/providers/locale";
 import { getUserId } from "@/helpers/localStorage";
 import dynamic from "next/dynamic";
-import { Preloader } from "@/components/layout/preloader/Preloader";
+import { Preloader } from "@/components/loading/preloader";
 import { usePathname } from "next/navigation";
 import { useAppSelector } from "@/hooks/store";
 import { selectUser } from "@/store/selectors/auth";

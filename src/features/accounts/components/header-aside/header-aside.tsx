@@ -1,4 +1,4 @@
-import { InnerHeaderActionsPortal } from "@/components/layout/inner/InnerHeaderActionsPortal";
+import { InnerHeaderAsidePortal } from "@/components/layout/inner-header-aside-portal/inner-header-aside-portal";
 import formatPrice from "@/helpers/formatPrice";
 import { useTranslation } from "react-i18next";
 import { selectAccountsBalance } from "../../selectors";
@@ -18,5 +18,5 @@ export const HeaderAside = () => {
     </div>
   );
 
-  return <InnerHeaderActionsPortal>{headerActions}</InnerHeaderActionsPortal>;
+  return <InnerHeaderAsidePortal>{headerActions}</InnerHeaderAsidePortal>;
 };

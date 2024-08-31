@@ -1,5 +1,5 @@
 import { Button } from "antd";
-import { SideModal } from "@/components/modals/SideModal";
+import { SideModal } from "@/components/modals/side-modal";
 import { DefaultForm } from "@/components/form/DefaultForm";
 import { selectCostFields } from "../../selectors";
 import { createCostItemThunk } from "../../store";

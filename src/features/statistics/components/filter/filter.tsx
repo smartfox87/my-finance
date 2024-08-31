@@ -2,7 +2,7 @@ import { setStatisticsFilterValues } from "../../store";
 import { selectStatisticsFilterFields, selectStatisticsFilterValues } from "../../selectors";
 import { useTranslation } from "react-i18next";
 import { Button } from "antd";
-import { SideModal } from "@/components/modals/SideModal";
+import { SideModal } from "@/components/modals/side-modal";
 import { memo, useEffect, useState } from "react";
 import SvgFilter from "@/assets/sprite/filter.svg";
 import { useViewport } from "@/hooks/viewport";

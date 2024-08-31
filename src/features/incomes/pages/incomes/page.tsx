@@ -7,7 +7,7 @@ import { useLoading } from "@/hooks/loading";
 import { useCallback, useEffect } from "react";
 import { INITIAL_INCOMES_FILTER_FIELDS } from "../../constants";
 import { getUserId } from "@/helpers/localStorage";
-import { Preloader } from "@/components/layout/preloader/Preloader";
+import { Preloader } from "@/components/loading/preloader";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { getFilterItemsFromFields } from "@/helpers/filters";
 import { HeaderAside } from "../../components";

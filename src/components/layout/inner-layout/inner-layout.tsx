@@ -1,9 +1,9 @@
 "use client";
 
-import { AuthGuard } from "@/components/auth/AuthGuard";
+import { AuthGuard } from "../auth-guard";
 import { ReactNode, Suspense } from "react";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
-import { Spinner } from "@/components/layout/preloader/Spinner";
+import { Spinner } from "@/components/loading/spinner";
 import { useTranslation } from "react-i18next";
 import type { LinkItem } from "@/types/breadcrumbs";
 import type { Page } from "@/types/router";

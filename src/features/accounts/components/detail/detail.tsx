@@ -3,7 +3,7 @@ import { memo, useEffect, useRef, useState } from "react";
 import { selectAccountFields, selectAccountItem } from "../../selectors";
 import { deleteAccountItemThunk, getAccountItemThunk, setAccountItem, updateAccountItemThunk } from "../../store";
 import { DefaultForm } from "@/components/form/DefaultForm";
-import { SideModal } from "@/components/modals/SideModal";
+import { SideModal } from "@/components/modals/side-modal";
 import { useLoading } from "@/hooks/loading";
 import SvgDelete from "@/assets/sprite/delete.svg";
 import { CalculatorModal } from "@/components/calculator/CalculatorModal";

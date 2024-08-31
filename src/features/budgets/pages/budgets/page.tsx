@@ -2,7 +2,7 @@
 
 import { useLoading } from "@/hooks/loading";
 import { useCallback, useEffect } from "react";
-import { Preloader } from "@/components/layout/preloader/Preloader";
+import { Preloader } from "@/components/loading/preloader";
 import { selectBudgetsFilterValues, selectBudgetsList } from "../../selectors";
 import { useFilterSearchParams } from "@/hooks/filterSearchParams";
 import { getBudgetsListThunk, setBudgetsFilterValues } from "../../store";

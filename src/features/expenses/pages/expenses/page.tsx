@@ -1,6 +1,6 @@
 "use client";
 
-import { Preloader } from "@/components/layout/preloader/Preloader";
+import { Preloader } from "@/components/loading/preloader";
 import { selectCostsFilterValues, selectCostsList } from "../../selectors";
 import { useFilterSearchParams } from "@/hooks/filterSearchParams";
 import { useLoading } from "@/hooks/loading";

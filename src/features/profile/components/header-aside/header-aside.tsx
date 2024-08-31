@@ -1,4 +1,4 @@
-import { InnerHeaderActionsPortal } from "@/components/layout/inner/InnerHeaderActionsPortal";
+import { InnerHeaderAsidePortal } from "@/components/layout/inner-header-aside-portal/inner-header-aside-portal";
 import { Button } from "antd";
 import SvgLogout from "@/assets/sprite/logout.svg";
 import { useState } from "react";
@@ -25,5 +25,5 @@ export const HeaderAside = () => {
     </Button>
   );
 
-  return <InnerHeaderActionsPortal>{headerActions}</InnerHeaderActionsPortal>;
+  return <InnerHeaderAsidePortal>{headerActions}</InnerHeaderAsidePortal>;
 };
