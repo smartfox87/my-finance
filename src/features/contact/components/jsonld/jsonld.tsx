@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { PRODUCTION_URL } from "@/constants/config";
 import type { Organization, WithContext } from "schema-dts";
 
-export const ContactsOrganizationJsonLd = () => {
+export const Jsonld = () => {
   const { t } = useTranslation();
   const jsonLdOrganization: WithContext<Organization> = {
     "@context": "https://schema.org",

@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 
-export const ContactsInfo = () => {
+export const Info = () => {
   const { t } = useTranslation();
 
   return (

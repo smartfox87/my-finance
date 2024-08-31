@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { initTranslations } from "@/i18n";
 import { InnerLayout } from "@/components/layout/inner/InnerLayout";
-import ContactModule from "@/app/[locale]/(inner)/contact/content-module";
+import { ContactPageModule } from "@/features/contact";
 import { getJsonLdBreadcrumbs, getJsonLdWebsite } from "@/helpers/jsonLd";
 import { LinkItem } from "@/types/breadcrumbs";
 import { Pages } from "@/types/router";
@@ -30,7 +30,7 @@ export default async function Contact({ params: { locale } }: { params: { locale
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(getJsonLdBreadcrumbs(breadcrumbList)) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(getJsonLdWebsite(t("seo.app_name"))) }} />
       <InnerLayout page={Pages.CONTACT} isAuth={false} breadcrumbs={breadcrumbList}>
-        <ContactModule />
+        <ContactPageModule />
       </InnerLayout>
     </>
   );

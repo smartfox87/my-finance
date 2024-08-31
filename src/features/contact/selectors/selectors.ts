@@ -1,9 +1,9 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { INITIAL_CONTACT_FIELDS } from "@/constants/contact";
+import { INITIAL_CONTACT_FIELDS } from "../constants";
 import { selectProfile } from "@/store/selectors/profile";
 import { isString, isTruthy } from "@/predicates/common";
 import { FieldIds } from "@/types/field";
-import type { ContactItemField } from "@/types/contact";
+import type { ContactItemField } from "../types";
 
 export const selectContactFields = createSelector([selectProfile], (profile): ContactItemField[] =>
   INITIAL_CONTACT_FIELDS.map((field) => {

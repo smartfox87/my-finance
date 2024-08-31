@@ -6,7 +6,7 @@ import { Detail } from "../../components";
 import { List } from "../../components";
 import { HeaderAside } from "../../components";
 
-export default function AccountsContent() {
+export default function Page() {
   return (
     <>
       <HeaderAside />
