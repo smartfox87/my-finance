@@ -1,5 +1,5 @@
 import { PropValueList } from "@/components/common/PropValueList";
-import { getFullDate } from "@/helpers/date";
+import { getFullDate } from "@/utils/date";
 import { useTranslation } from "react-i18next";
 import { selectProfile } from "../../selectors";
 import { useAppSelector } from "@/hooks/store";

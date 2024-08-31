@@ -3,9 +3,9 @@
 import { selectSettingsFields } from "../../selectors";
 import { DefaultForm } from "@/components/form/DefaultForm";
 import { getProfileThunk, updateProfileThunk } from "../../store";
-import { showNotification } from "@/helpers/modals";
+import { showNotification } from "@/utils/modals";
 import { useTranslation } from "react-i18next";
-import { showCommonError } from "@/helpers/errors";
+import { showCommonError } from "@/utils/errors";
 import { isSettingsData } from "../../predicates";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import type { DefaultFormSaveHandler } from "@/types/form";

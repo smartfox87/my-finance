@@ -1,12 +1,12 @@
 import { CommonDate } from "@/components/common/CommonDate";
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "antd";
-import formatPrice from "@/helpers/formatPrice";
+import formatPrice from "@/utils/format-price";
 import { selectCurrency } from "@/features/profile";
-import { uppercaseFirstLetter } from "@/helpers/strings";
+import { uppercaseFirstLetter } from "@/utils/strings";
 import { selectCostCategoriesObject } from "@/store/selectors/references";
 import { useEffect, useRef, useState } from "react";
-import { isTextClamped } from "@/helpers/isTextClamped";
+import { isTextClamped } from "@/utils/is-text-clamped";
 import { useViewport } from "@/hooks/viewport";
 import { selectAccountsObject } from "@/features/accounts";
 import Link from "next/link";

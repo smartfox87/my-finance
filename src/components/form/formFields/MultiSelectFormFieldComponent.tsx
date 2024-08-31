@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { handleFilterSelectOptions } from "@/helpers/fields";
+import { handleFilterSelectOptions } from "@/utils/fields";
 import { Form, Select } from "antd";
 import type { MultiSelectValue } from "@/types/field";
 import type { FormFieldProps, MultiSelectFormField } from "@/types/form";

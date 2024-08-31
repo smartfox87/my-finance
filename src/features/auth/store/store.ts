@@ -1,5 +1,5 @@
 import { getUserSession, loginDemoUserApi, loginUserApi, loginUserByProviderApi, logoutUserApi, registerUserApi } from "../api";
-import { handleRejectedReducerAction } from "@/helpers/errors";
+import { handleRejectedReducerAction } from "@/utils/errors";
 import { rootReducer } from "@/store";
 import { handleAuthStateChange } from "../utils";
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";

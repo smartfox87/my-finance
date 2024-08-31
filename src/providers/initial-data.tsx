@@ -2,10 +2,10 @@
 
 import { selectUser } from "@/store/selectors/auth";
 import { useTranslation } from "react-i18next";
-import { getUserId } from "@/helpers/localStorage";
+import { getUserId } from "@/utils/local-storage";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import { setCSSVariables } from "@/helpers/cssVariables";
+import { setCSSVariables } from "@/utils/css-variables";
 import type { ComponentChildrenProps } from "@/types/common";
 
 export default function InitialData({ children }: ComponentChildrenProps) {

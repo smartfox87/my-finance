@@ -1,5 +1,5 @@
 import { apiClient } from "@/lib/api-client";
-import { getPublicUrl } from "@/helpers/url";
+import { getPublicUrl } from "@/utils/url";
 import { Provider } from "@supabase/auth-js";
 import { DEMO_USER_EMAIL, DEMO_USER_PASSWORD } from "@/constants/config";
 import type { LoginData, RegisterData } from "../types";

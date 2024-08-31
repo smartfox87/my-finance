@@ -6,7 +6,7 @@ import { SideModal } from "@/components/modals/side-modal";
 import { memo, useEffect, useState } from "react";
 import SvgFilter from "@/assets/sprite/filter.svg";
 import { useViewport } from "@/hooks/viewport";
-import { prepareObjectValuesForFilterStateValues, setFilterValue } from "@/helpers/filters";
+import { prepareObjectValuesForFilterStateValues, setFilterValue } from "@/utils/filters";
 import { useFieldFocus } from "@/hooks/fieldFocus";
 import { FilterFields } from "@/components/common/filter/FilterFields";
 import cloneDeep from "lodash/cloneDeep";

@@ -1,7 +1,7 @@
 import { SerializedError } from "@reduxjs/toolkit";
 import { i18nRef } from "@/i18n";
-import { showErrorMessage } from "@/helpers/message";
-import { showNotification } from "@/helpers/modals";
+import { showErrorMessage } from "@/utils/message";
+import { showNotification } from "@/utils/modals";
 import { NotificationTypes } from "@/types/modals";
 import type { AccountsSliceState } from "@/features/accounts";
 import type { ProfileSliceState } from "@/features/profile";

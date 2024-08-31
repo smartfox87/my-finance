@@ -9,7 +9,7 @@ import { useModalState } from "@/hooks/providers/modalState";
 import dynamic from "next/dynamic";
 import { useAppDispatch } from "@/hooks/store";
 import { isRegisterData } from "../../predicates";
-import { showCommonError } from "@/helpers/errors";
+import { showCommonError } from "@/utils/errors";
 import type { DefaultFormSaveHandler } from "@/types/form";
 
 const AuthModal = dynamic(() => import("../auth-modal").then(({ AuthModal }) => ({ default: AuthModal })));
@@ -35,7 +35,7 @@ export const SignUp = () => {
       const score = await getScore();
       const registerData = { ...fieldsValues, score };
       if (!isRegisterData(registerData)) return;
-      if (score < 0.5) return import("@/helpers/modals").then(({ showNotification }) => showNotification({ title: t("notifications.recaptcha_invalid") }));
+      if (score < 0.5) return import("@/utils/modals").then(({ showNotification }) => showNotification({ title: t("notifications.recaptcha_invalid") }));
       const { registerUserThunk } = await import("../../store");
       await dispatch(registerUserThunk(registerData)).unwrap();
       handleToggleVisibility();

@@ -5,10 +5,10 @@ import { useFilterSearchParams } from "@/hooks/filterSearchParams";
 import { getBudgetsListForChartsThunk, getCostsListForChartsThunk, getIncomesListForChartsThunk, setStatisticsFilterValues } from "../../store";
 import { useCallback, useEffect, useState } from "react";
 import { INITIAL_STATISTICS_FILTER_FIELDS } from "../../constants";
-import { getUserId } from "@/helpers/localStorage";
+import { getUserId } from "@/utils/local-storage";
 import { Preloader } from "@/components/loading/preloader";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import { getFilterItemsFromFields } from "@/helpers/filters";
+import { getFilterItemsFromFields } from "@/utils/filters";
 import { PageContent } from "../../components";
 
 export default function StatisticsContent() {

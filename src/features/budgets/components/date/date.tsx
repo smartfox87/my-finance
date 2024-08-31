@@ -1,4 +1,4 @@
-import { getFullDate } from "@/helpers/date";
+import { getFullDate } from "@/utils/date";
 
 export const Date = ({ startDate, endDate }: { startDate: string; endDate: string }) => {
   const isDifferentMonths = startDate !== endDate;

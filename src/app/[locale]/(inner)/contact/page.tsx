@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { initTranslations } from "@/i18n";
 import { InnerLayout } from "@/components/layout/inner-layout";
 import { ContactPageModule } from "@/features/contact";
-import { getJsonLdBreadcrumbs, getJsonLdWebsite } from "@/helpers/jsonLd";
+import { getJsonLdBreadcrumbs, getJsonLdWebsite } from "@/utils/jsonld";
 import { LinkItem } from "@/types/breadcrumbs";
 import { Pages } from "@/types/router";
 import type { Locale } from "@/types/locales";

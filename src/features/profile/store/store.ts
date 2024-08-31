@@ -1,5 +1,5 @@
 import { getProfileApi, updateProfileApi } from "../api";
-import { handleRejectedReducerAction } from "@/helpers/errors";
+import { handleRejectedReducerAction } from "@/utils/errors";
 import { rootReducer } from "@/store";
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import type { Types, ProfileData, ProfileSliceState, SettingsData } from "../types";

@@ -7,7 +7,7 @@ import { memo, useEffect, useState } from "react";
 import SvgFilter from "@/assets/sprite/filter.svg";
 import { useViewport } from "@/hooks/viewport";
 import { useFieldFocus } from "@/hooks/fieldFocus";
-import { prepareObjectValuesForFilterStateValues, setFilterValue } from "@/helpers/filters";
+import { prepareObjectValuesForFilterStateValues, setFilterValue } from "@/utils/filters";
 import { FilterFields } from "@/components/common/filter/FilterFields";
 import cloneDeep from "lodash/cloneDeep";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";

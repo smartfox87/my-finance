@@ -1,4 +1,4 @@
-import { getLanguage } from "@/helpers/localStorage";
+import { getLanguage } from "@/utils/local-storage";
 
 export default function formatPrice(price: string | number | undefined, decimals = 2): string {
   if (!price) return "0";

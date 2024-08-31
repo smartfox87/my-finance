@@ -1,6 +1,6 @@
 import { apiClient } from "@/lib/api-client";
-import { getUserId } from "@/helpers/localStorage";
-import { getFromPeriodDatesForApi, getToPeriodDatesForApi } from "@/helpers/date";
+import { getUserId } from "@/utils/local-storage";
+import { getFromPeriodDatesForApi, getToPeriodDatesForApi } from "@/utils/date";
 import { FilterPeriodStateItem } from "@/types/filter";
 import { FieldIds } from "@/types/field";
 

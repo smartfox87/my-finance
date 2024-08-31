@@ -3,7 +3,7 @@ import { INITIAL_BUDGET_FIELDS, INITIAL_BUDGETS_FILTER_FIELDS } from "../constan
 import { selectCostCategories } from "@/store/selectors/references";
 import { selectCurrency } from "@/features/profile";
 import { selectAccountsList } from "@/features/accounts";
-import { filterMultiItemsList, getOptionsFromItemsList, processFilterFields, sortItemsList } from "@/helpers/selectors";
+import { filterMultiItemsList, getOptionsFromItemsList, processFilterFields, sortItemsList } from "@/utils/selectors";
 import { FieldIds, FieldTypes } from "@/types/field";
 import type { LazyLoadedSlices } from "@/types/store";
 import type { BudgetItemField, ProcessedBudgetItem } from "../types";

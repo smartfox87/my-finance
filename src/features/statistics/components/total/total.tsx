@@ -1,4 +1,4 @@
-import formatPrice from "@/helpers/formatPrice";
+import formatPrice from "@/utils/format-price";
 import { selectBudgetsAmount, selectCostsAmount, selectIncomesAmount } from "../../selectors";
 import { selectCurrency } from "@/features/profile";
 import { useTranslation } from "react-i18next";

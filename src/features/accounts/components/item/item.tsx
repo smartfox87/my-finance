@@ -1,12 +1,12 @@
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "antd";
-import formatPrice from "@/helpers/formatPrice";
+import formatPrice from "@/utils/format-price";
 import { selectCurrency } from "@/features/profile";
-import { uppercaseFirstLetter } from "@/helpers/strings";
+import { uppercaseFirstLetter } from "@/utils/strings";
 import { useEffect, useRef, useState } from "react";
-import { isTextClamped } from "@/helpers/isTextClamped";
+import { isTextClamped } from "@/utils/is-text-clamped";
 import { useViewport } from "@/hooks/viewport";
-import { getFullDate } from "@/helpers/date";
+import { getFullDate } from "@/utils/date";
 import Link from "next/link";
 import { useAppSelector } from "@/hooks/store";
 import type { ProcessedAccountItem } from "../../types";

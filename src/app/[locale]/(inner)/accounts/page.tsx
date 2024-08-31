@@ -1,7 +1,7 @@
 import { initTranslations } from "@/i18n";
 import { InnerLayout } from "@/components/layout/inner-layout";
 import { AccountsPageModule } from "@/features/accounts/";
-import { getJsonLdBreadcrumbs, getJsonLdWebsite } from "@/helpers/jsonLd";
+import { getJsonLdBreadcrumbs, getJsonLdWebsite } from "@/utils/jsonld";
 import { Pages } from "@/types/router";
 import type { LinkItem } from "@/types/breadcrumbs";
 import type { Metadata } from "next";

@@ -8,7 +8,7 @@ import { useModalState } from "@/hooks/providers/modalState";
 import dynamic from "next/dynamic";
 import { useAppDispatch } from "@/hooks/store";
 import { isLoginData } from "../../predicates";
-import { showCommonError } from "@/helpers/errors";
+import { showCommonError } from "@/utils/errors";
 import type { DefaultFormSaveHandler } from "@/types/form";
 
 const AuthModal = dynamic(() => import("../auth-modal").then(({ AuthModal }) => ({ default: AuthModal })));

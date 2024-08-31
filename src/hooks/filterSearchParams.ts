@@ -1,12 +1,12 @@
 import { useEffect, useMemo } from "react";
-import { getIntegerFromString } from "@/helpers/numbers";
-import { isStringValidDate } from "@/helpers/date";
+import { getIntegerFromString } from "@/utils/numbers";
+import { isStringValidDate } from "@/utils/date";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import queryString from "query-string";
 import { useAppDispatch } from "@/hooks/store";
 import { isFilterStateKey } from "@/predicates/filter";
 import { isMultiSelectValue, isSelectAllValue } from "@/predicates/field";
-import { prepareObjectValuesForFilterStateValues } from "@/helpers/filters";
+import { prepareObjectValuesForFilterStateValues } from "@/utils/filters";
 import type { FilterState, FilterStateValue, SetFilterStateValuesHandler } from "@/types/filter";
 
 export const useFilterSearchParams = (filterValues: FilterState | null, setFilterValues: SetFilterStateValuesHandler): [boolean, boolean] => {

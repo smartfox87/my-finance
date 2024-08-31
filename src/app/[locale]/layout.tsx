@@ -3,7 +3,7 @@ import { i18nConfig } from "../../../i18nConfig";
 import { dir } from "i18next";
 import { AppProvider } from "@/providers/app";
 import { initTranslations } from "@/i18n";
-import { getAppMetadata } from "@/helpers/metadata";
+import { getAppMetadata } from "@/utils/metadata";
 import type { Metadata, Viewport } from "next";
 import type { Locale } from "@/types/locales";
 import type { ReactNode } from "react";

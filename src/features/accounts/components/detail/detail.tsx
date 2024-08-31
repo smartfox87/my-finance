@@ -9,7 +9,7 @@ import SvgDelete from "@/assets/sprite/delete.svg";
 import { CalculatorModal } from "@/features/calculator";
 import { Button } from "antd";
 import { useRouter, useSearchParams } from "next/navigation";
-import { showCommonError } from "@/helpers/errors";
+import { showCommonError } from "@/utils/errors";
 import { isAccountItemUpdateData } from "../../predicates";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { FieldIds, FieldTypes } from "@/types/field";

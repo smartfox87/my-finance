@@ -1,7 +1,7 @@
 import { selectBudgetsFilterFields, selectBudgetsFilterValues } from "../../selectors";
 import { setBudgetsFilterValues } from "../../store";
 import { memo, useMemo } from "react";
-import { getActiveFilters } from "@/helpers/filters";
+import { getActiveFilters } from "@/utils/filters";
 import { ActiveFiltersList } from "@/components/common/filter/ActiveFiltersList";
 import { isMultiSelectFormFieldId } from "@/predicates/form";
 import { isNumber } from "@/predicates/common";

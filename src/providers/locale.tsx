@@ -1,6 +1,6 @@
 import { createContext, useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { toggleDayjsLocale } from "@/helpers/date";
+import { toggleDayjsLocale } from "@/utils/date";
 import { i18nConfig } from "../../i18nConfig";
 import { LOCALES } from "@/constants/config";
 import { useParams, usePathname, useRouter } from "next/navigation";

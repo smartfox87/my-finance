@@ -1,5 +1,5 @@
 import { selectCurrency } from "@/features/profile";
-import formatPrice from "@/helpers/formatPrice";
+import formatPrice from "@/utils/format-price";
 import { useAppSelector } from "@/hooks/store";
 import type { CostsCategoriesStatisticsTooltipProps } from "../../../types";
 

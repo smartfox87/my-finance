@@ -1,6 +1,6 @@
 import { InnerHeaderAsidePortal } from "@/components/layout/inner-header-aside-portal/inner-header-aside-portal";
 import { selectCurrency } from "@/features/profile";
-import formatPrice from "@/helpers/formatPrice";
+import formatPrice from "@/utils/format-price";
 import { selectIncomesAmount, selectIncomesByFilter } from "../../selectors";
 import { useTranslation } from "react-i18next";
 import { useAppSelector } from "@/hooks/store";

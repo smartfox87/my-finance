@@ -1,6 +1,6 @@
 import { createBudgetItemApi, getBudgetsListApi, updateBudgetItemApi, deleteBudgetItemApi, getBudgetItemApi } from "../api";
-import { handleRejectedReducerAction } from "@/helpers/errors";
-import { setFilterValue } from "@/helpers/filters";
+import { handleRejectedReducerAction } from "@/utils/errors";
+import { setFilterValue } from "@/utils/filters";
 import { rootReducer } from "@/store";
 import { processBudgetItem } from "../helpers";
 import { isFilterPeriodStateItem } from "@/predicates/filter";

@@ -7,9 +7,9 @@ import { selectBudgetsFilterValues, selectBudgetsList } from "../../selectors";
 import { useFilterSearchParams } from "@/hooks/filterSearchParams";
 import { getBudgetsListThunk, setBudgetsFilterValues } from "../../store";
 import { INITIAL_BUDGETS_FILTER_FIELDS } from "../../constants";
-import { getUserId } from "@/helpers/localStorage";
+import { getUserId } from "@/utils/local-storage";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import { getFilterItemsFromFields } from "@/helpers/filters";
+import { getFilterItemsFromFields } from "@/utils/filters";
 import { PageContent } from "../../components";
 import { HeaderAside } from "../../components";
 
