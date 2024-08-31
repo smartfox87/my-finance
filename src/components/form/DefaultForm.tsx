@@ -1,3 +1,5 @@
+"use client";
+
 import { useTranslation } from "react-i18next";
 import { useLoading } from "@/hooks/loading";
 import dynamic from "next/dynamic";
