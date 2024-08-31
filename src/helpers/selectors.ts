@@ -10,7 +10,7 @@ import type { IncomeItem } from "@/features/incomes";
 import type { ProcessedBudgetItem } from "@/features/budgets";
 import type { FilterField } from "@/types/filter";
 import type { ProcessedFilterField } from "@/types/selectors";
-import type { ProcessedStatisticsBudgetItem, StatisticsCostItem, StatisticsIncomeItem } from "@/types/statistics";
+import type { ProcessedStatisticsBudgetItem, StatisticsCostItem, StatisticsIncomeItem } from "@/features/statistics";
 
 export const checkSingleItemCondition = (filterItem: MultiSelectValue | undefined, itemId: number): boolean =>
   filterItem !== undefined && (filterItem.includes(itemId) || filterItem.includes(FieldValues.ALL));

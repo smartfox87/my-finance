@@ -8,7 +8,7 @@ import type { ProfileSliceState } from "@/types/profile";
 import type { IncomesSliceState } from "@/features/incomes";
 import type { BudgetsSliceState } from "@/features/budgets";
 import type { ReferencesSliceState } from "@/types/references";
-import type { StatisticsSliceState } from "@/types/statistics";
+import type { StatisticsSliceState } from "@/features/statistics";
 import type { AuthSliceState } from "@/types/auth";
 import type { CostsSliceState } from "@/features/expenses";
 
