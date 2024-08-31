@@ -26,10 +26,10 @@ export const MainNav = memo(function MainNav({ className = "" }: { className?: s
           <li key={full_name} className="w-full">
             <Link
               href={url}
-              className={`${getNavLinkClassName(url)} -ml-3 mr-3 flex items-center gap-4 py-3 pl-3 pr-3 text-lg duration-300 hover:!text-blue-600 dark:hover:!text-blue-400`}
+              className={`${getNavLinkClassName(url)} -ml-3 mr-3 flex items-center gap-3 py-3 pl-3 pr-3 text-lg duration-300 hover:!text-blue-600 dark:hover:!text-blue-400`}
               onClick={handleNavClick}
             >
-              <div className="scale-125">{icon}</div>
+              <div className="flex h-6 w-6 items-center justify-center lg:h-8 lg:w-8">{icon}</div>
               <div className="mt-0.5">{t(full_name)}</div>
             </Link>
           </li>
