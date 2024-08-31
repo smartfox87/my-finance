@@ -1,16 +1,16 @@
 "use client";
 
-import { selectSettingsFields } from "@/features/profile/selectors/profile";
+import { selectSettingsFields } from "../../selectors";
 import { DefaultForm } from "@/components/form/DefaultForm";
-import { getProfileThunk, updateProfileThunk } from "@/features/profile/store/profileSlice";
+import { getProfileThunk, updateProfileThunk } from "../../store";
 import { showNotification } from "@/helpers/modals";
 import { useTranslation } from "react-i18next";
 import { showCommonError } from "@/helpers/errors";
-import { DefaultFormSaveHandler } from "@/types/form";
-import { isSettingsData } from "@/predicates/profile";
+import { isSettingsData } from "../../predicates";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
+import type { DefaultFormSaveHandler } from "@/types/form";
 
-export default function SettingsContent() {
+export default function Page() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const profileFields = useAppSelector(selectSettingsFields);

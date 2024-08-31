@@ -4,7 +4,7 @@ import { showErrorMessage } from "@/helpers/message";
 import { showNotification } from "@/helpers/modals";
 import { NotificationTypes } from "@/types/modals";
 import type { AccountsSliceState } from "@/features/accounts";
-import type { ProfileSliceState } from "@/features/profile/types/types";
+import type { ProfileSliceState } from "@/features/profile";
 import type { IncomesSliceState } from "@/features/incomes";
 import type { BudgetsSliceState } from "@/features/budgets";
 import type { ReferencesSliceState } from "@/types/references";

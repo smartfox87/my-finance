@@ -25,7 +25,7 @@ export default function InitialData({ children }: ComponentChildrenProps) {
     if (!user) return;
     const [{ getAccountsListThunk }, { getProfileThunk }, { getCurrenciesThunk }] = await Promise.all([
       import("@/features/accounts"),
-      import("@/features/profile/store/profileSlice"),
+      import("@/features/profile"),
       import("@/store/slices/referencesSlice"),
     ]);
     await Promise.all([dispatch(getCurrenciesThunk()), dispatch(getProfileThunk()), dispatch(getAccountsListThunk())]);

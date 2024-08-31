@@ -6,7 +6,7 @@ import { DefaultForm } from "@/components/form/DefaultForm";
 import { getProfileThunk, updateProfileThunk } from "../../store";
 import { showNotification } from "@/helpers/modals";
 import { showCommonError } from "@/helpers/errors";
-import { isProfileData } from "@/predicates/profile";
+import { isProfileData } from "../../predicates";
 import { HeaderAside } from "../../components";
 import { Dates } from "../../components";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
