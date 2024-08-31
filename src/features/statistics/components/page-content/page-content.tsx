@@ -1,6 +1,6 @@
 import { Total } from "../total";
-import { ExpensesBudgets } from "../expenses-budgets";
 import { ExpensesIncomes } from "../expenses-incomes";
+import { ExpensesBudgets } from "../expenses-budgets";
 import { ExpensesCategories } from "../expenses-categories";
 import { IncomesCategories } from "../incomes-categories";
 import { Filter } from "../filter";
