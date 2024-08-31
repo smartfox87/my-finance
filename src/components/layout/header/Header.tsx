@@ -1,7 +1,6 @@
 "use client";
 
 import { Auth } from "@/components/auth/Auth";
-import { ProfileMenu } from "@/components/profile/ProfileMenu";
 import { LanguageToggle } from "@/components/layout/header/LanguageToggle";
 import { Logo } from "@/components/layout/header/Logo";
 import { memo, Suspense } from "react";
@@ -9,6 +8,7 @@ import { selectUser } from "@/store/selectors/auth";
 import { MobileMenu } from "@/components/layout/header/MobileMenu";
 import { useViewport } from "@/hooks/viewport";
 import { useAppSelector } from "@/hooks/store";
+import { ProfileMenu } from "@/components/layout/navigation/profile-menu";
 
 export const Header = memo(function Header() {
   const { isTablet } = useViewport();

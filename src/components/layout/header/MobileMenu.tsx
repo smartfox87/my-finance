@@ -2,7 +2,6 @@ import { memo, Suspense } from "react";
 import SvgMenu from "@/assets/sprite/menu.svg";
 import { useTranslation } from "react-i18next";
 import { SideModal } from "@/components/modals/SideModal";
-import { ProfileMenu } from "@/components/profile/ProfileMenu";
 import { Auth } from "@/components/auth/Auth";
 import { LanguageToggle } from "@/components/layout/header/LanguageToggle";
 import { selectUser } from "@/store/selectors/auth";
@@ -10,6 +9,7 @@ import { MainNav } from "@/components/layout/navigation/MainNav";
 import { useAntd } from "@/hooks/providers/antd";
 import { useModalState } from "@/hooks/providers/modalState";
 import { useAppSelector } from "@/hooks/store";
+import { ProfileMenu } from "@/components/layout/navigation/profile-menu";
 
 export const MobileMenu = memo(function MobileMenu() {
   const { t } = useTranslation();
