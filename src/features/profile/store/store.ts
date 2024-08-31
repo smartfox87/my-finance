@@ -1,14 +1,14 @@
-import { getProfileApi, updateProfileApi } from "@/api/profile";
+import { getProfileApi, updateProfileApi } from "../api";
 import { handleRejectedReducerAction } from "@/helpers/errors";
 import { rootReducer } from "@/store";
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
-import type { Profile, ProfileData, ProfileSliceState, SettingsData } from "@/types/profile";
+import type { Types, ProfileData, ProfileSliceState, SettingsData } from "../types";
 
 const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
 });
 
-const setPeriod = ({ period }: Profile) => localStorage.setItem("period", period || "year");
+const setPeriod = ({ period }: Types) => localStorage.setItem("period", period || "year");
 
 const initialState: ProfileSliceState = {
   profile: null,
@@ -18,7 +18,7 @@ export const profileSlice = createAppSlice({
   name: "profile",
   initialState,
   reducers: (create) => ({
-    getProfileThunk: create.asyncThunk<Profile, void, { rejectValue: string }>(
+    getProfileThunk: create.asyncThunk<Types, void, { rejectValue: string }>(
       async (_, { rejectWithValue }) => {
         const { data, error } = await getProfileApi();
         if (error) throw rejectWithValue(error.message);
@@ -32,7 +32,7 @@ export const profileSlice = createAppSlice({
         },
       },
     ),
-    updateProfileThunk: create.asyncThunk<Profile, ProfileData | SettingsData, { rejectValue: string }>(
+    updateProfileThunk: create.asyncThunk<Types, ProfileData | SettingsData, { rejectValue: string }>(
       async (profileData, { rejectWithValue }) => {
         const { data, error } = await updateProfileApi(profileData);
         if (error) throw rejectWithValue(error.message);

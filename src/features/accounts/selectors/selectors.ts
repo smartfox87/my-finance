@@ -1,5 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { selectCurrency } from "@/store/selectors/profile";
+import { selectCurrency } from "@/features/profile";
 import { INITIAL_ACCOUNT_FIELDS, INITIAL_ACCOUNT_TRANSFER_FIELDS } from "../constants/";
 import { selectAccountTypesObject } from "@/store/selectors/references";
 import { FieldIds } from "@/types/field";

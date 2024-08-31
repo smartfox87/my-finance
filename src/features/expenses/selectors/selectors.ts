@@ -1,7 +1,7 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { INITIAL_COST_FIELDS, INITIAL_COSTS_FILTER_FIELDS } from "../constants";
 import { selectCostCategories } from "@/store/selectors/references";
-import { selectCurrency } from "@/store/selectors/profile";
+import { selectCurrency } from "@/features/profile";
 import { selectAccountsList } from "@/features/accounts";
 import { filterSingleItemsList, getOptionsFromItemsList, processFilterFields, sortItemsList } from "@/helpers/selectors";
 import dayjs from "dayjs";

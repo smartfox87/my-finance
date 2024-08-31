@@ -2,7 +2,7 @@ import { CommonDate } from "@/components/common/CommonDate";
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "antd";
 import formatPrice from "@/helpers/formatPrice";
-import { selectCurrency } from "@/store/selectors/profile";
+import { selectCurrency } from "@/features/profile";
 import { uppercaseFirstLetter } from "@/helpers/strings";
 import { selectCostCategoriesObject } from "@/store/selectors/references";
 import { useEffect, useRef, useState } from "react";

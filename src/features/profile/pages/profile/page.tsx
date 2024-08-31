@@ -1,18 +1,18 @@
 "use client";
 
 import { useTranslation } from "react-i18next";
-import { selectProfileFields } from "@/store/selectors/profile";
+import { selectProfileFields } from "../../selectors";
 import { DefaultForm } from "@/components/form/DefaultForm";
-import { getProfileThunk, updateProfileThunk } from "@/store/slices/profileSlice";
+import { getProfileThunk, updateProfileThunk } from "../../store";
 import { showNotification } from "@/helpers/modals";
 import { showCommonError } from "@/helpers/errors";
 import { isProfileData } from "@/predicates/profile";
-import { ProfilePageActions } from "@/components/profile/page/ProfilePageActions";
-import { ProfileDates } from "@/components/profile/page/ProfileDates";
+import { HeaderAside } from "../../components";
+import { Dates } from "../../components";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import type { DefaultFormSaveHandler } from "@/types/form";
 
-export default function ProfileContent() {
+export default function Page() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const profileFields = useAppSelector(selectProfileFields);
@@ -30,8 +30,8 @@ export default function ProfileContent() {
 
   return (
     <>
-      <ProfilePageActions />
-      <ProfileDates />
+      <HeaderAside />
+      <Dates />
       <DefaultForm fields={profileFields} data-cy="edit-profile-form" onSaveForm={handleSaveProfile} />
     </>
   );

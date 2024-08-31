@@ -1,4 +1,4 @@
-import { selectCurrency } from "@/store/selectors/profile";
+import { selectCurrency } from "@/features/profile";
 import formatPrice from "@/helpers/formatPrice";
 import { useAppSelector } from "@/hooks/store";
 import type { CostsCategoriesStatisticsTooltipProps } from "../../../types";

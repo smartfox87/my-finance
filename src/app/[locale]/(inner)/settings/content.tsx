@@ -1,8 +1,8 @@
 "use client";
 
-import { selectSettingsFields } from "@/store/selectors/profile";
+import { selectSettingsFields } from "@/features/profile/selectors/profile";
 import { DefaultForm } from "@/components/form/DefaultForm";
-import { getProfileThunk, updateProfileThunk } from "@/store/slices/profileSlice";
+import { getProfileThunk, updateProfileThunk } from "@/features/profile/store/profileSlice";
 import { showNotification } from "@/helpers/modals";
 import { useTranslation } from "react-i18next";
 import { showCommonError } from "@/helpers/errors";

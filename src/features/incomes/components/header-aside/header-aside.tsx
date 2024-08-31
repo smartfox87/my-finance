@@ -1,5 +1,5 @@
 import { InnerHeaderActionsPortal } from "@/components/layout/inner/InnerHeaderActionsPortal";
-import { selectCurrency } from "@/store/selectors/profile";
+import { selectCurrency } from "@/features/profile";
 import formatPrice from "@/helpers/formatPrice";
 import { selectIncomesAmount, selectIncomesByFilter } from "../../selectors";
 import { useTranslation } from "react-i18next";

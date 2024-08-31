@@ -20,7 +20,7 @@ interface Currency {
   symbol: string;
 }
 
-export interface Profile {
+export interface Types {
   id: number;
   created_at: string;
   updated_at: string;
@@ -33,7 +33,7 @@ export interface Profile {
 }
 
 export interface ProfileSliceState {
-  profile: Profile | null;
+  profile: Types | null;
 }
 
 export type SettingsField = SingleSelectFormField<FieldIds.CURRENCY, number> | RadioButtonsFormField;

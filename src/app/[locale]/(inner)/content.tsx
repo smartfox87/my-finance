@@ -1,6 +1,6 @@
 "use client";
 
-import { selectProfile } from "@/store/selectors/profile";
+import { selectProfile } from "@/features/profile/selectors/profile";
 import { DemoUserAuth } from "@/components/auth/DemoUserAuth";
 import { useTranslation } from "react-i18next";
 import { useAppSelector } from "@/hooks/store";

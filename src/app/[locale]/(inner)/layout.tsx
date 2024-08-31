@@ -30,7 +30,7 @@ export default function MainLayout({ children }: ComponentChildrenProps) {
     if (!user) return;
     const [{ getAccountsListThunk }, { getProfileThunk }, { getCurrenciesThunk }] = await Promise.all([
       import("@/features/accounts"),
-      import("@/store/slices/profileSlice"),
+      import("@/features/profile/store/profileSlice"),
       import("@/store/slices/referencesSlice"),
     ]);
     await Promise.all([dispatch(getCurrenciesThunk()), dispatch(getProfileThunk()), dispatch(getAccountsListThunk())]);

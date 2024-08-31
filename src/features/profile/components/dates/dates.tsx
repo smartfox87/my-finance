@@ -1,10 +1,10 @@
 import { PropValueList } from "@/components/common/PropValueList";
 import { getFullDate } from "@/helpers/date";
 import { useTranslation } from "react-i18next";
-import { selectProfile } from "@/store/selectors/profile";
+import { selectProfile } from "../../selectors";
 import { useAppSelector } from "@/hooks/store";
 
-export const ProfileDates = () => {
+export const Dates = () => {
   const { t } = useTranslation();
   const profile = useAppSelector(selectProfile);
 

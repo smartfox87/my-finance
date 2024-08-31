@@ -1,4 +1,4 @@
-import { selectCurrency } from "@/store/selectors/profile";
+import { selectCurrency } from "@/features/profile";
 import { useTranslation } from "react-i18next";
 import formatPrice from "@/helpers/formatPrice";
 import { CostsIncomesStatisticsTooltipProps, StatisticsTypes } from "../../../types";

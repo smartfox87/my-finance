@@ -3,11 +3,11 @@ import { Button } from "antd";
 import SvgLogout from "@/assets/sprite/logout.svg";
 import { useState } from "react";
 import { logoutUserThunk } from "@/store/slices/authSlice";
-import { clearProfile } from "@/store/slices/profileSlice";
+import { clearProfile } from "../../store";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch } from "@/hooks/store";
 
-export const ProfilePageActions = () => {
+export const HeaderAside = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const [isLogoutLoading, setIsLogoutLoading] = useState(false);

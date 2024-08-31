@@ -1,4 +1,4 @@
-import { selectProfile } from "@/store/selectors/profile";
+import { selectProfile } from "../../selectors";
 import SvgUser from "@/assets/sprite/user.svg";
 import Link from "next/link";
 import { useViewport } from "@/hooks/viewport";

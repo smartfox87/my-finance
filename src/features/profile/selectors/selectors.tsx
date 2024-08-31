@@ -1,11 +1,11 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { selectCurrencies } from "@/store/selectors/references";
-import { INITIAL_PROFILE_FIELDS, INITIAL_SETTINGS_FIELDS } from "@/constants/profile";
+import { INITIAL_PROFILE_FIELDS, INITIAL_SETTINGS_FIELDS } from "../constants";
 import { FieldIds } from "@/types/field";
 import type { LazyLoadedSlices } from "@/types/store";
-import type { Profile, ProfileField, SettingsField } from "@/types/profile";
+import type { Types, ProfileField, SettingsField } from "../types";
 
-export const selectProfile = ({ profile }: LazyLoadedSlices): Profile | null => profile?.profile || null;
+export const selectProfile = ({ profile }: LazyLoadedSlices): Types | null => profile?.profile || null;
 
 export const selectCurrency = createSelector([selectProfile, selectCurrencies], (profile, currencies): string | undefined =>
   profile?.currency && !Array.isArray(profile.currency) ? profile.currency.symbol || profile.currency.code : currencies?.[0].symbol || currencies?.[0].code,

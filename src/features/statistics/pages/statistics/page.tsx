@@ -9,7 +9,7 @@ import { getUserId } from "@/helpers/localStorage";
 import { Preloader } from "@/components/layout/preloader/Preloader";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { getFilterItemsFromFields } from "@/helpers/filters";
-import { PageContent } from "../../components/page-content";
+import { PageContent } from "../../components";
 
 export default function StatisticsContent() {
   const dispatch = useAppDispatch();

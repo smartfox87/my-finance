@@ -2,7 +2,7 @@ import { InnerHeaderActionsPortal } from "@/components/layout/inner/InnerHeaderA
 import formatPrice from "@/helpers/formatPrice";
 import { useTranslation } from "react-i18next";
 import { selectAccountsBalance } from "../../selectors";
-import { selectCurrency } from "@/store/selectors/profile";
+import { selectCurrency } from "@/features/profile";
 import { useAppSelector } from "@/hooks/store";
 
 export const HeaderAside = () => {

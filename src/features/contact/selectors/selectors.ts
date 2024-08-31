@@ -1,6 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { INITIAL_CONTACT_FIELDS } from "../constants";
-import { selectProfile } from "@/store/selectors/profile";
+import { selectProfile } from "@/features/profile";
 import { isString, isTruthy } from "@/predicates/common";
 import { FieldIds } from "@/types/field";
 import type { ContactItemField } from "../types";

@@ -1,7 +1,7 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { INITIAL_BUDGET_FIELDS, INITIAL_BUDGETS_FILTER_FIELDS } from "../constants";
 import { selectCostCategories } from "@/store/selectors/references";
-import { selectCurrency } from "@/store/selectors/profile";
+import { selectCurrency } from "@/features/profile";
 import { selectAccountsList } from "@/features/accounts";
 import { filterMultiItemsList, getOptionsFromItemsList, processFilterFields, sortItemsList } from "@/helpers/selectors";
 import { FieldIds, FieldTypes } from "@/types/field";
