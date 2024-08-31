@@ -6,7 +6,7 @@ import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/to
 import type { AccountTypeData } from "@/types/references";
 import type { RootState } from "@/types/store";
 import type { AccountItem, AccountItemUpdateData, AccountItemBalanceData, AccountsSliceState, AccountItemCreateData } from "../types";
-import { getAccountTypesThunk } from "@/store/slices/referencesSlice";
+import { getAccountTypesThunk } from "@/store/slices/references";
 import { showNotification } from "@/helpers/modals";
 import { i18nRef } from "@/i18n";
 

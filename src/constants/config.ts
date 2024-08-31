@@ -1,3 +1,15 @@
+import { type CeoPage, CeoPages } from "../types/router";
+import { type Language, Languages, type Locale, Locales } from "../types/locales";
+import { I18nNamespaces } from "@/types/locales";
+
+export const ALL_I18N_NAMESPACES = Object.values(I18nNamespaces);
+
+export const LOCALES: Locale[] = Object.values(Locales).sort((a, b) => a.localeCompare(b));
+
+export const LANGUAGES: Language[] = Object.values(Languages).sort((a, b) => a.localeCompare(b));
+
+export const PAGES: CeoPage[] = Object.values(CeoPages);
+
 export const API_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 export const API_KEY = process.env.NEXT_PUBLIC_SUPABASE_KEY;
 

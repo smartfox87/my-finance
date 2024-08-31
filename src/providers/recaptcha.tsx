@@ -4,7 +4,7 @@ import { captureException } from "@sentry/nextjs";
 import { IS_PRODUCTION, RECAPTCHA_SITE_KEY } from "@/constants/config";
 import ReCAPTCHA, { type ReCAPTCHAProps } from "react-google-recaptcha";
 import type { ComponentChildrenProps } from "@/types/common";
-import type { GetScore, RecaptchaContextType } from "@/types/providers/recaptchaProvider";
+import type { GetScore, RecaptchaContextType } from "@/types/providers/recaptcha";
 
 const GoogleRecaptcha = dynamic(
   () =>

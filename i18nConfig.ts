@@ -1,4 +1,4 @@
-import { LOCALES } from "@/constants/router";
+import { LOCALES } from "@/constants/config";
 import { Locales } from "@/types/locales";
 
 export const i18nConfig = {

@@ -3,7 +3,7 @@ import { writeFileSync } from "fs";
 import { SitemapStream, streamToPromise } from "sitemap";
 import { Readable } from "stream";
 import { PRODUCTION_URL } from "../src/constants/config";
-import { LOCALES, PAGES } from "../src/constants/router";
+import { LOCALES, PAGES } from "../src/constants/config";
 import { type Locale, Locales } from "../src/types/locales";
 
 type Link = {

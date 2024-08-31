@@ -3,7 +3,7 @@ import { selectAccountsList, selectAccountTransferFields } from "../../selectors
 import { transferAccountsBalanceThunk } from "../../store";
 import { SideModal } from "@/components/modals/side-modal";
 import { useLoading } from "@/hooks/loading";
-import { CalculatorModal } from "@/components/calculator/CalculatorModal";
+import { CalculatorModal } from "@/features/calculator";
 import { handleFilterSelectOptions } from "@/helpers/fields";
 import { Button, Form, InputNumber, Select } from "antd";
 import { useViewport } from "@/hooks/viewport";

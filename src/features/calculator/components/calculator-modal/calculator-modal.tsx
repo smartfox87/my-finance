@@ -1,10 +1,10 @@
 import { Button } from "antd";
 import { SideModal } from "@/components/modals/side-modal";
-import { Calculator } from "@/components/calculator/Calculator";
+import { Calculator } from "../calculator";
 import SvgCalculator from "@/assets/sprite/calculator.svg";
 import SvgPassPrice from "@/assets/sprite/pass-price.svg";
 import { type ReactNode, useRef, useState } from "react";
-import type { CalculatorRef, CalculatorSaveHandler } from "@/types/calculator";
+import type { CalculatorRef, CalculatorSaveHandler } from "../../types";
 
 export const CalculatorModal = ({ title, buttonOpen, buttonSave, onSave }: { title: string; buttonOpen: ReactNode; buttonSave: ReactNode; onSave: CalculatorSaveHandler }) => {
   const [isOpen, setIsOpen] = useState(false);

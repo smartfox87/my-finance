@@ -26,7 +26,7 @@ export default function InitialData({ children }: ComponentChildrenProps) {
     const [{ getAccountsListThunk }, { getProfileThunk }, { getCurrenciesThunk }] = await Promise.all([
       import("@/features/accounts"),
       import("@/features/profile"),
-      import("@/store/slices/referencesSlice"),
+      import("@/store/slices/references"),
     ]);
     await Promise.all([dispatch(getCurrenciesThunk()), dispatch(getProfileThunk()), dispatch(getAccountsListThunk())]);
   };
@@ -37,7 +37,7 @@ export default function InitialData({ children }: ComponentChildrenProps) {
 
   const initReferences = async (): Promise<void> => {
     if (!user) return;
-    const { getAccountTypesThunk, getCostCategoriesThunk, getIncomeCategoriesThunk } = await import("@/store/slices/referencesSlice");
+    const { getAccountTypesThunk, getCostCategoriesThunk, getIncomeCategoriesThunk } = await import("@/store/slices/references");
     await Promise.all([dispatch(getAccountTypesThunk()), dispatch(getCostCategoriesThunk()), dispatch(getIncomeCategoriesThunk())]);
   };
 

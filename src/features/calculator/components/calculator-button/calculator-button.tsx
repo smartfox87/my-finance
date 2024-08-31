@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { ButtonClickHandler } from "@/types/calculator";
+import type { ButtonClickHandler } from "@/features/calculator";
 
 export const CalculatorButton = ({ name, title, onClick, children }: { name: string; title?: string; children?: ReactNode; onClick: ButtonClickHandler }) => {
   return (

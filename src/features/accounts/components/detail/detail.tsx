@@ -6,14 +6,14 @@ import { DefaultForm } from "@/components/form/DefaultForm";
 import { SideModal } from "@/components/modals/side-modal";
 import { useLoading } from "@/hooks/loading";
 import SvgDelete from "@/assets/sprite/delete.svg";
-import { CalculatorModal } from "@/components/calculator/CalculatorModal";
+import { CalculatorModal } from "@/features/calculator";
 import { Button } from "antd";
 import { useRouter, useSearchParams } from "next/navigation";
 import { showCommonError } from "@/helpers/errors";
 import { isAccountItemUpdateData } from "../../predicates";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { FieldIds, FieldTypes } from "@/types/field";
-import type { CalculatorSaveHandler } from "@/types/calculator";
+import type { CalculatorSaveHandler } from "@/features/calculator";
 import type { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 
 export const Detail = memo(function AccountDetail() {

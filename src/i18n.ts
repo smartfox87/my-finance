@@ -1,7 +1,7 @@
 import { initReactI18next } from "react-i18next/initReactI18next";
 import resourcesToBackend from "i18next-resources-to-backend";
 import { i18nConfig } from "../i18nConfig";
-import { ALL_I18N_NAMESPACES } from "@/constants/locales";
+import { ALL_I18N_NAMESPACES } from "@/constants/config";
 import { createInstance } from "i18next";
 import type { I18nNamespace, Locale } from "@/types/locales";
 import type { I18nProps, I18nRef, I18nResult } from "@/types/i18n";

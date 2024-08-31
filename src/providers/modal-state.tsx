@@ -1,6 +1,6 @@
 import { createContext, useCallback, useMemo, useState } from "react";
 import { useViewport } from "@/hooks/viewport";
-import type { ModalStateContextType } from "@/types/providers/modalStateProvider";
+import type { ModalStateContextType } from "@/types/providers/modal-state";
 import type { ComponentChildrenProps } from "@/types/common";
 
 export const ModalStateContext = createContext<ModalStateContextType | undefined>(undefined);

@@ -1,10 +1,9 @@
 import { forwardRef, SetStateAction, useImperativeHandle, useState } from "react";
-import { CalculatorResult } from "@/components/calculator/CalculatorResult";
-import { CalculatorKeyPad } from "@/components/calculator/CalculatorKeyPad";
+import { CalculatorResult } from "../calculator-result";
+import { CalculatorKeyPad } from "../calculator-key-pad";
 import { DECIMAL_KEYS, INTEGER_KEYS, MATH_OPERATORS_KEYS, NAVIGATION_KEYS } from "@/constants/input";
-import type { ButtonClickHandler, ResultChangeHandler, ResultKeyDownHandler } from "@/types/calculator";
+import type { ButtonClickHandler, ResultChangeHandler, ResultKeyDownHandler } from "../../types";
 
-// notice: setState type
 export const Calculator = forwardRef(function Calculator({ onCalculate }: { onCalculate: (result: SetStateAction<number>) => void }, ref) {
   const [result, setResult] = useState("");
 

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useViewport } from "@/hooks/viewport";
 import { useFieldFocus } from "@/hooks/fieldFocus";
-import type { ResultChangeHandler, ResultKeyDownHandler } from "@/types/calculator";
+import type { ResultChangeHandler, ResultKeyDownHandler } from "@/features/calculator";
 
 export const CalculatorResult = ({ value, onKeyDown, onChange }: { value: string; onKeyDown: ResultKeyDownHandler; onChange: ResultChangeHandler }) => {
   const { isTouchDevice } = useViewport();

@@ -1,4 +1,4 @@
-import { LOCALES, PAGES } from "../src/constants/router";
+import { LOCALES, PAGES } from "../src/constants/config";
 import fs from "fs";
 import path from "path";
 import * as cheerio from "cheerio";
