@@ -10,8 +10,8 @@ import { getUserId } from "@/helpers/localStorage";
 import { Preloader } from "@/components/layout/preloader/Preloader";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { getFilterItemsFromFields } from "@/helpers/filters";
-import { HeaderAside } from "../../components/header-aside";
-import { PageContent } from "../../components/page-content";
+import { HeaderAside } from "../../components";
+import { PageContent } from "../../components";
 
 export default function Page() {
   const dispatch = useAppDispatch();
