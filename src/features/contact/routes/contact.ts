@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export async function POST(request: NextRequest): Promise<NextResponse> {
+export async function sendEmail(request: NextRequest): Promise<NextResponse> {
   try {
     const formData = await request.formData();
     const full_name = formData.get("full_name");

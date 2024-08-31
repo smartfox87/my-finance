@@ -5,7 +5,7 @@ import { DemoUserAuth } from "@/features/auth";
 import { useTranslation } from "react-i18next";
 import { useAppSelector } from "@/hooks/store";
 
-export default function HomeContent() {
+export function Page() {
   const { t } = useTranslation();
   const profile = useAppSelector(selectProfile);
 

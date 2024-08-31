@@ -1,1 +1,1 @@
-export { POST } from "@/features/contact";
+export { sendEmail as POST } from "@/features/contact";

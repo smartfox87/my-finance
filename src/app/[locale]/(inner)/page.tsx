@@ -1,5 +1,5 @@
 import { initTranslations } from "@/i18n";
-import HomeContent from "@/app/[locale]/(inner)/content";
+import { Page } from "@/features/home";
 import type { Metadata } from "next";
 import type { Locale } from "@/types/locales";
 
@@ -13,5 +13,5 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 }
 
 export default function Home() {
-  return <HomeContent />;
+  return <Page />;
 }
