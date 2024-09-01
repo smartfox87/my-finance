@@ -1,5 +1,5 @@
 import { Total } from "../total";
-import { ExpensesIncomes } from "../expenses-Incomes";
+import { ExpensesIncomes } from "../expenses-incomes";
 import { ExpensesBudgets } from "../expenses-budgets";
 import { ExpensesCategories } from "../expenses-categories";
 import { IncomesCategories } from "../incomes-categories";
