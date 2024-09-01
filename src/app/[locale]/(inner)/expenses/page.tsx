@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
 import { initTranslations } from "@/i18n";
-import { InnerLayout } from "@/components/layout/inner/InnerLayout";
-import ExpensesModule from "@/app/[locale]/(inner)/expenses/content-module";
-import { getJsonLdBreadcrumbs, getJsonLdWebsite } from "@/helpers/jsonLd";
+import { InnerLayout } from "@/components/layout/inner-layout";
+import { ExpensesPageModule } from "@/features/expenses/";
+import { getJsonLdBreadcrumbs, getJsonLdWebsite } from "@/utils/jsonld";
 import { LinkItem } from "@/types/breadcrumbs";
 import { Pages } from "@/types/router";
+import type { Metadata } from "next";
 import type { Locale } from "@/types/locales";
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: Locale } }): Promise<Metadata> {
@@ -29,7 +29,7 @@ export default async function Expenses({ params: { locale } }: { params: { local
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(getJsonLdBreadcrumbs(breadcrumbList)) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(getJsonLdWebsite(t("seo.app_name"))) }} />
       <InnerLayout page={Pages.EXPENSES} breadcrumbs={breadcrumbList}>
-        <ExpensesModule />
+        <ExpensesPageModule />
       </InnerLayout>
     </>
   );

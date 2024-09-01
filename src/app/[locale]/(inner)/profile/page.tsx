@@ -1,6 +1,6 @@
 import { initTranslations } from "@/i18n";
-import { InnerLayout } from "@/components/layout/inner/InnerLayout";
-import ProfileModule from "@/app/[locale]/(inner)/profile/content-module";
+import { InnerLayout } from "@/components/layout/inner-layout";
+import { ProfilePageModule } from "@/features/profile";
 import { Pages } from "@/types/router";
 import type { Metadata } from "next";
 import type { Locale } from "@/types/locales";
@@ -16,7 +16,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 export default function Profile() {
   return (
     <InnerLayout page={Pages.PROFILE}>
-      <ProfileModule />
+      <ProfilePageModule />
     </InnerLayout>
   );
 }

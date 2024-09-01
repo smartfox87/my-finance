@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
 import { initTranslations } from "@/i18n";
-import StatisticsModule from "@/app/[locale]/(inner)/statistics/content-module";
-import { InnerLayout } from "@/components/layout/inner/InnerLayout";
-import { getJsonLdBreadcrumbs, getJsonLdWebsite } from "@/helpers/jsonLd";
-import { LinkItem } from "@/types/breadcrumbs";
+import { StatisticsPageModule } from "@/features/statistics";
+import { InnerLayout } from "@/components/layout/inner-layout";
+import { getJsonLdBreadcrumbs, getJsonLdWebsite } from "@/utils/jsonld";
 import { Pages } from "@/types/router";
 import type { Locale } from "@/types/locales";
+import type { LinkItem } from "@/types/breadcrumbs";
+import type { Metadata } from "next";
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: Locale } }): Promise<Metadata> {
   const { t } = await initTranslations({ locale });
@@ -29,7 +29,7 @@ export default async function Statistics({ params: { locale } }: { params: { loc
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(getJsonLdBreadcrumbs(breadcrumbList)) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(getJsonLdWebsite(t("seo.app_name"))) }} />
       <InnerLayout page={Pages.STATISTICS} breadcrumbs={breadcrumbList}>
-        <StatisticsModule />
+        <StatisticsPageModule />
       </InnerLayout>
     </>
   );

@@ -1,6 +1,6 @@
 import { initTranslations } from "@/i18n";
-import { InnerLayout } from "@/components/layout/inner/InnerLayout";
-import SettingsModule from "@/app/[locale]/(inner)/settings/content-module";
+import { InnerLayout } from "@/components/layout/inner-layout";
+import { SettingsPageModule } from "@/features/profile";
 import { Pages } from "@/types/router";
 import type { Metadata } from "next";
 import type { Locale } from "@/types/locales";
@@ -16,7 +16,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 export default function Settings() {
   return (
     <InnerLayout page={Pages.SETTINGS}>
-      <SettingsModule />
+      <SettingsPageModule />
     </InnerLayout>
   );
 }

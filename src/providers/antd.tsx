@@ -1,14 +1,14 @@
 import { useDarkTheme } from "@/hooks/theme";
-import { selectUser } from "@/store/selectors/auth";
 import { createContext, useCallback, useEffect, useMemo, useState } from "react";
 import { useLocale } from "@/hooks/providers/locale";
-import { getUserId } from "@/helpers/localStorage";
+import { getUserId } from "@/utils/local-storage";
 import dynamic from "next/dynamic";
-import { Preloader } from "@/components/layout/preloader/Preloader";
+import { Preloader } from "@/components/loading/preloader";
 import { usePathname } from "next/navigation";
 import { useAppSelector } from "@/hooks/store";
+import { selectUser } from "@/store/selectors/auth";
 import { Pages } from "@/types/router";
-import type { AntdContextType, Theme } from "@/types/providers/antdProvider";
+import type { AntdContextType, Theme } from "@/types/providers/antd";
 import type { ComponentChildrenProps } from "@/types/common";
 
 const StyleProvider = dynamic(() => import("@ant-design/cssinjs/es/StyleContext").then(({ StyleProvider }) => StyleProvider));

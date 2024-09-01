@@ -5,13 +5,14 @@ import { useTranslation } from "react-i18next";
 import { SimpleButton } from "@/components/form/SimpleButton";
 import * as Sentry from "@sentry/nextjs";
 import { useRouter } from "next/navigation";
+import { IS_PRODUCTION } from "@/constants/config";
 
 export default function Error({ error }: { error: Error & { digest?: string } }) {
   const { t } = useTranslation();
   const router = useRouter();
 
   useEffect((): void => {
-    if (process.env.NODE_ENV === "production") Sentry.captureException(error);
+    if (IS_PRODUCTION) Sentry.captureException(error);
   }, [error]);
 
   return (

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { LocaleContext } from "@/providers/locale";
-import type { LocaleContextType } from "@/types/providers/localeProvider";
+import type { LocaleContextType } from "@/types/providers/locale";
 
 export const useLocale = (): LocaleContextType => {
   const state = useContext(LocaleContext);

@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { Preloader } from "@/components/layout/preloader/Preloader";
+import { Preloader } from "@/components/loading/preloader";
 import { useViewport } from "@/hooks/viewport";
 import { Viewports } from "@/types/viewport";
 import type { ReactComponentLike } from "prop-types";
-import type { ProcessedBudgetItem } from "@/types/budgets";
-import type { IncomeItem } from "@/types/incomes";
-import type { CostItem } from "@/types/costs";
+import type { ProcessedBudgetItem } from "@/features/budgets";
+import type { IncomeItem } from "@/features/incomes";
+import type { CostItem } from "@/features/expenses/";
 
 const blankArray = new Array(3).fill(null);
 

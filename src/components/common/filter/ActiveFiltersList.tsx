@@ -1,5 +1,5 @@
 import { Button } from "antd";
-import { checkIsClearableFilter } from "@/helpers/filters";
+import { checkIsClearableFilter } from "@/utils/filters";
 import SvgCrossBold from "@/assets/sprite/cross-bold.svg";
 import type { ActiveFilterItem, ClearActiveFilterItemHandler } from "@/types/filter";
 
