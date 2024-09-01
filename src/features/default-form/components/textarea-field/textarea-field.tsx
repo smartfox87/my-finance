@@ -4,7 +4,7 @@ import { useLayoutEffect } from "react";
 import { Form, Input, type InputRef } from "antd";
 import type { FormFieldProps, TextFormField } from "@/types/form";
 
-export const TextareaFormFieldComponent = ({ field, onChange }: FormFieldProps<TextFormField>) => {
+export const TextareaField = ({ field, onChange }: FormFieldProps<TextFormField>) => {
   const { t } = useTranslation();
 
   const [focusFieldRef, mountFocusField] = useFieldFocus<InputRef>();

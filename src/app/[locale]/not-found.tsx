@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslation } from "react-i18next";
-import { SimpleButton } from "@/components/form/SimpleButton";
+import { SimpleButton } from "@/components/simple-button/simple-button";
 import { useRouter } from "next/navigation";
 
 export default function NotFoundPage() {

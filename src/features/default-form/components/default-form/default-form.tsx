@@ -10,16 +10,16 @@ import { FieldTypes } from "@/types/field";
 import { Button, Form, type FormProps } from "antd";
 import type { ChangedField, DefaultFormProps, FormValues } from "@/types/form";
 
-const TextFieldComponent = dynamic(() => import("@/components/form/formFields/TextFormFieldComponent").then((mod) => mod.TextFormFieldComponent));
-const PasswordFieldComponent = dynamic(() => import("@/components/form/formFields/PasswordFormFieldComponent").then((mod) => mod.PasswordFormFieldComponent));
-const TextAreaFieldComponent = dynamic(() => import("@/components/form/formFields/TextareaFormFieldComponent").then((mod) => mod.TextareaFormFieldComponent));
-const PeriodFieldComponent = dynamic(() => import("@/components/form/formFields/PeriodFormFieldComponent").then((mod) => mod.PeriodFormFieldComponent));
-const SingleSelectFieldComponent = dynamic(() => import("@/components/form/formFields/SingleSelectFormFieldComponent").then((mod) => mod.SingleSelectFormFieldComponent));
-const MultiSelectFieldComponent = dynamic(() => import("@/components/form/formFields/MultiSelectFormFieldComponent").then((mod) => mod.MultiSelectFormFieldComponent));
-const DatePickerFieldComponent = dynamic(() => import("@/components/form/formFields/DatePickerFormFieldComponent").then((mod) => mod.DatePickerFormFieldComponent));
-const InputNumberFieldComponent = dynamic(() => import("@/components/form/formFields/InputNumberFormFieldComponent").then((mod) => mod.InputNumberFormFieldComponent));
-const RadioGroupFieldComponent = dynamic(() => import("@/components/form/formFields/RadioGroupFormFieldComponent").then((mod) => mod.RadioGroupFormFieldComponent));
-const UploadFieldComponent = dynamic(() => import("@/components/form/formFields/UploadFormFieldComponent").then((mod) => mod.UploadFormFieldComponent));
+const TextFieldComponent = dynamic(() => import("../text-field").then((mod) => mod.TextField));
+const PasswordFieldComponent = dynamic(() => import("../password-field").then((mod) => mod.PasswordField));
+const TextAreaFieldComponent = dynamic(() => import("../textarea-field").then((mod) => mod.TextareaField));
+const PeriodFieldComponent = dynamic(() => import("../period-field").then((mod) => mod.PeriodField));
+const SingleSelectFieldComponent = dynamic(() => import("../single-select-field").then((mod) => mod.SingleSelectField));
+const MultiSelectFieldComponent = dynamic(() => import("../multi-select-field").then((mod) => mod.MultiSelectField));
+const DatePickerFieldComponent = dynamic(() => import("../date-picker-field").then((mod) => mod.DatePickerField));
+const InputNumberFieldComponent = dynamic(() => import("../number-field").then((mod) => mod.NumberField));
+const RadioGroupFieldComponent = dynamic(() => import("../radio-group-field").then((mod) => mod.RadioGroupField));
+const UploadFieldComponent = dynamic(() => import("../upload-field").then((mod) => mod.UploadField));
 
 export const DefaultForm = forwardRef(function DefaultForm({ fields, isResetAfterSave, "data-cy": dataCy, onSaveForm, onResetForm, onChange }: DefaultFormProps, ref) {
   const { t } = useTranslation();

@@ -4,7 +4,7 @@ import { Form, Select } from "antd";
 import type { MultiSelectValue } from "@/types/field";
 import type { FormFieldProps, MultiSelectFormField } from "@/types/form";
 
-export const MultiSelectFormFieldComponent = ({ field, onChange }: FormFieldProps<MultiSelectFormField>) => {
+export const MultiSelectField = ({ field, onChange }: FormFieldProps<MultiSelectFormField>) => {
   const { t } = useTranslation();
 
   return (

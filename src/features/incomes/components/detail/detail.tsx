@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { memo, useEffect, useRef, useState } from "react";
 import { selectIncomeFields, selectIncomeItem } from "../../selectors";
 import { deleteIncomeItemThunk, getIncomeItemThunk, setIncomeItem, updateIncomeItemThunk } from "../../store";
-import { DefaultForm } from "@/components/form/DefaultForm";
+import { DefaultForm } from "@/features/default-form";
 import { showNotification } from "@/utils/modals";
 import { SideModal } from "@/components/modals/side-modal";
 import { useLoading } from "@/hooks/loading";

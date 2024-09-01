@@ -1,6 +1,6 @@
 import { Button } from "antd";
 import { SideModal } from "@/components/modals/side-modal";
-import { DefaultForm } from "@/components/form/DefaultForm";
+import { DefaultForm } from "@/features/default-form";
 import { selectAccountFields } from "../../selectors";
 import { createAccountItemThunk } from "../../store";
 import { useTranslation } from "react-i18next";

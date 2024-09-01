@@ -7,7 +7,7 @@ import { FieldTypes } from "@/types/field";
 import type { FileFormField, FileFormFieldId, FormFieldProps } from "@/types/form";
 import { isUploadFilesArray } from "@/predicates/common";
 
-export const UploadFormFieldComponent = ({ field, value, onChange }: FormFieldProps<FileFormField>) => {
+export const UploadField = ({ field, value, onChange }: FormFieldProps<FileFormField>) => {
   const { t } = useTranslation();
 
   const normFile = (e: { fileList: UploadFile[] }): UploadFile[] => (Array.isArray(e) ? e : e?.fileList);

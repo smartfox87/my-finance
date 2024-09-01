@@ -1,6 +1,6 @@
 import { Select } from "antd";
 import { handleFilterSelectOptions, renderSelectOption } from "@/utils/fields";
-import { PeriodField } from "@/components/form/PeriodField";
+import { PeriodField } from "@/components/form/period-field";
 import { MutableRefObject, SetStateAction, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { FieldTypes } from "@/types/field";

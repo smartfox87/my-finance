@@ -3,7 +3,7 @@ import { cutDecimals, handleKeyDownDecimalsValidation, handleKeyUpCutDecimals } 
 import { Form, InputNumber } from "antd";
 import type { FormFieldProps, NumberFormField } from "@/types/form";
 
-export const InputNumberFormFieldComponent = ({ field, onChange }: FormFieldProps<NumberFormField>) => {
+export const NumberField = ({ field, onChange }: FormFieldProps<NumberFormField>) => {
   const { t } = useTranslation();
 
   return (

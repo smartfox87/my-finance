@@ -4,7 +4,7 @@ import { Form, Select } from "antd";
 import type { SingleSelectValue } from "@/types/field";
 import type { FormFieldProps, SingleSelectFormField } from "@/types/form";
 
-export const SingleSelectFormFieldComponent = ({ field, onChange }: FormFieldProps<SingleSelectFormField>) => {
+export const SingleSelectField = ({ field, onChange }: FormFieldProps<SingleSelectFormField>) => {
   const { t } = useTranslation();
 
   return (

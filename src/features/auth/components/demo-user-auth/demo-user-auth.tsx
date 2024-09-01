@@ -2,7 +2,7 @@
 
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
-import { SimpleButton } from "@/components/form/SimpleButton";
+import { SimpleButton } from "@/components/simple-button/simple-button";
 import { useAppDispatch } from "@/hooks/store";
 
 export const DemoUserAuth = () => {

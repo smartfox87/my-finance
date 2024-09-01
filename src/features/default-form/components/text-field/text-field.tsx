@@ -5,7 +5,7 @@ import { type LegacyRef, useLayoutEffect } from "react";
 import { type FieldTranslationError, type FieldType, FieldTypes } from "@/types/field";
 import type { FormFieldProps, FormItemRule, TextFormField } from "@/types/form";
 
-export const TextFormFieldComponent = ({ field, onChange }: FormFieldProps<TextFormField>) => {
+export const TextField = ({ field, onChange }: FormFieldProps<TextFormField>) => {
   const { t } = useTranslation();
 
   const [focusFieldRef, mountFocusField] = useFieldFocus<InputRef>();

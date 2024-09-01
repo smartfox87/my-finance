@@ -4,7 +4,7 @@ import { type LegacyRef, useLayoutEffect } from "react";
 import { Form, Input, InputRef } from "antd";
 import type { FormFieldProps, TextFormField } from "@/types/form";
 
-export const PasswordFormFieldComponent = ({ field, onChange }: FormFieldProps<TextFormField>) => {
+export const PasswordField = ({ field, onChange }: FormFieldProps<TextFormField>) => {
   const { t } = useTranslation();
 
   const [focusFieldRef, mountFocusField] = useFieldFocus<InputRef>();

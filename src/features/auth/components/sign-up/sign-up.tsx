@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useViewport } from "@/hooks/viewport";
 import { useRecaptcha } from "@/hooks/providers/recaptcha";
 import SvgSignUp from "@/assets/sprite/sign-up.svg";
-import { SimpleButton } from "@/components/form/SimpleButton";
+import { SimpleButton } from "@/components/simple-button/simple-button";
 import { useAntd } from "@/hooks/providers/antd";
 import { useModalState } from "@/hooks/providers/modal-state";
 import dynamic from "next/dynamic";

@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import type { ComponentChildrenProps } from "@/types/common";
