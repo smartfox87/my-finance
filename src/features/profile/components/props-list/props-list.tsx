@@ -1,4 +1,4 @@
-export const PropValueList = ({ items, className }: { items: { prop: string; value: string }[]; className: string }) => {
+export const PropsList = ({ items, className }: { items: { prop: string; value: string }[]; className: string }) => {
   return (
     <ul className={className}>
       {items.map(({ prop, value }) => (

@@ -5,7 +5,7 @@ import { Viewports } from "@/types/viewport";
 import type { ReactComponentLike } from "prop-types";
 import type { ProcessedBudgetItem } from "@/features/budgets";
 import type { IncomeItem } from "@/features/incomes";
-import type { CostItem } from "@/features/expenses/";
+import type { CostItem } from "@/features/expenses";
 
 const blankArray = new Array(3).fill(null);
 

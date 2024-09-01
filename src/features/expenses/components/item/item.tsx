@@ -1,4 +1,4 @@
-import { CommonDate } from "@/components/common/CommonDate";
+import { Date } from "@/components/date/date";
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "antd";
 import formatPrice from "@/utils/format-price";
@@ -35,7 +35,7 @@ export const Item = ({ id, created_at, name, amount, date, category, account }: 
       data-created={created_at}
       className="flex w-full flex-col gap-3 rounded-xl border border-gray-300 p-4 shadow-[0_3px_7px_0_#ddd] duration-300 hover:-translate-y-1 hover:shadow-[0_7px_7px_0_#ddd]"
     >
-      <CommonDate date={date} />
+      <Date date={date} />
       <ul className="flex grow flex-col gap-1">
         <li ref={nameRef} className="line-clamp-2 md:line-clamp-3">
           {isTooltipName ? (

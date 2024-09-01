@@ -2,7 +2,7 @@ import { selectCostsFilterFields, selectCostsFilterValues } from "../../selector
 import { setCostsFilterValues } from "../../store";
 import { memo, useMemo } from "react";
 import { getActiveFilters } from "@/utils/filters";
-import { ActiveFiltersList } from "@/components/common/filter/ActiveFiltersList";
+import { ActiveFiltersList } from "@/components/filter/active-filters-list";
 import { isMultiSelectFormFieldId } from "@/predicates/form";
 import { isMultiSelectValue } from "@/predicates/field";
 import { isNumber } from "@/predicates/common";

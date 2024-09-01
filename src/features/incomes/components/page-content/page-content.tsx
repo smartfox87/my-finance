@@ -1,12 +1,12 @@
 import { AddNew } from "../add-new";
 import { Filter } from "../filter";
 import { ActiveFilters } from "../active-filters";
-import { LazyList } from "@/components/common/list/LazyList";
+import { LazyList } from "@/components/list/lazy-list";
 import { Item } from "../item";
 import { Suspense } from "react";
 import { Detail } from "../detail";
 import { Empty } from "../empty";
-import { FoundNothing } from "@/components/common/list/FoundNothing";
+import { FoundNothing } from "@/components/list/found-nothing";
 import { selectIncomesByFilter, selectIncomesList } from "../../selectors";
 import { useAppSelector } from "@/hooks/store";
 import type { PageContentProps } from "@/types/common";

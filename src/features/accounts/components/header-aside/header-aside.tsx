@@ -1,4 +1,4 @@
-import { InnerHeaderAsidePortal } from "@/components/layout/inner-header-aside-portal/inner-header-aside-portal";
+import { InnerHeaderAsidePortal } from "@/features/inner-layout";
 import formatPrice from "@/utils/format-price";
 import { useTranslation } from "react-i18next";
 import { selectAccountsBalance } from "../../selectors";

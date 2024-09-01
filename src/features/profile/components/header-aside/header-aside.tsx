@@ -1,4 +1,4 @@
-import { InnerHeaderAsidePortal } from "@/components/layout/inner-header-aside-portal/inner-header-aside-portal";
+import { InnerHeaderAsidePortal } from "@/features/inner-layout";
 import { Button } from "antd";
 import SvgLogout from "@/assets/sprite/logout.svg";
 import { useState } from "react";

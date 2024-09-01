@@ -1,4 +1,4 @@
-import { PropValueList } from "@/components/common/PropValueList";
+import { PropsList } from "../props-list";
 import { getFullDate } from "@/utils/date";
 import { useTranslation } from "react-i18next";
 import { selectProfile } from "../../selectors";
@@ -13,5 +13,5 @@ export const Dates = () => {
     { prop: t("common.updated_at"), value: getFullDate(profile?.updated_at, "YYYY MMMM DD, HH:MM") },
   ];
 
-  return <PropValueList items={datesList} className="flex flex-wrap justify-between gap-x-6 gap-y-1" />;
+  return <PropsList items={datesList} className="flex flex-wrap justify-between gap-x-6 gap-y-1" />;
 };

@@ -5,7 +5,7 @@ import { ExpensesCategories } from "../expenses-categories";
 import { IncomesCategories } from "../incomes-categories";
 import { Filter } from "../filter";
 import { ActiveFilters } from "../active-filters";
-import { FoundNothing } from "@/components/common/list/FoundNothing";
+import { FoundNothing } from "@/components/list/found-nothing";
 import { selectCostCategories, selectIncomeCategories } from "@/store/selectors/references";
 import { selectBudgetsListForChartsByFilter, selectCostsListForChartsByFilter, selectIncomesListForChartsByFilter, selectIsStatisticsFilterValuesChanged } from "../../selectors";
 import { useAppSelector } from "@/hooks/store";
