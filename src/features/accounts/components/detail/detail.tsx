@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { memo, useEffect, useRef, useState } from "react";
 import { selectAccountFields, selectAccountItem } from "../../selectors";
-import { deleteAccountItemThunk, getAccountItemThunk, setAccountItem, updateAccountItemThunk } from "../../store";
+import { deleteAccountItemThunk, getAccountItemThunk, setAccountItem, updateAccountItemThunk } from "@/store/slices/accounts";
 import { DefaultForm } from "@/features/default-form";
 import { SideModal } from "@/components/modals/side-modal";
 import { useLoading } from "@/hooks/loading";

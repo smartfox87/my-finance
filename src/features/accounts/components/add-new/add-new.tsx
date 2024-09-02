@@ -2,7 +2,7 @@ import { Button } from "antd";
 import { SideModal } from "@/components/modals/side-modal";
 import { DefaultForm } from "@/features/default-form";
 import { selectAccountFields } from "../../selectors";
-import { createAccountItemThunk } from "../../store";
+import { createAccountItemThunk } from "@/store/slices/accounts";
 import { useTranslation } from "react-i18next";
 import { memo, useRef, useState } from "react";
 import SvgNewAccount from "@/assets/sprite/new-account.svg";

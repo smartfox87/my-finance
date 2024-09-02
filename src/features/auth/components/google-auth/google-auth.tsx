@@ -10,7 +10,7 @@ export const GoogleAuth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const handleAuthorize = async (): Promise<void> => {
     setIsLoading(true);
-    const { loginByProviderUserThunk } = await import("../../store");
+    const { loginByProviderUserThunk } = await import("@/store/slices/auth");
     dispatch(loginByProviderUserThunk("google"));
   };
 

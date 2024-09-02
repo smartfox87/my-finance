@@ -1,10 +1,9 @@
-import { getUserSession, loginDemoUserApi, loginUserApi, loginUserByProviderApi, logoutUserApi, registerUserApi } from "../api";
+import { getUserSession, loginDemoUserApi, loginUserApi, loginUserByProviderApi, logoutUserApi, registerUserApi } from "../../features/auth/api";
 import { handleRejectedReducerAction } from "@/utils/errors";
 import { rootReducer } from "@/store";
-import { handleAuthStateChange } from "../utils";
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import type { Provider, User } from "@supabase/auth-js";
-import type { RegisterData, UserPayload, LoginData, SessionPayload, AuthSliceState } from "../types";
+import type { RegisterData, UserPayload, LoginData, SessionPayload, AuthSliceState } from "@/features/auth";
 
 const setUserData = (state: AuthSliceState, user: User | null) => {
   if (!user || state.user) return;
@@ -29,7 +28,6 @@ export const authSlice = createAppSlice({
   reducers: (create) => ({
     registerUserThunk: create.asyncThunk<UserPayload, RegisterData, { rejectValue: string }>(
       async (userData, { rejectWithValue }) => {
-        handleAuthStateChange();
         const { data, error } = await registerUserApi(userData);
         if (error) throw rejectWithValue(error.message);
         return data;
@@ -41,7 +39,6 @@ export const authSlice = createAppSlice({
     ),
     loginUserThunk: create.asyncThunk<UserPayload, LoginData, { rejectValue: string }>(
       async (userData, { rejectWithValue }) => {
-        handleAuthStateChange();
         const { data, error } = await loginUserApi(userData);
         if (error) throw rejectWithValue(error.message);
         return data;
@@ -56,7 +53,6 @@ export const authSlice = createAppSlice({
     ),
     loginDemoUserThunk: create.asyncThunk<UserPayload, void, { rejectValue: string }>(
       async (_, { rejectWithValue }) => {
-        handleAuthStateChange();
         const { data, error } = await loginDemoUserApi();
         if (error) throw rejectWithValue(error.message);
         return data;
@@ -68,6 +64,7 @@ export const authSlice = createAppSlice({
     ),
     logoutUserThunk: create.asyncThunk<void, void, { rejectValue: string }>(
       async (_, { rejectWithValue }) => {
+        console.log("111111111111111111111111111111111111111111");
         const { error } = await logoutUserApi();
         if (error) throw rejectWithValue(error.message);
       },

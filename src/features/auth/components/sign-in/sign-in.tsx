@@ -30,7 +30,7 @@ export const SignIn = () => {
   const handleSubmitForm: DefaultFormSaveHandler = async (fieldsValues) => {
     try {
       if (!isLoginData(fieldsValues)) return;
-      const { loginUserThunk } = await import("../../store");
+      const { loginUserThunk } = await import("@/store/slices/auth");
       await dispatch(loginUserThunk(fieldsValues)).unwrap();
       handleToggleVisibility();
     } catch (error) {

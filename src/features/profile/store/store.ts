@@ -1,6 +1,7 @@
 import { getProfileApi, updateProfileApi } from "../api";
 import { handleRejectedReducerAction } from "@/utils/errors";
 import { rootReducer } from "@/store";
+import { logoutUserThunk } from "@/store/slices/auth";
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import type { Types, ProfileData, ProfileSliceState, SettingsData } from "../types";
 
@@ -46,9 +47,16 @@ export const profileSlice = createAppSlice({
         },
       },
     ),
-    clearProfile: create.reducer((state) => {
-      state.profile = null;
-    }),
+    logoutProfileThunk: create.asyncThunk<void, undefined, { rejectValue: string }>(
+      async (_, { dispatch }) => {
+        await dispatch(logoutUserThunk());
+      },
+      {
+        fulfilled: (state) => {
+          state.profile = null;
+        },
+      },
+    ),
   }),
 });
 
@@ -58,4 +66,4 @@ declare module "@/types/store" {
 
 rootReducer.inject(profileSlice);
 
-export const { clearProfile, getProfileThunk, updateProfileThunk } = profileSlice.actions;
+export const { logoutProfileThunk, getProfileThunk, updateProfileThunk } = profileSlice.actions;

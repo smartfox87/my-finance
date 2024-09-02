@@ -36,7 +36,7 @@ export const SignUp = () => {
       const registerData = { ...fieldsValues, score };
       if (!isRegisterData(registerData)) return;
       if (score < 0.5) return import("@/utils/modals").then(({ showNotification }) => showNotification({ title: t("notifications.recaptcha_invalid") }));
-      const { registerUserThunk } = await import("../../store");
+      const { registerUserThunk } = await import("@/store/slices/auth");
       await dispatch(registerUserThunk(registerData)).unwrap();
       handleToggleVisibility();
     } catch (error) {

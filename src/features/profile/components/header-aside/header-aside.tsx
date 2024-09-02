@@ -2,8 +2,7 @@ import { InnerHeaderAsidePortal } from "@/features/inner-layout";
 import { Button } from "antd";
 import SvgLogout from "@/assets/sprite/logout.svg";
 import { useState } from "react";
-import { logoutUserThunk } from "@/features/auth";
-import { clearProfile } from "../../store";
+import { logoutProfileThunk } from "../../store";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch } from "@/hooks/store";
 
@@ -14,7 +13,7 @@ export const HeaderAside = () => {
 
   const handleLogout = async (): Promise<void> => {
     setIsLogoutLoading(true);
-    await Promise.all([dispatch(logoutUserThunk()), dispatch(clearProfile())]);
+    await dispatch(logoutProfileThunk());
     setIsLogoutLoading(false);
   };
 
