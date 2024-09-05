@@ -1,10 +1,14 @@
-let errorMessage: (text: string, duration?: number) => void;
+import { NotificationTypes } from "@/types/modals";
+import type { MessageInstance } from "antd/es/message/interface";
 
-export const showErrorMessage = (text: string, duration?: number) => {
-  if (errorMessage) errorMessage(text, duration);
-  else
-    import("antd/es/message").then(({ default: mod }) => {
-      errorMessage = mod.error;
-      errorMessage(text, duration);
-    });
+let errorMessage: MessageInstance[NotificationTypes.ERROR] | undefined;
+
+export const showErrorMessage = async (text: string, duration?: number): Promise<void> => {
+  if (errorMessage) {
+    errorMessage(text, duration);
+  } else {
+    const message = await import("antd/es/message").then((mod) => mod.default);
+    errorMessage = message[NotificationTypes.ERROR];
+    errorMessage(text, duration);
+  }
 };
