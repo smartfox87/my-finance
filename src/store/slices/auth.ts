@@ -45,9 +45,8 @@ export const authSlice = createAppSlice({
       },
       {
         rejected: handleRejectedReducerAction,
-        fulfilled: (state, options) => {
-          console.log(options);
-          // setUserData(state, user)
+        fulfilled: (state, { payload: { user } }) => {
+          setUserData(state, user);
         },
       },
     ),
@@ -64,7 +63,6 @@ export const authSlice = createAppSlice({
     ),
     logoutUserThunk: create.asyncThunk<void, void, { rejectValue: string }>(
       async (_, { rejectWithValue }) => {
-        console.log("111111111111111111111111111111111111111111");
         const { error } = await logoutUserApi();
         if (error) throw rejectWithValue(error.message);
       },
