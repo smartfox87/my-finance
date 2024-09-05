@@ -11,7 +11,7 @@ import { isLoginData } from "../../predicates";
 import { showCommonError } from "@/utils/errors";
 import type { DefaultFormSaveHandler } from "@/types/form";
 
-const AuthModal = dynamic(() => import("../auth-modal").then(({ AuthModal }) => ({ default: AuthModal })));
+const AuthModal = dynamic(() => import("../auth-modal").then((mod) => mod.AuthModal));
 
 export const SignIn = () => {
   const { t } = useTranslation();
