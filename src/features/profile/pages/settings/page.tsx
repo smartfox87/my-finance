@@ -1,7 +1,7 @@
 "use client";
 
 import { selectSettingsFields } from "../../selectors";
-import { DefaultForm } from "@/components/form/DefaultForm";
+import { DefaultForm } from "@/features/default-form";
 import { getProfileThunk, updateProfileThunk } from "../../store";
 import { showNotification } from "@/utils/modals";
 import { useTranslation } from "react-i18next";

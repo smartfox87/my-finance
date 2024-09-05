@@ -1,4 +1,4 @@
 export * from "./types";
 export * from "./selectors";
-export * from "./store";
+export * from "./providers";
 export * from "./pages";

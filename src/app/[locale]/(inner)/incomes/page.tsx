@@ -1,5 +1,5 @@
 import { initTranslations } from "@/i18n";
-import { InnerLayout } from "@/components/layout/inner-layout";
+import { InnerLayout } from "@/features/inner-layout";
 import { IncomesPageModule } from "@/features/incomes";
 import { getJsonLdBreadcrumbs, getJsonLdWebsite } from "@/utils/jsonld";
 import { Pages } from "@/types/router";

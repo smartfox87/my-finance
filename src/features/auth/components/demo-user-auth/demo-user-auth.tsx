@@ -2,7 +2,7 @@
 
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
-import { SimpleButton } from "@/components/form/SimpleButton";
+import { SimpleButton } from "@/components/simple-button/simple-button";
 import { useAppDispatch } from "@/hooks/store";
 
 export const DemoUserAuth = () => {
@@ -12,7 +12,7 @@ export const DemoUserAuth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const handleAuthorize = async (): Promise<void> => {
     setIsLoading(true);
-    const { loginDemoUserThunk } = await import("../../store");
+    const { loginDemoUserThunk } = await import("@/store/slices/auth");
     dispatch(loginDemoUserThunk());
   };
 

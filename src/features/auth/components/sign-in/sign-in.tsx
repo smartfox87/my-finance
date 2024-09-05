@@ -2,7 +2,7 @@ import { INITIAL_SIGN_IN_FIELDS } from "../../constants";
 import { useTranslation } from "react-i18next";
 import { useViewport } from "@/hooks/viewport";
 import SvgSignIn from "@/assets/sprite/sign-in.svg";
-import { SimpleButton } from "@/components/form/SimpleButton";
+import { SimpleButton } from "@/components/simple-button/simple-button";
 import { useAntd } from "@/hooks/providers/antd";
 import { useModalState } from "@/hooks/providers/modal-state";
 import dynamic from "next/dynamic";
@@ -11,7 +11,7 @@ import { isLoginData } from "../../predicates";
 import { showCommonError } from "@/utils/errors";
 import type { DefaultFormSaveHandler } from "@/types/form";
 
-const AuthModal = dynamic(() => import("../auth-modal").then(({ AuthModal }) => ({ default: AuthModal })));
+const AuthModal = dynamic(() => import("../auth-modal").then((mod) => mod.AuthModal));
 
 export const SignIn = () => {
   const { t } = useTranslation();
@@ -30,7 +30,7 @@ export const SignIn = () => {
   const handleSubmitForm: DefaultFormSaveHandler = async (fieldsValues) => {
     try {
       if (!isLoginData(fieldsValues)) return;
-      const { loginUserThunk } = await import("../../store");
+      const { loginUserThunk } = await import("@/store/slices/auth");
       await dispatch(loginUserThunk(fieldsValues)).unwrap();
       handleToggleVisibility();
     } catch (error) {

@@ -1,6 +1,6 @@
 import { initTranslations } from "@/i18n";
 import { StatisticsPageModule } from "@/features/statistics";
-import { InnerLayout } from "@/components/layout/inner-layout";
+import { InnerLayout } from "@/features/inner-layout";
 import { getJsonLdBreadcrumbs, getJsonLdWebsite } from "@/utils/jsonld";
 import { Pages } from "@/types/router";
 import type { Locale } from "@/types/locales";
