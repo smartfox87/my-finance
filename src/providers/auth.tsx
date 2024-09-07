@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import type { ComponentChildrenProps } from "@/types/common";
 
-export function AuthInitialisation({ children }: ComponentChildrenProps) {
+export function AuthInitialization({ children }: ComponentChildrenProps) {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
 

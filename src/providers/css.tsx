@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { setCSSVariables } from "@/utils/css-variables";
 import type { ComponentChildrenProps } from "@/types/common";
 
-export function CSSVariablesInitialisation({ children }: ComponentChildrenProps) {
+export function CSSVariablesInitialization({ children }: ComponentChildrenProps) {
   useEffect((): void => {
     setCSSVariables();
   }, []);
