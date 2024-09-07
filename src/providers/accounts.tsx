@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import type { ComponentChildrenProps } from "@/types/common";
 
-export function InitialAccounts({ children }: ComponentChildrenProps) {
+export function LoadingAccounts({ children }: ComponentChildrenProps) {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
 
