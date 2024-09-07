@@ -11,7 +11,7 @@ import { ReferencesInitialisation } from "@/providers/references";
 import { LoadingAccounts } from "./accounts";
 import { LoadingProfile } from "@/features/profile";
 import { AuthInitialisation } from "@/features/auth";
-import {CSSVariablesInitialisation} from "@/providers/css";
+import { CSSVariablesInitialisation } from "@/providers/css";
 import type { ReactNode } from "react";
 import type { Resource } from "i18next";
 
