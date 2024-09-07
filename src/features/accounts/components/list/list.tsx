@@ -1,5 +1,5 @@
 import { Item } from "../item";
-import { selectAccountsList } from "../../selectors";
+import { selectAccountsList } from "@/store/selectors/accounts";
 import { useAppSelector } from "@/hooks/store";
 
 export const List = () => {

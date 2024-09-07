@@ -5,7 +5,7 @@ import { setFilterValue } from "@/utils/filters";
 import { rootReducer } from "@/store";
 import { isFilterPeriodStateItem } from "@/predicates/filter";
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
-import type { AccountItemBalanceData } from "@/features/accounts";
+import type { AccountItemBalanceData } from "@/types/accounts";
 import type { AppDispatch, RootState } from "@/types/store";
 import type { IncomeItem, IncomeItemData, IncomesSliceState } from "../types";
 import type { FilterItem, FilterState } from "@/types/filter";

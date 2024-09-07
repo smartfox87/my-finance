@@ -1,7 +1,7 @@
 import { InnerHeaderAsidePortal } from "@/features/inner-layout";
 import formatPrice from "@/utils/format-price";
 import { useTranslation } from "react-i18next";
-import { selectAccountsBalance } from "../../selectors";
+import { selectAccountsBalance } from "@/store/selectors/accounts";
 import { selectCurrency } from "@/features/profile";
 import { useAppSelector } from "@/hooks/store";
 

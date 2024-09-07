@@ -4,10 +4,9 @@ import { selectUser } from "@/store/selectors/auth";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import { setCSSVariables } from "@/utils/css-variables";
 import type { ComponentChildrenProps } from "@/types/common";
 
-export function InitialData({ children }: ComponentChildrenProps) {
+export function ReferencesLoading({ children }: ComponentChildrenProps) {
   const dispatch = useAppDispatch();
   const {
     i18n: { language },
@@ -25,10 +24,6 @@ export function InitialData({ children }: ComponentChildrenProps) {
         Promise.all([dispatch(getAccountTypesThunk()), dispatch(getCostCategoriesThunk()), dispatch(getIncomeCategoriesThunk())]),
       );
   }, [language, user]);
-
-  useEffect((): void => {
-    setCSSVariables();
-  }, []);
 
   return <>{children}</>;
 }

@@ -2,7 +2,7 @@ import { apiClient } from "@/lib/api-client";
 import { getUserId } from "@/utils/local-storage";
 import { deleteAccountTypeApi } from "@/api/references";
 import { getCurrentDate } from "@/utils/date";
-import type { AccountItemBalance } from "../types";
+import type { AccountItemBalance } from "@/types/accounts";
 
 export const createInitialAccountsApi = () =>
   apiClient

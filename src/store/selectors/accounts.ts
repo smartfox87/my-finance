@@ -1,10 +1,10 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { selectCurrency } from "@/features/profile";
-import { INITIAL_ACCOUNT_FIELDS, INITIAL_ACCOUNT_TRANSFER_FIELDS } from "../constants/";
+import { INITIAL_ACCOUNT_FIELDS, INITIAL_ACCOUNT_TRANSFER_FIELDS } from "@/constants/accounts";
 import { selectAccountTypesObject } from "@/store/selectors/references";
 import { FieldIds } from "@/types/field";
 import type { LazyLoadedSlices } from "@/types/store";
-import type { AccountItem, AccountItemField, AccountTransferField, ProcessedAccountItem } from "../types";
+import type { AccountItem, AccountItemField, AccountTransferField, ProcessedAccountItem } from "@/types/accounts";
 
 export const selectAccounts = ({ accounts }: LazyLoadedSlices): AccountItem[] | null => accounts?.accountsList || null;
 
