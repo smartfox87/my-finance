@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import type { ComponentChildrenProps } from "@/types/common";
 
-export function ReferencesInitialisation({ children }: ComponentChildrenProps) {
+export function ReferencesLoading({ children }: ComponentChildrenProps) {
   const dispatch = useAppDispatch();
   const {
     i18n: { language },

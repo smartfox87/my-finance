@@ -7,9 +7,9 @@ import { LocaleProvider } from "@/providers/locale";
 import { AntdProvider } from "@/providers/antd";
 import { I18nProvider } from "@/providers/i18n";
 import { ModalStateProvider } from "@/providers/modals";
-import { ReferencesInitialisation } from "@/providers/references";
-import { LoadingAccounts } from "./accounts";
-import { LoadingProfile } from "@/features/profile";
+import { ReferencesLoading } from "@/providers/references";
+import { AccountsLoading } from "./accounts";
+import { ProfileLoading } from "@/features/profile";
 import { AuthInitialisation } from "@/providers/auth";
 import { CSSVariablesInitialisation } from "@/providers/css";
 import type { ReactNode } from "react";
@@ -24,13 +24,13 @@ export function AppProvider({ children, i18nResources }: { children: ReactNode; 
             <ModalStateProvider>
               <AntdProvider>
                 <CSSVariablesInitialisation>
-                  <ReferencesInitialisation>
+                  <ReferencesLoading>
                     <AuthInitialisation>
-                      <LoadingAccounts>
-                        <LoadingProfile>{children}</LoadingProfile>
-                      </LoadingAccounts>
+                      <AccountsLoading>
+                        <ProfileLoading>{children}</ProfileLoading>
+                      </AccountsLoading>
                     </AuthInitialisation>
-                  </ReferencesInitialisation>
+                  </ReferencesLoading>
                 </CSSVariablesInitialisation>
               </AntdProvider>
             </ModalStateProvider>
