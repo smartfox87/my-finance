@@ -1,7 +1,7 @@
 import { Button } from "antd";
 import { SideModal } from "@/components/modals/side-modal";
 import { DefaultForm } from "@/features/default-form";
-import { selectAccountFields } from "../../selectors";
+import { selectAccountFields } from "@/store/selectors/accounts";
 import { createAccountItemThunk } from "@/store/slices/accounts";
 import { useTranslation } from "react-i18next";
 import { memo, useRef, useState } from "react";
