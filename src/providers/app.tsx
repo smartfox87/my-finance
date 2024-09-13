@@ -1,17 +1,13 @@
 "use client";
 
-import { RecaptchaProvider } from "@/providers/recaptcha";
+import { RecaptchaProvider } from "@/providers/items/recaptcha";
 import { Provider } from "react-redux";
 import { store } from "@/store";
-import { LocaleProvider } from "@/providers/locale";
-import { AntdProvider } from "@/providers/antd";
-import { I18nProvider } from "@/providers/i18n";
-import { ModalStateProvider } from "@/providers/modals";
-import { ReferencesLoading } from "@/providers/references";
-import { AccountsLoading } from "./accounts";
-import { ProfileLoading } from "@/features/profile";
-import { AuthInitialization } from "@/providers/auth";
-import { CSSVariablesInitialization } from "@/providers/css";
+import { LocaleProvider } from "@/providers/items/locale";
+import { AntdProvider } from "@/providers/items/antd";
+import { I18nProvider } from "@/providers/items/i18n";
+import { ModalStateProvider } from "@/providers/items/modals";
+import { CSSVariablesInitialization } from "@/providers/items/css";
 import type { ReactNode } from "react";
 import type { Resource } from "i18next";
 
@@ -23,15 +19,7 @@ export function AppProvider({ children, i18nResources }: { children: ReactNode; 
           <LocaleProvider>
             <ModalStateProvider>
               <AntdProvider>
-                <CSSVariablesInitialization>
-                  <AuthInitialization>
-                    <ReferencesLoading>
-                      <AccountsLoading>
-                        <ProfileLoading>{children}</ProfileLoading>
-                      </AccountsLoading>
-                    </ReferencesLoading>
-                  </AuthInitialization>
-                </CSSVariablesInitialization>
+                <CSSVariablesInitialization>{children}</CSSVariablesInitialization>
               </AntdProvider>
             </ModalStateProvider>
           </LocaleProvider>

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { RecaptchaContext } from "@/providers/recaptcha";
+import { RecaptchaContext } from "@/providers/items/recaptcha";
 import type { RecaptchaContextType } from "@/types/providers/recaptcha";
 
 export const useRecaptcha = (): RecaptchaContextType => {
