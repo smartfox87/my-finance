@@ -6,12 +6,11 @@ import type { Locale } from "@/types/locales";
 export async function generateMetadata({ params: { locale } }: { params: { locale: Locale } }): Promise<Metadata> {
   const { t } = await initTranslations({ locale });
   return {
-    title: t(`pages.accounts.title`),
-    description: t(`pages.accounts.description`),
-    keywords: t(`pages.accounts.keywords`),
+    title: t("pages.sign-in.title"),
+    description: t("pages.sign-in.description"),
   };
 }
 
-export default function Accounts() {
+export default async function SignIn() {
   return <SignInPageModule />;
 }

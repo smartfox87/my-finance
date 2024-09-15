@@ -4,7 +4,6 @@ import { RecaptchaProvider } from "@/providers/items/recaptcha";
 import { Provider } from "react-redux";
 import { store } from "@/store";
 import { LocaleProvider } from "@/providers/items/locale";
-import { AntdProvider } from "@/providers/items/antd";
 import { I18nProvider } from "@/providers/items/i18n";
 import { ModalStateProvider } from "@/providers/items/modals";
 import { CSSVariablesInitialization } from "@/providers/items/css";
@@ -18,9 +17,7 @@ export function AppProvider({ children, i18nResources }: { children: ReactNode; 
         <I18nProvider resources={i18nResources}>
           <LocaleProvider>
             <ModalStateProvider>
-              <AntdProvider>
-                <CSSVariablesInitialization>{children}</CSSVariablesInitialization>
-              </AntdProvider>
+              <CSSVariablesInitialization>{children}</CSSVariablesInitialization>
             </ModalStateProvider>
           </LocaleProvider>
         </I18nProvider>

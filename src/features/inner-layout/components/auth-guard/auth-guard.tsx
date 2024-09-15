@@ -2,7 +2,7 @@
 
 import { selectUser } from "@/store/selectors/auth";
 import { useTranslation } from "react-i18next";
-import { DemoUserAuth } from "@/features/auth";
+import { DemoUserAuth } from "@/components/demo-user-auth";
 import { useAppSelector } from "@/hooks/store";
 import type { ComponentChildrenProps } from "@/types/common";
 
