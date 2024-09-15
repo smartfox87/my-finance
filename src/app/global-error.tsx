@@ -2,16 +2,16 @@
 
 import { useEffect } from "react";
 import { SimpleButton } from "@/components/simple-button/simple-button";
-import * as Sentry from "@sentry/nextjs";
 import { useRouter } from "next/navigation";
 import { IS_PRODUCTION } from "@/constants/config";
+import { captureException } from "@sentry/nextjs";
 
 export default function GlobalError({ error }: { error: Error & { digest?: string } }) {
   const router = useRouter();
 
   useEffect(() => {
     console.error("global error:", error);
-    if (IS_PRODUCTION) Sentry.captureException(error);
+    if (IS_PRODUCTION) captureException(error);
   }, [error]);
 
   return (

@@ -6,6 +6,8 @@ import { isLoginData } from "../../predicates";
 import { DefaultForm } from "@/features/default-form";
 import { loginUserThunk } from "@/store/slices/auth";
 import { useRouter } from "next/navigation";
+import { captureException } from "@sentry/nextjs";
+import { IS_PRODUCTION } from "@/constants/config";
 import type { DefaultFormSaveHandler } from "@/types/form";
 
 export const SignIn = () => {
@@ -13,10 +15,13 @@ export const SignIn = () => {
   const router = useRouter();
 
   const handleSubmitForm: DefaultFormSaveHandler = async (fieldsValues) => {
-    if (!isLoginData(fieldsValues)) return;
-    dispatch(loginUserThunk(fieldsValues))
-      .unwrap()
-      .then(() => router.push("/"));
+    try {
+      if (!isLoginData(fieldsValues)) return;
+      await dispatch(loginUserThunk(fieldsValues)).unwrap();
+      router.push("/");
+    } catch (error) {
+      if (IS_PRODUCTION) captureException(error);
+    }
   };
 
   return <DefaultForm fields={INITIAL_SIGN_IN_FIELDS} data-cy="login-form" onSaveForm={handleSubmitForm} />;

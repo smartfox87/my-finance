@@ -12,7 +12,7 @@ const StyleProvider = dynamic(() => import("@ant-design/cssinjs/es/StyleContext"
 const ConfigProvider = dynamic(() => import("antd/es/config-provider"));
 const AntdRegistry = dynamic(() => import("@ant-design/nextjs-registry").then(({ AntdRegistry }) => AntdRegistry));
 
-export const AntdProvider = ({ isActive, children }: ComponentChildrenProps & { isActive: boolean }) => {
+export const AntdProvider = ({ isActive, children }: ComponentChildrenProps & { isActive?: boolean }) => {
   const darkTheme = useDarkTheme();
   const { antdLocale } = useLocale();
   const user = useAppSelector(selectUser);

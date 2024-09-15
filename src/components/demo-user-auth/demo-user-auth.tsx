@@ -4,6 +4,8 @@ import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { SimpleButton } from "@/components/simple-button/simple-button";
 import { useAppDispatch } from "@/hooks/store";
+import { IS_PRODUCTION } from "../../constants/config";
+import { captureException } from "@sentry/nextjs";
 
 export const DemoUserAuth = () => {
   const dispatch = useAppDispatch();
@@ -11,9 +13,15 @@ export const DemoUserAuth = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const handleAuthorize = async (): Promise<void> => {
-    setIsLoading(true);
-    const { loginDemoUserThunk } = await import("@/store/slices/auth");
-    dispatch(loginDemoUserThunk());
+    try {
+      setIsLoading(true);
+      const { loginDemoUserThunk } = await import("@/store/slices/auth");
+      await dispatch(loginDemoUserThunk()).unwrap();
+    } catch (error) {
+      if (IS_PRODUCTION) captureException(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
