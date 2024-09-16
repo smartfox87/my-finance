@@ -9,14 +9,16 @@ import type { ReactNode } from "react";
 
 export function InnerPagesProvider({ children }: { children: ReactNode }) {
   return (
-    <AntdProvider>
-      <AuthInitialization>
-        <ReferencesLoading>
-          <AccountsLoading>
-            <ProfileLoading>{children}</ProfileLoading>
-          </AccountsLoading>
-        </ReferencesLoading>
-      </AuthInitialization>
-    </AntdProvider>
+    <>
+      <AntdProvider>
+        <AuthInitialization>
+          <ReferencesLoading>
+            <AccountsLoading>
+              <ProfileLoading>{children}</ProfileLoading>
+            </AccountsLoading>
+          </ReferencesLoading>
+        </AuthInitialization>
+      </AntdProvider>
+    </>
   );
 }

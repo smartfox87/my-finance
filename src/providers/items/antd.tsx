@@ -39,12 +39,12 @@ export const AntdProvider = ({ isActive, children }: ComponentChildrenProps & { 
         <AntdRegistry>
           <StyleProvider hashPriority="high">
             <ConfigProvider locale={antdLocale || undefined} theme={themeSettings}>
-              {children}
+              <>{children}</>
             </ConfigProvider>
           </StyleProvider>
         </AntdRegistry>
       ) : (
-        { children }
+        <>{children}</>
       )}
     </>
   );
