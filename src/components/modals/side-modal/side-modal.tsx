@@ -1,8 +1,7 @@
 import { useViewport } from "@/hooks/viewport";
 import { Preloader } from "../../loading/preloader";
-import { useModalState } from "@/hooks/providers/modal-state";
 import dynamic from "next/dynamic";
-import { type ReactNode, type SetStateAction, useEffect } from "react";
+import type { ReactNode, SetStateAction } from "react";
 
 const Modal = dynamic(() => import("antd/es/drawer"));
 
@@ -25,34 +24,27 @@ export const SideModal = ({
 }) => {
   const { isMobile } = useViewport();
   const placement = isMobile ? "bottom" : "right";
-  const { isInitializedModal, setIsInitializedModal } = useModalState();
-
-  useEffect((): void => {
-    if (isOpen && !isInitializedModal) setIsInitializedModal(true);
-  }, [isOpen, isInitializedModal]);
 
   const handleOpenChange = (visible: boolean): void => {
     if (onMountContent) onMountContent(visible);
   };
 
   return (
-    isInitializedModal && (
-      <Modal
-        title={title}
-        placement={placement}
-        open={isOpen}
-        height="100%"
-        width={550}
-        destroyOnClose={true}
-        classNames={{ body: "flex flex-col" }}
-        onClose={onClose}
-        afterOpenChange={handleOpenChange}
-      >
-        <Preloader isLoading={isLoading}>
-          {children}
-          {footer && <div className="sticky -bottom-6 z-20 -mb-6 mt-auto flex flex-col gap-4 bg-white pb-6 pt-4 dark:bg-dark-modal">{footer}</div>}
-        </Preloader>
-      </Modal>
-    )
+    <Modal
+      title={title}
+      placement={placement}
+      open={isOpen}
+      height="100%"
+      width={550}
+      destroyOnClose={true}
+      classNames={{ body: "flex flex-col" }}
+      onClose={onClose}
+      afterOpenChange={handleOpenChange}
+    >
+      <Preloader isLoading={isLoading}>
+        {children}
+        {footer && <div className="sticky -bottom-6 z-20 -mb-6 mt-auto flex flex-col gap-4 bg-white pb-6 pt-4 dark:bg-dark-modal">{footer}</div>}
+      </Preloader>
+    </Modal>
   );
 };

@@ -32,9 +32,9 @@ export const MobileMenu = memo(function MobileMenu() {
       </button>
       {!isDestroyed && (
         <section
-          className={`fixed bottom-0 left-0 z-50 h-full w-full bg-white text-black duration-500 dark:bg-dark-modal dark:text-white ${isOpen ? "visible translate-y-0" : "invisible translate-y-full"}`}
+          className={`fixed bottom-0 left-0 z-50 h-full w-full overflow-y-auto bg-white text-black duration-500 dark:bg-dark-modal dark:text-white ${isOpen ? "visible translate-y-0" : "invisible translate-y-full"}`}
         >
-          <header className="flex border-b border-gray-300 p-6">
+          <header className="sticky top-0 z-20 flex border-b border-gray-300 bg-white p-6 dark:bg-dark-modal">
             <button className="-m-4 p-4" type="button" onClick={handleToggleVisibility}>
               <SvgClose className="h-4 w-4" />
             </button>
