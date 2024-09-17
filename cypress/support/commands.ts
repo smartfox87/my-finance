@@ -25,6 +25,10 @@ Cypress.Commands.add("getLang", () => {
   });
 });
 
+Cypress.Commands.add("isHomePage", () => {
+  cy.getLang().then((lang) => cy.url().then((url) => expect(url.replace(lang, "")).to.eq(`${Cypress.config().baseUrl}/`)));
+});
+
 Cypress.Commands.add("login", () => {
   cy.session(
     "login",

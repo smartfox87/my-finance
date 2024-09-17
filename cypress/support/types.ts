@@ -97,6 +97,7 @@ declare global {
       login(): Chainable<void>;
       loginDemo(): Chainable<void>;
       getLang(): Chainable<string>;
+      isHomePage(): Chainable<void>;
       getDictionary(locale?: Locale): Chainable<Dictionary>;
       pickSelect(selector: string, options?: { index?: number; returnValue?: boolean }): Chainable<string>;
       pickMultiSelect(selector: string, options?: { indexes?: number[]; indexesCount?: number; minIndex?: number; returnValue?: boolean; allSelectable?: boolean }): Chainable<void>;

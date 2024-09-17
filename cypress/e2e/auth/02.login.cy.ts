@@ -19,7 +19,7 @@ describe("Login modal", () => {
         expect(interception.response?.statusCode).to.eq(200);
         expect(interception.response?.body.access_token).to.be.a("string");
         expect(interception.response?.body.user).to.be.an("object");
-        cy.getLang().then((lang) => cy.url().should("eq", `${Cypress.config().baseUrl}/${lang}`));
+        cy.wait(1000).isHomePage();
       });
 
       cy.visit(`/profile`);
@@ -61,7 +61,7 @@ describe("Login modal", () => {
         expect(interception.response?.statusCode).to.eq(200);
         expect(interception.response?.body.access_token).to.be.a("string");
         expect(interception.response?.body.user).to.be.an("object");
-        cy.getLang().then((lang) => cy.url().should("eq", `${Cypress.config().baseUrl}/${lang}`));
+        cy.wait(1000).isHomePage();
 
         cy.visit(`/profile`);
         cy.get('[data-cy="logout-btn"]').click();
