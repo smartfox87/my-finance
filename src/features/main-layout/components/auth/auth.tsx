@@ -14,11 +14,11 @@ export const Auth = () => {
 
   return (
     <>
-      <SimpleButton type="primary" data-cy="modal-login-btn" onClick={() => router.push("/sign-up")}>
+      <SimpleButton type="primary" data-cy="register-btn" onClick={() => router.push("/sign-up")}>
         <SvgSignUp className="h-4 w-4" />
         {!isMobile ? t("buttons.sign_up") : null}
       </SimpleButton>
-      <SimpleButton type="primary" data-cy="modal-login-btn" onClick={() => router.push("/sign-in")}>
+      <SimpleButton type="primary" data-cy="login-btn" onClick={() => router.push("/sign-in")}>
         <SvgSignIn className="h-4 w-4" />
         {!isMobile ? t("buttons.sign_in") : null}
       </SimpleButton>

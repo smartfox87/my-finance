@@ -22,6 +22,7 @@ describe("Register form", () => {
         expect(interception.response?.statusCode).to.eq(200);
         expect(interception.response?.body.access_token).to.be.a("string");
         expect(interception.response?.body.user).to.be.an("object");
+        cy.getLang().then((lang) => cy.url().should("eq", `${Cypress.config().baseUrl}/${lang}`));
       });
     });
   });
@@ -48,6 +49,7 @@ describe("Register form", () => {
         expect(interception.response?.statusCode).to.eq(200);
         expect(interception.response?.body.access_token).to.be.a("string");
         expect(interception.response?.body.user).to.be.an("object");
+        cy.getLang().then((lang) => cy.url().should("eq", `${Cypress.config().baseUrl}/${lang}`));
       });
     });
   });
