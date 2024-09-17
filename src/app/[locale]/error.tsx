@@ -3,16 +3,16 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { SimpleButton } from "@/components/simple-button/simple-button";
-import * as Sentry from "@sentry/nextjs";
 import { useRouter } from "next/navigation";
 import { IS_PRODUCTION } from "@/constants/config";
+import { captureException } from "@sentry/nextjs";
 
 export default function Error({ error }: { error: Error & { digest?: string } }) {
   const { t } = useTranslation();
   const router = useRouter();
 
   useEffect((): void => {
-    if (IS_PRODUCTION) Sentry.captureException(error);
+    if (IS_PRODUCTION) captureException(error);
   }, [error]);
 
   return (

@@ -1,59 +1,28 @@
+"use client";
+
 import { INITIAL_SIGN_IN_FIELDS } from "../../constants";
-import { useTranslation } from "react-i18next";
-import { useViewport } from "@/hooks/viewport";
-import SvgSignIn from "@/assets/sprite/sign-in.svg";
-import { SimpleButton } from "@/components/simple-button/simple-button";
-import { useAntd } from "@/hooks/providers/antd";
-import { useModalState } from "@/hooks/providers/modal-state";
-import dynamic from "next/dynamic";
 import { useAppDispatch } from "@/hooks/store";
 import { isLoginData } from "../../predicates";
-import { showCommonError } from "@/utils/errors";
+import { DefaultForm } from "@/features/default-form";
+import { loginUserThunk } from "@/store/slices/auth";
+import { useRouter } from "next/navigation";
+import { captureException } from "@sentry/nextjs";
+import { IS_PRODUCTION } from "@/constants/config";
 import type { DefaultFormSaveHandler } from "@/types/form";
 
-const AuthModal = dynamic(() => import("../auth-modal").then((mod) => mod.AuthModal));
-
 export const SignIn = () => {
-  const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const { isMobile } = useViewport();
-
-  const { isLoadedAuthModal, isOpenSignInModal, toggleSignInModalVisibility } = useModalState();
-  const { initAntd, isLoadedAntd, isLoadingAntd } = useAntd();
-  const isLoading = isOpenSignInModal && !isLoadedAuthModal;
-
-  const handleToggleVisibility = (): void => {
-    toggleSignInModalVisibility();
-    if (!isLoadedAntd) initAntd();
-  };
+  const router = useRouter();
 
   const handleSubmitForm: DefaultFormSaveHandler = async (fieldsValues) => {
     try {
       if (!isLoginData(fieldsValues)) return;
-      const { loginUserThunk } = await import("@/store/slices/auth");
       await dispatch(loginUserThunk(fieldsValues)).unwrap();
-      handleToggleVisibility();
+      router.push("/");
     } catch (error) {
-      showCommonError({ error });
+      if (IS_PRODUCTION) captureException(error);
     }
   };
 
-  return (
-    <>
-      <SimpleButton type="primary" loading={isLoading} data-cy="modal-login-btn" onClick={handleToggleVisibility}>
-        <SvgSignIn className="h-4 w-4" />
-        {!isMobile ? t("buttons.sign_in") : null}
-      </SimpleButton>
-      {isLoadedAuthModal && (
-        <AuthModal
-          type="login"
-          title={t("titles.authorisation")}
-          fields={INITIAL_SIGN_IN_FIELDS}
-          isOpen={!isLoadingAntd && isOpenSignInModal}
-          onSaveForm={handleSubmitForm}
-          onToggleVisibility={handleToggleVisibility}
-        />
-      )}
-    </>
-  );
+  return <DefaultForm fields={INITIAL_SIGN_IN_FIELDS} data-cy="login-form" onSaveForm={handleSubmitForm} />;
 };

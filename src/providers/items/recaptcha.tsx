@@ -1,3 +1,5 @@
+"use client";
+
 import { createContext, createRef, forwardRef, useCallback, useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import { captureException } from "@sentry/nextjs";

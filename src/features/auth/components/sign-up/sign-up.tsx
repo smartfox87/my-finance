@@ -1,65 +1,39 @@
 import { INITIAL_SIGN_UP_FIELDS } from "../../constants";
 import { useTranslation } from "react-i18next";
-import { useViewport } from "@/hooks/viewport";
 import { useRecaptcha } from "@/hooks/providers/recaptcha";
-import SvgSignUp from "@/assets/sprite/sign-up.svg";
-import { SimpleButton } from "@/components/simple-button/simple-button";
-import { useAntd } from "@/hooks/providers/antd";
-import { useModalState } from "@/hooks/providers/modal-state";
-import dynamic from "next/dynamic";
 import { useAppDispatch } from "@/hooks/store";
 import { isRegisterData } from "../../predicates";
-import { showCommonError } from "@/utils/errors";
+import { DefaultForm } from "@/features/default-form";
+import { showNotification } from "@/utils/modals";
+import { registerUserThunk } from "@/store/slices/auth";
+import { useCallback } from "react";
+import { useRouter } from "next/navigation";
+import { captureException } from "@sentry/nextjs";
+import { IS_PRODUCTION } from "@/constants/config";
 import type { DefaultFormSaveHandler } from "@/types/form";
-
-const AuthModal = dynamic(() => import("../auth-modal").then((mod) => mod.AuthModal));
 
 export const SignUp = () => {
   const dispatch = useAppDispatch();
-  const { isMobile } = useViewport();
   const { t } = useTranslation();
+  const router = useRouter();
   const { initCaptcha, isLoadedCaptcha, getScore } = useRecaptcha();
 
-  const { isLoadedAuthModal, isOpenSignUpModal, toggleSignUpModalVisibility } = useModalState();
-  const { initAntd, isLoadedAntd, isLoadingAntd } = useAntd();
-  const isLoading = isOpenSignUpModal && (!isLoadedCaptcha || !isLoadedAuthModal);
-
-  const handleToggleVisibility = (): void => {
-    toggleSignUpModalVisibility();
-    if (!isLoadedAntd) initAntd();
+  const handleFieldChange = useCallback((): void => {
     if (!isLoadedCaptcha) initCaptcha();
-  };
+  }, [isLoadedCaptcha, initCaptcha]);
 
   const handleSubmitForm: DefaultFormSaveHandler = async (fieldsValues) => {
     try {
       const score = await getScore();
       const registerData = { ...fieldsValues, score };
       if (!isRegisterData(registerData)) return;
-      if (score < 0.5) return import("@/utils/modals").then(({ showNotification }) => showNotification({ title: t("notifications.recaptcha_invalid") }));
-      const { registerUserThunk } = await import("@/store/slices/auth");
+      if (score < 0.5) return showNotification({ title: t("notifications.recaptcha_invalid") });
       await dispatch(registerUserThunk(registerData)).unwrap();
-      handleToggleVisibility();
+      router.push("/");
     } catch (error) {
-      showCommonError({ error });
+      if (IS_PRODUCTION) captureException(error);
     }
   };
 
-  return (
-    <>
-      <SimpleButton type="primary" loading={isLoading} data-cy="register-btn" onClick={handleToggleVisibility}>
-        <SvgSignUp className="h-4 w-4" />
-        {!isMobile ? t("buttons.sign_up") : null}
-      </SimpleButton>
-      {isLoadedAuthModal && (
-        <AuthModal
-          type="register"
-          title={t("titles.registration")}
-          fields={INITIAL_SIGN_UP_FIELDS}
-          isOpen={!isLoadingAntd && isOpenSignUpModal}
-          onSaveForm={handleSubmitForm}
-          onToggleVisibility={handleToggleVisibility}
-        />
-      )}
-    </>
-  );
+  return <DefaultForm fields={INITIAL_SIGN_UP_FIELDS} data-cy="register-form" onSaveForm={handleSubmitForm} onChange={handleFieldChange} />;
 };

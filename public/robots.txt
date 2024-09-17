@@ -1,4 +1,6 @@
 User-agent: *
 Disallow: /profile
 Disallow: /settings
+Disallow: /sign-in
+Disallow: /sign-up
 Sitemap: https://www.myfinance.day/sitemap.xml

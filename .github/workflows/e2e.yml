@@ -10,7 +10,7 @@ jobs:
     permissions: write-all
     strategy:
         matrix:
-            node-version: [21.x]
+            node-version: [20.x]
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
@@ -36,8 +36,6 @@ jobs:
                 return;
               }
 
-              console.log('111111111111111111111111111111111', JSON.stringify(res.data.artifacts.at(-1), null, 2));
-              console.log('222222222222222222222222222222222', JSON.stringify(res.data.artifacts.map(({ created_at }) => created_at), null, 2));
               const artifactsToDelete = res.data.artifacts.filter(({ name }) => name === 'cypress-artifacts2');
 
               if (artifactsToDelete.length === 0) {

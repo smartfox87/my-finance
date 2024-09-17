@@ -145,8 +145,6 @@
     "total": "Total"
   },
   "titles": {
-    "authorisation": "Authorisation",
-    "registration": "Registration",
     "add_expense": "Add new expense",
     "add_budget": "Add new budget",
     "detail_expense": "Expense card",
@@ -254,6 +252,14 @@
     "contact": {
       "title": "Contact us",
       "description": "Send us a message. We will be happy to help you."
+    },
+    "sign-in": {
+      "title": "Sign in",
+      "description": "You can sign in to access the application through your email and password, Google account or demo user account."
+    },
+    "sign-up": {
+      "title": "Sign up",
+      "description": "You can sign up to access the application through your email and password, Google account or demo user account."
     }
   },
   "seo": {
