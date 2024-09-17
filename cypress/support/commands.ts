@@ -36,7 +36,7 @@ Cypress.Commands.add("login", () => {
       cy.viewport(1920, 1080);
       cy.visit("/");
       cy.intercept("POST", `${Cypress.env("NEXT_PUBLIC_SUPABASE_URL")}/auth/v1/token?grant_type=password`).as("login");
-      cy.get('[data-cy="modal-login-btn"]').click();
+      cy.get('[data-cy="login-btn"]').click();
       cy.get('[data-cy="login-form"]').within(() => {
         cy.get("#email").type(Cypress.env("E2E_LOGIN"), { force: true });
         cy.get("#password").type(Cypress.env("E2E_PASSWORD"), { force: true });

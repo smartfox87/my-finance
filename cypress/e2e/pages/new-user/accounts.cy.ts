@@ -5,7 +5,9 @@ describe("authorized accounts page", () => {
   context("1920x1080 resolution", () => {
     beforeEach(() => {
       cy.login();
-      cy.getLang().then((lang) => cy.visit(`/${lang}/accounts`));
+      cy.wait(500)
+        .getLang()
+        .then((lang) => cy.visit(`/${lang}/accounts`));
       cy.intercept("GET", `${Cypress.env("NEXT_PUBLIC_SUPABASE_URL")}/rest/v1/accounts*`).as("get-accounts");
     });
 

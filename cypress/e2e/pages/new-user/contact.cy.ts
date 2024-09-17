@@ -5,7 +5,9 @@ describe("Contact form", () => {
   context("1920x1080 resolution", () => {
     beforeEach(() => {
       cy.viewport(1920, 1080);
-      cy.getLang().then((lang) => cy.visit(`/${lang}/contact`));
+      cy.wait(500)
+        .getLang()
+        .then((lang) => cy.visit(`/${lang}/contact`));
       cy.intercept("POST", "/api/contact").as("contact");
     });
 

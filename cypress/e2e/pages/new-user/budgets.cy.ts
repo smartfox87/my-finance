@@ -5,7 +5,9 @@ describe("authorized budgets page", () => {
   context("1920x1080 resolution", () => {
     beforeEach(() => {
       cy.login();
-      cy.getLang().then((lang) => cy.visit(`/${lang}/budgets`));
+      cy.wait(500)
+        .getLang()
+        .then((lang) => cy.visit(`/${lang}/budgets`));
       cy.intercept("GET", `${Cypress.env("NEXT_PUBLIC_SUPABASE_URL")}/rest/v1/budgets*`).as("get-budgets");
     });
 
