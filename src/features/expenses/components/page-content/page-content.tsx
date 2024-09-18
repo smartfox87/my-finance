@@ -3,7 +3,6 @@ import { Filter } from "../filter";
 import { ActiveFilters } from "../active-filters";
 import { LazyList } from "@/components/list/lazy-list";
 import { Item } from "../item";
-import { Suspense } from "react";
 import { Detail } from "../detail";
 import { Empty } from "../empty";
 import { FoundNothing } from "@/components/list/found-nothing";
@@ -27,10 +26,7 @@ export const PageContent = ({ onGetData }: PageContentProps) => {
           <ActiveFilters />
         </div>
         <LazyList items={filteredSortedCosts} Item={Item} />
-        {/*  todo check suspense*/}
-        <Suspense fallback={<div />}>
-          <Detail onSave={onGetData} />
-        </Suspense>
+        <Detail onSave={onGetData} />
       </>
     );
   else if (!costsList?.length) content = <Empty addNew={<AddNew onSave={onGetData} />} />;

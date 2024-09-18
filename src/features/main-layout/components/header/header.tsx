@@ -3,7 +3,7 @@
 import { Auth } from "../auth";
 import { LanguageToggle } from "../language-toggle";
 import { Logo } from "../logo";
-import { memo, Suspense } from "react";
+import { memo } from "react";
 import { selectUser } from "@/store/selectors/auth";
 import { MobileMenu } from "../mobile-menu";
 import { useViewport } from "@/hooks/viewport";
@@ -19,9 +19,7 @@ export const Header = memo(function Header() {
       <div className="container flex items-center justify-between">
         <Logo />
         {isTablet ? (
-          <Suspense fallback={<div />}>
-            <MobileMenu />
-          </Suspense>
+          <MobileMenu />
         ) : (
           <div className="flex items-center gap-2 md:gap-4">
             {user ? <ProfileMenu /> : <Auth />}

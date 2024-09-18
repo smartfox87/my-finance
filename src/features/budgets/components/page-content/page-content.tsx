@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { selectBudgetsByFilter, selectBudgetsList } from "../../selectors";
 import { AddNew } from "../add-new";
 import { Filter } from "../filter";
@@ -27,9 +26,7 @@ export function PageContent({ onGetData }: PageContentProps) {
           <ActiveFilters />
         </div>
         <LazyList items={filteredSortedBudgets} Item={Item} />
-        <Suspense fallback={<div />}>
-          <Detail onSave={onGetData} />
-        </Suspense>
+        <Detail onSave={onGetData} />
       </>
     );
   else if (!budgetsList?.length) content = <Empty addNew={<AddNew onSave={onGetData} />} />;
