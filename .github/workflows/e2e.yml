@@ -2,7 +2,7 @@ name: E2E on Chrome
 on:
     push:
         branches: [master]
-    pull_request:
+    pull_request_target:
         branches: [master]
 jobs:
   pipeline:
