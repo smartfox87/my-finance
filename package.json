@@ -32,7 +32,7 @@
 		"i18next": "^23.14.0",
 		"i18next-resources-to-backend": "^1.2.1",
 		"lodash": "^4.17.21",
-		"next": "^14.2.11",
+		"next": "^14.2.13",
 		"next-i18n-router": "^5.5.1",
 		"nodemailer": "^6.9.15",
 		"query-string": "^9.1.0",
