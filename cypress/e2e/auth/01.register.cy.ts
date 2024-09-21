@@ -22,7 +22,7 @@ describe("Register form", () => {
         expect(interception.response?.statusCode).to.eq(200);
         expect(interception.response?.body.access_token).to.be.a("string");
         expect(interception.response?.body.user).to.be.an("object");
-        cy.wait(1000).isHomePage();
+        cy.wait(2000).isHomePage();
       });
     });
   });
@@ -49,7 +49,7 @@ describe("Register form", () => {
         expect(interception.response?.statusCode).to.eq(200);
         expect(interception.response?.body.access_token).to.be.a("string");
         expect(interception.response?.body.user).to.be.an("object");
-        cy.wait(1000).isHomePage();
+        cy.wait(2000).isHomePage();
       });
     });
   });
