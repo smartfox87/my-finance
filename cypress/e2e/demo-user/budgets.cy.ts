@@ -1,5 +1,5 @@
-import { FieldIds, FilteredMultiPropsItems, SelectedOptionsData } from "../../../support/types";
-import { getPropAndOrder, getReverseIndexesArray } from "../../../support/utils";
+import { FieldIds, FilteredMultiPropsItems, SelectedOptionsData } from "../../support/types";
+import { getPropAndOrder, getReverseIndexesArray } from "../../support/utils";
 
 describe("authorized budgets page", () => {
   context("1920x1080 resolution", () => {
