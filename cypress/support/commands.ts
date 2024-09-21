@@ -26,7 +26,7 @@ Cypress.Commands.add("getLang", () => {
 });
 
 Cypress.Commands.add("isHomePage", () => {
-  cy.getLang().then((lang) => cy.url().then((url) => expect(url.replace(`/${lang}`, "/")).to.eq(`${Cypress.config().baseUrl}/`)));
+  cy.getLang().then((lang) => cy.location("pathname").then((url) => expect(url.replace(`/${lang}`, "/")).to.eq(`/`)));
 });
 
 Cypress.Commands.add("login", () => {
