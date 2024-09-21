@@ -11,12 +11,6 @@ jobs:
     strategy:
       matrix:
         node-version: [20.x]
-        spec:
-          - 'cypress/e2e/auth/*.cy.ts'
-          - 'cypress/e2e/locales/*.cy.ts'
-          - 'cypress/e2e/pages/demo-user/*.cy.ts'
-          - 'cypress/e2e/pages/new-user/*.cy.ts'
-          - 'cypress/e2e/app.cy.ts'
     steps:
       - name: Check if Dependabot
         run: |
@@ -75,7 +69,6 @@ jobs:
 
           start: npm run start
           wait-on: ${{ vars.NEXT_PUBLIC_PUBLIC_URL }}
-          spec: ${{ matrix.spec }}
         env:
           CYPRESS_video: true
           CYPRESS_videoUploadOnPasses: false
