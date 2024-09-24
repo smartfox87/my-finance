@@ -51,7 +51,7 @@
 		"@next/bundle-analyzer": "^14.2.11",
 		"@svgr/webpack": "^8.1.0",
 		"@types/fs-extra": "^11.0.4",
-		"@types/lodash": "^4.17.7",
+		"@types/lodash": "^4.17.9",
 		"@types/node": "^22",
 		"@types/nodemailer": "^6.4.16",
 		"@types/react": "^18.3.5",
