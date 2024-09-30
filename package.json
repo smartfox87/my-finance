@@ -28,7 +28,7 @@
 		"@sentry/nextjs": "^8.30.0",
 		"@supabase/supabase-js": "^2.45.3",
 		"@vercel/speed-insights": "^1.0.12",
-		"antd": "^5.20.5",
+		"antd": "^5.21.1",
 		"i18next": "^23.14.0",
 		"i18next-resources-to-backend": "^1.2.1",
 		"lodash": "^4.17.21",
