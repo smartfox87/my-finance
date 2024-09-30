@@ -11,7 +11,7 @@ export function AuthInitialization({ children }: ComponentChildrenProps) {
   const user = useAppSelector(selectUser);
 
   useEffect((): void => {
-    if (getUserId() || user) import("@/utils/auth").then(({ handleAuthStateChange }) => handleAuthStateChange());
+    if (getUserId() || user) import("@/utils/handle-auth-state-change").then(({ handleAuthStateChange }) => handleAuthStateChange());
     if (getUserId() && !user) import("@/store/slices/auth").then(({ getUserSessionThunk }) => dispatch(getUserSessionThunk()));
   }, [user]);
 
