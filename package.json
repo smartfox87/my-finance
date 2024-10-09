@@ -29,7 +29,7 @@
 		"@supabase/supabase-js": "^2.45.3",
 		"@vercel/speed-insights": "^1.0.12",
 		"antd": "^5.20.5",
-		"i18next": "^23.14.0",
+		"i18next": "^23.15.2",
 		"i18next-resources-to-backend": "^1.2.1",
 		"lodash": "^4.17.21",
 		"next": "^14.2.13",
