@@ -1,4 +1,4 @@
-import { getDatesPeriod } from "@/utils/date";
+import { getDatesPeriodValues } from "@/utils/get-dates-period-values";
 import { getDatesPeriodName } from "src/utils/get-dates-period-name";
 import { PERIOD_OPTIONS } from "@/constants/date";
 import { ComplexFieldNames, SelectFieldOptions, FieldTypes, SimpleFieldNames, SortFieldOptions, GenderFieldOptions, SubjectFieldOptions, FieldValues } from "@/types/field";
@@ -83,7 +83,7 @@ export const DATES_PERIOD_FIELD: DatesPeriodFormField = {
   id: FieldIds.PERIOD,
   type: FieldTypes.DATES_PERIOD,
   label: `complex.${ComplexFieldNames.PERIOD}.label`,
-  value: getDatesPeriod(undefined, getDatesPeriodName()),
+  value: getDatesPeriodValues(undefined, getDatesPeriodName()),
 };
 
 export const NAME_FIELD: TextFormField<FieldIds.NAME, FieldTypes.TEXTAREA> = {

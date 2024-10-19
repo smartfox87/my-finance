@@ -1,8 +1,8 @@
 import { PERIODS } from "@/constants/date";
-import dayjs, { type Dayjs } from "dayjs";
 import quarterOfYear from "dayjs/plugin/quarterOfYear";
+import dayjs, { type Dayjs } from "dayjs";
 import { type Locale, Locales } from "@/types/locales";
-import { type DatesPeriod, DatesPeriods, DatesStrings } from "@/types/date";
+import { type DatesPeriod, DatesStrings } from "@/types/date";
 dayjs.extend(quarterOfYear);
 
 export const toggleDayjsLocale = async (locale: Locale): Promise<void> => {
@@ -13,11 +13,6 @@ export const toggleDayjsLocale = async (locale: Locale): Promise<void> => {
   } catch (error) {
     console.error(`Failed to load locale: ${locale}`, error);
   }
-};
-
-export const getDatesPeriod = (initialDate: string | undefined, period: DatesPeriod = DatesPeriods.MONTH): DatesStrings => {
-  const date = dayjs(initialDate);
-  return [date.startOf(period).format("YYYY-MM-DD"), date.endOf(period).format("YYYY-MM-DD")];
 };
 
 export const isStringValidDate = (str: string): boolean => {
