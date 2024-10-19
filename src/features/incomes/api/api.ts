@@ -1,6 +1,6 @@
 import { apiClient } from "@/libs/api-client";
 import { getUserId } from "@/utils/local-storage";
-import { getCurrentDate } from "@/utils/date";
+import { getCurrentISODate } from "@/utils/get-current-iso-date";
 import { FieldIds } from "@/types/field";
 import type { IncomeItemData } from "../types";
 import type { FilterPeriodStateItem } from "@/types/filter";
@@ -28,7 +28,7 @@ export const deleteIncomeItemApi = async (incomeId: number) => {
 export const updateIncomeItemApi = ({ incomeId, incomeData }: { incomeId: number; incomeData: IncomeItemData }) =>
   apiClient
     .from("incomes")
-    .update({ ...incomeData, updated_at: getCurrentDate() })
+    .update({ ...incomeData, updated_at: getCurrentISODate() })
     .match({ user_id: getUserId(), id: incomeId })
     .select("id, name, category, date, amount, account, created_at, updated_at")
     .single();

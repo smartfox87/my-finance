@@ -1,6 +1,6 @@
 import { apiClient } from "@/libs/api-client";
 import { getUserId } from "@/utils/local-storage";
-import { getCurrentDate } from "@/utils/date";
+import { getCurrentISODate } from "@/utils/get-current-iso-date";
 import type { ProfileData, SettingsData } from "../types";
 
 export const getProfileApi = () =>
@@ -9,7 +9,7 @@ export const getProfileApi = () =>
 export const updateProfileApi = (userData: Partial<ProfileData | SettingsData>) =>
   apiClient
     .from("profiles")
-    .update({ ...userData, updated_at: getCurrentDate() })
+    .update({ ...userData, updated_at: getCurrentISODate() })
     .eq("id", getUserId())
     .select("id, created_at, updated_at, email, full_name, birthdate, gender, period, currency(id, code, symbol)")
     .single();

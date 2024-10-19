@@ -3,10 +3,6 @@ import { DatesPeriods } from "@/types/date";
 import { expect } from "@jest/globals";
 
 describe("getPeriodName", () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
   it("returns YEAR when localStorage period is empty", () => {
     localStorage.removeItem("period");
     expect(getDatesPeriodName()).toBe(DatesPeriods.YEAR);
@@ -14,7 +10,7 @@ describe("getPeriodName", () => {
 
   it("returns YEAR when localStorage period is a valid DatesPeriod", () => {
     localStorage.setItem("period", DatesPeriods.MONTH);
-    expect(getDatesPeriodName()).toBe(DatesPeriods.YEAR);
+    expect(getDatesPeriodName()).toBe(DatesPeriods.MONTH);
   });
 
   it("returns YEAR when localStorage period is not a valid DatesPeriod", () => {

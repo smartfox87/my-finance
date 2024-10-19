@@ -1,6 +1,7 @@
 import { apiClient } from "@/libs/api-client";
 import { getUserId } from "@/utils/local-storage";
-import { getCurrentDate, getFromPeriodDatesForApi, getToPeriodDatesForApi } from "@/utils/date";
+import { getFromPeriodDatesForApi, getToPeriodDatesForApi } from "@/utils/date";
+import { getCurrentISODate } from "@/utils/get-current-iso-date";
 import { FieldIds } from "@/types/field";
 import type { BudgetItemData } from "../types";
 import type { FilterPeriodStateItem } from "@/types/filter";
@@ -29,7 +30,7 @@ export const deleteBudgetItemApi = (budgetId: number) =>
 export const updateBudgetItemApi = async ({ budgetId, budgetData: { name, amount, period, categories, accounts } }: { budgetId: number; budgetData: BudgetItemData }) => {
   const { data, error } = await apiClient
     .from("budgets")
-    .update({ name, amount, period, updated_at: getCurrentDate() })
+    .update({ name, amount, period, updated_at: getCurrentISODate() })
     .match({ user_id: getUserId(), id: budgetId })
     .select("created_at, id, name, amount, period, accounts(id), categories:cost_categories(id)")
     .single();

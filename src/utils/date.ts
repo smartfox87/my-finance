@@ -15,8 +15,6 @@ export const toggleDayjsLocale = async (locale: Locale): Promise<void> => {
   }
 };
 
-export const getCurrentDate = (): string => new Date().toISOString();
-
 export const getDatesPeriod = (initialDate: string | undefined, period: DatesPeriod = DatesPeriods.MONTH): DatesStrings => {
   const date = dayjs(initialDate);
   return [date.startOf(period).format("YYYY-MM-DD"), date.endOf(period).format("YYYY-MM-DD")];

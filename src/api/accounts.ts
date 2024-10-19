@@ -1,7 +1,7 @@
 import { apiClient } from "@/libs/api-client";
 import { getUserId } from "@/utils/local-storage";
 import { deleteAccountTypeApi } from "@/api/references";
-import { getCurrentDate } from "@/utils/date";
+import { getCurrentISODate } from "@/utils/get-current-iso-date";
 import type { AccountItemBalance } from "@/types/accounts";
 
 export const createInitialAccountsApi = () =>
@@ -31,7 +31,7 @@ export const deleteAccountItemApi = async (accountId: number) => {
 export const updateAccountItemApi = ({ accountId, accountData }: { accountId: number; accountData: { balance: number } }) =>
   apiClient
     .from("accounts")
-    .update({ ...accountData, updated_at: getCurrentDate() })
+    .update({ ...accountData, updated_at: getCurrentISODate() })
     .match({ user_id: getUserId(), id: accountId })
     .select("id, account_type_id, balance, updated_at")
     .single();
