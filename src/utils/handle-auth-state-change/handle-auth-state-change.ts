@@ -1,4 +1,4 @@
-import { apiClient } from "@/lib/api-client";
+import { apiClient } from "@/libs/api-client";
 import { store } from "@/store";
 import { clearUserReducer, setUserReducer } from "@/store/slices/auth";
 

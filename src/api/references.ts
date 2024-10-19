@@ -1,4 +1,4 @@
-import { apiClient } from "@/lib/api-client";
+import { apiClient } from "@/libs/api-client";
 import { getLanguage, getUserId } from "@/utils/local-storage";
 import { AccountTypeData, IncomeCategoryData } from "@/types/references";
 

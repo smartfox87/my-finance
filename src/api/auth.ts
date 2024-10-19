@@ -1,4 +1,4 @@
-import { apiClient } from "@/lib/api-client";
+import { apiClient } from "@/libs/api-client";
 import { getPublicUrl } from "@/utils/url";
 import { Provider } from "@supabase/auth-js";
 import { DEMO_USER_EMAIL, DEMO_USER_PASSWORD } from "@/constants/config";

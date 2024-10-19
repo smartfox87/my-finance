@@ -1,4 +1,4 @@
-import { apiClient } from "@/lib/api-client";
+import { apiClient } from "@/libs/api-client";
 import { getUserId } from "@/utils/local-storage";
 import { getFromPeriodDatesForApi, getToPeriodDatesForApi } from "@/utils/date";
 import { FilterPeriodStateItem } from "@/types/filter";
