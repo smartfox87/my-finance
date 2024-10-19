@@ -2,23 +2,24 @@ import { Button, DatePicker, Radio, type RadioChangeEvent } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { PERIOD_OPTIONS } from "@/constants/date";
-import { findMatchingPeriod, convertDatesToDayjs } from "@/utils/date";
+import { convertDatesToDayjs } from "@/utils/date";
 import { getDatesPeriodValues } from "@/utils/get-dates-period-values";
+import { findMatchingDatesPeriodName } from "@/utils/find-matching-dates-period-name";
 import type { Dayjs } from "dayjs";
 import type { DatesPeriod, DatesStrings } from "@/types/date";
 
 export const PeriodField = ({ id = "", value, onChange }: { id: string; value: DatesStrings; onChange: (dates: DatesStrings) => void }) => {
   const { t } = useTranslation();
   const [datesValue, setDatesValue] = useState(convertDatesToDayjs(value));
-  const [periodValue, setPeriodValue] = useState<DatesPeriod | null>(findMatchingPeriod(value));
+  const [periodValue, setPeriodValue] = useState<DatesPeriod | null>(findMatchingDatesPeriodName(value));
 
   useEffect((): void => {
     setDatesValue(convertDatesToDayjs(value));
-    setPeriodValue(findMatchingPeriod(value));
+    setPeriodValue(findMatchingDatesPeriodName(value));
   }, [value]);
 
   const handleChangeFieldValue = (_: [Dayjs | null, Dayjs | null] | null, value: DatesStrings): void => {
-    const newPeriod = findMatchingPeriod(value);
+    const newPeriod = findMatchingDatesPeriodName(value);
     if (newPeriod) setPeriodValue(newPeriod);
     setDatesValue(convertDatesToDayjs(value));
     onChange(value);

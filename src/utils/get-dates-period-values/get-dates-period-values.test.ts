@@ -1,12 +1,17 @@
 import { getDatesPeriodValues } from "./get-dates-period-values";
-import dayjs from "dayjs";
 import { describe, expect, it } from "@jest/globals";
 import { DatesPeriods } from "@/types/date";
+import dayjs from "dayjs";
 
 describe("getDatesPeriodValues", () => {
   it("returns start and end of the year for a given date", () => {
     const result = getDatesPeriodValues("2023-10-01", DatesPeriods.YEAR);
     expect(result).toEqual(["2023-01-01", "2023-12-31"]);
+  });
+
+  it("returns start and end of the quarter for a given date", () => {
+    const result = getDatesPeriodValues("2023-10-01", DatesPeriods.QUARTER);
+    expect(result).toEqual(["2023-10-01", "2023-12-31"]);
   });
 
   it("returns start and end of the month for a given date", () => {
