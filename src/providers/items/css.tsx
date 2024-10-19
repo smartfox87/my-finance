@@ -1,13 +1,10 @@
 "use client";
 
-import { useEffect } from "react";
-import { setCSSVariables } from "@/utils/css-variables";
+import { useCssVariables } from "@/hooks/css-variables";
 import type { ComponentChildrenProps } from "@/types/common";
 
 export function CSSVariablesInitialization({ children }: ComponentChildrenProps) {
-  useEffect((): void => {
-    setCSSVariables();
-  }, []);
+  useCssVariables();
 
   return <>{children}</>;
 }
