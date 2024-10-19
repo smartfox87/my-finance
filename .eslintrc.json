@@ -3,12 +3,14 @@
 		"next/core-web-vitals",
 		"prettier",
 		"eslint:recommended",
-		"plugin:@typescript-eslint/recommended"
+		"plugin:@typescript-eslint/recommended",
+		"plugin:jest/recommended"
 	],
 	"parser": "@typescript-eslint/parser",
 	"plugins": [
 		"prettier",
-		"@typescript-eslint"
+		"@typescript-eslint",
+		"jest"
 	],
 	"rules": {
 		"prettier/prettier": "error",
@@ -20,5 +22,10 @@
 			}
 		],
 		"import/no-cycle": "error"
+	},
+	"env": {
+		"browser": true,
+		"node": true,
+		"jest": true
 	}
 }
