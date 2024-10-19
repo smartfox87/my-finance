@@ -1,6 +1,6 @@
 import { getDatesPeriodName } from "./get-dates-period-name";
 import { DatesPeriods } from "@/types/date";
-import { expect } from "@jest/globals";
+import { describe, expect, it } from "@jest/globals";
 
 describe("getPeriodName", () => {
   it("returns YEAR when localStorage period is empty", () => {

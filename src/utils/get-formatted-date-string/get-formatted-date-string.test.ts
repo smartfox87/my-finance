@@ -1,5 +1,5 @@
 import { getFormattedDateString } from "./get-formatted-date-string";
-import { expect } from "@jest/globals";
+import { describe, expect, it } from "@jest/globals";
 
 describe("getFullDate", () => {
   it("returns formatted date when valid date is provided", () => {

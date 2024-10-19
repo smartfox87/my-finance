@@ -1,12 +1,12 @@
 import { useEffect, useMemo } from "react";
 import { getIntegerFromString } from "@/utils/numbers";
-import { isStringValidDate } from "@/utils/date";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import queryString from "query-string";
 import { useAppDispatch } from "@/hooks/store";
 import { isFilterStateKey } from "@/predicates/filter";
 import { isMultiSelectValue, isSelectAllValue } from "@/predicates/field";
 import { prepareObjectValuesForFilterStateValues } from "@/utils/filters";
+import { checkIsStringValidDate } from "@/utils/check-is-string-valid-date";
 import type { FilterState, FilterStateValue, SetFilterStateValuesHandler } from "@/types/filter";
 
 export const useFilterSearchParams = (filterValues: FilterState | null, setFilterValues: SetFilterStateValuesHandler): [boolean, boolean] => {
@@ -37,7 +37,7 @@ export const useFilterSearchParams = (filterValues: FilterState | null, setFilte
             (acc, [key, value]) => {
               let newValue: FilterStateValue;
               if (isFilterStateKey(key) && Array.isArray(filterValues[key]) && !acc[key]) {
-                if (isStringValidDate(value)) newValue = [value, value];
+                if (checkIsStringValidDate(value)) newValue = [value, value];
                 else newValue = [isSelectAllValue(value) ? value : getIntegerFromString(value)];
               } else if (Array.isArray(acc[key])) {
                 const accValue = acc[key];

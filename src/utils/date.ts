@@ -15,12 +15,6 @@ export const toggleDayjsLocale = async (locale: Locale): Promise<void> => {
   }
 };
 
-export const isStringValidDate = (str: string): boolean => {
-  if (str.length < 10) return false;
-  const date = Date.parse(str);
-  return !isNaN(date);
-};
-
 export const findMatchingPeriod = (datesArray: DatesStrings): null | DatesPeriod => {
   if (datesArray.length !== 2) return null;
   const date = dayjs(datesArray[0]);

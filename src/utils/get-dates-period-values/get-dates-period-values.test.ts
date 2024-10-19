@@ -1,6 +1,6 @@
 import { getDatesPeriodValues } from "./get-dates-period-values";
 import dayjs from "dayjs";
-import { expect } from "@jest/globals";
+import { describe, expect, it } from "@jest/globals";
 import { DatesPeriods } from "@/types/date";
 
 describe("getDatesPeriodValues", () => {
