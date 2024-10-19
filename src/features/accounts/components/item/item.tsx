@@ -6,7 +6,7 @@ import { uppercaseFirstLetter } from "@/utils/strings";
 import { useEffect, useRef, useState } from "react";
 import { isTextClamped } from "@/utils/is-text-clamped";
 import { useViewport } from "@/hooks/viewport";
-import { getFullDate } from "@/utils/date";
+import { getFormattedDateString } from "@/utils/get-formatted-date-string";
 import Link from "next/link";
 import { useAppSelector } from "@/hooks/store";
 import type { ProcessedAccountItem } from "@/types/accounts";
@@ -48,7 +48,7 @@ export const Item = ({ id, name, balance, updated_at }: ProcessedAccountItem) =>
         </span>
       </div>
       <div className="w-full md:w-auto">
-        {t("detail.updated_at")}:&nbsp; <span className="font-bold">{getFullDate(updated_at)}</span>
+        {t("detail.updated_at")}:&nbsp; <span className="font-bold">{getFormattedDateString(updated_at)}</span>
       </div>
     </Link>
   );

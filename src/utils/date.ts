@@ -24,11 +24,6 @@ export const getPeriod = (): DatesPeriod => {
 
 export const getCurrentDate = (): string => new Date().toISOString();
 
-export const getFullDate = (date?: string, format: string = "YYYY MMMM DD"): string => {
-  if (!date) return "";
-  return dayjs(date).format(format);
-};
-
 export const getDatesPeriod = (initialDate: string | undefined, period: DatesPeriod = DatesPeriods.MONTH): DatesStrings => {
   const date = dayjs(initialDate);
   return [date.startOf(period).format("YYYY-MM-DD"), date.endOf(period).format("YYYY-MM-DD")];
