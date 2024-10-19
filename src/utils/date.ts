@@ -1,7 +1,6 @@
 import { PERIODS } from "@/constants/date";
 import dayjs, { type Dayjs } from "dayjs";
 import quarterOfYear from "dayjs/plugin/quarterOfYear";
-import { isDatesPeriod } from "@/predicates/field";
 import { type Locale, Locales } from "@/types/locales";
 import { type DatesPeriod, DatesPeriods, DatesStrings } from "@/types/date";
 dayjs.extend(quarterOfYear);
@@ -14,12 +13,6 @@ export const toggleDayjsLocale = async (locale: Locale): Promise<void> => {
   } catch (error) {
     console.error(`Failed to load locale: ${locale}`, error);
   }
-};
-
-export const getPeriod = (): DatesPeriod => {
-  if (typeof window === "undefined") return DatesPeriods.YEAR;
-  const period = localStorage.getItem("period");
-  return isDatesPeriod(period) ? period : DatesPeriods.YEAR;
 };
 
 export const getCurrentDate = (): string => new Date().toISOString();
