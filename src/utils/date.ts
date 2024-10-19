@@ -3,7 +3,6 @@ import dayjs, { type Dayjs } from "dayjs";
 import quarterOfYear from "dayjs/plugin/quarterOfYear";
 import { isDatesPeriod } from "@/predicates/field";
 import { type Locale, Locales } from "@/types/locales";
-import { ComplexFieldNames, type FieldTranslationRadioButtonOption } from "@/types/field";
 import { type DatesPeriod, DatesPeriods, DatesStrings } from "@/types/date";
 dayjs.extend(quarterOfYear);
 
@@ -16,11 +15,6 @@ export const toggleDayjsLocale = async (locale: Locale): Promise<void> => {
     console.error(`Failed to load locale: ${locale}`, error);
   }
 };
-
-export const periodOptions = PERIODS.map((period): { label_translation: FieldTranslationRadioButtonOption; value: DatesPeriod } => ({
-  label_translation: `complex.${ComplexFieldNames.PERIOD}.options.${period}`,
-  value: period,
-}));
 
 export const getPeriod = (): DatesPeriod => {
   if (typeof window === "undefined") return DatesPeriods.YEAR;

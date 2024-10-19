@@ -1,4 +1,5 @@
-import { getDatesPeriod, getPeriod, periodOptions } from "@/utils/date";
+import { getDatesPeriod, getPeriod } from "@/utils/date";
+import { PERIOD_OPTIONS } from "@/constants/date";
 import { ComplexFieldNames, SelectFieldOptions, FieldTypes, SimpleFieldNames, SortFieldOptions, GenderFieldOptions, SubjectFieldOptions, FieldValues } from "@/types/field";
 import { FieldIds } from "@/types/field";
 import { PickerPeriods } from "@/types/date";
@@ -120,7 +121,7 @@ export const PERIOD_FIELD: RadioButtonsFormField = {
   id: FieldIds.PERIOD,
   type: FieldTypes.RADIO_BUTTONS,
   label: `simple.${SimpleFieldNames.PERIOD}`,
-  options: periodOptions,
+  options: PERIOD_OPTIONS,
   required: true,
 };
 

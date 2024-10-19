@@ -1,7 +1,8 @@
 import { Button, DatePicker, Radio, type RadioChangeEvent } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { findMatchingPeriod, getDatesPeriod, periodOptions, convertDatesToDayjs } from "@/utils/date";
+import { PERIOD_OPTIONS } from "@/constants/date";
+import { findMatchingPeriod, getDatesPeriod, convertDatesToDayjs } from "@/utils/date";
 import type { Dayjs } from "dayjs";
 import type { DatesPeriod, DatesStrings } from "@/types/date";
 
@@ -45,7 +46,7 @@ export const PeriodField = ({ id = "", value, onChange }: { id: string; value: D
         value={periodValue}
         optionType="button"
         buttonStyle="solid"
-        options={periodOptions?.map(({ label_translation, value }) => ({ label: t(`fields.${label_translation}`), value }))}
+        options={PERIOD_OPTIONS?.map(({ label_translation, value }) => ({ label: t(`fields.${label_translation}`), value }))}
         onChange={handleChangePeriod}
       />
       <div className="flex gap-0 2xs:gap-3">
