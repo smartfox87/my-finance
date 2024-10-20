@@ -1,4 +1,4 @@
-import { handleRejectedReducerAction } from "@/utils/errors";
+import { handleRejectedReducerAction } from "@/utils/handle-rejected-reducer-action";
 import { getBudgetsListForChartsApi, getCostsListForChartsApi, getIncomesListForChartsApi } from "../api";
 import { setFilterValue } from "@/utils/filters";
 import { rootReducer } from "@/store";

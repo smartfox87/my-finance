@@ -1,5 +1,5 @@
 import { createAccountItemApi, getAccountsListApi, updateAccountItemApi, deleteAccountItemApi, getAccountItemApi, createInitialAccountsApi } from "@/api/accounts";
-import { handleRejectedReducerAction } from "@/utils/errors";
+import { handleRejectedReducerAction } from "@/utils/handle-rejected-reducer-action";
 import { createAccountTypeApi, updateAccountTypeApi } from "@/api/references";
 import { rootReducer } from "@/store";
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";

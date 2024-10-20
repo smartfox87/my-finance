@@ -1,4 +1,4 @@
-import { handleRejectedReducerAction } from "@/utils/errors";
+import { handleRejectedReducerAction } from "@/utils/handle-rejected-reducer-action";
 import { getAccountTypesApi, getCostCategoriesApi, getCurrenciesApi, getIncomeCategoriesApi } from "@/api/references";
 import { rootReducer } from "@/store";
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
