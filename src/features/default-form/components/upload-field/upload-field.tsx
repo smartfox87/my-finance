@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import SvgUpload from "@/assets/sprite/upload.svg";
-import { getFileSizeWithUnit } from "@/utils/file";
+import { getFileSizeWithUnit } from "../../utils";
 import { showErrorMessage } from "@/utils/message";
 import { Button, Form, Upload, type UploadFile } from "antd";
 import { FieldTypes } from "@/types/field";
