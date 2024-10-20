@@ -1,7 +1,8 @@
 import { apiClient } from "@/libs/api-client";
 import { getUserId } from "@/utils/local-storage";
-import { getFromPeriodDatesForApi, getToPeriodDatesForApi } from "@/utils/date";
+import { getToPeriodDatesForApi } from "@/utils/date";
 import { getCurrentISODate } from "@/utils/get-current-iso-date";
+import { getFromPeriodDatesForApi } from "@/utils/get-from-period-api-values";
 import { FieldIds } from "@/types/field";
 import type { BudgetItemData } from "../types";
 import type { FilterPeriodStateItem } from "@/types/filter";
