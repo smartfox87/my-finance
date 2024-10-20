@@ -1,7 +1,7 @@
 import { getProfileApi, updateProfileApi } from "../api";
 import { handleRejectedReducerAction } from "@/utils/handle-rejected-reducer-action";
 import { rootReducer } from "@/store";
-import { logoutUserThunk } from "@/store/slices/auth";
+import { logoutUserThunk } from "@/features/auth-store";
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import type { Types, ProfileData, ProfileSliceState, SettingsData } from "../types";
 

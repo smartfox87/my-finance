@@ -12,7 +12,7 @@ export function AuthInitialization({ children }: ComponentChildrenProps) {
 
   useEffect((): void => {
     if (getUserId() || user) import("@/utils/handle-auth-state-change").then(({ handleAuthStateChange }) => handleAuthStateChange());
-    if (getUserId() && !user) import("@/store/slices/auth").then(({ getUserSessionThunk }) => dispatch(getUserSessionThunk()));
+    if (getUserId() && !user) import("@/features/auth-store").then(({ getUserSessionThunk }) => dispatch(getUserSessionThunk()));
   }, [user]);
 
   return <>{children}</>;

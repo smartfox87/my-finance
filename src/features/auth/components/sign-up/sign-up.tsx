@@ -5,7 +5,7 @@ import { useAppDispatch } from "@/hooks/store";
 import { isRegisterData } from "../../predicates";
 import { DefaultForm } from "@/features/default-form";
 import { showNotification } from "@/utils/modals";
-import { registerUserThunk } from "@/store/slices/auth";
+import { registerUserThunk } from "@/features/auth-store";
 import { useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { captureException } from "@sentry/nextjs";

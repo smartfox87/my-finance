@@ -1,6 +1,5 @@
 import { PUBLIC_URL, VERCEL_URL } from "@/constants/config";
-
-export const addHttpsToUrl = (url: string): string => (url.includes("http") ? url : "https://" + url);
+import { addHttpsToUrl } from "../add-https-to-url";
 
 export const getPublicUrl = (): string => {
   const url = PUBLIC_URL ? PUBLIC_URL : VERCEL_URL;

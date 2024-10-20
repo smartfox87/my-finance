@@ -1,8 +1,8 @@
 import { apiClient } from "@/libs/api-client";
-import { getPublicUrl } from "@/utils/url";
-import { Provider } from "@supabase/auth-js";
+import { getPublicUrl } from "../utils";
 import { DEMO_USER_EMAIL, DEMO_USER_PASSWORD } from "@/constants/config";
-import type { LoginData, RegisterData } from "@/types/auth";
+import type { Provider } from "@supabase/auth-js";
+import type { LoginData, RegisterData } from "../types";
 
 export const loginUserApi = ({ email, password }: LoginData) => apiClient.auth.signInWithPassword({ email, password });
 

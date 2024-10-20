@@ -1,6 +1,6 @@
 import { apiClient } from "@/libs/api-client";
 import { store } from "@/store";
-import { clearUserReducer, setUserReducer } from "@/store/slices/auth";
+import { clearUserReducer, setUserReducer } from "@/features/auth-store";
 
 export const handleAuthStateChange = () => {
   apiClient.auth.onAuthStateChange((event, session) => {
