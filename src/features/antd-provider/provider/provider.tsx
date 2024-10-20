@@ -5,7 +5,7 @@ import { getUserId } from "@/utils/local-storage";
 import dynamic from "next/dynamic";
 import { useAppSelector } from "@/hooks/store";
 import { selectUser } from "@/store/selectors/auth";
-import type { Theme } from "@/types/providers/antd";
+import type { Theme } from "../types";
 import type { ComponentChildrenProps } from "@/types/common";
 
 const StyleProvider = dynamic(() => import("@ant-design/cssinjs/es/StyleContext").then(({ StyleProvider }) => StyleProvider));
