@@ -2,7 +2,7 @@ import { apiClient } from "@/libs/api-client";
 import { getUserId } from "@/utils/local-storage";
 import { getToPeriodDatesForApi } from "@/utils/date";
 import { getCurrentISODate } from "@/utils/get-current-iso-date";
-import { getFromPeriodDatesForApi } from "@/utils/get-from-period-api-values";
+import { getFromPeriodApiValues } from "@/utils/get-from-period-api-values";
 import { FieldIds } from "@/types/field";
 import type { BudgetItemData } from "../types";
 import type { FilterPeriodStateItem } from "@/types/filter";
@@ -12,7 +12,7 @@ export const getBudgetsListApi = (filter: FilterPeriodStateItem) =>
     .from("budgets")
     .select("created_at, id, name, amount, period, accounts(id), categories:cost_categories(id)")
     .eq("user_id", getUserId())
-    .rangeGte("period", getFromPeriodDatesForApi(filter[FieldIds.PERIOD]))
+    .rangeGte("period", getFromPeriodApiValues(filter[FieldIds.PERIOD]))
     .rangeLte("period", getToPeriodDatesForApi(filter[FieldIds.PERIOD]));
 
 export const getBudgetItemApi = (budgetId: string) =>
