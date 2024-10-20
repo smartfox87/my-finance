@@ -6,7 +6,7 @@ import { useRecaptcha } from "@/hooks/providers/recaptcha";
 import { selectContactFields } from "../../selectors";
 import { isRcFileArray } from "@/predicates/field";
 import { isError, isStringNumber } from "@/predicates/common";
-import { showCommonError } from "@/utils/errors";
+import { showCommonError } from "@/utils/show-common-error";
 import { Info } from "../../components";
 import { useTranslation } from "react-i18next";
 import { useCallback } from "react";

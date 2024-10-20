@@ -10,7 +10,7 @@ import SvgNewBudget from "@/assets/sprite/new-budget.svg";
 import { CalculatorModal } from "@/features/calculator";
 import { useViewport } from "@/hooks/viewport";
 import { isBudgetItemData } from "../../predicates";
-import { showCommonError } from "@/utils/errors";
+import { showCommonError } from "@/utils/show-common-error";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { FieldIds, FieldTypes } from "@/types/field";
 import type { CalculatorSaveHandler } from "@/features/calculator";

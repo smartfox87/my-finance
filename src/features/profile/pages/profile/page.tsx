@@ -5,7 +5,7 @@ import { selectProfileFields } from "../../selectors";
 import { DefaultForm } from "@/features/default-form";
 import { getProfileThunk, updateProfileThunk } from "../../store";
 import { showNotification } from "@/utils/modals";
-import { showCommonError } from "@/utils/errors";
+import { showCommonError } from "@/utils/show-common-error";
 import { isProfileData } from "../../predicates";
 import { HeaderAside } from "../../components";
 import { Dates } from "../../components";

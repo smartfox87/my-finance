@@ -8,7 +8,7 @@ import { memo, useRef, useState } from "react";
 import SvgNewAccount from "@/assets/sprite/new-account.svg";
 import { CalculatorModal } from "@/features/calculator";
 import { useViewport } from "@/hooks/viewport";
-import { showCommonError } from "@/utils/errors";
+import { showCommonError } from "@/utils/show-common-error";
 import { isAccountItemCreateData } from "../../predicates";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { FieldIds, FieldTypes } from "@/types/field";

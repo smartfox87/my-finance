@@ -1,4 +1,4 @@
-import { showCommonError } from "@/utils/errors";
+import { showCommonError } from "@/utils/show-common-error";
 
 export const getIntegerFromString = (value: string): number => {
   const parsedValue = parseInt(value);

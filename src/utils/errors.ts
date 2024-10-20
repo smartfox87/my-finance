@@ -1,8 +1,5 @@
-import { SerializedError } from "@reduxjs/toolkit";
-import { i18nRef } from "@/i18n";
 import { showErrorMessage } from "@/utils/message";
-import { showNotification } from "@/utils/modals";
-import { NotificationTypes } from "@/types/modals";
+import type { SerializedError } from "@reduxjs/toolkit";
 import type { AccountsSliceState } from "@/types/accounts";
 import type { ProfileSliceState } from "@/features/profile";
 import type { IncomesSliceState } from "@/features/incomes";
@@ -17,10 +14,4 @@ type State = IncomesSliceState | AccountsSliceState | BudgetsSliceState | AuthSl
 export const handleRejectedReducerAction = (state: State, { payload, error }: { payload?: string; error: SerializedError }) => {
   const errorText = payload || error.message;
   if (errorText) showErrorMessage(errorText, 8);
-};
-
-export const showCommonError = ({ title, error }: { title?: string; error?: unknown } = {}): void => {
-  if (error) console.error(error);
-  if (title) showNotification({ title, type: NotificationTypes.ERROR });
-  else if (i18nRef.t) showNotification({ title: i18nRef.t("notifications.error.common"), type: NotificationTypes.ERROR });
 };
