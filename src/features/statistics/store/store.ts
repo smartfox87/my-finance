@@ -1,9 +1,9 @@
 import { handleRejectedReducerAction } from "@/utils/errors";
 import { getBudgetsListForChartsApi, getCostsListForChartsApi, getIncomesListForChartsApi } from "../api";
 import { setFilterValue } from "@/utils/filters";
-import { getPeriodDates } from "@/utils/date";
 import { rootReducer } from "@/store";
 import { isFilterPeriodStateItem } from "@/predicates/filter";
+import { getPeriodValuesFromJSON } from "@/utils/get-period-values-from-json";
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import type { FilterItem, FilterState } from "@/types/filter";
 import type { StatisticsBudgetItem, StatisticsCostItem, StatisticsIncomeItem, StatisticsSliceState } from "../types";
@@ -61,7 +61,7 @@ export const statisticsSlice = createAppSlice({
       {
         rejected: handleRejectedReducerAction,
         fulfilled: (state, { payload }) => {
-          state.budgetsListForCharts = payload.map((budget) => ({ ...budget, period: getPeriodDates(budget.period) }));
+          state.budgetsListForCharts = payload.map((budget) => ({ ...budget, period: getPeriodValuesFromJSON(budget.period) }));
         },
       },
     ),

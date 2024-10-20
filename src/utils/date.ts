@@ -1,4 +1,3 @@
-import { DatesStrings } from "@/types/date";
 import dayjs from "dayjs";
 import { type Locale, Locales } from "@/types/locales";
 
@@ -11,5 +10,3 @@ export const toggleDayjsLocale = async (locale: Locale): Promise<void> => {
     console.error(`Failed to load locale: ${locale}`, error);
   }
 };
-
-export const getPeriodDates = (dates: string): DatesStrings => JSON.parse(dates).map((date: string) => date.substring(0, 10));
