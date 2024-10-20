@@ -2,7 +2,7 @@ import { Button, DatePicker, Radio, type RadioChangeEvent } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { PERIOD_OPTIONS } from "@/constants/date";
-import { getPeriodValues } from "src/utils/get-period-values";
+import { getPeriodValuesByDate } from "src/utils/get-period-values-by-date";
 import { findMatchingPeriodName } from "src/utils/find-matching-period-name";
 import { convertDatesToDayjs } from "@/utils/convert-dates-to-dayjs";
 import type { Dayjs } from "dayjs";
@@ -26,7 +26,7 @@ export const PeriodField = ({ id = "", value, onChange }: { id: string; value: D
   };
 
   const handleChangePeriod = (event: RadioChangeEvent): void => {
-    const dates = getPeriodValues(undefined, event.target.value);
+    const dates = getPeriodValuesByDate(new Date().toISOString(), event.target.value);
     setPeriodValue(event.target.value);
     setDatesValue(convertDatesToDayjs(dates));
     onChange(dates);
@@ -35,7 +35,7 @@ export const PeriodField = ({ id = "", value, onChange }: { id: string; value: D
   const handleToggleDates = (next: boolean): void => {
     if (!periodValue) return;
     const prevDate = (next ? datesValue[0].add(1, periodValue) : datesValue[0].subtract(1, periodValue)).format("YYYY-MM-DD");
-    const dates = getPeriodValues(prevDate, periodValue);
+    const dates = getPeriodValuesByDate(prevDate, periodValue);
     setDatesValue(convertDatesToDayjs(dates));
     onChange(dates);
   };
