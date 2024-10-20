@@ -2,7 +2,7 @@ import { createBudgetItemApi, getBudgetsListApi, updateBudgetItemApi, deleteBudg
 import { handleRejectedReducerAction } from "@/utils/errors";
 import { setFilterValue } from "@/utils/filters";
 import { rootReducer } from "@/store";
-import { processBudgetItem } from "../helpers";
+import { processBudgetItem } from "../utils";
 import { isFilterPeriodStateItem } from "@/predicates/filter";
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import type { BudgetItem, BudgetItemData, BudgetsSliceState, ProcessedBudgetItem } from "../types";

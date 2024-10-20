@@ -1,9 +1,9 @@
-import { getPeriodDates } from "@/utils/date";
-import type { BudgetItem, ProcessedBudgetItem } from "../types";
+import { getPeriodValuesFromJSON } from "@/utils/get-period-values-from-json";
+import type { BudgetItem, ProcessedBudgetItem } from "../../types";
 
 export const processBudgetItem = (budgetItem: BudgetItem): ProcessedBudgetItem => ({
   ...budgetItem,
   accounts: budgetItem.accounts.map(({ id }) => id),
   categories: budgetItem.categories.map(({ id }) => id),
-  period: getPeriodDates(budgetItem.period),
+  period: getPeriodValuesFromJSON(budgetItem.period),
 });
