@@ -13,5 +13,3 @@ export const toggleDayjsLocale = async (locale: Locale): Promise<void> => {
 };
 
 export const getPeriodDates = (dates: string): DatesStrings => JSON.parse(dates).map((date: string) => date.substring(0, 10));
-
-export const getToPeriodDatesForApi = ([from, to]: string[]): string => `[${from + " 00:00:00"},${to + " 00:00:01"})`;

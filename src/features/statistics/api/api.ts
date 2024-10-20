@@ -1,8 +1,9 @@
 import { apiClient } from "@/libs/api-client";
 import { getUserId } from "@/utils/local-storage";
-import { getFromPeriodDatesForApi, getToPeriodDatesForApi } from "@/utils/date";
-import { FilterPeriodStateItem } from "@/types/filter";
+import { getFromPeriodApiValues } from "@/utils/get-from-period-api-values";
+import { getToPeriodApiValues } from "@/utils/get-to-period-api-values";
 import { FieldIds } from "@/types/field";
+import type { FilterPeriodStateItem } from "@/types/filter";
 
 export const getCostsListForChartsApi = (filter: FilterPeriodStateItem) => {
   const [from, to] = filter[FieldIds.PERIOD];
@@ -19,5 +20,5 @@ export const getBudgetsListForChartsApi = (filter: FilterPeriodStateItem) =>
     .from("view_budgets")
     .select("name, amount, period, categories, accounts")
     .match({ user_id: getUserId() })
-    .rangeGte("period", getFromPeriodDatesForApi(filter[FieldIds.PERIOD]))
-    .rangeLte("period", getToPeriodDatesForApi(filter[FieldIds.PERIOD]));
+    .rangeGte("period", getFromPeriodApiValues(filter[FieldIds.PERIOD]))
+    .rangeLte("period", getToPeriodApiValues(filter[FieldIds.PERIOD]));
