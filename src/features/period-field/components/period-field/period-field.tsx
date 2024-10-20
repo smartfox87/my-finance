@@ -1,10 +1,10 @@
-import { Button, DatePicker, Radio, type RadioChangeEvent } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { PERIOD_OPTIONS } from "@/constants/date";
-import { getPeriodValuesByDate } from "src/utils/get-period-values-by-date";
-import { findMatchingPeriodName } from "src/utils/find-matching-period-name";
-import { convertDatesToDayjs } from "@/utils/convert-dates-to-dayjs";
+import { getPeriodValuesByDate } from "@/utils/get-period-values-by-date";
+import { findMatchingPeriodName } from "../../utils";
+import { convertDatesToDayjs } from "../../utils";
+import { Button, DatePicker, Radio, type RadioChangeEvent } from "antd";
 import type { Dayjs } from "dayjs";
 import type { DatesPeriod, DatesStrings } from "@/types/date";
 
