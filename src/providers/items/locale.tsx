@@ -1,6 +1,6 @@
 import { createContext, useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { toggleDayjsLocale } from "@/utils/date";
+import { toggleDayjsLocale } from "@/utils/toggle-dayjs-locale";
 import { i18nConfig } from "../../../i18nConfig";
 import { LOCALES } from "@/constants/config";
 import { useParams, usePathname, useRouter } from "next/navigation";
@@ -29,7 +29,7 @@ export const LocaleProvider = ({ children }: ComponentChildrenProps) => {
 
       await changeLanguage(lang);
       setAntdLocale(await getAntdLocale(lang));
-      await toggleDayjsLocale(lang);
+      toggleDayjsLocale(lang);
 
       const days = 30;
       const date = new Date();
