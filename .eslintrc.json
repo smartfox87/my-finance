@@ -3,14 +3,12 @@
 		"next/core-web-vitals",
 		"prettier",
 		"eslint:recommended",
-		"plugin:@typescript-eslint/recommended",
-		"plugin:jest/recommended"
+		"plugin:@typescript-eslint/recommended"
 	],
 	"parser": "@typescript-eslint/parser",
 	"plugins": [
 		"prettier",
-		"@typescript-eslint",
-		"jest"
+		"@typescript-eslint"
 	],
 	"rules": {
 		"prettier/prettier": "error",
@@ -27,5 +25,12 @@
 		"browser": true,
 		"node": true,
 		"jest": true
-	}
+	},
+	"overrides": [
+		{
+			"files": ["*.test.ts", "*.test.js"],
+			"plugins": ["jest"],
+			"extends": ["plugin:jest/recommended"]
+		}
+	]
 }

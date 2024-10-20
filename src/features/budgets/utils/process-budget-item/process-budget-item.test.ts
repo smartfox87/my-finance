@@ -1,5 +1,5 @@
 import { processBudgetItem } from "./process-budget-item";
-import { describe, expect, it, jest } from "@jest/globals";
+import { describe, expect, it } from "@jest/globals";
 import type { BudgetItem } from "../../types";
 
 describe("processBudgetItem", () => {
