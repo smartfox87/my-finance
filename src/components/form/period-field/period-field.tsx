@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { PERIOD_OPTIONS } from "@/constants/date";
 import { getPeriodValues } from "src/utils/get-period-values";
-import { findMatchingDatesPeriodName } from "@/utils/find-matching-dates-period-name";
+import { findMatchingPeriodName } from "src/utils/find-matching-period-name";
 import { convertDatesToDayjs } from "@/utils/convert-dates-to-dayjs";
 import type { Dayjs } from "dayjs";
 import type { DatesPeriod, DatesStrings } from "@/types/date";
@@ -11,15 +11,15 @@ import type { DatesPeriod, DatesStrings } from "@/types/date";
 export const PeriodField = ({ id = "", value, onChange }: { id: string; value: DatesStrings; onChange: (dates: DatesStrings) => void }) => {
   const { t } = useTranslation();
   const [datesValue, setDatesValue] = useState(convertDatesToDayjs(value));
-  const [periodValue, setPeriodValue] = useState<DatesPeriod | null>(findMatchingDatesPeriodName(value));
+  const [periodValue, setPeriodValue] = useState<DatesPeriod | null>(findMatchingPeriodName(value));
 
   useEffect((): void => {
     setDatesValue(convertDatesToDayjs(value));
-    setPeriodValue(findMatchingDatesPeriodName(value));
+    setPeriodValue(findMatchingPeriodName(value));
   }, [value]);
 
   const handleChangeFieldValue = (_: [Dayjs | null, Dayjs | null] | null, value: DatesStrings): void => {
-    const newPeriod = findMatchingDatesPeriodName(value);
+    const newPeriod = findMatchingPeriodName(value);
     if (newPeriod) setPeriodValue(newPeriod);
     setDatesValue(convertDatesToDayjs(value));
     onChange(value);
