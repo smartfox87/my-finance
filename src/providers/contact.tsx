@@ -1,6 +1,6 @@
 "use client";
 
-import { RecaptchaProvider } from "@/providers/items/recaptcha";
+import { RecaptchaProvider } from "@/features/recaptcha-provider";
 import { AntdProvider } from "@/features/antd-provider";
 import type { ReactNode } from "react";
 

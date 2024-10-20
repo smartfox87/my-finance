@@ -2,7 +2,7 @@
 
 import { DefaultForm } from "@/features/default-form";
 import { showNotification } from "@/utils/modals";
-import { useRecaptcha } from "@/hooks/providers/recaptcha";
+import { useRecaptcha } from "@/features/recaptcha-provider";
 import { selectContactFields } from "../../selectors";
 import { isRcFileArray } from "@/predicates/field";
 import { isError, isStringNumber } from "@/predicates/common";

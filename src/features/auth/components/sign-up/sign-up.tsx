@@ -1,6 +1,6 @@
 import { INITIAL_SIGN_UP_FIELDS } from "../../constants";
 import { useTranslation } from "react-i18next";
-import { useRecaptcha } from "@/hooks/providers/recaptcha";
+import { useRecaptcha } from "@/features/recaptcha-provider";
 import { useAppDispatch } from "@/hooks/store";
 import { isRegisterData } from "../../predicates";
 import { DefaultForm } from "@/features/default-form";
