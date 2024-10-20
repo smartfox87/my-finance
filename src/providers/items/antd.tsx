@@ -1,6 +1,6 @@
 import { useDarkTheme } from "@/hooks/theme";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useLocale } from "@/hooks/providers/locale";
+import { useLocale } from "@/features/locale-provider";
 import { getUserId } from "@/utils/local-storage";
 import dynamic from "next/dynamic";
 import { useAppSelector } from "@/hooks/store";
@@ -38,7 +38,7 @@ export const AntdProvider = ({ isActive, children }: ComponentChildrenProps & { 
       {isLoadedAntd ? (
         <AntdRegistry>
           <StyleProvider hashPriority="high">
-            <ConfigProvider locale={antdLocale || undefined} theme={themeSettings}>
+            <ConfigProvider locale={antdLocale} theme={themeSettings}>
               <>{children}</>
             </ConfigProvider>
           </StyleProvider>

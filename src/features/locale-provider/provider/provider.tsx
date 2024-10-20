@@ -1,12 +1,12 @@
 import { createContext, useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { toggleDayjsLocale } from "@/utils/toggle-dayjs-locale";
-import { i18nConfig } from "../../../i18nConfig";
+import { toggleDayjsLocale } from "../utils";
+import { i18nConfig } from "../../../../i18nConfig";
 import { LOCALES } from "@/constants/config";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { isStringLocale } from "@/predicates/locale";
-import { type AntdLocale, AntdLocales, type Locale } from "@/types/locales";
-import type { LocaleContextType } from "@/types/providers/locale";
+import { type AntdLocale, type LocaleContextType, AntdLocales } from "../types";
+import type { Locale } from "@/types/locales";
 import type { ComponentChildrenProps } from "@/types/common";
 
 const getAntdLocale = (lang: Locale): Promise<AntdLocale> => import(`antd/lib/locale/${AntdLocales[lang]}`).then((module) => module.default);

@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useMemo } from "react";
 import { SimpleSelect } from "../simple-select";
-import { useLocale } from "@/hooks/providers/locale";
+import { useLocale } from "@/features/locale-provider";
 import { LOCALES } from "@/constants/config";
 import { isString } from "@/predicates/common";
 import { isStringLocale } from "@/predicates/locale";
