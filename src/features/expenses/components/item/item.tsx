@@ -6,7 +6,7 @@ import { selectCurrency } from "@/features/profile";
 import { uppercaseFirstLetter } from "@/utils/strings";
 import { selectCostCategoriesObject } from "@/store/selectors/references";
 import { useEffect, useRef, useState } from "react";
-import { isTextClamped } from "@/utils/is-text-clamped";
+import { checkIsTextClamped } from "@/utils/check-is-text-clamped";
 import { useViewport } from "@/hooks/viewport";
 import { selectAccountsObject } from "@/store/selectors/accounts";
 import Link from "next/link";
@@ -25,7 +25,7 @@ export const Item = ({ id, created_at, name, amount, date, category, account }: 
 
   useEffect((): void => {
     if (isTouchDevice) return;
-    if (nameRef.current) setIsTooltipName(isTextClamped(nameRef.current));
+    if (nameRef.current) setIsTooltipName(checkIsTextClamped(nameRef.current));
   }, [name, isTouchDevice]);
 
   return (
