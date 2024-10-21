@@ -1,7 +1,7 @@
 "use client";
 
 import { DefaultForm } from "@/features/default-form";
-import { showNotification } from "@/utils/modals";
+import { showNotification } from "@/utils/show-notification";
 import { useRecaptcha } from "@/features/recaptcha-provider";
 import { selectContactFields } from "../../selectors";
 import { isRcFileArray } from "@/predicates/field";

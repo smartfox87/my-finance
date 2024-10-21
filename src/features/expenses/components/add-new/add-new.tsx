@@ -4,7 +4,7 @@ import { DefaultForm } from "@/features/default-form";
 import { selectCostFields } from "../../selectors";
 import { createCostItemThunk } from "../../store";
 import { useTranslation } from "react-i18next";
-import { showNotification } from "@/utils/modals";
+import { showNotification } from "@/utils/show-notification";
 import { memo, useRef, useState } from "react";
 import SvgNewExpense from "@/assets/sprite/new-expense.svg";
 import { CalculatorModal } from "@/features/calculator";

@@ -3,7 +3,7 @@ import { memo, useEffect, useRef, useState } from "react";
 import { selectIncomeFields, selectIncomeItem } from "../../selectors";
 import { deleteIncomeItemThunk, getIncomeItemThunk, setIncomeItem, updateIncomeItemThunk } from "../../store";
 import { DefaultForm } from "@/features/default-form";
-import { showNotification } from "@/utils/modals";
+import { showNotification } from "@/utils/show-notification";
 import { SideModal } from "@/components/modals/side-modal";
 import { useLoading } from "@/hooks/loading";
 import SvgDelete from "@/assets/sprite/delete.svg";

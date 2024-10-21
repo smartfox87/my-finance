@@ -4,7 +4,7 @@ import { DefaultForm } from "@/features/default-form";
 import { selectIncomeFields } from "../../selectors";
 import { createIncomeItemThunk } from "../../store";
 import { useTranslation } from "react-i18next";
-import { showNotification } from "@/utils/modals";
+import { showNotification } from "@/utils/show-notification";
 import { memo, useRef, useState } from "react";
 import { CalculatorModal } from "@/features/calculator";
 import { useViewport } from "@/hooks/viewport";

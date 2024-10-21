@@ -3,7 +3,7 @@ import { memo, useEffect, useRef, useState } from "react";
 import { selectCostFields, selectCostItem } from "../../selectors";
 import { deleteCostItemThunk, getCostItemThunk, setCostItem, updateCostItemThunk } from "../../store";
 import { DefaultForm } from "@/features/default-form";
-import { showNotification } from "@/utils/modals";
+import { showNotification } from "@/utils/show-notification";
 import { SideModal } from "@/components/modals/side-modal";
 import { useLoading } from "@/hooks/loading";
 import SvgDelete from "@/assets/sprite/delete.svg";

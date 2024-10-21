@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { selectProfileFields } from "../../selectors";
 import { DefaultForm } from "@/features/default-form";
 import { getProfileThunk, updateProfileThunk } from "../../store";
-import { showNotification } from "@/utils/modals";
+import { showNotification } from "@/utils/show-notification";
 import { showCommonError } from "@/utils/show-common-error";
 import { isProfileData } from "../../predicates";
 import { HeaderAside } from "../../components";

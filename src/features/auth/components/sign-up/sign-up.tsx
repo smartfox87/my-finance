@@ -4,7 +4,7 @@ import { useRecaptcha } from "@/features/recaptcha-provider";
 import { useAppDispatch } from "@/hooks/store";
 import { isRegisterData } from "../../predicates";
 import { DefaultForm } from "@/features/default-form";
-import { showNotification } from "@/utils/modals";
+import { showNotification } from "@/utils/show-notification";
 import { registerUserThunk } from "@/features/auth-store";
 import { useCallback } from "react";
 import { useRouter } from "next/navigation";
