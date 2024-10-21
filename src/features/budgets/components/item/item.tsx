@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Tooltip } from "antd";
 import { formatPrice } from "@/utils/format-price";
 import { selectCurrency } from "@/features/profile";
-import { uppercaseFirstLetter } from "@/utils/strings";
+import { setUppercaseFirstLetter } from "@/utils/set-uppercase-first-letter";
 import { selectCostCategoriesObject } from "@/store/selectors/references";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { checkIsTextClamped } from "@/utils/check-is-text-clamped";
@@ -23,7 +23,7 @@ export const Item = ({ id, created_at, name, amount, accounts, categories, perio
   const categoriesValue = useMemo(() => categories?.map((id) => costCategoriesObject?.[id]).join(", ") || t("detail.all_categories"), [categories, costCategoriesObject, t]);
   const nameRef = useRef(null);
   const [isTooltipName, setIsTooltipName] = useState(false);
-  const capitalizedName = uppercaseFirstLetter(name);
+  const capitalizedName = setUppercaseFirstLetter(name);
 
   useEffect((): void => {
     if (isTouchDevice) return;
