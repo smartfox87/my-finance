@@ -1,7 +1,7 @@
 import { Date } from "@/components/date/date";
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "antd";
-import formatPrice from "@/utils/format-price";
+import { formatPrice } from "@/utils/format-price";
 import { selectCurrency } from "@/features/profile";
 import { uppercaseFirstLetter } from "@/utils/strings";
 import { selectIncomeCategoriesObject } from "@/store/selectors/references";

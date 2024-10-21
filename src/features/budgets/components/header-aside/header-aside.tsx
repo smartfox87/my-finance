@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { selectBudgetsAmount, selectBudgetsByFilter } from "../../selectors";
 import { selectCurrency } from "@/features/profile";
-import formatPrice from "@/utils/format-price";
+import { formatPrice } from "@/utils/format-price";
 import { InnerHeaderAsidePortal } from "@/features/inner-layout";
 import { useAppSelector } from "@/hooks/store";
 

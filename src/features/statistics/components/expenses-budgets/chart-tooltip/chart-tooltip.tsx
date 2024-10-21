@@ -1,6 +1,6 @@
 import { selectCurrency } from "@/features/profile";
 import { useTranslation } from "react-i18next";
-import formatPrice from "@/utils/format-price";
+import { formatPrice } from "@/utils/format-price";
 import { uppercaseFirstLetter } from "@/utils/strings";
 import { useAppSelector } from "@/hooks/store";
 import { type CostsBudgetsStatisticsTooltipProps, StatisticsTypes } from "../../../types";
