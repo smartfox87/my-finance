@@ -4,6 +4,7 @@
  */
 
 import nextJest from "next/jest.js";
+import { pathsToModuleNameMapper } from "ts-jest";
 import type { Config } from "jest";
 
 const createJestConfig = nextJest({
@@ -12,6 +13,8 @@ const createJestConfig = nextJest({
 });
 
 const config: Config = {
+  extensionsToTreatAsEsm: [".ts"],
+
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 
@@ -96,9 +99,7 @@ const config: Config = {
   // ],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
-  moduleNameMapper: {
-    "^@/(.*)$": "<rootDir>/src/.$1",
-  },
+  moduleNameMapper: pathsToModuleNameMapper({ "@/*": ["./src/*"] }, { prefix: "<rootDir>/" }),
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],

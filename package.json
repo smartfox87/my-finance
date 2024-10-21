@@ -20,8 +20,8 @@
 		"e2e:headless": "cypress run --e2e",
 		"component": "cypress open --component",
 		"component:headless": "cypress run --component",
-		"test": "jest",
-		"test:watch": "jest --watch"
+		"test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+		"test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch"
 	},
 	"dependencies": {
 		"@ant-design/nextjs-registry": "^1.0.1",
