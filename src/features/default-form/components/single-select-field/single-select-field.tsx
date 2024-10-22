@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { handleFilterSelectOptions } from "@/utils/fields";
+import { handleFilterSelectOptions } from "@/utils/handle-filter-select-options";
 import { Form, Select } from "antd";
 import type { SingleSelectValue } from "@/types/field";
 import type { FormFieldProps, SingleSelectFormField } from "@/types/form";

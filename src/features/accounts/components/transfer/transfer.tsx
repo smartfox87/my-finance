@@ -4,7 +4,7 @@ import { transferAccountsBalanceThunk } from "@/store/slices/accounts";
 import { SideModal } from "@/components/modals/side-modal";
 import { useLoading } from "@/hooks/loading";
 import { CalculatorModal } from "@/features/calculator";
-import { handleFilterSelectOptions } from "@/utils/fields";
+import { handleFilterSelectOptions } from "@/utils/handle-filter-select-options";
 import { Button, Form, InputNumber, Select } from "antd";
 import { useViewport } from "@/hooks/viewport";
 import SvgTransfer from "@/assets/sprite/transfer.svg";

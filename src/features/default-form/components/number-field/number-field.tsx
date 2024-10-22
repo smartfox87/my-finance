@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { cutDecimals, handleKeyDownDecimalsValidation, handleKeyUpCutDecimals } from "@/utils/fields";
+import { cutDecimals, handleKeyDownDecimalsValidation, handleKeyUpCutDecimals } from "../../utils";
 import { Form, InputNumber } from "antd";
 import type { FormFieldProps, NumberFormField } from "@/types/form";
 
