@@ -4,7 +4,7 @@ import { PeriodField } from "@/features/period-field";
 import { MutableRefObject, SetStateAction, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { FieldTypes } from "@/types/field";
-import type { FilterState, ChangeFilterFieldValueHandler } from "@/types/filter";
+import type { FilterState, ChangeFilterFieldValueHandler } from "../../types";
 import type { ProcessedFilterField } from "@/types/selectors";
 import type { BaseSelectRef } from "rc-select";
 

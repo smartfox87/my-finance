@@ -1,12 +1,12 @@
 import { createBudgetItemApi, getBudgetsListApi, updateBudgetItemApi, deleteBudgetItemApi, getBudgetItemApi } from "../api";
 import { handleRejectedReducerAction } from "@/utils/handle-rejected-reducer-action";
-import { setFilterValue } from "@/utils/filters";
+import { setFilterValue } from "@/features/filter";
 import { rootReducer } from "@/store";
 import { processBudgetItem } from "../utils";
-import { isFilterPeriodStateItem } from "@/predicates/filter";
+import { isFilterPeriodStateItem } from "@/features/filter";
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import type { BudgetItem, BudgetItemData, BudgetsSliceState, ProcessedBudgetItem } from "../types";
-import type { FilterItem, FilterState } from "@/types/filter";
+import type { FilterItem, FilterState } from "@/features/filter";
 
 const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },

@@ -1,13 +1,13 @@
 import { selectIncomesFilterFields, selectIncomesFilterValues } from "../../selectors";
 import { memo, useMemo } from "react";
-import { getActiveFilters } from "@/utils/filters";
-import { ActiveFiltersList } from "@/components/filter/active-filters-list";
+import { getActiveFilters } from "@/features/filter";
+import { ActiveFiltersList } from "@/features/filter";
 import { isMultiSelectFormFieldId } from "@/predicates/form";
 import { isNumber } from "@/predicates/common";
 import { isMultiSelectValue } from "@/predicates/field";
 import { setIncomesFilterValues } from "../../store";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import type { ClearActiveFilterItemHandler } from "@/types/filter";
+import type { ClearActiveFilterItemHandler } from "@/features/filter";
 
 export const ActiveFilters = memo(function ActiveIncomesFilters() {
   const dispatch = useAppDispatch();

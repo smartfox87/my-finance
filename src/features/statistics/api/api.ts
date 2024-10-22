@@ -3,7 +3,7 @@ import { getUserId } from "@/utils/get-user-id";
 import { getFromPeriodApiValues } from "@/utils/get-from-period-api-values";
 import { getToPeriodApiValues } from "@/utils/get-to-period-api-values";
 import { FieldIds } from "@/types/field";
-import type { FilterPeriodStateItem } from "@/types/filter";
+import type { FilterPeriodStateItem } from "@/features/filter";
 
 export const getCostsListForChartsApi = (filter: FilterPeriodStateItem) => {
   const [from, to] = filter[FieldIds.PERIOD];

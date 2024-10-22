@@ -1,14 +1,14 @@
 "use client";
 
 import { selectCostsListForCharts, selectStatisticsFilterValues } from "../../selectors";
-import { useFilterSearchParams } from "@/hooks/filter-search-params";
+import { useFilterSearchParams } from "@/features/filter";
 import { getBudgetsListForChartsThunk, getCostsListForChartsThunk, getIncomesListForChartsThunk, setStatisticsFilterValues } from "../../store";
 import { useCallback, useEffect, useState } from "react";
 import { INITIAL_STATISTICS_FILTER_FIELDS } from "../../constants";
 import { getUserId } from "@/utils/get-user-id";
 import { Preloader } from "@/components/loading/preloader";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import { getFilterItemsFromFields } from "@/utils/filters";
+import { getFilterItemsFromFields } from "@/features/filter";
 import { PageContent } from "../../components";
 
 export default function StatisticsContent() {

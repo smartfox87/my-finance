@@ -4,7 +4,7 @@ import { FieldIds } from "@/types/field";
 import type { CostItem } from "@/features/expenses";
 import type { IncomeItem } from "@/features/incomes";
 import type { StatisticsCostItem, StatisticsIncomeItem } from "@/features/statistics";
-import type { FilterState } from "@/types/filter";
+import type { FilterState } from "@/features/filter";
 
 export const filterSingleItemsList = <T extends CostItem | IncomeItem | StatisticsCostItem | StatisticsIncomeItem>(filterValues: FilterState, itemsList: T[]): T[] =>
   itemsList.filter(

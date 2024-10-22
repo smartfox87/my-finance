@@ -4,7 +4,7 @@ import { getOptionsFromItemsList } from "../get-options-from-items-list";
 import { getOptionsObjectFromOptions } from "../get-options-object-from-options";
 import { FieldIds, FieldTypes, type MultiSelectOptionValue } from "@/types/field";
 import type { CostCategory, IncomeCategory } from "@/types/references";
-import type { FilterField } from "@/types/filter";
+import type { FilterField } from "@/features/filter";
 import type { ProcessedAccountItem } from "@/types/accounts";
 import type { ProcessedFilterField } from "@/types/selectors";
 

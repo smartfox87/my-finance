@@ -6,13 +6,13 @@ import { SideModal } from "@/components/modals/side-modal";
 import { memo, useEffect, useState } from "react";
 import SvgFilter from "@/assets/sprite/filter.svg";
 import { useViewport } from "@/hooks/viewport";
-import { prepareObjectValuesForFilterStateValues, setFilterValue } from "@/utils/filters";
+import { prepareObjectValuesForFilterStateValues, setFilterValue } from "@/features/filter";
 import { useFieldFocus } from "@/hooks/field-focus";
-import { FilterFields } from "@/components/filter/filter-fields";
+import { FilterFields } from "@/features/filter";
 import cloneDeep from "lodash/cloneDeep";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { FieldIds } from "@/types/field";
-import type { ChangeFilterFieldValueHandler, FilterState } from "@/types/filter";
+import type { ChangeFilterFieldValueHandler, FilterState } from "@/features/filter";
 import type { BaseSelectRef } from "rc-select";
 import type { ComponentOnSaveProps } from "@/types/common";
 

@@ -8,7 +8,7 @@ import dayjs from "dayjs";
 import { FieldIds, FieldTypes } from "@/types/field";
 import type { LazyLoadedSlices } from "@/types/store";
 import type { IncomeItem, IncomeItemField } from "../types";
-import type { FilterState } from "@/types/filter";
+import type { FilterState } from "@/features/filter";
 import type { ProcessedFilterField } from "@/types/selectors";
 
 export const selectIncomesList = ({ incomes }: LazyLoadedSlices): IncomeItem[] | null => incomes?.incomesList || null;

@@ -5,7 +5,7 @@ import { getFromPeriodApiValues } from "@/utils/get-from-period-api-values";
 import { getToPeriodApiValues } from "@/utils/get-to-period-api-values";
 import { FieldIds } from "@/types/field";
 import type { BudgetItemData } from "../types";
-import type { FilterPeriodStateItem } from "@/types/filter";
+import type { FilterPeriodStateItem } from "@/features/filter";
 
 export const getBudgetsListApi = (filter: FilterPeriodStateItem) =>
   apiClient

@@ -2,7 +2,7 @@ import { apiClient } from "@/libs/api-client";
 import { getUserId } from "@/utils/get-user-id";
 import { getCurrentISODate } from "@/utils/get-current-iso-date";
 import { FieldIds } from "@/types/field";
-import type { FilterPeriodStateItem } from "@/types/filter";
+import type { FilterPeriodStateItem } from "@/features/filter";
 import type { CostItemData } from "../types";
 
 export const getCostsListApi = (filter: FilterPeriodStateItem) => {

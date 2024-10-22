@@ -8,7 +8,7 @@ import { FieldIds, FieldTypes } from "@/types/field";
 import type { LazyLoadedSlices } from "@/types/store";
 import type { BudgetItemField, ProcessedBudgetItem } from "../types";
 import type { ProcessedFilterField } from "@/types/selectors";
-import type { FilterState } from "@/types/filter";
+import type { FilterState } from "@/features/filter";
 
 export const selectBudgetsList = ({ budgets }: LazyLoadedSlices): ProcessedBudgetItem[] | null => budgets?.budgetsList || null;
 

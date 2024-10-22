@@ -2,14 +2,14 @@
 
 import { Preloader } from "@/components/loading/preloader";
 import { selectCostsFilterValues, selectCostsList } from "../../selectors";
-import { useFilterSearchParams } from "@/hooks/filter-search-params";
+import { useFilterSearchParams } from "@/features/filter";
 import { useLoading } from "@/hooks/loading";
 import { useCallback, useEffect } from "react";
 import { getCostsListThunk, setCostsFilterValues } from "../../store";
 import { INITIAL_COSTS_FILTER_FIELDS } from "../../constants";
 import { getUserId } from "@/utils/get-user-id";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import { getFilterItemsFromFields } from "@/utils/filters";
+import { getFilterItemsFromFields } from "@/features/filter";
 import { HeaderAside } from "../../components";
 import { PageContent } from "../../components";
 

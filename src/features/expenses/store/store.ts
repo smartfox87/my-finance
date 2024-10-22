@@ -2,11 +2,11 @@ import { asyncThunkCreator, buildCreateSlice } from "@reduxjs/toolkit";
 import { createCostItemApi, getCostsListApi, updateCostItemApi, deleteCostItemApi, getCostItemApi } from "../api";
 import { handleRejectedReducerAction } from "@/utils/handle-rejected-reducer-action";
 import { updateAccountBalanceThunk } from "@/store/slices/accounts";
-import { setFilterValue } from "@/utils/filters";
+import { setFilterValue } from "@/features/filter";
 import { rootReducer } from "@/store";
-import { isFilterPeriodStateItem } from "@/predicates/filter";
+import { isFilterPeriodStateItem } from "@/features/filter";
 import type { CostItem, CostItemData, CostsSliceState } from "../types";
-import type { FilterItem, FilterState } from "@/types/filter";
+import type { FilterItem, FilterState } from "@/features/filter";
 import type { WithSlice } from "@reduxjs/toolkit";
 import type { AppDispatch, RootState } from "@/types/store";
 

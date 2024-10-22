@@ -1,5 +1,5 @@
 import { FieldIds, FieldTypes } from "@/types/field";
-import type { FilterState } from "@/types/filter";
+import type { FilterState } from "@/features/filter";
 import type { DateFormField, NumberFormField, SingleSelectFormField, TextFormField } from "@/types/form";
 
 export interface CostItem {

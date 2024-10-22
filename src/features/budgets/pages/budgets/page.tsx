@@ -4,12 +4,12 @@ import { useLoading } from "@/hooks/loading";
 import { useCallback, useEffect } from "react";
 import { Preloader } from "@/components/loading/preloader";
 import { selectBudgetsFilterValues, selectBudgetsList } from "../../selectors";
-import { useFilterSearchParams } from "@/hooks/filter-search-params";
+import { useFilterSearchParams } from "@/features/filter";
 import { getBudgetsListThunk, setBudgetsFilterValues } from "../../store";
 import { INITIAL_BUDGETS_FILTER_FIELDS } from "../../constants";
 import { getUserId } from "@/utils/get-user-id";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import { getFilterItemsFromFields } from "@/utils/filters";
+import { getFilterItemsFromFields } from "@/features/filter";
 import { PageContent } from "../../components";
 import { HeaderAside } from "../../components";
 

@@ -3,7 +3,7 @@ import { checkPeriodsCondition } from "../check-periods-condition";
 import { FieldIds } from "@/types/field";
 import type { ProcessedBudgetItem } from "@/features/budgets";
 import type { ProcessedStatisticsBudgetItem } from "@/features/statistics";
-import type { FilterState } from "@/types/filter";
+import type { FilterState } from "@/features/filter";
 
 export const filterMultiItemsList = <T extends ProcessedBudgetItem | ProcessedStatisticsBudgetItem>(filterValues: FilterState, itemsList: T[]): T[] =>
   itemsList.filter(

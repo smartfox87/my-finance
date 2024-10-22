@@ -1,7 +1,7 @@
 "use client";
 
 import { selectIncomesFilterValues, selectIncomesList } from "../../selectors";
-import { useFilterSearchParams } from "@/hooks/filter-search-params";
+import { useFilterSearchParams } from "@/features/filter";
 import { getIncomesListThunk, setIncomesFilterValues } from "../../store";
 import { useLoading } from "@/hooks/loading";
 import { useCallback, useEffect } from "react";
@@ -9,7 +9,7 @@ import { INITIAL_INCOMES_FILTER_FIELDS } from "../../constants";
 import { getUserId } from "@/utils/get-user-id";
 import { Preloader } from "@/components/loading/preloader";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import { getFilterItemsFromFields } from "@/utils/filters";
+import { getFilterItemsFromFields } from "@/features/filter";
 import { HeaderAside } from "../../components";
 import { PageContent } from "../../components";
 

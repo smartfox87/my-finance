@@ -2,7 +2,7 @@ import { FieldIds } from "@/types/field";
 import type { CostItem } from "@/features/expenses";
 import type { IncomeItem } from "@/features/incomes";
 import type { ProcessedBudgetItem } from "@/features/budgets";
-import type { FilterState } from "@/types/filter";
+import type { FilterState } from "@/features/filter";
 
 export const sortItemsList = <T extends CostItem | IncomeItem | ProcessedBudgetItem>(filterValues: FilterState, itemsList: T[]): T[] =>
   itemsList.sort((a, b) => {
