@@ -5,7 +5,7 @@ import { useLocale } from "@/features/locale-provider";
 import { LOCALES } from "@/constants/config";
 import { isString } from "@/predicates/common";
 import { isStringLocale } from "@/predicates/locale";
-import type { SimpleSelectValue } from "@/types/select";
+import type { SimpleSelectValue } from "@/features/main-layout/types/select";
 
 export const LanguageToggle = () => {
   const {
