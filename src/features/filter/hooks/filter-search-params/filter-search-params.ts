@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from "react";
-import { getIntegerFromString } from "@/utils/numbers";
+import { getIntegerFromString } from "../../utils";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import queryString from "query-string";
 import { useAppDispatch } from "@/hooks/store";
