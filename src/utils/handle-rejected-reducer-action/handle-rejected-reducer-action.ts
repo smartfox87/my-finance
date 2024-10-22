@@ -1,4 +1,4 @@
-import { showErrorMessage } from "@/utils/message";
+import { showErrorMessage } from "@/utils/show-error-message";
 import type { SerializedError } from "@reduxjs/toolkit";
 import type { AccountsSliceState } from "@/types/accounts";
 import type { ProfileSliceState } from "@/features/profile";
