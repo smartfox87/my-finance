@@ -1,6 +1,6 @@
-import { FieldIds, FieldTypes } from "@/types/field";
-import type { DatesStrings } from "@/types/date";
-import type { DatesPeriodFormField, MultiSelectFormField, NumberFormField, TextFormField } from "@/types/form";
+import { FieldIds, FieldTypes } from "@/features/default-form";
+import type { DatesStrings } from "@/features/default-form";
+import type { DatesPeriodFormField, MultiSelectFormField, NumberFormField, TextFormField } from "@/features/default-form";
 import type { FilterState } from "@/features/filter";
 
 export interface BudgetItemData {

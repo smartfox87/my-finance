@@ -1,5 +1,5 @@
 import { isObject } from "@/predicates/common";
-import { FieldIds } from "@/types/field";
+import { FieldIds } from "@/features/default-form";
 import type { IncomeItemData } from "../types";
 
 export const isIncomeItemData = (data: unknown): data is IncomeItemData =>

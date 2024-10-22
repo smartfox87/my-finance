@@ -1,8 +1,7 @@
-import { isMultiSelectValue, isUploadFileArray } from "@/predicates/field";
+import { isMultiSelectValue, isUploadFileArray } from "../../predicates";
 import { isTruthy } from "@/predicates/common";
 import { isDayjs } from "dayjs";
-import { FieldValues } from "@/types/field";
-import type { FormValues } from "@/types/form";
+import { type FormValues, FieldValues } from "../../types";
 
 export const processFormValues = (values: FormValues): FormValues =>
   Object.assign(

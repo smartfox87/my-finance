@@ -1,13 +1,10 @@
 import { selectBudgetsFilterFields, selectBudgetsFilterValues } from "../../selectors";
 import { setBudgetsFilterValues } from "../../store";
 import { memo, useMemo } from "react";
-import { getActiveFilters } from "@/features/filter";
-import { ActiveFiltersList } from "@/features/filter";
-import { isMultiSelectFormFieldId } from "@/predicates/form";
 import { isNumber } from "@/predicates/common";
-import { isMultiSelectValue } from "@/predicates/field";
+import { isMultiSelectFormFieldId, isMultiSelectValue } from "@/features/default-form";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import type { ActiveFilterItemValue } from "@/features/filter";
+import { type ActiveFilterItemValue, getActiveFilters, ActiveFiltersList } from "@/features/filter";
 
 export const ActiveFilters = memo(function ActiveBudgetsFilters() {
   const dispatch = useAppDispatch();

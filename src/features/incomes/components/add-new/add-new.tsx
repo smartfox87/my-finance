@@ -12,9 +12,9 @@ import SvgNewIncome from "@/assets/sprite/new-income.svg";
 import { showCommonError } from "@/utils/show-common-error";
 import { isIncomeItemData } from "../../predicates";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import { FieldIds, FieldTypes } from "@/types/field";
+import { FieldIds, FieldTypes } from "@/features/default-form";
 import type { CalculatorSaveHandler } from "@/features/calculator";
-import type { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
+import type { DefaultFormRef, DefaultFormSaveHandler } from "@/features/default-form";
 
 export const AddNew = memo(function AddNewIncome({ isAdaptive, onSave }: { isAdaptive?: boolean; onSave: () => Promise<void> }) {
   const { t } = useTranslation();

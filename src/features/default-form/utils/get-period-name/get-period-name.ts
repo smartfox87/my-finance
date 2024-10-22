@@ -1,5 +1,5 @@
-import { DatesPeriod, DatesPeriods } from "@/types/date";
-import { isDatesPeriod } from "@/predicates/field";
+import { DatesPeriod, DatesPeriods } from "../../types";
+import { isDatesPeriod } from "../../predicates";
 
 export const getPeriodName = (): DatesPeriod => {
   if (typeof window === "undefined") return DatesPeriods.YEAR;

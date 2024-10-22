@@ -5,3 +5,7 @@ export * from "./get-values-from-props-fields";
 export * from "./handle-key-up-cut-decimals";
 export * from "./handle-key-down-decimals-validation";
 export * from "./cut-decimals";
+export * from "./convert-dates-to-dayjs";
+export * from "./find-matching-period-name";
+export * from "./get-period-name";
+export * from "./get-period-values-by-date";

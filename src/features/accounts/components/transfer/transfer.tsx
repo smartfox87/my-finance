@@ -12,7 +12,7 @@ import { useFieldFocus } from "@/hooks/field-focus";
 import { showCommonError } from "@/utils/show-common-error";
 import { INITIAL_ACCOUNT_TRANSFER_VALUES } from "@/constants/accounts";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import { FieldIds } from "@/types/field";
+import { FieldIds } from "@/features/default-form";
 import { memo, type ReactNode, useMemo, useState } from "react";
 import type { BaseSelectRef } from "rc-select";
 import type { AccountTransferField, AccountTransferValues } from "@/types/accounts";

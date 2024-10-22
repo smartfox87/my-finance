@@ -1,8 +1,8 @@
 import quarterOfYear from "dayjs/plugin/quarterOfYear";
 import dayjs from "dayjs";
 import { checkIsStringValidDate } from "@/utils/check-is-string-valid-date";
-import { PERIODS } from "@/constants/date";
-import { type DatesPeriod, type DatesStrings, DatesPeriods } from "@/types/date";
+import { PERIODS } from "../../constatnts/date";
+import { type DatesPeriod, type DatesStrings, DatesPeriods } from "../../types";
 
 dayjs.extend(quarterOfYear);
 

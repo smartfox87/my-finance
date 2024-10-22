@@ -1,7 +1,5 @@
-import { isDatesStrings } from "@/predicates/date";
 import { isString } from "@/predicates/common";
-import { isMultiSelectValue } from "@/predicates/field";
-import { FieldIds } from "@/types/field";
+import { FieldIds, isDatesStrings, isMultiSelectValue } from "@/features/default-form";
 import type { FilterMultiItem, FilterPeriodItem, FilterPeriodStateItem, FilterSortItem, FilterStateKey } from "@/features/filter";
 
 export const isFilterStateKey = (key: string): key is FilterStateKey => FieldIds.PERIOD === key || FieldIds.CATEGORIES === key || FieldIds.ACCOUNTS === key || FieldIds.SORT === key;

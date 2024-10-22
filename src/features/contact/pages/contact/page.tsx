@@ -4,7 +4,7 @@ import { DefaultForm } from "@/features/default-form";
 import { showNotification } from "@/utils/show-notification";
 import { useRecaptcha } from "@/features/recaptcha-provider";
 import { selectContactFields } from "../../selectors";
-import { isRcFileArray } from "@/predicates/field";
+import { isRcFileArray } from "@/features/default-form";
 import { isError, isStringNumber } from "@/predicates/common";
 import { showCommonError } from "@/utils/show-common-error";
 import { Info } from "../../components";
@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next";
 import { useCallback } from "react";
 import { Jsonld } from "../../components";
 import { useAppSelector } from "@/hooks/store";
-import type { FormValues } from "@/types/form";
+import type { FormValues } from "@/features/default-form";
 
 export default function Page() {
   const { t } = useTranslation();

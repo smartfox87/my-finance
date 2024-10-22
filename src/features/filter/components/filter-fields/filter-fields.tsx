@@ -1,10 +1,10 @@
 import { Select } from "antd";
 import { handleFilterSelectOptions } from "@/utils/handle-filter-select-options";
-import { PeriodField } from "@/features/period-field";
+import { PeriodField } from "@/features/default-form";
 import { MutableRefObject, SetStateAction, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { renderSelectOption } from "../../utils";
-import { FieldTypes } from "@/types/field";
+import { FieldTypes } from "@/features/default-form";
 import type { FilterState, ChangeFilterFieldValueHandler } from "../../types";
 import type { ProcessedFilterField } from "@/types/selectors";
 import type { BaseSelectRef } from "rc-select";

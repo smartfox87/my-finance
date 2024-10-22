@@ -1,6 +1,6 @@
 import { i18nRef } from "@/i18n";
 import { isTruthy } from "@/predicates/common";
-import { FieldTypes } from "@/types/field";
+import { FieldTypes } from "@/features/default-form";
 import type { ProcessedFilterField } from "@/types/selectors";
 import type { ActiveFilterItem, FilterState } from "@/features/filter";
 

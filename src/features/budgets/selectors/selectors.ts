@@ -4,7 +4,7 @@ import { selectCostCategories } from "@/store/selectors/references";
 import { selectCurrency } from "@/features/profile";
 import { selectAccountsList } from "@/store/selectors/accounts";
 import { filterMultiItemsList, getOptionsFromItemsList, processFilterFields, sortItemsList } from "@/utils/selectors";
-import { FieldIds, FieldTypes } from "@/types/field";
+import { FieldIds, FieldTypes } from "@/features/default-form";
 import type { LazyLoadedSlices } from "@/types/store";
 import type { BudgetItemField, ProcessedBudgetItem } from "../types";
 import type { ProcessedFilterField } from "@/types/selectors";

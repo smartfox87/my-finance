@@ -1,5 +1,5 @@
 import { findMatchingPeriodName } from "./find-matching-period-name";
-import { DatesPeriods } from "@/types/date";
+import { DatesPeriods } from "../../types";
 import { describe, expect, it } from "@jest/globals";
 
 describe("findMatchingDatesPeriodName", () => {

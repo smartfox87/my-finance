@@ -13,10 +13,10 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { isCostItemData } from "../../predicates";
 import { showCommonError } from "@/utils/show-common-error";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import { FieldIds, FieldTypes } from "@/types/field";
+import { FieldIds, FieldTypes } from "@/features/default-form";
 import type { CalculatorSaveHandler } from "@/features/calculator";
 import type { ComponentOnSaveProps } from "@/types/common";
-import type { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
+import type { DefaultFormRef, DefaultFormSaveHandler } from "@/features/default-form";
 
 export const Detail = memo(function CostDetail({ onSave }: ComponentOnSaveProps) {
   const { t } = useTranslation();

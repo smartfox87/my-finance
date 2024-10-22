@@ -1,6 +1,6 @@
 import { checkMultiItemCondition } from "../check-multi-item-condition";
 import { checkPeriodsCondition } from "../check-periods-condition";
-import { FieldIds } from "@/types/field";
+import { FieldIds } from "@/features/default-form";
 import type { ProcessedBudgetItem } from "@/features/budgets";
 import type { ProcessedStatisticsBudgetItem } from "@/features/statistics";
 import type { FilterState } from "@/features/filter";

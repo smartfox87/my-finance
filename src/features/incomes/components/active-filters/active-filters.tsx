@@ -2,9 +2,9 @@ import { selectIncomesFilterFields, selectIncomesFilterValues } from "../../sele
 import { memo, useMemo } from "react";
 import { getActiveFilters } from "@/features/filter";
 import { ActiveFiltersList } from "@/features/filter";
-import { isMultiSelectFormFieldId } from "@/predicates/form";
+import { isMultiSelectFormFieldId } from "@/features/default-form";
 import { isNumber } from "@/predicates/common";
-import { isMultiSelectValue } from "@/predicates/field";
+import { isMultiSelectValue } from "@/features/default-form";
 import { setIncomesFilterValues } from "../../store";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import type { ClearActiveFilterItemHandler } from "@/features/filter";

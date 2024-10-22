@@ -3,17 +3,17 @@
 import { useTranslation } from "react-i18next";
 import { useLoading } from "@/hooks/loading";
 import dynamic from "next/dynamic";
-import { isFieldId } from "@/predicates/field";
+import { isFieldId } from "../../predicates";
 import { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useState } from "react";
 import { getChangedFieldValue, getValuesFromPropsFields, processFormValues } from "../../utils/";
-import { FieldTypes } from "@/types/field";
+import { FieldTypes } from "../../types";
 import { Button, Form, type FormProps } from "antd";
-import type { ChangedField, DefaultFormProps, FormValues } from "@/types/form";
+import type { ChangedField, DefaultFormProps, FormValues } from "../../types";
 
 const TextFieldComponent = dynamic(() => import("../text-field").then((mod) => mod.TextField));
 const PasswordFieldComponent = dynamic(() => import("../password-field").then((mod) => mod.PasswordField));
 const TextAreaFieldComponent = dynamic(() => import("../textarea-field").then((mod) => mod.TextareaField));
-const PeriodFieldComponent = dynamic(() => import("../period-field").then((mod) => mod.PeriodField));
+const PeriodFieldComponent = dynamic(() => import("../period-form-field").then((mod) => mod.PeriodFormField));
 const SingleSelectFieldComponent = dynamic(() => import("../single-select-field").then((mod) => mod.SingleSelectField));
 const MultiSelectFieldComponent = dynamic(() => import("../multi-select-field").then((mod) => mod.MultiSelectField));
 const DatePickerFieldComponent = dynamic(() => import("../date-picker-field").then((mod) => mod.DatePickerField));

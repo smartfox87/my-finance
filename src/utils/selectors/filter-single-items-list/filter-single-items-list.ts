@@ -1,6 +1,6 @@
 import { checkSingleItemCondition } from "../check-single-item-condition";
 import { checkPeriodCondition } from "../check-period-condition";
-import { FieldIds } from "@/types/field";
+import { FieldIds } from "@/features/default-form";
 import type { CostItem } from "@/features/expenses";
 import type { IncomeItem } from "@/features/incomes";
 import type { StatisticsCostItem, StatisticsIncomeItem } from "@/features/statistics";

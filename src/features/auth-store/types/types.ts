@@ -1,6 +1,6 @@
-import { FieldIds, FieldTypes } from "@/types/field";
+import { FieldIds, FieldTypes } from "@/features/default-form";
 import type { Session, User } from "@supabase/auth-js";
-import type { TextFormField } from "@/types/form";
+import type { TextFormField } from "@/features/default-form";
 
 export type LoginData = {
   [FieldIds.EMAIL]: string;
