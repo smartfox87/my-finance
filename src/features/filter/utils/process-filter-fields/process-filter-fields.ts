@@ -4,9 +4,8 @@ import { getOptionsFromItemsList } from "../get-options-from-items-list";
 import { getOptionsObjectFromOptions } from "../get-options-object-from-options";
 import { FieldIds, FieldTypes, type MultiSelectOptionValue } from "@/features/default-form";
 import type { CostCategory, IncomeCategory } from "@/types/references";
-import type { FilterField } from "@/features/filter";
 import type { ProcessedAccountItem } from "@/types/accounts";
-import type { ProcessedFilterField } from "@/types/selectors";
+import type { FilterField, ProcessedFilterField } from "../../types";
 
 export const processFilterFields = <T extends IncomeCategory | CostCategory>(
   initialFieldsData: FilterField[],

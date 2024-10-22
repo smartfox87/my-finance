@@ -7,8 +7,7 @@ import { filterMultiItemsList, getOptionsFromItemsList, processFilterFields, sor
 import { FieldIds, FieldTypes } from "@/features/default-form";
 import type { LazyLoadedSlices } from "@/types/store";
 import type { BudgetItemField, ProcessedBudgetItem } from "../types";
-import type { ProcessedFilterField } from "@/types/selectors";
-import type { FilterState } from "@/features/filter";
+import type { ProcessedFilterField, FilterState } from "@/features/filter";
 
 export const selectBudgetsList = ({ budgets }: LazyLoadedSlices): ProcessedBudgetItem[] | null => budgets?.budgetsList || null;
 

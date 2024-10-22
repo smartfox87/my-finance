@@ -1,8 +1,7 @@
 import { i18nRef } from "@/i18n";
 import { isTruthy } from "@/predicates/common";
 import { FieldTypes } from "@/features/default-form";
-import type { ProcessedFilterField } from "@/types/selectors";
-import type { ActiveFilterItem, FilterState } from "@/features/filter";
+import type { ActiveFilterItem, FilterState, ProcessedFilterField } from "../../types";
 
 export const getActiveFilters = (processedFilterFields: ProcessedFilterField[], filterValues: FilterState | null): ActiveFilterItem[] =>
   processedFilterFields

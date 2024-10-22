@@ -7,7 +7,7 @@ import { isFilterStateKey } from "@/features/filter";
 import { getLocalisedMonths } from "../utils";
 import type { LazyLoadedSlices } from "@/types/store";
 import type { FilterState } from "@/features/filter";
-import type { ProcessedFilterField } from "@/types/selectors";
+import type { ProcessedFilterField } from "@/features/filter";
 import type {
   BudgetsListStatistics,
   CostIncomeStatisticsItem,

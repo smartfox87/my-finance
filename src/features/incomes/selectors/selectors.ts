@@ -9,7 +9,7 @@ import { FieldIds, FieldTypes } from "@/features/default-form";
 import type { LazyLoadedSlices } from "@/types/store";
 import type { IncomeItem, IncomeItemField } from "../types";
 import type { FilterState } from "@/features/filter";
-import type { ProcessedFilterField } from "@/types/selectors";
+import type { ProcessedFilterField } from "@/features/filter";
 
 export const selectIncomesList = ({ incomes }: LazyLoadedSlices): IncomeItem[] | null => incomes?.incomesList || null;
 
