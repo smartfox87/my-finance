@@ -1,4 +1,5 @@
-import { checkPeriodCondition, checkSingleItemCondition } from "@/utils/selectors";
+import { checkSingleItemCondition } from "../check-single-item-condition";
+import { checkPeriodCondition } from "../check-period-condition";
 import { FieldIds } from "@/types/field";
 import type { CostItem } from "@/features/expenses";
 import type { IncomeItem } from "@/features/incomes";

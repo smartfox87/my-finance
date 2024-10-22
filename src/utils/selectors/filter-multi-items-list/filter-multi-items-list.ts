@@ -1,4 +1,5 @@
-import { checkMultiItemCondition, checkPeriodsCondition } from "@/utils/selectors";
+import { checkMultiItemCondition } from "../check-multi-item-condition";
+import { checkPeriodsCondition } from "../check-periods-condition";
 import { FieldIds } from "@/types/field";
 import type { ProcessedBudgetItem } from "@/features/budgets";
 import type { ProcessedStatisticsBudgetItem } from "@/features/statistics";
