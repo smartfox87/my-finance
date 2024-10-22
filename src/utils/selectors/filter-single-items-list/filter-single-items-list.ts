@@ -1,0 +1,14 @@
+import { checkPeriodCondition, checkSingleItemCondition } from "@/utils/selectors";
+import { FieldIds } from "@/types/field";
+import type { CostItem } from "@/features/expenses";
+import type { IncomeItem } from "@/features/incomes";
+import type { StatisticsCostItem, StatisticsIncomeItem } from "@/features/statistics";
+import type { FilterState } from "@/types/filter";
+
+export const filterSingleItemsList = <T extends CostItem | IncomeItem | StatisticsCostItem | StatisticsIncomeItem>(filterValues: FilterState, itemsList: T[]): T[] =>
+  itemsList.filter(
+    ({ date, category, account }) =>
+      checkSingleItemCondition(filterValues[FieldIds.CATEGORIES], category) &&
+      checkPeriodCondition(filterValues[FieldIds.PERIOD], date) &&
+      checkSingleItemCondition(filterValues[FieldIds.ACCOUNTS], account),
+  );
