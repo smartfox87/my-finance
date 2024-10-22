@@ -4,7 +4,7 @@ import { selectAccountsList } from "@/store/selectors/accounts";
 import { INITIAL_STATISTICS_FILTER_FIELDS } from "../constants";
 import { processFilterFields, filterSingleItemsList, filterMultiItemsList } from "@/utils/selectors";
 import { isFilterStateKey } from "@/features/filter";
-import { getLocalisedMonths } from "@/utils/months";
+import { getLocalisedMonths } from "../utils";
 import type { LazyLoadedSlices } from "@/types/store";
 import type { FilterState } from "@/features/filter";
 import type { ProcessedFilterField } from "@/types/selectors";
