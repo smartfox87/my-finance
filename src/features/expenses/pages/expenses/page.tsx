@@ -7,7 +7,7 @@ import { useLoading } from "@/hooks/loading";
 import { useCallback, useEffect } from "react";
 import { getCostsListThunk, setCostsFilterValues } from "../../store";
 import { INITIAL_COSTS_FILTER_FIELDS } from "../../constants";
-import { getUserId } from "@/utils/local-storage";
+import { getUserId } from "@/utils/get-user-id";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { getFilterItemsFromFields } from "@/utils/filters";
 import { HeaderAside } from "../../components";

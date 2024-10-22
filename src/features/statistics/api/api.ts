@@ -1,5 +1,5 @@
 import { apiClient } from "@/libs/api-client";
-import { getUserId } from "@/utils/local-storage";
+import { getUserId } from "@/utils/get-user-id";
 import { getFromPeriodApiValues } from "@/utils/get-from-period-api-values";
 import { getToPeriodApiValues } from "@/utils/get-to-period-api-values";
 import { FieldIds } from "@/types/field";

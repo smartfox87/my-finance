@@ -1,7 +1,7 @@
 "use client";
 
 import { selectUser } from "@/store/selectors/auth";
-import { getUserId } from "@/utils/local-storage";
+import { getUserId } from "@/utils/get-user-id";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import type { ComponentChildrenProps } from "@/types/common";

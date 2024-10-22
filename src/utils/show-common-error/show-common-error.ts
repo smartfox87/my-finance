@@ -1,4 +1,4 @@
-import { showNotification } from "@/utils/modals";
+import { showNotification } from "@/utils/show-notification";
 import { NotificationTypes } from "@/types/modals";
 import { i18nRef } from "@/i18n";
 

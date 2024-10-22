@@ -1,4 +1,4 @@
-import { getLanguage } from "@/utils/local-storage";
+import { getLanguage } from "@/utils/get-language";
 
 export const formatPrice = (price: string | number, decimals: number = 2): string => {
   let result = price;

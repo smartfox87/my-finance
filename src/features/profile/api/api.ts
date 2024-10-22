@@ -1,5 +1,5 @@
 import { apiClient } from "@/libs/api-client";
-import { getUserId } from "@/utils/local-storage";
+import { getUserId } from "@/utils/get-user-id";
 import { getCurrentISODate } from "@/utils/get-current-iso-date";
 import type { ProfileData, SettingsData } from "../types";
 

@@ -6,7 +6,7 @@ import { getIncomesListThunk, setIncomesFilterValues } from "../../store";
 import { useLoading } from "@/hooks/loading";
 import { useCallback, useEffect } from "react";
 import { INITIAL_INCOMES_FILTER_FIELDS } from "../../constants";
-import { getUserId } from "@/utils/local-storage";
+import { getUserId } from "@/utils/get-user-id";
 import { Preloader } from "@/components/loading/preloader";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { getFilterItemsFromFields } from "@/utils/filters";

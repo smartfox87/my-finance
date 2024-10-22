@@ -2,13 +2,13 @@ import { createAccountItemApi, getAccountsListApi, updateAccountItemApi, deleteA
 import { handleRejectedReducerAction } from "@/utils/handle-rejected-reducer-action";
 import { createAccountTypeApi, updateAccountTypeApi } from "@/api/references";
 import { rootReducer } from "@/store";
+import { getAccountTypesThunk } from "@/store/slices/references";
+import { showNotification } from "@/utils/show-notification";
+import { i18nRef } from "@/i18n";
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import type { AccountTypeData } from "@/types/references";
 import type { RootState } from "@/types/store";
 import type { AccountItem, AccountItemUpdateData, AccountItemBalanceData, AccountsSliceState, AccountItemCreateData } from "@/types/accounts";
-import { getAccountTypesThunk } from "@/store/slices/references";
-import { showNotification } from "@/utils/modals";
-import { i18nRef } from "@/i18n";
 
 const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
