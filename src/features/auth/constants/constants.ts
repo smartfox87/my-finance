@@ -1,4 +1,4 @@
-import { EMAIL_FIELD, FULL_NAME_FIELD, PASSWORD_FIELD } from "@/features/default-form";
+import { EMAIL_FIELD, FULL_NAME_FIELD, PASSWORD_FIELD } from "@/constants/fields";
 import type { LoginField, RegisterField } from "@/features/auth-store";
 
 export const INITIAL_SIGN_UP_FIELDS: RegisterField[] = [FULL_NAME_FIELD, EMAIL_FIELD, PASSWORD_FIELD];

@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { cutDecimals, handleKeyDownDecimalsValidation, handleKeyUpCutDecimals } from "../../utils";
 import { Form, InputNumber } from "antd";
-import type { FormFieldProps, NumberFormField } from "../../types";
+import type { FormFieldProps, NumberFormField } from "@/types/form";
 
 export const NumberField = ({ field, onChange }: FormFieldProps<NumberFormField>) => {
   const { t } = useTranslation();

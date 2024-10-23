@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import { showCommonError } from "@/utils/show-common-error";
 import { isSettingsData } from "../../predicates";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import type { DefaultFormSaveHandler } from "@/features/default-form";
+import type { DefaultFormSaveHandler } from "@/types/form";
 
 export default function Page() {
   const { t } = useTranslation();

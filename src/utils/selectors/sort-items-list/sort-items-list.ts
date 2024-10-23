@@ -1,4 +1,4 @@
-import { FieldIds } from "@/features/default-form";
+import { FieldIds } from "@/types/field";
 import type { CostItem } from "@/features/expenses";
 import type { IncomeItem } from "@/features/incomes";
 import type { ProcessedBudgetItem } from "@/features/budgets";

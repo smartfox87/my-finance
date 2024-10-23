@@ -1,6 +1,6 @@
 import { checkIsStringValidDate } from "@/utils/check-is-string-valid-date";
 import dayjs from "dayjs";
-import type { DatesStrings } from "@/features/default-form";
+import type { DatesStrings } from "@/types/date";
 
 export const getToPeriodApiValues = ([from, to]: DatesStrings): string => {
   if (!checkIsStringValidDate(from)) throw new Error(`Invalid start date: ${from}`);

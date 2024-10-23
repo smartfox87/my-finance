@@ -1,4 +1,4 @@
-import { FieldIds } from "@/features/default-form";
+import { FieldIds } from "@/types/field";
 import { isObject } from "@/predicates/common";
 import type { BudgetItemData } from "../types";
 

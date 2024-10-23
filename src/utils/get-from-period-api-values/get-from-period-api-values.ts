@@ -1,5 +1,5 @@
 import { checkIsStringValidDate } from "@/utils/check-is-string-valid-date";
-import type { DatesStrings } from "@/features/default-form";
+import type { DatesStrings } from "@/types/date";
 import dayjs from "dayjs";
 
 export const getFromPeriodApiValues = ([from, to]: DatesStrings): string => {

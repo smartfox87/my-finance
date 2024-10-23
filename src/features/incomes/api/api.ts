@@ -1,7 +1,7 @@
 import { apiClient } from "@/libs/api-client";
 import { getUserId } from "@/utils/get-user-id";
 import { getCurrentISODate } from "@/utils/get-current-iso-date";
-import { FieldIds } from "@/features/default-form";
+import { FieldIds } from "@/types/field";
 import type { IncomeItemData } from "../types";
 import type { FilterPeriodStateItem } from "@/features/filter";
 

@@ -1,5 +1,5 @@
 import { checkIsStringValidDate } from "@/utils/check-is-string-valid-date";
-import type { DatesStrings } from "@/features/default-form";
+import type { DatesStrings } from "@/types/date";
 
 export const getPeriodValuesFromJSON = (dates: string): DatesStrings => {
   const array = JSON.parse(dates);

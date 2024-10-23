@@ -11,7 +11,7 @@ import { prepareObjectValuesForFilterStateValues, setFilterValue } from "@/featu
 import { FilterFields } from "@/features/filter";
 import cloneDeep from "lodash/cloneDeep";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import { FieldIds } from "@/features/default-form";
+import { FieldIds } from "@/types/field";
 import type { BaseSelectRef } from "rc-select";
 import type { ComponentOnSaveProps } from "@/types/common";
 import type { FilterState, ChangeFilterFieldValueHandler } from "@/features/filter";

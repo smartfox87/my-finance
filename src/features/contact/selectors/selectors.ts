@@ -2,7 +2,7 @@ import { createSelector } from "@reduxjs/toolkit";
 import { INITIAL_CONTACT_FIELDS } from "../constants";
 import { selectProfile } from "@/features/profile";
 import { isString, isTruthy } from "@/predicates/common";
-import { FieldIds } from "@/features/default-form";
+import { FieldIds } from "@/types/field";
 import type { ContactItemField } from "../types";
 
 export const selectContactFields = createSelector([selectProfile], (profile): ContactItemField[] =>

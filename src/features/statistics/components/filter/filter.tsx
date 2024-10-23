@@ -11,7 +11,7 @@ import { useFieldFocus } from "@/hooks/field-focus";
 import cloneDeep from "lodash/cloneDeep";
 import { FilterFields } from "@/features/filter";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import { FieldIds } from "@/features/default-form";
+import { FieldIds } from "@/types/field";
 import type { BaseSelectRef } from "rc-select";
 import type { ChangeFilterFieldValueHandler, FilterState } from "@/features/filter";
 import type { ComponentOnSaveProps } from "@/types/common";

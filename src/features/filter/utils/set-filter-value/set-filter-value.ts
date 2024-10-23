@@ -1,5 +1,5 @@
-import { isMultiSelectValue } from "@/features/default-form";
-import { FieldIds, FieldValues } from "@/features/default-form";
+import { isMultiSelectValue } from "@/predicates/field";
+import { FieldIds, FieldValues } from "@/types/field";
 import type { FilterItem, FilterState } from "../../types";
 
 export const setFilterValue = (filterValues: FilterState | null, { id, value }: FilterItem) => {

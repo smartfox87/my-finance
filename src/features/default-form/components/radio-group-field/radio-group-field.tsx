@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Form, Radio } from "antd";
-import type { FormFieldProps, RadioButtonsFormField } from "../../types";
+import type { FormFieldProps, RadioButtonsFormField } from "@/types/form";
 
 export const RadioGroupField = ({ field, onChange }: FormFieldProps<RadioButtonsFormField>) => {
   const { t } = useTranslation();

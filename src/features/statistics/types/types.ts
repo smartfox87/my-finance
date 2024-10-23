@@ -1,4 +1,4 @@
-import type { DatesStrings } from "@/features/default-form";
+import type { DatesStrings } from "@/types/date";
 import type { FilterState } from "@/features/filter";
 
 export enum StatisticsTypes {

@@ -12,9 +12,9 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { showCommonError } from "@/utils/show-common-error";
 import { isAccountItemUpdateData } from "../../predicates";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import { FieldIds, FieldTypes } from "@/features/default-form";
+import { FieldIds, FieldTypes } from "@/types/field";
 import type { CalculatorSaveHandler } from "@/features/calculator";
-import type { DefaultFormRef, DefaultFormSaveHandler } from "@/features/default-form";
+import type { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 
 export const Detail = memo(function AccountDetail() {
   const { t } = useTranslation();

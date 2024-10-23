@@ -1,4 +1,4 @@
-import { isMultiSelectFormFieldId } from "@/features/default-form";
+import { isMultiSelectFormFieldId } from "@/predicates/form";
 import { isNumber } from "@/predicates/common";
 import type { ActiveFilterItemValue } from "@/features/filter";
 

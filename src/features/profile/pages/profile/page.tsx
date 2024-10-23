@@ -10,7 +10,7 @@ import { isProfileData } from "../../predicates";
 import { HeaderAside } from "../../components";
 import { Dates } from "../../components";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import type { DefaultFormSaveHandler } from "@/features/default-form";
+import type { DefaultFormSaveHandler } from "@/types/form";
 
 export default function Page() {
   const { t } = useTranslation();

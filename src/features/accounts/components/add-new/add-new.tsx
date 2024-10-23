@@ -11,8 +11,8 @@ import { useViewport } from "@/hooks/viewport";
 import { showCommonError } from "@/utils/show-common-error";
 import { isAccountItemCreateData } from "../../predicates";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import { FieldIds, FieldTypes } from "@/features/default-form";
-import type { DefaultFormRef, DefaultFormSaveHandler } from "@/features/default-form";
+import { FieldIds, FieldTypes } from "@/types/field";
+import type { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 import type { CalculatorSaveHandler } from "@/features/calculator";
 
 export const AddNew = memo(function AddNewAccount() {

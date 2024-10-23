@@ -3,8 +3,8 @@ import SvgUpload from "@/assets/sprite/upload.svg";
 import { getFileSizeWithUnit } from "../../utils";
 import { showErrorMessage } from "@/utils/show-error-message";
 import { Button, Form, Upload, type UploadFile } from "antd";
-import { FieldTypes } from "../../types";
-import type { FileFormField, FileFormFieldId, FormFieldProps } from "../../types";
+import { FieldTypes } from "@/types/field";
+import type { FileFormField, FileFormFieldId, FormFieldProps } from "@/types/form";
 import { isUploadFilesArray } from "@/predicates/common";
 
 export const UploadField = ({ field, value, onChange }: FormFieldProps<FileFormField>) => {

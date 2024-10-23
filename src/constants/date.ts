@@ -1,4 +1,5 @@
-import { type DatesPeriod, DatesPeriods, ComplexFieldNames, type FieldTranslationRadioButtonOption } from "../types";
+import { type DatesPeriod, DatesPeriods } from "@/types/date";
+import { ComplexFieldNames, type FieldTranslationRadioButtonOption } from "@/types/field";
 
 export const PERIODS: DatesPeriod[] = Object.values(DatesPeriods);
 

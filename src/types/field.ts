@@ -1,4 +1,4 @@
-import { DatesPeriods } from "./date";
+import { DatesPeriods } from "@/types/date";
 
 export enum FieldIds {
   SORT = "sort",
@@ -55,6 +55,10 @@ export interface SelectOption<V extends MultiSelectOptionValue | SingleSelectVal
   label?: string;
   label_translation?: FieldTranslationSelectOption;
 }
+
+type ConditionalSelectValue<T> = T extends { mode: "multiple" } ? MultiSelectValue : SingleSelectValue;
+
+export type SelectComponentProps<T> = T & { value?: ConditionalSelectValue<T> };
 
 export type FieldType = `${FieldTypes}`;
 

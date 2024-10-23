@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useFieldFocus } from "@/hooks/field-focus";
 import { type LegacyRef, useLayoutEffect } from "react";
 import { Form, Input, InputRef } from "antd";
-import type { FormFieldProps, TextFormField } from "../../types";
+import type { FormFieldProps, TextFormField } from "@/types/form";
 
 export const PasswordField = ({ field, onChange }: FormFieldProps<TextFormField>) => {
   const { t } = useTranslation();
