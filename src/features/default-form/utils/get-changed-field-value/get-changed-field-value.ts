@@ -1,5 +1,4 @@
-import { isMultiSelectValue } from "@/features/fields";
-import { FieldTypes, FieldValues } from "@/features/fields";
+import { isMultiSelectValue, FieldTypes, FieldValues } from "@/features/fields";
 import type { ChangedField, FormValue } from "../../types";
 
 export const getChangedFieldValue = (prevValue: FormValue, { id, value, type }: ChangedField): Record<string, FormValue> => {

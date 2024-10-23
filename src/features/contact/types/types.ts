@@ -1,5 +1,4 @@
-import { FieldIds, FieldTypes } from "@/features/fields";
-import type { FileFormField, SingleSelectFormField, TextFormField } from "@/features/fields";
+import { type FileFormField, type SingleSelectFormField, type TextFormField, FieldIds, FieldTypes } from "@/features/fields";
 
 export type ContactItemField =
   | TextFormField<FieldIds.FULL_NAME, FieldTypes.TEXT>

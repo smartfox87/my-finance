@@ -1,5 +1,4 @@
-import { FieldIds } from "@/features/fields";
-import type { DatesPeriodFormField, MultiSelectFormField, SingleSelectFormField } from "@/features/fields";
+import { type DatesPeriodFormField, type MultiSelectFormField, type SingleSelectFormField, FieldIds } from "@/features/fields";
 
 export type BasedFilterField = {
   label: string;

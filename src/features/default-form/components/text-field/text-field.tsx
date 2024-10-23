@@ -2,8 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useFieldFocus } from "@/hooks/field-focus";
 import { Form, Input, InputRef } from "antd";
 import { type LegacyRef, useLayoutEffect } from "react";
-import { type FieldTranslationError, type FieldType, FieldTypes } from "@/features/fields";
-import type { TextFormField } from "@/features/fields";
+import { type TextFormField, type FieldTranslationError, type FieldType, FieldTypes } from "@/features/fields";
 import type { FormFieldProps, FormItemRule } from "../../types";
 
 export const TextField = ({ field, onChange }: FormFieldProps<TextFormField>) => {

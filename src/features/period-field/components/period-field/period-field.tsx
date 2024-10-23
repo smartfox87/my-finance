@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { PERIOD_OPTIONS } from "@/features/fields";
-import { getPeriodValuesByDate } from "@/features/fields";
 import { convertDatesToDayjs, findMatchingPeriodName } from "../../utils";
 import { Button, DatePicker, Radio, type RadioChangeEvent } from "antd";
 import type { Dayjs } from "dayjs";
-import type { DatesPeriod, DatesStrings } from "@/features/fields";
+import { type DatesPeriod, type DatesStrings, getPeriodValuesByDate, PERIOD_OPTIONS } from "@/features/fields";
 
 export const PeriodField = ({ id = "", value, onChange }: { id: string; value: DatesStrings; onChange: (dates: DatesStrings) => void }) => {
   const { t } = useTranslation();

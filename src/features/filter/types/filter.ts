@@ -1,5 +1,4 @@
-import { type DatesPeriodFormField, type MultiSelectFormField, type SingleSelectFormField, type MultiSelectValue, FieldIds, MultiSelectOptionValue } from "@/features/fields";
-import type { DatesStrings } from "@/features/fields";
+import { type DatesPeriodFormField, type DatesStrings, type MultiSelectFormField, type SingleSelectFormField, type MultiSelectValue, FieldIds, MultiSelectOptionValue } from "@/features/fields";
 import type { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 
 export interface FilterPeriodItem {

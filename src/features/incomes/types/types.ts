@@ -1,6 +1,5 @@
-import { FieldIds, FieldTypes } from "@/features/fields";
+import { type DateFormField, type NumberFormField, type SingleSelectFormField, type TextFormField, FieldIds, FieldTypes } from "@/features/fields";
 import type { FilterState } from "@/features/filter";
-import type { DateFormField, NumberFormField, SingleSelectFormField, TextFormField } from "@/features/fields";
 
 export interface IncomeItem {
   id: number;
