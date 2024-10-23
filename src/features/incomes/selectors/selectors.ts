@@ -3,13 +3,12 @@ import { INITIAL_INCOME_FIELDS, INITIAL_INCOMES_FILTER_FIELDS } from "../constan
 import { selectIncomeCategories } from "@/store/selectors/references";
 import { selectCurrency } from "@/features/profile";
 import { selectAccountsList } from "@/store/selectors/accounts";
-import { filterSingleItemsList, processFilterFields, sortItemsList } from "@/utils/selectors";
+import { filterSingleItemsList, sortItemsList } from "@/utils/selectors";
 import dayjs from "dayjs";
 import { FieldIds, FieldTypes } from "@/types/field";
+import { type ProcessedFilterField, type FilterState, processFilterFields } from "@/features/filter";
 import type { LazyLoadedSlices } from "@/types/store";
 import type { IncomeItem, IncomeItemField } from "../types";
-import type { FilterState } from "@/features/filter";
-import type { ProcessedFilterField } from "@/types/selectors";
 
 export const selectIncomesList = ({ incomes }: LazyLoadedSlices): IncomeItem[] | null => incomes?.incomesList || null;
 

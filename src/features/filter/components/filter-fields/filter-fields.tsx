@@ -5,8 +5,7 @@ import { MutableRefObject, SetStateAction, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { renderSelectOption } from "../../utils";
 import { FieldTypes } from "@/types/field";
-import type { FilterState, ChangeFilterFieldValueHandler } from "../../types";
-import type { ProcessedFilterField } from "@/types/selectors";
+import type { ProcessedFilterField, FilterState, ChangeFilterFieldValueHandler } from "../../types";
 import type { BaseSelectRef } from "rc-select";
 
 export const FilterFields = ({

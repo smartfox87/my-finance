@@ -3,13 +3,12 @@ import { INITIAL_COST_FIELDS, INITIAL_COSTS_FILTER_FIELDS } from "../constants";
 import { selectCostCategories } from "@/store/selectors/references";
 import { selectCurrency } from "@/features/profile";
 import { selectAccountsList } from "@/store/selectors/accounts";
-import { filterSingleItemsList, getOptionsFromItemsList, processFilterFields, sortItemsList } from "@/utils/selectors";
+import { filterSingleItemsList, sortItemsList } from "@/utils/selectors";
 import dayjs from "dayjs";
 import { FieldIds, FieldTypes } from "@/types/field";
+import { type FilterState, type ProcessedFilterField, getOptionsFromItemsList, processFilterFields } from "@/features/filter";
 import type { CostItem, CostItemField } from "../types";
 import type { LazyLoadedSlices } from "@/types/store";
-import type { FilterState } from "@/features/filter";
-import type { ProcessedFilterField } from "@/types/selectors";
 
 export const selectCostsList = ({ costs }: LazyLoadedSlices): CostItem[] | null => costs?.costsList || null;
 
