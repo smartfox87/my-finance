@@ -1,8 +1,7 @@
 import { selectCostsFilterFields, selectCostsFilterValues } from "../../selectors";
 import { setCostsFilterValues } from "../../store";
 import { memo, useMemo } from "react";
-import { isMultiSelectFormFieldId } from "@/predicates/form";
-import { isMultiSelectValue } from "@/predicates/field";
+import { isMultiSelectValue, isMultiSelectFormFieldId } from "@/features/fields";
 import { isNumber } from "@/predicates/common";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { type ClearActiveFilterItemHandler, ActiveFiltersList, getActiveFilters } from "@/features/filter";

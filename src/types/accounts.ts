@@ -1,5 +1,5 @@
-import { FieldIds, FieldTypes } from "@/types/field";
-import type { NumberFormField, SingleSelectFormField, TextFormField } from "@/types/form";
+import { FieldIds, FieldTypes } from "@/features/fields";
+import type { NumberFormField, SingleSelectFormField, TextFormField } from "@/features/fields";
 
 export interface AccountItemBalanceData {
   accountId: number;

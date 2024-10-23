@@ -1,4 +1,4 @@
-import { FieldIds } from "@/types/field";
+import { FieldIds } from "@/features/fields";
 import { isObject } from "@/predicates/common";
 import type { BudgetItemData } from "../types";
 

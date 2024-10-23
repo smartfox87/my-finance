@@ -1,7 +1,7 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { selectCurrencies } from "@/store/selectors/references";
 import { INITIAL_PROFILE_FIELDS, INITIAL_SETTINGS_FIELDS } from "../constants";
-import { FieldIds } from "@/types/field";
+import { FieldIds } from "@/features/fields";
 import type { LazyLoadedSlices } from "@/types/store";
 import type { Types, ProfileField, SettingsField } from "../types";
 

@@ -1,7 +1,7 @@
 import { handleRejectedReducerAction } from "@/utils/handle-rejected-reducer-action";
 import { getBudgetsListForChartsApi, getCostsListForChartsApi, getIncomesListForChartsApi } from "../api";
 import { rootReducer } from "@/store";
-import { getPeriodValuesFromJSON } from "@/utils/get-period-values-from-json";
+import { getPeriodValuesFromJSON } from "@/features/fields";
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
 import { type FilterItem, type FilterState, isFilterPeriodStateItem, setFilterValue } from "@/features/filter";
 import type { StatisticsBudgetItem, StatisticsCostItem, StatisticsIncomeItem, StatisticsSliceState } from "../types";

@@ -10,7 +10,7 @@ import SvgNewIncome from "@/assets/sprite/new-income.svg";
 import { showCommonError } from "@/utils/show-common-error";
 import { isIncomeItemData } from "../../predicates";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import { FieldIds, FieldTypes } from "@/types/field";
+import { FieldIds, FieldTypes } from "@/features/fields";
 import { type CalculatorSaveHandler, CalculatorModal } from "@/features/calculator";
 import { type DefaultFormRef, type DefaultFormSaveHandler, DefaultForm } from "@/features/default-form";
 

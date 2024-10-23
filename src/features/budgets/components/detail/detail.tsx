@@ -11,7 +11,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { showCommonError } from "@/utils/show-common-error";
 import { isBudgetItemData } from "../../predicates";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import { FieldIds, FieldTypes } from "@/types/field";
+import { FieldIds, FieldTypes } from "@/features/fields";
 import { type CalculatorSaveHandler, CalculatorModal } from "@/features/calculator";
 import { type DefaultFormRef, type DefaultFormSaveHandler, DefaultForm } from "@/features/default-form";
 import type { ComponentOnSaveProps } from "@/types/common";

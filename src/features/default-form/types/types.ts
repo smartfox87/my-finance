@@ -1,6 +1,6 @@
 import type { RcFile } from "antd/es/upload";
-import { FieldId, FieldTypes } from "@/types/field";
-import type { DateFormField, DatesPeriodFormField, FileFormField, MultiSelectFormField, NumberFormField, RadioButtonsFormField, SingleSelectFormField, TextFormField } from "@/types/form";
+import { FieldId, FieldTypes } from "@/features/fields";
+import type { DateFormField, DatesPeriodFormField, FileFormField, MultiSelectFormField, NumberFormField, RadioButtonsFormField, SingleSelectFormField, TextFormField } from "@/features/fields";
 
 export type FormItemRule = FieldTypes.NUMBER | FieldTypes.EMAIL;
 

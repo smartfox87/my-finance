@@ -3,10 +3,9 @@
 import { useTranslation } from "react-i18next";
 import { useLoading } from "@/hooks/loading";
 import dynamic from "next/dynamic";
-import { isFieldId } from "@/predicates/field";
 import { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useState } from "react";
 import { getChangedFieldValue, getValuesFromPropsFields, processFormValues } from "../../utils/";
-import { FieldTypes } from "@/types/field";
+import { FieldTypes, isFieldId } from "@/features/fields";
 import { Button, Form, type FormProps } from "antd";
 import type { ChangedField, DefaultFormProps, FormValues } from "../../types";
 

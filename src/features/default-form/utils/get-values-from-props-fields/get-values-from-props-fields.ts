@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { FieldTypes } from "@/types/field";
+import { FieldTypes } from "@/features/fields";
 import type { FormField, FormValues } from "../../types";
 
 export const getValuesFromPropsFields = (fields: FormField[]): FormValues =>

@@ -1,6 +1,5 @@
 import { isNumber, isObject } from "@/predicates/common";
-import { FieldId, FieldIds, FieldValues, type MultiSelectValue } from "@/types/field";
-import { type DatesPeriod, DatesPeriods } from "@/types/date";
+import { FieldId, FieldIds, FieldValues, type MultiSelectValue, type DatesPeriod, DatesPeriods } from "../types";
 import type { RcFile, UploadFile } from "antd/es/upload/interface";
 
 export const isSelectAllValue = (value: unknown): value is FieldValues.ALL => value === FieldValues.ALL;

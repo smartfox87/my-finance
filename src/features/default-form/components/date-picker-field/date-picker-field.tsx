@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { DatePicker, Form } from "antd";
-import type { DateFormField } from "@/types/form";
+import type { DateFormField } from "@/features/fields";
 import type { FormFieldProps } from "../../types";
 
 export const DatePickerField = ({ field, onChange }: FormFieldProps<DateFormField>) => {

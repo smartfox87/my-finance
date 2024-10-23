@@ -4,8 +4,8 @@ import { getFileSizeWithUnit } from "../../utils";
 import { showErrorMessage } from "@/utils/show-error-message";
 import { Button, Form, Upload, type UploadFile } from "antd";
 import { isUploadFilesArray } from "@/predicates/common";
-import { FieldTypes } from "@/types/field";
-import type { FileFormField, FileFormFieldId } from "@/types/form";
+import { FieldTypes } from "@/features/fields";
+import type { FileFormField, FileFormFieldId } from "@/features/fields";
 import type { FormFieldProps } from "../../types";
 
 export const UploadField = ({ field, value, onChange }: FormFieldProps<FileFormField>) => {

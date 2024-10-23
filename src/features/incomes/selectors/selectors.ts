@@ -5,7 +5,7 @@ import { selectCurrency } from "@/features/profile";
 import { selectAccountsList } from "@/store/selectors/accounts";
 import { filterSingleItemsList, sortItemsList } from "@/utils/selectors";
 import dayjs from "dayjs";
-import { FieldIds, FieldTypes } from "@/types/field";
+import { FieldIds, FieldTypes } from "@/features/fields";
 import { type ProcessedFilterField, type FilterState, processFilterFields } from "@/features/filter";
 import type { LazyLoadedSlices } from "@/types/store";
 import type { IncomeItem, IncomeItemField } from "../types";

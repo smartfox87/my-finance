@@ -1,9 +1,25 @@
-import { getPeriodValuesByDate } from "@/utils/get-period-values-by-date";
-import { getPeriodName } from "@/utils/get-period-name";
-import { PERIOD_OPTIONS } from "@/constants/date";
-import { FieldIds, ComplexFieldNames, SelectFieldOptions, FieldTypes, SimpleFieldNames, SortFieldOptions, GenderFieldOptions, SubjectFieldOptions, FieldValues } from "@/types/field";
-import { PickerPeriods } from "@/types/date";
-import type { DateFormField, DatesPeriodFormField, FileFormField, NumberFormField, RadioButtonsFormField, MultiSelectFormField, SingleSelectFormField, TextFormField } from "@/types/form";
+import { getPeriodName, getPeriodValuesByDate } from "../utils";
+import { PERIOD_OPTIONS } from "./date";
+import {
+  PickerPeriods,
+  FieldIds,
+  ComplexFieldNames,
+  SelectFieldOptions,
+  FieldTypes,
+  SimpleFieldNames,
+  SortFieldOptions,
+  GenderFieldOptions,
+  SubjectFieldOptions,
+  FieldValues,
+  type DateFormField,
+  type DatesPeriodFormField,
+  type FileFormField,
+  type NumberFormField,
+  type RadioButtonsFormField,
+  type MultiSelectFormField,
+  type SingleSelectFormField,
+  type TextFormField,
+} from "../types";
 
 export const SORT_FIELD: SingleSelectFormField<FieldIds.SORT, string> = {
   id: FieldIds.SORT,

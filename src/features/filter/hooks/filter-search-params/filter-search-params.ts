@@ -3,7 +3,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import queryString from "query-string";
 import { useAppDispatch } from "@/hooks/store";
 import { isFilterStateKey } from "../../predicates";
-import { isMultiSelectValue, isSelectAllValue } from "@/predicates/field";
+import { isMultiSelectValue, isSelectAllValue } from "@/features/fields";
 import { getIntegerFromString, prepareObjectValuesForFilterStateValues } from "../../utils";
 import { checkIsStringValidDate } from "@/utils/check-is-string-valid-date";
 import type { FilterState, FilterStateValue, SetFilterStateValuesHandler } from "../../types";

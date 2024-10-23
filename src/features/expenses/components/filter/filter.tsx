@@ -9,7 +9,7 @@ import { useViewport } from "@/hooks/viewport";
 import { useFieldFocus } from "@/hooks/field-focus";
 import cloneDeep from "lodash/cloneDeep";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import { FieldIds } from "@/types/field";
+import { FieldIds } from "@/features/fields";
 import { type FilterState, type ChangeFilterFieldValueHandler, FilterFields, prepareObjectValuesForFilterStateValues, setFilterValue } from "@/features/filter";
 import type { BaseSelectRef } from "rc-select";
 import type { ComponentOnSaveProps } from "@/types/common";

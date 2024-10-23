@@ -2,7 +2,7 @@ import { isTruthy } from "@/predicates/common";
 import { getOptionsTranslations } from "../get-options-translations";
 import { getOptionsFromItemsList } from "../get-options-from-items-list";
 import { getOptionsObjectFromOptions } from "../get-options-object-from-options";
-import { FieldIds, FieldTypes, type MultiSelectOptionValue } from "@/types/field";
+import { FieldIds, FieldTypes, type MultiSelectOptionValue } from "@/features/fields";
 import type { CostCategory, IncomeCategory } from "@/types/references";
 import type { ProcessedAccountItem } from "@/types/accounts";
 import type { FilterField, ProcessedFilterField } from "../../types";

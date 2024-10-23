@@ -1,6 +1,6 @@
 import { getPeriodValuesByDate } from "./get-period-values-by-date";
 import { describe, expect, it } from "@jest/globals";
-import { DatesPeriods } from "@/types/date";
+import { DatesPeriods } from "../../types";
 
 describe("getDatesPeriodValuesByDate", () => {
   it("throws an error when date is invalid", () => {

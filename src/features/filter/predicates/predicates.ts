@@ -1,8 +1,9 @@
-import { isDatesStrings } from "@/predicates/date";
 import { isString } from "@/predicates/common";
-import { isMultiSelectValue } from "@/predicates/field";
-import { FieldIds } from "@/types/field";
+import { FieldIds, isMultiSelectValue } from "@/features/fields";
 import type { FilterMultiItem, FilterPeriodItem, FilterPeriodStateItem, FilterSortItem, FilterStateKey } from "@/features/filter";
+import type { DatesStrings } from "@/features/fields";
+
+export const isDatesStrings = (dates: unknown): dates is DatesStrings => Array.isArray(dates) && dates.length === 2 && dates.every((date) => typeof date === "string");
 
 export const isFilterStateKey = (key: string): key is FilterStateKey => FieldIds.PERIOD === key || FieldIds.CATEGORIES === key || FieldIds.ACCOUNTS === key || FieldIds.SORT === key;
 

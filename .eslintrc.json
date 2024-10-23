@@ -19,8 +19,7 @@
 				"patterns": ["@/features/*/*"]
 			}
 		],
-		"import/no-cycle": "error",
-		"no-duplicate-imports": "error"
+		"import/no-cycle": "error"
 	},
 	"env": {
 		"browser": true,

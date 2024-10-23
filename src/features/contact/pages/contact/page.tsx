@@ -3,7 +3,7 @@
 import { showNotification } from "@/utils/show-notification";
 import { useRecaptcha } from "@/features/recaptcha-provider";
 import { selectContactFields } from "../../selectors";
-import { isRcFileArray } from "@/predicates/field";
+import { isRcFileArray } from "@/features/fields";
 import { isError, isStringNumber } from "@/predicates/common";
 import { showCommonError } from "@/utils/show-common-error";
 import { Jsonld, Info } from "../../components";

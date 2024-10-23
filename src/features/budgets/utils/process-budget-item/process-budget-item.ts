@@ -1,4 +1,4 @@
-import { getPeriodValuesFromJSON } from "@/utils/get-period-values-from-json";
+import { getPeriodValuesFromJSON } from "@/features/fields";
 import type { BudgetItem, ProcessedBudgetItem } from "../../types";
 
 export const processBudgetItem = (budgetItem: BudgetItem): ProcessedBudgetItem => ({
