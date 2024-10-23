@@ -2,7 +2,6 @@ import { useTranslation } from "react-i18next";
 import { memo, useEffect, useRef, useState } from "react";
 import { selectAccountFields, selectAccountItem } from "@/store/selectors/accounts";
 import { deleteAccountItemThunk, getAccountItemThunk, setAccountItem, updateAccountItemThunk } from "@/store/slices/accounts";
-import { DefaultForm } from "@/features/default-form";
 import { SideModal } from "@/components/modals/side-modal";
 import { useLoading } from "@/hooks/loading";
 import SvgDelete from "@/assets/sprite/delete.svg";
@@ -13,7 +12,7 @@ import { isAccountItemUpdateData } from "../../predicates";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { FieldIds, FieldTypes } from "@/types/field";
 import { type CalculatorSaveHandler, CalculatorModal } from "@/features/calculator";
-import type { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
+import { type DefaultFormRef, type DefaultFormSaveHandler, DefaultForm } from "@/features/default-form";
 
 export const Detail = memo(function AccountDetail() {
   const { t } = useTranslation();

@@ -2,14 +2,13 @@
 
 import { useTranslation } from "react-i18next";
 import { selectProfileFields } from "../../selectors";
-import { DefaultForm } from "@/features/default-form";
 import { getProfileThunk, updateProfileThunk } from "../../store";
 import { showNotification } from "@/utils/show-notification";
 import { showCommonError } from "@/utils/show-common-error";
 import { isProfileData } from "../../predicates";
 import { Dates, HeaderAside } from "../../components";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import type { DefaultFormSaveHandler } from "@/types/form";
+import { type DefaultFormSaveHandler, DefaultForm } from "@/features/default-form";
 
 export default function Page() {
   const { t } = useTranslation();

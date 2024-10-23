@@ -3,14 +3,13 @@ import { useTranslation } from "react-i18next";
 import { useRecaptcha } from "@/features/recaptcha-provider";
 import { useAppDispatch } from "@/hooks/store";
 import { isRegisterData } from "../../predicates";
-import { DefaultForm } from "@/features/default-form";
 import { showNotification } from "@/utils/show-notification";
 import { registerUserThunk } from "@/features/auth-store";
 import { useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { captureException } from "@sentry/nextjs";
 import { IS_PRODUCTION } from "@/constants/config";
-import type { DefaultFormSaveHandler } from "@/types/form";
+import { type DefaultFormSaveHandler, DefaultForm } from "@/features/default-form";
 
 export const SignUp = () => {
   const dispatch = useAppDispatch();

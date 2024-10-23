@@ -1,7 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { Form } from "antd";
 import { PeriodField as Period } from "@/features/period-field";
-import type { DatesPeriodFormField, FormFieldProps } from "@/types/form";
+import type { DatesPeriodFormField } from "@/types/form";
+import type { FormFieldProps } from "../../types";
 
 export const PeriodField = ({ field, onChange }: FormFieldProps<DatesPeriodFormField>) => {
   const { t } = useTranslation();

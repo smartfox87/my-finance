@@ -2,7 +2,6 @@ import { useTranslation } from "react-i18next";
 import { memo, useEffect, useRef, useState } from "react";
 import { selectIncomeFields, selectIncomeItem } from "../../selectors";
 import { deleteIncomeItemThunk, getIncomeItemThunk, setIncomeItem, updateIncomeItemThunk } from "../../store";
-import { DefaultForm } from "@/features/default-form";
 import { showNotification } from "@/utils/show-notification";
 import { SideModal } from "@/components/modals/side-modal";
 import { useLoading } from "@/hooks/loading";
@@ -14,8 +13,8 @@ import { isIncomeItemData } from "../../predicates";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { FieldIds, FieldTypes } from "@/types/field";
 import { type CalculatorSaveHandler, CalculatorModal } from "@/features/calculator";
+import { type DefaultFormRef, type DefaultFormSaveHandler, DefaultForm } from "@/features/default-form";
 import type { ComponentOnSaveProps } from "@/types/common";
-import type { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 
 export const Detail = memo(function IncomeDetail({ onSave }: ComponentOnSaveProps) {
   const { t } = useTranslation();

@@ -1,6 +1,5 @@
 import { Button } from "antd";
 import { SideModal } from "@/components/modals/side-modal";
-import { DefaultForm } from "@/features/default-form";
 import { selectCostFields } from "../../selectors";
 import { createCostItemThunk } from "../../store";
 import { useTranslation } from "react-i18next";
@@ -13,7 +12,7 @@ import { showCommonError } from "@/utils/show-common-error";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { FieldIds, FieldTypes } from "@/types/field";
 import { type CalculatorSaveHandler, CalculatorModal } from "@/features/calculator";
-import type { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
+import { type DefaultFormRef, type DefaultFormSaveHandler, DefaultForm } from "@/features/default-form";
 import type { ComponentOnSaveProps } from "@/types/common";
 
 export const AddNew = memo(function AddNewCost({ isAdaptive, onSave }: ComponentOnSaveProps & { isAdaptive?: boolean }) {

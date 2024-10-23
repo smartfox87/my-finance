@@ -1,6 +1,5 @@
 "use client";
 
-import { DefaultForm } from "@/features/default-form";
 import { showNotification } from "@/utils/show-notification";
 import { useRecaptcha } from "@/features/recaptcha-provider";
 import { selectContactFields } from "../../selectors";
@@ -11,7 +10,7 @@ import { Jsonld, Info } from "../../components";
 import { useTranslation } from "react-i18next";
 import { useCallback } from "react";
 import { useAppSelector } from "@/hooks/store";
-import type { FormValues } from "@/types/form";
+import { type FormValues, DefaultForm } from "@/features/default-form";
 
 export default function Page() {
   const { t } = useTranslation();

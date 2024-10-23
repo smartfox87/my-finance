@@ -1,10 +1,7 @@
-import { FieldId, FieldTranslationLabel, FieldTranslationRadioButtonOption, MultiSelectOptionValue, MultiSelectValue, SelectOption, SingleSelectValue, FieldIds, FieldTypes } from "@/types/field";
+import { FieldTranslationLabel, FieldTranslationRadioButtonOption, MultiSelectOptionValue, MultiSelectValue, SelectOption, SingleSelectValue, FieldIds, FieldTypes } from "@/types/field";
 import type { Dayjs } from "dayjs";
 import type { UploadFile } from "antd";
 import type { DatesStrings, PickerPeriod } from "@/types/date";
-import type { RcFile } from "antd/es/upload";
-
-export type FormItemRule = FieldTypes.NUMBER | FieldTypes.EMAIL;
 
 export type BaseFormField = {
   label: FieldTranslationLabel;
@@ -87,44 +84,4 @@ export type NumberFormField<I extends NumberFormFieldId = NumberFormFieldId> = B
   id: I;
   type: FieldTypes.NUMBER;
   value?: number | string | null;
-};
-
-export type FormField = DatesPeriodFormField | TextFormField | SingleSelectFormField | MultiSelectFormField | DateFormField | FileFormField | RadioButtonsFormField | NumberFormField;
-
-export type ChangedField =
-  | Pick<DatesPeriodFormField, "id" | "type" | "value">
-  | Pick<TextFormField, "id" | "type" | "value">
-  | Pick<SingleSelectFormField, "id" | "type" | "value">
-  | Pick<MultiSelectFormField, "id" | "type" | "value">
-  | Pick<DateFormField, "id" | "type" | "value">
-  | Pick<FileFormField, "id" | "type" | "value">
-  | Pick<RadioButtonsFormField, "id" | "type" | "value">
-  | Pick<NumberFormField, "id" | "type" | "value">;
-
-export type FormValue = FormField["value"] | RcFile[];
-
-export type FormValues = Record<FieldId, FormValue>;
-
-export interface DefaultFormSaveHandler {
-  (formValues: FormValues): Promise<void>;
-}
-
-export type FormFieldProps<F extends FormField> = {
-  field: F;
-  onChange(field: ChangedField): void;
-  value?: FormValue;
-};
-
-export interface DefaultFormProps {
-  fields: FormField[];
-  "data-cy"?: string;
-  onSaveForm: DefaultFormSaveHandler;
-  isResetAfterSave?: boolean;
-  onResetForm?: () => void;
-  onChange?: () => void;
-}
-
-// notice: createRef type with target component inner functions and variables
-export type DefaultFormRef = {
-  handleChangeFieldValue: (field: ChangedField) => void;
 };

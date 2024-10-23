@@ -8,7 +8,7 @@ import { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useSt
 import { getChangedFieldValue, getValuesFromPropsFields, processFormValues } from "../../utils/";
 import { FieldTypes } from "@/types/field";
 import { Button, Form, type FormProps } from "antd";
-import type { ChangedField, DefaultFormProps, FormValues } from "@/types/form";
+import type { ChangedField, DefaultFormProps, FormValues } from "../../types";
 
 const TextFieldComponent = dynamic(() => import("../text-field").then((mod) => mod.TextField));
 const PasswordFieldComponent = dynamic(() => import("../password-field").then((mod) => mod.PasswordField));
