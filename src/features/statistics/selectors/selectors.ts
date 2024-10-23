@@ -2,12 +2,10 @@ import { createSelector } from "@reduxjs/toolkit";
 import { selectAccountTypesObject, selectCostCategories, selectCostCategoriesObject, selectIncomeCategoriesObject } from "@/store/selectors/references";
 import { selectAccountsList } from "@/store/selectors/accounts";
 import { INITIAL_STATISTICS_FILTER_FIELDS } from "../constants";
-import { processFilterFields, filterSingleItemsList, filterMultiItemsList } from "@/utils/selectors";
-import { isFilterStateKey } from "@/features/filter";
+import { filterSingleItemsList, filterMultiItemsList } from "@/utils/selectors";
 import { getLocalisedMonths } from "../utils";
+import { type FilterState, type ProcessedFilterField, processFilterFields, isFilterStateKey } from "@/features/filter";
 import type { LazyLoadedSlices } from "@/types/store";
-import type { FilterState } from "@/features/filter";
-import type { ProcessedFilterField } from "@/features/filter";
 import type {
   BudgetsListStatistics,
   CostIncomeStatisticsItem,
