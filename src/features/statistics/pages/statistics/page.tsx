@@ -5,7 +5,7 @@ import { getFilterItemsFromFields, useFilterSearchParams } from "@/features/filt
 import { getBudgetsListForChartsThunk, getCostsListForChartsThunk, getIncomesListForChartsThunk, setStatisticsFilterValues } from "../../store";
 import { useCallback, useEffect, useState } from "react";
 import { INITIAL_STATISTICS_FILTER_FIELDS } from "../../constants";
-import { getUserId } from "@/utils/get-user-id";
+import { getUserId } from "@/features/user-id";
 import { Preloader } from "@/components/loading/preloader";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { PageContent } from "../../components";

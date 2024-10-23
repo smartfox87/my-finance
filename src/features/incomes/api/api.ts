@@ -1,5 +1,5 @@
 import { apiClient } from "@/libs/api-client";
-import { getUserId } from "@/utils/get-user-id";
+import { getUserId } from "@/features/user-id";
 import { getCurrentISODate } from "@/utils/get-current-iso-date";
 import { FieldIds } from "@/features/fields";
 import type { IncomeItemData } from "../types";

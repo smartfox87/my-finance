@@ -1,5 +1,5 @@
 import { apiClient } from "@/libs/api-client";
-import { getUserId } from "@/utils/get-user-id";
+import { getUserId } from "@/features/user-id";
 import { deleteAccountTypeApi } from "@/api/references";
 import { getCurrentISODate } from "@/utils/get-current-iso-date";
 import type { AccountItemBalance } from "@/types/accounts";

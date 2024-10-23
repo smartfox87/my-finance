@@ -1,7 +1,7 @@
 import { useDarkTheme } from "@/hooks/theme";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useLocale } from "@/features/locale-provider";
-import { getUserId } from "@/utils/get-user-id";
+import { getUserId } from "@/features/user-id";
 import dynamic from "next/dynamic";
 import { useAppSelector } from "@/hooks/store";
 import { selectUser } from "@/store/selectors/auth";

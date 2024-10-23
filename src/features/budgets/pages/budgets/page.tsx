@@ -6,7 +6,7 @@ import { Preloader } from "@/components/loading/preloader";
 import { selectBudgetsFilterValues, selectBudgetsList } from "../../selectors";
 import { getBudgetsListThunk, setBudgetsFilterValues } from "../../store";
 import { INITIAL_BUDGETS_FILTER_FIELDS } from "../../constants";
-import { getUserId } from "@/utils/get-user-id";
+import { getUserId } from "@/features/user-id";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { useFilterSearchParams, getFilterItemsFromFields } from "@/features/filter";
 import { HeaderAside, PageContent } from "../../components";

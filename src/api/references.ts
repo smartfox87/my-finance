@@ -1,6 +1,6 @@
 import { apiClient } from "@/libs/api-client";
 import { getLanguage } from "@/utils/get-language";
-import { getUserId } from "@/utils/get-user-id";
+import { getUserId } from "@/features/user-id";
 import type { AccountTypeData, IncomeCategoryData } from "@/types/references";
 
 export const getCostCategoriesApi = () =>

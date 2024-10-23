@@ -1,4 +1,4 @@
-import { getSession } from "@/utils/get-session";
+import { getSession } from "../get-session";
 
 export const getUserId = (): string | null => {
   const session = getSession();
