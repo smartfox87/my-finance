@@ -6,14 +6,13 @@ import { createIncomeItemThunk } from "../../store";
 import { useTranslation } from "react-i18next";
 import { showNotification } from "@/utils/show-notification";
 import { memo, useRef, useState } from "react";
-import { CalculatorModal } from "@/features/calculator";
 import { useViewport } from "@/hooks/viewport";
 import SvgNewIncome from "@/assets/sprite/new-income.svg";
 import { showCommonError } from "@/utils/show-common-error";
 import { isIncomeItemData } from "../../predicates";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { FieldIds, FieldTypes } from "@/types/field";
-import type { CalculatorSaveHandler } from "@/features/calculator";
+import { type CalculatorSaveHandler, CalculatorModal } from "@/features/calculator";
 import type { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 
 export const AddNew = memo(function AddNewIncome({ isAdaptive, onSave }: { isAdaptive?: boolean; onSave: () => Promise<void> }) {

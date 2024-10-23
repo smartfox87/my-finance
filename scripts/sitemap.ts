@@ -2,8 +2,7 @@ import "dotenv/config";
 import { writeFileSync } from "fs";
 import { SitemapStream, streamToPromise } from "sitemap";
 import { Readable } from "stream";
-import { PRODUCTION_URL } from "../src/constants/config";
-import { LOCALES, PAGES } from "../src/constants/config";
+import { PRODUCTION_URL, LOCALES, PAGES } from "../src/constants/config";
 import { type Locale, Locales } from "../src/types/locales";
 
 type Link = {

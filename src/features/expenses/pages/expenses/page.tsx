@@ -2,16 +2,14 @@
 
 import { Preloader } from "@/components/loading/preloader";
 import { selectCostsFilterValues, selectCostsList } from "../../selectors";
-import { useFilterSearchParams } from "@/features/filter";
+import { getFilterItemsFromFields, useFilterSearchParams } from "@/features/filter";
 import { useLoading } from "@/hooks/loading";
 import { useCallback, useEffect } from "react";
 import { getCostsListThunk, setCostsFilterValues } from "../../store";
 import { INITIAL_COSTS_FILTER_FIELDS } from "../../constants";
 import { getUserId } from "@/utils/get-user-id";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import { getFilterItemsFromFields } from "@/features/filter";
-import { HeaderAside } from "../../components";
-import { PageContent } from "../../components";
+import { PageContent, HeaderAside } from "../../components";
 
 export default function Page() {
   const dispatch = useAppDispatch();

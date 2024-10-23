@@ -1,9 +1,7 @@
 "use client";
 
-import { Header } from "../components";
-import { MainNav } from "../components";
+import { MobileNav, Header, MainNav } from "../components";
 import { useViewport } from "@/hooks/viewport";
-import { MobileNav } from "../components";
 import type { ComponentChildrenProps } from "@/types/common";
 
 export function Layout({ children }: ComponentChildrenProps) {

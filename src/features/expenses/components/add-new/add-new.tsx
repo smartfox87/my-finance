@@ -7,15 +7,14 @@ import { useTranslation } from "react-i18next";
 import { showNotification } from "@/utils/show-notification";
 import { memo, useRef, useState } from "react";
 import SvgNewExpense from "@/assets/sprite/new-expense.svg";
-import { CalculatorModal } from "@/features/calculator";
 import { useViewport } from "@/hooks/viewport";
 import { isCostItemData } from "../../predicates";
 import { showCommonError } from "@/utils/show-common-error";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { FieldIds, FieldTypes } from "@/types/field";
-import type { CalculatorSaveHandler } from "@/features/calculator";
+import { type CalculatorSaveHandler, CalculatorModal } from "@/features/calculator";
 import type { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
-import { ComponentOnSaveProps } from "@/types/common";
+import type { ComponentOnSaveProps } from "@/types/common";
 
 export const AddNew = memo(function AddNewCost({ isAdaptive, onSave }: ComponentOnSaveProps & { isAdaptive?: boolean }) {
   const { t } = useTranslation();

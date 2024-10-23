@@ -7,10 +7,9 @@ import { selectContactFields } from "../../selectors";
 import { isRcFileArray } from "@/predicates/field";
 import { isError, isStringNumber } from "@/predicates/common";
 import { showCommonError } from "@/utils/show-common-error";
-import { Info } from "../../components";
+import { Jsonld, Info } from "../../components";
 import { useTranslation } from "react-i18next";
 import { useCallback } from "react";
-import { Jsonld } from "../../components";
 import { useAppSelector } from "@/hooks/store";
 import type { FormValues } from "@/types/form";
 

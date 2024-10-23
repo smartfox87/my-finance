@@ -7,14 +7,13 @@ import { showNotification } from "@/utils/show-notification";
 import { SideModal } from "@/components/modals/side-modal";
 import { useLoading } from "@/hooks/loading";
 import SvgDelete from "@/assets/sprite/delete.svg";
-import { CalculatorModal } from "@/features/calculator";
 import { Button } from "antd";
 import { useRouter, useSearchParams } from "next/navigation";
 import { showCommonError } from "@/utils/show-common-error";
 import { isBudgetItemData } from "../../predicates";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { FieldIds, FieldTypes } from "@/types/field";
-import type { CalculatorSaveHandler } from "@/features/calculator";
+import { type CalculatorSaveHandler, CalculatorModal } from "@/features/calculator";
 import type { ComponentOnSaveProps } from "@/types/common";
 import type { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
 

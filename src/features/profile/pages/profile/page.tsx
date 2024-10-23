@@ -7,8 +7,7 @@ import { getProfileThunk, updateProfileThunk } from "../../store";
 import { showNotification } from "@/utils/show-notification";
 import { showCommonError } from "@/utils/show-common-error";
 import { isProfileData } from "../../predicates";
-import { HeaderAside } from "../../components";
-import { Dates } from "../../components";
+import { Dates, HeaderAside } from "../../components";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import type { DefaultFormSaveHandler } from "@/types/form";
 

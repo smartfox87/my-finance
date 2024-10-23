@@ -6,14 +6,13 @@ import { createAccountItemThunk } from "@/store/slices/accounts";
 import { useTranslation } from "react-i18next";
 import { memo, useRef, useState } from "react";
 import SvgNewAccount from "@/assets/sprite/new-account.svg";
-import { CalculatorModal } from "@/features/calculator";
 import { useViewport } from "@/hooks/viewport";
 import { showCommonError } from "@/utils/show-common-error";
 import { isAccountItemCreateData } from "../../predicates";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { FieldIds, FieldTypes } from "@/types/field";
+import { type CalculatorSaveHandler, CalculatorModal } from "@/features/calculator";
 import type { DefaultFormRef, DefaultFormSaveHandler } from "@/types/form";
-import type { CalculatorSaveHandler } from "@/features/calculator";
 
 export const AddNew = memo(function AddNewAccount() {
   const { t } = useTranslation();
