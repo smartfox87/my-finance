@@ -4,14 +4,12 @@ import { useLoading } from "@/hooks/loading";
 import { useCallback, useEffect } from "react";
 import { Preloader } from "@/components/loading/preloader";
 import { selectBudgetsFilterValues, selectBudgetsList } from "../../selectors";
-import { useFilterSearchParams } from "@/hooks/filter-search-params";
 import { getBudgetsListThunk, setBudgetsFilterValues } from "../../store";
 import { INITIAL_BUDGETS_FILTER_FIELDS } from "../../constants";
-import { getUserId } from "@/utils/local-storage";
+import { getUserId } from "@/features/user-id";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import { getFilterItemsFromFields } from "@/utils/filters";
-import { PageContent } from "../../components";
-import { HeaderAside } from "../../components";
+import { useFilterSearchParams, getFilterItemsFromFields } from "@/features/filter";
+import { HeaderAside, PageContent } from "../../components";
 
 // todo check default import everywhere
 export default function Page() {

@@ -1,6 +1,4 @@
-import { FieldIds, FieldTypes } from "@/types/field";
-import type { DatesPeriod } from "@/types/date";
-import type { DateFormField, RadioButtonsFormField, SingleSelectFormField, TextFormField } from "@/types/form";
+import { type DatesPeriod, type DateFormField, type RadioButtonsFormField, type SingleSelectFormField, type TextFormField, FieldIds, FieldTypes } from "@/features/fields";
 
 export interface ProfileData {
   [FieldIds.FULL_NAME]: string;

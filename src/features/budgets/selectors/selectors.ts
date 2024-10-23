@@ -3,12 +3,11 @@ import { INITIAL_BUDGET_FIELDS, INITIAL_BUDGETS_FILTER_FIELDS } from "../constan
 import { selectCostCategories } from "@/store/selectors/references";
 import { selectCurrency } from "@/features/profile";
 import { selectAccountsList } from "@/store/selectors/accounts";
-import { filterMultiItemsList, getOptionsFromItemsList, processFilterFields, sortItemsList } from "@/utils/selectors";
-import { FieldIds, FieldTypes } from "@/types/field";
+import { filterMultiItemsList, sortItemsList } from "@/utils/selectors";
+import { FieldIds, FieldTypes } from "@/features/fields";
+import { type ProcessedFilterField, type FilterState, getOptionsFromItemsList, processFilterFields } from "@/features/filter";
 import type { LazyLoadedSlices } from "@/types/store";
 import type { BudgetItemField, ProcessedBudgetItem } from "../types";
-import type { ProcessedFilterField } from "@/types/selectors";
-import type { FilterState } from "@/types/filter";
 
 export const selectBudgetsList = ({ budgets }: LazyLoadedSlices): ProcessedBudgetItem[] | null => budgets?.budgetsList || null;
 

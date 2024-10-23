@@ -3,12 +3,11 @@
 import { INITIAL_SIGN_IN_FIELDS } from "../../constants";
 import { useAppDispatch } from "@/hooks/store";
 import { isLoginData } from "../../predicates";
-import { DefaultForm } from "@/features/default-form";
-import { loginUserThunk } from "@/store/slices/auth";
+import { loginUserThunk } from "@/features/auth-store";
 import { useRouter } from "next/navigation";
 import { captureException } from "@sentry/nextjs";
 import { IS_PRODUCTION } from "@/constants/config";
-import type { DefaultFormSaveHandler } from "@/types/form";
+import { type DefaultFormSaveHandler, DefaultForm } from "@/features/default-form";
 
 export const SignIn = () => {
   const dispatch = useAppDispatch();

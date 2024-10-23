@@ -1,4 +1,4 @@
-import { FieldIds } from "@/types/field";
+import { FieldIds } from "@/features/fields";
 import type { AccountItemCreateData, AccountItemUpdateData } from "@/types/accounts";
 
 export const isAccountItemUpdateData = (data: Record<string, unknown>): data is AccountItemUpdateData =>

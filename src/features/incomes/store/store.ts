@@ -1,14 +1,12 @@
 import { createIncomeItemApi, getIncomesListApi, updateIncomeItemApi, deleteIncomeItemApi, getIncomeItemApi } from "../api";
-import { handleRejectedReducerAction } from "@/utils/errors";
+import { handleRejectedReducerAction } from "@/utils/handle-rejected-reducer-action";
 import { updateAccountBalanceThunk } from "@/store/slices/accounts";
-import { setFilterValue } from "@/utils/filters";
 import { rootReducer } from "@/store";
-import { isFilterPeriodStateItem } from "@/predicates/filter";
 import { asyncThunkCreator, buildCreateSlice, type WithSlice } from "@reduxjs/toolkit";
+import { type FilterItem, type FilterState, isFilterPeriodStateItem, setFilterValue } from "@/features/filter";
 import type { AccountItemBalanceData } from "@/types/accounts";
 import type { AppDispatch, RootState } from "@/types/store";
 import type { IncomeItem, IncomeItemData, IncomesSliceState } from "../types";
-import type { FilterItem, FilterState } from "@/types/filter";
 
 const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },

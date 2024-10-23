@@ -1,6 +1,5 @@
-import { LANGUAGES } from "@/constants/config";
+import { PRODUCTION_URL, LANGUAGES } from "@/constants/config";
 import { useTranslation } from "react-i18next";
-import { PRODUCTION_URL } from "@/constants/config";
 import type { Organization, WithContext } from "schema-dts";
 
 export const Jsonld = () => {

@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
-import { handleFilterSelectOptions } from "@/utils/fields";
+import { handleFilterSelectOptions } from "@/utils/handle-filter-select-options";
 import { Form, Select } from "antd";
-import type { MultiSelectValue } from "@/types/field";
-import type { FormFieldProps, MultiSelectFormField } from "@/types/form";
+import type { FormFieldProps } from "../../types";
+import type { MultiSelectValue, MultiSelectFormField } from "@/features/fields";
 
 export const MultiSelectField = ({ field, onChange }: FormFieldProps<MultiSelectFormField>) => {
   const { t } = useTranslation();

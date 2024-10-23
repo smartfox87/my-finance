@@ -1,14 +1,13 @@
 "use client";
 
 import { selectSettingsFields } from "../../selectors";
-import { DefaultForm } from "@/features/default-form";
 import { getProfileThunk, updateProfileThunk } from "../../store";
-import { showNotification } from "@/utils/modals";
+import { showNotification } from "@/utils/show-notification";
 import { useTranslation } from "react-i18next";
-import { showCommonError } from "@/utils/errors";
+import { showCommonError } from "@/utils/show-common-error";
 import { isSettingsData } from "../../predicates";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import type { DefaultFormSaveHandler } from "@/types/form";
+import { type DefaultFormSaveHandler, DefaultForm } from "@/features/default-form";
 
 export default function Page() {
   const { t } = useTranslation();

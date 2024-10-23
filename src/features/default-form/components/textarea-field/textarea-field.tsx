@@ -2,7 +2,8 @@ import { useTranslation } from "react-i18next";
 import { useFieldFocus } from "@/hooks/field-focus";
 import { useLayoutEffect } from "react";
 import { Form, Input, type InputRef } from "antd";
-import type { FormFieldProps, TextFormField } from "@/types/form";
+import type { TextFormField } from "@/features/fields";
+import type { FormFieldProps } from "../../types";
 
 export const TextareaField = ({ field, onChange }: FormFieldProps<TextFormField>) => {
   const { t } = useTranslation();

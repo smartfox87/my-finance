@@ -7,14 +7,12 @@ import { memo, useEffect, useState } from "react";
 import SvgFilter from "@/assets/sprite/filter.svg";
 import { useViewport } from "@/hooks/viewport";
 import { useFieldFocus } from "@/hooks/field-focus";
-import { prepareObjectValuesForFilterStateValues, setFilterValue } from "@/utils/filters";
-import { FilterFields } from "@/components/filter/filter-fields";
 import cloneDeep from "lodash/cloneDeep";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import { FieldIds } from "@/types/field";
+import { FieldIds } from "@/features/fields";
+import { type FilterState, type ChangeFilterFieldValueHandler, FilterFields, prepareObjectValuesForFilterStateValues, setFilterValue } from "@/features/filter";
 import type { BaseSelectRef } from "rc-select";
 import type { ComponentOnSaveProps } from "@/types/common";
-import type { FilterState, ChangeFilterFieldValueHandler } from "@/types/filter";
 
 export const Filter = memo(function CostsFilter({ onSave }: ComponentOnSaveProps) {
   const { t } = useTranslation();

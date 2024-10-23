@@ -1,5 +1,3 @@
-import en from "antd/lib/locale/en_US";
-
 export enum I18nNamespaces {
   COMMON = "common",
 }
@@ -19,22 +17,6 @@ export enum Locales {
 }
 
 export type Locale = `${Locales}`;
-
-export const AntdLocales = {
-  [Locales.EN]: "en_US",
-  [Locales.DE]: "de_DE",
-  [Locales.IT]: "it_IT",
-  [Locales.ES]: "es_ES",
-  [Locales.FR]: "fr_FR",
-  [Locales.PL]: "pl_PL",
-  [Locales.ZH]: "zh_CN",
-  [Locales.HI]: "hi_IN",
-  [Locales.RU]: "ru_RU",
-};
-
-export type AntdLocales = typeof AntdLocales;
-
-export type AntdLocale = typeof en;
 
 export const Languages = {
   [Locales.EN]: "english",

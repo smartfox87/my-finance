@@ -1,10 +1,6 @@
 "use client";
 
-import { AddNew } from "../../components";
-import { Transfer } from "../../components";
-import { Detail } from "../../components";
-import { List } from "../../components";
-import { HeaderAside } from "../../components";
+import { HeaderAside, AddNew, Transfer, Detail, List } from "../../components";
 
 export default function Page() {
   return (

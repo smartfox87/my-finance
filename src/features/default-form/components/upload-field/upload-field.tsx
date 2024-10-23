@@ -1,11 +1,11 @@
 import { useTranslation } from "react-i18next";
 import SvgUpload from "@/assets/sprite/upload.svg";
-import { getFileSizeWithUnit } from "@/utils/file";
-import { showErrorMessage } from "@/utils/message";
+import { getFileSizeWithUnit } from "../../utils";
+import { showErrorMessage } from "@/utils/show-error-message";
 import { Button, Form, Upload, type UploadFile } from "antd";
-import { FieldTypes } from "@/types/field";
-import type { FileFormField, FileFormFieldId, FormFieldProps } from "@/types/form";
 import { isUploadFilesArray } from "@/predicates/common";
+import { type FileFormField, type FileFormFieldId, FieldTypes } from "@/features/fields";
+import type { FormFieldProps } from "../../types";
 
 export const UploadField = ({ field, value, onChange }: FormFieldProps<FileFormField>) => {
   const { t } = useTranslation();

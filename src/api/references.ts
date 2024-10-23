@@ -1,6 +1,7 @@
-import { apiClient } from "@/lib/api-client";
-import { getLanguage, getUserId } from "@/utils/local-storage";
-import { AccountTypeData, IncomeCategoryData } from "@/types/references";
+import { apiClient } from "@/libs/api-client";
+import { getLanguage } from "@/utils/get-language";
+import { getUserId } from "@/features/user-id";
+import type { AccountTypeData, IncomeCategoryData } from "@/types/references";
 
 export const getCostCategoriesApi = () =>
   apiClient.from("cost_categories").select("id, cost_categories_translations(name)").filter("cost_categories_translations.lang", "eq", getLanguage()).order("sort", { ascending: false });

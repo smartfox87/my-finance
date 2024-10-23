@@ -1,8 +1,8 @@
-import { apiClient } from "@/lib/api-client";
-import { getUserId } from "@/utils/local-storage";
-import { getCurrentDate } from "@/utils/date";
-import { FieldIds } from "@/types/field";
-import type { FilterPeriodStateItem } from "@/types/filter";
+import { apiClient } from "@/libs/api-client";
+import { getUserId } from "@/features/user-id";
+import { getCurrentISODate } from "@/utils/get-current-iso-date";
+import { FieldIds } from "@/features/fields";
+import type { FilterPeriodStateItem } from "@/features/filter";
 import type { CostItemData } from "../types";
 
 export const getCostsListApi = (filter: FilterPeriodStateItem) => {
@@ -25,7 +25,7 @@ export const deleteCostItemApi = (costId: number) =>
 export const updateCostItemApi = ({ costId, costData }: { costId: number; costData: CostItemData }) =>
   apiClient
     .from("costs")
-    .update({ ...costData, updated_at: getCurrentDate() })
+    .update({ ...costData, updated_at: getCurrentISODate() })
     .match({ user_id: getUserId(), id: costId })
     .select("created_at, id, name, amount, date, category, account")
     .single();

@@ -2,7 +2,7 @@
 
 import { Provider } from "react-redux";
 import { store } from "@/store";
-import { LocaleProvider } from "@/providers/items/locale";
+import { LocaleProvider } from "@/features/locale-provider";
 import { I18nProvider } from "@/providers/items/i18n";
 import { CSSVariablesInitialization } from "@/providers/items/css";
 import type { ReactNode } from "react";

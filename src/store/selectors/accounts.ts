@@ -2,7 +2,7 @@ import { createSelector } from "@reduxjs/toolkit";
 import { selectCurrency } from "@/features/profile";
 import { INITIAL_ACCOUNT_FIELDS, INITIAL_ACCOUNT_TRANSFER_FIELDS } from "@/constants/accounts";
 import { selectAccountTypesObject } from "@/store/selectors/references";
-import { FieldIds } from "@/types/field";
+import { FieldIds } from "@/features/fields";
 import type { LazyLoadedSlices } from "@/types/store";
 import type { AccountItem, AccountItemField, AccountTransferField, ProcessedAccountItem } from "@/types/accounts";
 

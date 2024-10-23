@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
-import { handleFilterSelectOptions } from "@/utils/fields";
+import { handleFilterSelectOptions } from "@/utils/handle-filter-select-options";
 import { Form, Select } from "antd";
-import type { SingleSelectValue } from "@/types/field";
-import type { FormFieldProps, SingleSelectFormField } from "@/types/form";
+import type { SingleSelectFormField, SingleSelectValue } from "@/features/fields";
+import type { FormFieldProps } from "../../types";
 
 export const SingleSelectField = ({ field, onChange }: FormFieldProps<SingleSelectFormField>) => {
   const { t } = useTranslation();

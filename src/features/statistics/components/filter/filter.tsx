@@ -6,14 +6,12 @@ import { SideModal } from "@/components/modals/side-modal";
 import { memo, useEffect, useState } from "react";
 import SvgFilter from "@/assets/sprite/filter.svg";
 import { useViewport } from "@/hooks/viewport";
-import { prepareObjectValuesForFilterStateValues, setFilterValue } from "@/utils/filters";
 import { useFieldFocus } from "@/hooks/field-focus";
 import cloneDeep from "lodash/cloneDeep";
-import { FilterFields } from "@/components/filter/filter-fields";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import { FieldIds } from "@/types/field";
+import { FieldIds } from "@/features/fields";
+import { type ChangeFilterFieldValueHandler, type FilterState, FilterFields, prepareObjectValuesForFilterStateValues, setFilterValue } from "@/features/filter";
 import type { BaseSelectRef } from "rc-select";
-import type { ChangeFilterFieldValueHandler, FilterState } from "@/types/filter";
 import type { ComponentOnSaveProps } from "@/types/common";
 
 export const Filter = memo(function StatisticsFilter({ onSave }: ComponentOnSaveProps) {

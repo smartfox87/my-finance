@@ -2,9 +2,8 @@
 
 import { AuthGuard } from "../components/auth-guard";
 import { Breadcrumbs } from "../components/breadcrumbs";
-import { Spinner } from "@/components/loading/spinner";
 import { useTranslation } from "react-i18next";
-import { type ReactNode, Suspense } from "react";
+import type { ReactNode } from "react";
 import type { LinkItem } from "@/types/breadcrumbs";
 import type { Page } from "@/types/router";
 
@@ -36,7 +35,7 @@ export const InnerLayout = ({ page, isAuth = true, breadcrumbs, children }: Prop
         )}
       </div>
       {breadcrumbs?.length && <Breadcrumbs list={breadcrumbs} />}
-      <Suspense fallback={<Spinner isVisible />}>{isAuth ? <AuthGuard>{children}</AuthGuard> : children}</Suspense>
+      {isAuth ? <AuthGuard>{children}</AuthGuard> : children}
     </section>
   );
 };

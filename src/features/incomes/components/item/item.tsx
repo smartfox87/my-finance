@@ -1,12 +1,12 @@
 import { Date } from "@/components/date/date";
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "antd";
-import formatPrice from "@/utils/format-price";
+import { formatPrice } from "@/utils/format-price";
 import { selectCurrency } from "@/features/profile";
-import { uppercaseFirstLetter } from "@/utils/strings";
+import { setUppercaseFirstLetter } from "@/utils/set-uppercase-first-letter";
 import { selectIncomeCategoriesObject } from "@/store/selectors/references";
 import { useEffect, useRef, useState } from "react";
-import { isTextClamped } from "@/utils/is-text-clamped";
+import { checkIsTextClamped } from "@/utils/check-is-text-clamped";
 import { useViewport } from "@/hooks/viewport";
 import { selectAccountsObject } from "@/store/selectors/accounts";
 import Link from "next/link";
@@ -21,11 +21,11 @@ export const Item = ({ id, created_at, name, amount, date, category, account }: 
   const accountsObject = useAppSelector(selectAccountsObject);
   const nameRef = useRef(null);
   const [isTooltipName, setIsTooltipName] = useState(false);
-  const capitalizedName = uppercaseFirstLetter(name);
+  const capitalizedName = setUppercaseFirstLetter(name);
 
   useEffect((): void => {
     if (isTouchDevice) return;
-    if (nameRef.current) setIsTooltipName(isTextClamped(nameRef.current));
+    if (nameRef.current) setIsTooltipName(checkIsTextClamped(nameRef.current));
   }, [name, isTouchDevice]);
 
   return (

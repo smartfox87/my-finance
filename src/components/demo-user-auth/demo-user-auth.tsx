@@ -15,7 +15,7 @@ export const DemoUserAuth = () => {
   const handleAuthorize = async (): Promise<void> => {
     try {
       setIsLoading(true);
-      const { loginDemoUserThunk } = await import("@/store/slices/auth");
+      const { loginDemoUserThunk } = await import("@/features/auth-store");
       await dispatch(loginDemoUserThunk()).unwrap();
     } catch (error) {
       if (IS_PRODUCTION) captureException(error);
