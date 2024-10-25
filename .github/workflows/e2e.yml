@@ -1,9 +1,12 @@
 name: E2E on Chrome
 on:
   push:
-    branches: [master]
+    branches:
+      - master
   pull_request:
-    branches: [master, '!dependabot/**']
+    branches:
+      - master
+      - '!dependabot/**'
 jobs:
   pipeline:
     runs-on: ubuntu-latest
