@@ -8,6 +8,7 @@ import { MainNav } from "../main-nav";
 import { useAppSelector } from "@/hooks/store";
 import { ProfileMenu } from "../profile-menu";
 import SvgClose from "@/assets/sprite/close.svg";
+import { ThemeToggle } from "../theme-toggle";
 
 export const MobileMenu = memo(function MobileMenu() {
   const { t } = useTranslation();
@@ -42,8 +43,9 @@ export const MobileMenu = memo(function MobileMenu() {
           <div className="p-6">
             <div className="flex items-center justify-between gap-3">
               {user ? <ProfileMenu /> : <Auth />}
-              <div className="relative z-20 ml-auto">
+              <div className="relative z-20 ml-auto flex gap-2">
                 <LanguageToggle />
+                <ThemeToggle />
               </div>
             </div>
             <MainNav className="pl-1" />

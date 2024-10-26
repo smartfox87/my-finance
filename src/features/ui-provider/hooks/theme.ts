@@ -1,8 +1,8 @@
 import { useCallback, useEffect } from "react";
+import { useLocalStorage } from "./local-storage";
 import { ThemeTypes } from "../types";
-import { useLocalStorage } from "@/hooks/local-storage";
 
-export const useTheme = (): [boolean, string, () => void] => {
+export const useTheme = (): [boolean, () => void] => {
   const [state, setState] = useLocalStorage<ThemeTypes>("theme");
   const darkTheme = state === ThemeTypes.DARK;
 
@@ -52,5 +52,5 @@ export const useTheme = (): [boolean, string, () => void] => {
     return () => mediaQuery.removeEventListener("change", handleThemeChange);
   }, []);
 
-  return [darkTheme, state, toggleTheme];
+  return [darkTheme, toggleTheme];
 };

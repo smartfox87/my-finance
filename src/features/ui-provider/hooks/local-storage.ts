@@ -13,13 +13,16 @@ export const useLocalStorage = <T>(key: string, initialValue?: T): [T, (value: T
     }
   });
 
-  const handleStorageChange = useCallback(({ newValue }: StorageEvent): void => {
-    try {
-      setState(newValue ? JSON.parse(newValue) : initialValue);
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
+  const handleStorageChange = useCallback(
+    (event: StorageEvent): void => {
+      try {
+        if (event.key === key) setState(event.newValue ? JSON.parse(event.newValue) : initialValue);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [key],
+  );
 
   useEffect((): (() => void) => {
     window.addEventListener("storage", handleStorageChange);
@@ -31,7 +34,7 @@ export const useLocalStorage = <T>(key: string, initialValue?: T): [T, (value: T
       try {
         const valueToStore = value instanceof Function ? value(state) : value;
         if (isClient) window.localStorage.setItem(key, JSON.stringify(valueToStore));
-        setState(value);
+        setState(valueToStore);
       } catch (error) {
         console.log(error);
       }
