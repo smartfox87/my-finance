@@ -1,4 +1,4 @@
-import { useDarkTheme } from "@/hooks/theme";
+import { useTheme } from "../hooks";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useLocale } from "@/features/locale-provider";
 import { getUserId } from "@/features/user-id";
@@ -13,7 +13,7 @@ const ConfigProvider = dynamic(() => import("antd/es/config-provider"));
 const AntdRegistry = dynamic(() => import("@ant-design/nextjs-registry").then(({ AntdRegistry }) => AntdRegistry));
 
 export const AntdProvider = ({ isActive, children }: ComponentChildrenProps & { isActive?: boolean }) => {
-  const darkTheme = useDarkTheme();
+  const [darkTheme] = useTheme();
   const { antdLocale } = useLocale();
   const user = useAppSelector(selectUser);
 
@@ -31,7 +31,7 @@ export const AntdProvider = ({ isActive, children }: ComponentChildrenProps & { 
     if (!isLoadedAntd && (getUserId() || user)) initAntd();
   }, [user]);
 
-  const themeSettings = useMemo(() => (theme ? { algorithm: darkTheme ? theme.darkAlgorithm : theme.defaultAlgorithm } : undefined), [theme]);
+  const themeSettings = useMemo(() => (theme ? { algorithm: darkTheme ? theme.darkAlgorithm : theme.defaultAlgorithm } : undefined), [theme, darkTheme]);
 
   return (
     <>

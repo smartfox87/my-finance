@@ -1,37 +1,54 @@
 {
-	"extends": [
-		"next/core-web-vitals",
-		"prettier",
-		"eslint:recommended",
-		"plugin:@typescript-eslint/recommended"
-	],
-	"parser": "@typescript-eslint/parser",
-	"plugins": [
-		"prettier",
-		"@typescript-eslint"
-	],
-	"rules": {
-		"prettier/prettier": "error",
-		"react-hooks/exhaustive-deps": "off",
-		"no-restricted-imports": [
-			"error",
-			{
-				"patterns": ["@/features/*/*"]
-			}
-		],
-		"import/no-cycle": "error",
-		"no-duplicate-imports": "error"
-	},
-	"env": {
-		"browser": true,
-		"node": true,
-		"jest": true
-	},
-	"overrides": [
-		{
-			"files": ["*.test.ts", "*.test.js"],
-			"plugins": ["jest"],
-			"extends": ["plugin:jest/recommended"]
-		}
-	]
+  "extends": [
+    "next/core-web-vitals",
+    "prettier",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "prettier",
+    "@typescript-eslint"
+  ],
+  "rules": {
+    "prettier/prettier": "error",
+    "react-hooks/exhaustive-deps": "off",
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": [
+          "@/features/*/*"
+        ]
+      }
+    ],
+    "import/no-cycle": "error",
+    "no-duplicate-imports": "error",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_"
+      }
+    ]
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest": true
+  },
+  "overrides": [
+    {
+      "files": [
+        "*.test.ts",
+        "*.test.js"
+      ],
+      "plugins": [
+        "jest"
+      ],
+      "extends": [
+        "plugin:jest/recommended"
+      ]
+    }
+  ]
 }

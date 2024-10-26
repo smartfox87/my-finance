@@ -1,6 +1,6 @@
 "use client";
 
-import { AntdProvider } from "@/features/antd-provider";
+import { AntdProvider } from "@/features/ui-provider";
 import { ReferencesLoading } from "@/providers/items/references";
 import { AccountsLoading } from "./items/accounts";
 import { ProfileLoading } from "@/features/profile";

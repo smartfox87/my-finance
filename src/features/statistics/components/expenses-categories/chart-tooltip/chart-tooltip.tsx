@@ -8,7 +8,7 @@ export const ChartTooltip = ({ active, payload }: CostsCategoriesStatisticsToolt
 
   if (active && payload?.length) {
     return (
-      <ul className="flex max-w-[calc(100vw_-_30px)] flex-col gap-1 border border-gray-300 bg-white p-3 xs:ml-0 dark:bg-dark">
+      <ul className="flex max-w-[calc(100vw_-_30px)] flex-col gap-1 border border-gray-300 bg-white p-3 dark:bg-dark xs:ml-0">
         {payload.map(({ payload: { value, name, accounts } }) => (
           <li key={name}>
             <div className="font-bold">

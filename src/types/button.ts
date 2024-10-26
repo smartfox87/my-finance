@@ -10,11 +10,10 @@ export enum ButtonSizes {
   DEFAULT = "default",
 }
 
-export type ButtonSize = `${ButtonSizes}`;
-
 export type ButtonProps = {
   size?: ButtonSizes;
   type?: ButtonTypes;
+  title?: string;
   loading?: boolean;
   children: ReactNode;
   onClick: () => void;

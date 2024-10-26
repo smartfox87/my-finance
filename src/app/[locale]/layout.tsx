@@ -28,7 +28,7 @@ export default async function LocaleLayout({ children, params: { locale } }: { c
   const { resources } = await initTranslations({ locale });
   return (
     <html lang={locale} dir={dir(locale)} className="flex h-[calc(100_*_var(--vh))] w-[calc(100_*_var(--vw))] flex-col">
-      <body className="flex w-full grow flex-col dark:bg-dark">
+      <body className="flex w-full grow flex-col dark:bg-dark dark:text-white">
         {/*<SpeedInsights />*/}
         <AppProvider i18nResources={resources}>{children}</AppProvider>
       </body>
