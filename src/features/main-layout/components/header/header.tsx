@@ -9,6 +9,7 @@ import { MobileMenu } from "../mobile-menu";
 import { useViewport } from "@/hooks/viewport";
 import { useAppSelector } from "@/hooks/store";
 import { ProfileMenu } from "../profile-menu";
+import { ThemeToggle } from "../theme-toggle";
 
 export const Header = memo(function Header() {
   const { isTablet } = useViewport();
@@ -24,6 +25,7 @@ export const Header = memo(function Header() {
           <div className="flex items-center gap-2 md:gap-4">
             {user ? <ProfileMenu /> : <Auth />}
             <LanguageToggle />
+            <ThemeToggle />
           </div>
         )}
       </div>

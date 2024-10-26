@@ -2,8 +2,9 @@
 
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
-import { SimpleButton } from "@/components/simple-button/simple-button";
+import { SimpleButton } from "@/components/simple-button";
 import { useAppDispatch } from "@/hooks/store";
+import { ButtonSizes, ButtonTypes } from "@/types/button";
 
 export const GoogleAuth = () => {
   const dispatch = useAppDispatch();
@@ -17,7 +18,7 @@ export const GoogleAuth = () => {
   };
 
   return (
-    <SimpleButton size="large" type="primary" loading={isLoading} onClick={handleAuthorize}>
+    <SimpleButton size={ButtonSizes.LARGE} type={ButtonTypes.PRIMARY} loading={isLoading} onClick={handleAuthorize}>
       {t("buttons.sign_in_google")}
     </SimpleButton>
   );

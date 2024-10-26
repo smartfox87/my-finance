@@ -6,6 +6,7 @@ import { SimpleButton } from "@/components/simple-button";
 import { useViewport } from "@/hooks/viewport";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
+import { ButtonTypes } from "@/types/button";
 
 export const Auth = () => {
   const { t } = useTranslation();
@@ -14,11 +15,11 @@ export const Auth = () => {
 
   return (
     <>
-      <SimpleButton type="primary" data-cy="register-btn" onClick={() => router.push("/sign-up")}>
+      <SimpleButton type={ButtonTypes.PRIMARY} data-cy="register-btn" onClick={() => router.push("/sign-up")}>
         <SvgSignUp className="h-4 w-4" />
         {!isMobile ? t("buttons.sign_up") : null}
       </SimpleButton>
-      <SimpleButton type="primary" data-cy="login-btn" onClick={() => router.push("/sign-in")}>
+      <SimpleButton type={ButtonTypes.PRIMARY} data-cy="login-btn" onClick={() => router.push("/sign-in")}>
         <SvgSignIn className="h-4 w-4" />
         {!isMobile ? t("buttons.sign_in") : null}
       </SimpleButton>
