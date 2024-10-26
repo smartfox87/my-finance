@@ -2,10 +2,11 @@
 
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
-import { SimpleButton } from "@/components/simple-button/simple-button";
+import { SimpleButton } from "@/components/simple-button";
 import { useAppDispatch } from "@/hooks/store";
-import { IS_PRODUCTION } from "../../constants/config";
+import { IS_PRODUCTION } from "@/constants/config";
 import { captureException } from "@sentry/nextjs";
+import { ButtonSizes, ButtonTypes } from "@/types/button";
 
 export const DemoUserAuth = () => {
   const dispatch = useAppDispatch();
@@ -25,7 +26,7 @@ export const DemoUserAuth = () => {
   };
 
   return (
-    <SimpleButton size="large" type="primary" loading={isLoading} data-cy="demo-login-btn" onClick={handleAuthorize}>
+    <SimpleButton size={ButtonSizes.LARGE} type={ButtonTypes.PRIMARY} loading={isLoading} data-cy="demo-login-btn" onClick={handleAuthorize}>
       {t("buttons.sign_in_demo_user")}
     </SimpleButton>
   );

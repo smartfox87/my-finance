@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect } from "react";
-import { SimpleButton } from "@/components/simple-button/simple-button";
+import { SimpleButton } from "@/components/simple-button";
 import { useRouter } from "next/navigation";
 import { IS_PRODUCTION } from "@/constants/config";
 import { captureException } from "@sentry/nextjs";
+import { ButtonTypes } from "@/types/button";
 
 export default function GlobalError({ error }: { error: Error & { digest?: string } }) {
   const router = useRouter();
@@ -20,10 +21,10 @@ export default function GlobalError({ error }: { error: Error & { digest?: strin
         <section className="container flex grow flex-col items-center justify-center gap-4 text-center">
           <h1 className="text-xl font-black lg:text-3xl">Something went wrong!</h1>
           <div className="flex flex-wrap justify-center gap-4">
-            <SimpleButton type="primary" onClick={router.refresh}>
+            <SimpleButton type={ButtonTypes.PRIMARY} onClick={router.refresh}>
               Try again
             </SimpleButton>
-            <SimpleButton type="primary" onClick={() => router.push("/")}>
+            <SimpleButton type={ButtonTypes.PRIMARY} onClick={() => router.push("/")}>
               Go home
             </SimpleButton>
           </div>

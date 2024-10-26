@@ -1,8 +1,9 @@
 "use client";
 
 import { useTranslation } from "react-i18next";
-import { SimpleButton } from "@/components/simple-button/simple-button";
+import { SimpleButton } from "@/components/simple-button";
 import { useRouter } from "next/navigation";
+import { ButtonTypes } from "@/types/button";
 
 export default function NotFoundPage() {
   const { t } = useTranslation();
@@ -11,7 +12,7 @@ export default function NotFoundPage() {
   return (
     <section className="flex grow flex-col items-center justify-center gap-4 text-center">
       <h1 className="text-xl font-black lg:text-3xl">404</h1>
-      <SimpleButton type="primary" onClick={() => router.push("/")}>
+      <SimpleButton type={ButtonTypes.PRIMARY} onClick={() => router.push("/")}>
         {t("buttons.go_home")}
       </SimpleButton>
     </section>
