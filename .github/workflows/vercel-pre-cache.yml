@@ -1,12 +1,15 @@
 name: Pre-cache Vercel Pages
 
 on:
-  pull_request_review:
+  pull_request:
+    branches:
+      - master
     types:
-      - submitted
+      - closed
 
 jobs:
   precache-vercel:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
@@ -18,36 +21,65 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Cache npm dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Compile and run urls.ts
         run: |
           node --loader ts-node/esm scripts/urls.ts
 
+      - name: Install jq
+        run: sudo apt-get install -y jq
+
       - name: Wait for Vercel Deployment
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          COMMIT_SHA: ${{ github.event.pull_request.merge_commit_sha }}
         run: |
           echo "Checking Vercel deployment status..."
-          DEPLOYMENT_STATUS="building"
-          while [ "$DEPLOYMENT_STATUS" != "ready" ]; do
-            RESPONSE=$(curl -s -X GET "https://api.vercel.com/v13/deployments?projectId=$VERCEL_PROJECT_ID" \
+          MAX_RETRIES=30
+          RETRY_COUNT=0
+          while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+            RESPONSE=$(curl -s -G "https://api.vercel.com/v6/deployments" \
+              -d "projectId=$VERCEL_PROJECT_ID" \
+              -d "meta-gitlabCommitSha=$COMMIT_SHA" \
               -H "Authorization: Bearer $VERCEL_TOKEN")
-            DEPLOYMENT_STATUS=$(echo $RESPONSE | jq -r '.deployments[0].state')
+            DEPLOYMENT_STATUS=$(echo "$RESPONSE" | jq -r '.deployments[0].state')
             echo "Current deployment status: $DEPLOYMENT_STATUS"
-            if [ "$DEPLOYMENT_STATUS" == "error" ]; then
+            if [ "$DEPLOYMENT_STATUS" == "READY" ]; then
+              echo "Deployment is ready!"
+              break
+            elif [ "$DEPLOYMENT_STATUS" == "ERROR" ]; then
               echo "Deployment failed."
               exit 1
+            else
+              echo "Deployment is not ready yet. Waiting..."
+              sleep 10
+              RETRY_COUNT=$((RETRY_COUNT+1))
             fi
-            sleep 10
           done
-          echo "Deployment is ready!"
+          if [ $RETRY_COUNT -eq $MAX_RETRIES ]; then
+            echo "Deployment is taking too long."
+            exit 1
+          fi
 
       - name: Read URLs and request each one
         run: |
           while IFS= read -r url; do
             echo "Requesting $url..."
-            curl -I "$url"
+            STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$url")
+            if [ "$STATUS_CODE" -ne 200 ]; then
+              echo "Failed to fetch $url - Status code: $STATUS_CODE"
+            else
+              echo "Successfully fetched $url - Status code: $STATUS_CODE"
+            fi
           done < urls.txt
