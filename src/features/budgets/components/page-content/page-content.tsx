@@ -44,5 +44,5 @@ export function PageContent({ onGetData }: PageContentProps) {
       </>
     );
 
-  return content && <div className="flex flex-col gap-4 lg:gap-8">{content}</div>;
+  return content && <div className="flex flex-col gap-4 xl:gap-8">{content}</div>;
 }

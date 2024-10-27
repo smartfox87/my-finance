@@ -16,7 +16,7 @@ export const HeaderAside = () => {
       <div className="mr-auto flex gap-1">
         <span data-cy="budgets-items-count">{filteredSortedBudgets?.length}</span> {t("common.items")}
       </div>
-      <div className="font-black lg:text-lg">
+      <div className="font-black xl:text-lg">
         <span className="mr-1">{t("common.total")}: </span>
         {formatPrice(totalAmount)}
         {currency}

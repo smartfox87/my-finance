@@ -11,7 +11,7 @@ export const HeaderAside = () => {
   const currency = useAppSelector(selectCurrency);
 
   const headerActions = (
-    <div className="ml-auto font-black lg:text-lg">
+    <div className="ml-auto font-black xl:text-lg">
       <span className="mr-1">{t("common.total")}: </span>
       {formatPrice(totalBalance)}
       {currency}
