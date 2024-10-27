@@ -59,7 +59,7 @@ export const selectIsStatisticsFilterValuesChanged = createSelector(
 
 export const selectCostsAmount = createSelector([selectCostsListForChartsByFilter], (costsListForCharts): number => costsListForCharts?.reduce((acc, { amount }) => acc + amount, 0) || 0);
 
-export const selectIncomesAmount = createSelector([selectCostsListForChartsByFilter], (incomesListForCharts): number => incomesListForCharts?.reduce((acc, { amount }) => (acc += amount), 0) || 0);
+export const selectIncomesAmount = createSelector([selectIncomesListForChartsByFilter], (incomesListForCharts): number => incomesListForCharts?.reduce((acc, { amount }) => (acc += amount), 0) || 0);
 
 export const selectBudgetsAmount = createSelector([selectBudgetsListForChartsByFilter], (budgetsListForCharts): number => budgetsListForCharts?.reduce((acc, { amount }) => (acc += amount), 0) || 0);
 
