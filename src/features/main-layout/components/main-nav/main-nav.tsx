@@ -4,7 +4,7 @@ import { memo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export const MainNav = memo(function MainNav({ className = "" }: { className?: string }) {
+export const MainNav = memo(function MainNav({ className = "", onCloseMenu }: { className?: string; onCloseMenu: () => void }) {
   const {
     t,
     i18n: { language },
@@ -17,7 +17,11 @@ export const MainNav = memo(function MainNav({ className = "" }: { className?: s
       <ul className="sticky top-16 flex grow flex-col py-4">
         {INIT_NAV_LIST.map(({ icon, full_name, url }) => (
           <li key={full_name} className="w-full">
-            <Link href={url} className={`${getNavLinkClassName(url)} -ml-3 mr-3 flex items-center gap-3 py-3 pl-3 pr-3 text-lg duration-300 hover:!text-blue-600 dark:hover:!text-blue-400`}>
+            <Link
+              href={url}
+              className={`${getNavLinkClassName(url)} -ml-3 mr-3 flex items-center gap-3 py-3 pl-3 pr-3 text-lg duration-300 hover:!text-blue-600 dark:hover:!text-blue-400`}
+              onClick={onCloseMenu}
+            >
               <div className="flex h-6 w-6 items-center justify-center lg:h-8 lg:w-8">{icon}</div>
               <div className="mt-0.5">{t(full_name)}</div>
             </Link>
