@@ -11,10 +11,10 @@ export function Page() {
 
   return (
     <section className="flex grow flex-col items-center justify-center gap-4 text-center">
-      <h1 className="text-xl font-black lg:text-3xl" data-cy="title">
+      <h1 className="text-xl font-black xl:text-3xl" data-cy="title">
         {t("pages.home.title")}
       </h1>
-      <p className="lg:text-xl xl:px-20" data-cy="description">
+      <p className="xl:px-20 xl:text-xl" data-cy="description">
         {t("pages.home.description")}
       </p>
       {!profile && <div className="mt-4">{<DemoUserAuth />}</div>}

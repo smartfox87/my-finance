@@ -20,15 +20,15 @@
 .container {
   margin-left: auto;
   margin-right: auto;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-left: 24px;
+  padding-right: 24px;
   max-width: 1400px;
   width: 100%;
 }
 
 .container-edge {
-  margin-left: -16px;
-  margin-right: -16px;
+  margin-left: -24px;
+  margin-right: -24px;
   width: auto;
 }
 
@@ -78,6 +78,18 @@ g:focus {
   height: 1px !important;
   width: 1px !important;
   overflow: hidden;
+}
+
+@media (max-width: 767px) {
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .container-edge {
+    margin-left: -16px;
+    margin-right: -16px;
+  }
 }
 
 @media (max-width: 385px) {

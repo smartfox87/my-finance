@@ -9,7 +9,7 @@ const viewports: { name: Viewport; query: string }[] = [
   { name: Viewports.XS, query: `(min-width: ${Breakpoints["2XS-MIN"]}px) and (max-width: ${Breakpoints["XS-MAX"]}px)` },
   { name: Viewports.XXS, query: `(max-width: ${Breakpoints["3XS-MAX"]}px)` },
 ];
-const tabletViewports: Viewport[] = [Viewports.XXS, Viewports.XS, Viewports.SM];
+const tabletViewports: Viewport[] = [Viewports.XXS, Viewports.XS, Viewports.SM, Viewports.MD];
 const mobileViewports: Viewport[] = [Viewports.XXS, Viewports.XS];
 
 const getTrueValueIndex = (mediaQueryLists: MediaQueryList[]): number => mediaQueryLists.map((list) => list.matches).findIndex(Boolean);

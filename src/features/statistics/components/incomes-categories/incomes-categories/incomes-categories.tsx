@@ -1,17 +1,17 @@
-import { Chart } from "../../expenses-categories/chart";
-import { selectCostsCategoriesChartItems } from "../../../selectors";
+import { Chart } from "../../incomes-categories/chart";
+import { selectIncomesCategoriesChartItems } from "../../../selectors";
 import { useTranslation } from "react-i18next";
 import { useAppSelector } from "@/hooks/store";
 
 export const IncomesCategories = () => {
   const { t } = useTranslation();
-  const costsCategoriesChartItems = useAppSelector(selectCostsCategoriesChartItems);
+  const incomesCategoriesChartItems = useAppSelector(selectIncomesCategoriesChartItems);
 
   return (
-    !!costsCategoriesChartItems.length && (
+    !!incomesCategoriesChartItems.length && (
       <section className="flex flex-col gap-2">
-        <h2 className="text-center text-xl font-bold">{t("statistics.expenses_by_categories")}</h2>
-        <Chart items={costsCategoriesChartItems} />
+        <h2 className="text-center text-xl font-bold">{t("statistics.incomes_by_categories")}</h2>
+        <Chart items={incomesCategoriesChartItems} />
       </section>
     )
   );

@@ -17,7 +17,7 @@ export const HeaderAside = () => {
         <span data-cy="incomes-items-count">{filteredSortedIncomes?.length}</span>
         {t("common.items")}
       </div>
-      <div className="font-black lg:text-lg">
+      <div className="font-black xl:text-lg">
         <span className="mr-1">{t("common.total")}: </span>
         {formatPrice(totalAmount)}
         {currency}

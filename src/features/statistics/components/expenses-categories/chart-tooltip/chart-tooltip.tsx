@@ -1,9 +1,9 @@
 import { selectCurrency } from "@/features/profile";
 import { formatPrice } from "@/utils/format-price";
 import { useAppSelector } from "@/hooks/store";
-import type { CostsCategoriesStatisticsTooltipProps } from "../../../types";
+import type { IncomesCategoriesStatisticsTooltipProps } from "../../../types";
 
-export const ChartTooltip = ({ active, payload }: CostsCategoriesStatisticsTooltipProps) => {
+export const ChartTooltip = ({ active, payload }: IncomesCategoriesStatisticsTooltipProps) => {
   const currency = useAppSelector(selectCurrency);
 
   if (active && payload?.length) {

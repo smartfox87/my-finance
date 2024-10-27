@@ -19,7 +19,7 @@ export const ChartTooltip = ({ active, payload }: CostsIncomesStatisticsTooltipP
               {t(`statistics.${incomesStatistics.name}`)}: {formatPrice(incomesStatistics.value)} {currency}
             </p>
             <ul>
-              {Object.entries(incomesStatistics.payload.costsList).map(([key, value]) => (
+              {Object.entries(incomesStatistics.payload.incomesList).map(([key, value]) => (
                 <li className="flex items-center gap-2 before:h-1 before:w-1 before:rounded-full before:bg-current" key={key}>
                   {key}: {formatPrice(value)} {currency}
                 </li>

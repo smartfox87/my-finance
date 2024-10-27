@@ -18,7 +18,7 @@ export const MobileNav = memo(function MobileNav() {
   const filteredList = useMemo(() => INIT_NAV_LIST.filter(({ mobile_nav }) => !isTablet || (isTablet && mobile_nav)), [isTablet]);
 
   return (
-    <nav className="shrink-0 border-t border-gray-300 lg:hidden" aria-label="mobile navigation">
+    <nav className="shrink-0 border-t border-gray-300 xl:hidden" aria-label="mobile navigation">
       <ul className="flex">
         {filteredList.map(({ icon, full_name, short_name, url }) => (
           <li key={full_name} className="w-1/12 grow">

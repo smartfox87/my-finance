@@ -208,7 +208,8 @@
     "budgets": "Budgets",
     "budget": "Budget",
     "incomes": "Incomes",
-    "accounts": "Accounts"
+    "accounts": "Accounts",
+    "unplanned": "Unplanned"
   },
   "pages": {
     "home": {
