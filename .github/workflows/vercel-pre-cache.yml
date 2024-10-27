@@ -26,8 +26,7 @@ jobs:
 
       - name: Compile and run urls.ts
         run: |
-          npx tsc scripts/urls.ts
-          node scripts/urls.js
+          node --loader ts-node/esm scripts/urls.ts
 
       - name: Wait for Vercel Deployment
         env:
