@@ -1,12 +1,9 @@
 name: Pre-cache Vercel Pages
 
 on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+  pull_request_review:
+    types:
+      - submitted
 
 jobs:
   precache-vercel:
