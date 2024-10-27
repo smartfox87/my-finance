@@ -49,11 +49,12 @@ jobs:
           MAX_RETRIES=30
           RETRY_COUNT=0
           while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
-            RESPONSE=$(curl -s -G "https://api.vercel.com/v6/deployments" \
+            RESPONSE=$(curl -X PATCH "https://api.vercel.com/v13/deployments" \
               -d "projectId=$VERCEL_PROJECT_ID" \
               -d "meta-gitCommitSha=$COMMIT_SHA" \
               -H "Authorization: Bearer $VERCEL_TOKEN")
-            DEPLOYMENT_STATUS=$(echo "$RESPONSE" | jq -r '.deployments[0].state')
+              -H "Content-Type: application/json"
+            DEPLOYMENT_STATUS=$(echo "$RESPONSE" | jq -r '.deployments[0] .state')
             echo "Current deployment status: $DEPLOYMENT_STATUS"
             if [ "$DEPLOYMENT_STATUS" == "READY" ]; then
               echo "Deployment is ready!"
