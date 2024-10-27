@@ -1,8 +1,4 @@
 import { Total } from "../total";
-import { ExpensesIncomes } from "../expenses-incomes";
-import { ExpensesBudgets } from "../expenses-budgets";
-import { ExpensesCategories } from "../expenses-categories";
-import { IncomesCategories } from "../incomes-categories";
 import { Filter } from "../filter";
 import { ActiveFilters } from "../active-filters";
 import { FoundNothing } from "@/components/list/found-nothing";
@@ -10,6 +6,7 @@ import { selectCostCategories, selectIncomeCategories } from "@/store/selectors/
 import { selectBudgetsListForChartsByFilter, selectCostsListForChartsByFilter, selectIncomesListForChartsByFilter, selectIsStatisticsFilterValuesChanged } from "../../selectors";
 import { useAppSelector } from "@/hooks/store";
 import { Empty } from "../empty";
+import { Tabs } from "../tabs";
 import type { PageContentProps } from "@/types/common";
 
 export const PageContent = ({ isFilterValuesFilled, onGetData }: PageContentProps & { isFilterValuesFilled: boolean }) => {
@@ -23,10 +20,7 @@ export const PageContent = ({ isFilterValuesFilled, onGetData }: PageContentProp
   const charts = (
     <>
       <Total />
-      <ExpensesBudgets />
-      <ExpensesIncomes />
-      <ExpensesCategories />
-      <IncomesCategories />
+      <Tabs />
     </>
   );
 
