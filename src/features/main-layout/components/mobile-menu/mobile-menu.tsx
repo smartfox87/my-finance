@@ -48,7 +48,7 @@ export const MobileMenu = memo(function MobileMenu() {
                 <ThemeToggle />
               </div>
             </div>
-            <MainNav className="pl-1" />
+            <MainNav className="pl-1" onCloseMenu={handleToggleVisibility} />
           </div>
         </section>
       )}
