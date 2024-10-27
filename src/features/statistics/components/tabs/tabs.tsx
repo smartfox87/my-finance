@@ -27,8 +27,8 @@ export const Tabs = () => {
   }, [costsBudgetsChartItems, costsIncomesChartItems, incomesCategoriesChartItems, costsCategoriesChartItems]);
 
   return (
-    <section className="flex flex-col gap-6">
-      <ul className="container-edge container flex gap-3 overflow-x-auto">
+    <section className="flex flex-col gap-4">
+      <ul className="container-edge container flex gap-2 overflow-x-auto">
         {tabs.map(({ name }) => (
           <li key={name}>
             <Button type={name === activeTab ? "primary" : "default"} onClick={() => setActiveTab(name)}>

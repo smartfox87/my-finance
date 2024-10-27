@@ -210,7 +210,8 @@
     "budgets": "Бюджеты",
     "budget": "Бюджет",
     "incomes": "Доходы",
-    "accounts": "Счета"
+    "accounts": "Счета",
+    "unplanned": "Непланированные"
   },
   "pages": {
     "home": {

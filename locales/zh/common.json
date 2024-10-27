@@ -210,7 +210,8 @@
     "budgets": "预算",
     "budget": "预算",
     "incomes": "收入",
-    "accounts": "账户"
+    "accounts": "账户",
+    "unplanned": "未计划"
   },
   "pages": {
     "home": {

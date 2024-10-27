@@ -210,7 +210,8 @@
     "budgets": "Presupuestos",
     "budget": "Presupuesto",
     "incomes": "Ingresos",
-    "accounts": "Cuentas"
+    "accounts": "Cuentas",
+    "unplanned": "No planificado"
   },
   "pages": {
     "home": {
