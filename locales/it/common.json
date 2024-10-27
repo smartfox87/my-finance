@@ -210,7 +210,8 @@
     "budgets": "Budget",
     "budget": "Budget",
     "incomes": "Redditi",
-    "accounts": "Conti"
+    "accounts": "Conti",
+    "unplanned": "Non pianificato"
   },
   "pages": {
     "home": {
