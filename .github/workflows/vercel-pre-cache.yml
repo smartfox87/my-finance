@@ -26,8 +26,8 @@ jobs:
 
       - name: Compile and run urls.ts
         run: |
-          npx tsc urls.ts
-          node urls.js
+          npx tsc scripts/urls.ts
+          node scripts/urls.js
 
       - name: Read URLs and request each one
         run: |
