@@ -2,7 +2,7 @@ import SvgLoadingBtn from "@/assets/sprite/loading-btn.svg";
 import { type ButtonProps, ButtonSizes, ButtonTypes } from "@/types/button";
 
 export const SimpleButton = ({ size = ButtonSizes.DEFAULT, type = ButtonTypes.DEFAULT, loading, children, onClick, ...props }: ButtonProps) => {
-  let className = `rounded-md border border-current text-gray-700 dark:text-gray-400`;
+  let className = `rounded-md border border-black/15 dark:border-dark-gray text-gray-700 dark:text-gray-400`;
 
   if (size === ButtonSizes.LARGE) className += " h-10 text-base";
   else className += " h-8 text-sm";
