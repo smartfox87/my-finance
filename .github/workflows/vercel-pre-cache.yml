@@ -4,9 +4,12 @@ on:
   pull_request:
     branches:
       - master
+    types:
+      - closed
 
 jobs:
   precache-vercel:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
@@ -40,7 +43,7 @@ jobs:
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-          NEXT_PUBLIC_PRODUCTION_URL: ${{ secrets.NEXT_PUBLIC_PRODUCTION_URL }}
+          NEXT_PUBLIC_PRODUCTION_URL: ${{ vars.NEXT_PUBLIC_PRODUCTION_URL }}
         run: |
           echo "Checking Vercel deployment status..."
           MAX_RETRIES=30
