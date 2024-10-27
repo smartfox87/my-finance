@@ -27,7 +27,7 @@ export const PageContent = ({ isFilterValuesFilled, onGetData }: PageContentProp
   let content = <Empty />;
   if (costCategories && incomeCategories) {
     content = (
-      <>
+      <section className="flex flex-col gap-8">
         {isFilterValuesFilled && (
           <div className="container-edge container sticky top-16 z-20 -my-4 flex flex-col gap-4 bg-white py-4 dark:bg-dark">
             <div className="grid grid-cols-2 gap-4">
@@ -37,7 +37,7 @@ export const PageContent = ({ isFilterValuesFilled, onGetData }: PageContentProp
           </div>
         )}
         {costsListForCharts?.length || incomesListForCharts?.length || budgetsListForCharts?.length ? charts : isFilterValuesChanged && <FoundNothing />}
-      </>
+      </section>
     );
   }
   return content;

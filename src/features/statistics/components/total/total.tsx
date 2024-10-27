@@ -10,21 +10,20 @@ export const Total = () => {
   const costsTotalAmount = useAppSelector(selectCostsAmount);
   const incomesTotalAmount = useAppSelector(selectIncomesAmount);
   const budgetsTotalAmount = useAppSelector(selectBudgetsAmount);
+  const list: { name: string; amount: number }[] = [
+    { name: t("statistics.incomes"), amount: incomesTotalAmount },
+    { name: t("statistics.costs"), amount: costsTotalAmount },
+    { name: t("statistics.budgets"), amount: budgetsTotalAmount },
+    { name: t("common.total"), amount: incomesTotalAmount - costsTotalAmount },
+  ];
 
   return (
-    <ul className="flex flex-col gap-x-6 gap-y-1 text-xl empty:hidden md:flex-row">
-      <li>
-        {t("statistics.incomes")}: {formatPrice(incomesTotalAmount)} {currency}
-      </li>
-      <li>
-        {t("statistics.costs")}: {formatPrice(costsTotalAmount)} {currency}
-      </li>
-      <li>
-        {t("statistics.budgets")}: {formatPrice(budgetsTotalAmount)} {currency}
-      </li>
-      <li className="font-bold">
-        {t("common.total")}: {formatPrice(incomesTotalAmount - costsTotalAmount)} {currency}
-      </li>
+    <ul className="flex flex-wrap gap-2 text-xs empty:hidden 2xs:text-sm xs:text-base">
+      {list.map(({ name, amount }) => (
+        <li className="w-1/3 grow rounded-md border border-gray-300 px-1.5 py-2.5 text-center xl:w-1/6" key={name}>
+          {name}: {formatPrice(amount)} {currency}
+        </li>
+      ))}
     </ul>
   );
 };
