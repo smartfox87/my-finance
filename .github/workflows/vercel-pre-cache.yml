@@ -29,6 +29,26 @@ jobs:
           npx tsc scripts/urls.ts
           node scripts/urls.js
 
+      - name: Wait for Vercel Deployment
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          echo "Checking Vercel deployment status..."
+          DEPLOYMENT_STATUS="building"
+          while [ "$DEPLOYMENT_STATUS" != "ready" ]; do
+            RESPONSE=$(curl -s -X GET "https://api.vercel.com/v13/deployments?projectId=$VERCEL_PROJECT_ID" \
+              -H "Authorization: Bearer $VERCEL_TOKEN")
+            DEPLOYMENT_STATUS=$(echo $RESPONSE | jq -r '.deployments[0].state')
+            echo "Current deployment status: $DEPLOYMENT_STATUS"
+            if [ "$DEPLOYMENT_STATUS" == "error" ]; then
+              echo "Deployment failed."
+              exit 1
+            fi
+            sleep 10
+          done
+          echo "Deployment is ready!"
+
       - name: Read URLs and request each one
         run: |
           while IFS= read -r url; do
