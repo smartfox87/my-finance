@@ -1,0 +1,56 @@
+name: Pre-cache Vercel Pages
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  precache-vercel:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Compile and run urls.ts
+        run: |
+          node --loader ts-node/esm scripts/urls.ts
+
+      - name: Wait for Vercel Deployment
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          echo "Checking Vercel deployment status..."
+          DEPLOYMENT_STATUS="building"
+          while [ "$DEPLOYMENT_STATUS" != "ready" ]; do
+            RESPONSE=$(curl -s -X GET "https://api.vercel.com/v13/deployments?projectId=$VERCEL_PROJECT_ID" \
+              -H "Authorization: Bearer $VERCEL_TOKEN")
+            DEPLOYMENT_STATUS=$(echo $RESPONSE | jq -r '.deployments[0].state')
+            echo "Current deployment status: $DEPLOYMENT_STATUS"
+            if [ "$DEPLOYMENT_STATUS" == "error" ]; then
+              echo "Deployment failed."
+              exit 1
+            fi
+            sleep 10
+          done
+          echo "Deployment is ready!"
+
+      - name: Read URLs and request each one
+        run: |
+          while IFS= read -r url; do
+            echo "Requesting $url..."
+            curl -I "$url"
+          done < urls.txt
