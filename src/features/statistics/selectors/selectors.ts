@@ -119,15 +119,16 @@ export const selectCostsBudgetsChartItems = createSelector(
           const monthIndex = (index + 1).toString().padStart(2, "0");
           const { costsAmount, costsList } = costsByMonths[monthName];
           let budgets = 0;
-          const budgetsList = budgetsListForCharts
-            .filter(({ period: [from, to] }) => from.substring(5, 7) <= monthIndex && to.substring(5, 7) >= monthIndex)
-            .reduce((acc, { name, amount, categories }) => {
-              const costs = categories.length ? categories.reduce((acc, categoryId) => acc + (costsList[costCategoriesObject[categoryId]] || 0), 0) : costsAmount;
-              acc[name] = { amount, costs };
-              budgets += amount;
-              return acc;
-            }, {} as BudgetsListStatistics);
-          return { name: monthName, costs: costsAmount, budgets, budgetsList };
+          const monthBudgets = budgetsListForCharts.filter(({ period: [from, to] }) => from.substring(5, 7) <= monthIndex && to.substring(5, 7) >= monthIndex);
+          const monthBudgetsCategories = monthBudgets.reduce((acc, { categories }) => acc.concat(categories), [] as number[]);
+          const unplannedCosts = Object.entries(costsList).reduce((acc, [category, amount]) => (monthBudgetsCategories.includes(parseInt(category)) ? acc : (acc += amount)), 0);
+          const budgetsList = monthBudgets.reduce((acc, { name, amount, categories }) => {
+            const costs = categories.length ? categories.reduce((acc, categoryId) => acc + (costsList[costCategoriesObject[categoryId]] || 0), 0) : costsAmount;
+            acc[name] = { amount, costs };
+            budgets += amount;
+            return acc;
+          }, {} as BudgetsListStatistics);
+          return { name: monthName, costs: costsAmount, budgets, budgetsList, unplannedCosts };
         })
       : [];
   },

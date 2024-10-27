@@ -64,6 +64,7 @@ export type CostsBudgetsStatisticsItem = {
   name: string;
   costs: number;
   budgets: number;
+  unplannedCosts: number;
   budgetsList: BudgetsListStatistics;
 };
 
