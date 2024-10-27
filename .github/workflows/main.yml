@@ -2,8 +2,10 @@ name: linting, testing
 run-name: linting, testing
 on:
     pull_request:
-        branches:
-          - master
+      types:
+        - opened
+      branches:
+        - master
 jobs:
   pipeline:
     runs-on: ubuntu-latest
