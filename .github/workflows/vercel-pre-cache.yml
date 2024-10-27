@@ -49,7 +49,7 @@ jobs:
           MAX_RETRIES=30
           RETRY_COUNT=0
           while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
-            RESPONSE=$(curl -X PATCH "https://api.vercel.com/v6/deployments" \
+            RESPONSE=$(curl -X GET "https://api.vercel.com/v6/deployments" \
               -d "projectId=$VERCEL_PROJECT_ID" \
               -d "limit=1" \
               -d "target=production" \
