@@ -4,7 +4,7 @@ import { memo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export const MainNav = memo(function MainNav({ className = "", onCloseMenu }: { className?: string; onCloseMenu: () => void }) {
+export const MainNav = memo(function MainNav({ className = "", onCloseMenu }: { className?: string; onCloseMenu?: () => void }) {
   const {
     t,
     i18n: { language },
