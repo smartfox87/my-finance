@@ -1,8 +1,5 @@
 name: E2E on Chrome
 on:
-  push:
-    branches:
-      - master
   pull_request:
     branches:
       - master
