@@ -7,7 +7,6 @@ on:
 jobs:
   pipeline:
     runs-on: ubuntu-latest
-    permissions: write-all
     strategy:
       matrix:
         node-version: [20.x]
@@ -17,17 +16,29 @@ jobs:
           - 'cypress/e2e/locales/*.cy.ts'
           - 'cypress/e2e/app.cy.ts'
     steps:
-      - name: Check if Dependabot
-        run: |
-          if [ "${{ github.actor }}" == "dependabot[bot]" ]; then
-            echo "Pull request from Dependabot. Skipping workflow."
-            exit 0
-          fi
       - name: Check out repository code
         uses: actions/checkout@v4
 
+      - name: Restore cached Primes
+        id: cache-primes-restore
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            node_modules
+            .next
+          key: ${{ runner.os }}-primes
+
+      - name: Save Primes
+        id: cache-primes-save
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            node_modules
+            .next
+          key: ${{ steps.cache-primes-restore.outputs.cache-primary-key }}
+
       - name: Set up Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
 
