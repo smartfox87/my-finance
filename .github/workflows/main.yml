@@ -13,13 +13,20 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
+
+      - name: Cache
+        uses: actions/cache@v4.1.2
+
       - name: Set up Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+
       - name: Install dependencies
         run: npm install
+
       - name: Run eslint
         run: npm run eslint
+
       - name: Run stylelint
         run: npm run stylelint
