@@ -6,6 +6,7 @@ on:
       - '!dependabot/**'
 jobs:
   pipeline:
+    if: github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -42,40 +43,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Delete Old Artifacts
-        uses: actions/github-script@v7
-        id: artifact
-        with:
-          script: |
-            try {
-              const res = await github.rest.actions.listArtifactsForRepo({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-              });
-
-              if (res.status !== 200) {
-                core.setFailed(`Failed to list artifacts: ${res.status}`);
-                return;
-              }
-
-              const artifactsToDelete = res.data.artifacts.filter(({ name }) => name === 'cypress-artifacts2');
-
-              if (artifactsToDelete.length === 0) {
-                console.log('No artifacts to delete.');
-                return;
-              }
-
-              for (const { id } of artifactsToDelete) {
-                await github.rest.actions.deleteArtifact({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  artifact_id: id,
-                });
-                console.log(`Deleted artifact with id: ${id}`);
-              }
-            } catch (error) {
-              core.setFailed(`Action failed with error: ${error}`);
-            }
+      - name: Install dependencies
+        run: npm ci
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
