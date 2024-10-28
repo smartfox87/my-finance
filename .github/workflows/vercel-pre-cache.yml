@@ -33,6 +33,8 @@ jobs:
         run: npm ci
 
       - name: Compile and run urls.ts
+        env:
+          NEXT_PUBLIC_PRODUCTION_URL: ${{ vars.NEXT_PUBLIC_PRODUCTION_URL }}
         run: |
           node --loader ts-node/esm scripts/urls.ts
 
@@ -43,7 +45,6 @@ jobs:
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-          NEXT_PUBLIC_PRODUCTION_URL: ${{ secrets.NEXT_PUBLIC_PRODUCTION_URL }}
         run: |
           echo "Checking Vercel deployment status..."
           MAX_RETRIES=30
