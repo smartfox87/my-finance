@@ -6,6 +6,7 @@ on:
       - '!dependabot/**'
 jobs:
   pipeline:
+    if: github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     strategy:
       matrix:
