@@ -24,7 +24,7 @@
 		"test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch"
 	},
 	"dependencies": {
-		"@ant-design/nextjs-registry": "^1.0.1",
+		"@ant-design/nextjs-registry": "^1.0.2",
 		"@ducanh2912/next-pwa": "^10.2.9",
 		"@reduxjs/toolkit": "^2.3.0",
 		"@sentry/nextjs": "^8.38.0",
